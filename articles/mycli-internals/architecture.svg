@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#0b0d14"/>
+  <style>
+    .layer { rx: 8; }
+    .label { font-family: -apple-system, sans-serif; font-size: 14px; fill: #e2e8f0; font-weight: 600; }
+    .desc { font-family: -apple-system, sans-serif; font-size: 12px; fill: #7a85a3; }
+    .mod { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #a0aec0; }
+    .title { font-family: -apple-system, sans-serif; font-size: 16px; fill: #e2e8f0; font-weight: 700; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">mycli v2.10.0 分层架构</text>
+
+  <!-- Layer 1: CLI / Entry -->
+  <rect x="20" y="50" width="760" height="90" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="40" y="75" class="label" fill="#6c8ef5">CLI / 入口层</text>
+  <text x="40" y="92" class="desc">Click 参数解析 · 模式分发 · REPL 交互</text>
+  <text x="40" y="112" class="mod">main.py          cli_runner.py          main_modes/{repl,execute,batch}.py</text>
+  <text x="40" y="128" class="mod">CliArgs(dataclass) · run_from_cli_args() · 策略模式分发 5 种运行模式</text>
+
+  <!-- Arrow -->
+  <path d="M 400 145 L 400 160" stroke="#363b62" stroke-width="2"/>
+
+  <!-- Layer 2: Client -->
+  <rect x="20" y="165" width="760" height="90" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="40" y="190" class="label" fill="#4ecdc4">客户端层</text>
+  <text x="40" y="207" class="desc">MyCli 核心类 · Mixin 组合 · 连接管理 · 查询执行</text>
+  <text x="40" y="227" class="mod">client.py          client_connection.py          client_query.py</text>
+  <text x="40" y="243" class="mod">MyCli(AppState, Output, Commands, Connection, Query) · 5 Mixin 组合</text>
+
+  <!-- Arrow -->
+  <path d="M 400 260 L 400 275" stroke="#363b62" stroke-width="2"/>
+
+  <!-- Layer 3: Execution -->
+  <rect x="20" y="280" width="370" height="90" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="40" y="305" class="label" fill="#f9ca24">SQL 执行引擎</text>
+  <text x="40" y="322" class="desc">pymysql 封装 · 多语句执行 · 结果流式</text>
+  <text x="40" y="342" class="mod">sqlexecute.py</text>
+  <text x="40" y="358" class="mod">SQLExecute.run() → Generator[SQLResult]</text>
+
+  <rect x="410" y="280" width="370" height="90" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="430" y="305" class="label" fill="#f9ca24">特殊命令</text>
+  <text x="430" y="322" class="desc">@decorator 注册 · 命令分发 · IO 控制</text>
+  <text x="430" y="342" class="mod">packages/special/{main,dbcommands,iocommands}.py</text>
+  <text x="430" y="358" class="mod">@special_command · execute() → COMMANDS[cmd].handler()</text>
+
+  <!-- Arrow -->
+  <path d="M 400 375 L 400 390" stroke="#363b62" stroke-width="2"/>
+
+  <!-- Layer 4: Infrastructure -->
+  <rect x="20" y="395" width="760" height="105" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="40" y="420" class="label" fill="#ff6b9d">基础设施层</text>
+  <text x="40" y="437" class="desc">补全引擎 · 配置 · 输出格式化 · 后台刷新</text>
+  <text x="40" y="457" class="mod">sqlcompleter.py    completion_engine.py    completion_refresher.py</text>
+  <text x="40" y="473" class="mod">output.py    config.py    password_sources.py    ssh_tunnel.py</text>
+  <text x="40" y="489" class="mod">SQLCompleter(Completer) · SuggestRule 规则引擎 · 后台线程 daemon Thread 刷新</text>
+</svg>
