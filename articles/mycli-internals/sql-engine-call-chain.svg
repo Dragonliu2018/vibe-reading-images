@@ -10,7 +10,9 @@
 
   <!-- Background -->
   <rect width="800" height="540" fill="#0b0d14"/>
-
+<style>
+  path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
+</style>
   <!-- Path titles -->
   <text x="210" y="38" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600">Path A — Query Execution</text>
   <text x="590" y="73" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600">Path B — Reconnection</text>

@@ -14,6 +14,7 @@
     .title { fill: #c8d0dc; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 700; }
     .legend-text { fill: #8892a8; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 10px; }
     .path-label { fill: #c8d0dc; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 11px; font-weight: 600; }
+    path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
   </style>
   <defs>
     <marker id="arrowhead2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">

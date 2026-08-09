@@ -5,6 +5,7 @@
     .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
     .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
     .branch { font-family: system-ui, sans-serif; font-size: 11px; fill: #7a85a3; }
+    path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
   </style>
 
   <!-- main() -->

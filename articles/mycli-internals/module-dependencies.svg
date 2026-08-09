@@ -4,6 +4,7 @@
     .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #e2e8f0; }
     .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
     .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
   </style>
 
   <!-- CLI Client (center top) -->

@@ -5,7 +5,8 @@
       .node-title { font-family: 'SF Mono','Fira Code',monospace; font-size: 15px; font-weight: 700; }
       .node-sub { font-family: 'SF Mono','Fira Code',monospace; font-size: 11px; font-weight: 400; }
       .layer-band { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; font-weight: 600; letter-spacing: 1px; }
-    </style>
+      path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
+  </style>
   </defs>
 
   <!-- background -->

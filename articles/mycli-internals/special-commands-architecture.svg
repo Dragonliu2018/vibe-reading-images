@@ -10,6 +10,7 @@
     .arrow-label { fill: #636e8e; font-family: ui-monospace, monospace; font-size: 9px; }
     .title { fill: #c8d0dc; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 700; }
     .legend-text { fill: #8892a8; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 10px; }
+    path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
   </style>
   <defs>
     <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">

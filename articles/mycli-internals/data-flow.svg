@@ -7,6 +7,7 @@
     .mod { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #4ecdc4; }
     .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
     .title { font-family: -apple-system, sans-serif; font-size: 16px; fill: #e2e8f0; font-weight: 700; }
+    path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
   </style>
 
   <text x="400" y="30" text-anchor="middle" class="title">mycli 交互式 REPL 数据流</text>

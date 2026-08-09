@@ -7,7 +7,9 @@
 
   <!-- Background -->
   <rect width="800" height="480" fill="#0b0d14"/>
-
+<style>
+  path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
+</style>
   <!-- Title -->
   <text x="400" y="28" text-anchor="middle" fill="#8892a8" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600">SQL Execution Engine — Module Architecture</text>
 

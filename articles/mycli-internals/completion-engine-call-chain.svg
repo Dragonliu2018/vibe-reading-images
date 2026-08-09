@@ -5,7 +5,8 @@
       .node-title { font-family: 'SF Mono','Fira Code',monospace; font-size: 13px; font-weight: 700; }
       .node-sub { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; font-weight: 400; }
       .dtype { font-family: 'SF Mono','Fira Code',monospace; font-size: 9px; font-style: italic; }
-    </style>
+      path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
+  </style>
     <marker id="arrow-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
     </marker>
