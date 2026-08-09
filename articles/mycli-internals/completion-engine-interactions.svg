@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="493" viewBox="0 0 800 493">
   <defs>
     <style>
-      .mod-title { font-family: 'SF Mono','Fira Code',monospace; font-size: 14px; font-weight: 700; }
-      .mod-sub { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; font-weight: 400; }
-      .ext-title { font-family: 'SF Mono','Fira Code',monospace; font-size: 12px; font-weight: 600; }
-      .edge-label { font-family: 'SF Mono','Fira Code',monospace; font-size: 9px; font-style: italic; }
-      .group-label { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+      .mod-title { font-family: system-ui, sans-serif; font-size: 14px; font-weight: 700; }
+      .mod-sub { font-family: system-ui, sans-serif; font-size: 10px; font-weight: 400; }
+      .ext-title { font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+      .edge-label { font-family: system-ui, sans-serif; font-size: 9px; font-style: italic; }
+      .group-label { font-family: system-ui, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
       path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
   </style>
     <marker id="arr-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -23,81 +23,81 @@
   </defs>
 
   <!-- background -->
-  <rect width="800" height="493" fill="#0b0d14" rx="12"/>
+  <rect width="800" height="493" fill="#0b0d14"/>
 
   <!-- ===================== Internal modules ===================== -->
 
   <!-- completion_engine.py (top-left) -->
-  <rect x="40" y="60" width="200" height="80" rx="10" fill="#1a1d2a" stroke="#f9ca24" stroke-width="1.5"/>
+  <rect x="40" y="60" width="200" height="80" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
   <text x="140" y="86" text-anchor="middle" class="mod-title" fill="#f9ca24">completion_engine.py</text>
-  <line x1="60" y1="94" x2="220" y2="94" stroke="#f9ca24" stroke-width="0.5" opacity="0.3"/>
+  <line x1="60" y1="94" x2="220" y2="94" stroke="#f9ca24" stroke-width="0.5" opacity="0.6"/>
   <text x="140" y="112" text-anchor="middle" class="mod-sub" fill="#a0a4b8">解析层 · suggest_type</text>
   <text x="140" y="128" text-anchor="middle" class="mod-sub" fill="#7c8090">规则引擎 · 纯函数</text>
 
   <!-- sqlcompleter.py (center) -->
-  <rect x="300" y="220" width="200" height="80" rx="10" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <rect x="300" y="220" width="200" height="80" rx="10" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
   <text x="400" y="246" text-anchor="middle" class="mod-title" fill="#ff6b9d">sqlcompleter.py</text>
-  <line x1="320" y1="254" x2="480" y2="254" stroke="#ff6b9d" stroke-width="0.5" opacity="0.3"/>
+  <line x1="320" y1="254" x2="480" y2="254" stroke="#ff6b9d" stroke-width="0.5" opacity="0.6"/>
   <text x="400" y="272" text-anchor="middle" class="mod-sub" fill="#a0a4b8">数据+匹配层 · 核心</text>
   <text x="400" y="288" text-anchor="middle" class="mod-sub" fill="#7c8090">SQLCompleter · Fuzziness</text>
 
   <!-- completion_refresher.py (bottom-left) -->
-  <rect x="40" y="400" width="200" height="80" rx="10" fill="#1a1d2a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="40" y="400" width="200" height="80" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
   <text x="140" y="426" text-anchor="middle" class="mod-title" fill="#4ecdc4">completion_refresher.py</text>
-  <line x1="60" y1="434" x2="220" y2="434" stroke="#4ecdc4" stroke-width="0.5" opacity="0.3"/>
+  <line x1="60" y1="434" x2="220" y2="434" stroke="#4ecdc4" stroke-width="0.5" opacity="0.6"/>
   <text x="140" y="452" text-anchor="middle" class="mod-sub" fill="#a0a4b8">异步刷新层 · daemon</text>
   <text x="140" y="468" text-anchor="middle" class="mod-sub" fill="#7c8090">@refresher 注册表</text>
 
   <!-- ===================== External deps (right side) ===================== -->
   <text x="560" y="44" class="group-label" fill="#8c90a0">EXTERNAL DEPS / 外部依赖</text>
-  <line x1="560" y1="48" x2="760" y2="48" stroke="#8c90a0" stroke-width="0.5" opacity="0.3"/>
+  <line x1="560" y1="48" x2="760" y2="48" stroke="#8c90a0" stroke-width="0.5" opacity="0.6"/>
 
   <!-- sqlparse -->
-  <rect x="560" y="60" width="100" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <rect x="560" y="60" width="100" height="44" rx="8" fill="#13162a" stroke="#6c7080" stroke-width="1.5"/>
   <text x="610" y="80" text-anchor="middle" class="ext-title" fill="#a0a4b8">sqlparse</text>
   <text x="610" y="96" text-anchor="middle" class="mod-sub" fill="#7c8090">SQL 解析库</text>
 
   <!-- COMMANDS -->
-  <rect x="680" y="60" width="100" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <rect x="680" y="60" width="100" height="44" rx="8" fill="#13162a" stroke="#6c7080" stroke-width="1.5"/>
   <text x="730" y="80" text-anchor="middle" class="ext-title" fill="#a0a4b8">COMMANDS</text>
   <text x="730" y="96" text-anchor="middle" class="mod-sub" fill="#7c8090">special.main</text>
 
   <!-- prompt_toolkit.Completer -->
-  <rect x="560" y="180" width="220" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <rect x="560" y="180" width="220" height="44" rx="8" fill="#13162a" stroke="#6c7080" stroke-width="1.5"/>
   <text x="670" y="200" text-anchor="middle" class="ext-title" fill="#a0a4b8">prompt_toolkit.Completer</text>
   <text x="670" y="216" text-anchor="middle" class="mod-sub" fill="#7c8090">基类 · Completer 接口</text>
 
   <!-- rapidfuzz -->
-  <rect x="560" y="240" width="100" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <rect x="560" y="240" width="100" height="44" rx="8" fill="#13162a" stroke="#6c7080" stroke-width="1.5"/>
   <text x="610" y="260" text-anchor="middle" class="ext-title" fill="#a0a4b8">rapidfuzz</text>
   <text x="610" y="276" text-anchor="middle" class="mod-sub" fill="#7c8090">模糊匹配</text>
 
   <!-- pygments -->
-  <rect x="680" y="240" width="100" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <rect x="680" y="240" width="100" height="44" rx="8" fill="#13162a" stroke="#6c7080" stroke-width="1.5"/>
   <text x="730" y="260" text-anchor="middle" class="ext-title" fill="#a0a4b8">pygments</text>
   <text x="730" y="276" text-anchor="middle" class="mod-sub" fill="#7c8090">语法高亮</text>
 
   <!-- SQLExecute -->
-  <rect x="560" y="400" width="220" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <rect x="560" y="400" width="220" height="44" rx="8" fill="#13162a" stroke="#6c7080" stroke-width="1.5"/>
   <text x="670" y="420" text-anchor="middle" class="ext-title" fill="#a0a4b8">SQLExecute</text>
   <text x="670" y="436" text-anchor="middle" class="mod-sub" fill="#7c8090">新建独立连接</text>
 
   <!-- ===================== Consumers (left side, consumers of sqlcompleter) ===================== -->
   <text x="40" y="180" class="group-label" fill="#8c90a0">CONSUMERS / 引用方</text>
-  <line x1="40" y1="184" x2="260" y2="184" stroke="#8c90a0" stroke-width="0.5" opacity="0.3"/>
+  <line x1="40" y1="184" x2="260" y2="184" stroke="#8c90a0" stroke-width="0.5" opacity="0.6"/>
 
   <!-- client.py -->
-  <rect x="40" y="200" width="115" height="40" rx="8" fill="#141620" stroke="#8c90a0" stroke-width="1.5"/>
+  <rect x="40" y="200" width="115" height="40" rx="8" fill="#13162a" stroke="#8c90a0" stroke-width="1.5"/>
   <text x="97" y="220" text-anchor="middle" class="ext-title" fill="#a0a4b8" font-size="11px">client.py</text>
   <text x="97" y="234" text-anchor="middle" class="mod-sub" fill="#7c8090">主入口</text>
 
   <!-- client_query.py -->
-  <rect x="165" y="200" width="115" height="40" rx="8" fill="#141620" stroke="#8c90a0" stroke-width="1.5"/>
+  <rect x="165" y="200" width="115" height="40" rx="8" fill="#13162a" stroke="#8c90a0" stroke-width="1.5"/>
   <text x="222" y="220" text-anchor="middle" class="ext-title" fill="#a0a4b8" font-size="11px">client_query.py</text>
   <text x="222" y="234" text-anchor="middle" class="mod-sub" fill="#7c8090">查询交互</text>
 
   <!-- schema_prefetcher.py -->
-  <rect x="40" y="250" width="240" height="40" rx="8" fill="#141620" stroke="#8c90a0" stroke-width="1.5"/>
+  <rect x="40" y="250" width="240" height="40" rx="8" fill="#13162a" stroke="#8c90a0" stroke-width="1.5"/>
   <text x="160" y="270" text-anchor="middle" class="ext-title" fill="#a0a4b8" font-size="11px">schema_prefetcher.py</text>
   <text x="160" y="284" text-anchor="middle" class="mod-sub" fill="#7c8090">schema 预取</text>
 
