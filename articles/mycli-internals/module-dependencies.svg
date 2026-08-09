@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #e2e8f0; }
+    .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+  </style>
+
+  <!-- CLI Client (center top) -->
+  <rect x="290" y="20" width="220" height="55" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="42" text-anchor="middle" class="label" fill="#6c8ef5">CLI 客户端</text>
+  <text x="400" y="60" text-anchor="middle" class="mod">main.py · client.py</text>
+
+  <!-- SQL Engine (left) -->
+  <rect x="40" y="120" width="180" height="55" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="130" y="142" text-anchor="middle" class="label" fill="#f9ca24">SQL 执行引擎</text>
+  <text x="130" y="160" text-anchor="middle" class="mod">sqlexecute.py</text>
+
+  <!-- Special Commands (right) -->
+  <rect x="580" y="120" width="180" height="55" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="670" y="142" text-anchor="middle" class="label" fill="#f9ca24">特殊命令</text>
+  <text x="670" y="160" text-anchor="middle" class="mod">packages/special/</text>
+
+  <!-- Completion Engine (bottom left) -->
+  <rect x="40" y="240" width="180" height="55" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="130" y="262" text-anchor="middle" class="label" fill="#ff6b9d">补全引擎</text>
+  <text x="130" y="280" text-anchor="middle" class="mod">sqlcompleter.py</text>
+
+  <!-- Completion Refresher (bottom center) -->
+  <rect x="290" y="240" width="220" height="55" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="400" y="262" text-anchor="middle" class="label" fill="#ff6b9d">补全刷新器</text>
+  <text x="400" y="280" text-anchor="middle" class="mod">completion_refresher.py</text>
+
+  <!-- Config/Output (bottom right) -->
+  <rect x="580" y="240" width="180" height="55" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="670" y="262" text-anchor="middle" class="label" fill="#ff6b9d">配置/输出</text>
+  <text x="670" y="280" text-anchor="middle" class="mod">config.py · output.py</text>
+
+  <!-- pymysql (very bottom) -->
+  <rect x="250" y="360" width="300" height="45" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="400" y="388" text-anchor="middle" class="label" fill="#4ecdc4">pymysql · prompt_toolkit · sqlparse</text>
+
+  <!-- Arrows: CLI → SQL Engine -->
+  <path d="M 340 75 L 180 120" class="arrow" marker-end="url(#ah)"/>
+  <!-- CLI → Special -->
+  <path d="M 460 75 L 620 120" class="arrow" marker-end="url(#ah)"/>
+  <!-- SQL Engine → Special (bidirectional via execute()) -->
+  <path d="M 220 148 L 580 148" class="arrow" marker-end="url(#ah)" stroke-dasharray="4 2"/>
+  <!-- CLI → Completion -->
+  <path d="M 340 75 L 160 240" class="arrow" marker-end="url(#ah)" stroke-dasharray="4 2"/>
+  <!-- SQL Engine → Completion Refresher -->
+  <path d="M 180 175 L 330 240" class="arrow" marker-end="url(#ah)"/>
+  <!-- Completion Refresher → Completion Engine -->
+  <path d="M 330 268 L 220 268" class="arrow" marker-end="url(#ah)"/>
+  <!-- SQL Engine → pymysql -->
+  <path d="M 130 175 L 320 360" class="arrow" marker-end="url(#ah)"/>
+  <!-- CLI → prompt_toolkit/sqlparse -->
+  <path d="M 400 75 L 400 360" class="arrow" marker-end="url(#ah)" stroke-dasharray="4 2"/>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+  </defs>
+</svg>
