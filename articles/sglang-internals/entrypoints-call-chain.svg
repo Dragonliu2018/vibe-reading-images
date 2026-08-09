@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+  <rect width="800" height="560" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #e2e8f0; }
+    .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .ipc { stroke: #ff6b9d; stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; }
+    .dtype { font-family: system-ui, sans-serif; font-size: 10px; fill: #f9ca24; }
+    .branch { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <text x="210" y="32" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">路径 A — 流式生成</text>
+  <text x="590" y="32" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">路径 B — 控制面 RPC</text>
+  <line x1="400" y1="44" x2="400" y2="500" stroke="#1e2230" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- Path A -->
+  <rect x="40" y="55" width="340" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="210" y="76" text-anchor="middle" class="label" fill="#6c8ef5">openai_v1_chat_completions</text>
+  <text x="210" y="93" text-anchor="middle" class="dtype">input: ChatCompletionRequest</text>
+  <path d="M 210 105 L 210 130" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="40" y="132" width="340" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="210" y="153" text-anchor="middle" class="label" fill="#6c8ef5">OpenAIServingChat.handle_request</text>
+  <text x="210" y="170" text-anchor="middle" class="mod">_convert_to_internal_request</text>
+  <path d="M 210 182 L 210 207" class="arrow" marker-end="url(#ah)"/>
+  <text x="220" y="197" class="dtype">→ GenerateReqInput</text>
+
+  <rect x="40" y="209" width="340" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="210" y="230" text-anchor="middle" class="label" fill="#6c8ef5">Engine.generate / async_generate</text>
+  <text x="210" y="247" text-anchor="middle" class="mod">tokenizer_manager.generate_request(obj)</text>
+  <path d="M 210 259 L 210 284" class="ipc" marker-end="url(#ahp)"/>
+  <text x="220" y="274" class="dtype">ZMQ PUSH → Scheduler</text>
+
+  <rect x="40" y="286" width="340" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="210" y="307" text-anchor="middle" class="label" fill="#4ecdc4">TokenizerManager.generate_request</text>
+  <text x="210" y="324" text-anchor="middle" class="mod">_tokenize · _dispatch · _wait_one_response</text>
+  <path d="M 210 336 L 210 361" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="40" y="363" width="340" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="210" y="384" text-anchor="middle" class="label" fill="#4ecdc4">handle_loop（asyncio task）</text>
+  <text x="210" y="401" text-anchor="middle" class="mod">ZMQ PULL ← Detokenizer · event.set()</text>
+  <path d="M 210 413 L 210 438" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="40" y="440" width="340" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="210" y="461" text-anchor="middle" class="label" fill="#ff6b9d">stream_results → SSE</text>
+  <text x="210" y="478" text-anchor="middle" class="dtype">output: data: {json}\n\n</text>
+
+  <!-- Path B -->
+  <rect x="420" y="90" width="340" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="590" y="111" text-anchor="middle" class="label" fill="#f9ca24">Engine.update_weights_from_tensor</text>
+  <text x="590" y="128" text-anchor="middle" class="dtype">input: named_tensors</text>
+  <path d="M 590 140 L 590 165" class="ipc" marker-end="url(#ahp)"/>
+  <text x="600" y="158" class="dtype">ZMQ DEALER</text>
+
+  <rect x="420" y="167" width="340" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="590" y="188" text-anchor="middle" class="label" fill="#f9ca24">sock_send(send_to_rpc, obj)</text>
+  <text x="590" y="205" text-anchor="middle" class="mod">DEALER → Scheduler（同步请求-响应）</text>
+  <path d="M 590 217 L 590 242" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="420" y="244" width="340" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="590" y="265" text-anchor="middle" class="label" fill="#4ecdc4">sock_recv(send_to_rpc, BLOCKY)</text>
+  <text x="590" y="282" text-anchor="middle" class="mod">阻塞等待 Scheduler 返回结果</text>
+  <path d="M 590 294 L 590 319" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="420" y="321" width="340" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="590" y="342" text-anchor="middle" class="label" fill="#ff6b9d">返回权重更新结果</text>
+  <text x="590" y="359" text-anchor="middle" class="dtype">output: bool / Dict</text>
+
+  <!-- legend -->
+  <rect x="40" y="525" width="14" height="12" rx="2" fill="none" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="62" y="535" class="mod">接口层</text>
+  <rect x="130" y="525" width="14" height="12" rx="2" fill="none" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="152" y="535" class="mod">编排层(managers)</text>
+  <rect x="270" y="525" width="14" height="12" rx="2" fill="none" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="292" y="535" class="mod">输出</text>
+  <line x1="380" y1="531" x2="405" y2="531" class="ipc" marker-end="url(#ahp)"/>
+  <text x="415" y="535" class="mod">ZMQ 进程边界</text>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+    <marker id="ahp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+</svg>
