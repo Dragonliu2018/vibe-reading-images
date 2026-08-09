@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620">
+  <defs>
+    <style>
+      .path-label { font-family: 'SF Mono','Fira Code',monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+      .node-title { font-family: 'SF Mono','Fira Code',monospace; font-size: 13px; font-weight: 700; }
+      .node-sub { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; font-weight: 400; }
+      .dtype { font-family: 'SF Mono','Fira Code',monospace; font-size: 9px; font-style: italic; }
+    </style>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c7080"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect width="800" height="620" fill="#0b0d14" rx="12"/>
+
+  <!-- ============ PATH A: get_completions ============ -->
+  <rect x="24" y="24" width="752" height="284" rx="10" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="4 4" opacity="0.25"/>
+  <text x="40" y="46" class="path-label" fill="#f9ca24">PATH A — get_completions() / 同步补全链路</text>
+
+  <!-- Row 1: get_completions → suggest_type → sqlparse.parse -->
+  <!-- get_completions -->
+  <rect x="40" y="64" width="150" height="54" rx="8" fill="#1a1d2a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="115" y="86" text-anchor="middle" class="node-title" fill="#f9ca24">get_completions</text>
+  <text x="115" y="104" text-anchor="middle" class="dtype" fill="#7c8090">→ Document</text>
+
+  <!-- suggest_type -->
+  <rect x="230" y="64" width="140" height="54" rx="8" fill="#1a1d2a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="300" y="86" text-anchor="middle" class="node-title" fill="#f9ca24">suggest_type</text>
+  <text x="300" y="104" text-anchor="middle" class="dtype" fill="#7c8090">→ list[Suggestion]</text>
+
+  <!-- sqlparse.parse -->
+  <rect x="410" y="64" width="140" height="54" rx="8" fill="#1a1d2a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="480" y="86" text-anchor="middle" class="node-title" fill="#f9ca24">sqlparse.parse</text>
+  <text x="480" y="104" text-anchor="middle" class="dtype" fill="#7c8090">→ Statement · lru_cache</text>
+
+  <!-- suggest_based_on_last_token -->
+  <rect x="590" y="64" width="170" height="54" rx="8" fill="#1a1d2a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="675" y="84" text-anchor="middle" class="node-title" fill="#f9ca24" font-size="11px">suggest_based_on_last_token</text>
+  <text x="675" y="104" text-anchor="middle" class="dtype" fill="#7c8090">规则引擎 → Suggestion[]</text>
+
+  <!-- arrows row 1 -->
+  <line x1="190" y1="91" x2="226" y2="91" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-yellow)"/>
+  <line x1="370" y1="91" x2="406" y2="91" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-yellow)"/>
+  <line x1="550" y1="91" x2="586" y2="91" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-yellow)"/>
+
+  <!-- Row 2: for suggestion → find_matches → find_fuzzy_match → sort -->
+  <!-- loop back arrow: suggest_based_on_last_token returns list[Suggestion] back to suggest_type area -->
+  <path d="M675 118 C 675 140, 300 140, 300 64" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" marker-end="url(#arrow-yellow)"/>
+
+  <!-- find_matches -->
+  <rect x="120" y="160" width="150" height="54" rx="8" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="195" y="182" text-anchor="middle" class="node-title" fill="#ff6b9d">find_matches</text>
+  <text x="195" y="200" text-anchor="middle" class="dtype" fill="#7c8090">→ list[tuple[str,int]]</text>
+
+  <!-- find_fuzzy_match -->
+  <rect x="310" y="160" width="150" height="54" rx="8" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="385" y="182" text-anchor="middle" class="node-title" fill="#ff6b9d">find_fuzzy_match</text>
+  <text x="385" y="200" text-anchor="middle" class="dtype" fill="#7c8090">→ Fuzziness 级别</text>
+
+  <!-- sort -->
+  <rect x="500" y="160" width="120" height="54" rx="8" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="560" y="182" text-anchor="middle" class="node-title" fill="#ff6b9d">sort</text>
+  <text x="560" y="200" text-anchor="middle" class="dtype" fill="#7c8090">排序</text>
+
+  <!-- list[Completion] -->
+  <rect x="660" y="160" width="110" height="54" rx="8" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="715" y="182" text-anchor="middle" class="node-title" fill="#ff6b9d" font-size="11px">list[Completion]</text>
+  <text x="715" y="200" text-anchor="middle" class="dtype" fill="#7c8090">输出</text>
+
+  <!-- arrows row 2 -->
+  <line x1="270" y1="187" x2="306" y2="187" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow-pink)"/>
+  <line x1="460" y1="187" x2="496" y2="187" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow-pink)"/>
+  <line x1="620" y1="187" x2="656" y2="187" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow-pink)"/>
+
+  <!-- connection: suggest_type returns → find_matches (cross-layer) -->
+  <path d="M300 118 C 300 135, 195 135, 195 160" fill="none" stroke="#6c7080" stroke-width="1" stroke-dasharray="4 3" opacity="0.5" marker-end="url(#arrow-gray)"/>
+  <text x="220" y="138" class="dtype" fill="#6c7080">for each suggestion</text>
+
+  <!-- loop note for sqlparse lru_cache -->
+  <text x="480" y="130" text-anchor="middle" class="dtype" fill="#7c8090">cached</text>
+
+  <!-- ============ PATH B: CompletionRefresher.refresh ============ -->
+  <rect x="24" y="330" width="752" height="270" rx="10" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="4 4" opacity="0.25"/>
+  <text x="40" y="352" class="path-label" fill="#4ecdc4">PATH B — CompletionRefresher.refresh() / 异步刷新链路</text>
+
+  <!-- refresh -->
+  <rect x="40" y="370" width="160" height="54" rx="8" fill="#1a1d2a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="120" y="392" text-anchor="middle" class="node-title" fill="#4ecdc4">refresh()</text>
+  <text x="120" y="410" text-anchor="middle" class="dtype" fill="#7c8090">→ daemon Thread</text>
+
+  <!-- _bg_refresh -->
+  <rect x="240" y="370" width="150" height="54" rx="8" fill="#1a1d2a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="315" y="392" text-anchor="middle" class="node-title" fill="#4ecdc4">_bg_refresh</text>
+  <text x="315" y="410" text-anchor="middle" class="dtype" fill="#7c8090">后台执行</text>
+
+  <!-- SQLCompleter new instance -->
+  <rect x="430" y="370" width="150" height="54" rx="8" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="505" y="392" text-anchor="middle" class="node-title" fill="#ff6b9d" font-size="11px">SQLCompleter(**opts)</text>
+  <text x="505" y="410" text-anchor="middle" class="dtype" fill="#7c8090">新建实例</text>
+
+  <!-- SQLExecute new connection -->
+  <rect x="620" y="370" width="140" height="54" rx="8" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="690" y="392" text-anchor="middle" class="node-title" fill="#ff6b9d" font-size="11px">SQLExecute(...)</text>
+  <text x="690" y="410" text-anchor="middle" class="dtype" fill="#7c8090">新建独立连接</text>
+
+  <!-- arrows row 1 -->
+  <line x1="200" y1="397" x2="236" y2="397" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+  <line x1="390" y1="397" x2="426" y2="397" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+  <line x1="580" y1="397" x2="616" y2="397" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+
+  <!-- Row 2: refresh_* loop → callback -->
+  <!-- refresh_* loop -->
+  <rect x="180" y="470" width="280" height="54" rx="8" fill="#1a1d2a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="320" y="492" text-anchor="middle" class="node-title" fill="#4ecdc4">for refresher: refresh_*</text>
+  <text x="320" y="510" text-anchor="middle" class="dtype" fill="#7c8090">@refresher 注册表 · 遍历执行</text>
+
+  <!-- callback hot-swap -->
+  <rect x="500" y="470" width="200" height="54" rx="8" fill="#1a1d2a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="600" y="492" text-anchor="middle" class="node-title" fill="#4ecdc4">callback(completer)</text>
+  <text x="600" y="510" text-anchor="middle" class="dtype" fill="#7c8090">热替换 · 不阻塞 UI</text>
+
+  <!-- arrows row 2 -->
+  <!-- _bg_refresh → refresh_* loop (down) -->
+  <path d="M315 424 L315 470" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+  <!-- refresh_* → callback -->
+  <line x1="460" y1="497" x2="496" y2="497" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+
+  <!-- SQLExecute feeds refresh_* -->
+  <path d="M690 424 C 690 445, 460 445, 460 470" fill="none" stroke="#6c7080" stroke-width="1" stroke-dasharray="4 3" opacity="0.5" marker-end="url(#arrow-gray)"/>
+  <text x="575" y="445" class="dtype" fill="#6c8090">executor 传入</text>
+
+  <!-- SQLCompleter feeds refresh_* (target) -->
+  <path d="M505 424 C 505 440, 320 450, 320 470" fill="none" stroke="#6c7080" stroke-width="1" stroke-dasharray="4 3" opacity="0.4" marker-end="url(#arrow-gray)"/>
+  <text x="410" y="455" class="dtype" fill="#6c8090">completer 目标</text>
+
+  <!-- callback hot-swap back to L2 (cross-path) -->
+  <path d="M600 470 C 600 440, 750 440, 750 200" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="3 3" opacity="0.35"/>
+  <text x="730" y="380" class="dtype" fill="#4ecdc4" opacity="0.6" transform="rotate(-90 730 380)">hot-swap</text>
+
+</svg>

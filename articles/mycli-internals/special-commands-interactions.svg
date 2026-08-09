@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620">
+  <style>
+    .bg { fill: #0b0d14; }
+    .node-core { fill: rgba(249,202,36,0.12); stroke: #f9ca24; stroke-width: 1.5; }
+    .node-impl { fill: rgba(78,205,196,0.12); stroke: #4ecdc4; stroke-width: 1.5; }
+    .node-state { fill: rgba(255,107,157,0.12); stroke: #ff6b9d; stroke-width: 1.5; }
+    .node-caller { fill: rgba(178,190,210,0.08); stroke: #8892a8; stroke-width: 1.5; stroke-dasharray: 5 3; }
+    .label-core { fill: #f9ca24; font-family: ui-monospace, monospace; font-size: 13px; font-weight: 600; }
+    .label-impl { fill: #4ecdc4; font-family: ui-monospace, monospace; font-size: 13px; font-weight: 600; }
+    .label-state { fill: #ff6b9d; font-family: ui-monospace, monospace; font-size: 13px; font-weight: 600; }
+    .label-caller { fill: #8892a8; font-family: ui-monospace, monospace; font-size: 12px; font-weight: 600; }
+    .sub { fill: #8892a8; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 10px; }
+    .arrow-reg { stroke: #4ecdc4; stroke-width: 1.5; fill: none; marker-end: url(#arrow-reg-m); }
+    .arrow-ref { stroke: #8892a8; stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; marker-end: url(#arrow-ref-m); }
+    .arrow-state { stroke: #ff6b9d; stroke-width: 1.5; fill: none; marker-end: url(#arrow-state-m); }
+    .arrow-label { fill: #636e8e; font-family: ui-monospace, monospace; font-size: 9px; }
+    .title { fill: #c8d0dc; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 700; }
+    .legend-text { fill: #8892a8; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 10px; }
+  </style>
+  <defs>
+    <marker id="arrow-reg-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrow-ref-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#8892a8"/>
+    </marker>
+    <marker id="arrow-state-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="800" height="620"/>
+
+  <!-- Title -->
+  <text x="400" y="26" text-anchor="middle" class="title">Special Commands — Module Interactions</text>
+
+  <!-- Legend -->
+  <g transform="translate(200, 10)">
+    <rect x="0" y="0" width="14" height="14" rx="2" class="node-core"/>
+    <text x="20" y="11" class="legend-text">Dispatch Core</text>
+    <rect x="120" y="0" width="14" height="14" rx="2" class="node-impl"/>
+    <text x="140" y="11" class="legend-text">Command Impl</text>
+    <rect x="250" y="0" width="14" height="14" rx="2" class="node-state"/>
+    <text x="270" y="11" class="legend-text">State Mgmt</text>
+    <rect x="360" y="0" width="14" height="14" rx="2" class="node-caller"/>
+    <text x="380" y="11" class="legend-text">Caller</text>
+  </g>
+
+  <!-- Central: special/main.py -->
+  <g>
+    <rect x="280" y="250" width="240" height="80" rx="10" class="node-core"/>
+    <text x="400" y="275" text-anchor="middle" class="label-core">special/main.py</text>
+    <text x="400" y="293" text-anchor="middle" class="sub">COMMANDS · execute · parse_special_command</text>
+    <text x="400" y="307" text-anchor="middle" class="sub">@special_command · ArgType</text>
+  </g>
+
+  <!-- Caller modules (top, dashed) -->
+  <g>
+    <rect x="30" y="55" width="130" height="50" rx="10" class="node-caller"/>
+    <text x="95" y="76" text-anchor="middle" class="label-caller">sqlexecute.py</text>
+    <text x="95" y="92" text-anchor="middle" class="sub">execute / CommandNotFound</text>
+  </g>
+
+  <g>
+    <rect x="180" y="55" width="130" height="50" rx="10" class="node-caller"/>
+    <text x="245" y="76" text-anchor="middle" class="label-caller">sqlcompleter.py</text>
+    <text x="245" y="92" text-anchor="middle" class="sub">COMMANDS</text>
+  </g>
+
+  <g>
+    <rect x="330" y="55" width="140" height="50" rx="10" class="node-caller"/>
+    <text x="400" y="76" text-anchor="middle" class="label-caller">completion_engine.py</text>
+    <text x="400" y="92" text-anchor="middle" class="sub">COMMANDS / parse</text>
+  </g>
+
+  <g>
+    <rect x="490" y="55" width="140" height="50" rx="10" class="node-caller"/>
+    <text x="560" y="76" text-anchor="middle" class="label-caller">completion_refresher.py</text>
+    <text x="560" y="92" text-anchor="middle" class="sub">COMMANDS</text>
+  </g>
+
+  <g>
+    <rect x="650" y="55" width="120" height="50" rx="10" class="node-caller"/>
+    <text x="710" y="76" text-anchor="middle" class="label-caller">repl.py</text>
+    <text x="710" y="92" text-anchor="middle" class="sub">handle_llm</text>
+  </g>
+
+  <!-- Caller arrows (dashed gray, pointing down to main.py) -->
+  <path class="arrow-ref" d="M 95 105 C 95 180, 300 220, 330 250"/>
+  <path class="arrow-ref" d="M 245 105 C 245 180, 340 220, 360 250"/>
+  <path class="arrow-ref" d="M 400 105 L 400 250"/>
+  <path class="arrow-ref" d="M 560 105 C 560 180, 470 220, 450 250"/>
+  <path class="arrow-ref" d="M 710 105 C 710 180, 500 220, 470 250"/>
+
+  <!-- Implementation modules (bottom-left, cyan) -->
+  <g>
+    <rect x="30" y="400" width="170" height="60" rx="10" class="node-impl"/>
+    <text x="115" y="425" text-anchor="middle" class="label-impl">dbcommands.py</text>
+    <text x="115" y="443" text-anchor="middle" class="sub">\dt \l status \u</text>
+  </g>
+
+  <g>
+    <rect x="220" y="400" width="170" height="60" rx="10" class="node-impl"/>
+    <text x="305" y="425" text-anchor="middle" class="label-impl">iocommands.py</text>
+    <text x="305" y="443" text-anchor="middle" class="sub">pager tee system \f</text>
+  </g>
+
+  <!-- Registration arrows (cyan, pointing up from impl to main.py) -->
+  <path class="arrow-reg" d="M 115 400 C 115 370, 250 350, 310 330"/>
+  <text x="170" y="375" class="arrow-label" transform="rotate(-15, 170, 375)">@special_command</text>
+
+  <path class="arrow-reg" d="M 305 400 C 305 370, 320 350, 350 330"/>
+  <text x="320" y="375" class="arrow-label">@special_command</text>
+
+  <!-- State management (bottom-right, pink) -->
+  <g>
+    <rect x="420" y="400" width="180" height="60" rx="10" class="node-state"/>
+    <text x="510" y="425" text-anchor="middle" class="label-state">iocommands.py</text>
+    <text x="510" y="443" text-anchor="middle" class="sub">module-level globals</text>
+  </g>
+
+  <g>
+    <rect x="620" y="400" width="160" height="80" rx="10" class="node-state"/>
+    <text x="700" y="425" text-anchor="middle" class="label-state">Global State</text>
+    <text x="700" y="443" text-anchor="middle" class="sub">TIMING_ENABLED</text>
+    <text x="700" y="457" text-anchor="middle" class="sub">PAGER_ENABLED</text>
+    <text x="700" y="471" text-anchor="middle" class="sub">tee_file</text>
+  </g>
+
+  <!-- State arrow from iocommands state node to main.py -->
+  <path class="arrow-state" d="M 510 400 C 510 370, 460 350, 430 330"/>
+  <text x="490" y="375" class="arrow-label" transform="rotate(15, 490, 375)">reads/writes</text>
+
+  <!-- State arrow: iocommands.py → global state (self-referential) -->
+  <path class="arrow-state" d="M 375 430 C 400 430, 410 430, 420 430"/>
+
+  <!-- Bottom notes -->
+  <text x="400" y="515" text-anchor="middle" class="sub">Dashed gray = reference (caller imports main.py) · Solid cyan = registration (@special_command)</text>
+  <text x="400" y="531" text-anchor="middle" class="sub">Pink = state management via module-level globals (no class encapsulation)</text>
+  <text x="400" y="547" text-anchor="middle" class="sub">Implementation modules register INTO main.py — never reverse-depend on it</text>
+</svg>

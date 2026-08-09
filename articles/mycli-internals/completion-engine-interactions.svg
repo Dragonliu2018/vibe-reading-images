@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+  <defs>
+    <style>
+      .mod-title { font-family: 'SF Mono','Fira Code',monospace; font-size: 14px; font-weight: 700; }
+      .mod-sub { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; font-weight: 400; }
+      .ext-title { font-family: 'SF Mono','Fira Code',monospace; font-size: 12px; font-weight: 600; }
+      .edge-label { font-family: 'SF Mono','Fira Code',monospace; font-size: 9px; font-style: italic; }
+      .group-label { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+    </style>
+    <marker id="arr-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+    <marker id="arr-pink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+    <marker id="arr-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arr-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8c90a0"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect width="800" height="560" fill="#0b0d14" rx="12"/>
+
+  <!-- ===================== Internal modules ===================== -->
+
+  <!-- completion_engine.py (top-left) -->
+  <rect x="40" y="60" width="200" height="80" rx="10" fill="#1a1d2a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="140" y="86" text-anchor="middle" class="mod-title" fill="#f9ca24">completion_engine.py</text>
+  <line x1="60" y1="94" x2="220" y2="94" stroke="#f9ca24" stroke-width="0.5" opacity="0.3"/>
+  <text x="140" y="112" text-anchor="middle" class="mod-sub" fill="#a0a4b8">解析层 · suggest_type</text>
+  <text x="140" y="128" text-anchor="middle" class="mod-sub" fill="#7c8090">规则引擎 · 纯函数</text>
+
+  <!-- sqlcompleter.py (center) -->
+  <rect x="300" y="220" width="200" height="80" rx="10" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="400" y="246" text-anchor="middle" class="mod-title" fill="#ff6b9d">sqlcompleter.py</text>
+  <line x1="320" y1="254" x2="480" y2="254" stroke="#ff6b9d" stroke-width="0.5" opacity="0.3"/>
+  <text x="400" y="272" text-anchor="middle" class="mod-sub" fill="#a0a4b8">数据+匹配层 · 核心</text>
+  <text x="400" y="288" text-anchor="middle" class="mod-sub" fill="#7c8090">SQLCompleter · Fuzziness</text>
+
+  <!-- completion_refresher.py (bottom-left) -->
+  <rect x="40" y="400" width="200" height="80" rx="10" fill="#1a1d2a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="140" y="426" text-anchor="middle" class="mod-title" fill="#4ecdc4">completion_refresher.py</text>
+  <line x1="60" y1="434" x2="220" y2="434" stroke="#4ecdc4" stroke-width="0.5" opacity="0.3"/>
+  <text x="140" y="452" text-anchor="middle" class="mod-sub" fill="#a0a4b8">异步刷新层 · daemon</text>
+  <text x="140" y="468" text-anchor="middle" class="mod-sub" fill="#7c8090">@refresher 注册表</text>
+
+  <!-- ===================== External deps (right side) ===================== -->
+  <text x="560" y="44" class="group-label" fill="#8c90a0">EXTERNAL DEPS / 外部依赖</text>
+  <line x1="560" y1="48" x2="760" y2="48" stroke="#8c90a0" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- sqlparse -->
+  <rect x="560" y="60" width="100" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <text x="610" y="80" text-anchor="middle" class="ext-title" fill="#a0a4b8">sqlparse</text>
+  <text x="610" y="96" text-anchor="middle" class="mod-sub" fill="#7c8090">SQL 解析库</text>
+
+  <!-- COMMANDS -->
+  <rect x="680" y="60" width="100" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <text x="730" y="80" text-anchor="middle" class="ext-title" fill="#a0a4b8">COMMANDS</text>
+  <text x="730" y="96" text-anchor="middle" class="mod-sub" fill="#7c8090">special.main</text>
+
+  <!-- prompt_toolkit.Completer -->
+  <rect x="560" y="180" width="220" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <text x="670" y="200" text-anchor="middle" class="ext-title" fill="#a0a4b8">prompt_toolkit.Completer</text>
+  <text x="670" y="216" text-anchor="middle" class="mod-sub" fill="#7c8090">基类 · Completer 接口</text>
+
+  <!-- rapidfuzz -->
+  <rect x="560" y="240" width="100" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <text x="610" y="260" text-anchor="middle" class="ext-title" fill="#a0a4b8">rapidfuzz</text>
+  <text x="610" y="276" text-anchor="middle" class="mod-sub" fill="#7c8090">模糊匹配</text>
+
+  <!-- pygments -->
+  <rect x="680" y="240" width="100" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <text x="730" y="260" text-anchor="middle" class="ext-title" fill="#a0a4b8">pygments</text>
+  <text x="730" y="276" text-anchor="middle" class="mod-sub" fill="#7c8090">语法高亮</text>
+
+  <!-- SQLExecute -->
+  <rect x="560" y="400" width="220" height="44" rx="8" fill="#141620" stroke="#6c7080" stroke-width="1.5"/>
+  <text x="670" y="420" text-anchor="middle" class="ext-title" fill="#a0a4b8">SQLExecute</text>
+  <text x="670" y="436" text-anchor="middle" class="mod-sub" fill="#7c8090">新建独立连接</text>
+
+  <!-- ===================== Consumers (left side, consumers of sqlcompleter) ===================== -->
+  <text x="40" y="180" class="group-label" fill="#8c90a0">CONSUMERS / 引用方</text>
+  <line x1="40" y1="184" x2="260" y2="184" stroke="#8c90a0" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- client.py -->
+  <rect x="40" y="200" width="115" height="40" rx="8" fill="#141620" stroke="#8c90a0" stroke-width="1.5"/>
+  <text x="97" y="220" text-anchor="middle" class="ext-title" fill="#a0a4b8" font-size="11px">client.py</text>
+  <text x="97" y="234" text-anchor="middle" class="mod-sub" fill="#7c8090">主入口</text>
+
+  <!-- client_query.py -->
+  <rect x="165" y="200" width="115" height="40" rx="8" fill="#141620" stroke="#8c90a0" stroke-width="1.5"/>
+  <text x="222" y="220" text-anchor="middle" class="ext-title" fill="#a0a4b8" font-size="11px">client_query.py</text>
+  <text x="222" y="234" text-anchor="middle" class="mod-sub" fill="#7c8090">查询交互</text>
+
+  <!-- schema_prefetcher.py -->
+  <rect x="40" y="250" width="240" height="40" rx="8" fill="#141620" stroke="#8c90a0" stroke-width="1.5"/>
+  <text x="160" y="270" text-anchor="middle" class="ext-title" fill="#a0a4b8" font-size="11px">schema_prefetcher.py</text>
+  <text x="160" y="284" text-anchor="middle" class="mod-sub" fill="#7c8090">schema 预取</text>
+
+  <!-- ===================== Edges ===================== -->
+
+  <!-- completion_engine → sqlcompleter (imports suggest_type) -->
+  <line x1="140" y1="140" x2="300" y2="220" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+  <text x="195" y="175" class="edge-label" fill="#f9ca24">imports suggest_type</text>
+
+  <!-- sqlcompleter → prompt_toolkit -->
+  <line x1="500" y1="245" x2="556" y2="200" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr-pink)"/>
+  <text x="510" y="210" class="edge-label" fill="#ff6b9d">imports</text>
+
+  <!-- sqlcompleter → rapidfuzz -->
+  <line x1="500" y1="262" x2="556" y2="262" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr-pink)"/>
+  <text x="525" y="256" class="edge-label" fill="#ff6b9d">uses</text>
+
+  <!-- sqlcompleter → pygments -->
+  <line x1="500" y1="280" x2="676" y2="262" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr-pink)"/>
+  <text x="585" y="285" class="edge-label" fill="#ff6b9d">uses</text>
+
+  <!-- completion_engine → sqlparse -->
+  <line x1="240" y1="80" x2="556" y2="82" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+  <text x="380" y="74" class="edge-label" fill="#f9ca24">imports sqlparse</text>
+
+  <!-- completion_engine → COMMANDS -->
+  <path d="M240 100 C 460 100, 600 60, 676 78" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+  <text x="430" y="58" class="edge-label" fill="#f9ca24">imports special.main.COMMANDS</text>
+
+  <!-- completion_refresher → SQLCompleter (inside sqlcompleter.py) -->
+  <line x1="240" y1="425" x2="300" y2="280" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arr-cyan)"/>
+  <text x="250" y="350" class="edge-label" fill="#4ecdc4">imports SQLCompleter</text>
+
+  <!-- completion_refresher → SQLExecute -->
+  <line x1="240" y1="440" x2="556" y2="420" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arr-cyan)"/>
+  <text x="350" y="438" class="edge-label" fill="#4ecdc4">imports SQLExecute</text>
+
+  <!-- consumers → sqlcompleter (dashed gray, "referenced by") -->
+  <line x1="97" y1="240" x2="300" y2="240" stroke="#8c90a0" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arr-gray)"/>
+  <line x1="222" y1="240" x2="300" y2="248" stroke="#8c90a0" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arr-gray)"/>
+  <line x1="160" y1="290" x2="300" y2="282" stroke="#8c90a0" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arr-gray)"/>
+  <text x="270" y="232" class="edge-label" fill="#8c90a0" text-anchor="end">referenced by</text>
+
+</svg>

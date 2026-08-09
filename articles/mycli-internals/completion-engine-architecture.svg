@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+  <defs>
+    <style>
+      .layer-label { font-family: 'SF Mono','Fira Code',monospace; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
+      .node-title { font-family: 'SF Mono','Fira Code',monospace; font-size: 15px; font-weight: 700; }
+      .node-sub { font-family: 'SF Mono','Fira Code',monospace; font-size: 11px; font-weight: 400; }
+      .layer-band { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; font-weight: 600; letter-spacing: 1px; }
+    </style>
+  </defs>
+
+  <!-- background -->
+  <rect width="800" height="520" fill="#0b0d14" rx="12"/>
+
+  <!-- ===================== Layer 1: Parsing ===================== -->
+  <rect x="24" y="36" width="752" height="132" rx="10" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="4 4" opacity="0.35"/>
+  <text x="40" y="58" class="layer-band" fill="#f9ca24">LAYER 1 — PARSING / 解析层</text>
+
+  <!-- completion_engine.py -->
+  <rect x="60" y="74" width="300" height="78" rx="10" fill="#1a1d2a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="210" y="98" text-anchor="middle" class="node-title" fill="#f9ca24">completion_engine.py</text>
+  <line x1="80" y1="106" x2="340" y2="106" stroke="#f9ca24" stroke-width="0.5" opacity="0.3"/>
+  <text x="210" y="124" text-anchor="middle" class="node-sub" fill="#a0a4b8">suggest_type() · 纯函数</text>
+  <text x="210" y="140" text-anchor="middle" class="node-sub" fill="#7c8090">SuggestRule[] · 无状态</text>
+
+  <!-- SuggestRule types -->
+  <rect x="420" y="74" width="320" height="78" rx="10" fill="#1a1d2a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="580" y="98" text-anchor="middle" class="node-title" fill="#f9ca24">SuggestRule[]</text>
+  <line x1="440" y1="106" x2="720" y2="106" stroke="#f9ca24" stroke-width="0.5" opacity="0.3"/>
+  <text x="580" y="124" text-anchor="middle" class="node-sub" fill="#a0a4b8">FromClause · Table · Database</text>
+  <text x="580" y="140" text-anchor="middle" class="node-sub" fill="#7c8090">Function · View · Keyword …</text>
+
+  <!-- link between -->
+  <line x1="360" y1="113" x2="420" y2="113" stroke="#f9ca24" stroke-width="1.5"/>
+  <circle cx="390" cy="113" r="3" fill="#f9ca24"/>
+
+  <!-- ===================== Layer 2: Data + Matching ===================== -->
+  <rect x="24" y="188" width="752" height="152" rx="10" fill="none" stroke="#ff6b9d" stroke-width="1" stroke-dasharray="4 4" opacity="0.35"/>
+  <text x="40" y="210" class="layer-band" fill="#ff6b9d">LAYER 2 — DATA + MATCHING / 数据+匹配层</text>
+
+  <!-- SQLCompleter -->
+  <rect x="60" y="226" width="300" height="98" rx="10" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="210" y="250" text-anchor="middle" class="node-title" fill="#ff6b9d">SQLCompleter</text>
+  <line x1="80" y1="258" x2="340" y2="258" stroke="#ff6b9d" stroke-width="0.5" opacity="0.3"/>
+  <text x="210" y="276" text-anchor="middle" class="node-sub" fill="#a0a4b8">dbmetadata · 元数据缓存</text>
+  <text x="210" y="292" text-anchor="middle" class="node-sub" fill="#a0a4b8">find_matches() · 模糊匹配</text>
+  <text x="210" y="308" text-anchor="middle" class="node-sub" fill="#7c8090">find_fuzzy_match()</text>
+
+  <!-- Fuzziness -->
+  <rect x="420" y="226" width="140" height="98" rx="10" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="490" y="254" text-anchor="middle" class="node-title" fill="#ff6b9d">Fuzziness</text>
+  <line x1="435" y1="262" x2="545" y2="262" stroke="#ff6b9d" stroke-width="0.5" opacity="0.3"/>
+  <text x="490" y="280" text-anchor="middle" class="node-sub" fill="#a0a4b8">多级匹配</text>
+  <text x="490" y="296" text-anchor="middle" class="node-sub" fill="#7c8090">Exact → Fuzzy</text>
+  <text x="490" y="312" text-anchor="middle" class="node-sub" fill="#7c8090">→ Subsequence</text>
+
+  <!-- dbmetadata -->
+  <rect x="600" y="226" width="140" height="98" rx="10" fill="#1a1d2a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="670" y="254" text-anchor="middle" class="node-title" fill="#ff6b9d">dbmetadata</text>
+  <line x1="615" y1="262" x2="725" y2="262" stroke="#ff6b9d" stroke-width="0.5" opacity="0.3"/>
+  <text x="670" y="280" text-anchor="middle" class="node-sub" fill="#a0a4b8">databases[]</text>
+  <text x="670" y="296" text-anchor="middle" class="node-sub" fill="#7c8090">tables{} · columns{}</text>
+  <text x="670" y="312" text-anchor="middle" class="node-sub" fill="#7c8090">functions{}</text>
+
+  <!-- links -->
+  <line x1="360" y1="275" x2="420" y2="275" stroke="#ff6b9d" stroke-width="1.5"/>
+  <line x1="560" y1="275" x2="600" y2="275" stroke="#ff6b9d" stroke-width="1.5"/>
+
+  <!-- cross-layer link: L1 -> L2 -->
+  <path d="M210 152 L210 190 L210 226" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.6"/>
+  <polygon points="210,226 206,218 214,218" fill="#f9ca24" opacity="0.6"/>
+  <text x="218" y="198" class="layer-band" fill="#f9ca24" opacity="0.7">imports</text>
+
+  <!-- ===================== Layer 3: Async Refresh ===================== -->
+  <rect x="24" y="360" width="752" height="132" rx="10" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="4 4" opacity="0.35"/>
+  <text x="40" y="382" class="layer-band" fill="#4ecdc4">LAYER 3 — ASYNC REFRESH / 异步刷新层</text>
+
+  <!-- completion_refresher.py -->
+  <rect x="60" y="398" width="300" height="78" rx="10" fill="#1a1d2a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="210" y="422" text-anchor="middle" class="node-title" fill="#4ecdc4">completion_refresher.py</text>
+  <line x1="80" y1="430" x2="340" y2="430" stroke="#4ecdc4" stroke-width="0.5" opacity="0.3"/>
+  <text x="210" y="448" text-anchor="middle" class="node-sub" fill="#a0a4b8">daemon Thread · 后台守护</text>
+  <text x="210" y="464" text-anchor="middle" class="node-sub" fill="#7c8090">@refresher 注册表</text>
+
+  <!-- independent connection -->
+  <rect x="420" y="398" width="320" height="78" rx="10" fill="#1a1d2a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="580" y="422" text-anchor="middle" class="node-title" fill="#4ecdc4">Independent Connection</text>
+  <line x1="440" y1="430" x2="720" y2="430" stroke="#4ecdc4" stroke-width="0.5" opacity="0.3"/>
+  <text x="580" y="448" text-anchor="middle" class="node-sub" fill="#a0a4b8">SQLExecute(独立连接)</text>
+  <text x="580" y="464" text-anchor="middle" class="node-sub" fill="#7c8090">不阻塞主线程</text>
+
+  <line x1="360" y1="437" x2="420" y2="437" stroke="#4ecdc4" stroke-width="1.5"/>
+
+  <!-- cross-layer link: L3 -> L2 (hot swap) -->
+  <path d="M210 398 L210 372 L210 324" fill="none" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.6"/>
+  <polygon points="210,324 206,332 214,332" fill="#4ecdc4" opacity="0.6"/>
+  <text x="218" y="356" class="layer-band" fill="#4ecdc4" opacity="0.7">hot-swap</text>
+
+  <!-- cross-layer link: L3 -> L1 (refresh_*) -->
+  <path d="M580 398 C 580 360, 580 200, 420 113" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="3 3" opacity="0.3"/>
+
+</svg>
