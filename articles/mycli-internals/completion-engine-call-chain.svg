@@ -39,16 +39,16 @@
   <text x="480" y="86" text-anchor="middle" class="node-title" fill="#f9ca24">sqlparse.parse</text>
   <text x="480" y="104" text-anchor="middle" class="dtype">→ Statement · cached</text>
 
-  <rect x="580" y="64" width="200" height="54" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-  <text x="680" y="82" text-anchor="middle" class="node-title" fill="#f9ca24" font-size="11px">suggest_based_on_last_token</text>
-  <text x="680" y="104" text-anchor="middle" class="dtype">规则引擎 → Suggestion[]</text>
+  <rect x="570" y="64" width="200" height="54" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="670" y="82" text-anchor="middle" class="node-title" fill="#f9ca24" font-size="11px">suggest_based_on_last_token</text>
+  <text x="670" y="104" text-anchor="middle" class="dtype">规则引擎 → Suggestion[]</text>
 
   <line x1="190" y1="91" x2="226" y2="91" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-yellow)"/>
   <line x1="370" y1="91" x2="406" y2="91" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-yellow)"/>
-  <line x1="550" y1="91" x2="576" y2="91" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-yellow)"/>
+  <line x1="550" y1="91" x2="566" y2="91" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-yellow)"/>
 
   <!-- loop back -->
-  <path d="M680 118 C 680 142, 300 142, 300 118" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#arrow-yellow)"/>
+  <path d="M670 118 C 670 142, 300 142, 300 118" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.7" marker-end="url(#arrow-yellow)"/>
   <text x="480" y="138" text-anchor="middle" class="dtype" fill="#f9ca24">返回 Suggestion[]</text>
 
   <!-- Row 2 -->
@@ -73,7 +73,7 @@
   <line x1="620" y1="187" x2="656" y2="187" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow-pink)"/>
 
   <!-- cross-layer -->
-  <path d="M300 118 C 300 135, 195 135, 195 160" fill="none" stroke="#5a6885" stroke-width="1" stroke-dasharray="4 3" opacity="0.7" marker-end="url(#arrow-gray)"/>
+  <path d="M300 118 C 300 135, 195 135, 195 160" fill="none" stroke="#5a6885" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.8" marker-end="url(#arrow-gray)"/>
   <text x="232" y="143" class="dtype" fill="#7a85a3">for each suggestion</text>
 
   <!-- ============ PATH B ============ -->
@@ -114,14 +114,14 @@
   <line x1="460" y1="497" x2="496" y2="497" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
 
   <!-- feeder arrows -->
-  <path d="M690 424 C 690 445, 460 445, 460 470" fill="none" stroke="#5a6885" stroke-width="1" stroke-dasharray="4 3" opacity="0.7" marker-end="url(#arrow-gray)"/>
+  <path d="M690 424 C 690 445, 460 445, 460 470" fill="none" stroke="#5a6885" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.8" marker-end="url(#arrow-gray)"/>
   <text x="565" y="438" class="dtype" fill="#7a85a3">executor 传入</text>
 
-  <path d="M505 424 C 505 440, 320 450, 320 470" fill="none" stroke="#5a6885" stroke-width="1" stroke-dasharray="4 3" opacity="0.7" marker-end="url(#arrow-gray)"/>
+  <path d="M505 424 C 505 440, 320 450, 320 470" fill="none" stroke="#5a6885" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.8" marker-end="url(#arrow-gray)"/>
   <text x="395" y="438" class="dtype" fill="#7a85a3">completer 目标</text>
 
   <!-- hot-swap cross-path -->
-  <path d="M600 470 C 600 440, 770 440, 770 214" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <path d="M600 470 C 600 440, 770 440, 770 214" fill="none" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.7"/>
   <text x="760" y="330" class="dtype" fill="#4ecdc4" text-anchor="end">热替换</text>
 
 </svg>
