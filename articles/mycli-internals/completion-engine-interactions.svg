@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="493" viewBox="0 0 800 493">
   <defs>
     <style>
       .mod-title { font-family: 'SF Mono','Fira Code',monospace; font-size: 14px; font-weight: 700; }
@@ -22,7 +22,7 @@
   </defs>
 
   <!-- background -->
-  <rect width="800" height="560" fill="#0b0d14" rx="12"/>
+  <rect width="800" height="493" fill="#0b0d14" rx="12"/>
 
   <!-- ===================== Internal modules ===================== -->
 

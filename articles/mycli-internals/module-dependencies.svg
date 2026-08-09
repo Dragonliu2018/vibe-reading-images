@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
-  <rect width="800" height="450" fill="#0b0d14"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="413" viewBox="0 0 800 413">
+  <rect width="800" height="413" fill="#0b0d14"/>
   <style>
     .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #e2e8f0; }
     .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }

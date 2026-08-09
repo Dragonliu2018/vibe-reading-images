@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-  <rect width="800" height="600" fill="#0b0d14"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="515" viewBox="0 0 800 515">
+  <rect width="800" height="515" fill="#0b0d14"/>
   <style>
     .box { rx: 6; }
     .label { font-family: -apple-system, sans-serif; font-size: 13px; fill: #e2e8f0; font-weight: 600; }
