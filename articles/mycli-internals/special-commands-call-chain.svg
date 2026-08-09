@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="720" viewBox="0 0 800 720">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620">
   <style>
     .bg { fill: #0b0d14; }
     .node-core { fill: rgba(249,202,36,0.12); stroke: #f9ca24; stroke-width: 1.5; }
@@ -21,7 +21,7 @@
     </marker>
   </defs>
 
-  <rect class="bg" width="800" height="720"/>
+  <rect class="bg" width="800" height="620"/>
 
   <!-- Title -->
   <text x="400" y="26" text-anchor="middle" class="title">Special Commands — Call Chain &amp; Data Flow</text>
@@ -167,8 +167,8 @@
   <text x="580" y="530" class="arrow-label">final SQL</text>
 
   <!-- Divider line between paths -->
-  <line x1="420" y1="50" x2="420" y2="680" stroke="#2a2d3a" stroke-width="1" stroke-dasharray="3 5"/>
+  <line x1="420" y1="50" x2="420" y2="600" stroke="#2a2d3a" stroke-width="1" stroke-dasharray="3 5"/>
 
   <!-- Bottom note -->
-  <text x="400" y="690" text-anchor="middle" class="sub">Path A: O(1) lookup → typed dispatch · Path B: template pipeline with UUID marker round-trip</text>
+  <text x="400" y="610" text-anchor="middle" class="sub">Path A: O(1) lookup → typed dispatch · Path B: template pipeline with UUID marker round-trip</text>
 </svg>

@@ -74,8 +74,8 @@
   </g>
 
   <g>
-    <rect x="490" y="55" width="140" height="50" rx="10" class="node-caller"/>
-    <text x="560" y="76" text-anchor="middle" class="label-caller">completion_refresher.py</text>
+    <rect x="480" y="55" width="160" height="50" rx="10" class="node-caller"/>
+    <text x="560" y="76" text-anchor="middle" class="label-caller">completion_refresher</text>
     <text x="560" y="92" text-anchor="middle" class="sub">COMMANDS</text>
   </g>
 
@@ -107,7 +107,7 @@
 
   <!-- Registration arrows (cyan, pointing up from impl to main.py) -->
   <path class="arrow-reg" d="M 115 400 C 115 370, 250 350, 310 330"/>
-  <text x="170" y="375" class="arrow-label" transform="rotate(-15, 170, 375)">@special_command</text>
+  <text x="170" y="367" class="arrow-label" transform="rotate(-15, 170, 367)">@special_command</text>
 
   <path class="arrow-reg" d="M 305 400 C 305 370, 320 350, 350 330"/>
   <text x="320" y="375" class="arrow-label">@special_command</text>
@@ -132,7 +132,7 @@
   <text x="490" y="375" class="arrow-label" transform="rotate(15, 490, 375)">reads/writes</text>
 
   <!-- State arrow: iocommands.py → global state (self-referential) -->
-  <path class="arrow-state" d="M 375 430 C 400 430, 410 430, 420 430"/>
+  <path class="arrow-state" d="M 390 430 L 420 430"/>
 
   <!-- Bottom notes -->
   <text x="400" y="515" text-anchor="middle" class="sub">Dashed gray = reference (caller imports main.py) · Solid cyan = registration (@special_command)</text>

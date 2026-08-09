@@ -104,26 +104,26 @@
 
   <!-- completion_engine → sqlcompleter (imports suggest_type) -->
   <line x1="140" y1="140" x2="300" y2="220" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
-  <text x="195" y="175" class="edge-label" fill="#f9ca24">imports suggest_type</text>
+  <text x="195" y="157" class="edge-label" fill="#f9ca24">imports suggest_type</text>
 
   <!-- sqlcompleter → prompt_toolkit -->
-  <line x1="500" y1="245" x2="556" y2="200" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr-pink)"/>
+  <line x1="500" y1="245" x2="558" y2="200" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr-pink)"/>
   <text x="510" y="210" class="edge-label" fill="#ff6b9d">imports</text>
 
   <!-- sqlcompleter → rapidfuzz -->
-  <line x1="500" y1="262" x2="556" y2="262" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr-pink)"/>
+  <line x1="500" y1="262" x2="558" y2="262" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr-pink)"/>
   <text x="525" y="256" class="edge-label" fill="#ff6b9d">uses</text>
 
   <!-- sqlcompleter → pygments -->
-  <line x1="500" y1="280" x2="676" y2="262" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr-pink)"/>
+  <line x1="500" y1="280" x2="678" y2="262" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr-pink)"/>
   <text x="585" y="285" class="edge-label" fill="#ff6b9d">uses</text>
 
   <!-- completion_engine → sqlparse -->
-  <line x1="240" y1="80" x2="556" y2="82" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+  <line x1="240" y1="80" x2="558" y2="82" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
   <text x="380" y="74" class="edge-label" fill="#f9ca24">imports sqlparse</text>
 
   <!-- completion_engine → COMMANDS -->
-  <path d="M240 100 C 460 100, 600 60, 676 78" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+  <path d="M240 100 C 460 100, 600 60, 678 78" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
   <text x="430" y="58" class="edge-label" fill="#f9ca24">imports special.main.COMMANDS</text>
 
   <!-- completion_refresher → SQLCompleter (inside sqlcompleter.py) -->
@@ -131,7 +131,7 @@
   <text x="250" y="350" class="edge-label" fill="#4ecdc4">imports SQLCompleter</text>
 
   <!-- completion_refresher → SQLExecute -->
-  <line x1="240" y1="440" x2="556" y2="420" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arr-cyan)"/>
+  <line x1="240" y1="440" x2="558" y2="420" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arr-cyan)"/>
   <text x="350" y="438" class="edge-label" fill="#4ecdc4">imports SQLExecute</text>
 
   <!-- consumers → sqlcompleter (dashed gray, "referenced by") -->

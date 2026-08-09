@@ -102,16 +102,16 @@
   <text x="510" y="172" class="arrow-label">register</text>
 
   <!-- to dsn_aliases -->
-  <path class="arrow" d="M 340 140 C 280 200, 240 260, 190 330"/>
-  <text x="230" y="280" class="arrow-label" transform="rotate(20, 230, 280)">register</text>
+  <path class="arrow" d="M 310 140 L 310 175 L 220 175 L 220 300 L 190 300 L 190 330"/>
+  <text x="200" y="295" class="arrow-label">register</text>
 
   <!-- to llm -->
-  <path class="arrow" d="M 400 140 C 400 220, 400 280, 400 330"/>
-  <text x="410" y="260" class="arrow-label">register</text>
+  <path class="arrow" d="M 430 140 L 430 300 L 400 300 L 400 330"/>
+  <text x="415" y="295" class="arrow-label">register</text>
 
   <!-- to delimitercommand -->
-  <path class="arrow" d="M 460 140 C 540 200, 600 260, 620 330"/>
-  <text x="560" y="280" class="arrow-label" transform="rotate(-20, 560, 280)">register</text>
+  <path class="arrow" d="M 490 140 L 490 175 L 650 175 L 650 300 L 620 300 L 620 330"/>
+  <text x="635" y="295" class="arrow-label">register</text>
 
   <!-- Bottom note -->
   <text x="400" y="440" text-anchor="middle" class="sub">Each module uses @special_command decorator to register into COMMANDS dict</text>

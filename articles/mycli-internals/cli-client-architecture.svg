@@ -12,7 +12,7 @@
   <text x="400" y="42" text-anchor="middle" class="label" fill="#6c8ef5">main.py</text>
   <text x="400" y="58" text-anchor="middle" class="mod">CliArgs dataclass · click入口</text>
 
-  <path d="M 400 70 L 400 88" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 70 L 400 95" class="arrow" marker-end="url(#ah)"/>
 
   <!-- cli_runner.py -->
   <rect x="240" y="95" width="320" height="55" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
@@ -20,19 +20,19 @@
   <text x="400" y="133" text-anchor="middle" class="mod">run_from_cli_args · DSN解析 · 密码候选链 · 模式分发</text>
 
   <!-- password_sources.py (side) -->
-  <path d="M 560 122 L 598 122" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 560 122 L 600 122" class="arrow" marker-end="url(#ah)"/>
   <rect x="600" y="100" width="180" height="45" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
   <text x="690" y="120" text-anchor="middle" class="label" fill="#ff6b9d">password_sources.py</text>
   <text x="690" y="136" text-anchor="middle" class="mod">PasswordCandidates</text>
 
-  <path d="M 400 150 L 400 175" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 150 L 400 180" class="arrow" marker-end="url(#ah)"/>
 
   <!-- client.py -->
   <rect x="280" y="180" width="240" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
   <text x="400" y="202" text-anchor="middle" class="label" fill="#4ecdc4">client.py</text>
   <text x="400" y="218" text-anchor="middle" class="mod">MyCli · 5 Mixin组合</text>
 
-  <path d="M 400 230 L 400 258" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 230 L 400 265" class="arrow" marker-end="url(#ah)"/>
 
   <!-- main_modes/ container -->
   <rect x="20" y="265" width="760" height="110" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 2"/>

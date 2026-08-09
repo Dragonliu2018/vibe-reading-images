@@ -37,7 +37,7 @@
 
   <!-- client_connection → sqlexecute (right side) -->
   <path d="M 240 82 L 275 82 L 275 155 L 310 155" fill="none" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arrow-int)"/>
-  <text x="252" y="130" fill="#8892a8" font-family="system-ui, -apple-system, sans-serif" font-size="10">SQLExecute</text>
+  <text x="272" y="130" text-anchor="end" fill="#8892a8" font-family="system-ui, -apple-system, sans-serif" font-size="10">SQLExecute</text>
 
   <!-- ===== Center: sqlexecute.py ===== -->
 

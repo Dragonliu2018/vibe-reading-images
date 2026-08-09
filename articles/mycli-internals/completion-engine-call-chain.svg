@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="535" viewBox="0 0 800 535">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620">
   <defs>
     <style>
       .path-label { font-family: 'SF Mono','Fira Code',monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
@@ -21,7 +21,7 @@
   </defs>
 
   <!-- background -->
-  <rect width="800" height="535" fill="#0b0d14" rx="12"/>
+  <rect width="800" height="620" fill="#0b0d14" rx="12"/>
 
   <!-- ============ PATH A: get_completions ============ -->
   <rect x="24" y="24" width="752" height="284" rx="10" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="4 4" opacity="0.25"/>
@@ -84,7 +84,7 @@
 
   <!-- connection: suggest_type returns → find_matches (cross-layer) -->
   <path d="M300 118 C 300 135, 195 135, 195 160" fill="none" stroke="#6c7080" stroke-width="1" stroke-dasharray="4 3" opacity="0.5" marker-end="url(#arrow-gray)"/>
-  <text x="220" y="138" class="dtype" fill="#6c7080">for each suggestion</text>
+  <text x="220" y="130" class="dtype" fill="#6c7080" paint-order="stroke" stroke="#0b0d14" stroke-width="3">for each suggestion</text>
 
   <!-- loop note for sqlparse lru_cache -->
   <text x="480" y="130" text-anchor="middle" class="dtype" fill="#7c8090">cached</text>
@@ -137,11 +137,11 @@
 
   <!-- SQLExecute feeds refresh_* -->
   <path d="M690 424 C 690 445, 460 445, 460 470" fill="none" stroke="#6c7080" stroke-width="1" stroke-dasharray="4 3" opacity="0.5" marker-end="url(#arrow-gray)"/>
-  <text x="575" y="445" class="dtype" fill="#6c8090">executor 传入</text>
+  <text x="575" y="435" class="dtype" fill="#6c8090">executor 传入</text>
 
   <!-- SQLCompleter feeds refresh_* (target) -->
   <path d="M505 424 C 505 440, 320 450, 320 470" fill="none" stroke="#6c7080" stroke-width="1" stroke-dasharray="4 3" opacity="0.4" marker-end="url(#arrow-gray)"/>
-  <text x="410" y="455" class="dtype" fill="#6c8090">completer 目标</text>
+  <text x="410" y="435" class="dtype" fill="#6c8090">completer 目标</text>
 
   <!-- callback hot-swap back to L2 (cross-path) -->
   <path d="M600 470 C 600 440, 750 440, 750 200" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="3 3" opacity="0.35"/>

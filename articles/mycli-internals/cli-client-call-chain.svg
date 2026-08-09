@@ -51,10 +51,10 @@
   <text x="400" y="426" text-anchor="middle" class="mod">策略模式短路</text>
 
   <!-- branch arrows -->
-  <path d="M 290 435 L 120 465" class="arrow" marker-end="url(#ah)"/>
-  <path d="M 340 435 L 290 465" class="arrow" marker-end="url(#ah)"/>
-  <path d="M 460 435 L 510 465" class="arrow" marker-end="url(#ah)"/>
-  <path d="M 510 435 L 680 465" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 290 435 L 120 470" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 340 435 L 290 470" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 460 435 L 510 470" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 510 435 L 680 470" class="arrow" marker-end="url(#ah)"/>
 
   <text x="120" y="458" text-anchor="middle" class="branch">--execute</text>
   <text x="290" y="458" text-anchor="middle" class="branch">--batch</text>
@@ -79,10 +79,10 @@
   <text x="680" y="506" text-anchor="middle" class="dtype">→ exit_code</text>
 
   <!-- converge to close -->
-  <path d="M 120 520 L 370 545" class="arrow" marker-end="url(#ah)"/>
-  <path d="M 290 520 L 380 545" class="arrow" marker-end="url(#ah)"/>
-  <path d="M 510 520 L 420 545" class="arrow" marker-end="url(#ah)"/>
-  <path d="M 680 520 L 430 545" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 120 520 L 370 550" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 290 520 L 380 550" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 510 520 L 420 550" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 680 520 L 430 550" class="arrow" marker-end="url(#ah)"/>
 
   <!-- mycli.close() -->
   <rect x="300" y="550" width="200" height="40" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
