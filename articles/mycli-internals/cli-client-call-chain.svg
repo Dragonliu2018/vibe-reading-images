@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-  <rect width="800" height="600" fill="#0b0d14"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="615" viewBox="0 0 800 615">
+  <rect width="800" height="615" fill="#0b0d14"/>
   <style>
     .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #e2e8f0; }
     .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
@@ -14,48 +14,48 @@
   <text x="400" y="42" text-anchor="middle" class="label" fill="#6c8ef5">main()</text>
   <text x="400" y="58" text-anchor="middle" class="dtype">输入: sys.argv</text>
 
-  <path d="M 400 70 L 400 88" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 70 L 400 95" class="arrow" marker-end="url(#ah)"/>
   <text x="415" y="83" class="dtype">CliArgs</text>
 
   <!-- run_from_cli_args -->
-  <rect x="250" y="95" width="300" height="55" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <rect x="250" y="97" width="300" height="55" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
   <text x="400" y="117" text-anchor="middle" class="label" fill="#6c8ef5">run_from_cli_args(cli_args)</text>
   <text x="400" y="135" text-anchor="middle" class="mod">模式分发 · 密码候选链</text>
 
-  <path d="M 400 150 L 400 168" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 152 L 400 177" class="arrow" marker-end="url(#ah)"/>
 
   <!-- preprocess -->
-  <rect x="290" y="175" width="220" height="45" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
-  <text x="400" y="195" text-anchor="middle" class="label">preprocess_cli_args()</text>
+  <rect x="290" y="179" width="220" height="45" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="199" text-anchor="middle" class="label">preprocess_cli_args()</text>
   <text x="400" y="211" text-anchor="middle" class="mod">参数校验 · DSN归一化</text>
 
-  <path d="M 400 220 L 400 238" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 224 L 400 249" class="arrow" marker-end="url(#ah)"/>
 
   <!-- MyCli init -->
-  <rect x="290" y="245" width="220" height="45" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="400" y="265" text-anchor="middle" class="label" fill="#4ecdc4">MyCli(...)</text>
+  <rect x="290" y="251" width="220" height="45" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="400" y="271" text-anchor="middle" class="label" fill="#4ecdc4">MyCli(...)</text>
   <text x="400" y="281" text-anchor="middle" class="mod">实例化 · 加载配置</text>
 
-  <path d="M 400 290 L 400 308" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 296 L 400 321" class="arrow" marker-end="url(#ah)"/>
   <text x="415" y="303" class="dtype">mycli</text>
 
   <!-- connect -->
-  <rect x="270" y="315" width="260" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="270" y="323" width="260" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
   <text x="400" y="337" text-anchor="middle" class="label" fill="#4ecdc4">mycli.connect(...)</text>
   <text x="400" y="353" text-anchor="middle" class="dtype">→ SQLExecute</text>
 
-  <path d="M 400 365 L 400 383" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 373 L 400 398" class="arrow" marker-end="url(#ah)"/>
 
   <!-- 模式分发 -->
-  <rect x="250" y="390" width="300" height="45" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-  <text x="400" y="410" text-anchor="middle" class="label" fill="#f9ca24">模式分发</text>
-  <text x="400" y="426" text-anchor="middle" class="mod">策略模式短路</text>
+  <rect x="250" y="400" width="300" height="45" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="400" y="416" text-anchor="middle" class="label" fill="#f9ca24">模式分发</text>
+  <text x="400" y="432" text-anchor="middle" class="mod">策略模式短路</text>
 
   <!-- branch arrows -->
-  <path d="M 290 435 L 120 470" class="arrow" marker-end="url(#ah)"/>
-  <path d="M 340 435 L 290 470" class="arrow" marker-end="url(#ah)"/>
-  <path d="M 460 435 L 510 470" class="arrow" marker-end="url(#ah)"/>
-  <path d="M 510 435 L 680 470" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 290 445 L 120 470" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 340 445 L 290 470" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 460 445 L 510 470" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 510 445 L 680 470" class="arrow" marker-end="url(#ah)"/>
 
   <text x="120" y="458" text-anchor="middle" class="branch">--execute</text>
   <text x="290" y="458" text-anchor="middle" class="branch">--batch</text>

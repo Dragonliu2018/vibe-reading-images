@@ -1,175 +1,139 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="630" viewBox="0 0 720 630">
   <style>
     .bg { fill: #0b0d14; }
-    .node-core { fill: rgba(249,202,36,0.12); stroke: #f9ca24; stroke-width: 1.5; }
-    .node-impl { fill: rgba(78,205,196,0.12); stroke: #4ecdc4; stroke-width: 1.5; }
-    .node-state { fill: rgba(255,107,157,0.12); stroke: #ff6b9d; stroke-width: 1.5; }
-    .label-core { fill: #f9ca24; font-family: ui-monospace, monospace; font-size: 12px; font-weight: 600; }
-    .label-impl { fill: #4ecdc4; font-family: ui-monospace, monospace; font-size: 12px; font-weight: 600; }
-    .label-state { fill: #ff6b9d; font-family: ui-monospace, monospace; font-size: 12px; font-weight: 600; }
-    .sub { fill: #8892a8; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 10px; }
-    .arrow { stroke: #4a5568; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead2); }
-    .arrow-data { stroke: #636e8e; stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; marker-end: url(#arrowhead2); }
-    .arrow-label { fill: #636e8e; font-family: ui-monospace, monospace; font-size: 9px; }
-    .title { fill: #c8d0dc; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 700; }
-    .legend-text { fill: #8892a8; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 10px; }
-    .path-label { fill: #c8d0dc; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 11px; font-weight: 600; }
+    .node-core { fill: #13162a; stroke: #f9ca24; stroke-width: 1.5; }
+    .node-impl { fill: #13162a; stroke: #4ecdc4; stroke-width: 1.5; }
+    .node-state { fill: #13162a; stroke: #ff6b9d; stroke-width: 1.5; }
+    .label-core { fill: #f9ca24; font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+    .label-impl { fill: #4ecdc4; font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+    .label-state { fill: #ff6b9d; font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+    .sub { fill: #7c8090; font-family: system-ui, sans-serif; font-size: 10px; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .arrow-data { stroke: #5a6885; stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
+    .arrow-label { fill: #5a6885; font-family: system-ui, sans-serif; font-size: 9px; }
+    .path-label { fill: #c8d0dc; font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
+    .legend-text { fill: #7c8090; font-family: system-ui, sans-serif; font-size: 10px; }
     path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
   </style>
   <defs>
-    <marker id="arrowhead2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#4a5568"/>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
     </marker>
   </defs>
 
-  <rect class="bg" width="800" height="620"/>
+  <rect class="bg" width="720" height="630"/>
 
-  <!-- Title -->
-  <text x="400" y="26" text-anchor="middle" class="title">Special Commands — Call Chain &amp; Data Flow</text>
+  <!-- 分隔线 -->
+  <line x1="425" y1="50" x2="425" y2="570" stroke="#2a2d3a" stroke-width="1" stroke-dasharray="3 5"/>
 
-  <!-- Legend -->
-  <g transform="translate(490, 10)">
-    <rect x="0" y="0" width="14" height="14" rx="2" class="node-core"/>
-    <text x="20" y="11" class="legend-text">Dispatch</text>
-    <rect x="80" y="0" width="14" height="14" rx="2" class="node-impl"/>
-    <text x="100" y="11" class="legend-text">Implementation</text>
-    <rect x="190" y="0" width="14" height="14" rx="2" class="node-state"/>
-    <text x="210" y="11" class="legend-text">State</text>
+  <!-- ============ Path A ============ -->
+  <text x="200" y="30" text-anchor="middle" class="path-label">路径 A：execute(cur, sql)</text>
+
+  <rect x="100" y="55" width="200" height="55" rx="8" class="node-core"/>
+  <text x="200" y="76" text-anchor="middle" class="label-core">execute(cur, sql)</text>
+  <text x="200" y="93" text-anchor="middle" class="sub">输入: str</text>
+
+  <path class="arrow" d="M 200 110 L 200 137" marker-end="url(#ah)"/>
+
+  <rect x="100" y="137" width="200" height="55" rx="8" class="node-core"/>
+  <text x="200" y="158" text-anchor="middle" class="label-core">parse_special_command()</text>
+  <text x="200" y="175" text-anchor="middle" class="sub">→ command, arg, verbosity</text>
+
+  <path class="arrow" d="M 200 192 L 200 219" marker-end="url(#ah)"/>
+
+  <rect x="100" y="219" width="200" height="55" rx="8" class="node-core"/>
+  <text x="200" y="240" text-anchor="middle" class="label-core">COMMANDS[command]</text>
+  <text x="200" y="257" text-anchor="middle" class="sub">→ SpecialCommand, O(1)</text>
+
+  <path class="arrow" d="M 200 274 L 200 301" marker-end="url(#ah)"/>
+
+  <rect x="100" y="301" width="200" height="55" rx="8" class="node-core"/>
+  <text x="200" y="322" text-anchor="middle" class="label-core">arg_type 分发</text>
+  <text x="200" y="339" text-anchor="middle" class="sub">NO_ARG / PARSED / RAW</text>
+
+  <!-- 三个 handler 分支 -->
+  <path class="arrow" d="M 110 356 C 90 375, 70 390, 70 405" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 200 356 L 200 405" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 210 356 C 250 375, 310 390, 310 405" marker-end="url(#ah)"/>
+
+  <rect x="10" y="405" width="120" height="50" rx="8" class="node-impl"/>
+  <text x="70" y="425" text-anchor="middle" class="label-impl">handler()</text>
+  <text x="70" y="440" text-anchor="middle" class="sub">NO_ARGUMENT</text>
+
+  <rect x="140" y="405" width="120" height="50" rx="8" class="node-impl"/>
+  <text x="200" y="425" text-anchor="middle" class="label-impl">handler(cur, arg)</text>
+  <text x="200" y="440" text-anchor="middle" class="sub">PARSED_QUERY</text>
+
+  <rect x="270" y="405" width="120" height="50" rx="8" class="node-impl"/>
+  <text x="330" y="425" text-anchor="middle" class="label-impl">handler(cur, query)</text>
+  <text x="330" y="440" text-anchor="middle" class="sub">RAW_QUERY</text>
+
+  <!-- 汇聚到 result -->
+  <path class="arrow" d="M 70 455 L 200 492" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 200 455 L 200 492" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 330 455 L 200 492" marker-end="url(#ah)"/>
+
+  <rect x="100" y="492" width="200" height="48" rx="8" class="node-impl"/>
+  <text x="200" y="512" text-anchor="middle" class="label-impl">→ list[SQLResult]</text>
+  <text x="200" y="528" text-anchor="middle" class="sub">三条路径返回相同类型</text>
+
+  <!-- ============ Path B ============ -->
+  <text x="570" y="30" text-anchor="middle" class="path-label">路径 B：execute_favorite_query(cur, arg)</text>
+
+  <rect x="460" y="55" width="220" height="50" rx="8" class="node-core"/>
+  <text x="570" y="75" text-anchor="middle" class="label-core">execute_favorite_query()</text>
+  <text x="570" y="91" text-anchor="middle" class="sub">输入: str（\f 命令）</text>
+
+  <path class="arrow" d="M 570 105 L 570 132" marker-end="url(#ah)"/>
+  <text x="580" y="122" class="arrow-label">原始参数</text>
+
+  <rect x="460" y="132" width="220" height="50" rx="8" class="node-impl"/>
+  <text x="570" y="152" text-anchor="middle" class="label-impl">parse_favorite_query_args()</text>
+  <text x="570" y="168" text-anchor="middle" class="sub">→ positional, template_values</text>
+
+  <path class="arrow" d="M 570 182 L 570 209" marker-end="url(#ah)"/>
+  <text x="580" y="199" class="arrow-label">name</text>
+
+  <rect x="460" y="209" width="220" height="50" rx="8" class="node-state"/>
+  <text x="570" y="229" text-anchor="middle" class="label-state">FavoriteQueries.get(name)</text>
+  <text x="570" y="245" text-anchor="middle" class="sub">→ 模板 SQL</text>
+
+  <path class="arrow" d="M 570 259 L 570 286" marker-end="url(#ah)"/>
+  <text x="580" y="276" class="arrow-label">template</text>
+
+  <rect x="460" y="286" width="220" height="50" rx="8" class="node-impl"/>
+  <text x="570" y="306" text-anchor="middle" class="label-impl">prepare_favorite_query_args()</text>
+  <text x="570" y="322" text-anchor="middle" class="sub">→ marked_query（UUID marker 替换 $1）</text>
+
+  <path class="arrow" d="M 570 336 L 570 363" marker-end="url(#ah)"/>
+  <text x="580" y="353" class="arrow-label">marked</text>
+
+  <rect x="460" y="363" width="220" height="50" rx="8" class="node-impl"/>
+  <text x="570" y="383" text-anchor="middle" class="label-impl">render_favorite_query()</text>
+  <text x="570" y="399" text-anchor="middle" class="sub">→ rendered SQL（Jinja2 渲染）</text>
+
+  <path class="arrow" d="M 570 413 L 570 440" marker-end="url(#ah)"/>
+  <text x="580" y="430" class="arrow-label">rendered</text>
+
+  <rect x="460" y="440" width="220" height="50" rx="8" class="node-impl"/>
+  <text x="570" y="460" text-anchor="middle" class="label-impl">restore_favorite_query_args()</text>
+  <text x="570" y="476" text-anchor="middle" class="sub">→ final SQL（marker 还原）</text>
+
+  <path class="arrow" d="M 570 490 L 570 517" marker-end="url(#ah)"/>
+  <text x="580" y="507" class="arrow-label">final SQL</text>
+
+  <rect x="460" y="517" width="220" height="50" rx="8" class="node-impl"/>
+  <text x="570" y="537" text-anchor="middle" class="label-impl">sqlparse.split()</text>
+  <text x="570" y="553" text-anchor="middle" class="sub">→ execute() / cur.execute()</text>
+
+  <!-- Legend (bottom-left) -->
+  <g transform="translate(30, 590)">
+    <rect x="0" y="0" width="14" height="14" rx="2" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+    <text x="20" y="11" class="legend-text">调度核心</text>
+    <rect x="100" y="0" width="14" height="14" rx="2" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+    <text x="120" y="11" class="legend-text">命令实现</text>
+    <rect x="200" y="0" width="14" height="14" rx="2" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+    <text x="220" y="11" class="legend-text">状态存储</text>
   </g>
 
-  <!-- Path A label -->
-  <text x="200" y="58" class="path-label">Path A: execute(cur, sql)</text>
-  <text x="200" y="73" class="sub" text-anchor="start">standard command dispatch</text>
-
-  <!-- Path A nodes -->
-  <g>
-    <rect x="60" y="85" width="180" height="55" rx="10" class="node-core"/>
-    <text x="150" y="106" text-anchor="middle" class="label-core">execute(cur, sql)</text>
-    <text x="150" y="123" text-anchor="middle" class="sub">input: str</text>
-  </g>
-
-  <g>
-    <rect x="60" y="160" width="180" height="55" rx="10" class="node-core"/>
-    <text x="150" y="181" text-anchor="middle" class="label-core">parse_special_command()</text>
-    <text x="150" y="198" text-anchor="middle" class="sub">→ command, arg, verbosity</text>
-  </g>
-
-  <g>
-    <rect x="60" y="235" width="180" height="55" rx="10" class="node-core"/>
-    <text x="150" y="256" text-anchor="middle" class="label-core">COMMANDS[command]</text>
-    <text x="150" y="273" text-anchor="middle" class="sub">→ SpecialCommand, O(1)</text>
-  </g>
-
-  <!-- Branch: arg_type dispatch -->
-  <g>
-    <rect x="60" y="310" width="180" height="55" rx="10" class="node-core"/>
-    <text x="150" y="331" text-anchor="middle" class="label-core">arg_type dispatch</text>
-    <text x="150" y="348" text-anchor="middle" class="sub">NO_ARG / PARSED / RAW</text>
-  </g>
-
-  <!-- Three handler branches -->
-  <g>
-    <rect x="20" y="395" width="120" height="55" rx="10" class="node-impl"/>
-    <text x="80" y="416" text-anchor="middle" class="label-impl">handler()</text>
-    <text x="80" y="433" text-anchor="middle" class="sub">NO_ARGUMENT</text>
-  </g>
-
-  <g>
-    <rect x="150" y="395" width="120" height="55" rx="10" class="node-impl"/>
-    <text x="210" y="416" text-anchor="middle" class="label-impl">handler(cur, arg)</text>
-    <text x="210" y="433" text-anchor="middle" class="sub">PARSED_QUERY</text>
-  </g>
-
-  <g>
-    <rect x="280" y="395" width="120" height="55" rx="10" class="node-impl"/>
-    <text x="340" y="416" text-anchor="middle" class="label-impl">handler(cur, query)</text>
-    <text x="340" y="433" text-anchor="middle" class="sub">RAW_QUERY</text>
-  </g>
-
-  <!-- Result node -->
-  <g>
-    <rect x="130" y="475" width="200" height="50" rx="10" class="node-impl"/>
-    <text x="230" y="496" text-anchor="middle" class="label-impl">→ list[SQLResult]</text>
-    <text x="230" y="512" text-anchor="middle" class="sub">all paths return same type</text>
-  </g>
-
-  <!-- Path A arrows -->
-  <path class="arrow" d="M 150 140 L 150 160"/>
-  <path class="arrow" d="M 150 215 L 150 235"/>
-  <path class="arrow" d="M 150 290 L 150 310"/>
-  <path class="arrow" d="M 120 365 C 100 375, 80 385, 80 395"/>
-  <path class="arrow" d="M 150 365 L 210 395"/>
-  <path class="arrow" d="M 180 365 C 250 375, 320 385, 340 395"/>
-  <path class="arrow" d="M 80 450 L 200 475"/>
-  <path class="arrow" d="M 210 450 L 230 475"/>
-  <path class="arrow" d="M 340 450 L 260 475"/>
-
-  <!-- Path B label -->
-  <text x="540" y="58" class="path-label">Path B: execute_favorite_query(cur, arg)</text>
-  <text x="540" y="73" class="sub" text-anchor="start">\f command — template rendering</text>
-
-  <!-- Path B nodes -->
-  <g>
-    <rect x="460" y="85" width="220" height="55" rx="10" class="node-core"/>
-    <text x="570" y="106" text-anchor="middle" class="label-core">execute_favorite_query(cur, arg)</text>
-    <text x="570" y="123" text-anchor="middle" class="sub">input: str (\f command)</text>
-  </g>
-
-  <g>
-    <rect x="460" y="160" width="220" height="55" rx="10" class="node-impl"/>
-    <text x="570" y="181" text-anchor="middle" class="label-impl">parse_favorite_query_args()</text>
-    <text x="570" y="198" text-anchor="middle" class="sub">→ positional, template_values</text>
-  </g>
-
-  <g>
-    <rect x="460" y="235" width="220" height="55" rx="10" class="node-state"/>
-    <text x="570" y="256" text-anchor="middle" class="label-state">FavoriteQueries.get(name)</text>
-    <text x="570" y="273" text-anchor="middle" class="sub">→ template SQL</text>
-  </g>
-
-  <g>
-    <rect x="460" y="310" width="220" height="55" rx="10" class="node-impl"/>
-    <text x="570" y="331" text-anchor="middle" class="label-impl">prepare_favorite_query_args()</text>
-    <text x="570" y="348" text-anchor="middle" class="sub">→ marked_query, UUID marker for $1</text>
-  </g>
-
-  <g>
-    <rect x="460" y="385" width="220" height="55" rx="10" class="node-impl"/>
-    <text x="570" y="406" text-anchor="middle" class="label-impl">render_favorite_query()</text>
-    <text x="570" y="423" text-anchor="middle" class="sub">→ rendered SQL (Jinja2)</text>
-  </g>
-
-  <g>
-    <rect x="460" y="460" width="220" height="55" rx="10" class="node-impl"/>
-    <text x="570" y="481" text-anchor="middle" class="label-impl">restore_favorite_query_args()</text>
-    <text x="570" y="498" text-anchor="middle" class="sub">→ final SQL (marker restored)</text>
-  </g>
-
-  <g>
-    <rect x="460" y="535" width="220" height="55" rx="10" class="node-impl"/>
-    <text x="570" y="556" text-anchor="middle" class="label-impl">sqlparse.split()</text>
-    <text x="570" y="573" text-anchor="middle" class="sub">→ execute() / cur.execute()</text>
-  </g>
-
-  <!-- Path B arrows -->
-  <path class="arrow" d="M 570 140 L 570 160"/>
-  <path class="arrow" d="M 570 215 L 570 235"/>
-  <path class="arrow" d="M 570 290 L 570 310"/>
-  <path class="arrow" d="M 570 365 L 570 385"/>
-  <path class="arrow" d="M 570 440 L 570 460"/>
-  <path class="arrow" d="M 570 515 L 570 535"/>
-
-  <!-- Data flow labels on Path B -->
-  <text x="580" y="155" class="arrow-label">raw args</text>
-  <text x="580" y="230" class="arrow-label">name</text>
-  <text x="580" y="305" class="arrow-label">template</text>
-  <text x="580" y="380" class="arrow-label">marked</text>
-  <text x="580" y="455" class="arrow-label">rendered</text>
-  <text x="580" y="530" class="arrow-label">final SQL</text>
-
-  <!-- Divider line between paths -->
-  <line x1="420" y1="50" x2="420" y2="600" stroke="#2a2d3a" stroke-width="1" stroke-dasharray="3 5"/>
-
-  <!-- Bottom note -->
-  <text x="400" y="610" text-anchor="middle" class="sub">Path A: O(1) lookup → typed dispatch · Path B: template pipeline with UUID marker round-trip</text>
 </svg>

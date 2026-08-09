@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="320" viewBox="0 0 800 320">
-  <rect width="800" height="320" fill="#0b0d14"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <rect width="800" height="380" fill="#0b0d14"/>
   <style>
     .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #e2e8f0; }
     .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
     .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
-    path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
+    path:hover, line:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
   </style>
 
   <!-- main_execute_from_cli -->
@@ -12,33 +12,32 @@
   <text x="400" y="40" text-anchor="middle" class="label" fill="#6c8ef5">main_execute_from_cli()</text>
   <text x="400" y="56" text-anchor="middle" class="mod">execute.py</text>
 
-  <path d="M 400 65 L 400 80" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 65 L 400 95" class="arrow" marker-end="url(#ah)"/>
 
   <!-- run_query -->
-  <rect x="280" y="85" width="240" height="45" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="400" y="105" text-anchor="middle" class="label" fill="#4ecdc4">run_query()</text>
-  <text x="400" y="121" text-anchor="middle" class="mod">client_query.py</text>
+  <rect x="280" y="100" width="240" height="45" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="400" y="120" text-anchor="middle" class="label" fill="#4ecdc4">run_query()</text>
+  <text x="400" y="136" text-anchor="middle" class="mod">client_query.py</text>
 
-  <path d="M 400 130 L 400 145" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 145 L 400 175" class="arrow" marker-end="url(#ah)"/>
 
   <!-- sqlexecute.run -->
-  <rect x="250" y="150" width="300" height="55" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-  <text x="400" y="172" text-anchor="middle" class="label" fill="#f9ca24">sqlexecute.run()</text>
-  <text x="400" y="188" text-anchor="middle" class="mod">Generator[SQLResult]</text>
-  <text x="400" y="198" text-anchor="middle" class="mod">sqlexecute.py</text>
+  <rect x="250" y="180" width="300" height="55" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="400" y="202" text-anchor="middle" class="label" fill="#f9ca24">sqlexecute.run()</text>
+  <text x="400" y="218" text-anchor="middle" class="mod">Generator[SQLResult]</text>
+  <text x="400" y="228" text-anchor="middle" class="mod">sqlexecute.py</text>
 
-  <path d="M 400 210 L 400 225" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 235 L 400 265" class="arrow" marker-end="url(#ah)"/>
 
   <!-- format + echo -->
-  <rect x="230" y="230" width="340" height="45" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
-  <text x="400" y="250" text-anchor="middle" class="label" fill="#ff6b9d">格式化 + 输出</text>
-  <text x="400" y="266" text-anchor="middle" class="mod">format_sqlresult() → click.echo</text>
+  <rect x="230" y="270" width="340" height="45" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="400" y="290" text-anchor="middle" class="label" fill="#ff6b9d">格式化 + 输出</text>
+  <text x="400" y="306" text-anchor="middle" class="mod">format_sqlresult() → click.echo</text>
 
-  <path d="M 400 280 L 400 295" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 400 315 L 400 345" class="arrow" marker-end="url(#ah)"/>
 
   <!-- sys.exit -->
-  <rect x="320" y="300" width="160" height="0" rx="8" fill="none"/>
-  <text x="400" y="310" text-anchor="middle" class="mod">sys.exit(exit_code)</text>
+  <text x="400" y="365" text-anchor="middle" class="mod">sys.exit(exit_code)</text>
 
   <defs>
     <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">

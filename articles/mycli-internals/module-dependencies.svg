@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="413" viewBox="0 0 800 413">
-  <rect width="800" height="413" fill="#0b0d14"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="430" viewBox="0 0 800 430">
+  <rect width="800" height="430" fill="#0b0d14"/>
   <style>
     .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #e2e8f0; }
     .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
     .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
-    path:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
+    path:hover, line:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
   </style>
 
   <!-- CLI Client (center top) -->
@@ -52,11 +52,11 @@
   <!-- SQL Engine → Completion Refresher -->
   <path d="M 180 175 L 330 240" class="arrow" marker-end="url(#ah)"/>
   <!-- Completion Refresher → Completion Engine -->
-  <path d="M 330 268 L 220 268" class="arrow" marker-end="url(#ah)"/>
-  <!-- SQL Engine → pymysql -->
-  <path d="M 130 175 L 320 360" class="arrow" marker-end="url(#ah)"/>
-  <!-- CLI → prompt_toolkit/sqlparse -->
-  <path d="M 400 75 L 400 360" class="arrow" marker-end="url(#ah)" stroke-dasharray="4 2"/>
+  <path d="M 292 268 L 222 268" class="arrow" marker-end="url(#ah)"/>
+  <!-- SQL Engine → pymysql (polyline through left margin, arrow points to pymysql left-center) -->
+  <path d="M 40 148 L 25 148 L 25 383 L 248 383" class="arrow" marker-end="url(#ah)"/>
+  <!-- CLI → prompt_toolkit/sqlparse (curved right to avoid passing through Completion Refresher) -->
+  <path d="M 420 75 C 560 150, 560 310, 420 360" class="arrow" marker-end="url(#ah)" stroke-dasharray="4 2"/>
 
   <defs>
     <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">

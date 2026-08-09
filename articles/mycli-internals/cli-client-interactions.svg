@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="390" viewBox="0 0 800 390">
-  <rect width="800" height="390" fill="#0b0d14"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+  <rect width="800" height="420" fill="#0b0d14"/>
   <style>
     .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #e2e8f0; }
     .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
@@ -35,7 +35,7 @@
 
   <!-- cli_runner → main (lazy import) -->
   <path d="M 240 48 L 170 48" class="arrow" marker-end="url(#ah)"/>
-  <text x="206" y="42" text-anchor="middle" class="edge-label">延迟导入</text>
+  <text x="206" y="38" text-anchor="middle" class="edge-label">延迟导入</text>
 
   <!-- cli_runner → client -->
   <path d="M 440 48 L 500 48" class="arrow" marker-end="url(#ah)"/>
@@ -61,18 +61,18 @@
   <text x="205" y="223" text-anchor="middle" class="tag">checkup · completions · list_dsn</text>
 
   <!-- cli_runner infra -->
-  <rect x="35" y="260" width="100" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
-  <text x="85" y="284" text-anchor="middle" class="mod" fill="#ff6b9d">password_sources</text>
+  <rect x="35" y="285" width="100" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="85" y="309" text-anchor="middle" class="mod" fill="#ff6b9d">password_sources</text>
 
-  <rect x="145" y="260" width="70" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
-  <text x="180" y="284" text-anchor="middle" class="mod" fill="#ff6b9d">vault</text>
+  <rect x="145" y="285" width="70" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="180" y="309" text-anchor="middle" class="mod" fill="#ff6b9d">vault</text>
 
-  <rect x="225" y="260" width="120" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
-  <text x="285" y="284" text-anchor="middle" class="mod" fill="#ff6b9d">special/dsn_aliases</text>
+  <rect x="225" y="285" width="120" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="285" y="309" text-anchor="middle" class="mod" fill="#ff6b9d">special/dsn_aliases</text>
 
   <!-- arrows from cli_runner to left group -->
   <path d="M 280 75 L 205 110" class="arrow" marker-end="url(#ah)" stroke-dasharray="4 2"/>
-  <path d="M 400 75 L 400 255 L 85 255 L 85 260" class="arrow" marker-end="url(#ah)" stroke-dasharray="4 2"/>
+  <path d="M 400 75 L 400 258 L 85 258 L 85 283" class="arrow" marker-end="url(#ah)" stroke-dasharray="4 2"/>
 
   <!-- ===== Right group: client dependencies ===== -->
   <rect x="410" y="110" width="370" height="140" rx="8" fill="#0d1018" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="4 2"/>
@@ -101,31 +101,31 @@
   <!-- arrow from client to right group -->
   <path d="M 575 75 L 575 110" class="arrow" marker-end="url(#ah)" stroke-dasharray="4 2"/>
 
-  <!-- ===== Reverse reference: client_commands → repl.py ===== -->
-  <path d="M 670 35 Q 580 5 100 5 L 100 168" class="arrow" marker-end="url(#ah)" stroke="#4ecdc4" stroke-dasharray="6 3"/>
-  <text x="340" y="12" text-anchor="middle" class="edge-label" fill="#4ecdc4">反向引用: set_all_external_titles(repl.py)</text>
+  <!-- ===== Reverse reference: client_commands → repl.py (polyline) ===== -->
+  <path d="M 700 25 L 700 8 L 100 8 L 100 168" class="arrow" marker-end="url(#ah)" stroke="#4ecdc4" stroke-dasharray="6 3"/>
+  <text x="400" y="16" text-anchor="middle" class="edge-label" fill="#4ecdc4" paint-order="stroke" stroke="#0b0d14" stroke-width="3">反向引用: set_all_external_titles</text>
 
   <!-- ===== Legend ===== -->
-  <rect x="20" y="320" width="760" height="3" fill="none"/>
-  <text x="20" y="345" class="tag">图例</text>
+  <rect x="20" y="345" width="760" height="3" fill="none"/>
+  <text x="20" y="370" class="tag">图例</text>
 
-  <rect x="20" y="355" width="16" height="16" rx="3" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
-  <text x="44" y="367" class="mod">入口层</text>
+  <rect x="20" y="380" width="16" height="16" rx="3" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="44" y="392" class="mod">入口层</text>
 
-  <rect x="110" y="355" width="16" height="16" rx="3" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="134" y="367" class="mod">客户端层</text>
+  <rect x="110" y="380" width="16" height="16" rx="3" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="134" y="392" class="mod">客户端层</text>
 
-  <rect x="215" y="355" width="16" height="16" rx="3" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-  <text x="239" y="367" class="mod">模式层</text>
+  <rect x="215" y="380" width="16" height="16" rx="3" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="239" y="392" class="mod">模式层</text>
 
-  <rect x="305" y="355" width="16" height="16" rx="3" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
-  <text x="329" y="367" class="mod">基础设施</text>
+  <rect x="305" y="380" width="16" height="16" rx="3" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="329" y="392" class="mod">基础设施</text>
 
-  <line x1="400" y1="363" x2="440" y2="363" stroke="#363b62" stroke-width="1.5"/>
-  <text x="448" y="367" class="mod">直接导入</text>
+  <line x1="400" y1="388" x2="440" y2="388" stroke="#363b62" stroke-width="1.5"/>
+  <text x="448" y="392" class="mod">直接导入</text>
 
-  <line x1="530" y1="363" x2="570" y2="363" stroke="#363b62" stroke-width="1.5" stroke-dasharray="4 2"/>
-  <text x="578" y="367" class="mod">延迟/反向导入</text>
+  <line x1="530" y1="388" x2="570" y2="388" stroke="#363b62" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <text x="578" y="392" class="mod">延迟/反向导入</text>
 
   <defs>
     <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
