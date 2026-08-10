@@ -1,48 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="490" viewBox="0 0 800 490">
   <defs>
     <marker id="arrowD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a6a"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6c8ef5"/>
     </marker>
   </defs>
-  <rect width="800" height="460" fill="#0b0d14"/>
+  <rect width="800" height="490" fill="#0b0d14"/>
   <text x="400" y="28" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">LongCatImageTransformer2DModel 架构（TP 并行）</text>
   <text x="150" y="52" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">packed latents [B,S,64]</text>
-  <rect x="50" y="58" width="200" height="48" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="6"/>
-  <text x="150" y="78" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">x_embedder</text>
-  <text x="150" y="95" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">ColumnParallelLinear 64→3072</text>
   <text x="400" y="52" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">text embeds [B,512,3584]</text>
-  <rect x="300" y="58" width="200" height="48" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="6"/>
-  <text x="400" y="78" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">context_embedder</text>
-  <text x="400" y="95" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">ColumnParallelLinear 3584→3072</text>
   <text x="650" y="52" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">timestep [0,1000]</text>
-  <rect x="550" y="58" width="200" height="48" fill="#13162a" stroke="#4ecdc4" stroke-width="2" rx="6"/>
-  <text x="650" y="78" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">time_embed</text>
-  <text x="650" y="95" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">Timesteps(256)+Embedding</text>
-  <path d="M150 106 L150 120 L280 120 L280 135" stroke="#5a5a6a" stroke-width="1.5" fill="none" marker-end="url(#arrowD)"/>
-  <path d="M400 106 L400 120 L280 120 L280 135" stroke="#5a5a6a" stroke-width="1.5" fill="none" marker-end="url(#arrowD)"/>
-  <path d="M650 106 L650 155 L510 155" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowD)" opacity="0.7"/>
-  <text x="540" y="148" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="10" opacity="0.7">temb</text>
-  <rect x="50" y="138" width="460" height="55" fill="#13162a" stroke="#f9ca24" stroke-width="2" rx="6"/>
-  <text x="280" y="160" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">19 × _TransformerBlock（双流）</text>
-  <text x="280" y="178" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">JointAttention(img+txt, QK-Norm, RoPE) + FFN</text>
-  <path d="M280 193 L280 210" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowD)"/>
-  <path d="M650 155 L650 235 L510 235" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowD)" opacity="0.7"/>
-  <text x="540" y="228" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="10" opacity="0.7">temb</text>
-  <rect x="50" y="213" width="460" height="55" fill="#13162a" stroke="#f9ca24" stroke-width="2" rx="6"/>
-  <text x="280" y="235" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">38 × _SingleTransformerBlock（单流）</text>
-  <text x="280" y="253" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">SingleAttention(img+txt concat) + proj_mlp + proj_out</text>
-  <path d="M280 268 L280 285" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowD)"/>
-  <rect x="150" y="288" width="260" height="40" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="6"/>
-  <text x="280" y="308" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">norm_out (AdaLayerNormContinuous)</text>
-  <text x="280" y="322" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">+ temb</text>
-  <path d="M280 328 L280 345" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowD)"/>
-  <rect x="150" y="348" width="260" height="40" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="6"/>
-  <text x="280" y="368" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">proj_out (ColumnParallelLinear)</text>
-  <text x="280" y="382" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">3072→64</text>
-  <path d="M280 388 L280 405" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowD)"/>
-  <text x="280" y="425" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">velocity field [B, S, 64]</text>
-  <rect x="540" y="138" width="230" height="55" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="4 2" rx="6"/>
-  <text x="655" y="158" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">RoPE 实时计算</text>
-  <text x="655" y="175" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">pos_embed(cat(txt_ids, img_ids))</text>
-  <text x="655" y="188" text-anchor="middle" fill="#606070" font-family="system-ui, sans-serif" font-size="9">对齐 diffusers transformer</text>
+
+  <rect x="50" y="58" width="200" height="48" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="150" y="80" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">x_embedder</text>
+  <text x="150" y="97" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">ColumnParallelLinear 64→3072</text>
+
+  <rect x="300" y="58" width="200" height="48" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="400" y="80" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">context_embedder</text>
+  <text x="400" y="97" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">ColumnParallelLinear 3584→3072</text>
+
+  <rect x="550" y="58" width="200" height="48" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" rx="6"/>
+  <text x="650" y="80" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">time_embed</text>
+  <text x="650" y="97" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">Timesteps(256)+Embedding</text>
+
+  <path d="M150 106 L150 131" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#arrowD)"/>
+  <path d="M400 106 L400 131" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#arrowD)"/>
+
+  <rect x="50" y="134" width="460" height="55" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" rx="6"/>
+  <text x="280" y="158" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">19 × _TransformerBlock（双流）</text>
+  <text x="280" y="176" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">JointAttention(img+txt, QK-Norm, RoPE) + FFN</text>
+
+  <path d="M650 106 L650 165 L510 165" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowD)" opacity="0.7"/>
+  <text x="540" y="158" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="10" opacity="0.7">temb</text>
+
+  <path d="M280 189 L280 214" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#arrowD)"/>
+  <path d="M650 165 L650 245 L510 245" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowD)" opacity="0.7"/>
+  <text x="540" y="238" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="10" opacity="0.7">temb</text>
+
+  <rect x="50" y="217" width="460" height="55" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" rx="6"/>
+  <text x="280" y="241" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">38 × _SingleTransformerBlock（单流）</text>
+  <text x="280" y="259" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">SingleAttention(img+txt concat) + proj_mlp + proj_out</text>
+
+  <path d="M280 272 L280 297" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#arrowD)"/>
+
+  <rect x="150" y="300" width="260" height="40" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="280" y="322" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">norm_out (AdaLayerNormContinuous)</text>
+  <text x="280" y="336" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">+ temb</text>
+
+  <path d="M280 340 L280 365" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#arrowD)"/>
+
+  <rect x="150" y="368" width="260" height="40" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="280" y="390" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">proj_out (ColumnParallelLinear)</text>
+  <text x="280" y="404" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">3072→64</text>
+
+  <path d="M280 408 L280 433" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#arrowD)"/>
+
+  <text x="280" y="455" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">velocity field [B, S, 64]</text>
+
+  <rect x="540" y="134" width="230" height="55" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="4 2" rx="6"/>
+  <text x="655" y="156" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">RoPE 实时计算</text>
+  <text x="655" y="173" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">pos_embed(cat(txt_ids, img_ids))</text>
+  <text x="655" y="187" text-anchor="middle" fill="#606070" font-family="system-ui, sans-serif" font-size="9">对齐 diffusers transformer</text>
 </svg>

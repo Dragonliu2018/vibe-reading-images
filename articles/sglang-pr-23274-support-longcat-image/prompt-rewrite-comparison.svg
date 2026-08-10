@@ -1,45 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="370" viewBox="0 0 800 370">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="386" viewBox="0 0 800 386">
   <defs>
     <marker id="arrowC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a6a"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6c8ef5"/>
     </marker>
   </defs>
-  <rect width="800" height="370" fill="#0b0d14"/>
+  <rect width="800" height="386" fill="#0b0d14"/>
   <text x="400" y="28" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Prompt Rewrite 改动前/后对比</text>
-  <text x="190" y="55" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">旧版 PR（手动解码）</text>
-  <text x="610" y="55" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">新版 PR（HF generate）</text>
-  <rect x="40" y="68" width="300" height="42" fill="#13162a" stroke="#ff6b9d" stroke-width="2" rx="6"/>
-  <text x="190" y="85" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">_greedy_generate()</text>
-  <text x="190" y="102" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">手动 prefill + decode 循环</text>
-  <path d="M190 110 L190 122" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowC)"/>
-  <rect x="40" y="125" width="300" height="42" fill="#13162a" stroke="#ff6b9d" stroke-width="2" rx="6"/>
-  <text x="190" y="142" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">DynamicCache</text>
-  <text x="190" y="159" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">手动管理 KV cache 累积</text>
-  <path d="M190 167 L190 179" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowC)"/>
-  <rect x="40" y="182" width="300" height="42" fill="#13162a" stroke="#ff6b9d" stroke-width="2" rx="6"/>
-  <text x="190" y="199" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">set_forward_context(attn_metadata=None)</text>
-  <text x="190" y="216" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">绕过 SGLang 后端，走 SDPA</text>
-  <path d="M190 224 L190 236" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowC)"/>
-  <rect x="40" y="239" width="300" height="42" fill="#13162a" stroke="#ff6b9d" stroke-width="2" rx="6"/>
-  <text x="190" y="256" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">3 处共享 bug 修复</text>
-  <text x="190" y="273" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">GQA repeat / attn_mask 透传 / position_ids</text>
-  <rect x="460" y="68" width="300" height="42" fill="#13162a" stroke="#4ecdc4" stroke-width="2" rx="6"/>
-  <text x="610" y="85" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">text_encoder.generate()</text>
-  <text x="610" y="102" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">HF 原生 API，内部管理解码</text>
-  <path d="M610 110 L610 122" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowC)"/>
-  <rect x="460" y="125" width="300" height="42" fill="#13162a" stroke="#4ecdc4" stroke-width="2" rx="6"/>
-  <text x="610" y="142" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">generation_config.json</text>
-  <text x="610" y="159" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">top_k=1, temp=0.1, rep_penalty=1.05</text>
-  <path d="M610 167 L610 179" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowC)"/>
-  <rect x="460" y="182" width="300" height="42" fill="#13162a" stroke="#4ecdc4" stroke-width="2" rx="6"/>
-  <text x="610" y="199" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">ComponentUse 常驻管理</text>
-  <text x="610" y="216" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">residency manager 自动 offload</text>
-  <path d="M610 224 L610 236" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrowC)"/>
-  <rect x="460" y="239" width="300" height="42" fill="#13162a" stroke="#4ecdc4" stroke-width="2" rx="6"/>
-  <text x="610" y="256" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">无需 bug 修复</text>
-  <text x="610" y="273" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">generate() 内部处理 KV cache</text>
-  <text x="400" y="170" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">VS</text>
-  <path d="M360 160 L440 160" stroke="#5a5a6a" stroke-width="1" stroke-dasharray="4 3"/>
-  <path d="M360 180 L440 180" stroke="#5a5a6a" stroke-width="1" stroke-dasharray="4 3"/>
-  <text x="400" y="330" text-anchor="middle" fill="#606070" font-family="system-ui, sans-serif" font-size="11">新版用 HF .generate() 替代手动解码循环，消除了三处共享 bug，简化了 KV cache 管理</text>
+  <text x="190" y="58" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">旧版 PR（手动解码）</text>
+  <text x="610" y="58" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">新版 PR（HF generate）</text>
+  <!-- Left column: node 1 -->
+  <rect x="40" y="87" width="300" height="44" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" rx="6"/>
+  <text x="190" y="105" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">_greedy_generate()</text>
+  <text x="190" y="121" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">手动 prefill + decode 循环</text>
+  <path d="M190 131 L190 156" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowC)"/>
+  <!-- Left column: node 2 -->
+  <rect x="40" y="156" width="300" height="44" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" rx="6"/>
+  <text x="190" y="174" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">DynamicCache</text>
+  <text x="190" y="190" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">手动管理 KV cache 累积</text>
+  <path d="M190 200 L190 225" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowC)"/>
+  <!-- Left column: node 3 -->
+  <rect x="40" y="225" width="300" height="44" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" rx="6"/>
+  <text x="190" y="243" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">set_forward_context(attn_metadata=None)</text>
+  <text x="190" y="259" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">绕过 SGLang 后端，走 SDPA</text>
+  <path d="M190 269 L190 294" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowC)"/>
+  <!-- Left column: node 4 -->
+  <rect x="40" y="294" width="300" height="44" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" rx="6"/>
+  <text x="190" y="312" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">3 处共享 bug 修复</text>
+  <text x="190" y="328" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">GQA repeat / attn_mask 透传 / position_ids</text>
+  <!-- Right column: node 1 -->
+  <rect x="460" y="87" width="300" height="44" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" rx="6"/>
+  <text x="610" y="105" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">text_encoder.generate()</text>
+  <text x="610" y="121" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">HF 原生 API，内部管理解码</text>
+  <path d="M610 131 L610 156" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowC)"/>
+  <!-- Right column: node 2 -->
+  <rect x="460" y="156" width="300" height="44" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" rx="6"/>
+  <text x="610" y="174" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">generation_config.json</text>
+  <text x="610" y="190" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">top_k=1, temp=0.1, rep_penalty=1.05</text>
+  <path d="M610 200 L610 225" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowC)"/>
+  <!-- Right column: node 3 -->
+  <rect x="460" y="225" width="300" height="44" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" rx="6"/>
+  <text x="610" y="243" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">ComponentUse 常驻管理</text>
+  <text x="610" y="259" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">residency manager 自动 offload</text>
+  <path d="M610 269 L610 294" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowC)"/>
+  <!-- Right column: node 4 -->
+  <rect x="460" y="294" width="300" height="44" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" rx="6"/>
+  <text x="610" y="312" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">无需 bug 修复</text>
+  <text x="610" y="328" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="10">generate() 内部处理 KV cache</text>
+  <!-- VS divider (lines first, text on top) -->
+  <path d="M360 203 L440 203" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <path d="M360 223 L440 223" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="400" y="213" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">VS</text>
+  <!-- Caption -->
+  <text x="400" y="358" text-anchor="middle" fill="#606070" font-family="system-ui, sans-serif" font-size="11">新版用 HF .generate() 替代手动解码循环，消除了三处共享 bug，简化了 KV cache 管理</text>
 </svg>
