@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="510" viewBox="0 0 800 510">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a6a"/>
+    </marker>
+  </defs>
+  <rect width="800" height="510" fill="#0b0d14"/>
+  <text x="400" y="28" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">LongCat-Image Pipeline 架构（6 阶段）</text>
+  <rect x="540" y="12" width="14" height="14" fill="#13162a" stroke="#f9ca24" stroke-width="2" rx="3"/>
+  <text x="560" y="24" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12">模型特定（新增）</text>
+  <rect x="540" y="32" width="14" height="14" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="3"/>
+  <text x="560" y="44" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="12">框架标准（复用）</text>
+  <text x="200" y="68" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">prompt + seed</text>
+  <path d="M200 72 L200 82" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="85" width="280" height="52" fill="#13162a" stroke="#f9ca24" stroke-width="2" rx="6"/>
+  <text x="200" y="108" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">LongCatPromptRewriteStage</text>
+  <text x="200" y="126" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">模型特定 · Qwen2.5-VL .generate()</text>
+  <path d="M340 111 L395 111" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="410" y="108" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="12">rewritten prompt</text>
+  <text x="410" y="122" fill="#606070" font-family="system-ui, sans-serif" font-size="10">max 512 tokens</text>
+  <path d="M200 137 L200 157" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="160" width="280" height="52" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="6"/>
+  <text x="200" y="183" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">TextEncodingStage</text>
+  <text x="200" y="201" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · tokenize_prompt + postprocess_text</text>
+  <path d="M340 186 L395 186" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="410" y="183" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="12">prompt_embeds</text>
+  <text x="410" y="197" fill="#606070" font-family="system-ui, sans-serif" font-size="10">[B, 512, 3584]</text>
+  <path d="M200 212 L200 232" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="235" width="280" height="52" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="6"/>
+  <text x="200" y="258" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">LatentPreparationStage</text>
+  <text x="200" y="276" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · pack latents + prepare IDs</text>
+  <path d="M340 261 L395 261" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="410" y="258" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="12">packed latents</text>
+  <text x="410" y="272" fill="#606070" font-family="system-ui, sans-serif" font-size="10">[B, S, 64] + img_ids</text>
+  <path d="M200 287 L200 307" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="310" width="280" height="52" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="6"/>
+  <text x="200" y="333" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">TimestepPreparationStage</text>
+  <text x="200" y="351" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · sigma 调度 + mu 计算</text>
+  <path d="M340 336 L395 336" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="410" y="333" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="12">sigmas + mu</text>
+  <text x="410" y="347" fill="#606070" font-family="system-ui, sans-serif" font-size="10">FlowMatchEuler</text>
+  <path d="M200 362 L200 382" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="385" width="280" height="52" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="6"/>
+  <text x="200" y="408" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">DenoisingStage</text>
+  <text x="200" y="426" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · 50 步去噪 + CFG Renorm</text>
+  <path d="M340 411 L395 411" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="410" y="408" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="12">denoised latents</text>
+  <text x="410" y="422" fill="#606070" font-family="system-ui, sans-serif" font-size="10">unpack → [B,16,H,W]</text>
+  <path d="M200 437 L200 457" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="460" width="280" height="48" fill="#13162a" stroke="#6c8ef5" stroke-width="2" rx="6"/>
+  <text x="200" y="482" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">DecodingStage</text>
+  <text x="200" y="499" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · VAE 解码</text>
+  <path d="M340 484 L395 484" stroke="#5a5a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="410" y="484" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="12">output image [B,3,H,W]</text>
+</svg>
