@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 360" width="820" height="360" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+  <rect width="820" height="360" fill="#0b0d14"/>
+  <text x="410" y="28" text-anchor="middle" fill="#e6e6e6" font-size="16" font-weight="600">归并阶段：列指针缓存</text>
+
+  <!-- 左列 改动前 -->
+  <text x="200" y="62" text-anchor="middle" fill="#f9ca24" font-size="13">改动前</text>
+  <rect x="60" y="74" width="280" height="42" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="100" text-anchor="middle" fill="#e6e6e6" font-size="13">归并循环（每行）</text>
+  <rect x="60" y="136" width="280" height="48" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="200" y="158" text-anchor="middle" fill="#e6e6e6" font-size="13">block-&gt;get_columns()[i]</text>
+  <text x="200" y="175" text-anchor="middle" fill="#ff6b9d" font-size="11">临时 vector&lt;ColumnPtr&gt; 构造+析构（浪费）</text>
+  <rect x="60" y="204" width="280" height="42" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="230" text-anchor="middle" fill="#e6e6e6" font-size="13">insert_from</text>
+  <rect x="60" y="266" width="280" height="42" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="292" text-anchor="middle" fill="#e6e6e6" font-size="13">结果 Block</text>
+  <line x1="200" y1="116" x2="200" y2="135" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="200" y1="184" x2="200" y2="203" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="200" y1="246" x2="200" y2="265" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- 右列 改动后 -->
+  <text x="620" y="62" text-anchor="middle" fill="#4ecdc4" font-size="13">改动后</text>
+  <rect x="480" y="74" width="280" height="48" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="620" y="96" text-anchor="middle" fill="#e6e6e6" font-size="13">reset() 一次性</text>
+  <text x="620" y="113" text-anchor="middle" fill="#4ecdc4" font-size="11">columns.push_back(col.get()) 缓存</text>
+  <rect x="480" y="136" width="280" height="42" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="620" y="162" text-anchor="middle" fill="#e6e6e6" font-size="13">归并循环（每行）</text>
+  <rect x="480" y="204" width="280" height="48" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="620" y="226" text-anchor="middle" fill="#e6e6e6" font-size="13">current-&gt;columns[i]</text>
+  <text x="620" y="243" text-anchor="middle" fill="#4ecdc4" font-size="11">预缓存裸指针，零开销</text>
+  <rect x="480" y="266" width="280" height="42" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="620" y="292" text-anchor="middle" fill="#e6e6e6" font-size="13">insert_from → 结果 Block</text>
+  <line x1="620" y1="122" x2="620" y2="135" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="620" y1="178" x2="620" y2="203" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="620" y1="252" x2="620" y2="265" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <text x="410" y="170" text-anchor="middle" fill="#666" font-size="14">vs</text>
+
+  <!-- 图例 -->
+  <rect x="60" y="326" width="14" height="14" rx="3" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="82" y="338" fill="#999" font-size="11">浪费点</text>
+  <rect x="160" y="326" width="14" height="14" rx="3" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="182" y="338" fill="#999" font-size="11">优化点</text>
+</svg>
