@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="580" viewBox="0 0 820 580">
+  <rect width="820" height="580" fill="#0b0d14"/>
+  <style>
+    .layer-title { font-family: system-ui, sans-serif; font-size: 15px; font-weight: 700; }
+    .layer-desc { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
+    .mod { font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+    .infra { font-family: system-ui, sans-serif; font-size: 11px; fill: #5a6075; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+  </style>
+
+  <!-- Layer 1: Entry & Integration -->
+  <rect x="30" y="30" width="540" height="72" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="50" y="52" class="layer-title" fill="#6c8ef5">入口与集成层</text>
+  <text x="50" y="68" class="layer-desc">CLI 分派 · AI 助手 skill 注册 · MCP server · PreToolUse hooks</text>
+  <text x="50" y="90" class="mod" fill="#e2e8f0">__main__.py · cli.py · install.py · serve.py · hooks.py</text>
+
+  <!-- Layer 2: Detection -->
+  <rect x="30" y="122" width="540" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="50" y="144" class="layer-title" fill="#4ecdc4">检测层</text>
+  <text x="50" y="160" class="layer-desc">文件扫描 · 类型分类 (CODE/DOCUMENT/PAPER/IMAGE/VIDEO) · 增量 manifest</text>
+  <text x="50" y="176" class="mod" fill="#e2e8f0">detect.py · paths.py</text>
+
+  <!-- Layer 3: Extraction -->
+  <rect x="30" y="202" width="540" height="88" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="50" y="224" class="layer-title" fill="#f9ca24">抽取层</text>
+  <text x="50" y="240" class="layer-desc">tree-sitter AST 确定性抽取 (~40 语言) · LLM 语义抽取 (docs/PDF/media)</text>
+  <text x="50" y="262" class="mod" fill="#e2e8f0">extract.py · extractors/ · llm.py</text>
+  <text x="50" y="280" class="mod" fill="#e2e8f0">semantic_cleanup.py · ingest.py</text>
+
+  <!-- Layer 4: Graph Building -->
+  <rect x="30" y="310" width="540" height="72" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="50" y="332" class="layer-title" fill="#ff6b9d">图构建与分析层</text>
+  <text x="50" y="348" class="layer-desc">NetworkX 组装 · 三层去重 · Leiden 社区检测 · god nodes</text>
+  <text x="50" y="370" class="mod" fill="#e2e8f0">build.py · dedup.py · cluster.py · analyze.py</text>
+
+  <!-- Layer 5: Export -->
+  <rect x="30" y="402" width="540" height="72" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="50" y="424" class="layer-title" fill="#6c8ef5">导出与可视化层</text>
+  <text x="50" y="440" class="layer-desc">graph.json · 交互式 graph.html · GRAPH_REPORT.md · Neo4j</text>
+  <text x="50" y="462" class="mod" fill="#e2e8f0">export.py · exporters/ · report.py</text>
+
+  <!-- Infrastructure sidebar -->
+  <rect x="600" y="30" width="190" height="444" rx="8" fill="none" stroke="#2a2d3e" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="695" y="52" text-anchor="middle" class="layer-title" fill="#5a6075">基础设施</text>
+  <text x="695" y="80" text-anchor="middle" class="infra">cache.py</text>
+  <text x="620" y="80" class="infra"></text>
+  <text x="695" y="120" text-anchor="middle" class="infra">两层缓存 + manifest</text>
+  <text x="695" y="140" text-anchor="middle" class="infra">AST cache · 语义 cache</text>
+  <text x="695" y="170" text-anchor="middle" class="infra"></text>
+  <text x="695" y="200" text-anchor="middle" class="infra">security.py</text>
+  <text x="695" y="220" text-anchor="middle" class="infra">路径消毒 · URL 验证</text>
+  <text x="695" y="250" text-anchor="middle" class="infra"></text>
+  <text x="695" y="280" text-anchor="middle" class="infra">ids.py</text>
+  <text x="695" y="300" text-anchor="middle" class="infra">make_id · normalize_id</text>
+  <text x="695" y="330" text-anchor="middle" class="infra"></text>
+  <text x="695" y="360" text-anchor="middle" class="infra">resolver_registry.py</text>
+  <text x="695" y="380" text-anchor="middle" class="infra">跨语言解析器注册</text>
+  <text x="695" y="420" text-anchor="middle" class="infra">贯穿所有层</text>
+
+  <!-- Arrows between layers -->
+  <path d="M 300 102 L 300 122" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 300 182 L 300 202" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 300 290 L 300 310" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 300 382 L 300 402" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Output -->
+  <rect x="180" y="500" width="300" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="330" y="522" text-anchor="middle" class="mod" fill="#4ecdc4">graphify-out/</text>
+  <text x="330" y="540" text-anchor="middle" class="layer-desc">graph.json · graph.html · GRAPH_REPORT.md</text>
+  <path d="M 300 474 L 300 500" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Infra connector (dashed) -->
+  <path d="M 600 150 L 570 150" stroke="#2a2d3e" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+  <path d="M 600 250 L 570 250" stroke="#2a2d3e" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+  <path d="M 600 340 L 570 340" stroke="#2a2d3e" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+  </defs>
+</svg>

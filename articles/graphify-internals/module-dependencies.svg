@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520">
+  <rect width="820" height="520" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 14px; font-weight: 700; }
+    .mod { font-family: system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
+    .edge { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .dep { stroke: #4ecdc4; stroke-width: 1.5; fill: none; }
+    .bidir { stroke: #ff6b9d; stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; }
+  </style>
+
+  <!-- Center: CLI -->
+  <rect x="320" y="210" width="180" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="410" y="235" text-anchor="middle" class="label" fill="#6c8ef5">CLI 命令层</text>
+  <text x="410" y="253" text-anchor="middle" class="mod">cli.py · __main__.py</text>
+
+  <!-- Top-left: Integration -->
+  <rect x="30" y="30" width="180" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="120" y="55" text-anchor="middle" class="label" fill="#6c8ef5">集成与服务</text>
+  <text x="120" y="73" text-anchor="middle" class="mod">install.py · serve.py · hooks.py</text>
+
+  <!-- Top-right: Detection -->
+  <rect x="610" y="30" width="180" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="700" y="55" text-anchor="middle" class="label" fill="#4ecdc4">文件检测</text>
+  <text x="700" y="73" text-anchor="middle" class="mod">detect.py · paths.py</text>
+
+  <!-- Left: Extraction -->
+  <rect x="30" y="210" width="180" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="120" y="235" text-anchor="middle" class="label" fill="#f9ca24">抽取引擎</text>
+  <text x="120" y="253" text-anchor="middle" class="mod">extract.py · extractors/</text>
+
+  <!-- Right: LLM Semantic -->
+  <rect x="610" y="210" width="180" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="700" y="235" text-anchor="middle" class="label" fill="#f9ca24">LLM 语义层</text>
+  <text x="700" y="253" text-anchor="middle" class="mod">llm.py · ingest.py</text>
+
+  <!-- Bottom-left: Graph Building -->
+  <rect x="30" y="390" width="180" height="60" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="120" y="415" text-anchor="middle" class="label" fill="#ff6b9d">图构建与分析</text>
+  <text x="120" y="433" text-anchor="middle" class="mod">build.py · cluster.py · dedup.py</text>
+
+  <!-- Bottom-right: Export -->
+  <rect x="610" y="390" width="180" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="700" y="415" text-anchor="middle" class="label" fill="#6c8ef5">查询与导出</text>
+  <text x="700" y="433" text-anchor="middle" class="mod">export.py · exporters/ · report.py</text>
+
+  <!-- Bottom-center: Infrastructure -->
+  <rect x="320" y="390" width="180" height="60" rx="8" fill="#13162a" stroke="#5a6075" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="410" y="415" text-anchor="middle" class="label" fill="#5a6075">基础设施</text>
+  <text x="410" y="433" text-anchor="middle" class="mod">cache · security · ids · resolver_registry</text>
+
+  <!-- Arrows: CLI → Extraction (调用 extract) -->
+  <path d="M 320 240 L 210 240" class="dep" marker-end="url(#ahc)"/>
+  <text x="265" y="232" text-anchor="middle" class="mod">extract()</text>
+
+  <!-- Arrows: CLI → LLM (调用 semantic) -->
+  <path d="M 500 240 L 610 240" class="dep" marker-end="url(#ahc)"/>
+  <text x="555" y="232" text-anchor="middle" class="mod">extract_corpus_parallel()</text>
+
+  <!-- Arrows: CLI → Detection (调用 detect) -->
+  <path d="M 470 210 L 470 130 L 700 90" class="dep" marker-end="url(#ahc)"/>
+  <text x="510" y="125" class="mod">detect()</text>
+
+  <!-- Arrows: CLI → Graph Building (调用 build) -->
+  <path d="M 370 270 L 370 350 L 120 390" class="dep" marker-end="url(#ahc)"/>
+  <text x="180" y="360" class="mod">build()</text>
+
+  <!-- Arrows: CLI → Export (调用 export) -->
+  <path d="M 450 270 L 450 350 L 700 390" class="dep" marker-end="url(#ahc)"/>
+  <text x="620" y="360" text-anchor="end" class="mod">to_json() · to_html()</text>
+
+  <!-- Arrows: Extraction → Graph Building (nodes+edges) -->
+  <path d="M 120 270 L 120 390" class="edge" marker-end="url(#ahb)"/>
+  <text x="135" y="335" class="mod">nodes+edges</text>
+
+  <!-- Arrows: LLM → Graph Building (semantic nodes) -->
+  <path d="M 700 270 L 700 350 L 210 390" class="bidir" marker-end="url(#ahp)"/>
+  <text x="500" y="345" text-anchor="middle" class="mod">semantic merge</text>
+
+  <!-- Arrows: Integration → CLI (skill 调用 CLI) -->
+  <path d="M 210 60 L 410 210" class="edge" marker-end="url(#ahb)"/>
+  <text x="280" y="130" class="mod">/graphify .</text>
+
+  <!-- Arrows: Graph Building → Export (nx.Graph) -->
+  <path d="M 210 420 L 610 420" class="edge" marker-end="url(#ahb)"/>
+  <text x="410" y="412" text-anchor="middle" class="mod">nx.Graph + communities</text>
+
+  <!-- Infrastructure connectors (dashed) -->
+  <path d="M 320 420 L 210 420" stroke="#2a2d3e" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+  <path d="M 500 420 L 610 420" stroke="#2a2d3e" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+
+  <!-- Extraction → Infrastructure (imports cache, security, ids) -->
+  <path d="M 120 270 L 120 320 L 320 400" stroke="#2a2d3e" stroke-width="1" stroke-dasharray="3 3" fill="none" opacity="0.6"/>
+
+  <!-- Legend -->
+  <line x1="30" y1="490" x2="55" y2="490" class="dep" marker-end="url(#ahc)"/>
+  <text x="62" y="494" class="mod">CLI 调用</text>
+  <line x1="160" y1="490" x2="185" y2="490" class="edge" marker-end="url(#ahb)"/>
+  <text x="192" y="494" class="mod">数据传递</text>
+  <line x1="290" y1="490" x2="315" y2="490" class="bidir" marker-end="url(#ahp)"/>
+  <text x="322" y="494" class="mod">语义合并</text>
+
+  <defs>
+    <marker id="ahb" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+    <marker id="ahc" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ecdc4"/>
+    </marker>
+    <marker id="ahp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+</svg>
