@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="440" viewBox="0 0 820 440" font-family="system-ui, sans-serif">
+  <rect width="820" height="440" fill="#0b0d14"/>
+  <defs>
+    <marker id="ah-cyan" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4ecdc4"/></marker>
+    <marker id="ah-dim" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8b90a8"/></marker>
+    <marker id="ah-yellow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f9ca24"/></marker>
+  </defs>
+
+  <text x="20" y="22" fill="#e4e7f0" font-size="16" font-weight="600">模块依赖关系</text>
+
+  <!-- Row 1: configs (left), trainer (center), utils (right) -->
+  <rect x="40" y="60" width="170" height="64" rx="10" fill="#13162a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="125" y="86" fill="#e4e7f0" font-size="14" text-anchor="middle" dominant-baseline="middle">配置系统</text>
+  <text x="125" y="104" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">configs/ + instantiate</text>
+
+  <rect x="325" y="60" width="170" height="64" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="86" fill="#e4e7f0" font-size="14" text-anchor="middle" dominant-baseline="middle">训练循环</text>
+  <text x="410" y="104" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">trainer.py + callbacks/</text>
+
+  <rect x="610" y="60" width="170" height="64" rx="10" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="695" y="86" fill="#e4e7f0" font-size="14" text-anchor="middle" dominant-baseline="middle">基础设施</text>
+  <text x="695" y="104" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">utils/ (dist + ckpt + log)</text>
+
+  <!-- Row 2: methods (center) -->
+  <rect x="325" y="190" width="170" height="70" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="218" fill="#e4e7f0" font-size="14" text-anchor="middle" dominant-baseline="middle">蒸馏方法</text>
+  <text x="410" y="236" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">methods/ FastGenModel</text>
+
+  <!-- Row 3: networks (left), datasets (right) -->
+  <rect x="110" y="330" width="180" height="64" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="356" fill="#e4e7f0" font-size="14" text-anchor="middle" dominant-baseline="middle">网络架构</text>
+  <text x="200" y="374" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">networks/ FastGenNetwork</text>
+
+  <rect x="530" y="330" width="180" height="64" rx="10" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="620" y="356" fill="#e4e7f0" font-size="14" text-anchor="middle" dominant-baseline="middle">数据集</text>
+  <text x="620" y="374" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">datasets/</text>
+
+  <!-- Arrows (all orthogonal, no diagonal through nodes) -->
+  <!-- trainer -> methods (vertical, center) -->
+  <line x1="410" y1="124" x2="410" y2="190" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#ah-cyan)"/>
+  <text x="418" y="160" fill="#8b90a8" font-size="11">single_train_step</text>
+
+  <!-- trainer -> configs (horizontal left) -->
+  <line x1="325" y1="92" x2="210" y2="92" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-dim)"/>
+  <text x="267" y="84" fill="#8b90a8" font-size="11" text-anchor="middle">config</text>
+
+  <!-- trainer -> utils (horizontal right) -->
+  <line x1="495" y1="92" x2="610" y2="92" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-dim)"/>
+  <text x="552" y="84" fill="#8b90a8" font-size="11" text-anchor="middle">ckpt / sync</text>
+
+  <!-- methods -> networks (L-shaped: down then left) -->
+  <polyline points="325,225 270,225 270,362 290,362" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#ah-yellow)"/>
+  <text x="278" y="295" fill="#8b90a8" font-size="11">self.net</text>
+
+  <!-- trainer -> datasets (L-shaped: right then down) -->
+  <polyline points="495,92 540,92 540,362 530,362" fill="none" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah-cyan)"/>
+  <text x="548" y="220" fill="#8b90a8" font-size="11">dataloader</text>
+
+  <!-- configs -> methods (dashed, L-shaped: down from configs then right to methods) -->
+  <polyline points="125,124 125,225 325,225" fill="none" stroke="#8b90a8" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah-dim)"/>
+  <text x="180" y="217" fill="#8b90a8" font-size="11">LazyCall</text>
+
+  <!-- utils -> methods (dashed, L: down from utils then left to methods) -->
+  <polyline points="695,124 695,225 495,225" fill="none" stroke="#8b90a8" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah-dim)"/>
+  <text x="560" y="217" fill="#8b90a8" font-size="11">distributed</text>
+</svg>

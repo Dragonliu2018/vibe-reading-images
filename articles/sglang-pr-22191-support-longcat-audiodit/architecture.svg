@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5a5f7a"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="500" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="440" y="24" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="700">LongCat-AudioDiT 接入 multimodal_gen：改动位置总览</text>
+
+  <!-- Legend -->
+  <g font-size="10.5" fill="#9aa0b4">
+    <rect x="500" y="38" width="11" height="11" rx="2" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+    <text x="516" y="47">改动</text>
+    <rect x="556" y="38" width="11" height="11" rx="2" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+    <text x="572" y="47">新增</text>
+    <rect x="612" y="38" width="11" height="11" rx="2" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+    <text x="628" y="47">外部</text>
+    <rect x="668" y="38" width="11" height="11" rx="2" fill="#13162a" stroke="#5a5f7a" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <text x="684" y="47">绕过</text>
+  </g>
+
+  <!-- Layer 1: Entrypoints (3 boxes, yellow = modified) -->
+  <g>
+    <rect x="80" y="60" width="232" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+    <text x="196" y="78" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">CLI generate.py</text>
+    <text x="196" y="92" text-anchor="middle" fill="#9aa0b4" font-size="10">--prompt-audio / --guidance-method</text>
+
+    <rect x="324" y="60" width="232" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+    <text x="440" y="78" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">HTTP Server</text>
+    <text x="440" y="92" text-anchor="middle" fill="#9aa0b4" font-size="10">audio-only 输出透传</text>
+
+    <rect x="568" y="60" width="232" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+    <text x="684" y="78" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">Python API</text>
+    <text x="684" y="92" text-anchor="middle" fill="#9aa0b4" font-size="10">diffusion_generator</text>
+  </g>
+
+  <!-- arrow L1 -> L2 (x=440 = L2 dual-box overall center) -->
+  <line x1="440" y1="100" x2="440" y2="125" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer 2: Registry (yellow) + SamplingParams (green) -->
+  <rect x="80" y="127" width="476" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="318" y="145" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">registry.py</text>
+  <text x="318" y="159" text-anchor="middle" fill="#9aa0b4" font-size="10">register_configs · 1B / 3.5B</text>
+
+  <rect x="568" y="127" width="232" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="684" y="145" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">SamplingParams</text>
+  <text x="684" y="159" text-anchor="middle" fill="#9aa0b4" font-size="10">steps=16 · cfg=4.0</text>
+
+  <!-- arrow L2 -> L3 (x=318 = left-box center, main flow) -->
+  <line x1="318" y1="167" x2="318" y2="192" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer 3: Pipeline (green) + bypassed standard (grey dashed) -->
+  <rect x="80" y="194" width="476" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="318" y="213" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">LongCatAudioDiTPipeline</text>
+  <text x="318" y="229" text-anchor="middle" fill="#9aa0b4" font-size="10">绕过 model_index.json · load_modules</text>
+
+  <rect x="568" y="194" width="232" height="50" rx="6" fill="#13162a" stroke="#5a5f7a" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="684" y="213" text-anchor="middle" fill="#7a7f96" font-size="12" font-weight="600">标准 Stage</text>
+  <text x="684" y="229" text-anchor="middle" fill="#5a5f7a" font-size="10">Denoising / Decoding（绕过）</text>
+
+  <!-- arrow L3 -> L4 (x=318) -->
+  <line x1="318" y1="244" x2="318" y2="269" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer 4: Inference Stage (green, full width) -->
+  <rect x="80" y="271" width="720" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="440" y="290" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">LongCatAudioDiTInferenceStage（单体）</text>
+  <text x="440" y="306" text-anchor="middle" fill="#9aa0b4" font-size="10">时长估计 → tokenize → model.forward</text>
+
+  <!-- arrow L4 -> L5 (x=318) -->
+  <line x1="318" y1="321" x2="318" y2="346" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer 5: Model (green) + upstream reference (blue) -->
+  <rect x="80" y="348" width="476" height="58" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="318" y="367" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">LongCatAudioDiTModel</text>
+  <text x="318" y="382" text-anchor="middle" fill="#9aa0b4" font-size="10">DiT · WAV-VAE · UMT5</text>
+  <text x="318" y="396" text-anchor="middle" fill="#4ecdc4" font-size="10">forward: Euler + CFG/APG</text>
+
+  <rect x="568" y="348" width="232" height="58" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="684" y="367" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">上游参考</text>
+  <text x="684" y="382" text-anchor="middle" fill="#9aa0b4" font-size="10">LongCat-AudioDiT</text>
+  <text x="684" y="396" text-anchor="middle" fill="#9aa0b4" font-size="10">inference.py（1:1 移植）</text>
+
+  <!-- arrow L5 -> L6 (x=318) -->
+  <line x1="318" y1="406" x2="318" y2="431" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer 6: Output (yellow, full width) -->
+  <rect x="80" y="433" width="720" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="440" y="451" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">T2A → DataType.AUDIO</text>
+  <text x="440" y="465" text-anchor="middle" fill="#9aa0b4" font-size="10">soundfile.write → .wav</text>
+</svg>

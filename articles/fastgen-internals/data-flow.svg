@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="660" viewBox="0 0 700 660" font-family="system-ui, sans-serif">
+  <rect width="700" height="660" fill="#0b0d14"/>
+  <defs>
+    <marker id="ah-df" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8b90a8"/></marker>
+  </defs>
+
+  <text x="20" y="24" fill="#e4e7f0" font-size="16" font-weight="600">训练数据流（一个 step）</text>
+
+  <!-- 9 steps, vertical. node x=180 w=340, center=350 -->
+  <!-- step 1 -->
+  <rect x="180" y="44" width="340" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="350" y="64" fill="#e4e7f0" font-size="13" text-anchor="middle" dominant-baseline="middle">parse_args + setup</text>
+  <text x="350" y="82" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">scripts.py</text>
+  <line x1="350" y1="92" x2="350" y2="112" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-df)"/>
+
+  <!-- step 2 -->
+  <rect x="180" y="112" width="340" height="48" rx="8" fill="#13162a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="350" y="132" fill="#e4e7f0" font-size="13" text-anchor="middle" dominant-baseline="middle">instantiate(model_class)</text>
+  <text x="350" y="150" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">utils/__init__.py</text>
+  <line x1="350" y1="160" x2="350" y2="180" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-df)"/>
+
+  <!-- step 3 -->
+  <rect x="180" y="180" width="340" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="350" y="200" fill="#e4e7f0" font-size="13" text-anchor="middle" dominant-baseline="middle">Trainer.run(model)</text>
+  <text x="350" y="218" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">trainer.py:67</text>
+  <line x1="350" y1="228" x2="350" y2="248" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-df)"/>
+
+  <!-- step 4 -->
+  <rect x="180" y="248" width="340" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="350" y="268" fill="#e4e7f0" font-size="13" text-anchor="middle" dominant-baseline="middle">preprocess_data</text>
+  <text x="350" y="286" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">trainer.py:375</text>
+  <line x1="350" y1="296" x2="350" y2="316" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-df)"/>
+
+  <!-- step 5 -->
+  <rect x="180" y="316" width="340" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="350" y="336" fill="#e4e7f0" font-size="13" text-anchor="middle" dominant-baseline="middle">model.single_train_step</text>
+  <text x="350" y="354" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">methods/model.py:515</text>
+  <line x1="350" y1="364" x2="350" y2="384" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-df)"/>
+
+  <!-- step 6 -->
+  <rect x="180" y="384" width="340" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="350" y="404" fill="#e4e7f0" font-size="13" text-anchor="middle" dominant-baseline="middle">net.forward + noise_scheduler</text>
+  <text x="350" y="422" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">networks/network.py:156</text>
+  <line x1="350" y1="432" x2="350" y2="452" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-df)"/>
+
+  <!-- step 7 -->
+  <rect x="180" y="452" width="340" height="48" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="350" y="472" fill="#e4e7f0" font-size="13" text-anchor="middle" dominant-baseline="middle">loss = vsd / dsm / gan</text>
+  <text x="350" y="490" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">methods/common_loss.py</text>
+  <line x1="350" y1="500" x2="350" y2="520" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-df)"/>
+
+  <!-- step 8 -->
+  <rect x="180" y="520" width="340" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="350" y="540" fill="#e4e7f0" font-size="13" text-anchor="middle" dominant-baseline="middle">backward + optimizer_step</text>
+  <text x="350" y="558" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">trainer.py:319</text>
+  <line x1="350" y1="568" x2="350" y2="588" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#ah-df)"/>
+
+  <!-- step 9 -->
+  <rect x="180" y="588" width="340" height="48" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="350" y="608" fill="#e4e7f0" font-size="13" text-anchor="middle" dominant-baseline="middle">callbacks (EMA / Wandb / GradClip)</text>
+  <text x="350" y="626" fill="#8b90a8" font-size="11" text-anchor="middle" dominant-baseline="middle">callbacks/</text>
+</svg>
