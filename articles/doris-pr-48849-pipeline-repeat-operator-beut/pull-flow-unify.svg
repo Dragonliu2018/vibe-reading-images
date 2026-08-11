@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" width="960" height="470" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="arrb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="arrr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+    <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8b8fa3"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="470" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="480" y="26" text-anchor="middle" fill="#e6e6f0" font-size="17" font-weight="600">RepeatOperator pull() 控制流：no-expr 路径对齐 expr 路径</text>
+  <text x="480" y="48" text-anchor="middle" fill="#8b8fa3" font-size="12.5">重构前两路不一致 → 重构后统一为 _repeat_id_idx 状态机</text>
+
+  <!-- ============ LEFT PANEL: 重构前 ============ -->
+  <rect x="30" y="66" width="440" height="300" rx="10" fill="#13162a" stroke="#23263d" stroke-width="1"/>
+  <rect x="30" y="66" width="440" height="30" rx="10" fill="#1a1d33"/>
+  <rect x="30" y="86" width="440" height="10" fill="#1a1d33"/>
+  <text x="48" y="86" fill="#ff6b9d" font-size="14" font-weight="600">重构前</text>
+
+  <!-- decision -->
+  <rect x="110" y="112" width="280" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="250" y="138" text-anchor="middle" fill="#f9ca24" font-size="12.5">if _intermediate_block.rows &gt; 0 ?</text>
+
+  <!-- fork arrows -->
+  <path d="M200,154 L135,188" fill="none" stroke="#6c8ef5" stroke-width="1.4" marker-end="url(#arrb)"/>
+  <path d="M300,154 L365,188" fill="none" stroke="#ff6b9d" stroke-width="1.4" marker-end="url(#arrr)"/>
+  <text x="150" y="174" fill="#6c8ef5" font-size="11">是</text>
+  <text x="338" y="174" fill="#ff6b9d" font-size="11">否(exprs empty)</text>
+
+  <!-- expr path box (left) -->
+  <rect x="50" y="190" width="180" height="86" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="140" y="208" text-anchor="middle" fill="#6c8ef5" font-size="11" font-weight="600">expr 路径</text>
+  <text x="140" y="225" text-anchor="middle" fill="#c9cde0" font-size="11">get_repeated_block(idx)</text>
+  <text x="140" y="242" text-anchor="middle" fill="#c9cde0" font-size="11">idx++</text>
+  <text x="140" y="259" text-anchor="middle" fill="#c9cde0" font-size="11">if idx&gt;=size: clear, idx=0</text>
+
+  <!-- no-expr path box (right) OLD -->
+  <rect x="250" y="190" width="180" height="86" rx="6" fill="#1a1320" stroke="#ff6b9d" stroke-width="1.4"/>
+  <text x="340" y="208" text-anchor="middle" fill="#ff6b9d" font-size="11" font-weight="600">no-expr 路径</text>
+  <text x="340" y="225" text-anchor="middle" fill="#c9cde0" font-size="11">for idx in 0..size:</text>
+  <text x="340" y="242" text-anchor="middle" fill="#c9cde0" font-size="11">  add_grouping_id_column(idx)</text>
+  <text x="340" y="259" text-anchor="middle" fill="#c9cde0" font-size="11">clear</text>
+  <rect x="262" y="263" width="156" height="16" rx="3" fill="#ff6b9d" opacity="0.18"/>
+  <text x="340" y="275" text-anchor="middle" fill="#ff6b9d" font-size="10.5">★ 一次性产出全部分组集</text>
+
+  <!-- converge to output -->
+  <path d="M140,276 L210,300" fill="none" stroke="#8b8fa3" stroke-width="1.2" marker-end="url(#arrd)"/>
+  <path d="M340,276 L290,300" fill="none" stroke="#8b8fa3" stroke-width="1.2" marker-end="url(#arrd)"/>
+  <rect x="150" y="304" width="200" height="34" rx="6" fill="#13162a" stroke="#8b8fa3" stroke-width="1"/>
+  <text x="250" y="326" text-anchor="middle" fill="#c9cde0" font-size="12">Output Block（行数不均匀）</text>
+
+  <!-- ============ RIGHT PANEL: 重构后 ============ -->
+  <rect x="490" y="66" width="440" height="300" rx="10" fill="#13162a" stroke="#23263d" stroke-width="1"/>
+  <rect x="490" y="66" width="440" height="30" rx="10" fill="#1a1d33"/>
+  <rect x="490" y="86" width="440" height="10" fill="#1a1d33"/>
+  <text x="508" y="86" fill="#4ecdc4" font-size="14" font-weight="600">重构后</text>
+
+  <!-- decision -->
+  <rect x="570" y="112" width="280" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="710" y="138" text-anchor="middle" fill="#f9ca24" font-size="12.5">if _intermediate_block.rows &gt; 0 ?</text>
+
+  <!-- fork arrows -->
+  <path d="M660,154 L595,188" fill="none" stroke="#6c8ef5" stroke-width="1.4" marker-end="url(#arrb)"/>
+  <path d="M760,154 L825,188" fill="none" stroke="#4ecdc4" stroke-width="1.4" marker-end="url(#arrg)"/>
+  <text x="610" y="174" fill="#6c8ef5" font-size="11">是</text>
+  <text x="798" y="174" fill="#4ecdc4" font-size="11">否(exprs empty)</text>
+
+  <!-- expr path box (left) -->
+  <rect x="510" y="190" width="180" height="86" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="600" y="208" text-anchor="middle" fill="#6c8ef5" font-size="11" font-weight="600">expr 路径</text>
+  <text x="600" y="225" text-anchor="middle" fill="#c9cde0" font-size="11">get_repeated_block(idx)</text>
+  <text x="600" y="242" text-anchor="middle" fill="#c9cde0" font-size="11">idx++</text>
+  <text x="600" y="259" text-anchor="middle" fill="#c9cde0" font-size="11">if idx&gt;=size: clear, idx=0</text>
+
+  <!-- no-expr path box (right) NEW -->
+  <rect x="710" y="190" width="180" height="86" rx="6" fill="#0f1f1d" stroke="#4ecdc4" stroke-width="1.4"/>
+  <text x="800" y="208" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="600">no-expr 路径</text>
+  <text x="800" y="225" text-anchor="middle" fill="#c9cde0" font-size="11">add_grouping_id_column(idx)</text>
+  <text x="800" y="242" text-anchor="middle" fill="#c9cde0" font-size="11">idx++</text>
+  <text x="800" y="259" text-anchor="middle" fill="#c9cde0" font-size="11">if idx&gt;=size: clear, idx=0</text>
+  <rect x="722" y="263" width="156" height="16" rx="3" fill="#4ecdc4" opacity="0.18"/>
+  <text x="800" y="275" text-anchor="middle" fill="#4ecdc4" font-size="10.5">★ 逐次产出，与上路统一</text>
+
+  <!-- converge to output -->
+  <path d="M600,276 L670,300" fill="none" stroke="#8b8fa3" stroke-width="1.2" marker-end="url(#arrd)"/>
+  <path d="M800,276 L750,300" fill="none" stroke="#8b8fa3" stroke-width="1.2" marker-end="url(#arrd)"/>
+  <rect x="610" y="304" width="200" height="34" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="710" y="326" text-anchor="middle" fill="#c9cde0" font-size="12">Output Block（恒为一组分组集）</text>
+
+  <!-- ============ BOTTOM CALLOUT ============ -->
+  <rect x="30" y="380" width="900" height="70" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1"/>
+  <text x="48" y="403" fill="#f9ca24" font-size="12.5" font-weight="600">_repeat_id_idx 状态机</text>
+  <text x="48" y="423" fill="#c9cde0" font-size="11.8">_repeat_id_idx 从 0 递增到 _repeat_id_list_size，每次 pull 产出一组分组集；到顶后清空 _intermediate_block / _child_block 并归零，need_more_input_data 随之恢复 true。</text>
+  <text x="48" y="441" fill="#4ecdc4" font-size="11.8">重构后 expr / no-expr 两路共用同一状态机 —— 一次 pull 恒产出一组，输出块大小均匀，控制流可被单元测试精确断言。</text>
+</svg>

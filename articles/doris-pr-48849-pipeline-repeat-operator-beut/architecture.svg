@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 450" width="960" height="450" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="arrb2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="arrg2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrc2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+    <marker id="arrd2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8b8fa3"/>
+    </marker>
+    <marker id="arry" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="450" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="480" y="24" text-anchor="middle" fill="#e6e6f0" font-size="17" font-weight="600">RepeatOperator 数据流与 PR #48849 改动位置</text>
+  <text x="480" y="44" text-anchor="middle" fill="#8b8fa3" font-size="12">pipeline: Child ─push─► RepeatOperator ─pull─► Aggregate</text>
+
+  <!-- ============ pipeline 位置带 ============ -->
+  <rect x="56" y="60" width="104" height="30" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="108" y="80" text-anchor="middle" fill="#c9cde0" font-size="12">Child 算子</text>
+  <path d="M164,75 L196,75" fill="none" stroke="#6c8ef5" stroke-width="1.4" marker-end="url(#arrb2)"/>
+  <text x="180" y="70" text-anchor="middle" fill="#6c8ef5" font-size="10">push</text>
+
+  <path d="M756,75 L792,75" fill="none" stroke="#6c8ef5" stroke-width="1.4" marker-end="url(#arrb2)"/>
+  <text x="774" y="70" text-anchor="middle" fill="#6c8ef5" font-size="10">pull</text>
+  <rect x="796" y="60" width="108" height="30" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="850" y="80" text-anchor="middle" fill="#c9cde0" font-size="12">Aggregate</text>
+
+  <!-- ============ RepeatOperator 大框（黄虚线 = 整体被改） ============ -->
+  <rect x="200" y="56" width="556" height="286" rx="9" fill="#13162a" fill-opacity="0.45" stroke="#f9ca24" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <rect x="214" y="62" width="150" height="22" rx="4" fill="#f9ca24" fill-opacity="0.18" stroke="#f9ca24" stroke-width="0.8"/>
+  <text x="289" y="78" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="600">RepeatOperatorX</text>
+  <text x="640" y="78" text-anchor="middle" fill="#f9ca24" font-size="10.5">可测试性重构 ①②③⑥</text>
+
+  <!-- ============ 第一行：push → _intermediate_block → pull 判断 ============ -->
+  <rect x="216" y="108" width="124" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="278" y="127" text-anchor="middle" fill="#e6e6f0" font-size="11.5" font-weight="600">push(block)</text>
+  <text x="278" y="142" text-anchor="middle" fill="#8b8fa3" font-size="10">求值 expr 缓存</text>
+
+  <path d="M342,130 L382,130" fill="none" stroke="#6c8ef5" stroke-width="1.4" marker-end="url(#arrb2)"/>
+
+  <rect x="386" y="108" width="158" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="465" y="127" text-anchor="middle" fill="#e6e6f0" font-size="11.5" font-weight="600">_intermediate_block</text>
+  <text x="465" y="142" text-anchor="middle" fill="#8b8fa3" font-size="10">expr 投影结果</text>
+
+  <path d="M546,130 L586,130" fill="none" stroke="#6c8ef5" stroke-width="1.4" marker-end="url(#arrb2)"/>
+
+  <!-- pull 判断 -->
+  <rect x="590" y="106" width="150" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="665" y="125" text-anchor="middle" fill="#f9ca24" font-size="11.5" font-weight="600">pull: rows &gt; 0 ?</text>
+  <text x="665" y="142" text-anchor="middle" fill="#8b8fa3" font-size="10">_repeat_id_idx 状态机</text>
+
+  <!-- 分支线 -->
+  <path d="M620,154 L278,196" fill="none" stroke="#4ecdc4" stroke-width="1.4" marker-end="url(#arrg2)"/>
+  <text x="430" y="170" fill="#4ecdc4" font-size="10.5">是（expr 路径）</text>
+  <path d="M710,154 L600,196" fill="none" stroke="#ff6b9d" stroke-width="1.4" marker-end="url(#arrc2)"/>
+  <text x="675" y="170" fill="#ff6b9d" font-size="10.5">否（no-expr）</text>
+
+  <!-- ============ 左路 expr：get_repeated_block → add_grouping_id ============ -->
+  <rect x="186" y="200" width="186" height="50" rx="6" fill="#1a1d10" stroke="#f9ca24" stroke-width="1.4"/>
+  <text x="279" y="220" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="600">get_repeated_block</text>
+  <text x="279" y="236" text-anchor="middle" fill="#c9cde0" font-size="10">填列 + NULL 处理</text>
+  <circle cx="366" cy="208" r="8" fill="#f9ca24"/>
+  <text x="366" y="212" text-anchor="middle" fill="#0b0d14" font-size="10" font-weight="700">④</text>
+
+  <path d="M374,225 L412,225" fill="none" stroke="#4ecdc4" stroke-width="1.4" marker-end="url(#arrg2)"/>
+
+  <rect x="416" y="200" width="156" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="494" y="220" text-anchor="middle" fill="#e6e6f0" font-size="11" font-weight="600">add_grouping_id</text>
+  <text x="494" y="236" text-anchor="middle" fill="#8b8fa3" font-size="10">追加 grouping_id 列</text>
+
+  <!-- ============ 右路 no-expr：add_grouping_id ============ -->
+  <rect x="592" y="200" width="156" height="50" rx="6" fill="#1a1d10" stroke="#f9ca24" stroke-width="1.4"/>
+  <text x="670" y="220" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="600">add_grouping_id</text>
+  <text x="670" y="236" text-anchor="middle" fill="#c9cde0" font-size="10">仅 grouping_id 列</text>
+  <circle cx="742" cy="208" r="8" fill="#f9ca24"/>
+  <text x="742" y="212" text-anchor="middle" fill="#0b0d14" font-size="10" font-weight="700">⑤</text>
+
+  <!-- 两路汇合 → output -->
+  <path d="M494,250 L494,285" fill="none" stroke="#8b8fa3" stroke-width="1.2" marker-end="url(#arrd2)"/>
+  <path d="M670,250 L670,285" fill="none" stroke="#8b8fa3" stroke-width="1.2" marker-end="url(#arrd2)"/>
+  <rect x="402" y="288" width="200" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="502" y="304" text-anchor="middle" fill="#e6e6f0" font-size="11.5" font-weight="600">Output Block</text>
+  <text x="502" y="318" text-anchor="middle" fill="#8b8fa3" font-size="10">一组分组集 × 输入行数</text>
+  <path d="M602,308 L756,75" fill="none" stroke="#6c8ef5" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrb2)" opacity="0.6"/>
+
+  <!-- ============ 底部改动清单 ============ -->
+  <rect x="30" y="356" width="900" height="84" rx="8" fill="#13162a" stroke="#23263d" stroke-width="1"/>
+  <text x="48" y="378" fill="#f9ca24" font-size="12" font-weight="600">改动清单（黄框 = 数据流节点行为变更，其余 = 可测试性重构）</text>
+
+  <text x="48" y="398" fill="#c9cde0" font-size="10.8"><tspan fill="#f9ca24" font-weight="700">①</tspan> RepeatOperatorX() = default（#ifdef BE_TEST）</text>
+  <text x="488" y="398" fill="#c9cde0" font-size="10.8"><tspan fill="#f9ca24" font-weight="700">④</tspan> get_repeated_block：ColumnNullable 高层 API + assert_cast</text>
+
+  <text x="48" y="416" fill="#c9cde0" font-size="10.8"><tspan fill="#f9ca24" font-weight="700">②</tspan> init() 增加 grouping_list 长度校验</text>
+  <text x="488" y="416" fill="#c9cde0" font-size="10.8"><tspan fill="#f9ca24" font-weight="700">⑤</tspan> pull else：for 循环 → _repeat_id_idx 状态机（控制流统一）</text>
+
+  <text x="48" y="434" fill="#c9cde0" font-size="10.8"><tspan fill="#f9ca24" font-weight="700">③</tspan> prepare 移除 _output_tuple_desc 成员，slots 先收集</text>
+  <text x="488" y="434" fill="#c9cde0" font-size="10.8"><tspan fill="#f9ca24" font-weight="700">⑥</tspan> _repeat_id_list → _size 标量；MOCK_REMOVE(const) _id</text>
+</svg>
