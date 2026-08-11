@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+  <rect width="800" height="560" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 13px; fill: #e2e8f0; font-weight: 600; }
+    .desc { font-family: system-ui, sans-serif; font-size: 11px; fill: #7a85a3; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #4ecdc4; }
+    .lane { font-family: system-ui, sans-serif; font-size: 11px; fill: #f9ca24; font-weight: 700; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .title { font-family: system-ui, sans-serif; font-size: 16px; fill: #e2e8f0; font-weight: 700; }
+    path:hover, line:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#363b62"/>
+    </marker>
+  </defs>
+
+  <text x="400" y="28" text-anchor="middle" class="title">mycli 后台补全刷新流</text>
+
+  <!-- UI Thread lane label -->
+  <text x="20" y="80" class="lane">UI 线程</text>
+
+  <!-- Node 1: trigger -->
+  <rect x="200" y="50" width="400" height="55" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="72" text-anchor="middle" class="label">refresh_completions() 触发</text>
+  <text x="400" y="88" text-anchor="middle" class="mod">启动 · USE 切库 · REFRESH · DDL 后</text>
+  <text x="400" y="100" text-anchor="middle" class="desc">client_query.py:35</text>
+
+  <path d="M 400 105 L 400 133" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <!-- Node 2: start daemon -->
+  <rect x="250" y="135" width="300" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="157" text-anchor="middle" class="label">refresh() 启动 daemon Thread</text>
+  <text x="400" y="173" text-anchor="middle" class="mod">completion_refresher.py:25</text>
+
+  <path d="M 400 185 L 400 213" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <!-- UI continues note (right side) -->
+  <rect x="580" y="215" width="200" height="55" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="680" y="237" text-anchor="middle" class="label">UI 不阻塞</text>
+  <text x="680" y="253" text-anchor="middle" class="mod">get_completions() 走旧 completer</text>
+  <text x="680" y="265" text-anchor="middle" class="desc">读者只看旧 dict</text>
+
+  <!-- daemon Thread dashed container -->
+  <rect x="80" y="215" width="470" height="245" rx="10" fill="none" stroke="#f9ca24" stroke-width="1.2" stroke-dasharray="6 4"/>
+  <text x="100" y="232" class="lane">daemon Thread · 独立连接</text>
+
+  <!-- Node 3: _bg_refresh + new SQLExecute -->
+  <rect x="120" y="240" width="390" height="55" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="315" y="262" text-anchor="middle" class="label">_bg_refresh() 新建独立 SQLExecute</text>
+  <text x="315" y="278" text-anchor="middle" class="mod">复用原连接凭据，不抢用户连接</text>
+  <text x="315" y="290" text-anchor="middle" class="desc">completion_refresher.py:66</text>
+
+  <path d="M 315 295 L 315 323" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <!-- Node 4: loop refreshers -->
+  <rect x="120" y="325" width="390" height="60" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="315" y="347" text-anchor="middle" class="label">遍历 13 个 @refresher 填新 completer</text>
+  <text x="315" y="363" text-anchor="middle" class="mod">databases·schemata·tables·columns·FK·enum·users·functions…</text>
+  <text x="315" y="378" text-anchor="middle" class="desc">refreshers.values() · completion_refresher.py:98</text>
+
+  <!-- restart loop arrow (left side, back up to Node 4) -->
+  <path d="M 120 355 L 95 355 L 95 320 L 120 320" class="arrow" marker-end="url(#arrowhead)" stroke="#ff6b9d"/>
+  <text x="70" y="340" text-anchor="middle" class="mod" fill="#ff6b9d">_restart_refresh</text>
+  <text x="70" y="352" text-anchor="middle" class="desc">切库→从头跑</text>
+
+  <path d="M 315 385 L 315 413" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <!-- Node 5: callback hot swap -->
+  <rect x="150" y="415" width="330" height="45" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="315" y="435" text-anchor="middle" class="label">callback(completer) 热替换</text>
+  <text x="315" y="450" text-anchor="middle" class="mod">finally executor.close()</text>
+
+  <!-- callback arrow back up to UI thread Node 6 -->
+  <path d="M 400 437 L 540 437 L 540 495 L 400 495" class="arrow" marker-end="url(#arrowhead)" stroke="#ff6b9d"/>
+  <text x="555" y="465" class="mod" fill="#ff6b9d">callback 回 UI</text>
+
+  <!-- Node 6: UI resumes, hot swap -->
+  <rect x="200" y="488" width="400" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="510" text-anchor="middle" class="label">_on_completions_refreshed(new_completer)</text>
+  <text x="400" y="526" text-anchor="middle" class="mod">原子装回 PromptSession · load_schema_metadata 赋值替换</text>
+</svg>

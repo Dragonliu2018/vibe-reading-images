@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="490" viewBox="0 0 800 490">
+  <rect width="800" height="490" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 13px; fill: #e2e8f0; font-weight: 600; }
+    .desc { font-family: system-ui, sans-serif; font-size: 11px; fill: #7a85a3; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #4ecdc4; }
+    .lane { font-family: system-ui, sans-serif; font-size: 13px; fill: #f9ca24; font-weight: 700; }
+    .elabel { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .title { font-family: system-ui, sans-serif; font-size: 16px; fill: #e2e8f0; font-weight: 700; }
+    path:hover, line:hover { stroke: #6c8ef5 !important; stroke-width: 3 !important; cursor: pointer; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#363b62"/>
+    </marker>
+  </defs>
+
+  <text x="400" y="28" text-anchor="middle" class="title">mycli 状态流</text>
+
+  <!-- Zone 1: 补全刷新状态机 -->
+  <text x="40" y="58" class="lane">补全刷新状态机</text>
+  <text x="40" y="73" class="desc">CompletionRefresher · completion_refresher.py</text>
+
+  <!-- IDLE -->
+  <rect x="120" y="98" width="120" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="180" y="118" text-anchor="middle" class="label">IDLE</text>
+
+  <!-- REFRESHING -->
+  <rect x="340" y="98" width="150" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="415" y="118" text-anchor="middle" class="label">REFRESHING</text>
+  <text x="415" y="134" text-anchor="middle" class="mod">daemon Thread</text>
+
+  <!-- VISIBILITY -->
+  <rect x="580" y="98" width="140" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="650" y="118" text-anchor="middle" class="label">VISIBILITY</text>
+  <text x="650" y="134" text-anchor="middle" class="mod">1s 消息窗口</text>
+
+  <!-- IDLE -> REFRESHING -->
+  <path d="M 240 123 L 340 123" class="arrow" marker-end="url(#arrowhead)"/>
+  <text x="290" y="115" text-anchor="middle" class="elabel">refresh()</text>
+
+  <!-- REFRESHING -> VISIBILITY -->
+  <path d="M 490 123 L 580 123" class="arrow" marker-end="url(#arrowhead)"/>
+  <text x="535" y="115" text-anchor="middle" class="elabel">callback 热替换</text>
+
+  <!-- VISIBILITY -> IDLE (curve below) -->
+  <path d="M 650 148 L 650 178 L 180 178 L 180 148" class="arrow" marker-end="url(#arrowhead)"/>
+  <text x="415" y="170" text-anchor="middle" class="elabel">_visibility_timer 到期</text>
+
+  <!-- REFRESHING self-loop (切库重启, above) -->
+  <path d="M 380 98 L 380 70 L 460 70 L 460 98" class="arrow" marker-end="url(#arrowhead)" stroke="#ff6b9d"/>
+  <text x="420" y="62" text-anchor="middle" class="elabel" fill="#ff6b9d">切库 _restart_refresh</text>
+
+  <!-- REFRESHING -> IDLE (连接失败, below) -->
+  <path d="M 340 138 L 240 138" class="arrow" marker-end="url(#arrowhead)" stroke="#ff6b9d"/>
+  <text x="290" y="163" text-anchor="middle" class="elabel" fill="#ff6b9d">连接失败 不替换</text>
+
+  <!-- divider -->
+  <line x1="40" y1="200" x2="760" y2="200" stroke="#1e2240" stroke-width="1"/>
+
+  <!-- Zone 2: 连接状态机 -->
+  <text x="40" y="230" class="lane">连接状态机</text>
+  <text x="40" y="245" class="desc">ClientConnectionMixin + SQLExecute</text>
+
+  <!-- DISCONNECTED -->
+  <rect x="60" y="270" width="150" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="135" y="290" text-anchor="middle" class="label">DISCONNECTED</text>
+
+  <!-- CONNECTED -->
+  <rect x="340" y="270" width="130" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="405" y="290" text-anchor="middle" class="label">CONNECTED</text>
+
+  <!-- SANDBOX -->
+  <rect x="340" y="375" width="130" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="405" y="397" text-anchor="middle" class="label">SANDBOX</text>
+  <text x="405" y="413" text-anchor="middle" class="mod">受限连接</text>
+
+  <!-- RECONNECTING -->
+  <rect x="580" y="270" width="160" height="50" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="660" y="290" text-anchor="middle" class="label">RECONNECTING</text>
+
+  <!-- DISCONNECTED -> CONNECTED (正常 / 禁SSL降级重试，同一转换的两条路径合并表示) -->
+  <path d="M 210 295 L 340 295" class="arrow" marker-end="url(#arrowhead)"/>
+  <text x="275" y="287" text-anchor="middle" class="elabel">connect() 正常</text>
+  <text x="275" y="310" text-anchor="middle" class="elabel">禁SSL重试</text>
+
+  <!-- DISCONNECTED -> SANDBOX (ER_MUST_CHANGE_PASSWORD) -->
+  <path d="M 135 320 L 135 400 L 340 400" class="arrow" marker-end="url(#arrowhead)" stroke="#f9ca24"/>
+  <text x="145" y="365" class="elabel" fill="#f9ca24">ER_MUST_CHANGE_PASSWORD</text>
+
+  <!-- SANDBOX -> CONNECTED (改密码后) -->
+  <path d="M 405 375 L 405 320" class="arrow" marker-end="url(#arrowhead)"/>
+  <text x="395" y="340" text-anchor="end" class="elabel">ALTER USER 后</text>
+
+  <!-- CONNECTED -> RECONNECTING -->
+  <path d="M 470 295 L 580 295" class="arrow" marker-end="url(#arrowhead)"/>
+  <text x="525" y="287" text-anchor="middle" class="elabel">连接断开</text>
+
+  <!-- RECONNECTING -> CONNECTED (ping) -->
+  <path d="M 660 320 L 660 350 L 470 350 L 470 320" class="arrow" marker-end="url(#arrowhead)"/>
+  <text x="520" y="342" text-anchor="middle" class="elabel">ping 重连</text>
+
+  <!-- legend -->
+  <text x="40" y="465" class="desc">实线 = 正常路径 · 黄色 = 降级特殊态 · 粉色 = 异常/重启分支</text>
+</svg>
