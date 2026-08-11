@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="400" viewBox="0 0 880 400">
+  <defs>
+    <marker id="df-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86a8"/>
+    </marker>
+    <marker id="df-arrow-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+    <style>
+      .stage-box { fill: #13162a; stroke: #3a4170; stroke-width: 1.5; }
+      .stage-box-blue { stroke: #6c8ef5; } .stage-box-cyan { stroke: #4ecdc4; }
+      .stage-box-yellow { stroke: #f9ca24; } .stage-box-pink { stroke: #ff6b9d; }
+      .stage-title { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 700; }
+      .st-blue { fill: #6c8ef5; } .st-cyan { fill: #4ecdc4; }
+      .st-yellow { fill: #f9ca24; } .st-pink { fill: #ff6b9d; }
+      .detail { fill: #a0a8c0; font-family: system-ui, sans-serif; font-size: 10px; }
+      .section-label { fill: #6c8ef5; font-family: system-ui, sans-serif; font-size: 12px; font-weight: 700; }
+      .db-text { fill: #7a86a8; font-family: system-ui, sans-serif; font-size: 11px; }
+      .df-line { stroke: #7a86a8; stroke-width: 1.5; fill: none; }
+      .loop-line { stroke: #ff6b9d; stroke-width: 1.5; fill: none; opacity: 0.7; stroke-dasharray: 5,3; }
+      .loop-label { fill: #ff6b9d; font-family: system-ui, sans-serif; font-size: 11px; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="400" fill="#0b0d14"/>
+
+  <text class="section-label" x="20" y="24">一次 Heartbeat Run 的端到端数据流</text>
+
+  <!-- Stage 1: Trigger -->
+  <rect class="stage-box stage-box-cyan" x="14" y="40" width="130" height="118" rx="6"/>
+  <text class="stage-title st-cyan" x="79" y="60" text-anchor="middle">Trigger</text>
+  <text class="detail" x="22" y="84">tickTimers</text>
+  <text class="detail" x="22" y="100">firePublicTrigger</text>
+  <text class="detail" x="22" y="116">issue assign</text>
+  <text class="detail" x="22" y="132">@mention · API</text>
+
+  <!-- Stage 2: enqueueWakeup -->
+  <rect class="stage-box stage-box-blue" x="158" y="40" width="130" height="118" rx="6"/>
+  <text class="stage-title st-blue" x="223" y="60" text-anchor="middle">enqueueWakeup</text>
+  <text class="detail" x="166" y="84">coalescing 去重</text>
+  <text class="detail" x="166" y="100">agent row lock</text>
+  <text class="detail" x="166" y="116">INSERT heartbeatRuns</text>
+  <text class="detail" x="166" y="132">status=queued</text>
+
+  <!-- Stage 3: Guard chain -->
+  <rect class="stage-box stage-box-yellow" x="302" y="40" width="130" height="118" rx="6"/>
+  <text class="stage-title st-yellow" x="367" y="60" text-anchor="middle">claimQueuedRun</text>
+  <text class="detail" x="310" y="84">budget hard stop</text>
+  <text class="detail" x="310" y="100">pause hold gate</text>
+  <text class="detail" x="310" y="116">blocker 依赖</text>
+  <text class="detail" x="310" y="132">staleness 检查</text>
+
+  <!-- Stage 4: Run setup -->
+  <rect class="stage-box stage-box-blue" x="446" y="40" width="130" height="118" rx="6"/>
+  <text class="stage-title st-blue" x="511" y="60" text-anchor="middle">Run Setup</text>
+  <text class="detail" x="454" y="84">resolveWorkspace</text>
+  <text class="detail" x="454" y="100">git worktree</text>
+  <text class="detail" x="454" y="116">secretService 注入</text>
+  <text class="detail" x="454" y="132">env lease 获取</text>
+
+  <!-- Stage 5: adapter.execute -->
+  <rect class="stage-box stage-box-pink" x="590" y="40" width="130" height="118" rx="6"/>
+  <text class="stage-title st-pink" x="655" y="60" text-anchor="middle">adapter.execute</text>
+  <text class="detail" x="598" y="84">getServerAdapter</text>
+  <text class="detail" x="598" y="100">Claude / Codex</text>
+  <text class="detail" x="598" y="116">Cursor / HTTP</text>
+  <text class="detail" x="598" y="132">onLog · onMeta 流式</text>
+
+  <!-- Stage 6: Finalize -->
+  <rect class="stage-box stage-box-cyan" x="734" y="40" width="130" height="118" rx="6"/>
+  <text class="stage-title st-cyan" x="799" y="60" text-anchor="middle">Finalize</text>
+  <text class="detail" x="742" y="84">setRunStatus</text>
+  <text class="detail" x="742" y="100">release issue lock</text>
+  <text class="detail" x="742" y="116">logActivity 审计</text>
+  <text class="detail" x="742" y="132">publishLiveEvent</text>
+
+  <!-- Arrows between stages -->
+  <path class="df-line" d="M144,99 L158,99" marker-end="url(#df-arrow)"/>
+  <path class="df-line" d="M288,99 L302,99" marker-end="url(#df-arrow)"/>
+  <path class="df-line" d="M432,99 L446,99" marker-end="url(#df-arrow)"/>
+  <path class="df-line" d="M576,99 L590,99" marker-end="url(#df-arrow)"/>
+  <path class="df-line" d="M720,99 L734,99" marker-end="url(#df-arrow)"/>
+
+  <!-- Recovery loop arrow (Finalize back to Trigger) -->
+  <path class="loop-line" d="M799,158 L799,200 L79,200 L79,158" marker-end="url(#df-arrow-loop)"/>
+  <text class="loop-label" x="439" y="194" text-anchor="middle">recovery enqueueWakeup · 唤醒后续 blocked 依赖</text>
+
+  <!-- DB state section -->
+  <text class="section-label" x="20" y="234">DB 状态变化（heartbeat_runs + issues）</text>
+  <rect class="stage-box" x="80" y="248" width="120" height="36" rx="5"/>
+  <text class="db-text" x="140" y="271" text-anchor="middle">queued</text>
+  <path class="df-line" d="M200,266 L234,266" marker-end="url(#df-arrow)"/>
+  <rect class="stage-box stage-box-yellow" x="234" y="248" width="120" height="36" rx="5"/>
+  <text class="db-text" x="294" y="271" text-anchor="middle">running</text>
+  <path class="df-line" d="M354,266 L388,266" marker-end="url(#df-arrow)"/>
+  <rect class="stage-box stage-box-blue" x="388" y="248" width="120" height="36" rx="5"/>
+  <text class="db-text" x="448" y="271" text-anchor="middle">scheduled_retry</text>
+  <path class="df-line" d="M508,266 L542,266" marker-end="url(#df-arrow)"/>
+  <rect class="stage-box stage-box-cyan" x="542" y="248" width="140" height="36" rx="5"/>
+  <text class="db-text" x="612" y="271" text-anchor="middle">succeeded / failed / cancelled / timed_out</text>
+
+  <!-- Side effects -->
+  <text class="section-label" x="20" y="324">副作用落库</text>
+  <text class="db-text" x="20" y="346">• cost_events（token/cost 追踪） · activity_log（审计日志） · heartbeat_run_events（流式日志/事件）</text>
+  <text class="db-text" x="20" y="366">• secret_access_events（secret 取值审计） · issue status + executionRunId（执行锁） · environment_leases（租约）</text>
+</svg>

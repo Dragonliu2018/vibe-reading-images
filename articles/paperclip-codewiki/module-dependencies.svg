@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="520" viewBox="0 0 860 520">
+  <defs>
+    <marker id="dep-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86a8"/>
+    </marker>
+    <marker id="dep-arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <style>
+      .hub-box { fill: #1a2040; stroke: #6c8ef5; stroke-width: 2; }
+      .sub-box { fill: #13162a; stroke-width: 1.5; }
+      .sub-cyan { stroke: #4ecdc4; } .sub-blue { stroke: #6c8ef5; }
+      .sub-yellow { stroke: #f9ca24; } .sub-pink { stroke: #ff6b9d; }
+      .hub-text { fill: #6c8ef5; font-family: system-ui, sans-serif; font-size: 15px; font-weight: 700; }
+      .sub-title-cyan { fill: #4ecdc4; } .sub-title-blue { fill: #6c8ef5; }
+      .sub-title-yellow { fill: #f9ca24; } .sub-title-pink { fill: #ff6b9d; }
+      .sub-title { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 700; }
+      .mod-text { fill: #c8cce0; font-family: system-ui, sans-serif; font-size: 12px; }
+      .arrow-label { fill: #a0a8c0; font-family: system-ui, sans-serif; font-size: 11px; }
+      .dep-line { stroke: #7a86a8; stroke-width: 1.5; fill: none; }
+      .dep-line-cyan { stroke: #4ecdc4; stroke-width: 1.5; fill: none; opacity: 0.8; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="860" height="520" fill="#0b0d14"/>
+
+  <!-- TL: Work Execution Engine -->
+  <rect class="sub-box sub-cyan" x="20" y="22" width="320" height="150" rx="8"/>
+  <text class="sub-title sub-title-cyan" x="36" y="44">工作执行引擎</text>
+  <text class="mod-text" x="36" y="74">• Issues · Work &amp; Task System</text>
+  <text class="mod-text" x="36" y="98">• Routines &amp; Schedules</text>
+  <text class="mod-text" x="36" y="122">• Heartbeat &amp; Recovery</text>
+  <text class="arrow-label" x="324" y="44" text-anchor="end">subsystem 1</text>
+
+  <!-- TR: Organization & Governance -->
+  <rect class="sub-box sub-blue" x="520" y="22" width="320" height="150" rx="8"/>
+  <text class="sub-title sub-title-blue" x="536" y="44">组织与治理</text>
+  <text class="mod-text" x="536" y="74">• Agents &amp; Org Chart</text>
+  <text class="mod-text" x="536" y="98">• Identity &amp; Access</text>
+  <text class="mod-text" x="536" y="122">• Budget &amp; Governance</text>
+  <text class="arrow-label" x="824" y="44" text-anchor="end">subsystem 2</text>
+
+  <!-- BL: Workspace & Runtime -->
+  <rect class="sub-box sub-yellow" x="20" y="348" width="320" height="150" rx="8"/>
+  <text class="sub-title sub-title-yellow" x="36" y="370">工作区与运行时</text>
+  <text class="mod-text" x="36" y="400">• Workspace Runtime</text>
+  <text class="mod-text" x="36" y="424">• Environments &amp; Cloud</text>
+  <text class="mod-text" x="36" y="448">• Projects &amp; Documents</text>
+  <text class="arrow-label" x="324" y="370" text-anchor="end">subsystem 3</text>
+
+  <!-- BR: Platform & Portability -->
+  <rect class="sub-box sub-pink" x="520" y="348" width="320" height="150" rx="8"/>
+  <text class="sub-title sub-title-pink" x="536" y="370">平台扩展与可移植</text>
+  <text class="mod-text" x="536" y="400">• Plugin System</text>
+  <text class="mod-text" x="536" y="424">• Portability &amp; Skills</text>
+  <text class="mod-text" x="536" y="448">• Secrets · Storage · Activity</text>
+  <text class="arrow-label" x="824" y="370" text-anchor="end">subsystem 4</text>
+
+  <!-- Hub: Heartbeat Engine -->
+  <rect class="hub-box" x="350" y="232" width="160" height="56" rx="10"/>
+  <text class="hub-text" x="430" y="258" text-anchor="middle">Heartbeat</text>
+  <text class="hub-text" x="430" y="278" text-anchor="middle">Engine</text>
+
+  <!-- Arrows: Hub orchestrates each subsystem -->
+  <path class="dep-line" d="M380,232 L380,172" marker-end="url(#dep-arrow)"/>
+  <text class="arrow-label" x="386" y="206">checkout · run</text>
+
+  <path class="dep-line" d="M480,232 L480,172" marker-end="url(#dep-arrow)"/>
+  <text class="arrow-label" x="486" y="206" text-anchor="start">budget · auth</text>
+
+  <path class="dep-line" d="M380,288 L380,348" marker-end="url(#dep-arrow)"/>
+  <text class="arrow-label" x="386" y="322">workspace · env</text>
+
+  <path class="dep-line" d="M480,288 L480,348" marker-end="url(#dep-arrow)"/>
+  <text class="arrow-label" x="486" y="322" text-anchor="start">secrets · plugins</text>
+
+  <!-- Cross arrows: callers into hub -->
+  <path class="dep-line-cyan" d="M260,172 L350,238" marker-end="url(#dep-arrow-cyan)"/>
+  <text class="arrow-label" x="262" y="200" fill="#4ecdc4">enqueueWakeup</text>
+
+  <path class="dep-line-cyan" d="M600,172 L510,238" marker-end="url(#dep-arrow-cyan)"/>
+  <text class="arrow-label" x="540" y="200" text-anchor="end" fill="#6c8ef5">run JWT · actor</text>
+
+  <!-- Recovery circular dependency note -->
+  <path class="dep-line" d="M430,232 L430,172" stroke-dasharray="4,3" opacity="0.5"/>
+</svg>
