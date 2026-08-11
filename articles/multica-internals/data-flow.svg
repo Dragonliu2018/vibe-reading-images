@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="660" viewBox="0 0 860 660" font-family="system-ui, sans-serif">
+  <rect width="860" height="660" fill="#0b0d14"/>
+  <text x="430" y="28" text-anchor="middle" fill="#e4e7f0" font-size="17" font-weight="600">Agent Task 端到端数据流</text>
+
+  <!-- Lane headers -->
+  <rect x="30" y="48" width="150" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="105" y="70" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">Frontend / CLI</text>
+
+  <rect x="250" y="48" width="240" height="34" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="370" y="70" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">Server (API + Service + Bus)</text>
+
+  <rect x="560" y="48" width="120" height="34" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="620" y="70" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">Daemon</text>
+
+  <rect x="710" y="48" width="120" height="34" rx="6" fill="#13162a" stroke="#a8aec4" stroke-width="1.5"/>
+  <text x="770" y="70" text-anchor="middle" fill="#a8aec4" font-size="13" font-weight="600">Agent CLI</text>
+
+  <!-- Lane dividers -->
+  <line x1="220" y1="90" x2="220" y2="620" stroke="#2a2e48" stroke-width="1" stroke-dasharray="3 4"/>
+  <line x1="540" y1="90" x2="540" y2="620" stroke="#2a2e48" stroke-width="1" stroke-dasharray="3 4"/>
+  <line x1="690" y1="90" x2="690" y2="620" stroke="#2a2e48" stroke-width="1" stroke-dasharray="3 4"/>
+
+  <defs>
+    <marker id="df" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="dfP" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#ff6b9d"/>
+    </marker>
+    <marker id="dfB" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="dfG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#5a6078"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: assign issue -->
+  <text x="35" y="108" fill="#8b91a8" font-size="11">① 分配 issue</text>
+  <path d="M 180 115 L 250 115" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#dfB)"/>
+
+  <!-- Step 2: Enqueue -->
+  <text x="255" y="108" fill="#4ecdc4" font-size="11">EnqueueTaskForIssue → CreateAgentTask</text>
+  <rect x="300" y="122" width="140" height="26" rx="5" fill="#1a1d30" stroke="#5a6078" stroke-width="1.2"/>
+  <text x="370" y="139" text-anchor="middle" fill="#f9ca24" font-size="12">status = queued</text>
+
+  <!-- Step 3: event + wakeup -->
+  <path d="M 250 160 L 180 160" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#df)"/>
+  <text x="183" y="155" fill="#4ecdc4" font-size="10">task:queued (WS)</text>
+  <path d="M 490 160 L 560 160" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#df)"/>
+  <text x="498" y="155" fill="#4ecdc4" font-size="10">NotifyTaskAvailable (WS)</text>
+
+  <!-- Step 4: Claim -->
+  <text x="35" y="195" fill="#8b91a8" font-size="11">② 认领</text>
+  <path d="M 560 195 L 490 195" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#dfP)"/>
+  <text x="498" y="190" fill="#ff6b9d" font-size="10">ClaimTask (HTTP)</text>
+  <text x="255" y="195" fill="#4ecdc4" font-size="11">ClaimAgentTask: FOR UPDATE SKIP LOCKED</text>
+  <rect x="300" y="205" width="140" height="26" rx="5" fill="#1a1d30" stroke="#5a6078" stroke-width="1.2"/>
+  <text x="370" y="222" text-anchor="middle" fill="#f9ca24" font-size="12">status = dispatched</text>
+  <path d="M 490 215 L 560 215" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#df)" stroke-dasharray="4 3"/>
+  <text x="498" y="210" fill="#6b7186" font-size="10">task + mat_ token</text>
+
+  <!-- Step 5: Start -->
+  <text x="35" y="262" fill="#8b91a8" font-size="11">③ 开始</text>
+  <path d="M 560 262 L 490 262" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#dfP)"/>
+  <text x="498" y="257" fill="#ff6b9d" font-size="10">StartTask (HTTP)</text>
+  <rect x="300" y="272" width="140" height="26" rx="5" fill="#1a1d30" stroke="#5a6078" stroke-width="1.2"/>
+  <text x="370" y="289" text-anchor="middle" fill="#f9ca24" font-size="12">status = running</text>
+  <path d="M 250 282 L 180 282" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#df)"/>
+  <text x="183" y="277" fill="#4ecdc4" font-size="10">task:running (WS)</text>
+
+  <!-- Step 6: Execute -->
+  <text x="35" y="335" fill="#8b91a8" font-size="11">④ 执行</text>
+  <path d="M 620 320 L 620 345 L 710 345" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#dfP)"/>
+  <text x="628" y="338" fill="#ff6b9d" font-size="10">agent.Execute (子进程)</text>
+  <rect x="715" y="332" width="100" height="26" rx="5" fill="#1a1d30" stroke="#a8aec4" stroke-width="1.2"/>
+  <text x="765" y="349" text-anchor="middle" fill="#a8aec4" font-size="11">claude/codex/...</text>
+
+  <!-- Step 7: stream -->
+  <text x="35" y="395" fill="#8b91a8" font-size="11">⑤ 流式上报</text>
+  <path d="M 710 392 L 620 392" fill="none" stroke="#a8aec4" stroke-width="1.5" marker-end="url(#dfG)"/>
+  <text x="628" y="387" fill="#a8aec4" font-size="10">Messages channel</text>
+  <path d="M 560 410 L 490 410" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#dfP)"/>
+  <text x="498" y="405" fill="#ff6b9d" font-size="10">ReportProgress (HTTP)</text>
+  <path d="M 250 410 L 180 410" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#df)"/>
+  <text x="183" y="405" fill="#4ecdc4" font-size="10">task:progress (WS)</text>
+
+  <!-- Step 8: Complete -->
+  <text x="35" y="470" fill="#8b91a8" font-size="11">⑥ 完成/失败</text>
+  <path d="M 560 470 L 490 470" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#dfP)"/>
+  <text x="498" y="465" fill="#ff6b9d" font-size="10">Complete/Fail (HTTP)</text>
+  <rect x="300" y="482" width="170" height="26" rx="5" fill="#1a1d30" stroke="#5a6078" stroke-width="1.2"/>
+  <text x="385" y="499" text-anchor="middle" fill="#f9ca24" font-size="12">status = completed / failed</text>
+  <path d="M 250 495 L 180 495" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#df)"/>
+  <text x="183" y="490" fill="#4ecdc4" font-size="10">task:completed (WS)</text>
+
+  <!-- retry branch -->
+  <text x="255" y="535" fill="#8b91a8" font-size="11">失败自动重试（infra 类）→ CreateRetryTask (继承 session_id, attempt+1)</text>
+  <path d="M 385 508 L 385 528 L 300 528 L 300 122" fill="none" stroke="#5a6078" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#dfG)" opacity="0.7"/>
+
+  <!-- bottom note -->
+  <rect x="30" y="565" width="800" height="78" rx="8" fill="none" stroke="#2a2e48" stroke-width="1"/>
+  <text x="45" y="585" fill="#8b91a8" font-size="12" font-weight="600">关键设计</text>
+  <text x="45" y="605" fill="#8b91a8" font-size="11">• 事件总线同步：先 BroadcastToWorkspace 再 NotifyTaskAvailable，保证 UI 看到 queued 再看到 dispatch</text>
+  <text x="45" y="622" fill="#8b91a8" font-size="11">• EmptyClaimCache 负缓存：enqueue 时 Bump 版本号失效，claim 时跳过空队列；Wakeup 主动唤醒降低轮询延迟</text>
+  <text x="45" y="639" fill="#8b91a8" font-size="11">• task-scoped mat_ token：agent 子进程只拿到单 task 凭证，看不到 daemon 的 workspace owner credential</text>
+</svg>

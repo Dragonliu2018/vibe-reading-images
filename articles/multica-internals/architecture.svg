@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="540" viewBox="0 0 860 540" font-family="system-ui, sans-serif">
+  <rect width="860" height="540" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="430" y="30" text-anchor="middle" fill="#e4e7f0" font-size="17" font-weight="600">Multica 分层架构</text>
+
+  <!-- ===== Client Layer ===== -->
+  <rect x="30" y="52" width="800" height="76" rx="10" fill="none" stroke="#2a2e48" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <text x="44" y="72" fill="#8b91a8" font-size="12">客户端层 · Clients</text>
+
+  <rect x="70" y="82" width="170" height="38" rx="7" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="155" y="106" text-anchor="middle" fill="#6c8ef5" font-size="14">Next.js Web</text>
+
+  <rect x="345" y="82" width="170" height="38" rx="7" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="106" text-anchor="middle" fill="#6c8ef5" font-size="14">Electron Desktop</text>
+
+  <rect x="620" y="82" width="170" height="38" rx="7" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="705" y="106" text-anchor="middle" fill="#6c8ef5" font-size="14">multica CLI</text>
+
+  <!-- Clients -> Server (HTTP + WS) -->
+  <path d="M 155 120 L 155 150 L 340 150" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <path d="M 430 120 L 430 150" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <path d="M 705 120 L 705 150 L 525 150" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <text x="430" y="145" text-anchor="middle" fill="#6b7186" font-size="11">HTTP + WebSocket</text>
+
+  <!-- ===== Go Backend ===== -->
+  <rect x="30" y="158" width="500" height="200" rx="10" fill="none" stroke="#2a2e48" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <text x="44" y="178" fill="#8b91a8" font-size="12">Go Backend · server/</text>
+
+  <!-- API layer -->
+  <rect x="55" y="188" width="210" height="46" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="160" y="207" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">Chi Router + Handler</text>
+  <text x="160" y="224" text-anchor="middle" fill="#8b91a8" font-size="11">REST API · 147 files</text>
+
+  <!-- Service layer -->
+  <rect x="280" y="188" width="235" height="46" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="397" y="207" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">Service + Events Bus</text>
+  <text x="397" y="224" text-anchor="middle" fill="#8b91a8" font-size="11">TaskService · AutopilotService</text>
+
+  <!-- Realtime -->
+  <rect x="55" y="248" width="210" height="46" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="160" y="267" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">Realtime Hub</text>
+  <text x="160" y="284" text-anchor="middle" fill="#8b91a8" font-size="11">WS 房间 + Redis 分片中继</text>
+
+  <!-- daemonws -->
+  <rect x="280" y="248" width="235" height="46" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="397" y="267" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">Daemon WS Hub</text>
+  <text x="397" y="284" text-anchor="middle" fill="#8b91a8" font-size="11">守护进程连接 + 心跳 + 唤醒</text>
+
+  <!-- Scheduler -->
+  <rect x="55" y="308" width="210" height="40" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="160" y="333" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">Scheduler</text>
+
+  <!-- pkg/db -->
+  <rect x="280" y="308" width="235" height="40" rx="7" fill="#13162a" stroke="#5a6078" stroke-width="1.5"/>
+  <text x="397" y="333" text-anchor="middle" fill="#a8aec4" font-size="13" font-weight="600">sqlc DB Layer</text>
+
+  <!-- Backend internal arrows -->
+  <path d="M 265 211 L 280 211" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <path d="M 160 234 L 160 248" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <path d="M 397 234 L 397 248" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+
+  <!-- ===== Local Daemon (side) ===== -->
+  <rect x="560" y="158" width="270" height="200" rx="10" fill="none" stroke="#2a2e48" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <text x="574" y="178" fill="#8b91a8" font-size="12">Local Daemon · 用户机器</text>
+
+  <rect x="585" y="188" width="220" height="40" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="695" y="213" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">Daemon 执行引擎</text>
+
+  <rect x="585" y="240" width="220" height="40" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="695" y="265" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">pkg/agent (14 providers)</text>
+
+  <rect x="585" y="292" width="105" height="40" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="637" y="317" text-anchor="middle" fill="#ff6b9d" font-size="12">execenv</text>
+
+  <rect x="700" y="292" width="105" height="40" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="752" y="317" text-anchor="middle" fill="#ff6b9d" font-size="12">repocache</text>
+
+  <path d="M 695 228 L 695 240" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <path d="M 637 280 L 637 292" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <path d="M 752 280 L 752 292" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+
+  <!-- Server <-> Daemon (WS + poll) -->
+  <path d="M 530 271 L 555 271 L 555 213 L 585 213" fill="none" stroke="#4ecdc4" stroke-width="1.8" marker-end="url(#arrowC)"/>
+  <path d="M 585 208 L 530 208" fill="none" stroke="#4ecdc4" stroke-width="1.8" marker-end="url(#arrowC)" opacity="0.7"/>
+  <text x="558" y="244" text-anchor="middle" fill="#4ecdc4" font-size="11">WS + 心跳</text>
+
+  <!-- ===== Data Layer ===== -->
+  <rect x="30" y="380" width="800" height="76" rx="10" fill="none" stroke="#2a2e48" stroke-width="1.2" stroke-dasharray="5 4"/>
+  <text x="44" y="400" fill="#8b91a8" font-size="12">数据层 · Persistence</text>
+
+  <rect x="120" y="410" width="250" height="38" rx="7" fill="#13162a" stroke="#5a6078" stroke-width="1.5"/>
+  <text x="245" y="434" text-anchor="middle" fill="#a8aec4" font-size="14">PostgreSQL 17 + pgvector</text>
+
+  <rect x="490" y="410" width="250" height="38" rx="7" fill="#13162a" stroke="#5a6078" stroke-width="1.5"/>
+  <text x="615" y="434" text-anchor="middle" fill="#a8aec4" font-size="14">Redis (realtime relay)</text>
+
+  <!-- Backend -> DB -->
+  <path d="M 280 358 L 280 380 L 245 380 L 245 410" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <path d="M 397 358 L 397 380 L 615 380 L 615 410" fill="none" stroke="#3a3f5c" stroke-width="1.5" marker-end="url(#arrowG)"/>
+
+  <!-- Legend -->
+  <text x="30" y="490" fill="#8b91a8" font-size="11">图例：</text>
+  <rect x="72" y="480" width="12" height="12" rx="2" fill="none" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="90" y="490" fill="#8b91a8" font-size="11">客户端</text>
+  <rect x="140" y="480" width="12" height="12" rx="2" fill="none" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="158" y="490" fill="#8b91a8" font-size="11">API</text>
+  <rect x="190" y="480" width="12" height="12" rx="2" fill="none" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="208" y="490" fill="#8b91a8" font-size="11">服务/实时</text>
+  <rect x="270" y="480" width="12" height="12" rx="2" fill="none" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="288" y="490" fill="#8b91a8" font-size="11">Daemon/Agent</text>
+  <rect x="370" y="480" width="12" height="12" rx="2" fill="none" stroke="#5a6078" stroke-width="1.5"/>
+  <text x="388" y="490" fill="#8b91a8" font-size="11">数据</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#3a3f5c"/>
+    </marker>
+    <marker id="arrowC" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+</svg>
