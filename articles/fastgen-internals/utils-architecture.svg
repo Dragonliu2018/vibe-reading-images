@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="440" viewBox="0 0 820 440" font-family="system-ui, sans-serif">
+  <rect width="820" height="440" fill="#0b0d14"/>
+  <defs>
+    <marker id="ah-ua" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#363b62"/></marker>
+  </defs>
+  <style>.label{font-size:13px;font-weight:600;fill:#e2e8f0}.mod{font-size:11px;fill:#a0aec0}.tag{font-size:10px;fill:#7a85a3}.arrow{stroke:#363b62;stroke-width:1.5;fill:none}</style>
+
+  <!-- utils/ 容器 -->
+  <rect x="20" y="20" width="780" height="400" rx="10" fill="none" stroke="#7bed9f" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.5"/>
+  <text x="40" y="40" class="tag" fill="#7bed9f">utils/ (扇入 64 · 3067 行 · 15 文件)</text>
+
+  <!-- distributed 子包 (左上) -->
+  <rect x="40" y="55" width="350" height="160" rx="8" fill="none" stroke="#6c8ef5" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="60" y="73" class="tag" fill="#6c8ef5">distributed/</text>
+
+  <rect x="60" y="85" width="140" height="45" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="130" y="104" text-anchor="middle" class="label" fill="#6c8ef5">__init__.py</text>
+  <text x="130" y="120" text-anchor="middle" class="tag">synchronize/world_size/is_rank0/rank0_only</text>
+
+  <rect x="220" y="85" width="150" height="45" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="295" y="104" text-anchor="middle" class="label" fill="#6c8ef5">fsdp.py</text>
+  <text x="295" y="120" text-anchor="middle" class="tag">model_to_fsdp · apply_ckp · sync_grad</text>
+
+  <rect x="60" y="140" width="140" height="45" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="130" y="159" text-anchor="middle" class="label" fill="#6c8ef5">ddp.py</text>
+  <text x="130" y="175" text-anchor="middle" class="tag">DDPWrapper · ddp_sync_grad</text>
+
+  <rect x="220" y="140" width="150" height="45" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="295" y="159" text-anchor="middle" class="label" fill="#6c8ef5">s3_filesystem.py</text>
+  <text x="295" y="175" text-anchor="middle" class="tag">S3 DCP 适配</text>
+
+  <rect x="60" y="195" width="310" height="15" fill="none"/>
+  <text x="215" y="207" text-anchor="middle" class="tag">degree: synchronize(22) · world_size(22) · is_rank0(19)</text>
+
+  <!-- checkpointer (右上) -->
+  <rect x="410" y="55" width="370" height="110" rx="8" fill="none" stroke="#7bed9f" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="430" y="73" class="tag" fill="#7bed9f">checkpointer.py (degree 14)</text>
+
+  <rect x="430" y="85" width="150" height="45" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1"/>
+  <text x="505" y="104" text-anchor="middle" class="label" fill="#7bed9f">Checkpointer</text>
+  <text x="505" y="120" text-anchor="middle" class="tag">save/load · {iter:07d}.pth</text>
+
+  <rect x="600" y="85" width="160" height="45" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1"/>
+  <text x="680" y="104" text-anchor="middle" class="label" fill="#7bed9f">FSDPCheckpointer</text>
+  <text x="680" y="120" text-anchor="middle" class="tag">适配器 · DTensor 容错</text>
+
+  <rect x="430" y="140" width="310" height="20" fill="none"/>
+  <text x="585" y="153" text-anchor="middle" class="tag">ModelWrapper / OptimizerWrapper (适配器模式)</text>
+
+  <!-- autoresume (右中) -->
+  <rect x="410" y="175" width="370" height="75" rx="8" fill="none" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="430" y="193" class="tag" fill="#a78bfa">autoresume.py (degree 11 · 策略模式)</text>
+  <rect x="430" y="200" width="160" height="40" rx="6" fill="#13162a" stroke="#a78bfa" stroke-width="1"/>
+  <text x="510" y="217" text-anchor="middle" class="label" fill="#a78bfa">AutoResumeInterface</text>
+  <text x="510" y="232" text-anchor="middle" class="tag">4 抽象方法</text>
+  <rect x="610" y="200" width="150" height="40" rx="6" fill="#13162a" stroke="#a78bfa" stroke-width="1"/>
+  <text x="685" y="217" text-anchor="middle" class="label" fill="#a78bfa">NoOpAutoResume</text>
+  <text x="685" y="232" text-anchor="middle" class="tag">默认 no-op</text>
+
+  <!-- 底层: logging / lr_scheduler / io_utils / __init__ -->
+  <rect x="40" y="240" width="180" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="130" y="262" text-anchor="middle" class="label" fill="#f9ca24">logging_utils.py</text>
+  <text x="130" y="278" text-anchor="middle" class="tag">loguru · 扇入 58</text>
+  <text x="130" y="292" text-anchor="middle" class="tag">rank0_if_not_debug</text>
+
+  <rect x="240" y="240" width="180" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="330" y="262" text-anchor="middle" class="label" fill="#f9ca24">lr_scheduler.py</text>
+  <text x="330" y="278" text-anchor="middle" class="tag">4 种 Lambda scheduler</text>
+  <text x="330" y="292" text-anchor="middle" class="tag">get_scheduler 工厂</text>
+
+  <rect x="440" y="240" width="160" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="520" y="262" text-anchor="middle" class="label" fill="#f9ca24">io_utils.py</text>
+  <text x="520" y="278" text-anchor="middle" class="tag">s3_load/s3_save</text>
+  <text x="520" y="292" text-anchor="middle" class="tag">latest_checkpoint</text>
+
+  <rect x="620" y="240" width="160" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="700" y="262" text-anchor="middle" class="label" fill="#f9ca24">__init__.py</text>
+  <text x="700" y="278" text-anchor="middle" class="tag">instantiate(14) · LazyCall</text>
+  <text x="700" y="292" text-anchor="middle" class="tag">expand_like(36) · global_vars</text>
+
+  <!-- 被依赖方向 (bottom note) -->
+  <rect x="40" y="320" width="740" height="80" rx="8" fill="#0d1018" stroke="#363b62" stroke-width="1"/>
+  <text x="60" y="340" class="tag" fill="#7a85a3">被依赖（扇入来源）：</text>
+  <text x="60" y="358" class="tag">trainer.py · methods/model.py · networks/*/network.py · callbacks/* · checkpointer · logging · fsdp · ddp</text>
+  <text x="60" y="374" class="tag">→ 几乎所有模块依赖 distributed 原语 + logging_utils + instantiate</text>
+  <text x="60" y="390" class="tag">→ Trainer 持有 Checkpointer + AutoResumeInterface · methods 持有 optimizer(lr_scheduler)</text>
+</svg>

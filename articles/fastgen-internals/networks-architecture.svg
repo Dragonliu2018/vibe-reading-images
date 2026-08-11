@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="460" viewBox="0 0 820 460" font-family="system-ui, sans-serif">
+  <rect width="820" height="460" fill="#0b0d14"/>
+  <defs>
+    <marker id="ah-na" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#363b62"/></marker>
+  </defs>
+  <style>.label{font-size:13px;font-weight:600;fill:#e2e8f0}.mod{font-size:11px;fill:#a0aec0}.tag{font-size:10px;fill:#7a85a3}.arrow{stroke:#363b62;stroke-width:1.5;fill:none}</style>
+
+  <!-- FastGenNetwork 基类 -->
+  <rect x="280" y="20" width="260" height="55" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="410" y="42" text-anchor="middle" class="label" fill="#6c8ef5">FastGenNetwork (ABC)</text>
+  <text x="410" y="58" text-anchor="middle" class="mod">degree 31 · forward() 抽象 · 持有 noise_scheduler</text>
+  <text x="410" y="72" text-anchor="middle" class="tag">set_noise_schedule() · sample() · fully_shard()</text>
+
+  <!-- CausalFastGenNetwork 继承 -->
+  <line x1="410" y1="75" x2="620" y2="110" class="arrow" marker-end="url(#ah-na)"/>
+  <text x="540" y="96" class="tag">▼ 继承</text>
+  <rect x="540" y="110" width="240" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="660" y="132" text-anchor="middle" class="label" fill="#ff6b9d">CausalFastGenNetwork</text>
+  <text x="660" y="148" text-anchor="middle" class="mod">视频因果 · clear_caches() · chunk_size</text>
+
+  <!-- EDMPrecond 装饰器 -->
+  <line x1="330" y1="75" x2="180" y2="110" class="arrow" marker-end="url(#ah-na)"/>
+  <text x="235" y="96" class="tag">▼ 继承（装饰器）</text>
+  <rect x="60" y="110" width="240" height="55" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="180" y="132" text-anchor="middle" class="label" fill="#f9ca24">EDMPrecond</text>
+  <text x="180" y="148" text-anchor="middle" class="mod">装饰器 · 包装底层 U-Net</text>
+  <text x="180" y="162" text-anchor="middle" class="tag">precond_input → model → precond_output</text>
+
+  <!-- 11 网络架构 (容器) -->
+  <rect x="20" y="195" width="500" height="120" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="40" y="215" class="tag" fill="#6c8ef5">11 种网络架构（继承 FastGenNetwork）</text>
+  <rect x="40" y="225" width="90" height="35" rx="6" fill="#0d1018" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="85" y="247" text-anchor="middle" class="mod" fill="#6c8ef5">EDM</text>
+  <rect x="140" y="225" width="90" height="35" rx="6" fill="#0d1018" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="185" y="247" text-anchor="middle" class="mod" fill="#6c8ef5">EDM2</text>
+  <rect x="240" y="225" width="90" height="35" rx="6" fill="#0d1018" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="285" y="247" text-anchor="middle" class="mod" fill="#6c8ef5">DiT</text>
+  <rect x="340" y="225" width="90" height="35" rx="6" fill="#0d1018" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="385" y="247" text-anchor="middle" class="mod" fill="#6c8ef5">Flux</text>
+  <rect x="40" y="270" width="90" height="35" rx="6" fill="#0d1018" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="85" y="292" text-anchor="middle" class="mod" fill="#6c8ef5">SD15</text>
+  <rect x="140" y="270" width="90" height="35" rx="6" fill="#0d1018" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="185" y="292" text-anchor="middle" class="mod" fill="#6c8ef5">SDXL</text>
+  <rect x="240" y="270" width="90" height="35" rx="6" fill="#0d1018" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="285" y="292" text-anchor="middle" class="mod" fill="#6c8ef5">QwenImage</text>
+  <rect x="340" y="270" width="90" height="35" rx="6" fill="#0d1018" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="385" y="292" text-anchor="middle" class="mod" fill="#6c8ef5">Wan</text>
+  <rect x="40" y="315" width="430" height="0" fill="none"/>
+
+  <!-- noise_schedule 策略 (right side) -->
+  <line x1="410" y1="75" x2="660" y2="195" class="arrow" marker-end="url(#ah-na)" stroke-dasharray="4 2"/>
+  <text x="560" y="140" class="tag">持有（策略组合）</text>
+  <rect x="540" y="195" width="260" height="120" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="560" y="215" class="tag" fill="#7bed9f">BaseNoiseSchedule (degree 40)</text>
+  <text x="560" y="215" class="tag" fill="#7bed9f">7 子类（策略模式）</text>
+  <rect x="555" y="225" width="105" height="30" rx="6" fill="#0d1018" stroke="#7bed9f" stroke-width="1"/>
+  <text x="607" y="244" text-anchor="middle" class="mod" fill="#7bed9f">EDM</text>
+  <rect x="670" y="225" width="115" height="30" rx="6" fill="#0d1018" stroke="#7bed9f" stroke-width="1"/>
+  <text x="727" y="244" text-anchor="middle" class="mod" fill="#7bed9f">Alphas</text>
+  <rect x="555" y="260" width="105" height="30" rx="6" fill="#0d1018" stroke="#7bed9f" stroke-width="1"/>
+  <text x="607" y="279" text-anchor="middle" class="mod" fill="#7bed9f">RF</text>
+  <rect x="670" y="260" width="115" height="30" rx="6" fill="#0d1018" stroke="#7bed9f" stroke-width="1"/>
+  <text x="727" y="279" text-anchor="middle" class="mod" fill="#7bed9f">Trig</text>
+  <text x="670" y="305" text-anchor="middle" class="tag">+ SD/SDXL/CogVideoX</text>
+
+  <!-- discriminators (bottom) -->
+  <rect x="120" y="360" width="560" height="75" rx="8" fill="#13162a" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="4 2"/>
+  <text x="140" y="380" class="tag" fill="#a78bfa">discriminators.py（横切关注点，不继承 FastGenNetwork）</text>
+  <rect x="150" y="390" width="200" height="35" rx="6" fill="#0d1018" stroke="#a78bfa" stroke-width="1"/>
+  <text x="250" y="412" text-anchor="middle" class="mod" fill="#a78bfa">Discriminator_EDM</text>
+  <rect x="380" y="390" width="240" height="35" rx="6" fill="#0d1018" stroke="#a78bfa" stroke-width="1"/>
+  <text x="500" y="412" text-anchor="middle" class="mod" fill="#a78bfa">Discriminator_VideoDiT</text>
+  <text x="630" y="412" class="tag">消费网络中间特征</text>
+</svg>

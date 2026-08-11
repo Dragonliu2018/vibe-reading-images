@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="410" viewBox="0 0 800 410" font-family="system-ui, sans-serif">
+  <rect width="800" height="410" fill="#0b0d14"/>
+  <defs>
+    <marker id="ah-t" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#363b62"/></marker>
+  </defs>
+  <style>.label{font-size:13px;font-weight:600;fill:#e2e8f0}.mod{font-size:11px;fill:#a0aec0}.tag{font-size:10px;fill:#7a85a3}.arrow{stroke:#363b62;stroke-width:1.5;fill:none}</style>
+
+  <!-- Trainer (center top) -->
+  <rect x="290" y="20" width="220" height="55" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="400" y="42" text-anchor="middle" class="label" fill="#4ecdc4">Trainer</text>
+  <text x="400" y="58" text-anchor="middle" class="mod">run() · train_step() · 模板方法</text>
+
+  <!-- 3 collaborators (owned by Trainer) -->
+  <!-- CallbackDict -->
+  <line x1="340" y1="75" x2="200" y2="120" class="arrow" marker-end="url(#ah-t)"/>
+  <rect x="80" y="120" width="240" height="55" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="200" y="142" text-anchor="middle" class="label" fill="#f9ca24">CallbackDict</text>
+  <text x="200" y="158" text-anchor="middle" class="mod">__getattr__ 动态分发 · 20 钩子</text>
+
+  <!-- Checkpointer -->
+  <line x1="400" y1="75" x2="400" y2="120" class="arrow" marker-end="url(#ah-t)"/>
+  <rect x="280" y="120" width="240" height="55" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="400" y="142" text-anchor="middle" class="label" fill="#7bed9f">Checkpointer</text>
+  <text x="400" y="158" text-anchor="middle" class="mod">save/load · FSDPCheckpointer 适配</text>
+
+  <!-- AutoResume -->
+  <line x1="460" y1="75" x2="600" y2="120" class="arrow" marker-end="url(#ah-t)"/>
+  <rect x="480" y="120" width="240" height="55" rx="8" fill="#13162a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="600" y="142" text-anchor="middle" class="label" fill="#a78bfa">AutoResumeInterface</text>
+  <text x="600" y="158" text-anchor="middle" class="mod">策略模式 · NoOpAutoResume 默认</text>
+
+  <!-- Callback 子类容器 -->
+  <rect x="20" y="210" width="760" height="110" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <text x="40" y="230" class="tag" fill="#f9ca24">callbacks/ 子类（通过 config _target_ 动态实例化）</text>
+
+  <rect x="40" y="240" width="140" height="55" rx="6" fill="#0d1018" stroke="#f9ca24" stroke-width="1"/>
+  <text x="110" y="262" text-anchor="middle" class="mod" fill="#f9ca24">EMACallback</text>
+  <text x="110" y="278" text-anchor="middle" class="tag">on_training_step_end</text>
+
+  <rect x="200" y="240" width="140" height="55" rx="6" fill="#0d1018" stroke="#f9ca24" stroke-width="1"/>
+  <text x="270" y="262" text-anchor="middle" class="mod" fill="#f9ca24">WandbCallback</text>
+  <text x="270" y="278" text-anchor="middle" class="tag">on_training_step_end</text>
+
+  <rect x="360" y="240" width="140" height="55" rx="6" fill="#0d1018" stroke="#f9ca24" stroke-width="1"/>
+  <text x="430" y="262" text-anchor="middle" class="mod" fill="#f9ca24">GradClipCallback</text>
+  <text x="430" y="278" text-anchor="middle" class="tag">on_optimizer_step_begin</text>
+
+  <rect x="520" y="240" width="140" height="55" rx="6" fill="#0d1018" stroke="#f9ca24" stroke-width="1"/>
+  <text x="590" y="262" text-anchor="middle" class="mod" fill="#f9ca24">ParamCount</text>
+  <text x="590" y="278" text-anchor="middle" class="tag">on_model_init_end</text>
+
+  <rect x="680" y="240" width="90" height="55" rx="6" fill="#0d1018" stroke="#f9ca24" stroke-width="1"/>
+  <text x="725" y="270" text-anchor="middle" class="mod" fill="#f9ca24">…</text>
+
+  <!-- CallbackDict 分发到子类 -->
+  <line x1="200" y1="175" x2="200" y2="210" class="arrow" marker-end="url(#ah-t)"/>
+  <text x="210" y="196" class="tag">遍历调用 on_xxx</text>
+
+  <!-- 外部调用 -->
+  <rect x="290" y="345" width="220" height="45" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="372" text-anchor="middle" class="label" fill="#6c8ef5">train.py:main()</text>
+  <line x1="400" y1="345" x2="400" y2="75" class="arrow" marker-end="url(#ah-t)" stroke-dasharray="4 2"/>
+  <text x="410" y="220" class="tag">Trainer(config).run(model)</text>
+</svg>

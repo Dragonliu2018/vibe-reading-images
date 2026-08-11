@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440" font-family="system-ui, sans-serif">
+  <rect width="800" height="440" fill="#0b0d14"/>
+  <defs>
+    <marker id="ah-m" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#363b62"/></marker>
+  </defs>
+  <style>.label{font-size:13px;font-weight:600;fill:#e2e8f0}.mod{font-size:11px;fill:#a0aec0}.tag{font-size:10px;fill:#7a85a3}.arrow{stroke:#363b62;stroke-width:1.5;fill:none}</style>
+
+  <!-- FastGenModel 基类 (top) -->
+  <rect x="280" y="20" width="240" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+  <text x="400" y="44" text-anchor="middle" class="label" fill="#f9ca24">FastGenModel</text>
+  <text x="400" y="60" text-anchor="middle" class="mod">degree 94 · 全局 god node #1</text>
+  <text x="400" y="74" text-anchor="middle" class="tag">single_train_step() · build_model() · init_optimizers()</text>
+
+  <!-- 继承箭头 (空心三角) — 6 个子类分两行 -->
+  <!-- Row 1: DMD2, CM, LADD -->
+  <line x1="400" y1="80" x2="400" y2="110" class="arrow"/>
+  <rect x="180" y="110" width="30" height="20" fill="#0b0d14"/>
+  <text x="400" y="124" text-anchor="middle" class="tag">▼ 继承</text>
+
+  <line x1="400" y1="130" x2="160" y2="160" class="arrow" marker-end="url(#ah-m)"/>
+  <line x1="400" y1="130" x2="400" y2="160" class="arrow" marker-end="url(#ah-m)"/>
+  <line x1="400" y1="130" x2="640" y2="160" class="arrow" marker-end="url(#ah-m)"/>
+
+  <rect x="60" y="160" width="200" height="55" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="160" y="182" text-anchor="middle" class="label" fill="#6c8ef5">DMD2Model</text>
+  <text x="160" y="198" text-anchor="middle" class="mod">4 网络 · VSD+GAN 交替</text>
+  <text x="160" y="212" text-anchor="middle" class="tag">degree 23</text>
+
+  <rect x="300" y="160" width="200" height="55" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="182" text-anchor="middle" class="label" fill="#6c8ef5">CMModel</text>
+  <text x="400" y="198" text-anchor="middle" class="mod">一致性 loss · use_cd 才有 teacher</text>
+  <text x="400" y="212" text-anchor="middle" class="tag">degree 13</text>
+
+  <rect x="540" y="160" width="200" height="55" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="640" y="182" text-anchor="middle" class="label" fill="#6c8ef5">LADDModel</text>
+  <text x="640" y="198" text-anchor="middle" class="mod">teacher+disc · 纯 GAN</text>
+  <text x="640" y="212" text-anchor="middle" class="tag">degree 19</text>
+
+  <!-- Row 2: SFT, KD, CausVid/SelfForcing -->
+  <line x1="400" y1="130" x2="160" y2="260" class="arrow" marker-end="url(#ah-m)" stroke-dasharray="4 2"/>
+  <line x1="400" y1="130" x2="400" y2="260" class="arrow" marker-end="url(#ah-m)" stroke-dasharray="4 2"/>
+  <line x1="640" y1="215" x2="640" y2="260" class="arrow" marker-end="url(#ah-m)"/>
+
+  <rect x="60" y="260" width="200" height="50" rx="8" fill="#13162a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="160" y="282" text-anchor="middle" class="label" fill="#a78bfa">SFTModel</text>
+  <text x="160" y="298" text-anchor="middle" class="mod">无 teacher · 直接 DSM</text>
+
+  <rect x="300" y="260" width="200" height="50" rx="8" fill="#13162a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="400" y="282" text-anchor="middle" class="label" fill="#a78bfa">KDModel</text>
+  <text x="400" y="298" text-anchor="middle" class="mod">ODE pair 数据 · L2 loss</text>
+
+  <rect x="540" y="260" width="200" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="640" y="282" text-anchor="middle" class="label" fill="#ff6b9d">CausVidModel → SelfForcing</text>
+  <text x="640" y="298" text-anchor="middle" class="mod">继承 DMD2 · 因果视频</text>
+
+  <!-- common_loss (side) -->
+  <line x1="160" y1="215" x2="100" y2="360" class="arrow" marker-end="url(#ah-m)" stroke-dasharray="3 3"/>
+  <line x1="640" y1="215" x2="700" y2="360" class="arrow" marker-end="url(#ah-m)" stroke-dasharray="3 3"/>
+  <rect x="260" y="360" width="280" height="60" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="400" y="382" text-anchor="middle" class="label" fill="#7bed9f">common_loss.py</text>
+  <text x="400" y="398" text-anchor="middle" class="mod">dsm_loss · vsd_loss · gan_gen · gan_disc</text>
+  <text x="400" y="412" text-anchor="middle" class="tag">纯函数 · DMD2/LADD/SFT 共享</text>
+</svg>
