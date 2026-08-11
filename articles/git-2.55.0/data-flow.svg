@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="586" viewBox="0 0 540 586" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="df-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="df-arrow-y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="540" height="586" fill="#0b0d14"/>
+  <text x="270" y="26" text-anchor="middle" font-size="16" font-weight="600" fill="#e6e6f0">git commit 数据流</text>
+
+  <!-- Stage 1: dispatch (blue) -->
+  <rect x="70" y="44" width="400" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="66" text-anchor="middle" font-size="13" fill="#e6e6f0">main() → init_git()</text>
+  <text x="270" y="83" text-anchor="middle" font-size="10" fill="#8a8db0">common-main.c · common-init.c</text>
+
+  <!-- Stage 2 -->
+  <rect x="70" y="110" width="400" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="132" text-anchor="middle" font-size="13" fill="#e6e6f0">cmd_main() → handle_builtin() → run_builtin()</text>
+  <text x="270" y="149" text-anchor="middle" font-size="10" fill="#8a8db0">git.c</text>
+
+  <!-- Stage 3 -->
+  <rect x="70" y="176" width="400" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="198" text-anchor="middle" font-size="13" fill="#e6e6f0">setup_git_directory()</text>
+  <text x="270" y="215" text-anchor="middle" font-size="10" fill="#8a8db0">setup.c — RUN_SETUP 仓库发现</text>
+
+  <!-- Stage 4 -->
+  <rect x="70" y="242" width="400" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="264" text-anchor="middle" font-size="13" fill="#e6e6f0">cmd_commit()</text>
+  <text x="270" y="281" text-anchor="middle" font-size="10" fill="#8a8db0">builtin/commit.c</text>
+
+  <!-- Stage 5: index (yellow) -->
+  <rect x="70" y="308" width="400" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="270" y="330" text-anchor="middle" font-size="13" fill="#e6e6f0">repo_read_index_preload() → preload_index()</text>
+  <text x="270" y="347" text-anchor="middle" font-size="10" fill="#8a8db0">read-cache.c · preload-index.c — 多线程 lstat 刷新</text>
+
+  <!-- Stage 6: object DB -->
+  <rect x="70" y="374" width="400" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="270" y="396" text-anchor="middle" font-size="13" fill="#e6e6f0">cache_tree_update() → odb_write_object_ext()</text>
+  <text x="270" y="413" text-anchor="middle" font-size="10" fill="#8a8db0">cache-tree.c · odb.c — 写 tree 对象 (OBJ_TREE)</text>
+
+  <!-- Stage 7: object DB -->
+  <rect x="70" y="440" width="400" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="270" y="462" text-anchor="middle" font-size="13" fill="#e6e6f0">commit_tree_extended() → odb_write_object_ext()</text>
+  <text x="270" y="479" text-anchor="middle" font-size="10" fill="#8a8db0">commit.c · odb.c — 写 commit 对象 (OBJ_COMMIT)</text>
+
+  <!-- Stage 8: refs -->
+  <rect x="70" y="506" width="400" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="270" y="528" text-anchor="middle" font-size="13" fill="#e6e6f0">ref_transaction_begin/update/commit()</text>
+  <text x="270" y="545" text-anchor="middle" font-size="10" fill="#8a8db0">refs.c — 更新 HEAD + reflog</text>
+
+  <!-- Arrows -->
+  <path d="M270,92 L270,110" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+  <path d="M270,158 L270,176" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+  <text x="280" y="171" font-size="10" fill="#8a8db0">the_repository</text>
+  <path d="M270,224 L270,242" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+  <text x="280" y="237" font-size="10" fill="#8a8db0">prefix</text>
+  <path d="M270,290 L270,308" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#df-arrow-y)"/>
+  <text x="280" y="303" font-size="10" fill="#8a8db0">struct index_state *</text>
+  <path d="M270,356 L270,374" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#df-arrow-y)"/>
+  <text x="280" y="369" font-size="10" fill="#8a8db0">刷新后的 index</text>
+  <path d="M270,422 L270,440" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#df-arrow-y)"/>
+  <text x="280" y="435" font-size="10" fill="#8a8db0">struct object_id tree_oid</text>
+  <path d="M270,488 L270,506" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#df-arrow-y)"/>
+  <text x="280" y="501" font-size="10" fill="#8a8db0">struct object_id commit_oid</text>
+
+  <text x="270" y="575" text-anchor="middle" font-size="10" fill="#8a8db0">蓝框 = 命令分发层 · 黄框 = 核心数据层</text>
+</svg>

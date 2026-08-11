@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="460" viewBox="0 0 820 460" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8db0"/>
+    </marker>
+    <marker id="arrow-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="460" fill="#0b0d14"/>
+  <text x="410" y="26" text-anchor="middle" font-size="17" font-weight="600" fill="#e6e6f0">Git 模块依赖关系</text>
+
+  <!-- Central hub: 对象数据库 -->
+  <rect x="335" y="200" width="150" height="60" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+  <text x="410" y="226" text-anchor="middle" font-size="14" fill="#f9ca24" font-weight="600">对象数据库</text>
+  <text x="410" y="246" text-anchor="middle" font-size="10" fill="#8a8db0">object-file.c · packfile.c</text>
+
+  <!-- Ring modules -->
+  <!-- 命令分发 top -->
+  <rect x="340" y="56" width="140" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="80" text-anchor="middle" font-size="13" fill="#e6e6f0">命令分发</text>
+  <text x="410" y="98" text-anchor="middle" font-size="10" fill="#8a8db0">git.c · setup.c</text>
+
+  <!-- 版本遍历 top-right -->
+  <rect x="600" y="120" width="140" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="670" y="144" text-anchor="middle" font-size="13" fill="#e6e6f0">版本遍历</text>
+  <text x="670" y="162" text-anchor="middle" font-size="10" fill="#8a8db0">revision.c · pretty.c</text>
+
+  <!-- Diff/合并 bottom-right -->
+  <rect x="600" y="320" width="140" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="670" y="344" text-anchor="middle" font-size="13" fill="#e6e6f0">Diff/合并/补丁</text>
+  <text x="670" y="362" text-anchor="middle" font-size="10" fill="#8a8db0">diff.c · sequencer.c</text>
+
+  <!-- 索引/工作树 bottom -->
+  <rect x="340" y="384" width="140" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="408" text-anchor="middle" font-size="13" fill="#e6e6f0">索引/工作树</text>
+  <text x="410" y="426" text-anchor="middle" font-size="10" fill="#8a8db0">read-cache.c</text>
+
+  <!-- 传输与协议 bottom-left -->
+  <rect x="80" y="320" width="140" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="150" y="344" text-anchor="middle" font-size="13" fill="#e6e6f0">传输与协议</text>
+  <text x="150" y="362" text-anchor="middle" font-size="10" fill="#8a8db0">transport.c</text>
+
+  <!-- 引用管理 top-left -->
+  <rect x="80" y="120" width="140" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="150" y="144" text-anchor="middle" font-size="13" fill="#e6e6f0">引用管理</text>
+  <text x="150" y="162" text-anchor="middle" font-size="10" fill="#8a8db0">refs.c · reftable/</text>
+
+  <!-- Hub arrows (to 对象数据库, yellow) -->
+  <path d="M410,110 L410,200" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow-c)"/>
+  <text x="416" y="158" font-size="10" fill="#f9ca24">setup</text>
+
+  <path d="M600,160 L485,210" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow-c)"/>
+  <text x="535" y="172" font-size="10" fill="#f9ca24">读 commit</text>
+
+  <path d="M600,338 L485,250" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow-c)"/>
+  <text x="535" y="300" font-size="10" fill="#f9ca24">读 tree/blob</text>
+
+  <path d="M410,384 L410,260" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow-c)"/>
+  <text x="416" y="325" font-size="10" fill="#f9ca24">读 blob</text>
+
+  <path d="M220,338 L335,250" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow-c)"/>
+  <text x="247" y="300" font-size="10" fill="#f9ca24">odb_has_object</text>
+
+  <path d="M220,160 L335,210" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow-c)"/>
+  <text x="247" y="172" font-size="10" fill="#f9ca24">parse_object</text>
+
+  <!-- Peripheral arrows (gray) -->
+  <path d="M600,147 L220,147" stroke="#8a8db0" stroke-width="1.5" fill="none" marker-end="url(#arrow)" stroke-dasharray="5 3"/>
+  <text x="395" y="140" font-size="10" fill="#8a8db0">ref tips</text>
+
+  <path d="M150,320 L150,174" stroke="#8a8db0" stroke-width="1.5" fill="none" marker-end="url(#arrow)" stroke-dasharray="5 3"/>
+  <text x="158" y="250" font-size="10" fill="#8a8db0">resolve refs</text>
+
+  <path d="M640,374 L480,400" stroke="#8a8db0" stroke-width="1.5" fill="none" marker-end="url(#arrow)" stroke-dasharray="5 3"/>
+  <text x="545" y="395" font-size="10" fill="#8a8db0">写 index</text>
+
+  <text x="410" y="450" text-anchor="middle" font-size="10" fill="#8a8db0">黄箭头 = 依赖对象数据库 · 虚线灰箭头 = 模块间协作</text>
+</svg>
