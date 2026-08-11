@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 560" width="740" height="560" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="arrow5g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8b90a8"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="740" height="560" fill="#0b0d14"/>
+
+  <text x="370" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#e8eaf0">code-review · 9 步多模型置信度过滤流水线</text>
+
+  <!-- legend -->
+  <rect x="180" y="33" width="10" height="10" fill="#f9ca24"/>
+  <text x="196" y="42" font-size="9" fill="#8b90a8">haiku</text>
+  <rect x="244" y="33" width="10" height="10" fill="#6c8ef5"/>
+  <text x="260" y="42" font-size="9" fill="#8b90a8">sonnet</text>
+  <rect x="316" y="33" width="10" height="10" fill="#ff6b9d"/>
+  <text x="332" y="42" font-size="9" fill="#8b90a8">opus</text>
+  <rect x="376" y="33" width="10" height="10" fill="#8b90a8"/>
+  <text x="392" y="42" font-size="9" fill="#8b90a8">控制</text>
+  <rect x="436" y="33" width="10" height="10" fill="#95e1a3"/>
+  <text x="452" y="42" font-size="9" fill="#8b90a8">输出</text>
+
+  <!-- Entry -->
+  <rect x="240" y="52" width="260" height="28" rx="6" fill="#13162a" stroke="#8b90a8" stroke-width="1.2"/>
+  <text x="370" y="70" text-anchor="middle" font-size="11" fill="#e8eaf0">/code-review [--comment]</text>
+  <path d="M370,80 L370,88" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+
+  <!-- Step 1 -->
+  <rect x="240" y="88" width="260" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="252" y="105" font-size="11" font-weight="bold" fill="#f9ca24">Step 1 · haiku 门控</text>
+  <text x="252" y="119" font-size="9" fill="#8b90a8">closed / draft / trivial / 已评论?</text>
+  <path d="M500,107 L560,107" stroke="#8b90a8" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow5g)"/>
+  <text x="566" y="110" font-size="10" fill="#8b90a8">→ STOP</text>
+  <path d="M370,126 L370,134" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+
+  <!-- Step 2 -->
+  <rect x="240" y="134" width="260" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="252" y="151" font-size="11" font-weight="bold" fill="#f9ca24">Step 2 · haiku</text>
+  <text x="252" y="165" font-size="9" fill="#8b90a8">收集相关 CLAUDE.md 文件路径</text>
+  <path d="M370,172 L370,180" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+
+  <!-- Step 3 -->
+  <rect x="240" y="180" width="260" height="38" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="252" y="197" font-size="11" font-weight="bold" fill="#6c8ef5">Step 3 · sonnet</text>
+  <text x="252" y="211" font-size="9" fill="#8b90a8">查看 PR 变更并返回摘要</text>
+  <path d="M370,218 L370,226" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+
+  <!-- Step 4: 4 parallel agents -->
+  <rect x="240" y="226" width="260" height="78" rx="6" fill="#13162a" stroke="#2a2e4a" stroke-width="1.5"/>
+  <text x="252" y="243" font-size="11" font-weight="bold" fill="#e8eaf0">Step 4 · 4 并行 review agents</text>
+  <rect x="250" y="250" width="58" height="30" rx="4" fill="#1a1d30" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="279" y="269" text-anchor="middle" font-size="9" fill="#6c8ef5">sonnet</text>
+  <text x="279" y="278" text-anchor="middle" font-size="8" fill="#e8eaf0">CLAUDE.md</text>
+  <rect x="314" y="250" width="58" height="30" rx="4" fill="#1a1d30" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="343" y="269" text-anchor="middle" font-size="9" fill="#6c8ef5">sonnet</text>
+  <text x="343" y="278" text-anchor="middle" font-size="8" fill="#e8eaf0">CLAUDE.md</text>
+  <rect x="378" y="250" width="58" height="30" rx="4" fill="#1a1d30" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="407" y="269" text-anchor="middle" font-size="9" fill="#ff6b9d">opus</text>
+  <text x="407" y="278" text-anchor="middle" font-size="8" fill="#e8eaf0">bug 扫描</text>
+  <rect x="442" y="250" width="58" height="30" rx="4" fill="#1a1d30" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="471" y="269" text-anchor="middle" font-size="9" fill="#ff6b9d">opus</text>
+  <text x="471" y="278" text-anchor="middle" font-size="8" fill="#e8eaf0">逻辑/安全</text>
+  <text x="370" y="298" text-anchor="middle" font-size="9" fill="#f9ca24">HIGH SIGNAL only（编译错/确定性逻辑错/明确违规）</text>
+  <path d="M370,304 L370,312" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+
+  <!-- Step 5 -->
+  <rect x="240" y="312" width="260" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="252" y="329" font-size="11" font-weight="bold" fill="#ff6b9d">Step 5 · 并行 validation</text>
+  <text x="252" y="343" font-size="9" fill="#8b90a8">per issue 独立验证（bug→opus / 违规→sonnet）</text>
+  <path d="M370,350 L370,358" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+
+  <!-- Step 6 -->
+  <rect x="240" y="358" width="260" height="32" rx="6" fill="#13162a" stroke="#8b90a8" stroke-width="1.5"/>
+  <text x="370" y="378" text-anchor="middle" font-size="11" fill="#e8eaf0">Step 6 · 过滤未验证 issue（丢弃未确认）</text>
+  <path d="M370,390 L370,398" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+
+  <!-- Step 7 -->
+  <rect x="240" y="398" width="260" height="50" rx="6" fill="#13162a" stroke="#95e1a3" stroke-width="1.5"/>
+  <text x="252" y="415" font-size="11" font-weight="bold" fill="#95e1a3">Step 7 · 输出摘要</text>
+  <text x="252" y="430" font-size="9" fill="#8b90a8">无 --comment → 止</text>
+  <text x="252" y="442" font-size="9" fill="#8b90a8">--comment → gh pr comment / 继续 Step 8</text>
+  <path d="M370,448 L370,456" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+
+  <!-- Step 8 -->
+  <rect x="240" y="456" width="260" height="30" rx="6" fill="#13162a" stroke="#8b90a8" stroke-width="1.5"/>
+  <text x="370" y="475" text-anchor="middle" font-size="11" fill="#e8eaf0">Step 8 · 内部评论清单（不发布，自我确认）</text>
+  <path d="M370,486 L370,494" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+
+  <!-- Step 9 -->
+  <rect x="240" y="494" width="260" height="44" rx="6" fill="#13162a" stroke="#95e1a3" stroke-width="1.5"/>
+  <text x="252" y="511" font-size="11" font-weight="bold" fill="#95e1a3">Step 9 · 发布 inline comments</text>
+  <text x="252" y="527" font-size="9" fill="#8b90a8">MCP create_inline_comment · 每 issue 一条</text>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 290" width="820" height="290" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="arrow4p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="290" fill="#0b0d14"/>
+
+  <text x="410" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#e8eaf0">Stop Hook 状态流 · ralph-wiggum 循环 + security-guidance 递归保护</text>
+
+  <rect x="40" y="46" width="120" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="100" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#e8eaf0">Running</text>
+  <text x="100" y="82" text-anchor="middle" font-size="9" fill="#8b90a8">Claude 执行中</text>
+
+  <path d="M160,70 L240,70" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow4)"/>
+
+  <rect x="240" y="46" width="120" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="300" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#f9ca24">Stop 事件</text>
+  <text x="300" y="82" text-anchor="middle" font-size="9" fill="#8b90a8">Claude 尝试结束</text>
+
+  <path d="M360,70 L440,70" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow4)"/>
+
+  <rect x="440" y="46" width="150" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="515" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#4ecdc4">Stop hook 执行</text>
+  <text x="515" y="82" text-anchor="middle" font-size="9" fill="#8b90a8">stop.py / stop-hook.sh</text>
+
+  <path d="M590,70 L660,70" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow4)"/>
+
+  <rect x="660" y="46" width="120" height="48" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="720" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#ff6b9d">决策</text>
+  <text x="720" y="82" text-anchor="middle" font-size="9" fill="#8b90a8">evaluate</text>
+
+  <!-- branch: ralph -->
+  <path d="M672,94 L672,120 L190,120 L190,158" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow4)"/>
+  <text x="420" y="112" text-anchor="middle" font-size="10" fill="#4ecdc4">ralph: 未达 completion_promise</text>
+
+  <!-- branch: security -->
+  <path d="M720,94 L720,140 L440,140 L440,158" stroke="#95e1a3" stroke-width="1.5" fill="none" marker-end="url(#arrow4)"/>
+  <text x="580" y="132" text-anchor="middle" font-size="10" fill="#95e1a3">security: 发现漏洞</text>
+
+  <!-- branch: ended -->
+  <path d="M768,94 L768,158" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#arrow4)"/>
+  <text x="760" y="126" text-anchor="end" font-size="10" fill="#8b90a8">正常 / guard / max</text>
+
+  <!-- ralph box -->
+  <rect x="80" y="158" width="220" height="62" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="190" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#4ecdc4">ralph-wiggum</text>
+  <text x="190" y="196" text-anchor="middle" font-size="10" fill="#e8eaf0">block + reinject</text>
+  <text x="190" y="210" text-anchor="middle" font-size="9" fill="#8b90a8">原始 prompt 重新注入</text>
+
+  <!-- security box -->
+  <rect x="330" y="158" width="220" height="62" rx="6" fill="#13162a" stroke="#95e1a3" stroke-width="1.5"/>
+  <text x="440" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#95e1a3">security-guidance</text>
+  <text x="440" y="196" text-anchor="middle" font-size="10" fill="#e8eaf0">exit 2 + stderr</text>
+  <text x="440" y="210" text-anchor="middle" font-size="9" fill="#8b90a8">CONTINUATION_SUFFIX</text>
+
+  <!-- ended box -->
+  <rect x="700" y="158" width="100" height="62" rx="6" fill="#13162a" stroke="#95e1a3" stroke-width="1.5"/>
+  <text x="750" y="184" text-anchor="middle" font-size="13" font-weight="bold" fill="#95e1a3">Ended</text>
+  <text x="750" y="202" text-anchor="middle" font-size="9" fill="#8b90a8">会话结束</text>
+
+  <!-- loop return -->
+  <path d="M190,220 L190,252" stroke="#ff6b9d" stroke-width="1.5" fill="none"/>
+  <path d="M440,220 L440,252" stroke="#ff6b9d" stroke-width="1.5" fill="none"/>
+  <path d="M440,252 L190,252" stroke="#ff6b9d" stroke-width="1.5" fill="none"/>
+  <path d="M190,252 L100,252 L100,94" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow4p)"/>
+  <text x="145" y="244" font-size="10" fill="#ff6b9d">block / exit 2 → 强制继续执行</text>
+
+  <text x="410" y="276" text-anchor="middle" font-size="9" fill="#8b90a8">ralph: max_iterations · security: MAX_STOP_HOOK_FIRINGS=3 · stop_hook_active 递归保护 → 均走 Ended 分支</text>
+</svg>

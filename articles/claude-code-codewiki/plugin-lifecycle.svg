@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" width="860" height="420" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="860" height="420" fill="#0b0d14"/>
+
+  <text x="430" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#e8eaf0">插件生命周期 · Install → Discover → Register → Invoke</text>
+
+  <!-- P1 Install -->
+  <rect x="24" y="50" width="186" height="200" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="117" y="72" text-anchor="middle" font-size="13" font-weight="bold" fill="#6c8ef5">① 安装 Install</text>
+  <line x1="36" y1="84" x2="198" y2="84" stroke="#2a2e4a"/>
+  <text x="117" y="104" text-anchor="middle" font-size="10" fill="#e8eaf0">/plugin marketplace</text>
+  <text x="117" y="118" text-anchor="middle" font-size="10" fill="#e8eaf0">  add &lt;repo&gt;</text>
+  <text x="117" y="136" text-anchor="middle" font-size="10" fill="#e8eaf0">/plugin install &lt;name&gt;</text>
+  <text x="117" y="158" text-anchor="middle" font-size="10" fill="#95e1a3">→ ~/.claude/plugins/</text>
+  <text x="117" y="178" text-anchor="middle" font-size="9" fill="#8b90a8">或 git clone / npm</text>
+  <text x="117" y="200" text-anchor="middle" font-size="10" fill="#e8eaf0">marketplace.json</text>
+  <text x="117" y="214" text-anchor="middle" font-size="9" fill="#8b90a8">登记可装插件</text>
+  <text x="117" y="236" text-anchor="middle" font-size="9" font-style="italic" fill="#6c8ef5">本仓根 .claude-plugin/</text>
+
+  <!-- P2 Discover -->
+  <rect x="234" y="50" width="186" height="200" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="327" y="72" text-anchor="middle" font-size="13" font-weight="bold" fill="#4ecdc4">② 发现 Discover</text>
+  <line x1="246" y1="84" x2="408" y2="84" stroke="#2a2e4a"/>
+  <text x="327" y="104" text-anchor="middle" font-size="10" fill="#e8eaf0">Claude Code 启动</text>
+  <text x="327" y="122" text-anchor="middle" font-size="10" fill="#e8eaf0">扫描 plugin.json</text>
+  <text x="327" y="136" text-anchor="middle" font-size="9" fill="#8b90a8">（每个插件清单）</text>
+  <text x="327" y="156" text-anchor="middle" font-size="10" fill="#e8eaf0">marketplace.json</text>
+  <text x="327" y="170" text-anchor="middle" font-size="9" fill="#8b90a8">（仓库根目录清单）</text>
+  <text x="327" y="192" text-anchor="middle" font-size="10" fill="#95e1a3">${CLAUDE_PLUGIN_ROOT}</text>
+  <text x="327" y="206" text-anchor="middle" font-size="9" fill="#8b90a8">环境变量注入</text>
+  <text x="327" y="228" text-anchor="middle" font-size="9" fill="#8b90a8">auto-discovery</text>
+
+  <!-- P3 Register -->
+  <rect x="444" y="50" width="186" height="200" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="537" y="72" text-anchor="middle" font-size="13" font-weight="bold" fill="#f9ca24">③ 注册 Register</text>
+  <line x1="456" y1="84" x2="618" y2="84" stroke="#2a2e4a"/>
+  <text x="537" y="104" text-anchor="middle" font-size="10" fill="#e8eaf0">5 扩展点注册进运行时</text>
+  <text x="537" y="124" text-anchor="middle" font-size="10" fill="#e8eaf0">commands/ → 命令表</text>
+  <text x="537" y="140" text-anchor="middle" font-size="10" fill="#e8eaf0">agents/ → agent 表</text>
+  <text x="537" y="156" text-anchor="middle" font-size="10" fill="#e8eaf0">skills/ → skill 索引</text>
+  <text x="537" y="172" text-anchor="middle" font-size="10" fill="#e8eaf0">hooks/ → 事件路由</text>
+  <text x="537" y="188" text-anchor="middle" font-size="10" fill="#e8eaf0">.mcp.json → MCP server</text>
+  <text x="537" y="212" text-anchor="middle" font-size="10" fill="#95e1a3">allowed-tools 白名单</text>
+  <text x="537" y="226" text-anchor="middle" font-size="9" fill="#8b90a8">随 command frontmatter 生效</text>
+
+  <!-- P4 Invoke -->
+  <rect x="654" y="50" width="186" height="200" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="747" y="72" text-anchor="middle" font-size="13" font-weight="bold" fill="#ff6b9d">④ 调用 Invoke</text>
+  <line x1="666" y1="84" x2="828" y2="84" stroke="#2a2e4a"/>
+  <text x="747" y="104" text-anchor="middle" font-size="10" fill="#e8eaf0">运行时按扩展点触发</text>
+  <text x="747" y="122" text-anchor="middle" font-size="10" fill="#e8eaf0">/cmd → command.md</text>
+  <text x="747" y="136" text-anchor="middle" font-size="9" fill="#8b90a8">frontmatter 约束工具</text>
+  <text x="747" y="156" text-anchor="middle" font-size="10" fill="#e8eaf0">hook 事件 → 脚本</text>
+  <text x="747" y="170" text-anchor="middle" font-size="9" fill="#8b90a8">stdin JSON 输入</text>
+  <text x="747" y="190" text-anchor="middle" font-size="10" fill="#e8eaf0">skill 匹配 → SKILL.md</text>
+  <text x="747" y="208" text-anchor="middle" font-size="10" fill="#e8eaf0">Task → agent.md</text>
+  <text x="747" y="226" text-anchor="middle" font-size="10" fill="#e8eaf0">MCP 工具调用</text>
+
+  <!-- arrows between phases -->
+  <path d="M210,150 L234,150" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow3)"/>
+  <path d="M420,150 L444,150" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow3)"/>
+  <path d="M630,150 L654,150" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow3)"/>
+
+  <!-- Hook I/O contract -->
+  <rect x="24" y="268" width="816" height="134" rx="8" fill="#13162a" stroke="#2a2e4a" stroke-width="1.5"/>
+  <text x="40" y="290" font-size="13" font-weight="bold" fill="#6c8ef5">Hook 事件 I/O 契约（最具体的跨进程数据流）</text>
+
+  <rect x="40" y="302" width="340" height="90" rx="6" fill="#1a1d30" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="210" y="322" text-anchor="middle" font-size="11" font-weight="bold" fill="#4ecdc4">stdin（Claude Code → hook 进程）</text>
+  <text x="210" y="344" text-anchor="middle" font-size="10" fill="#e8eaf0">{ tool_name, tool_input,</text>
+  <text x="210" y="360" text-anchor="middle" font-size="10" fill="#e8eaf0">  hook_event_name,</text>
+  <text x="210" y="376" text-anchor="middle" font-size="10" fill="#e8eaf0">  transcript_path }</text>
+
+  <path d="M380,347 L440,347" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow3)"/>
+  <text x="410" y="339" text-anchor="middle" font-size="10" fill="#8b90a8">评估</text>
+
+  <rect x="440" y="302" width="384" height="90" rx="6" fill="#1a1d30" stroke="#95e1a3" stroke-width="1"/>
+  <text x="632" y="322" text-anchor="middle" font-size="11" font-weight="bold" fill="#95e1a3">stdout JSON / exit code（→ Claude Code）</text>
+  <text x="632" y="344" text-anchor="middle" font-size="10" fill="#e8eaf0">{} → 放行</text>
+  <text x="632" y="360" text-anchor="middle" font-size="10" fill="#e8eaf0">systemMessage → 警告但放行</text>
+  <text x="632" y="376" text-anchor="middle" font-size="10" fill="#ff6b9d">permissionDecision:deny / exit 2 → 阻止或强制继续</text>
+</svg>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" width="820" height="440" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="arrow2g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8b90a8"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="440" fill="#0b0d14"/>
+
+  <text x="410" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#e8eaf0">模块地图 · 13 插件 → 7 个解读模块</text>
+
+  <!-- 01 foundation -->
+  <rect x="40" y="48" width="740" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="56" y="70" font-size="13" font-weight="bold" fill="#6c8ef5">01 · 插件架构 Plugin Architecture</text>
+  <text x="56" y="88" font-size="10" fill="#8b90a8">plugin.json · marketplace.json · 5 扩展点（commands/agents/skills/hooks/.mcp.json）· 加载机制</text>
+  <text x="56" y="103" font-size="10" font-style="italic" fill="#6c8ef5">为什么独立：贯穿所有插件的共享契约，理解生态的基础</text>
+
+  <!-- arrow 01 -> middle -->
+  <path d="M410,112 L410,140" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <text x="420" y="130" font-size="11" fill="#8b90a8">5 组插件实现该契约</text>
+
+  <!-- 02 plugin-dev -->
+  <rect x="40" y="144" width="136" height="150" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="108" y="164" text-anchor="middle" font-size="12" font-weight="bold" fill="#4ecdc4">02 · plugin-dev</text>
+  <text x="108" y="180" text-anchor="middle" font-size="10" fill="#8b90a8">元插件 meta</text>
+  <line x1="48" y1="188" x2="168" y2="188" stroke="#2a2e4a"/>
+  <text x="108" y="204" text-anchor="middle" font-size="10" fill="#e8eaf0">7 skills</text>
+  <text x="108" y="220" text-anchor="middle" font-size="10" fill="#e8eaf0">3 agents</text>
+  <text x="108" y="236" text-anchor="middle" font-size="10" fill="#e8eaf0">/create-plugin</text>
+  <text x="108" y="252" text-anchor="middle" font-size="10" fill="#e8eaf0">8 阶段引导</text>
+  <text x="108" y="280" text-anchor="middle" font-size="9" font-style="italic" fill="#4ecdc4">造插件的插件</text>
+
+  <!-- 03 hookify -->
+  <rect x="190" y="144" width="136" height="150" rx="6" fill="#13162a" stroke="#95e1a3" stroke-width="1.5"/>
+  <text x="258" y="164" text-anchor="middle" font-size="12" font-weight="bold" fill="#95e1a3">03 · hookify</text>
+  <text x="258" y="180" text-anchor="middle" font-size="10" fill="#8b90a8">Hook 引擎</text>
+  <line x1="198" y1="188" x2="318" y2="188" stroke="#2a2e4a"/>
+  <text x="258" y="204" text-anchor="middle" font-size="10" fill="#e8eaf0">Python core</text>
+  <text x="258" y="220" text-anchor="middle" font-size="10" fill="#e8eaf0">RuleEngine</text>
+  <text x="258" y="236" text-anchor="middle" font-size="10" fill="#e8eaf0">4 hook 事件</text>
+  <text x="258" y="252" text-anchor="middle" font-size="10" fill="#e8eaf0">6 operators</text>
+  <text x="258" y="280" text-anchor="middle" font-size="9" font-style="italic" fill="#95e1a3">唯一含实质代码</text>
+
+  <!-- 04 code-quality -->
+  <rect x="340" y="144" width="136" height="150" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="408" y="164" text-anchor="middle" font-size="12" font-weight="bold" fill="#6c8ef5">04 · 代码质量</text>
+  <text x="408" y="180" text-anchor="middle" font-size="10" fill="#8b90a8">3 插件</text>
+  <line x1="348" y1="188" x2="468" y2="188" stroke="#2a2e4a"/>
+  <text x="408" y="204" text-anchor="middle" font-size="10" fill="#e8eaf0">code-review</text>
+  <text x="408" y="220" text-anchor="middle" font-size="10" fill="#e8eaf0">pr-review-toolkit</text>
+  <text x="408" y="236" text-anchor="middle" font-size="10" fill="#e8eaf0">security-guidance</text>
+  <text x="408" y="252" text-anchor="middle" font-size="10" fill="#e8eaf0">多 Agent + 25 模式</text>
+  <text x="408" y="280" text-anchor="middle" font-size="9" font-style="italic" fill="#6c8ef5">审查与安全</text>
+
+  <!-- 05 dev-workflow -->
+  <rect x="490" y="144" width="136" height="150" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="558" y="164" text-anchor="middle" font-size="12" font-weight="bold" fill="#f9ca24">05 · 开发流程</text>
+  <text x="558" y="180" text-anchor="middle" font-size="10" fill="#8b90a8">3 插件</text>
+  <line x1="498" y1="188" x2="618" y2="188" stroke="#2a2e4a"/>
+  <text x="558" y="204" text-anchor="middle" font-size="10" fill="#e8eaf0">feature-dev</text>
+  <text x="558" y="220" text-anchor="middle" font-size="10" fill="#e8eaf0">commit-commands</text>
+  <text x="558" y="236" text-anchor="middle" font-size="10" fill="#e8eaf0">agent-sdk-dev</text>
+  <text x="558" y="252" text-anchor="middle" font-size="10" fill="#e8eaf0">7 阶段 + 脚手架</text>
+  <text x="558" y="280" text-anchor="middle" font-size="9" font-style="italic" fill="#f9ca24">开发编排</text>
+
+  <!-- 06 style-behavior -->
+  <rect x="640" y="144" width="136" height="150" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="708" y="164" text-anchor="middle" font-size="12" font-weight="bold" fill="#ff6b9d">06 · 风格行为</text>
+  <text x="708" y="180" text-anchor="middle" font-size="10" fill="#8b90a8">5 插件</text>
+  <line x1="648" y1="188" x2="768" y2="188" stroke="#2a2e4a"/>
+  <text x="708" y="202" text-anchor="middle" font-size="10" fill="#e8eaf0">explanatory</text>
+  <text x="708" y="216" text-anchor="middle" font-size="10" fill="#e8eaf0">learning</text>
+  <text x="708" y="230" text-anchor="middle" font-size="10" fill="#e8eaf0">ralph-wiggum</text>
+  <text x="708" y="244" text-anchor="middle" font-size="10" fill="#e8eaf0">frontend-design</text>
+  <text x="708" y="258" text-anchor="middle" font-size="10" fill="#e8eaf0">opus-migration</text>
+  <text x="708" y="282" text-anchor="middle" font-size="9" font-style="italic" fill="#ff6b9d">output style + 循环</text>
+
+  <!-- meta bracket: plugin-dev -> 03-06 -->
+  <path d="M108,294 L108,304" stroke="#4ecdc4" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+  <path d="M108,304 L708,304" stroke="#4ecdc4" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+  <path d="M258,304 L258,294" stroke="#4ecdc4" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+  <path d="M408,304 L408,294" stroke="#4ecdc4" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+  <path d="M558,304 L558,294" stroke="#4ecdc4" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+  <path d="M708,304 L708,294" stroke="#4ecdc4" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+  <text x="408" y="320" text-anchor="middle" font-size="10" fill="#4ecdc4">plugin-dev（meta）· 7 skills 指导其他插件开发</text>
+
+  <!-- arrow middle -> 07 -->
+  <path d="M410,326 L410,352" stroke="#8b90a8" stroke-width="1.5" marker-end="url(#arrow2g)"/>
+  <text x="420" y="344" font-size="11" fill="#8b90a8">settings 治理 + 部署示范</text>
+
+  <!-- 07 examples -->
+  <rect x="40" y="352" width="740" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="56" y="374" font-size="13" font-weight="bold" fill="#6c8ef5">07 · 示例与部署 Examples &amp; Deployment</text>
+  <text x="56" y="392" font-size="10" fill="#8b90a8">gateway/gcp · MDM 托管 · settings 预设（strict/lax/sandbox）· CI workflows · devcontainer · scripts</text>
+  <text x="56" y="407" font-size="10" font-style="italic" fill="#6c8ef5">为什么独立：部署拓扑 + 企业托管 + 权限预设 + 仓库运维，与插件逻辑正交</text>
+</svg>
