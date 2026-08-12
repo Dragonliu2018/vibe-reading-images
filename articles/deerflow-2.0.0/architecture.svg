@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 560" width="860" height="560" font-family="system-ui, sans-serif">
+<rect width="860" height="560" fill="#0b0d14"/>
+<text x="430.0" y="28" text-anchor="middle" font-size="18" font-weight="600" fill="#e6e8f0">DeerFlow 分层架构</text>
+<marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5a6075"/></marker>
+<rect x="16" y="50" width="828" height="68" rx="10" fill="none" stroke="#ff6b9d" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+<text x="28" y="92.0" font-size="13" font-weight="600" fill="#ff6b9d">外部调用方</text>
+<rect x="150.0" y="60" width="222.0" height="52" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="261" y="77" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Frontend</text>
+<text x="261" y="95" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">(Next.js)</text>
+<rect x="384.0" y="60" width="222.0" height="52" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="495" y="77" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">IM 平台</text>
+<text x="495" y="95" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">飞书/Slack/TG…</text>
+<rect x="618.0" y="60" width="222.0" height="52" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="729" y="77" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Terminal</text>
+<text x="729" y="95" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">(TUI)</text>
+<rect x="16" y="126" width="828" height="68" rx="10" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+<text x="28" y="168.0" font-size="13" font-weight="600" fill="#f9ca24">接口层</text>
+<rect x="150.0" y="136" width="222.0" height="52" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="261" y="153" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Gateway</text>
+<text x="261" y="171" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">FastAPI · SSE</text>
+<rect x="384.0" y="136" width="222.0" height="52" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="495" y="153" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Channels</text>
+<text x="495" y="171" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">IM 适配器</text>
+<rect x="618.0" y="136" width="222.0" height="52" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="729" y="153" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">TUI</text>
+<text x="729" y="171" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Textual App</text>
+<rect x="16" y="202" width="828" height="68" rx="10" fill="none" stroke="#6c8ef5" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+<text x="28" y="244.0" font-size="13" font-weight="600" fill="#6c8ef5">编排与运行时</text>
+<rect x="150.0" y="212" width="128.4" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="214" y="229" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Lead Agent</text>
+<text x="214" y="247" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">&amp; Client</text>
+<rect x="290.4" y="212" width="128.4" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="355" y="229" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Middlewares</text>
+<text x="355" y="247" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">15+ 中间件</text>
+<rect x="430.8" y="212" width="128.4" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="495" y="229" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Runtime</text>
+<text x="495" y="247" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">RunManager</text>
+<rect x="571.2" y="212" width="128.4" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="635" y="229" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Models</text>
+<text x="635" y="247" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">create_chat_model</text>
+<rect x="711.6" y="212" width="128.4" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="776" y="229" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Memory</text>
+<text x="776" y="247" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">DeerMem</text>
+<rect x="16" y="278" width="828" height="68" rx="10" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+<text x="28" y="320.0" font-size="13" font-weight="600" fill="#4ecdc4">能力层</text>
+<rect x="150.0" y="288" width="163.5" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="232" y="305" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Skills</text>
+<text x="232" y="323" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">SKILL.md</text>
+<rect x="325.5" y="288" width="163.5" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="407" y="305" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Tools/Ext/MCP</text>
+<text x="407" y="323" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">工具聚合</text>
+<rect x="501.0" y="288" width="163.5" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="583" y="305" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Sandbox</text>
+<text x="583" y="323" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Provider</text>
+<rect x="676.5" y="288" width="163.5" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="758" y="305" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Community</text>
+<text x="758" y="323" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">搜索/爬虫/浏览器</text>
+<rect x="16" y="354" width="828" height="68" rx="10" fill="none" stroke="#9a7cff" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+<text x="28" y="396.0" font-size="13" font-weight="600" fill="#9a7cff">基础设施</text>
+<rect x="150.0" y="364" width="163.5" height="52" rx="8" fill="#13162a" stroke="#9a7cff" stroke-width="1.5"/>
+<text x="232" y="381" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Config</text>
+<text x="232" y="399" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">AppConfig</text>
+<rect x="325.5" y="364" width="163.5" height="52" rx="8" fill="#13162a" stroke="#9a7cff" stroke-width="1.5"/>
+<text x="407" y="381" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Persistence</text>
+<text x="407" y="399" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">SQLAlchemy</text>
+<rect x="501.0" y="364" width="163.5" height="52" rx="8" fill="#13162a" stroke="#9a7cff" stroke-width="1.5"/>
+<text x="583" y="381" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Tracing</text>
+<text x="583" y="399" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Monocle</text>
+<rect x="676.5" y="364" width="163.5" height="52" rx="8" fill="#13162a" stroke="#9a7cff" stroke-width="1.5"/>
+<text x="758" y="381" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">Authz</text>
+<text x="758" y="399" text-anchor="middle" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e8f0">RBAC</text>
+<line x1="430.0" y1="128" x2="430.0" y2="136" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="430.0" y1="204" x2="430.0" y2="212" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="430.0" y1="280" x2="430.0" y2="288" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="430.0" y1="356" x2="430.0" y2="364" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>
