@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 440" width="860" height="440" font-family="system-ui, sans-serif">
+  <rect width="860" height="440" fill="#0b0d14"/>
+  <defs>
+    <marker id="ak" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#8b95b5"/>
+    </marker>
+  </defs>
+  <text x="430" y="28" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="700">注意力 Backend 选择与 Plan/Run 分离</text>
+
+  <!-- 两套 API -->
+  <rect x="30" y="60" width="390" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="225" y="82" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">新统一 API: BatchAttention</text>
+  <text x="225" y="100" text-anchor="middle" fill="#8b95b5" font-size="10">holistic persistent kernel（prefill+decode 融合）</text>
+
+  <rect x="440" y="60" width="390" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="635" y="82" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">旧 API: Decode / Prefill / MLA / Cascade Wrapper</text>
+  <text x="635" y="100" text-anchor="middle" fill="#8b95b5" font-size="10">determine_attention_backend 多 backend 分发</text>
+
+  <!-- 旧 API backend 分发 -->
+  <text x="635" y="138" text-anchor="middle" fill="#8b95b5" font-size="11">backend="auto" 决策树</text>
+  <g font-size="11" fill="#e6e8f0">
+    <rect x="450" y="150" width="110" height="40" rx="6" fill="#13162a" stroke="#4ecdc4"/>
+    <text x="505" y="167" text-anchor="middle">fa3</text>
+    <text x="505" y="183" text-anchor="middle" fill="#8b95b5" font-size="10">SM90a + 条件</text>
+    <rect x="580" y="150" width="110" height="40" rx="6" fill="#13162a" stroke="#4ecdc4"/>
+    <text x="635" y="167" text-anchor="middle">fa2</text>
+    <text x="635" y="183" text-anchor="middle" fill="#8b95b5" font-size="10">fallback</text>
+    <rect x="710" y="150" width="110" height="40" rx="6" fill="#13162a" stroke="#4ecdc4"/>
+    <text x="765" y="167" text-anchor="middle">cudnn</text>
+    <text x="765" y="183" text-anchor="middle" fill="#8b95b5" font-size="10">graph 缓存</text>
+    <rect x="450" y="210" width="110" height="40" rx="6" fill="#13162a" stroke="#4ecdc4"/>
+    <text x="505" y="227" text-anchor="middle">trtllm-gen</text>
+    <text x="505" y="243" text-anchor="middle" fill="#8b95b5" font-size="10">Hopper</text>
+    <rect x="580" y="210" width="110" height="40" rx="6" fill="#13162a" stroke="#4ecdc4"/>
+    <text x="635" y="227" text-anchor="middle">cute-dsl</text>
+    <text x="635" y="243" text-anchor="middle" fill="#8b95b5" font-size="10">Blackwell</text>
+    <rect x="710" y="210" width="110" height="40" rx="6" fill="#13162a" stroke="#4ecdc4"/>
+    <text x="765" y="227" text-anchor="middle">cutlass</text>
+    <text x="765" y="243" text-anchor="middle" fill="#8b95b5" font-size="10">SM100/110</text>
+  </g>
+
+  <!-- Plan/Run 分离（左侧） -->
+  <text x="225" y="138" text-anchor="middle" fill="#8b95b5" font-size="11">Plan / Run 两阶段（所有 API 共有）</text>
+  <rect x="50" y="150" width="160" height="100" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="130" y="173" text-anchor="middle" fill="#f9ca24" font-size="12" font-weight="600">plan()</text>
+  <text x="130" y="194" text-anchor="middle" fill="#e6e8f0" font-size="10">选 backend / JIT 编译</text>
+  <text x="130" y="210" text-anchor="middle" fill="#e6e8f0" font-size="10">split-kv 调度</text>
+  <text x="130" y="226" text-anchor="middle" fill="#e6e8f0" font-size="10">CPU pinned → GPU</text>
+  <text x="130" y="242" text-anchor="middle" fill="#8b95b5" font-size="10">→ plan_info</text>
+
+  <rect x="240" y="150" width="160" height="100" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="320" y="173" text-anchor="middle" fill="#4ecdc4" font-size="12" font-weight="600">run()</text>
+  <text x="320" y="194" text-anchor="middle" fill="#e6e8f0" font-size="10">kernel launch</text>
+  <text x="320" y="210" text-anchor="middle" fill="#e6e8f0" font-size="10">CUDAGraph 可捕获</text>
+  <text x="320" y="226" text-anchor="middle" fill="#e6e8f0" font-size="10">torch.compile 兼容</text>
+  <text x="320" y="242" text-anchor="middle" fill="#8b95b5" font-size="10">→ out, lse</text>
+
+  <line x1="210" y1="200" x2="238" y2="200" stroke="#8b95b5" stroke-width="1.5" marker-end="url(#ak)"/>
+  <text x="224" y="192" text-anchor="middle" fill="#8b95b5" font-size="9">plan_info</text>
+
+  <!-- 底部说明 -->
+  <rect x="30" y="290" width="800" height="120" rx="8" fill="#13162a" stroke="#8b95b5" stroke-width="1" stroke-dasharray="5,4"/>
+  <text x="50" y="313" fill="#e6e8f0" font-size="12" font-weight="600">为什么 plan / run 分离？</text>
+  <text x="50" y="336" fill="#8b95b5" font-size="11">· plan 含 host-side 规划、CPU↔GPU 同步、JIT 编译——这些无法被 CUDA Graph / torch.compile 捕获</text>
+  <text x="50" y="356" fill="#8b95b5" font-size="11">· run 只做 kernel launch，所有输入 tensor 在 graph 模式下用预分配固定 buffer，shape 不变 → 可被捕获</text>
+  <text x="50" y="376" fill="#8b95b5" font-size="11">· MLA 额外通过 autotuner 在 trtllm-gen / cute-dsl runner 间竞争选择；BatchAttention 则用 holistic cooperative kernel 不走 backend 分发</text>
+  <text x="50" y="396" fill="#8b95b5" font-size="11">· trace 系统通过 plan_capture 在 plan 时 stash 状态、run 时 augment，弥合两阶段与 torch.compile 的矛盾</text>
+</svg>

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 560" width="880" height="560" font-family="system-ui, sans-serif">
+  <rect width="880" height="560" fill="#0b0d14"/>
+  <defs>
+    <marker id="am" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#8b95b5"/>
+    </marker>
+    <marker id="an" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <text x="440" y="28" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="700">MoE 调用链：构建 → 路由 → 竞速 → Fused Kernel</text>
+
+  <!-- 构建阶段 -->
+  <rect x="30" y="55" width="250" height="120" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="155" y="78" text-anchor="middle" fill="#6c8ef5" font-size="12" font-weight="600">① 构建阶段（模型加载时）</text>
+  <text x="45" y="100" fill="#e6e8f0" font-size="11">prepare_weights → FP4/FP8 量化</text>
+  <text x="45" y="118" fill="#e6e8f0" font-size="11">+ shuffle + block_scale_interleave</text>
+  <text x="45" y="138" fill="#e6e8f0" font-size="11">→ MoEWeightPack（多 backend view）</text>
+  <text x="45" y="158" fill="#8b95b5" font-size="10">MoELayer 遍历 backend candidates</text>
+
+  <!-- 执行阶段 -->
+  <rect x="310" y="55" width="260" height="120" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="440" y="78" text-anchor="middle" fill="#4ecdc4" font-size="12" font-weight="600">② 执行阶段（每次 forward）</text>
+  <text x="325" y="100" fill="#e6e8f0" font-size="11">MoELayer.__call__(act_pack, weights)</text>
+  <text x="325" y="118" fill="#e6e8f0" font-size="11">routing_input_mode 过滤 runners</text>
+  <text x="325" y="138" fill="#e6e8f0" font-size="11">map_to_hybrid_bucket(token 数)</text>
+  <text x="325" y="158" fill="#8b95b5" font-size="10">→ (bucket, mode) winner 缓存</text>
+
+  <!-- 竞速 -->
+  <rect x="600" y="55" width="250" height="120" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="725" y="78" text-anchor="middle" fill="#f9ca24" font-size="12" font-weight="600">③ 跨 backend 竞速（miss 时）</text>
+  <text x="615" y="100" fill="#e6e8f0" font-size="11">_select_winner()</text>
+  <text x="615" y="118" fill="#e6e8f0" font-size="11">per-runner: tuner.choose_one</text>
+  <text x="615" y="138" fill="#e6e8f0" font-size="11">+ CUDA Graph 计时对比</text>
+  <text x="615" y="158" fill="#8b95b5" font-size="10">→ winner runner + tactic</text>
+
+  <line x1="280" y1="115" x2="308" y2="115" stroke="#8b95b5" stroke-width="1.5" marker-end="url(#am)"/>
+  <line x1="570" y1="115" x2="598" y2="115" stroke="#8b95b5" stroke-width="1.5" marker-end="url(#am)"/>
+
+  <!-- 7 runners -->
+  <text x="440" y="205" text-anchor="middle" fill="#8b95b5" font-size="11">7 个 MoERunner（策略模式，按 arch + quant + routing_mode 筛选）</text>
+  <g font-size="10" fill="#e6e8f0">
+    <rect x="30" y="220" width="120" height="40" rx="6" fill="#13162a" stroke="#ff6b9d"/>
+    <text x="90" y="237" text-anchor="middle">CuteDslNvfp4</text>
+    <text x="90" y="252" text-anchor="middle" fill="#8b95b5" font-size="9">SM100/103</text>
+    <rect x="160" y="220" width="120" height="40" rx="6" fill="#13162a" stroke="#ff6b9d"/>
+    <text x="220" y="237" text-anchor="middle">TrtllmFp4Routed</text>
+    <text x="220" y="252" text-anchor="middle" fill="#8b95b5" font-size="9">SM100/103</text>
+    <rect x="290" y="220" width="120" height="40" rx="6" fill="#13162a" stroke="#ff6b9d"/>
+    <text x="350" y="237" text-anchor="middle">TrtllmFp8Block</text>
+    <text x="350" y="252" text-anchor="middle" fill="#8b95b5" font-size="9">DeepSeekFp8</text>
+    <rect x="420" y="220" width="120" height="40" rx="6" fill="#13162a" stroke="#ff6b9d"/>
+    <text x="480" y="237" text-anchor="middle">TrtllmFp8PerTensor</text>
+    <text x="480" y="252" text-anchor="middle" fill="#8b95b5" font-size="9">E4M3</text>
+    <rect x="550" y="220" width="120" height="40" rx="6" fill="#13162a" stroke="#ff6b9d"/>
+    <text x="610" y="237" text-anchor="middle">TrtllmBf16</text>
+    <text x="610" y="252" text-anchor="middle" fill="#8b95b5" font-size="9">BF16</text>
+    <rect x="680" y="220" width="90" height="40" rx="6" fill="#13162a" stroke="#ff6b9d"/>
+    <text x="725" y="237" text-anchor="middle">B12xNvfp4</text>
+    <text x="725" y="252" text-anchor="middle" fill="#8b95b5" font-size="9">SM120</text>
+    <rect x="780" y="220" width="70" height="40" rx="6" fill="#13162a" stroke="#ff6b9d"/>
+    <text x="815" y="237" text-anchor="middle">B12xW4A16</text>
+    <text x="815" y="252" text-anchor="middle" fill="#8b95b5" font-size="9">SM120</text>
+  </g>
+
+  <!-- runner.forward 内部 -->
+  <rect x="120" y="290" width="640" height="100" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="440" y="313" text-anchor="middle" fill="#ff6b9d" font-size="12" font-weight="600">runner.forward → C++ fused MoE kernel（grouped GEMM 融合）</text>
+  <g font-size="11" fill="#e6e8f0">
+    <rect x="140" y="325" width="120" height="30" rx="6" fill="#0b0d14" stroke="#8b95b5"/>
+    <text x="200" y="345" text-anchor="middle">Routing</text>
+    <text x="200" y="375" text-anchor="middle" fill="#8b95b5" font-size="9">top-k / DSV3 / Llama4</text>
+    <rect x="280" y="325" width="120" height="30" rx="6" fill="#0b0d14" stroke="#8b95b5"/>
+    <text x="340" y="345" text-anchor="middle">GEMM1</text>
+    <text x="340" y="375" text-anchor="middle" fill="#8b95b5" font-size="9">hidden × W1</text>
+    <rect x="420" y="325" width="120" height="30" rx="6" fill="#0b0d14" stroke="#8b95b5"/>
+    <text x="480" y="345" text-anchor="middle">Activation</text>
+    <text x="480" y="375" text-anchor="middle" fill="#8b95b5" font-size="9">Swiglu/Geglu</text>
+    <rect x="560" y="325" width="120" height="30" rx="6" fill="#0b0d14" stroke="#8b95b5"/>
+    <text x="620" y="345" text-anchor="middle">GEMM2</text>
+    <text x="620" y="375" text-anchor="middle" fill="#8b95b5" font-size="9">inter × W2</text>
+    <rect x="700" y="325" width="50" height="30" rx="6" fill="#0b0d14" stroke="#8b95b5"/>
+    <text x="725" y="345" text-anchor="middle">Final</text>
+  </g>
+  <line x1="260" y1="340" x2="278" y2="340" stroke="#ff6b9d" stroke-width="1.2" marker-end="url(#an)"/>
+  <line x1="400" y1="340" x2="418" y2="340" stroke="#ff6b9d" stroke-width="1.2" marker-end="url(#an)"/>
+  <line x1="540" y1="340" x2="558" y2="340" stroke="#ff6b9d" stroke-width="1.2" marker-end="url(#an)"/>
+  <line x1="680" y1="340" x2="698" y2="340" stroke="#ff6b9d" stroke-width="1.2" marker-end="url(#an)"/>
+
+  <line x1="440" y1="260" x2="440" y2="288" stroke="#8b95b5" stroke-width="1.5" marker-end="url(#am)"/>
+
+  <!-- moe_ep -->
+  <rect x="120" y="420" width="640" height="110" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <text x="440" y="443" text-anchor="middle" fill="#6c8ef5" font-size="12" font-weight="600">moe_ep（Expert Parallel 层，多 rank 通信）</text>
+  <text x="140" y="465" fill="#e6e8f0" font-size="11">MoEEpSplitLayer: dispatch → local compute → combine</text>
+  <text x="140" y="485" fill="#8b95b5" font-size="11">local compute 复用 fused_moe.MoELayer（构造 MoEActivationPack，top_k=1）</text>
+  <text x="140" y="505" fill="#8b95b5" font-size="11">MoEEpMegaLayer: fused comm+compute megakernel（DeepGemm/CuTeDSL，独立实现）</text>
+  <text x="140" y="525" fill="#8b95b5" font-size="11">通信后端: NCCL-EP / NVSHMEM / MNNVL（多节点 NVLink）</text>
+</svg>
