@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 460" width="860" height="460" font-family="system-ui, sans-serif">
+  <rect width="860" height="460" fill="#0b0d14"/>
+  <defs>
+    <marker id="aj" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#8b95b5"/>
+    </marker>
+  </defs>
+  <text x="430" y="28" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="700">JIT 编译流水线</text>
+
+  <!-- gen_*_module -->
+  <rect x="30" y="60" width="150" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="105" y="83" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">gen_*_module</text>
+  <text x="105" y="102" text-anchor="middle" fill="#8b95b5" font-size="10">Jinja 渲染 .cu</text>
+
+  <!-- gen_jit_spec -->
+  <rect x="200" y="60" width="150" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="275" y="83" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">gen_jit_spec</text>
+  <text x="275" y="102" text-anchor="middle" fill="#8b95b5" font-size="10">JitSpecNvcc</text>
+
+  <!-- registry -->
+  <rect x="370" y="60" width="150" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="445" y="83" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">registry.register</text>
+  <text x="445" y="102" text-anchor="middle" fill="#8b95b5" font-size="10">全局 spec 注册表</text>
+
+  <line x1="180" y1="88" x2="198" y2="88" stroke="#8b95b5" stroke-width="1.5" marker-end="url(#aj)"/>
+  <line x1="350" y1="88" x2="368" y2="88" stroke="#8b95b5" stroke-width="1.5" marker-end="url(#aj)"/>
+
+  <!-- build_and_load (模板方法) -->
+  <rect x="540" y="60" width="170" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="625" y="83" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">build_and_load</text>
+  <text x="625" y="102" text-anchor="middle" fill="#8b95b5" font-size="10">模板方法 (基类)</text>
+  <line x1="520" y1="88" x2="538" y2="88" stroke="#8b95b5" stroke-width="1.5" marker-end="url(#aj)"/>
+
+  <!-- 三级路径 -->
+  <text x="430" y="155" text-anchor="middle" fill="#8b95b5" font-size="11">build_and_load 内部：三级缓存策略</text>
+
+  <!-- AOT 快路径 -->
+  <rect x="60" y="175" width="220" height="90" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="170" y="198" text-anchor="middle" fill="#4ecdc4" font-size="12" font-weight="600">① AOT 快路径</text>
+  <text x="170" y="220" text-anchor="middle" fill="#e6e8f0" font-size="11">try_load() 检查</text>
+  <text x="170" y="238" text-anchor="middle" fill="#8b95b5" font-size="10">flashinfer-jit-cache 包</text>
+  <text x="170" y="254" text-anchor="middle" fill="#8b95b5" font-size="10">→ tvm_ffi.load_module</text>
+
+  <!-- JIT 编译 -->
+  <rect x="320" y="175" width="220" height="90" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="430" y="198" text-anchor="middle" fill="#f9ca24" font-size="12" font-weight="600">② JIT 编译路径</text>
+  <text x="430" y="220" text-anchor="middle" fill="#e6e8f0" font-size="11">FileLock (double-check)</text>
+  <text x="430" y="238" text-anchor="middle" fill="#8b95b5" font-size="10">write_ninja + run_ninja</text>
+  <text x="430" y="254" text-anchor="middle" fill="#8b95b5" font-size="10">nvcc → .so</text>
+
+  <!-- DISABLE_JIT -->
+  <rect x="580" y="175" width="220" height="90" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="690" y="198" text-anchor="middle" fill="#ff6b9d" font-size="12" font-weight="600">③ JIT 禁用</text>
+  <text x="690" y="220" text-anchor="middle" fill="#e6e8f0" font-size="11">FLASHINFER_DISABLE_JIT=1</text>
+  <text x="690" y="238" text-anchor="middle" fill="#8b95b5" font-size="10">缓存缺失即 raise</text>
+  <text x="690" y="254" text-anchor="middle" fill="#8b95b5" font-size="10">MissingJITCacheError</text>
+
+  <line x1="625" y1="116" x2="170" y2="173" stroke="#8b95b5" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#aj)"/>
+  <line x1="625" y1="116" x2="430" y2="173" stroke="#8b95b5" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#aj)"/>
+  <line x1="625" y1="116" x2="690" y2="173" stroke="#8b95b5" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#aj)"/>
+
+  <!-- load -->
+  <rect x="300" y="300" width="260" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="322" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">load() → tvm_ffi.load_module(.so)</text>
+  <text x="430" y="340" text-anchor="middle" fill="#8b95b5" font-size="10">返回 TVM-FFI module，含 plan/run kernel 函数</text>
+
+  <line x1="170" y1="265" x2="380" y2="298" stroke="#8b95b5" stroke-width="1.5" marker-end="url(#aj)"/>
+  <line x1="430" y1="265" x2="430" y2="298" stroke="#8b95b5" stroke-width="1.5" marker-end="url(#aj)"/>
+
+  <!-- cubin 旁路 -->
+  <rect x="60" y="380" width="740" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <text x="430" y="403" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">cubin 旁路（trtllm 系列 kernel）</text>
+  <text x="430" y="422" text-anchor="middle" fill="#8b95b5" font-size="10">host 代码走 JIT 编译 → device cubin 由 flashinfer-cubin 包预装 / 按需下载（ctypes 回调）</text>
+  <line x1="430" y1="350" x2="430" y2="378" stroke="#ff6b9d" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#aj)"/>
+</svg>

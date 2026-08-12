@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="500" viewBox="0 0 840 500" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a82a8"/>
+    </marker>
+    <marker id="data-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect width="840" height="500" fill="#0b0d14"/>
+
+  <text x="420" y="28" text-anchor="middle" fill="#e8eaf0" font-size="17" font-weight="600">ZeRO-3 训练迭代数据流</text>
+
+  <!-- Phase headers -->
+  <rect x="30" y="50" width="170" height="30" rx="5" fill="#1a2040" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="115" y="70" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">① Initialize</text>
+  <rect x="220" y="50" width="170" height="30" rx="5" fill="#1a2040" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="305" y="70" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">② Forward</text>
+  <rect x="410" y="50" width="170" height="30" rx="5" fill="#1a2040" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="495" y="70" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">③ Backward</text>
+  <rect x="600" y="50" width="210" height="30" rx="5" fill="#1a2040" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="705" y="70" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">④ Step</text>
+
+  <!-- Column 1: Initialize -->
+  <rect x="30" y="100" width="170" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.1"/>
+  <text x="115" y="124" text-anchor="middle" fill="#e8eaf0" font-size="12">deepspeed.initialize()</text>
+  <path d="M115,140 L115,154" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="30" y="158" width="170" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.1"/>
+  <text x="115" y="175" text-anchor="middle" fill="#e8eaf0" font-size="12">DeepSpeedEngine</text>
+  <text x="115" y="190" text-anchor="middle" fill="#7a82a8" font-size="11">.__init__()</text>
+  <path d="M115,198 L115,212" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="30" y="216" width="170" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.1"/>
+  <text x="115" y="233" text-anchor="middle" fill="#e8eaf0" font-size="12">_configure_zero</text>
+  <text x="115" y="248" text-anchor="middle" fill="#7a82a8" font-size="11">_optimizer()</text>
+  <path d="M115,256 L115,270" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="30" y="274" width="170" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.1"/>
+  <text x="115" y="291" text-anchor="middle" fill="#e8eaf0" font-size="12">ZeRO-3 hooks</text>
+  <text x="115" y="306" text-anchor="middle" fill="#7a82a8" font-size="11">注册完成</text>
+
+  <!-- Column 2: Forward -->
+  <rect x="220" y="100" width="170" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.1"/>
+  <text x="305" y="124" text-anchor="middle" fill="#e8eaf0" font-size="12">pre-forward hook</text>
+  <path d="M305,140 L305,154" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="220" y="158" width="170" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.1"/>
+  <text x="305" y="175" text-anchor="middle" fill="#e8eaf0" font-size="12">allgather params</text>
+  <text x="305" y="190" text-anchor="middle" fill="#7a82a8" font-size="11">分片→完整</text>
+  <path d="M305,198 L305,212" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="220" y="216" width="170" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.1"/>
+  <text x="305" y="233" text-anchor="middle" fill="#e8eaf0" font-size="12">module(*inputs)</text>
+  <text x="305" y="248" text-anchor="middle" fill="#7a82a8" font-size="11">用户模型计算</text>
+  <path d="M305,256 L305,270" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="220" y="274" width="170" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.1"/>
+  <text x="305" y="291" text-anchor="middle" fill="#e8eaf0" font-size="12">post-forward hook</text>
+  <text x="305" y="306" text-anchor="middle" fill="#7a82a8" font-size="11">release params</text>
+
+  <!-- Column 3: Backward -->
+  <rect x="410" y="100" width="170" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.1"/>
+  <text x="495" y="124" text-anchor="middle" fill="#e8eaf0" font-size="12">loss.backward()</text>
+  <path d="M495,140 L495,154" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="410" y="158" width="170" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.1"/>
+  <text x="495" y="175" text-anchor="middle" fill="#e8eaf0" font-size="12">gradient hook</text>
+  <text x="495" y="190" text-anchor="middle" fill="#7a82a8" font-size="11">触发</text>
+  <path d="M495,198 L495,212" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="410" y="216" width="170" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.1"/>
+  <text x="495" y="233" text-anchor="middle" fill="#e8eaf0" font-size="12">reduce_scatter</text>
+  <text x="495" y="248" text-anchor="middle" fill="#7a82a8" font-size="11">跨 rank 梯度</text>
+  <path d="M495,256 L495,270" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="410" y="274" width="170" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.1"/>
+  <text x="495" y="291" text-anchor="middle" fill="#e8eaf0" font-size="12">partition grads</text>
+  <text x="495" y="306" text-anchor="middle" fill="#7a82a8" font-size="11">释放完整梯度</text>
+
+  <!-- Column 4: Step -->
+  <rect x="600" y="100" width="210" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.1"/>
+  <text x="705" y="124" text-anchor="middle" fill="#e8eaf0" font-size="12">overflow check</text>
+  <path d="M705,140 L705,154" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="600" y="158" width="210" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.1"/>
+  <text x="705" y="175" text-anchor="middle" fill="#e8eaf0" font-size="12">loss scale update</text>
+  <text x="705" y="190" text-anchor="middle" fill="#7a82a8" font-size="11">+ fp32 grad 准备</text>
+  <path d="M705,198 L705,212" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="600" y="216" width="210" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.1"/>
+  <text x="705" y="233" text-anchor="middle" fill="#e8eaf0" font-size="12">unscale + clip + step</text>
+  <text x="705" y="248" text-anchor="middle" fill="#7a82a8" font-size="11">optimizer.step()</text>
+  <path d="M705,256 L705,270" stroke="#7a82a8" stroke-width="1.3" fill="none" marker-end="url(#flow-arrow)"/>
+  <rect x="600" y="274" width="210" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.1"/>
+  <text x="705" y="291" text-anchor="middle" fill="#e8eaf0" font-size="12">fp32→fp16 copy</text>
+  <text x="705" y="306" text-anchor="middle" fill="#7a82a8" font-size="11">+ allgather</text>
+
+  <!-- Inter-column data flow arrows (yellow = data) -->
+  <path d="M200,294 L220,120" stroke="#f9ca24" stroke-width="1.6" fill="none" marker-end="url(#data-arrow)" opacity="0.8"/>
+  <text x="208" y="210" fill="#f9ca24" font-size="10" transform="rotate(-75 208 210)">返回 engine</text>
+
+  <path d="M390,236 L410,120" stroke="#f9ca24" stroke-width="1.6" fill="none" marker-end="url(#data-arrow)"/>
+  <text x="398" y="180" fill="#f9ca24" font-size="11" font-weight="600">loss</text>
+
+  <path d="M580,294 L600,120" stroke="#f9ca24" stroke-width="1.6" fill="none" marker-end="url(#data-arrow)"/>
+  <text x="588" y="200" fill="#f9ca24" font-size="11" font-weight="600">grad</text>
+
+  <!-- Loop back: step -> next forward -->
+  <path d="M705,314 L705,360 L115,360 L115,314" stroke="#4ecdc4" stroke-width="1.6" fill="none" stroke-dasharray="5,4" marker-end="url(#data-arrow)" opacity="0.7"/>
+  <text x="400" y="378" text-anchor="middle" fill="#4ecdc4" font-size="11">更新后的 fp16 参数分片 → 下一次 forward allgather</text>
+
+  <!-- Bottom annotations -->
+  <rect x="30" y="400" width="780" height="80" rx="6" fill="#101224" stroke="#2a2d44" stroke-width="1"/>
+  <text x="50" y="424" fill="#7a82a8" font-size="11" font-weight="600">关键数据类型流转</text>
+  <text x="50" y="444" fill="#a8aec0" font-size="11">fp16_grad (param.grad) → reduce_scatter → grad_partition → flatten → fp32_grad → unscale → optimizer.step() → fp32_param → copy → fp16_param</text>
+  <text x="50" y="462" fill="#a8aec0" font-size="11">三条 CUDA Stream 并行：default（计算）+ reduce_and_partition_stream（梯度通信）+ allgather_stream（参数聚合）</text>
+  <text x="50" y="478" fill="#a8aec0" font-size="11">黄色箭头 = 数据流（loss / grad）；青色虚线 = 参数循环（下一次迭代）</text>
+</svg>
