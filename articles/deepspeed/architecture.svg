@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="720" viewBox="0 0 840 720" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a82a8"/>
+    </marker>
+    <marker id="arrow-down" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5a6280"/>
+    </marker>
+  </defs>
+  <rect width="840" height="720" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="420" y="30" text-anchor="middle" fill="#e8eaf0" font-size="17" font-weight="600">DeepSpeed v0.19.5 系统分层架构</text>
+
+  <!-- Layer 1: API 入口层 -->
+  <rect x="25" y="52" width="790" height="82" rx="8" fill="none" stroke="#6c8ef5" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.55"/>
+  <text x="40" y="72" fill="#6c8ef5" font-size="12" font-weight="600">API 入口层</text>
+  <rect x="160" y="82" width="160" height="38" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="240" y="106" text-anchor="middle" fill="#e8eaf0" font-size="13">deepspeed.initialize()</text>
+  <rect x="360" y="82" width="160" height="38" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="440" y="106" text-anchor="middle" fill="#e8eaf0" font-size="13">init_inference()</text>
+  <rect x="560" y="82" width="160" height="38" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="640" y="106" text-anchor="middle" fill="#e8eaf0" font-size="13">Launcher</text>
+
+  <!-- Arrow L1 -> L2 -->
+  <path d="M420,134 L420,148" stroke="#5a6280" stroke-width="1.5" fill="none" marker-end="url(#arrow-down)"/>
+
+  <!-- Layer 2: 引擎编排层 -->
+  <rect x="25" y="152" width="790" height="82" rx="8" fill="none" stroke="#4ecdc4" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.55"/>
+  <text x="40" y="172" fill="#4ecdc4" font-size="12" font-weight="600">引擎编排层</text>
+  <rect x="110" y="182" width="170" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="195" y="206" text-anchor="middle" fill="#e8eaf0" font-size="13">DeepSpeedEngine</text>
+  <rect x="335" y="182" width="170" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="420" y="206" text-anchor="middle" fill="#e8eaf0" font-size="13">DeepSpeedConfig</text>
+  <rect x="560" y="182" width="170" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="645" y="206" text-anchor="middle" fill="#e8eaf0" font-size="13">PipelineEngine</text>
+
+  <!-- Arrow L2 -> L3 -->
+  <path d="M420,234 L420,248" stroke="#5a6280" stroke-width="1.5" fill="none" marker-end="url(#arrow-down)"/>
+
+  <!-- Layer 3: 并行训练层 -->
+  <rect x="25" y="252" width="790" height="96" rx="8" fill="none" stroke="#f9ca24" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.55"/>
+  <text x="40" y="272" fill="#f9ca24" font-size="12" font-weight="600">并行训练层</text>
+  <rect x="45" y="282" width="140" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="115" y="306" text-anchor="middle" fill="#e8eaf0" font-size="13">ZeRO 1/2/3</text>
+  <rect x="205" y="282" width="140" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="275" y="306" text-anchor="middle" fill="#e8eaf0" font-size="13">FP16 / BF16</text>
+  <rect x="365" y="282" width="140" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="435" y="306" text-anchor="middle" fill="#e8eaf0" font-size="13">Pipeline</text>
+  <rect x="525" y="282" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="590" y="306" text-anchor="middle" fill="#e8eaf0" font-size="13">MoE</text>
+  <rect x="675" y="282" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="740" y="306" text-anchor="middle" fill="#e8eaf0" font-size="13">DeepCompile</text>
+
+  <!-- Arrow L2 -> L4 (inference path) -->
+  <path d="M645,234 L645,392" stroke="#5a6280" stroke-width="1.5" fill="none" marker-end="url(#arrow-down)" stroke-dasharray="4,3"/>
+  <text x="660" y="318" fill="#7a82a8" font-size="11">推理路径</text>
+
+  <!-- Layer 4: 推理引擎层 -->
+  <rect x="25" y="396" width="790" height="82" rx="8" fill="none" stroke="#ff6b9d" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.55"/>
+  <text x="40" y="416" fill="#ff6b9d" font-size="12" font-weight="600">推理引擎层</text>
+  <rect x="110" y="426" width="170" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="195" y="450" text-anchor="middle" fill="#e8eaf0" font-size="13">InferenceEngine v2</text>
+  <rect x="335" y="426" width="170" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="420" y="450" text-anchor="middle" fill="#e8eaf0" font-size="13">Module Inject</text>
+  <rect x="560" y="426" width="170" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="645" y="450" text-anchor="middle" fill="#e8eaf0" font-size="13">Ragged Batch</text>
+
+  <!-- Arrow L3 -> L5, L4 -> L5 -->
+  <path d="M195,348 L195,508" stroke="#5a6280" stroke-width="1.5" fill="none" marker-end="url(#arrow-down)"/>
+  <path d="M645,478 L645,508" stroke="#5a6280" stroke-width="1.5" fill="none" marker-end="url(#arrow-down)"/>
+
+  <!-- Layer 5: 基础设施层 -->
+  <rect x="25" y="512" width="790" height="96" rx="8" fill="none" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.55"/>
+  <text x="40" y="532" fill="#a78bfa" font-size="12" font-weight="600">基础设施层</text>
+  <rect x="55" y="542" width="160" height="38" rx="6" fill="#13162a" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="135" y="566" text-anchor="middle" fill="#e8eaf0" font-size="13">Comm 通信层</text>
+  <rect x="245" y="542" width="160" height="38" rx="6" fill="#13162a" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="325" y="566" text-anchor="middle" fill="#e8eaf0" font-size="13">Accelerator 抽象</text>
+  <rect x="435" y="542" width="160" height="38" rx="6" fill="#13162a" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="515" y="566" text-anchor="middle" fill="#e8eaf0" font-size="13">Ops / CUDA Kernels</text>
+  <rect x="625" y="542" width="160" height="38" rx="6" fill="#13162a" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="705" y="566" text-anchor="middle" fill="#e8eaf0" font-size="13">Checkpoint</text>
+
+  <!-- Legend -->
+  <text x="40" y="640" fill="#7a82a8" font-size="11">实线箭头 = 训练调用链</text>
+  <text x="40" y="658" fill="#7a82a8" font-size="11">虚线箭头 = 推理调用链</text>
+  <text x="300" y="640" fill="#7a82a8" font-size="11">上层依赖下层，下层不感知上层</text>
+  <text x="300" y="658" fill="#7a82a8" font-size="11">基础设施层被训练与推理共享</text>
+  <text x="560" y="648" fill="#7a82a8" font-size="11">每层颜色区分职责域</text>
+</svg>

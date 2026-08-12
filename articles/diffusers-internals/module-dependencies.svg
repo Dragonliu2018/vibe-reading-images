@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="480" viewBox="0 0 720 480">
+<defs>
+<marker id="ah2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6c8ef5"/></marker>
+</defs>
+<rect width="720" height="480" fill="#0b0d14"/>
+
+<text x="360" y="28" text-anchor="middle" fill="#e0e0e8" font-size="16" font-family="system-ui, sans-serif" font-weight="600">模块依赖关系</text>
+
+<!-- Center: Pipeline -->
+<rect x="280" y="200" width="160" height="50" rx="8" fill="#1a2040" stroke="#4ecdc4" stroke-width="2"/>
+<text x="360" y="222" text-anchor="middle" fill="#4ecdc4" font-size="13" font-family="system-ui, sans-serif" font-weight="600">管线核心</text>
+<text x="360" y="240" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">DiffusionPipeline</text>
+
+<!-- Left top: Models -->
+<rect x="40" y="60" width="140" height="44" rx="6" fill="#1a2040" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="110" y="80" text-anchor="middle" fill="#e0e0e8" font-size="12" font-family="system-ui, sans-serif">模型架构</text>
+<text x="110" y="96" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">UNet / VAE / Transformer</text>
+
+<!-- Right top: Schedulers -->
+<rect x="540" y="60" width="140" height="44" rx="6" fill="#1a2040" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="610" y="80" text-anchor="middle" fill="#e0e0e8" font-size="12" font-family="system-ui, sans-serif">调度器</text>
+<text x="610" y="96" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">DDPM / DDIM / Euler</text>
+
+<!-- Left mid: Loaders -->
+<rect x="40" y="200" width="140" height="44" rx="6" fill="#1a2040" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="110" y="220" text-anchor="middle" fill="#e0e0e8" font-size="12" font-family="system-ui, sans-serif">加载器</text>
+<text x="110" y="236" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">LoRA / IP-Adapter</text>
+
+<!-- Right mid: Guiders -->
+<rect x="540" y="200" width="140" height="44" rx="6" fill="#1a2040" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="610" y="220" text-anchor="middle" fill="#e0e0e8" font-size="12" font-family="system-ui, sans-serif">引导器</text>
+<text x="610" y="236" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">CFG / PAG / SLG</text>
+
+<!-- Left bottom: Quantizers -->
+<rect x="40" y="340" width="140" height="44" rx="6" fill="#1a2040" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="110" y="360" text-anchor="middle" fill="#e0e0e8" font-size="12" font-family="system-ui, sans-serif">量化器</text>
+<text x="110" y="376" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">BnB / GGUF / Quanto</text>
+
+<!-- Right bottom: Hooks -->
+<rect x="540" y="340" width="140" height="44" rx="6" fill="#1a2040" stroke="#50c878" stroke-width="1.5"/>
+<text x="610" y="360" text-anchor="middle" fill="#e0e0e8" font-size="12" font-family="system-ui, sans-serif">前向钩子</text>
+<text x="610" y="376" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">FBC / GroupOffload</text>
+
+<!-- Bottom center: Modular Pipelines -->
+<rect x="240" y="410" width="240" height="44" rx="6" fill="#1a2040" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="360" y="430" text-anchor="middle" fill="#e0e0e8" font-size="12" font-family="system-ui, sans-serif">模块化管线</text>
+<text x="360" y="446" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">ModularPipeline / ComponentSpec</text>
+
+<!-- Arrows: Pipeline -> Models -->
+<path d="M 280 210 L 180 104" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#ah2)"/>
+<text x="215" y="155" fill="#888" font-size="10" font-family="system-ui, sans-serif">unet()</text>
+
+<!-- Arrows: Pipeline -> Schedulers -->
+<path d="M 440 210 L 540 104" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#ah2)"/>
+<text x="485" y="155" fill="#888" font-size="10" font-family="system-ui, sans-serif">scheduler.step()</text>
+
+<!-- Arrows: Pipeline -> Loaders -->
+<line x1="280" y1="225" x2="180" y2="225" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah2)"/>
+<text x="215" y="218" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">load_lora</text>
+
+<!-- Arrows: Pipeline -> Guiders -->
+<line x1="440" y1="225" x2="540" y2="225" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah2)"/>
+<text x="490" y="218" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">guider()</text>
+
+<!-- Arrows: Pipeline -> Modular -->
+<line x1="360" y1="250" x2="360" y2="410" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah2)"/>
+<text x="370" y="335" fill="#888" font-size="10" font-family="system-ui, sans-serif">组件化</text>
+
+<!-- Arrows: Loaders -> Models -->
+<path d="M 110 200 L 110 104" stroke="#f9ca24" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#ah2)"/>
+<text x="120" y="155" fill="#888" font-size="10" font-family="system-ui, sans-serif">注入 LoRA</text>
+
+<!-- Arrows: Hooks -> Models -->
+<path d="M 540 360 L 180 104" stroke="#50c878" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#ah2)"/>
+<text x="340" y="230" fill="#888" font-size="10" font-family="system-ui, sans-serif">hook forward()</text>
+
+<!-- Arrows: Quantizers -> Models -->
+<path d="M 110 340 L 110 104" stroke="#f9ca24" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#ah2)"/>
+<text x="120" y="280" fill="#888" font-size="10" font-family="system-ui, sans-serif">量化层替换</text>
+
+</svg>

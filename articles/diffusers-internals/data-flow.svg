@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520">
+<defs>
+<marker id="ah3" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6c8ef5"/></marker>
+</defs>
+<rect width="760" height="520" fill="#0b0d14"/>
+
+<text x="380" y="28" text-anchor="middle" fill="#e0e0e8" font-size="16" font-family="system-ui, sans-serif" font-weight="600">文生图推理数据流</text>
+
+<!-- Step 1: Text Input -->
+<rect x="280" y="50" width="200" height="40" rx="6" fill="#1a2040" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="380" y="75" text-anchor="middle" fill="#e0e0e8" font-size="12" font-family="system-ui, sans-serif">prompt: "a cat"</text>
+
+<line x1="380" y1="90" x2="380" y2="110" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah3)"/>
+
+<!-- Step 2: Tokenize + Text Encode -->
+<rect x="200" y="112" width="360" height="50" rx="6" fill="#1a2040" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="380" y="132" text-anchor="middle" fill="#ff6b9d" font-size="12" font-family="system-ui, sans-serif" font-weight="600">encode_prompt()</text>
+<text x="380" y="150" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">tokenizer → text_encoder → prompt_embeds [B, 77, 768]</text>
+
+<line x1="380" y1="162" x2="380" y2="182" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah3)"/>
+
+<!-- Step 3: CFG concat -->
+<rect x="240" y="184" width="280" height="36" rx="6" fill="#1a2040" stroke="#6c8ef5" stroke-width="1"/>
+<text x="380" y="207" text-anchor="middle" fill="#888" font-size="11" font-family="system-ui, sans-serif">CFG: cat([neg_embeds, pos_embeds]) → [2B, 77, 768]</text>
+
+<line x1="380" y1="220" x2="380" y2="238" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah3)"/>
+
+<!-- Step 4: Prepare latents -->
+<rect x="240" y="240" width="280" height="36" rx="6" fill="#1a2040" stroke="#6c8ef5" stroke-width="1"/>
+<text x="380" y="263" text-anchor="middle" fill="#888" font-size="11" font-family="system-ui, sans-serif">randn_tensor → latents [B, 4, 64, 64]</text>
+
+<line x1="380" y1="276" x2="380" y2="294" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah3)"/>
+
+<!-- Step 5: Denoising Loop -->
+<rect x="80" y="296" width="600" height="120" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="380" y="316" text-anchor="middle" fill="#f9ca24" font-size="13" font-family="system-ui, sans-serif" font-weight="600">去噪循环 for t in timesteps:</text>
+
+<rect x="100" y="326" width="160" height="36" rx="5" fill="#1a2040" stroke="#ff6b9d" stroke-width="1"/>
+<text x="180" y="349" text-anchor="middle" fill="#e0e0e8" font-size="11" font-family="system-ui, sans-serif">UNet(latent, t, embeds)</text>
+
+<rect x="300" y="326" width="140" height="36" rx="5" fill="#1a2040" stroke="#6c8ef5" stroke-width="1"/>
+<text x="370" y="349" text-anchor="middle" fill="#e0e0e8" font-size="11" font-family="system-ui, sans-serif">CFG: uncond+scale*Δ</text>
+
+<rect x="480" y="326" width="180" height="36" rx="5" fill="#1a2040" stroke="#6c8ef5" stroke-width="1"/>
+<text x="570" y="349" text-anchor="middle" fill="#e0e0e8" font-size="11" font-family="system-ui, sans-serif">scheduler.step(pred, t, lat)</text>
+
+<line x1="260" y1="344" x2="300" y2="344" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah3)"/>
+<line x1="440" y1="344" x2="480" y2="344" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah3)"/>
+
+<text x="180" y="385" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">[2B,4,64,64] → noise_pred</text>
+<text x="370" y="385" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">[2B,4,64,64] → [B,4,64,64]</text>
+<text x="570" y="385" text-anchor="middle" fill="#888" font-size="10" font-family="system-ui, sans-serif">[B,4,64,64] → prev_sample</text>
+
+<!-- Loop back arrow -->
+<path d="M 570 362 Q 570 400 380 400 Q 190 400 180 362" stroke="#f9ca24" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#ah3)" opacity="0.7"/>
+<text x="380" y="408" text-anchor="middle" fill="#f9ca24" font-size="10" font-family="system-ui, sans-serif" opacity="0.8">latents = prev_sample (循环)</text>
+
+<line x1="380" y1="416" x2="380" y2="436" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah3)"/>
+
+<!-- Step 6: VAE Decode -->
+<rect x="200" y="438" width="360" height="36" rx="6" fill="#1a2040" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="380" y="461" text-anchor="middle" fill="#ff6b9d" font-size="12" font-family="system-ui, sans-serif">vae.decode(latents / scaling_factor) → image [B, 3, 512, 512]</text>
+
+<line x1="380" y1="474" x2="380" y2="490" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ah3)"/>
+
+<!-- Step 7: Output -->
+<rect x="280" y="492" width="200" height="24" rx="5" fill="#1a2040" stroke="#4ecdc4" stroke-width="1"/>
+<text x="380" y="508" text-anchor="middle" fill="#4ecdc4" font-size="11" font-family="system-ui, sans-serif">PIL Image 512×512</text>
+
+</svg>
