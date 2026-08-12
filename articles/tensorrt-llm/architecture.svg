@@ -1,0 +1,54 @@
+<svg viewBox="0 0 820 540" xmlns="http://www.w3.org/2000/svg" width="820" height="540" style="display:block;margin:0 auto;">
+  <rect width="820" height="540" rx="12" fill="#0b0d14"/>
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#5a6075"/></marker>
+  </defs>
+  <text x="410" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#e6e8f0" font-family="system-ui,sans-serif">TensorRT-LLM 分层架构</text>
+
+  <!-- Layer 1: API -->
+  <rect x="60" y="50" width="700" height="60" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="74" text-anchor="middle" font-size="13" font-weight="bold" fill="#6c8ef5" font-family="system-ui,sans-serif">接口层 · API Layer</text>
+  <text x="410" y="94" text-anchor="middle" font-size="11" fill="#a8b0c8" font-family="system-ui,sans-serif">llmapi (LLM / AsyncLLM)  ·  serve (OpenAI Server)  ·  commands (CLI)</text>
+
+  <line x1="410" y1="110" x2="410" y2="130" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer 2: Executor -->
+  <rect x="60" y="135" width="700" height="60" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="159" text-anchor="middle" font-size="13" font-weight="bold" fill="#4ecdc4" font-family="system-ui,sans-serif">编排层 · Executor</text>
+  <text x="410" y="179" text-anchor="middle" font-size="11" fill="#a8b0c8" font-family="system-ui,sans-serif">GenerationExecutor (Proxy / Worker / Ray)  ·  Request 队列  ·  GenerationResult (Future)</text>
+
+  <line x1="410" y1="195" x2="410" y2="215" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer 3: PyExecutor Engine -->
+  <rect x="60" y="220" width="700" height="60" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="244" text-anchor="middle" font-size="13" font-weight="bold" fill="#f9ca24" font-family="system-ui,sans-serif">执行引擎层 · PyExecutor (Torch 后端)</text>
+  <text x="410" y="264" text-anchor="middle" font-size="11" fill="#a8b0c8" font-family="system-ui,sans-serif">KVCacheV2Scheduler  ·  PyTorchModelEngine  ·  TorchSampler  ·  KVCacheManagerV2</text>
+
+  <line x1="410" y1="280" x2="410" y2="300" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer 4: Models & Modules -->
+  <rect x="60" y="305" width="340" height="60" rx="10" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="230" y="329" text-anchor="middle" font-size="13" font-weight="bold" fill="#ff6b9d" font-family="system-ui,sans-serif">模型层 · Models</text>
+  <text x="230" y="349" text-anchor="middle" font-size="10" fill="#a8b0c8" font-family="system-ui,sans-serif">modeling_*.py  ·  AutoModelForCausalLM</text>
+
+  <rect x="420" y="305" width="340" height="60" rx="10" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="590" y="329" text-anchor="middle" font-size="13" font-weight="bold" fill="#ff6b9d" font-family="system-ui,sans-serif">算子层 · Modules</text>
+  <text x="590" y="349" text-anchor="middle" font-size="10" fill="#a8b0c8" font-family="system-ui,sans-serif">Attention  ·  MLP  ·  MoE  ·  RMSNorm</text>
+
+  <line x1="230" y1="365" x2="230" y2="385" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="590" y1="365" x2="590" y2="385" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer 5: Attention backends & Kernels -->
+  <rect x="60" y="390" width="340" height="60" rx="10" fill="#13162a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="230" y="414" text-anchor="middle" font-size="13" font-weight="bold" fill="#a78bfa" font-family="system-ui,sans-serif">注意力后端</text>
+  <text x="230" y="434" text-anchor="middle" font-size="10" fill="#a8b0c8" font-family="system-ui,sans-serif">TRTLLM  ·  FlashInfer  ·  Vanilla</text>
+
+  <rect x="420" y="390" width="340" height="60" rx="10" fill="#13162a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="590" y="414" text-anchor="middle" font-size="13" font-weight="bold" fill="#a78bfa" font-family="system-ui,sans-serif">CUDA Kernel</text>
+  <text x="590" y="434" text-anchor="middle" font-size="10" fill="#a8b0c8" font-family="system-ui,sans-serif">custom_ops  ·  cute_dsl_kernels  ·  cpp/kernels</text>
+
+  <!-- Side: Advanced features -->
+  <rect x="60" y="470" width="700" height="50" rx="10" fill="#13162a" stroke="#2ecc71" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="410" y="492" text-anchor="middle" font-size="12" font-weight="bold" fill="#2ecc71" font-family="system-ui,sans-serif">横切特性 · Cross-cutting</text>
+  <text x="410" y="510" text-anchor="middle" font-size="10" fill="#a8b0c8" font-family="system-ui,sans-serif">speculative (投机解码)  ·  disaggregation (PD 分离 / NIXL)  ·  scaffolding (Agent)</text>
+</svg>

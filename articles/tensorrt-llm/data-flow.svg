@@ -1,0 +1,61 @@
+<svg viewBox="0 0 820 580" xmlns="http://www.w3.org/2000/svg" width="820" height="580" style="display:block;margin:0 auto;">
+  <rect width="820" height="580" rx="12" fill="#0b0d14"/>
+  <defs>
+    <marker id="arr3" markerWidth="9" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#5a6075"/></marker>
+  </defs>
+  <text x="410" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#e6e8f0" font-family="system-ui,sans-serif">推理请求数据流（Torch 后端）</text>
+
+  <!-- Step 1: LLM.generate -->
+  <rect x="290" y="50" width="240" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="78" text-anchor="middle" font-size="12" font-weight="bold" fill="#6c8ef5" font-family="system-ui,sans-serif">LLM.generate() · 文本→token IDs</text>
+  <line x1="410" y1="96" x2="410" y2="114" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <!-- Step 2: executor.submit -->
+  <rect x="290" y="118" width="240" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="146" text-anchor="middle" font-size="12" font-weight="bold" fill="#4ecdc4" font-family="system-ui,sans-serif">executor.submit() · GenerationRequest</text>
+  <line x1="410" y1="164" x2="410" y2="182" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <!-- Step 3: queue -->
+  <rect x="290" y="186" width="240" height="46" rx="8" fill="#13162a" stroke="#7a8095" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="410" y="214" text-anchor="middle" font-size="12" fill="#a8b0c8" font-family="system-ui,sans-serif">ExecutorRequestQueue · 跨线程</text>
+  <line x1="410" y1="232" x2="410" y2="250" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <!-- Loop box -->
+  <rect x="40" y="255" width="740" height="240" rx="10" fill="none" stroke="#f9ca24" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <text x="60" y="275" font-size="11" fill="#f9ca24" font-family="system-ui,sans-serif">_executor_loop_overlap() · 每 iteration</text>
+
+  <!-- 3a schedule -->
+  <rect x="70" y="288" width="200" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="170" y="310" text-anchor="middle" font-size="11" font-weight="bold" fill="#f9ca24" font-family="system-ui,sans-serif">scheduler</text>
+  <text x="170" y="327" text-anchor="middle" font-size="10" fill="#a8b0c8" font-family="system-ui,sans-serif">prefill+decode 混合 batch</text>
+  <line x1="270" y1="313" x2="290" y2="313" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <!-- 3b forward -->
+  <rect x="295" y="288" width="220" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="405" y="310" text-anchor="middle" font-size="11" font-weight="bold" fill="#f9ca24" font-family="system-ui,sans-serif">model_engine.forward()</text>
+  <text x="405" y="327" text-anchor="middle" font-size="10" fill="#a8b0c8" font-family="system-ui,sans-serif">logits [tokens, vocab]</text>
+  <line x1="515" y1="313" x2="535" y2="313" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <!-- 3c sample -->
+  <rect x="540" y="288" width="220" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="650" y="310" text-anchor="middle" font-size="11" font-weight="bold" fill="#f9ca24" font-family="system-ui,sans-serif">sampler.sample_async()</text>
+  <text x="650" y="327" text-anchor="middle" font-size="10" fill="#a8b0c8" font-family="system-ui,sans-serif">new_tokens (GPU→CPU)</text>
+
+  <!-- loop back arrow -->
+  <path d="M650,338 L650,360 L170,360 L170,338" fill="none" stroke="#f9ca24" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr3)"/>
+  <text x="410" y="378" text-anchor="middle" font-size="10" fill="#f9ca24" font-family="system-ui,sans-serif">update_requests · 回写 token · 检查 stop</text>
+
+  <!-- KV cache note -->
+  <rect x="295" y="395" width="220" height="36" rx="6" fill="#13162a" stroke="#a78bfa" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="405" y="417" text-anchor="middle" font-size="10" fill="#a78bfa" font-family="system-ui,sans-serif">KVCacheManagerV2 · paged blocks</text>
+
+  <!-- response -->
+  <rect x="295" y="442" width="220" height="42" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="405" y="468" text-anchor="middle" font-size="11" font-weight="bold" fill="#4ecdc4" font-family="system-ui,sans-serif">LlmResponse → GenerationResult.queue</text>
+
+  <line x1="410" y1="495" x2="410" y2="513" stroke="#5a6075" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <!-- output -->
+  <rect x="290" y="517" width="240" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="545" text-anchor="middle" font-size="12" font-weight="bold" fill="#6c8ef5" font-family="system-ui,sans-serif">RequestOutput · detokenize → text</text>
+</svg>
