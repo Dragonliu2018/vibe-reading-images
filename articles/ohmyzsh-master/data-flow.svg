@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="820" height="720" viewBox="0 0 820 720">
   <defs>
-    <marker id="df-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="arrow">
+    <marker id="df-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
     </marker>
-    <marker id="df-arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="arrow">
+    <marker id="df-arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
     </marker>
   </defs>

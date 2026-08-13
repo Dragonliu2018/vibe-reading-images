@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470">
   <defs>
-    <marker id="dep-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="arrow">
+    <marker id="dep-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
     </marker>
-    <marker id="dep-arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="arrow">
+    <marker id="dep-arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
     </marker>
   </defs>
@@ -65,9 +65,9 @@
   <!-- arrow themes -> lib (call git_prompt_info) -->
   <path d="M 380 340 L 240 292" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow-cyan)"/>
 
-  <!-- arrow cli.zsh -> tools/upgrade.sh (call) -->
-  <path d="M 280 270 L 540 270" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow-cyan)"/>
-  <text x="410" y="262" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">omz update 调用</text>
+  <!-- arrow cli.zsh -> tools/upgrade.sh (call, bridge over crossing) -->
+  <path d="M 280 270 L 395 270 L 395 286 L 425 286 L 425 270 L 540 270" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow-cyan)"/>
+  <text x="410" y="300" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">omz update 调用</text>
 
   <!-- Bottom note: custom override -->
   <rect x="80" y="410" width="660" height="40" rx="8" fill="#13162a" stroke="#9aa3c0" stroke-width="1" stroke-dasharray="4,3"/>
