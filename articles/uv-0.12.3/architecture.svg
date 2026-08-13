@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="640" viewBox="0 0 820 640" font-family="system-ui, sans-serif">
+  <rect width="820" height="640" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="410" y="32" text-anchor="middle" fill="#e6e6e6" font-size="17" font-weight="600">uv 0.12.3 分层架构</text>
+
+  <!-- Layer 1: CLI 与调度层 -->
+  <rect x="40" y="56" width="740" height="92" rx="10" fill="none" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
+  <text x="58" y="78" fill="#6c8ef5" font-size="13" font-weight="600">CLI 与调度层</text>
+  <rect x="60" y="88" width="200" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="160" y="108" text-anchor="middle" fill="#e6e6e6" font-size="13">bin/uv.rs · lib.rs</text>
+  <text x="160" y="126" text-anchor="middle" fill="#9aa3b2" font-size="11">main() · run_with_workspace_cache()</text>
+  <rect x="290" y="88" width="180" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="380" y="108" text-anchor="middle" fill="#e6e6e6" font-size="13">uv-cli</text>
+  <text x="380" y="126" text-anchor="middle" fill="#9aa3b2" font-size="11">Cli · Commands · GlobalArgs</text>
+  <rect x="500" y="88" width="180" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="590" y="108" text-anchor="middle" fill="#e6e6e6" font-size="13">settings.rs</text>
+  <text x="590" y="126" text-anchor="middle" fill="#9aa3b2" font-size="11">三层合并 · *Settings::resolve()</text>
+
+  <!-- Layer 2: 命令实现层 -->
+  <rect x="40" y="168" width="740" height="80" rx="10" fill="none" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
+  <text x="58" y="190" fill="#4ecdc4" font-size="13" font-weight="600">命令实现层</text>
+  <rect x="60" y="200" width="150" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="135" y="224" text-anchor="middle" fill="#e6e6e6" font-size="12">project/ sync · run</text>
+  <rect x="225" y="200" width="135" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="292" y="224" text-anchor="middle" fill="#e6e6e6" font-size="12">pip/ install · compile</text>
+  <rect x="375" y="200" width="110" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="430" y="224" text-anchor="middle" fill="#e6e6e6" font-size="12">tool/ · python/</text>
+  <rect x="500" y="200" width="110" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="555" y="224" text-anchor="middle" fill="#e6e6e6" font-size="12">build · publish</text>
+  <rect x="625" y="200" width="95" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="672" y="224" text-anchor="middle" fill="#e6e6e6" font-size="12">cache · venv</text>
+
+  <!-- Layer 3: 解析与项目层 -->
+  <rect x="40" y="268" width="740" height="80" rx="10" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
+  <text x="58" y="290" fill="#f9ca24" font-size="13" font-weight="600">解析与项目层</text>
+  <rect x="60" y="300" width="170" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="145" y="324" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-resolver · PubGrub</text>
+  <rect x="245" y="300" width="165" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="327" y="324" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-workspace · 项目模型</text>
+  <rect x="425" y="300" width="125" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="487" y="324" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-dispatch · 构建编排</text>
+  <rect x="565" y="300" width="105" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="617" y="324" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-settings</text>
+
+  <!-- Layer 4: 获取与安装层 -->
+  <rect x="40" y="368" width="740" height="80" rx="10" fill="none" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
+  <text x="58" y="390" fill="#ff6b9d" font-size="13" font-weight="600">获取与安装层</text>
+  <rect x="60" y="400" width="150" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="135" y="424" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-distribution · 下载</text>
+  <rect x="225" y="400" width="130" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="290" y="424" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-client · PyPI</text>
+  <rect x="370" y="400" width="120" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="430" y="424" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-installer</text>
+  <rect x="505" y="400" width="115" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="562" y="424" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-install-wheel</text>
+  <rect x="635" y="400" width="90" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="680" y="424" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-extract</text>
+
+  <!-- Layer 5: 基础设施层 -->
+  <rect x="40" y="468" width="740" height="92" rx="10" fill="none" stroke="#8a8f9c" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
+  <text x="58" y="490" fill="#8a8f9c" font-size="13" font-weight="600">基础设施层</text>
+  <rect x="60" y="500" width="150" height="48" rx="6" fill="#13162a" stroke="#8a8f9c" stroke-width="1.2"/>
+  <text x="135" y="520" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-pep440 · uv-pep508</text>
+  <text x="135" y="538" text-anchor="middle" fill="#9aa3b2" font-size="11">版本/依赖规范解析</text>
+  <rect x="225" y="500" width="150" height="48" rx="6" fill="#13162a" stroke="#8a8f9c" stroke-width="1.2"/>
+  <text x="300" y="520" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-cache · uv-python</text>
+  <text x="300" y="538" text-anchor="middle" fill="#9aa3b2" font-size="11">全局缓存 · 解释器管理</text>
+  <rect x="390" y="500" width="155" height="48" rx="6" fill="#13162a" stroke="#8a8f9c" stroke-width="1.2"/>
+  <text x="467" y="520" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-platform-tags · uv-auth</text>
+  <text x="467" y="538" text-anchor="middle" fill="#9aa3b2" font-size="11">平台标签 · 认证</text>
+  <rect x="560" y="500" width="155" height="48" rx="6" fill="#13162a" stroke="#8a8f9c" stroke-width="1.2"/>
+  <text x="637" y="520" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-configuration · uv-fs</text>
+  <text x="637" y="538" text-anchor="middle" fill="#9aa3b2" font-size="11">配置类型 · 文件系统</text>
+
+  <!-- Layer dependency arrows (downward) -->
+  <defs>
+    <marker id="arr-down" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,0 L5,9 z" fill="#5a6275"/>
+    </marker>
+  </defs>
+  <line x1="410" y1="148" x2="410" y2="164" stroke="#5a6275" stroke-width="1.5" marker-end="url(#arr-down)"/>
+  <line x1="410" y1="248" x2="410" y2="264" stroke="#5a6275" stroke-width="1.5" marker-end="url(#arr-down)"/>
+  <line x1="410" y1="348" x2="410" y2="364" stroke="#5a6275" stroke-width="1.5" marker-end="url(#arr-down)"/>
+  <line x1="410" y1="448" x2="410" y2="464" stroke="#5a6275" stroke-width="1.5" marker-end="url(#arr-down)"/>
+
+  <text x="425" y="160" fill="#5a6275" font-size="11">依赖方向</text>
+  <text x="58" y="608" fill="#9aa3b2" font-size="11">层间依赖单向向下；上层只依赖下层接口契约，下层不反向感知上层</text>
+</svg>

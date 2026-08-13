@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" width="900" height="640">
+<rect width="900" height="640" fill="#0b0d14"/>
+<defs>
+<marker id="arrow-#e6e6e6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e6e6e6"/></marker>
+<marker id="arrow-#6c8ef5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6c8ef5"/></marker>
+<marker id="arrow-#4ecdc4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ecdc4"/></marker>
+<marker id="arrow-#f9ca24" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f9ca24"/></marker>
+<marker id="arrow-#ff6b9d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ff6b9d"/></marker>
+<marker id="arrow-#888" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/></marker>
+</defs>
+<text x="450.0" y="30" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="17" font-weight="600">核心模块依赖关系</text>
+<rect x="70" y="90" width="150" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="145.0" y="113.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">ruff (CLI)</text>
+<text x="145.0" y="131.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">命令分发</text>
+<rect x="70" y="300" width="150" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="145.0" y="323.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">ruff_server</text>
+<text x="145.0" y="341.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">(LSP)</text>
+<rect x="290" y="80" width="150" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="365.0" y="103.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">ruff_workspace</text>
+<text x="365.0" y="121.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">配置/文件发现</text>
+<rect x="290" y="240" width="150" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="365.0" y="263.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">ruff_linter</text>
+<text x="365.0" y="281.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">核心管线</text>
+<rect x="290" y="400" width="150" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="365.0" y="423.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">ruff_python</text>
+<text x="365.0" y="441.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">_formatter</text>
+<rect x="520" y="80" width="150" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="595.0" y="103.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">rules</text>
+<text x="595.0" y="121.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">900+ 规则</text>
+<rect x="520" y="240" width="150" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="595.0" y="263.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">ruff_python</text>
+<text x="595.0" y="281.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">_semantic</text>
+<rect x="520" y="400" width="150" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="595.0" y="423.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">ruff_python</text>
+<text x="595.0" y="441.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">_parser</text>
+<rect x="740" y="240" width="150" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="815.0" y="263.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">ruff_python</text>
+<text x="815.0" y="281.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">_ast</text>
+<rect x="290" y="540" width="150" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="365.0" y="572.0" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="13">ruff_cache</text>
+<path d="M 220 118.0 L 290 108.0" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-#4ecdc4)"/>
+<path d="M 220 118.0 L 290 268.0" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-#4ecdc4)"/>
+<path d="M 220 118.0 L 290 428.0" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-#4ecdc4)"/>
+<path d="M 220 118.0 L 290 568.0" fill="none" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-#ff6b9d)"/>
+<path d="M 220 328.0 L 290 108.0" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-#4ecdc4)"/>
+<path d="M 220 328.0 L 290 268.0" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-#4ecdc4)"/>
+<path d="M 220 328.0 L 290 428.0" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-#4ecdc4)"/>
+<path d="M 440 268.0 L 520 428.0" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-#f9ca24)"/>
+<path d="M 440 268.0 L 520 268.0" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-#f9ca24)"/>
+<path d="M 440 268.0 L 520 108.0" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-#f9ca24)"/>
+<path d="M 440 428.0 L 520 428.0" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-#f9ca24)"/>
+<path d="M 595.0 136 L 595.0 240" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-#f9ca24)"/>
+<path d="M 670 108.0 L 740 268.0" fill="none" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-#ff6b9d)"/>
+<path d="M 670 268.0 L 740 268.0" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow-#ff6b9d)"/>
+<path d="M 670 428.0 L 740 268.0" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow-#ff6b9d)"/>
+<path d="M 365.0 296 L 365.0 540" fill="none" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-#ff6b9d)"/>
+<text x="70" y="615" fill="#888" font-family="system-ui, sans-serif" font-size="11">实线 = 直接调用依赖　虚线 = 横切/基础设施依赖</text>
+</svg>

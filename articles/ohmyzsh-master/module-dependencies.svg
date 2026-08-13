@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470">
+  <defs>
+    <marker id="dep-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="arrow">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="dep-arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="arrow">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+  <rect width="820" height="470" fill="#0b0d14"/>
+
+  <text x="410" y="34" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">模块依赖关系</text>
+
+  <!-- Legend -->
+  <rect x="560" y="48" width="14" height="14" rx="3" fill="none" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="580" y="60" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">source / 加载</text>
+  <rect x="680" y="48" width="14" height="14" rx="3" fill="none" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="700" y="60" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">调用</text>
+
+  <!-- User config -->
+  <rect x="310" y="80" width="200" height="44" rx="8" fill="#1a2030" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="100" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">~/.zshrc</text>
+  <text x="410" y="116" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">$ZSH $plugins $ZSH_THEME</text>
+
+  <!-- Bootstrap -->
+  <rect x="310" y="156" width="200" height="44" rx="8" fill="#1a2030" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="176" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">oh-my-zsh.sh</text>
+  <text x="410" y="192" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">引导引擎 / _omz_source</text>
+
+  <!-- arrow zshrc -> bootstrap -->
+  <path d="M 410 124 L 410 156" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow)"/>
+
+  <!-- Core lib -->
+  <rect x="80" y="248" width="200" height="44" rx="8" fill="#1a2030" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="180" y="268" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">核心库 lib/</text>
+  <text x="180" y="284" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">cli git async termsupport</text>
+
+  <!-- Lifecycle tools -->
+  <rect x="540" y="248" width="200" height="44" rx="8" fill="#1a2030" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="640" y="268" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">生命周期 tools/</text>
+  <text x="640" y="284" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">install upgrade check</text>
+
+  <!-- arrow bootstrap -> lib (source) -->
+  <path d="M 350 200 L 250 248" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow)"/>
+  <!-- arrow bootstrap -> tools (source check_for_upgrade) -->
+  <path d="M 470 200 L 570 248" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow)"/>
+
+  <!-- Plugins -->
+  <rect x="80" y="340" width="200" height="44" rx="8" fill="#1a2030" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="180" y="360" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">插件 plugins/</text>
+  <text x="180" y="376" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">git docker npm z …</text>
+
+  <!-- Themes -->
+  <rect x="310" y="340" width="200" height="44" rx="8" fill="#1a2030" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="410" y="360" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">主题 themes/</text>
+  <text x="410" y="376" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">robbyrussell agnoster …</text>
+
+  <!-- arrow bootstrap -> plugins (source) -->
+  <path d="M 330 200 L 200 340" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow)"/>
+  <!-- arrow bootstrap -> themes (source) -->
+  <path d="M 410 200 L 410 340" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow)"/>
+
+  <!-- arrow plugins -> lib (call git functions) -->
+  <path d="M 200 340 L 200 292" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow-cyan)"/>
+  <!-- arrow themes -> lib (call git_prompt_info) -->
+  <path d="M 380 340 L 240 292" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow-cyan)"/>
+
+  <!-- arrow cli.zsh -> tools/upgrade.sh (call) -->
+  <path d="M 260 270 L 540 270" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#dep-arrow-cyan)"/>
+  <text x="400" y="262" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">omz update 调用</text>
+
+  <!-- arrow lib -> themes (prompt_info contract) note -->
+  <text x="345" y="320" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="10">git_prompt_info 契约</text>
+
+  <!-- Bottom note: custom override -->
+  <rect x="80" y="416" width="660" height="40" rx="8" fill="#13162a" stroke="#9aa3c0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="410" y="440" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="12">custom/ 目录对 lib、plugins、themes 提供同级覆盖（约定优于配置，custom 优先于 stock）</text>
+</svg>

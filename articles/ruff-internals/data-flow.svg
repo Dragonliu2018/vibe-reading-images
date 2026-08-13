@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="960" height="720">
+<rect width="960" height="720" fill="#0b0d14"/>
+<defs>
+<marker id="arrow-#e6e6e6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e6e6e6"/></marker>
+<marker id="arrow-#6c8ef5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6c8ef5"/></marker>
+<marker id="arrow-#4ecdc4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ecdc4"/></marker>
+<marker id="arrow-#f9ca24" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f9ca24"/></marker>
+<marker id="arrow-#ff6b9d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ff6b9d"/></marker>
+</defs>
+<text x="480.0" y="30" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="17" font-weight="600">ruff check 数据流</text>
+<rect x="220.0" y="70" width="520" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="236.0" y="90" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="600">CLI 解析</text>
+<text x="236.0" y="108" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11" opacity="0.85">Args::parse_from() → Command::Check</text>
+<rect x="220.0" y="140" width="520" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="236.0" y="160" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">配置解析</text>
+<text x="236.0" y="178" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11" opacity="0.85">resolve() → PyprojectConfig (ruff_workspace)</text>
+<rect x="220.0" y="210" width="520" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="236.0" y="230" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">文件发现</text>
+<text x="236.0" y="248" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11" opacity="0.85">project_files_in_path() → Vec&lt;ResolvedFile&gt;</text>
+<rect x="220.0" y="280" width="520" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="236.0" y="300" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">并行分发</text>
+<text x="236.0" y="318" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11" opacity="0.85">paths.par_iter() (rayon)</text>
+<rect x="220.0" y="360" width="520" height="46" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="236.0" y="380" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">解析 Python</text>
+<text x="236.0" y="398" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11" opacity="0.85">parse_unchecked() → Parsed&lt;ModModule&gt;</text>
+<rect x="220.0" y="430" width="520" height="46" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="236.0" y="450" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="13" font-weight="600">辅助索引</text>
+<text x="236.0" y="468" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11" opacity="0.85">Locator / Stylist / Indexer / Directives</text>
+<rect x="220.0" y="500" width="520" height="46" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="236.0" y="520" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">规则执行</text>
+<text x="236.0" y="538" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11" opacity="0.85">check_path() → check_tokens/ast/imports/physical_lines/noqa</text>
+<rect x="220.0" y="590" width="520" height="46" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="236.0" y="610" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">诊断收集</text>
+<text x="236.0" y="628" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11" opacity="0.85">LintContext → Vec&lt;Diagnostic&gt;</text>
+<rect x="220.0" y="660" width="520" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="236.0" y="680" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="600">输出</text>
+<text x="236.0" y="698" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11" opacity="0.85">Printer::write_once() → ExitStatus</text>
+<path d="M 480.0 116 L 480.0 140" fill="none" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arrow-#e6e6e6)"/>
+<path d="M 480.0 186 L 480.0 210" fill="none" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arrow-#e6e6e6)"/>
+<path d="M 480.0 256 L 480.0 280" fill="none" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arrow-#e6e6e6)"/>
+<path d="M 480.0 326 L 480.0 360" fill="none" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arrow-#e6e6e6)"/>
+<path d="M 480.0 406 L 480.0 430" fill="none" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arrow-#e6e6e6)"/>
+<path d="M 480.0 476 L 480.0 500" fill="none" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arrow-#e6e6e6)"/>
+<path d="M 480.0 546 L 480.0 590" fill="none" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arrow-#e6e6e6)"/>
+<path d="M 480.0 636 L 480.0 660" fill="none" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arrow-#e6e6e6)"/>
+<rect x="760" y="490" width="180" height="120" rx="8" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="4 3" opacity="0.7"/>
+<text x="850" y="512" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12" font-weight="600">fix 收敛循环</text>
+<text x="850" y="532" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11">lint_fix()</text>
+<text x="850" y="550" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11">应用 fix → 重解析</text>
+<text x="850" y="568" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11">→ 再检查</text>
+<text x="850" y="588" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11">≤ 100 轮收敛</text>
+<path d="M 760 540 L 740.0 523" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-#f9ca24)"/>
+<text x="750.0" y="523.5" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">fix 模式</text>
+<text x="236.0" y="695" fill="#888" font-family="system-ui, sans-serif" font-size="11">每个文件独立并行处理，单文件 panic 由 catch_unwind 捕获转为诊断</text>
+</svg>

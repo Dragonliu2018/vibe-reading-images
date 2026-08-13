@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="540" viewBox="0 0 820 540">
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="arrow">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="820" height="540" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="410" y="34" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">Oh My Zsh 分层架构</text>
+
+  <!-- Layer 1: User config -->
+  <rect x="40" y="62" width="740" height="74" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="60" y="84" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">用户配置层</text>
+  <rect x="170" y="94" width="180" height="32" rx="6" fill="#1a2030" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="260" y="115" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">~/.zshrc</text>
+  <rect x="470" y="94" width="280" height="32" rx="6" fill="#1a2030" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="610" y="115" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">custom/ (覆盖与扩展)</text>
+
+  <!-- arrow user -> bootstrap -->
+  <path d="M 410 136 L 410 162" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arch-arrow)"/>
+
+  <!-- Layer 2: Bootstrap -->
+  <rect x="40" y="162" width="740" height="74" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="60" y="184" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">引导引擎层</text>
+  <rect x="170" y="194" width="200" height="32" rx="6" fill="#1a2030" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="270" y="215" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">oh-my-zsh.sh</text>
+  <rect x="430" y="194" width="160" height="32" rx="6" fill="#1a2030" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="510" y="215" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">_omz_source</text>
+  <rect x="620" y="194" width="130" height="32" rx="6" fill="#1a2030" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="685" y="215" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">compinit</text>
+
+  <!-- arrow bootstrap -> core lib -->
+  <path d="M 410 236 L 410 262" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arch-arrow)"/>
+
+  <!-- Layer 3: Core lib -->
+  <rect x="40" y="262" width="740" height="84" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="60" y="284" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">核心库层</text>
+  <rect x="60" y="294" width="118" height="38" rx="6" fill="#1a2030" stroke="#f9ca24" stroke-width="1"/>
+  <text x="119" y="312" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">cli.zsh</text>
+  <text x="119" y="326" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="10">omz 命令</text>
+  <rect x="192" y="294" width="118" height="38" rx="6" fill="#1a2030" stroke="#f9ca24" stroke-width="1"/>
+  <text x="251" y="312" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">git.zsh</text>
+  <text x="251" y="326" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="10">prompt 函数</text>
+  <rect x="324" y="294" width="118" height="38" rx="6" fill="#1a2030" stroke="#f9ca24" stroke-width="1"/>
+  <text x="383" y="312" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">async_prompt</text>
+  <text x="383" y="326" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="10">异步渲染</text>
+  <rect x="456" y="294" width="118" height="38" rx="6" fill="#1a2030" stroke="#f9ca24" stroke-width="1"/>
+  <text x="515" y="312" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">termsupport</text>
+  <text x="515" y="326" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="10">终端标题</text>
+  <rect x="588" y="294" width="170" height="38" rx="6" fill="#1a2030" stroke="#f9ca24" stroke-width="1"/>
+  <text x="673" y="312" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">其余 16 个 lib/*.zsh</text>
+  <text x="673" y="326" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="10">completion/键绑定/剪贴板…</text>
+
+  <!-- arrows core -> plugins/themes (fork) -->
+  <path d="M 300 346 L 300 372" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arch-arrow)"/>
+  <path d="M 540 346 L 540 372" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arch-arrow)"/>
+
+  <!-- Layer 4: Extensions -->
+  <rect x="40" y="372" width="360" height="74" rx="10" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="60" y="394" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">插件系统</text>
+  <rect x="70" y="404" width="150" height="32" rx="6" fill="#1a2030" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="145" y="425" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">plugins/ (359)</text>
+  <rect x="240" y="404" width="140" height="32" rx="6" fill="#1a2030" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="310" y="425" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">.plugin.zsh 约定</text>
+
+  <rect x="420" y="372" width="360" height="74" rx="10" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="440" y="394" fill="#b388ff" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">主题系统</text>
+  <rect x="450" y="404" width="150" height="32" rx="6" fill="#1a2030" stroke="#b388ff" stroke-width="1"/>
+  <text x="525" y="425" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">themes/ (143)</text>
+  <rect x="620" y="404" width="140" height="32" rx="6" fill="#1a2030" stroke="#b388ff" stroke-width="1"/>
+  <text x="690" y="425" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">.zsh-theme 约定</text>
+
+  <!-- arrow to lifecycle -->
+  <path d="M 410 446 L 410 472" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arch-arrow)"/>
+
+  <!-- Layer 5: Lifecycle tools -->
+  <rect x="40" y="472" width="740" height="52" rx="10" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="60" y="494" fill="#80c7ff" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">生命周期工具层</text>
+  <rect x="180" y="484" width="130" height="30" rx="6" fill="#1a2030" stroke="#80c7ff" stroke-width="1"/>
+  <text x="245" y="504" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">install.sh</text>
+  <rect x="326" y="484" width="160" height="30" rx="6" fill="#1a2030" stroke="#80c7ff" stroke-width="1"/>
+  <text x="406" y="504" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">check_for_upgrade</text>
+  <rect x="502" y="484" width="110" height="30" rx="6" fill="#1a2030" stroke="#80c7ff" stroke-width="1"/>
+  <text x="557" y="504" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">upgrade.sh</text>
+  <rect x="628" y="484" width="130" height="30" rx="6" fill="#1a2030" stroke="#80c7ff" stroke-width="1"/>
+  <text x="693" y="504" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">changelog.sh</text>
+</svg>

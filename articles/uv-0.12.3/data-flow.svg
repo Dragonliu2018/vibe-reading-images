@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="720" viewBox="0 0 820 720" font-family="system-ui, sans-serif">
+  <rect width="820" height="720" fill="#0b0d14"/>
+
+  <text x="410" y="30" text-anchor="middle" fill="#e6e6e6" font-size="17" font-weight="600">uv sync 数据流：从 CLI 到环境同步</text>
+
+  <defs>
+    <marker id="flow-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+
+  <!-- Phase labels (left rail) -->
+  <text x="48" y="80" fill="#f9ca24" font-size="12" font-weight="600">① 启动</text>
+  <text x="48" y="195" fill="#f9ca24" font-size="12" font-weight="600">② 装配</text>
+  <text x="48" y="320" fill="#f9ca24" font-size="12" font-weight="600">③ 解析</text>
+  <text x="48" y="470" fill="#f9ca24" font-size="12" font-weight="600">④ 锁定</text>
+  <text x="48" y="575" fill="#f9ca24" font-size="12" font-weight="600">⑤ 安装</text>
+
+  <!-- Step 1: CLI parse -->
+  <rect x="100" y="56" width="640" height="46" rx="7" fill="#13162a" stroke="#6c8ef5" stroke-width="1.3"/>
+  <text x="420" y="76" text-anchor="middle" fill="#e6e6e6" font-size="13">Cli::try_parse_from(args) → Clap 解析</text>
+  <text x="420" y="93" text-anchor="middle" fill="#9aa3b2" font-size="11">lib.rs::main() → 独立线程跑 tokio current_thread runtime → run_with_workspace_cache()</text>
+
+  <!-- Step 2: workspace + settings -->
+  <rect x="100" y="120" width="310" height="60" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.3"/>
+  <text x="255" y="142" text-anchor="middle" fill="#e6e6e6" font-size="13">发现 Workspace</text>
+  <text x="255" y="159" text-anchor="middle" fill="#9aa3b2" font-size="11">ProjectWorkspace::discover()</text>
+  <text x="255" y="174" text-anchor="middle" fill="#9aa3b2" font-size="11">pyproject.toml + members</text>
+
+  <rect x="430" y="120" width="310" height="60" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.3"/>
+  <text x="585" y="142" text-anchor="middle" fill="#e6e6e6" font-size="13">解析 Settings</text>
+  <text x="585" y="159" text-anchor="middle" fill="#9aa3b2" font-size="11">CLI > 环境变量 > 配置文件</text>
+  <text x="585" y="174" text-anchor="middle" fill="#9aa3b2" font-size="11">SyncSettings::resolve()</text>
+
+  <!-- Step 3: resolve -->
+  <rect x="100" y="210" width="200" height="60" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.3"/>
+  <text x="200" y="232" text-anchor="middle" fill="#e6e6e6" font-size="13">发现 Python</text>
+  <text x="200" y="249" text-anchor="middle" fill="#9aa3b2" font-size="11">PythonEnvironment::find()</text>
+  <text x="200" y="264" text-anchor="middle" fill="#9aa3b2" font-size="11">Interpreter → markers + tags</text>
+
+  <rect x="320" y="210" width="420" height="60" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.3"/>
+  <text x="530" y="232" text-anchor="middle" fill="#e6e6e6" font-size="13">Resolver::resolve() · PubGrub 求解</text>
+  <text x="530" y="249" text-anchor="middle" fill="#9aa3b2" font-size="11">solver 线程 + async fetcher 双线程 · mpsc channel</text>
+  <text x="530" y="264" text-anchor="middle" fill="#9aa3b2" font-size="11">Manifest → ResolverOutput (petgraph)</text>
+
+  <!-- Step 3b: fetch metadata -->
+  <rect x="320" y="290" width="420" height="44" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2" opacity="0.9"/>
+  <text x="530" y="310" text-anchor="middle" fill="#e6e6e6" font-size="12">DistributionDatabase → RegistryClient::simple_detail()</text>
+  <text x="530" y="326" text-anchor="middle" fill="#9aa3b2" font-size="11">PyPI Simple API · CachedClient HTTP 缓存 · 并发获取元数据</text>
+
+  <!-- Step 4: lock -->
+  <rect x="100" y="358" width="640" height="56" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.3"/>
+  <text x="420" y="380" text-anchor="middle" fill="#e6e6e6" font-size="13">生成/校验 uv.lock (universal resolution, 多 fork)</text>
+  <text x="420" y="397" text-anchor="middle" fill="#9aa3b2" font-size="11">lock.rs::do_lock() · marker_reachability + simplify_conflict_markers</text>
+  <text x="420" y="410" text-anchor="middle" fill="#9aa3b2" font-size="11">--locked/--frozen 校验 · InstallTarget::to_resolution() 过滤当前平台</text>
+
+  <!-- Step 5: plan -->
+  <rect x="100" y="442" width="640" height="48" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.3"/>
+  <text x="420" y="463" text-anchor="middle" fill="#e6e6e6" font-size="13">InstallationPlan::build() · Planner 分区</text>
+  <text x="420" y="480" text-anchor="middle" fill="#9aa3b2" font-size="11">Resolution + SitePackages → Plan { cached, remote, reinstalls, extraneous }</text>
+
+  <!-- Step 5b: prepare + install -->
+  <rect x="100" y="512" width="310" height="72" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.3"/>
+  <text x="255" y="534" text-anchor="middle" fill="#e6e6e6" font-size="13">Preparer::prepare()</text>
+  <text x="255" y="551" text-anchor="middle" fill="#9aa3b2" font-size="11">FuturesUnordered 并行下载</text>
+  <text x="255" y="566" text-anchor="middle" fill="#9aa3b2" font-size="11">get_or_build_wheel()</text>
+  <text x="255" y="578" text-anchor="middle" fill="#9aa3b2" font-size="10">stream/download · sdist PEP 517 build</text>
+
+  <rect x="430" y="512" width="310" height="72" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.3"/>
+  <text x="585" y="534" text-anchor="middle" fill="#e6e6e6" font-size="13">Installer::install_blocking()</text>
+  <text x="585" y="551" text-anchor="middle" fill="#9aa3b2" font-size="11">rayon par_iter 并行</text>
+  <text x="585" y="566" text-anchor="middle" fill="#9aa3b2" font-size="11">install_wheel() 硬链接到 site-packages</text>
+  <text x="585" y="578" text-anchor="middle" fill="#9aa3b2" font-size="10">卸载 extraneous · 两阶段 isolated/shared</text>
+
+  <!-- Step 6: result -->
+  <rect x="100" y="610" width="640" height="46" rx="7" fill="#13162a" stroke="#6c8ef5" stroke-width="1.3"/>
+  <text x="420" y="630" text-anchor="middle" fill="#e6e6e6" font-size="13">ExitStatus::Success · 输出 Changelog</text>
+  <text x="420" y="647" text-anchor="middle" fill="#9aa3b2" font-size="11">UvError::User(1) / Unexpected(2) · OperationDiagnostic 错误报告</text>
+
+  <!-- Flow arrows -->
+  <line x1="420" y1="102" x2="420" y2="118" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="420" y1="180" x2="200" y2="208" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="420" y1="180" x2="530" y2="208" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="530" y1="270" x2="530" y2="288" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="200" y1="270" x2="420" y2="356" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="530" y1="334" x2="420" y2="356" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="420" y1="414" x2="420" y2="440" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="420" y1="490" x2="255" y2="510" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="420" y1="490" x2="585" y2="510" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="255" y1="584" x2="420" y2="608" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="585" y1="584" x2="420" y2="608" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+</svg>

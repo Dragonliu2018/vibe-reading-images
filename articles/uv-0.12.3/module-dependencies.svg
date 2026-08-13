@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="560" viewBox="0 0 820 560" font-family="system-ui, sans-serif">
+  <rect width="820" height="560" fill="#0b0d14"/>
+
+  <text x="410" y="30" text-anchor="middle" fill="#e6e6e6" font-size="17" font-weight="600">uv 核心模块依赖关系</text>
+
+  <defs>
+    <marker id="dep-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="dep-arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+
+  <!-- Center hub: commands (uv crate) -->
+  <rect x="330" y="240" width="160" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="410" y="263" text-anchor="middle" fill="#e6e6e6" font-size="14" font-weight="600">uv 主 crate</text>
+  <text x="410" y="282" text-anchor="middle" fill="#9aa3b2" font-size="11">commands/ · lib.rs 调度</text>
+
+  <!-- Resolver (left) -->
+  <rect x="60" y="120" width="150" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="135" y="142" text-anchor="middle" fill="#e6e6e6" font-size="13" font-weight="600">uv-resolver</text>
+  <text x="135" y="160" text-anchor="middle" fill="#9aa3b2" font-size="11">PubGrub 依赖解析</text>
+
+  <!-- Workspace (left lower) -->
+  <rect x="60" y="240" width="150" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="135" y="262" text-anchor="middle" fill="#e6e6e6" font-size="13" font-weight="600">uv-workspace</text>
+  <text x="135" y="280" text-anchor="middle" fill="#9aa3b2" font-size="11">项目/workspace 模型</text>
+
+  <!-- Distribution (right) -->
+  <rect x="610" y="120" width="150" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="685" y="142" text-anchor="middle" fill="#e6e6e6" font-size="13" font-weight="600">uv-distribution</text>
+  <text x="685" y="160" text-anchor="middle" fill="#9aa3b2" font-size="11">下载/构建 wheel</text>
+
+  <!-- Installer (right lower) -->
+  <rect x="610" y="240" width="150" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="685" y="262" text-anchor="middle" fill="#e6e6e6" font-size="13" font-weight="600">uv-installer</text>
+  <text x="685" y="280" text-anchor="middle" fill="#9aa3b2" font-size="11">安装 wheel 到 venv</text>
+
+  <!-- Python (bottom left) -->
+  <rect x="180" y="400" width="140" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="250" y="422" text-anchor="middle" fill="#e6e6e6" font-size="13" font-weight="600">uv-python</text>
+  <text x="250" y="440" text-anchor="middle" fill="#9aa3b2" font-size="11">解释器发现/安装</text>
+
+  <!-- Client (bottom mid) -->
+  <rect x="340" y="400" width="140" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="410" y="422" text-anchor="middle" fill="#e6e6e6" font-size="13" font-weight="600">uv-client</text>
+  <text x="410" y="440" text-anchor="middle" fill="#9aa3b2" font-size="11">PyPI HTTP + 缓存</text>
+
+  <!-- Cache (bottom right) -->
+  <rect x="500" y="400" width="140" height="50" rx="8" fill="#13162a" stroke="#8a8f9c" stroke-width="1.5"/>
+  <text x="570" y="422" text-anchor="middle" fill="#e6e6e6" font-size="13" font-weight="600">uv-cache</text>
+  <text x="570" y="440" text-anchor="middle" fill="#9aa3b2" font-size="11">全局去重缓存</text>
+
+  <!-- Parsing primitives (top center) -->
+  <rect x="300" y="70" width="220" height="42" rx="8" fill="#13162a" stroke="#8a8f9c" stroke-width="1.5"/>
+  <text x="410" y="96" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-pep440 · uv-pep508 · uv-pypi-types · uv-platform-tags</text>
+
+  <!-- Edges: uv crate -> modules (blue) -->
+  <line x1="330" y1="248" x2="210" y2="158" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#dep-arr)"/>
+  <line x1="330" y1="268" x2="210" y2="262" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#dep-arr)"/>
+  <line x1="490" y1="248" x2="610" y2="158" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#dep-arr)"/>
+  <line x1="490" y1="268" x2="610" y2="262" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#dep-arr)"/>
+  <line x1="385" y1="296" x2="270" y2="400" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#dep-arr)"/>
+
+  <!-- resolver -> distribution/client (teal: cross deps) -->
+  <line x1="210" y1="145" x2="610" y2="145" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
+  <text x="410" y="138" text-anchor="middle" fill="#4ecdc4" font-size="10">DefaultResolverProvider 经 DistributionDatabase 取元数据</text>
+
+  <!-- distribution -> client -->
+  <line x1="685" y1="170" x2="450" y2="400" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
+  <!-- distribution -> cache -->
+  <line x1="685" y1="170" x2="600" y2="400" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
+  <!-- installer -> cache -->
+  <line x1="685" y1="290" x2="590" y2="400" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
+  <!-- client -> cache -->
+  <line x1="470" y1="425" x2="500" y2="425" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
+
+  <!-- modules -> parsing primitives (dashed gray) -->
+  <line x1="135" y1="120" x2="320" y2="100" stroke="#5a6275" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="685" y1="120" x2="500" y2="100" stroke="#5a6275" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
+
+  <!-- Legend -->
+  <line x1="60" y1="510" x2="90" y2="510" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="96" y="514" fill="#9aa3b2" font-size="11">uv crate 调用</text>
+  <line x1="200" y1="510" x2="230" y2="510" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="236" y="514" fill="#9aa3b2" font-size="11">模块间依赖</text>
+  <line x1="340" y1="510" x2="370" y2="510" stroke="#5a6275" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="376" y="514" fill="#9aa3b2" font-size="11">依赖解析原语层（被几乎所有模块使用）</text>
+</svg>

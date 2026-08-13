@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="720" viewBox="0 0 820 720">
+  <defs>
+    <marker id="df-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="arrow">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="df-arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="arrow">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect width="820" height="720" fill="#0b0d14"/>
+
+  <text x="410" y="34" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">Shell 启动数据流</text>
+
+  <!-- Stage 1: zshrc -->
+  <rect x="280" y="56" width="260" height="48" rx="8" fill="#1a2030" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="76" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">source ~/.zshrc</text>
+  <text x="410" y="93" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">设 $ZSH / $plugins / $ZSH_THEME</text>
+  <path d="M 410 104 L 410 124" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+
+  <!-- Stage 2: env guard -->
+  <rect x="280" y="124" width="260" height="44" rx="8" fill="#1a2030" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="144" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">环境保护 + 路径推导</text>
+  <text x="410" y="160" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">ZSH_VERSION / emulate / $ZSH 推导</text>
+  <path d="M 410 168 L 410 188" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+
+  <!-- Stage 3: upgrade check (async branch) -->
+  <rect x="60" y="188" width="200" height="44" rx="8" fill="#1a2030" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="160" y="208" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">check_for_upgrade</text>
+  <text x="160" y="224" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="10">后台 &amp;| 非阻塞</text>
+
+  <!-- Stage 4: fpath -->
+  <rect x="320" y="188" width="180" height="44" rx="8" fill="#1a2030" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="208" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">fpath 装配</text>
+  <text x="410" y="224" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">functions + 插件目录</text>
+  <path d="M 410 154 L 410 188" stroke="none"/>
+  <!-- arrow from env to fpath -->
+  <path d="M 410 168 L 410 188" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+  <!-- dashed branch to upgrade -->
+  <path d="M 320 210 L 260 210" stroke="#80c7ff" stroke-width="1.5" fill="none" stroke-dasharray="5,4" marker-end="url(#df-arrow-amber)" opacity="0.8"/>
+  <path d="M 410 232 L 410 252" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+
+  <!-- Stage 5: compinit -->
+  <rect x="280" y="252" width="260" height="56" rx="8" fill="#1a2030" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="272" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">compinit + zcompdump 缓存</text>
+  <text x="410" y="289" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">revision/fpath 指纹检测</text>
+  <text x="410" y="303" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">zrecompile → .zwc 字节码</text>
+  <path d="M 410 308 L 410 328" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+
+  <!-- Stage 6: lib -->
+  <rect x="280" y="328" width="260" height="44" rx="8" fill="#1a2030" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="348" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">source lib/*.zsh (21 个)</text>
+  <text x="410" y="364" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">cli / git / completion / key-bindings …</text>
+  <path d="M 410 372 L 410 392" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+
+  <!-- Stage 7: plugins -->
+  <rect x="280" y="392" width="260" height="44" rx="8" fill="#1a2030" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="410" y="412" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">source plugins/*/*.plugin.zsh</text>
+  <text x="410" y="428" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">别名 / 函数 / compdef / hook 注入</text>
+  <path d="M 410 436 L 410 456" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+
+  <!-- Stage 8: custom -->
+  <rect x="280" y="456" width="260" height="44" rx="8" fill="#1a2030" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="476" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">source custom/*.zsh</text>
+  <text x="410" y="492" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">用户自定义配置</text>
+  <path d="M 410 500 L 410 520" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+
+  <!-- Stage 9: theme -->
+  <rect x="280" y="520" width="260" height="44" rx="8" fill="#1a2030" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="410" y="540" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">source $ZSH_THEME.zsh-theme</text>
+  <text x="410" y="556" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">设 $PROMPT / ZSH_THEME_GIT_PROMPT_*</text>
+  <path d="M 410 564 L 410 584" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
+
+  <!-- Stage 10: prompt ready -->
+  <rect x="280" y="584" width="260" height="48" rx="8" fill="#1a2030" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="410" y="604" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">Prompt 就绪</text>
+  <text x="410" y="621" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">completion + 别名 + 键绑定 + 主题</text>
+
+  <!-- async prompt loop note -->
+  <rect x="580" y="520" width="200" height="56" rx="8" fill="#1a2030" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="680" y="540" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="12">async_prompt</text>
+  <text x="680" y="556" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="10">precmd fork 子进程</text>
+  <text x="680" y="569" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="10">回调 zle .reset-prompt</text>
+  <path d="M 580 548 L 540 548" stroke="#f9ca24" stroke-width="1.5" fill="none" stroke-dasharray="5,4" marker-end="url(#df-arrow-amber)" opacity="0.8"/>
+
+  <!-- config driving note -->
+  <rect x="60" y="584" width="200" height="56" rx="8" fill="#1a2030" stroke="#9aa3c0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="160" y="604" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">zstyle :omz:update:*</text>
+  <text x="160" y="620" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">ZSH_DISABLE_COMPFIX</text>
+  <text x="160" y="636" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">配置全程驱动行为</text>
+
+  <text x="410" y="688" text-anchor="middle" fill="#6b7394" font-family="system-ui, sans-serif" font-size="11">虚线 = 异步 / 后台分支　实线 = 同步 source 调用</text>
+</svg>
