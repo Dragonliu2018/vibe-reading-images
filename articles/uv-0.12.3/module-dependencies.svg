@@ -53,7 +53,7 @@
   <text x="570" y="440" text-anchor="middle" fill="#9aa3b2" font-size="11">全局去重缓存</text>
 
   <!-- Parsing primitives (top center) -->
-  <rect x="300" y="70" width="220" height="42" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <rect x="230" y="70" width="360" height="42" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
   <text x="410" y="96" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-pep440 · uv-pep508 · uv-pypi-types · uv-platform-tags</text>
 
   <!-- Edges: uv crate -> modules (blue) -->
@@ -67,18 +67,18 @@
   <line x1="210" y1="145" x2="610" y2="145" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
   <text x="410" y="138" text-anchor="middle" fill="#4ecdc4" font-size="10">DefaultResolverProvider 经 DistributionDatabase 取元数据</text>
 
-  <!-- distribution -> client -->
-  <line x1="685" y1="170" x2="450" y2="400" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
-  <!-- distribution -> cache -->
-  <line x1="685" y1="170" x2="600" y2="400" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
+  <!-- distribution -> client (折线从左侧绕开 installer 框) -->
+  <polyline points="685,170 580,170 580,375 410,375 410,400" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
+  <!-- distribution -> cache (折线从右侧绕开 installer 框) -->
+  <polyline points="685,170 780,170 780,415 640,415" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
   <!-- installer -> cache -->
   <line x1="685" y1="290" x2="590" y2="400" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
   <!-- client -> cache -->
   <line x1="470" y1="425" x2="500" y2="425" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
 
   <!-- modules -> parsing primitives (dashed gray) -->
-  <line x1="135" y1="120" x2="320" y2="100" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
-  <line x1="685" y1="120" x2="500" y2="100" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="135" y1="120" x2="230" y2="100" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="685" y1="120" x2="590" y2="100" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
 
   <!-- Legend -->
   <line x1="60" y1="510" x2="90" y2="510" stroke="#6c8ef5" stroke-width="1.5"/>
