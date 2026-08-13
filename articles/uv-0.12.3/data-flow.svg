@@ -79,10 +79,12 @@
 
   <!-- Flow arrows -->
   <line x1="420" y1="102" x2="420" y2="118" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
-  <line x1="420" y1="180" x2="200" y2="208" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
-  <line x1="420" y1="180" x2="530" y2="208" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="255" y1="180" x2="200" y2="208" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="585" y1="180" x2="530" y2="208" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
   <line x1="530" y1="270" x2="530" y2="288" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
-  <line x1="200" y1="270" x2="420" y2="356" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
+  <line x1="200" y1="270" x2="200" y2="345" stroke="#6c8ef5" stroke-width="1.5"/>
+  <line x1="200" y1="345" x2="420" y2="345" stroke="#6c8ef5" stroke-width="1.5"/>
+  <line x1="420" y1="345" x2="420" y2="356" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
   <line x1="530" y1="334" x2="420" y2="356" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
   <line x1="420" y1="414" x2="420" y2="440" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
   <line x1="420" y1="490" x2="255" y2="510" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#flow-arr)"/>
