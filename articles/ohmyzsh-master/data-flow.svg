@@ -32,10 +32,8 @@
   <rect x="320" y="188" width="180" height="44" rx="8" fill="#1a2030" stroke="#6c8ef5" stroke-width="1.5"/>
   <text x="410" y="208" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">fpath 装配</text>
   <text x="410" y="224" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">functions + 插件目录</text>
-  <!-- arrow from env to fpath -->
-  <path d="M 410 168 L 410 188" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
-  <!-- dashed branch to upgrade -->
-  <path d="M 320 210 L 260 210" stroke="#80c7ff" stroke-width="1.5" fill="none" stroke-dasharray="5,4" marker-end="url(#df-arrow-amber)" opacity="0.8"/>
+  <!-- dashed branch: check_for_upgrade (async) then fpath -->
+  <path d="M 260 210 L 320 210" stroke="#80c7ff" stroke-width="1.5" fill="none" stroke-dasharray="5,4" marker-end="url(#df-arrow-amber)" opacity="0.8"/>
   <path d="M 410 232 L 410 252" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
 
   <!-- Stage 5: compinit -->
