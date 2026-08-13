@@ -32,7 +32,6 @@
   <rect x="320" y="188" width="180" height="44" rx="8" fill="#1a2030" stroke="#6c8ef5" stroke-width="1.5"/>
   <text x="410" y="208" text-anchor="middle" fill="#e6e9f0" font-family="system-ui, sans-serif" font-size="13">fpath 装配</text>
   <text x="410" y="224" text-anchor="middle" fill="#9aa3c0" font-family="system-ui, sans-serif" font-size="11">functions + 插件目录</text>
-  <path d="M 410 154 L 410 188" stroke="none"/>
   <!-- arrow from env to fpath -->
   <path d="M 410 168 L 410 188" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#df-arrow)"/>
   <!-- dashed branch to upgrade -->
