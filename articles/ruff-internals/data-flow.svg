@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="960" height="720">
-<rect width="960" height="720" fill="#0b0d14"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 745" width="960" height="745">
+<rect width="960" height="745" fill="#0b0d14"/>
 <defs>
 <marker id="arrow-e6e6e6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e6e6e6"/></marker>
 <marker id="arrow-6c8ef5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
@@ -51,5 +51,5 @@
 <text x="850" y="588" text-anchor="middle" fill="#e6e6e6" font-family="system-ui, sans-serif" font-size="11">≤ 100 轮收敛</text>
 <path d="M 760 540 L 740.0 523" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-f9ca24)"/>
 <text x="750.0" y="523.5" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">fix 模式</text>
-<text x="236.0" y="695" fill="#888" font-family="system-ui, sans-serif" font-size="11">每个文件独立并行处理，单文件 panic 由 catch_unwind 捕获转为诊断</text>
+<text x="236.0" y="730" fill="#888" font-family="system-ui, sans-serif" font-size="11">每个文件独立并行处理，单文件 panic 由 catch_unwind 捕获转为诊断</text>
 </svg>
