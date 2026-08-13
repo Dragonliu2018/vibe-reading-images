@@ -75,8 +75,8 @@
 
   <!-- Layer dependency arrows (downward) -->
   <defs>
-    <marker id="arr-down" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M0,0 L10,0 L5,9 z" fill="#7a86b3"/>
+    <marker id="arr-down" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
     </marker>
   </defs>
   <line x1="410" y1="148" x2="410" y2="164" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr-down)"/>
