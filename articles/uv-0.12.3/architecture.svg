@@ -58,32 +58,32 @@
   <text x="680" y="424" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-extract</text>
 
   <!-- Layer 5: 基础设施层 -->
-  <rect x="40" y="468" width="740" height="92" rx="10" fill="none" stroke="#8a8f9c" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
-  <text x="58" y="490" fill="#8a8f9c" font-size="13" font-weight="600">基础设施层</text>
-  <rect x="60" y="500" width="150" height="48" rx="6" fill="#13162a" stroke="#8a8f9c" stroke-width="1.2"/>
+  <rect x="40" y="468" width="740" height="92" rx="10" fill="none" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.7"/>
+  <text x="58" y="490" fill="#80c7ff" font-size="13" font-weight="600">基础设施层</text>
+  <rect x="60" y="500" width="150" height="48" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
   <text x="135" y="520" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-pep440 · uv-pep508</text>
   <text x="135" y="538" text-anchor="middle" fill="#9aa3b2" font-size="11">版本/依赖规范解析</text>
-  <rect x="225" y="500" width="150" height="48" rx="6" fill="#13162a" stroke="#8a8f9c" stroke-width="1.2"/>
+  <rect x="225" y="500" width="150" height="48" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
   <text x="300" y="520" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-cache · uv-python</text>
   <text x="300" y="538" text-anchor="middle" fill="#9aa3b2" font-size="11">全局缓存 · 解释器管理</text>
-  <rect x="390" y="500" width="155" height="48" rx="6" fill="#13162a" stroke="#8a8f9c" stroke-width="1.2"/>
+  <rect x="390" y="500" width="155" height="48" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
   <text x="467" y="520" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-platform-tags · uv-auth</text>
   <text x="467" y="538" text-anchor="middle" fill="#9aa3b2" font-size="11">平台标签 · 认证</text>
-  <rect x="560" y="500" width="155" height="48" rx="6" fill="#13162a" stroke="#8a8f9c" stroke-width="1.2"/>
+  <rect x="560" y="500" width="155" height="48" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
   <text x="637" y="520" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-configuration · uv-fs</text>
   <text x="637" y="538" text-anchor="middle" fill="#9aa3b2" font-size="11">配置类型 · 文件系统</text>
 
   <!-- Layer dependency arrows (downward) -->
   <defs>
     <marker id="arr-down" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M0,0 L10,0 L5,9 z" fill="#5a6275"/>
+      <path d="M0,0 L10,0 L5,9 z" fill="#7a86b3"/>
     </marker>
   </defs>
-  <line x1="410" y1="148" x2="410" y2="164" stroke="#5a6275" stroke-width="1.5" marker-end="url(#arr-down)"/>
-  <line x1="410" y1="248" x2="410" y2="264" stroke="#5a6275" stroke-width="1.5" marker-end="url(#arr-down)"/>
-  <line x1="410" y1="348" x2="410" y2="364" stroke="#5a6275" stroke-width="1.5" marker-end="url(#arr-down)"/>
-  <line x1="410" y1="448" x2="410" y2="464" stroke="#5a6275" stroke-width="1.5" marker-end="url(#arr-down)"/>
+  <line x1="410" y1="148" x2="410" y2="164" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr-down)"/>
+  <line x1="410" y1="248" x2="410" y2="264" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr-down)"/>
+  <line x1="410" y1="348" x2="410" y2="364" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr-down)"/>
+  <line x1="410" y1="448" x2="410" y2="464" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr-down)"/>
 
-  <text x="425" y="160" fill="#5a6275" font-size="11">依赖方向</text>
+  <text x="425" y="160" fill="#7a86b3" font-size="11">依赖方向</text>
   <text x="58" y="608" fill="#9aa3b2" font-size="11">层间依赖单向向下；上层只依赖下层接口契约，下层不反向感知上层</text>
 </svg>

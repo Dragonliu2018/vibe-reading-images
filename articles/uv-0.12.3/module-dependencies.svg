@@ -48,12 +48,12 @@
   <text x="410" y="440" text-anchor="middle" fill="#9aa3b2" font-size="11">PyPI HTTP + 缓存</text>
 
   <!-- Cache (bottom right) -->
-  <rect x="500" y="400" width="140" height="50" rx="8" fill="#13162a" stroke="#8a8f9c" stroke-width="1.5"/>
+  <rect x="500" y="400" width="140" height="50" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
   <text x="570" y="422" text-anchor="middle" fill="#e6e6e6" font-size="13" font-weight="600">uv-cache</text>
   <text x="570" y="440" text-anchor="middle" fill="#9aa3b2" font-size="11">全局去重缓存</text>
 
   <!-- Parsing primitives (top center) -->
-  <rect x="300" y="70" width="220" height="42" rx="8" fill="#13162a" stroke="#8a8f9c" stroke-width="1.5"/>
+  <rect x="300" y="70" width="220" height="42" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
   <text x="410" y="96" text-anchor="middle" fill="#e6e6e6" font-size="12">uv-pep440 · uv-pep508 · uv-pypi-types · uv-platform-tags</text>
 
   <!-- Edges: uv crate -> modules (blue) -->
@@ -77,14 +77,14 @@
   <line x1="470" y1="425" x2="500" y2="425" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dep-arr2)" opacity="0.85"/>
 
   <!-- modules -> parsing primitives (dashed gray) -->
-  <line x1="135" y1="120" x2="320" y2="100" stroke="#5a6275" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
-  <line x1="685" y1="120" x2="500" y2="100" stroke="#5a6275" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="135" y1="120" x2="320" y2="100" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="685" y1="120" x2="500" y2="100" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6"/>
 
   <!-- Legend -->
   <line x1="60" y1="510" x2="90" y2="510" stroke="#6c8ef5" stroke-width="1.5"/>
   <text x="96" y="514" fill="#9aa3b2" font-size="11">uv crate 调用</text>
   <line x1="200" y1="510" x2="230" y2="510" stroke="#4ecdc4" stroke-width="1.5"/>
   <text x="236" y="514" fill="#9aa3b2" font-size="11">模块间依赖</text>
-  <line x1="340" y1="510" x2="370" y2="510" stroke="#5a6275" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <line x1="340" y1="510" x2="370" y2="510" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4,3"/>
   <text x="376" y="514" fill="#9aa3b2" font-size="11">依赖解析原语层（被几乎所有模块使用）</text>
 </svg>
