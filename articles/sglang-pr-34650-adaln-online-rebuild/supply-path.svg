@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="460" viewBox="0 0 840 460" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect width="840" height="460" fill="#0b0d14"/>
+
+  <!-- main title -->
+  <text x="420" y="26" text-anchor="middle" fill="#e6e8f0" font-size="15" font-weight="600">AdaLN 输出供给路径：sidecar 与按需重建</text>
+
+  <!-- column headers -->
+  <text x="210" y="52" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">旧 · sidecar 预计算（#33991，已关闭）</text>
+  <text x="630" y="52" text-anchor="middle" fill="#7bed9f" font-size="13" font-weight="600">新 · 按需重建（#34650）</text>
+
+  <!-- divider -->
+  <line x1="420" y1="48" x2="420" y2="436" stroke="#2a2e44" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+  <!-- LEFT COLUMN (cx=210, w=300 -> x 60..360) -->
+  <!-- A1 offline builder -->
+  <rect x="60" y="70" width="300" height="58" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="210" y="103" text-anchor="middle" fill="#e6e8f0" font-size="13">离线 build_minimax_h3_adaln_cache</text>
+  <!-- A2 sidecar artifact -->
+  <rect x="60" y="158" width="300" height="80" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="210" y="192" text-anchor="middle" fill="#e6e8f0" font-size="13">sidecar .safetensors<tspan x="210" dy="18">24.2 GiB · 锁(mode/steps/flow/noise)</tspan></text>
+  <!-- A3 serve load + lookup -->
+  <rect x="60" y="268" width="300" height="58" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="210" y="301" text-anchor="middle" fill="#e6e8f0" font-size="13">serve 加载 → lookup(plan)</text>
+  <!-- A4 red callout -->
+  <rect x="60" y="356" width="300" height="70" rx="8" fill="#13162a" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="210" y="382" text-anchor="middle" fill="#e6e8f0" font-size="13">计划不在 artifact<tspan x="210" dy="18">→ 请求直接失败（不降级）</tspan></text>
+
+  <!-- left arrows -->
+  <path d="M210,128 L210,158" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M210,238 L210,268" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M210,326 L210,356" fill="none" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- RIGHT COLUMN (cx=630, w=300 -> x 480..780) -->
+  <!-- B1 per-request entry -->
+  <rect x="480" y="70" width="300" height="58" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="630" y="103" text-anchor="middle" fill="#e6e8f0" font-size="13">prepare_adaln_plans（每请求）</text>
+  <!-- B2 build streaming -->
+  <rect x="480" y="158" width="300" height="80" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="630" y="192" text-anchor="middle" fill="#e6e8f0" font-size="13">build()：流式读 checkpoint<tspan x="630" dy="18">峰值 1 层 = 496 MiB</tspan></text>
+  <!-- B3 slab + lookup -->
+  <rect x="480" y="268" width="300" height="58" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="630" y="301" text-anchor="middle" fill="#e6e8f0" font-size="13">slab + lookup → block / final</text>
+  <!-- B4 green callout -->
+  <rect x="480" y="356" width="300" height="70" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="630" y="382" text-anchor="middle" fill="#e6e8f0" font-size="13">任意 schedule / steps<tspan x="630" dy="18">· bit-identical（md5 一致）</tspan></text>
+
+  <!-- right arrows -->
+  <path d="M630,128 L630,158" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M630,238 L630,268" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M630,326 L630,356" fill="none" stroke="#7bed9f" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>
