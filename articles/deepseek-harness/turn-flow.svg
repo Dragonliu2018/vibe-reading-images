@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="960" viewBox="0 0 780 960" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <rect width="780" height="960" fill="#0b0d14"/>
+  <text x="30" y="26" fill="#e6e8f0" font-size="16" font-weight="600">Turn / Step 运行时流程</text>
+  <text x="750" y="26" fill="#7a86b3" font-size="11" text-anchor="end">青= durable session event · 蓝= waterfall(next) · 粉= serial · 灰= 内部动作</text>
+
+  <!-- 1 turn/start -->
+  <rect x="200" y="44" width="380" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="390" y="69" fill="#4ecdc4" font-size="13" text-anchor="middle">turn/start</text>
+  <path d="M390,84 L390,112" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 2 claim + assemble -->
+  <rect x="200" y="114" width="380" height="40" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="390" y="139" fill="#cdd0e0" font-size="12" text-anchor="middle">claim next-step input + assemble prompt sections &amp; tool schemas</text>
+  <path d="M390,154 L390,182" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 3 agent/pre-step waterfall -->
+  <rect x="200" y="184" width="380" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="390" y="209" fill="#6c8ef5" font-size="13" text-anchor="middle">agent/pre-step  [waterfall · reject | enter(messages)]</text>
+  <path d="M390,224 L390,252" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- reject branch: from box3 left edge (y=204) down to turn/end (y=904) -->
+  <path d="M200,204 L120,204 L120,904 L200,904" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrowp)"/>
+  <text x="130" y="560" fill="#ff6b9d" font-size="12">reject → 关闭 turn</text>
+
+  <!-- 4 step/start + user/message -->
+  <rect x="200" y="254" width="380" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="390" y="279" fill="#4ecdc4" font-size="13" text-anchor="middle">step/start · user/message</text>
+  <path d="M390,294 L390,322" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 5 deriveMessages -->
+  <rect x="200" y="324" width="380" height="40" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="390" y="349" fill="#cdd0e0" font-size="12" text-anchor="middle">deriveMessages() — 从 log 投影 model history</text>
+  <path d="M390,364 L390,392" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 6 agent/request + llm/stream -->
+  <rect x="200" y="394" width="380" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="390" y="419" fill="#6c8ef5" font-size="13" text-anchor="middle">agent/request [waterfall] → llm/stream [waterfall]</text>
+  <path d="M390,434 L390,462" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 7 assistant/chunk + message -->
+  <rect x="200" y="464" width="380" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="390" y="489" fill="#4ecdc4" font-size="13" text-anchor="middle">assistant/chunk* · assistant/message</text>
+  <path d="M390,504 L390,532" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 8 tool/call -->
+  <rect x="200" y="534" width="380" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="390" y="559" fill="#4ecdc4" font-size="13" text-anchor="middle">tool/call*  (若无 tool-call → 跳到 step/end)</text>
+  <path d="M390,574 L390,602" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 9 tools pipeline waterfall -->
+  <rect x="200" y="604" width="380" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="390" y="629" fill="#6c8ef5" font-size="13" text-anchor="middle">tools/pre-execute → execute → post-execute  [waterfall]</text>
+  <path d="M390,644 L390,672" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 10 tool/result -->
+  <rect x="200" y="674" width="380" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="390" y="699" fill="#4ecdc4" font-size="13" text-anchor="middle">tool/result*</text>
+  <path d="M390,714 L390,742" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 11 step/end -->
+  <rect x="200" y="744" width="380" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="390" y="769" fill="#4ecdc4" font-size="13" text-anchor="middle">step/end</text>
+  <path d="M390,784 L390,812" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- loop back: from step/end right (y=764) up to claim+assemble (y=134) -->
+  <path d="M580,764 L660,764 L660,134 L580,134" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowc)"/>
+  <text x="668" y="460" fill="#4ecdc4" font-size="12">tools 欠新请求 / next-step</text>
+  <text x="668" y="476" fill="#4ecdc4" font-size="12">input 到达 → 下一个 step</text>
+
+  <!-- 12 agent/turn-stopping serial -->
+  <rect x="200" y="814" width="380" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+  <text x="390" y="839" fill="#ff6b9d" font-size="13" text-anchor="middle">agent/turn-stopping  [serial · 无 next()]</text>
+  <path d="M390,854 L390,882" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 13 turn/end -->
+  <rect x="200" y="884" width="380" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="390" y="909" fill="#4ecdc4" font-size="13" text-anchor="middle">turn/end</text>
+
+  <text x="30" y="940" fill="#7a86b3" font-size="11">step = 一次 model 请求 + 它调用的工具 · turn = 零或多个 step，首个 input claim 前开、无欠账时闭</text>
+</svg>

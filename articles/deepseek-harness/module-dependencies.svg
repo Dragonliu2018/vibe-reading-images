@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="500" viewBox="0 0 860 500" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect width="860" height="500" fill="#0b0d14"/>
+  <text x="30" y="26" fill="#e6e8f0" font-size="16" font-weight="600">模块依赖关系</text>
+  <text x="830" y="26" fill="#7a86b3" font-size="11" text-anchor="end">箭头 = 依赖方向（调用方 → 被调方）</text>
+
+  <!-- Row 1: assemblers / app face -->
+  <rect x="40" y="50" width="170" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="2"/>
+  <text x="125" y="78" fill="#80c7ff" font-size="13" text-anchor="middle">装配与启动</text>
+  <rect x="650" y="50" width="170" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="2"/>
+  <text x="735" y="78" fill="#b388ff" font-size="13" text-anchor="middle">客户端与 Host</text>
+
+  <!-- Row 2: core spine + cross-cutting -->
+  <rect x="40" y="180" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="125" y="208" fill="#6c8ef5" font-size="13" text-anchor="middle">Agent Loop</text>
+  <rect x="245" y="180" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="330" y="208" fill="#6c8ef5" font-size="13" text-anchor="middle">Tool 工具管线</text>
+  <rect x="450" y="180" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="535" y="208" fill="#6c8ef5" font-size="13" text-anchor="middle">Session 日志</text>
+  <rect x="655" y="180" width="170" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+  <text x="740" y="208" fill="#ff6b9d" font-size="13" text-anchor="middle">交互与护栏</text>
+
+  <!-- Row 3: capabilities + delegation -->
+  <rect x="40" y="320" width="170" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+  <text x="125" y="348" fill="#ff6b9d" font-size="13" text-anchor="middle">委托与协议</text>
+  <rect x="280" y="320" width="170" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="365" y="348" fill="#4ecdc4" font-size="13" text-anchor="middle">执行能力生态</text>
+  <rect x="520" y="320" width="170" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+  <text x="605" y="348" fill="#f9ca24" font-size="13" text-anchor="middle">LLM 能力层</text>
+
+  <!-- Row 4: Cordis foundation -->
+  <rect x="345" y="430" width="170" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="430" y="458" fill="#4ecdc4" font-size="13" text-anchor="middle">Cordis 插件内核</text>
+
+  <!-- 装配 -> Agent Loop (vertical in row gap) -->
+  <path d="M125,96 L125,180" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- 装配 -> Cordis (left channel, fold) -->
+  <path d="M60,96 L60,453 L345,453" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.65"/>
+  <!-- 客户端/Host -> Session (fold via row1-row2 gap) -->
+  <path d="M735,96 L735,140 L535,140 L535,180" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.65"/>
+  <!-- Agent Loop -> Tool 管线 (horizontal adjacent) -->
+  <path d="M210,203 L245,203" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="227" y="196" fill="#7a86b3" font-size="10">execute</text>
+  <!-- Tool 管线 -> Session (horizontal adjacent) -->
+  <path d="M415,210 L450,210" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="432" y="204" fill="#7a86b3" font-size="10">log</text>
+  <!-- Tool 管线 -> 执行能力 (Consumer->Provider, vertical in gap) -->
+  <path d="M330,226 L330,320" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowy)"/>
+  <text x="338" y="278" fill="#f9ca24" font-size="10">Consumer→Provider</text>
+  <!-- 交互护栏 -> Tool 管线 (fold above row2, avoids crossing Session box) -->
+  <path d="M740,180 L740,160 L330,160 L330,180" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.75"/>
+  <text x="500" y="154" fill="#ff6b9d" font-size="10">agent/* tools/* 事件</text>
+  <!-- 委托协议 -> Tool 管线 (fold via row2-row3 gap, x stays left of 330 to avoid crossing) -->
+  <path d="M125,320 L125,270 L300,270 L300,226" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.65"/>
+  <!-- 执行能力 -> Cordis (fold via row3-row4 gap) -->
+  <path d="M365,366 L365,400 L430,400 L430,430" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- LLM -> Cordis (fold via row3-row4 gap, x range disjoint from above) -->
+  <path d="M605,366 L605,400 L460,400 L460,430" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <text x="30" y="492" fill="#7a86b3" font-size="11">所有模块皆 Cordis 插件；核心引擎层（Agent Loop / Tool / Session）是产品 API 脊柱，能力层与框架层可替换。Agent Loop→LLM 的 stream 调用见 turn-flow.svg。</text>
+</svg>
