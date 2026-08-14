@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="636" viewBox="0 0 820 636" font-family="system-ui, sans-serif">
+<rect width="820" height="636" fill="#0b0d14"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker></defs>
+<text x="410.0" y="26" text-anchor="middle" fill="#e6e8f0" font-size="18" font-weight="600">fish-shell 模块依赖关系</text>
+<text x="410.0" y="44" text-anchor="middle" fill="#7a86b3" font-size="11">箭头方向：调用方 → 被依赖方（A 调用/依赖 B）</text>
+<line x1="435" y1="146" x2="435" y2="240" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="444" y="196" text-anchor="start" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">eval() 执行命令</text>
+<line x1="360" y1="118" x2="240" y2="118" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="300" y="109" text-anchor="middle" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">着色</text>
+<line x1="510" y1="118" x2="630" y2="118" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="570" y="109" text-anchor="middle" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">Tab</text>
+<path d="M 510 118 L 580 118 L 580 386" stroke="#7a86b3" stroke-width="1.4" fill="none" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="588" y="252" text-anchor="start" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">↑/add</text>
+<line x1="165" y1="146" x2="165" y2="240" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="174" y="196" text-anchor="start" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">部分解析</text>
+<line x1="705" y1="146" x2="705" y2="240" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="714" y="196" text-anchor="start" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">命令名</text>
+<line x1="360" y1="268" x2="240" y2="268" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="300" y="259" text-anchor="middle" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">消费 Ast</text>
+<line x1="510" y1="268" x2="630" y2="268" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="570" y="259" text-anchor="middle" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">派发</text>
+<line x1="435" y1="296" x2="290" y2="390" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="362" y="334" text-anchor="middle" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">展开变量</text>
+<line x1="435" y1="296" x2="580" y2="390" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="508" y="334" text-anchor="middle" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">add</text>
+<line x1="365" y1="418" x2="360" y2="548" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="372" y="486" text-anchor="start" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">signal/notify</text>
+<line x1="505" y1="418" x2="510" y2="548" stroke="#7a86b3" stroke-width="1.4" marker-end="url(#arrow)" opacity="0.75"/>
+<text x="516" y="486" text-anchor="start" fill="#9aa3c7" font-size="9.5" paint-order="stroke" stroke="#0b0d14" stroke-width="3">wutil/fs</text>
+<text x="435" y="604" text-anchor="middle" fill="#80c7ff" font-size="10.5" opacity="0.85">↑ 所有上层模块均依赖基础设施层（&amp;wstr / threads / flog / event / crates）</text>
+<rect x="90" y="90" width="150" height="56" rx="9" fill="#13162a" stroke="#b388ff" stroke-width="1.6"/>
+<text x="165" y="114" text-anchor="middle" fill="#e6e8f0" font-size="13.5" font-weight="600">Highlight</text>
+<text x="165" y="131" text-anchor="middle" fill="#9aa3c7" font-size="10">语法高亮</text>
+<rect x="360" y="90" width="150" height="56" rx="9" fill="#13162a" stroke="#b388ff" stroke-width="1.6"/>
+<text x="435" y="114" text-anchor="middle" fill="#e6e8f0" font-size="13.5" font-weight="600">Reader</text>
+<text x="435" y="131" text-anchor="middle" fill="#9aa3c7" font-size="10">交互主循环</text>
+<rect x="630" y="90" width="150" height="56" rx="9" fill="#13162a" stroke="#b388ff" stroke-width="1.6"/>
+<text x="705" y="114" text-anchor="middle" fill="#e6e8f0" font-size="13.5" font-weight="600">Completion</text>
+<text x="705" y="131" text-anchor="middle" fill="#9aa3c7" font-size="10">Tab 补全</text>
+<rect x="90" y="240" width="150" height="56" rx="9" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="165" y="264" text-anchor="middle" fill="#e6e8f0" font-size="13.5" font-weight="600">Parsing</text>
+<text x="165" y="281" text-anchor="middle" fill="#9aa3c7" font-size="10">tokenizer/ast</text>
+<rect x="360" y="240" width="150" height="56" rx="9" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="435" y="264" text-anchor="middle" fill="#e6e8f0" font-size="13.5" font-weight="600">Execution</text>
+<text x="435" y="281" text-anchor="middle" fill="#9aa3c7" font-size="10">exec/proc/expand</text>
+<rect x="630" y="240" width="150" height="56" rx="9" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="705" y="264" text-anchor="middle" fill="#e6e8f0" font-size="13.5" font-weight="600">Builtins</text>
+<text x="705" y="281" text-anchor="middle" fill="#9aa3c7" font-size="10">命令派发</text>
+<rect x="215" y="390" width="150" height="56" rx="9" fill="#13162a" stroke="#f9ca24" stroke-width="1.6"/>
+<text x="290" y="414" text-anchor="middle" fill="#e6e8f0" font-size="13.5" font-weight="600">Environment</text>
+<text x="290" y="431" text-anchor="middle" fill="#9aa3c7" font-size="10">env/universal</text>
+<rect x="505" y="390" width="150" height="56" rx="9" fill="#13162a" stroke="#f9ca24" stroke-width="1.6"/>
+<text x="580" y="414" text-anchor="middle" fill="#e6e8f0" font-size="13.5" font-weight="600">History</text>
+<text x="580" y="431" text-anchor="middle" fill="#9aa3c7" font-size="10">历史记录</text>
+<rect x="360" y="520" width="150" height="56" rx="9" fill="#13162a" stroke="#80c7ff" stroke-width="1.6"/>
+<text x="435" y="544" text-anchor="middle" fill="#e6e8f0" font-size="13.5" font-weight="600">Foundation</text>
+<text x="435" y="561" text-anchor="middle" fill="#9aa3c7" font-size="10">&amp;wstr / threads / flog</text>
+</svg>

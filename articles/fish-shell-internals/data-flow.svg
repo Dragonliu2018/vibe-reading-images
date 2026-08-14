@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="878" viewBox="0 0 820 878" font-family="system-ui, sans-serif">
+<rect width="820" height="878" fill="#0b0d14"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker></defs>
+<text x="410.0" y="26" text-anchor="middle" fill="#e6e8f0" font-size="18" font-weight="600">fish-shell 命令执行数据流</text>
+<text x="410.0" y="44" text-anchor="middle" fill="#7a86b3" font-size="11">从命令行到退出码的端到端数据流 · 按 Enter 后触发</text>
+<rect x="295" y="58" width="230" height="40" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.6"/>
+<text x="410" y="74" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">命令行 WString</text>
+<text x="410" y="89" text-anchor="middle" fill="#9aa3c7" font-size="9.5">"echo hello | cat"  (输入)</text>
+<rect x="285" y="132" width="250" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="410" y="150" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">词法 + 语法解析</text>
+<text x="410" y="165" text-anchor="middle" fill="#9aa3c7" font-size="9.5">tokenizer.rs → ast.rs (Populator)</text>
+<line x1="410" y1="98" x2="410" y2="128" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="295" y="206" width="230" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="410" y="222" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">ParsedSource</text>
+<text x="410" y="237" text-anchor="middle" fill="#9aa3c7" font-size="9.5">Arc { src + Ast }  parse_tree.rs</text>
+<line x1="410" y1="176" x2="410" y2="202" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="295" y="280" width="230" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="410" y="296" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">ExecutionContext</text>
+<text x="410" y="311" text-anchor="middle" fill="#9aa3c7" font-size="9.5">eval_node()  parse_execution.rs</text>
+<line x1="410" y1="246" x2="410" y2="276" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="285" y="354" width="250" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="410" y="372" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Expand 5 阶段展开</text>
+<text x="410" y="387" text-anchor="middle" fill="#9aa3c7" font-size="9.5">变量 / 通配 / 命令替换 / tilde  expand.rs</text>
+<line x1="410" y1="320" x2="410" y2="350" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="285" y="428" width="250" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="410" y="446" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">process_type_for_command</text>
+<text x="410" y="461" text-anchor="middle" fill="#9aa3c7" font-size="9.5">判定 External / Builtin / Function</text>
+<line x1="410" y1="398" x2="410" y2="424" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="295" y="502" width="230" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="410" y="518" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Job / Process[]</text>
+<text x="410" y="533" text-anchor="middle" fill="#9aa3c7" font-size="9.5">proc.rs  (管道构建)</text>
+<line x1="410" y1="472" x2="410" y2="498" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="310" y="576" width="200" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="410" y="592" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">exec_job</text>
+<text x="410" y="607" text-anchor="middle" fill="#9aa3c7" font-size="9.5">exec.rs  (分支点)</text>
+<line x1="410" y1="542" x2="410" y2="572" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 410 616 L 410 624 L 185 624 L 185 648" stroke="#7a86b3" stroke-width="1.4" fill="none" marker-end="url(#arrow)" opacity="0.8"/>
+<rect x="98" y="652" width="175" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="185" y="668" text-anchor="middle" fill="#e6e8f0" font-size="12.5" font-weight="600">External</text>
+<text x="185" y="682" text-anchor="middle" fill="#9aa3c7" font-size="9.5">fork+execvp / posix_spawn</text>
+<text x="185" y="693" text-anchor="middle" fill="#9aa3c7" font-size="9.5">→ Pid  (fork_exec)</text>
+<path d="M 410 616 L 410 624 L 410 624 L 410 648" stroke="#7a86b3" stroke-width="1.4" fill="none" marker-end="url(#arrow)" opacity="0.8"/>
+<rect x="322" y="652" width="175" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="410" y="668" text-anchor="middle" fill="#e6e8f0" font-size="12.5" font-weight="600">Builtin</text>
+<text x="410" y="682" text-anchor="middle" fill="#9aa3c7" font-size="9.5">builtin_run(parser,</text>
+<text x="410" y="693" text-anchor="middle" fill="#9aa3c7" font-size="9.5">IoStreams, argv)  builtins</text>
+<path d="M 410 616 L 410 624 L 635 624 L 635 648" stroke="#7a86b3" stroke-width="1.4" fill="none" marker-end="url(#arrow)" opacity="0.8"/>
+<rect x="548" y="652" width="175" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/>
+<text x="635" y="668" text-anchor="middle" fill="#e6e8f0" font-size="12.5" font-weight="600">Function</text>
+<text x="635" y="682" text-anchor="middle" fill="#9aa3c7" font-size="9.5">parser.eval() 递归</text>
+<text x="635" y="693" text-anchor="middle" fill="#9aa3c7" font-size="9.5">回到解析执行</text>
+<path d="M 185 702 L 185 712 L 410 712 L 410 734" stroke="#7a86b3" stroke-width="1.4" fill="none" marker-end="url(#arrow)" opacity="0.8"/>
+<path d="M 410 702 L 410 712 L 410 712 L 410 734" stroke="#7a86b3" stroke-width="1.4" fill="none" marker-end="url(#arrow)" opacity="0.8"/>
+<path d="M 635 702 L 635 712 L 410 712 L 410 734" stroke="#7a86b3" stroke-width="1.4" fill="none" marker-end="url(#arrow)" opacity="0.8"/>
+<rect x="295" y="738" width="230" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.6"/>
+<text x="410" y="754" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">ProcStatus</text>
+<text x="410" y="769" text-anchor="middle" fill="#9aa3c7" font-size="9.5">from_waitpid / from builtin</text>
+<line x1="410" y1="778" x2="410" y2="808" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="270" y="812" width="280" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.6"/>
+<text x="410" y="830" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">$status / $pipestatus</text>
+<text x="410" y="845" text-anchor="middle" fill="#9aa3c7" font-size="9.5">写入环境变量  +  history.add()  (输出)</text>
+</svg>
