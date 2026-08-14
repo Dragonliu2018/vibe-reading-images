@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1150" height="330" viewBox="0 0 1150 330" font-family="system-ui, sans-serif">
+<rect width="1150" height="330" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+</defs>
+  <text x="575" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16">GCC 编译数据流：源码 → 汇编</text>
+  <rect x="20" y="60" width="150" height="58" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="20" y="60" width="4" height="58" fill="#4ecdc4"/>
+  <text x="95" y="71" text-anchor="middle" fill="#e6e8f0" font-size="11">源码 .c</text>
+  <text x="95" y="89" text-anchor="middle" fill="#e6e8f0" font-size="11">libcpp 预处理</text>
+  <text x="95" y="107" text-anchor="middle" fill="#e6e8f0" font-size="11">cpp_get_token</text>
+  <rect x="260" y="60" width="150" height="58" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="260" y="60" width="4" height="58" fill="#4ecdc4"/>
+  <text x="335" y="71" text-anchor="middle" fill="#e6e8f0" font-size="11">C 前端解析</text>
+  <text x="335" y="89" text-anchor="middle" fill="#e6e8f0" font-size="11">c_parser_*</text>
+  <text x="335" y="107" text-anchor="middle" fill="#e6e8f0" font-size="11">→ GENERIC tree</text>
+  <rect x="500" y="60" width="150" height="58" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <rect x="500" y="60" width="4" height="58" fill="#f9ca24"/>
+  <text x="575" y="71" text-anchor="middle" fill="#e6e8f0" font-size="11">gimplify</text>
+  <text x="575" y="89" text-anchor="middle" fill="#e6e8f0" font-size="11">GENERIC → GIMPLE</text>
+  <text x="575" y="107" text-anchor="middle" fill="#e6e8f0" font-size="11">gimplify_expr</text>
+  <rect x="740" y="60" width="150" height="58" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <rect x="740" y="60" width="4" height="58" fill="#f9ca24"/>
+  <text x="815" y="71" text-anchor="middle" fill="#e6e8f0" font-size="11">SSA 构造</text>
+  <text x="815" y="89" text-anchor="middle" fill="#e6e8f0" font-size="11">rewrite_into_ssa</text>
+  <text x="815" y="107" text-anchor="middle" fill="#e6e8f0" font-size="11">→ SSA/GIMPLE</text>
+  <rect x="980" y="60" width="150" height="58" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <rect x="980" y="60" width="4" height="58" fill="#f9ca24"/>
+  <text x="1055" y="71" text-anchor="middle" fill="#e6e8f0" font-size="11">GIMPLE 优化遍</text>
+  <text x="1055" y="89" text-anchor="middle" fill="#e6e8f0" font-size="11">向量化 SCCVN</text>
+  <text x="1055" y="107" text-anchor="middle" fill="#e6e8f0" font-size="11">PRE DCE</text>
+  <rect x="20" y="210" width="150" height="58" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <rect x="20" y="210" width="4" height="58" fill="#ff6b9d"/>
+  <text x="95" y="221" text-anchor="middle" fill="#e6e8f0" font-size="11">pass_expand</text>
+  <text x="95" y="239" text-anchor="middle" fill="#e6e8f0" font-size="11">GIMPLE → RTL</text>
+  <text x="95" y="257" text-anchor="middle" fill="#e6e8f0" font-size="11">cfgexpand</text>
+  <rect x="260" y="210" width="150" height="58" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <rect x="260" y="210" width="4" height="58" fill="#ff6b9d"/>
+  <text x="335" y="221" text-anchor="middle" fill="#e6e8f0" font-size="11">RTL 优化</text>
+  <text x="335" y="239" text-anchor="middle" fill="#e6e8f0" font-size="11">cse · combine</text>
+  <text x="335" y="257" text-anchor="middle" fill="#e6e8f0" font-size="11">haifa-sched</text>
+  <rect x="500" y="210" width="150" height="58" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <rect x="500" y="210" width="4" height="58" fill="#ff6b9d"/>
+  <text x="575" y="221" text-anchor="middle" fill="#e6e8f0" font-size="11">寄存器分配</text>
+  <text x="575" y="239" text-anchor="middle" fill="#e6e8f0" font-size="11">ira · lra</text>
+  <text x="575" y="257" text-anchor="middle" fill="#e6e8f0" font-size="11">→ 硬件寄存器</text>
+  <rect x="740" y="210" width="150" height="58" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <rect x="740" y="210" width="4" height="58" fill="#ff6b9d"/>
+  <text x="815" y="221" text-anchor="middle" fill="#e6e8f0" font-size="11">final</text>
+  <text x="815" y="239" text-anchor="middle" fill="#e6e8f0" font-size="11">RTL → 汇编</text>
+  <text x="815" y="257" text-anchor="middle" fill="#e6e8f0" font-size="11">output_asm_insn</text>
+  <rect x="980" y="210" width="150" height="58" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <rect x="980" y="210" width="4" height="58" fill="#80c7ff"/>
+  <text x="1055" y="221" text-anchor="middle" fill="#e6e8f0" font-size="11">汇编 .s</text>
+  <text x="1055" y="239" text-anchor="middle" fill="#e6e8f0" font-size="11">asm_out_file</text>
+  <text x="1055" y="257" text-anchor="middle" fill="#e6e8f0" font-size="11">输出</text>
+  <path d="M171,89 L258,89" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M411,89 L498,89" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M651,89 L738,89" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M891,89 L978,89" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M1055,118 L1055,164 L95,164 L95,210" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M171,239 L258,239" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M411,239 L498,239" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M651,239 L738,239" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M891,239 L978,239" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="215" y="81" text-anchor="middle" fill="#f9ca24" font-size="10">tree_node</text>
+  <text x="455" y="81" text-anchor="middle" fill="#f9ca24" font-size="10">gimple</text>
+  <text x="695" y="81" text-anchor="middle" fill="#f9ca24" font-size="10">ssa_name</text>
+  <text x="935" y="81" text-anchor="middle" fill="#f9ca24" font-size="10">gimple</text>
+  <text x="215" y="231" text-anchor="middle" fill="#ff6b9d" font-size="10">rtx_def</text>
+  <text x="455" y="231" text-anchor="middle" fill="#ff6b9d" font-size="10">rtx 硬件寄存器</text>
+  <text x="695" y="231" text-anchor="middle" fill="#ff6b9d" font-size="10">rtx</text>
+  <text x="1120" y="302" text-anchor="end" fill="#b388ff" font-size="11">目标描述（targetm + insn-*）被 pass_expand / recog / final 查询</text>
+</svg>

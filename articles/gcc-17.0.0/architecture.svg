@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="770" height="700" viewBox="0 0 770 700" font-family="system-ui, sans-serif">
+<rect width="770" height="700" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+</defs>
+  <text x="385" y="28" text-anchor="middle" fill="#e6e8f0" font-size="16">GCC 17 分层架构</text>
+  <text x="40" y="48" fill="#6c8ef5" font-size="14" font-weight="600">驱动与编排层</text>
+  <rect x="133" y="56" width="160" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <rect x="133" y="56" width="4" height="44" fill="#6c8ef5"/>
+  <text x="213" y="69" text-anchor="middle" fill="#e6e8f0" font-size="12">gcc 驱动器</text>
+  <text x="213" y="87" text-anchor="middle" fill="#e6e8f0" font-size="12">spec 语言 + pex 子进程</text>
+  <text x="213" y="40" text-anchor="middle" fill="#6c8ef5" font-size="11">gcc.cc</text>
+  <rect x="305" y="56" width="160" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <rect x="305" y="56" width="4" height="44" fill="#6c8ef5"/>
+  <text x="385" y="69" text-anchor="middle" fill="#e6e8f0" font-size="12">编译器入口</text>
+  <text x="385" y="87" text-anchor="middle" fill="#e6e8f0" font-size="12">toplev::main</text>
+  <text x="385" y="40" text-anchor="middle" fill="#6c8ef5" font-size="11">main.cc / toplev.cc</text>
+  <rect x="477" y="56" width="160" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <rect x="477" y="56" width="4" height="44" fill="#6c8ef5"/>
+  <text x="557" y="69" text-anchor="middle" fill="#e6e8f0" font-size="12">pass 管理器</text>
+  <text x="557" y="87" text-anchor="middle" fill="#e6e8f0" font-size="12">execute_one_pass 调度</text>
+  <text x="557" y="40" text-anchor="middle" fill="#6c8ef5" font-size="11">passes.cc</text>
+  <text x="40" y="180" fill="#4ecdc4" font-size="14" font-weight="600">前端层</text>
+  <rect x="133" y="188" width="160" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="133" y="188" width="4" height="44" fill="#4ecdc4"/>
+  <text x="213" y="201" text-anchor="middle" fill="#e6e8f0" font-size="12">预处理器</text>
+  <text x="213" y="219" text-anchor="middle" fill="#e6e8f0" font-size="12">cpp_get_token</text>
+  <text x="213" y="172" text-anchor="middle" fill="#4ecdc4" font-size="11">libcpp</text>
+  <rect x="305" y="188" width="160" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="305" y="188" width="4" height="44" fill="#4ecdc4"/>
+  <text x="385" y="201" text-anchor="middle" fill="#e6e8f0" font-size="12">C 递归下降 parser</text>
+  <text x="385" y="219" text-anchor="middle" fill="#e6e8f0" font-size="12">c_parser_* -> GENERIC</text>
+  <text x="385" y="172" text-anchor="middle" fill="#4ecdc4" font-size="11">c/  c-family/</text>
+  <rect x="477" y="188" width="160" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="477" y="188" width="4" height="44" fill="#4ecdc4"/>
+  <text x="557" y="201" text-anchor="middle" fill="#e6e8f0" font-size="12">语言钩子</text>
+  <text x="557" y="219" text-anchor="middle" fill="#e6e8f0" font-size="12">多语言复用后端</text>
+  <text x="557" y="172" text-anchor="middle" fill="#4ecdc4" font-size="11">lang_hooks</text>
+  <text x="40" y="312" fill="#f9ca24" font-size="14" font-weight="600">中端层</text>
+  <rect x="47" y="320" width="160" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <rect x="47" y="320" width="4" height="44" fill="#f9ca24"/>
+  <text x="127" y="333" text-anchor="middle" fill="#e6e8f0" font-size="12">GENERIC 树</text>
+  <text x="127" y="351" text-anchor="middle" fill="#e6e8f0" font-size="12">union tree_node</text>
+  <text x="127" y="304" text-anchor="middle" fill="#f9ca24" font-size="11">tree.cc</text>
+  <rect x="219" y="320" width="160" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <rect x="219" y="320" width="4" height="44" fill="#f9ca24"/>
+  <text x="299" y="333" text-anchor="middle" fill="#e6e8f0" font-size="12">GENERIC -> GIMPLE</text>
+  <text x="299" y="351" text-anchor="middle" fill="#e6e8f0" font-size="12">三地址降级</text>
+  <text x="299" y="304" text-anchor="middle" fill="#f9ca24" font-size="11">gimplify.cc</text>
+  <rect x="391" y="320" width="160" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <rect x="391" y="320" width="4" height="44" fill="#f9ca24"/>
+  <text x="471" y="333" text-anchor="middle" fill="#e6e8f0" font-size="12">SSA 构造</text>
+  <text x="471" y="351" text-anchor="middle" fill="#e6e8f0" font-size="12">rewrite_into_ssa</text>
+  <text x="471" y="304" text-anchor="middle" fill="#f9ca24" font-size="11">tree-into-ssa.cc</text>
+  <rect x="563" y="320" width="160" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <rect x="563" y="320" width="4" height="44" fill="#f9ca24"/>
+  <text x="643" y="333" text-anchor="middle" fill="#e6e8f0" font-size="12">GIMPLE/SSA 优化遍</text>
+  <text x="643" y="351" text-anchor="middle" fill="#e6e8f0" font-size="12">向量化 SCCVN PRE</text>
+  <text x="643" y="304" text-anchor="middle" fill="#f9ca24" font-size="11">tree-ssa-*  tree-vect-*</text>
+  <text x="40" y="464" fill="#ff6b9d" font-size="14" font-weight="600">后端层</text>
+  <rect x="47" y="472" width="160" height="44" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <rect x="47" y="472" width="4" height="44" fill="#ff6b9d"/>
+  <text x="127" y="485" text-anchor="middle" fill="#e6e8f0" font-size="12">GIMPLE -> RTL</text>
+  <text x="127" y="503" text-anchor="middle" fill="#e6e8f0" font-size="12">pass_expand</text>
+  <text x="127" y="456" text-anchor="middle" fill="#ff6b9d" font-size="11">cfgexpand.cc</text>
+  <rect x="219" y="472" width="160" height="44" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <rect x="219" y="472" width="4" height="44" fill="#ff6b9d"/>
+  <text x="299" y="485" text-anchor="middle" fill="#e6e8f0" font-size="12">RTL 优化遍</text>
+  <text x="299" y="503" text-anchor="middle" fill="#e6e8f0" font-size="12">haifa-sched recog</text>
+  <text x="299" y="456" text-anchor="middle" fill="#ff6b9d" font-size="11">cse  combine  sched</text>
+  <rect x="391" y="472" width="160" height="44" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <rect x="391" y="472" width="4" height="44" fill="#ff6b9d"/>
+  <text x="471" y="485" text-anchor="middle" fill="#e6e8f0" font-size="12">寄存器分配</text>
+  <text x="471" y="503" text-anchor="middle" fill="#e6e8f0" font-size="12">IRA 全局 + LRA 局部</text>
+  <text x="471" y="456" text-anchor="middle" fill="#ff6b9d" font-size="11">ira  lra  reload</text>
+  <rect x="563" y="472" width="160" height="44" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <rect x="563" y="472" width="4" height="44" fill="#ff6b9d"/>
+  <text x="643" y="485" text-anchor="middle" fill="#e6e8f0" font-size="12">代码生成</text>
+  <text x="643" y="503" text-anchor="middle" fill="#e6e8f0" font-size="12">汇编 + DWARF</text>
+  <text x="643" y="456" text-anchor="middle" fill="#ff6b9d" font-size="11">final  varasm  dwarf2out</text>
+  <path d="M385,100 L385,186" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M385,232 L385,318" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M385,364 L385,470" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="385" y="143" text-anchor="middle" fill="#f9ca24" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">spawn cc1/as/ld</text>
+  <text x="385" y="275" text-anchor="middle" fill="#f9ca24" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">tree_node</text>
+  <text x="385" y="417" text-anchor="middle" fill="#f9ca24" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">gimple / ssa_name</text>
+  <text x="385" y="540" text-anchor="middle" fill="#f9ca24" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">rtx -> 汇编</text>
+  <text x="40" y="596" fill="#b388ff" font-size="14" font-weight="600">目标描述层（跨层基底）</text>
+  <rect x="133" y="604" width="160" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <rect x="133" y="604" width="4" height="44" fill="#b388ff"/>
+  <text x="213" y="617" text-anchor="middle" fill="#e6e8f0" font-size="12">机器描述</text>
+  <text x="213" y="635" text-anchor="middle" fill="#e6e8f0" font-size="12">define_insn</text>
+  <text x="213" y="588" text-anchor="middle" fill="#b388ff" font-size="11">config/  *.md</text>
+  <rect x="305" y="604" width="160" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <rect x="305" y="604" width="4" height="44" fill="#b388ff"/>
+  <text x="385" y="617" text-anchor="middle" fill="#e6e8f0" font-size="12">构建期代码生成</text>
+  <text x="385" y="635" text-anchor="middle" fill="#e6e8f0" font-size="12">emit · recog · automata</text>
+  <text x="385" y="588" text-anchor="middle" fill="#b388ff" font-size="11">gen* 生成器</text>
+  <rect x="477" y="604" width="160" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <rect x="477" y="604" width="4" height="44" fill="#b388ff"/>
+  <text x="557" y="617" text-anchor="middle" fill="#e6e8f0" font-size="12">targetm 钩子</text>
+  <text x="557" y="635" text-anchor="middle" fill="#e6e8f0" font-size="12">运行时多态 -mcpu</text>
+  <text x="557" y="588" text-anchor="middle" fill="#b388ff" font-size="11">target.h</text>
+  <path d="M213,604 L213,560 L127,560 L127,518" fill="none" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrowp)"/>
+  <path d="M385,604 L385,560 L299,560 L299,518" fill="none" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrowp)"/>
+  <path d="M557,604 L557,560 L643,560 L643,518" fill="none" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrowp)"/>
+  <text x="385" y="674" text-anchor="middle" fill="#b388ff" font-size="11">targetm 钩子 + insn-* 生成代码被后端 RTL / 代码生成层查询</text>
+</svg>
