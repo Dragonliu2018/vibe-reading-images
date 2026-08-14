@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="672" viewBox="0 0 820 672" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowPink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="672" fill="#0b0d14"/>
+  <text x="410" y="30" text-anchor="middle" font-size="17" font-weight="600" fill="#e6e6f0">分布式 SELECT 查询数据流</text>
+
+  <text x="210" y="52" text-anchor="middle" font-size="12" fill="#4ecdc4">Coordinator (QD)</text>
+  <text x="610" y="52" text-anchor="middle" font-size="12" fill="#ff6b9d">Segments (QE)</text>
+
+  <!-- QD 1: exec_simple_query -->
+  <rect x="30" y="60" width="360" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="210" y="80" text-anchor="middle" font-size="14" fill="#e6e6f0">exec_simple_query</text>
+  <text x="210" y="98" text-anchor="middle" font-size="11" fill="#8a8db0">tcop/postgres.c:1666 · SQL → Query</text>
+
+  <path d="M210,110 L210,140" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="220" y="128" font-size="11" fill="#8a8db0">pg_plan_query → Query*</text>
+
+  <!-- QD 2: standard_planner / optimize_query -->
+  <rect x="30" y="142" width="360" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="210" y="162" text-anchor="middle" font-size="14" fill="#e6e6f0">standard_planner · optimize_query</text>
+  <text x="210" y="180" text-anchor="middle" font-size="11" fill="#8a8db0">planner.c · optimizer/plan/orca.c:92</text>
+
+  <path d="M210,192 L210,222" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="220" y="210" font-size="11" fill="#8a8db0">Query → DXL</text>
+
+  <!-- QD 3: GPORCA -->
+  <rect x="30" y="224" width="360" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="210" y="246" text-anchor="middle" font-size="14" fill="#e6e6f0">GPORCA Cascades 优化</text>
+  <text x="210" y="264" text-anchor="middle" font-size="11" fill="#8a8db0">COptTasks.cpp:956 PdxlnOptimize</text>
+  <text x="210" y="280" text-anchor="middle" font-size="11" fill="#8a8db0">DXL 逻辑 → xform → DXL 物理(含 Motion)</text>
+
+  <path d="M210,288 L210,318" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="220" y="306" font-size="11" fill="#8a8db0">物理 DXL → PlanStmt</text>
+
+  <!-- QD 4: CdbDispatchPlan + gang + IC -->
+  <rect x="30" y="320" width="360" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="210" y="342" text-anchor="middle" font-size="14" fill="#e6e6f0">CdbDispatchPlan · 建互连</text>
+  <text x="210" y="360" text-anchor="middle" font-size="11" fill="#8a8db0">cdbdisp_query.c:177 · cdbgang_createGang_async</text>
+  <text x="210" y="376" text-anchor="middle" font-size="11" fill="#8a8db0">SetupTCPInterconnect · ic_tcp.c:1248</text>
+
+  <!-- network boundary -->
+  <path d="M390,352 L450,352" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrowPink)"/>
+  <text x="420" y="346" text-anchor="middle" font-size="10" fill="#ff6b9d">libpq 'M'</text>
+  <text x="420" y="366" text-anchor="middle" font-size="10" fill="#ff6b9d">序列化 Plan</text>
+
+  <!-- QE 1: exec_mpp_query -->
+  <rect x="450" y="320" width="340" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="620" y="342" text-anchor="middle" font-size="14" fill="#e6e6f0">exec_mpp_query · 反序列化</text>
+  <text x="620" y="360" text-anchor="middle" font-size="11" fill="#8a8db0">postgres.c:1129 · deserializeNode</text>
+  <text x="620" y="376" text-anchor="middle" font-size="11" fill="#8a8db0">定位本地 slice · SetupInterconnect</text>
+
+  <path d="M620,384 L620,418" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="630" y="404" font-size="11" fill="#8a8db0">Plan(QE) → 执行</text>
+
+  <!-- QE 2: Motion sender -->
+  <rect x="450" y="420" width="340" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="620" y="442" text-anchor="middle" font-size="14" fill="#e6e6f0">ExecutorRun · Motion Sender</text>
+  <text x="620" y="460" text-anchor="middle" font-size="11" fill="#8a8db0">nodeMotion.c:201 execMotionSender</text>
+  <text x="620" y="476" text-anchor="middle" font-size="11" fill="#8a8db0">doSendTuple · GATHER/BROADCAST/HASH</text>
+
+  <!-- results back across to QD receiver -->
+  <path d="M450,452 C360,452 360,560 250,560 L210,560 L210,542" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+  <text x="330" y="515" text-anchor="middle" font-size="10" fill="#4ecdc4">元组流 · TCP interconnect</text>
+
+  <!-- QD 5: Motion receiver -->
+  <rect x="30" y="544" width="360" height="60" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="210" y="566" text-anchor="middle" font-size="14" fill="#e6e6f0">QD Motion Receiver · 汇总</text>
+  <text x="210" y="584" text-anchor="middle" font-size="11" fill="#8a8db0">nodeMotion.c:303 RecvTupleFrom</text>
+  <text x="210" y="598" text-anchor="middle" font-size="11" fill="#8a8db0">→ DestReceiver → 客户端</text>
+
+  <text x="410" y="644" text-anchor="middle" font-size="11" fill="#8a8db0">QD 派发 → QE 并行执行 → 元组经互连回流 QD 汇总 · 共享无盘</text>
+  <text x="410" y="660" text-anchor="middle" font-size="10" fill="#8a8db0">失败：cdbdisp 取消 QE + ThrowErrorData · DTX 两阶段回滚(cdbtm)</text>
+</svg>

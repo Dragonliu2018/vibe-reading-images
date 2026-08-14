@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="460" viewBox="0 0 860 460" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowPink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="860" height="460" fill="#0b0d14"/>
+  <text x="430" y="30" text-anchor="middle" font-size="17" font-weight="600" fill="#e6e6f0">Greenplum 模块依赖关系</text>
+  <text x="135" y="50" text-anchor="middle" font-size="12" fill="#4ecdc4">调用方</text>
+  <text x="430" y="50" text-anchor="middle" font-size="12" fill="#f9ca24">GPDB 专属模块</text>
+  <text x="730" y="50" text-anchor="middle" font-size="12" fill="#6c8ef5">依赖（PG 继承 / 外部）</text>
+
+  <!-- Left column: callers -->
+  <rect x="30" y="70" width="210" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="135" y="92" text-anchor="middle" font-size="13" fill="#e6e6f0">optimizer/plan/orca.c</text>
+  <text x="135" y="108" text-anchor="middle" font-size="11" fill="#8a8db0">standard_planner 入口</text>
+
+  <rect x="30" y="240" width="210" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="135" y="262" text-anchor="middle" font-size="13" fill="#e6e6f0">executor · optimizer</text>
+  <text x="135" y="278" text-anchor="middle" font-size="11" fill="#8a8db0">execMain · cdbllize · cdbmutate</text>
+
+  <rect x="30" y="350" width="210" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="135" y="372" text-anchor="middle" font-size="13" fill="#e6e6f0">postmaster</text>
+  <text x="135" y="388" text-anchor="middle" font-size="11" fill="#8a8db0">PMAuxProcList 注册</text>
+
+  <!-- Center column: GPDB modules -->
+  <rect x="330" y="70" width="200" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="430" y="92" text-anchor="middle" font-size="14" fill="#e6e6f0">gpopt 翻译桥</text>
+  <text x="430" y="108" text-anchor="middle" font-size="11" fill="#8a8db0">Query↔DXL↔PlannedStmt</text>
+
+  <rect x="330" y="150" width="200" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="430" y="172" text-anchor="middle" font-size="14" fill="#e6e6f0">gporca 优化器</text>
+  <text x="430" y="188" text-anchor="middle" font-size="11" fill="#8a8db0">Cascades · Memo · xform</text>
+
+  <rect x="330" y="240" width="200" height="50" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="430" y="262" text-anchor="middle" font-size="14" fill="#e6e6f0">cdb 分布式执行</text>
+  <text x="430" y="278" text-anchor="middle" font-size="11" fill="#8a8db0">dispatch · gang · IC · DTX</text>
+
+  <rect x="330" y="350" width="200" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="430" y="372" text-anchor="middle" font-size="14" fill="#e6e6f0">fts 容错</text>
+  <text x="430" y="388" text-anchor="middle" font-size="11" fill="#8a8db0">探测 · failover</text>
+
+  <!-- Right column: deps -->
+  <rect x="620" y="70" width="210" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="725" y="92" text-anchor="middle" font-size="13" fill="#e6e6f0">PG catalog · nodes</text>
+  <text x="725" y="108" text-anchor="middle" font-size="11" fill="#8a8db0">relcache · syscache</text>
+
+  <rect x="620" y="240" width="210" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="725" y="262" text-anchor="middle" font-size="13" fill="#e6e6f0">segments (QE)</text>
+  <text x="725" y="278" text-anchor="middle" font-size="11" fill="#8a8db0">libpq 'M' · Motion TCP</text>
+
+  <rect x="620" y="350" width="210" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="725" y="372" text-anchor="middle" font-size="13" fill="#e6e6f0">gp_segment_configuration</text>
+  <text x="725" y="388" text-anchor="middle" font-size="11" fill="#8a8db0">catalog + 共享内存</text>
+
+  <!-- Arrows: callers -> modules (left -> center, cyan) -->
+  <path d="M240,95 L330,95" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+  <path d="M240,265 L330,265" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+  <path d="M240,375 L330,375" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+
+  <!-- gpopt -> gporca (DXL, down) -->
+  <path d="M430,120 L430,150" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="440" y="138" font-size="11" fill="#8a8db0">DXL</text>
+
+  <!-- gpopt -> catalog (right) -->
+  <path d="M530,95 L620,95" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- cdb -> segments (right) -->
+  <path d="M530,265 L620,265" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- fts -> gp_segment_configuration (right) -->
+  <path d="M530,375 L620,375" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- cdb -> fts (internal down, pink) -->
+  <path d="M430,290 L430,350" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrowPink)"/>
+  <text x="440" y="324" font-size="11" fill="#ff6b9d">FtsIsSegmentDown</text>
+  <text x="440" y="340" font-size="10" fill="#ff6b9d">FtsNotifyProber</text>
+
+  <text x="430" y="438" text-anchor="middle" font-size="11" fill="#8a8db0">gpopt↔gporca 用 DXL 解耦 C/C++ · cdb↔fts 最终一致 · 其余为 PG 继承目录/外部进程</text>
+</svg>
