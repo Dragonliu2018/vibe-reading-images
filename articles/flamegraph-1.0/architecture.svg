@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520" font-family="system-ui,sans-serif">
+<rect x="0" y="0" width="820" height="520" fill="#0b0d14"/>
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  <marker id="arrp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+  </marker>
+  <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+  </marker>
+</defs>
+<text x="410.0" y="28" fill="#d6dcf2" font-size="14" font-family="system-ui,sans-serif" text-anchor="middle">FlameGraph 三阶段流水线架构</text>
+<rect x="150" y="56" width="320" height="70" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.6"/><text x="310.0" y="82" fill="#80c7ff" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">采集层 Capture</text><text x="310.0" y="102" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">perf · DTrace · jstack · pprof · VTune</text><text x="310.0" y="118" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">采集脚本 · aix-perf.pl · jmaps · files.pl</text>
+<path d="M310,126 L310,150" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<text x="322" y="140" fill="#9aa3c7" font-size="11" font-family="system-ui,sans-serif" text-anchor="start">原始栈 raw stacks (多行)</text>
+<rect x="150" y="150" width="320" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.6"/><text x="310.0" y="176" fill="#4ecdc4" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">折叠层 Fold</text><text x="310.0" y="196" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">stackcollapse-*.pl / *.awk</text><text x="310.0" y="212" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">状态机解析 → 去重计数 %collapsed</text>
+<path d="M310,220 L310,320" stroke="#ff6b9d" stroke-width="1.6" fill="none" marker-end="url(#arrp)"/>
+<text x="322" y="240" fill="#ff6b9d" font-size="11" font-family="system-ui,sans-serif" text-anchor="start">folded: func;func count  ← 契约</text>
+<rect x="150" y="320" width="320" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/><text x="310.0" y="346" fill="#6c8ef5" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">渲染层 Render</text><text x="310.0" y="366" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">flamegraph.pl · dev/hotcoldgraph.pl</text><text x="310.0" y="382" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">flow() 合并 → %Node → 宽度/颜色 → SVG</text>
+<path d="M310,390 L310,418" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<rect x="245" y="418" width="130" height="44" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.6"/><text x="310.0" y="444" fill="#7bed9f" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">SVG 火焰图</text><text x="310.0" y="464" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle"></text>
+<rect x="555" y="158" width="225" height="150" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.6" stroke-dasharray="6,4"/><text x="667.5" y="184" fill="#f9ca24" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">处理层 Process (可选)</text><text x="667.5" y="204" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">difffolded.pl 差分</text><text x="667.5" y="220" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">range-perf.pl 时间区间</text><text x="667.5" y="236" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">pkgsplit-perf.pl 包拆分</text><text x="667.5" y="252" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">stackcollapse-recursive.pl</text>
+<path d="M470,193 L555,193" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<text x="512.5" y="188" fill="#9aa3c7" font-size="11" font-family="system-ui,sans-serif" text-anchor="middle">folded</text>
+<path d="M555,308 L525,308 L525,355 L470,355" stroke="#f9ca24" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<text x="520" y="300" fill="#f9ca24" font-size="11" font-family="system-ui,sans-serif" text-anchor="end">变换后 folded</text>
+<text x="808" y="508" fill="#555" font-size="10" text-anchor="end">FlameGraph v1.0 · pipeline</text>
+</svg>

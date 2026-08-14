@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="582" viewBox="0 0 800 582" font-family="system-ui,sans-serif">
+<rect x="0" y="0" width="800" height="582" fill="#0b0d14"/>
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  <marker id="arrp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+  </marker>
+  <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+  </marker>
+</defs>
+<text x="400.0" y="26" fill="#d6dcf2" font-size="14" font-family="system-ui,sans-serif" text-anchor="middle">flow() 栈合并与帧布局算法</text>
+<rect x="250" y="52" width="300" height="50" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.6"/><text x="400.0" y="78" fill="#80c7ff" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">输入: 排序后的 folded 行序列</text><text x="400.0" y="98" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">相邻栈字典序相邻 → 便于找共同前缀</text>
+<path d="M400,102 L400,128" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<rect x="230" y="128" width="340" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.6"/><text x="400.0" y="154" fill="#4ecdc4" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">① 找共同前缀 len_same</text><text x="400.0" y="174" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">比较 $last 与 $this, 计算相同帧数</text>
+<path d="M400,188 L400,214" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<rect x="230" y="214" width="340" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/><text x="400.0" y="240" fill="#6c8ef5" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">② 关闭旧帧 %Tmp → %Node</text><text x="400.0" y="260" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">超出共同前缀的帧: 锁定 etime</text><text x="400.0" y="276" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">key = func;depth;etime</text>
+<path d="M400,284 L400,310" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<rect x="230" y="310" width="340" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/><text x="400.0" y="336" fill="#6c8ef5" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">③ 开启新帧 → %Tmp</text><text x="400.0" y="356" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">新增帧: 记录 stime, delta</text><text x="400.0" y="372" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">等待后续锁定 etime</text>
+<path d="M400,380 L400,406" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<rect x="210" y="406" width="380" height="80" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.6"/><text x="400.0" y="432" fill="#ff6b9d" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">④ 剪枝 + 布局 + 着色</text><text x="400.0" y="452" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">剪枝: etime-stime &lt; minwidth 删除</text><text x="400.0" y="468" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">布局: x=stime×widthpertime, y=depth×frameh</text><text x="400.0" y="484" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">着色: color() 按 palette/hash/annotation</text>
+<path d="M400,486 L400,512" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<rect x="270" y="512" width="260" height="40" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.6"/><text x="400.0" y="538" fill="#7bed9f" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">%Node → SVG &lt;g&gt; 帧</text><text x="400.0" y="558" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle"></text>
+<text x="788" y="572" fill="#555" font-size="10" text-anchor="end">flow() merge algorithm</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470" font-family="system-ui,sans-serif">
+<rect x="0" y="0" width="820" height="470" fill="#0b0d14"/>
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  <marker id="arrp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+  </marker>
+  <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+  </marker>
+</defs>
+<text x="410.0" y="28" fill="#d6dcf2" font-size="14" font-family="system-ui,sans-serif" text-anchor="middle">模块依赖与 folded 契约</text>
+<rect x="310" y="60" width="200" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.6"/><text x="410.0" y="86" fill="#ff6b9d" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">folded 格式契约</text><text x="410.0" y="106" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">func;func count</text>
+<rect x="30" y="60" width="180" height="70" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.6"/><text x="120.0" y="86" fill="#80c7ff" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">外部 Profilers</text><text x="120.0" y="106" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">perf · DTrace · jstack</text><text x="120.0" y="122" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">pprof · VTune ...</text>
+<rect x="30" y="200" width="180" height="80" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.6"/><text x="120.0" y="226" fill="#4ecdc4" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">折叠器族</text><text x="120.0" y="246" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">stackcollapse-*.pl/awk</text><text x="120.0" y="262" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">状态机解析 + 去重计数</text>
+<rect x="310" y="320" width="200" height="80" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.6"/><text x="410.0" y="346" fill="#f9ca24" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">辅助分析工具</text><text x="410.0" y="366" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">difffolded · range-perf</text><text x="410.0" y="382" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">pkgsplit · files.pl</text>
+<rect x="610" y="200" width="180" height="80" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.6"/><text x="700.0" y="226" fill="#6c8ef5" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">渲染引擎</text><text x="700.0" y="246" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">flamegraph.pl</text><text x="700.0" y="262" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle">hotcoldgraph.pl</text>
+<rect x="625" y="60" width="150" height="50" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.6"/><text x="700.0" y="86" fill="#7bed9f" font-size="15" font-weight="700" font-family="system-ui,sans-serif" text-anchor="middle">SVG 输出</text><text x="700.0" y="106" fill="#9aa3c7" font-size="12" font-family="system-ui,sans-serif" text-anchor="middle"></text>
+<path d="M120,130 L120,200" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<text x="132" y="168" fill="#9aa3c7" font-size="11" font-family="system-ui,sans-serif" text-anchor="start">原始栈</text>
+<path d="M210,230 L310,95" stroke="#ff6b9d" stroke-width="1.6" fill="none" marker-end="url(#arrp)"/>
+<text x="260" y="153" fill="#ff6b9d" font-size="11" font-family="system-ui,sans-serif" text-anchor="middle">产出</text>
+<path d="M510,85 L610,220" stroke="#ff6b9d" stroke-width="1.6" fill="none" marker-end="url(#arrp)"/>
+<text x="565" y="150" fill="#ff6b9d" font-size="11" font-family="system-ui,sans-serif" text-anchor="middle">消费</text>
+<path d="M700,200 L700,110" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<path d="M410,320 L410,110" stroke="#7a86b3" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<text x="422" y="215" fill="#f9ca24" font-size="11" font-family="system-ui,sans-serif" text-anchor="start">读/写 folded</text>
+<path d="M510,345 L610,250" stroke="#f9ca24" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+<text x="560" y="309" fill="#f9ca24" font-size="11" font-family="system-ui,sans-serif" text-anchor="middle">direct folded</text>
+<text x="808" y="458" fill="#555" font-size="10" text-anchor="end">static module view</text>
+</svg>
