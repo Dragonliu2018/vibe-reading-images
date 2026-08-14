@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="620" viewBox="0 0 860 620" font-family="system-ui, sans-serif">
+  <rect width="860" height="620" fill="#0b0d14"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowL" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+
+  <text x="430.0" y="28" fill="#e8eaf0" font-size="16" font-weight="bold" text-anchor="middle">核心子系统依赖关系</text>
+  <rect x="360" y="55" width="140" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430.0" y="82.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">init/</text>
+  <text x="430.0" y="95.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">启动装配</text>
+  <rect x="90" y="150" width="140" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="160.0" y="177.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">kernel/</text>
+  <text x="160.0" y="190.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">进程·调度</text>
+  <rect x="280" y="150" width="140" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="350.0" y="177.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">mm/</text>
+  <text x="350.0" y="190.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">内存管理</text>
+  <rect x="470" y="150" width="140" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="540.0" y="177.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">fs/</text>
+  <text x="540.0" y="190.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">VFS</text>
+  <rect x="660" y="150" width="140" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="730.0" y="177.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">net/</text>
+  <text x="730.0" y="190.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">网络栈</text>
+  <rect x="90" y="260" width="140" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="160.0" y="287.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">block/</text>
+  <text x="160.0" y="300.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">blk-mq</text>
+  <rect x="280" y="260" width="140" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="350.0" y="287.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">ipc/</text>
+  <text x="350.0" y="300.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">IPC</text>
+  <rect x="470" y="260" width="140" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="540.0" y="287.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">io_uring/</text>
+  <text x="540.0" y="300.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">异步IO</text>
+  <rect x="660" y="260" width="140" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="730.0" y="287.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">crypto/</text>
+  <text x="730.0" y="300.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">加密</text>
+  <rect x="180" y="370" width="140" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="250.0" y="397.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">security/</text>
+  <text x="250.0" y="410.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">LSM</text>
+  <rect x="470" y="370" width="140" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="540.0" y="397.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">drivers/base</text>
+  <text x="540.0" y="410.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">驱动模型</text>
+  <rect x="280" y="480" width="140" height="50" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="350.0" y="507.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">arch/x86</text>
+  <text x="350.0" y="520.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">架构入口</text>
+  <rect x="470" y="480" width="140" height="50" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="540.0" y="507.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">lib/</text>
+  <text x="540.0" y="520.6" fill="#e8eaf0" font-size="13" font-family="system-ui, sans-serif" text-anchor="middle">通用库</text>
+  <line x1="430.0" y1="105" x2="350.0" y2="480" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="360" y1="80.0" x2="230" y2="175.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="430.0" y1="105" x2="350.0" y2="150" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="500" y1="80.0" x2="470" y2="175.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="500" y1="80.0" x2="660" y2="175.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="430.0" y1="105" x2="250.0" y2="370" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="160.0" y1="200" x2="350.0" y2="480" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="230" y1="175.0" x2="280" y2="175.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="470" y1="175.0" x2="420" y2="175.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="470" y1="175.0" x2="230" y2="285.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="660" y1="175.0" x2="420" y2="175.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="350.0" y1="260" x2="350.0" y2="200" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="540.0" y1="260" x2="540.0" y2="200" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="610" y1="285.0" x2="660" y2="175.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="660" y1="285.0" x2="610" y2="395.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="230" y1="285.0" x2="470" y2="395.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="320" y1="395.0" x2="470" y2="175.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="320" y1="395.0" x2="660" y2="175.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="250.0" y1="370" x2="160.0" y2="200" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <line x1="470" y1="395.0" x2="420" y2="505.0" stroke="#7a86b3" stroke-width="1.5" opacity="0.65" marker-end="url(#arrow)"/>
+  <text x="20" y="605" fill="#9aa3c0" font-size="11">箭头方向 = 依赖（调用方 → 被调用方）</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="680" viewBox="0 0 820 680" font-family="system-ui, sans-serif">
+  <rect width="820" height="680" fill="#0b0d14"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowL" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+
+  <text x="410.0" y="28" fill="#e8eaf0" font-size="16" font-weight="bold" text-anchor="middle">read() 系统调用数据流</text>
+  <rect x="60" y="50" width="700" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410.0" y="73.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">用户态</text>
+  <text x="410.0" y="87.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">read(fd, buf, n)</text>
+  <text x="410.0" y="101.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">syscall 指令</text>
+  <line x1="410.0" y1="106" x2="410.0" y2="120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="120" width="700" height="56" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="410.0" y="143.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">arch/x86</text>
+  <text x="410.0" y="157.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">entry_SYSCALL_64</text>
+  <text x="410.0" y="171.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">构造 pt_regs</text>
+  <line x1="410.0" y1="176" x2="410.0" y2="190" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="190" width="700" height="56" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="410.0" y="213.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">syscall 分发</text>
+  <text x="410.0" y="227.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">do_syscall_64</text>
+  <text x="410.0" y="241.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">x64_sys_call switch</text>
+  <line x1="410.0" y1="246" x2="410.0" y2="260" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="260" width="700" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410.0" y="283.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">VFS 层</text>
+  <text x="410.0" y="297.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">ksys_read → vfs_read</text>
+  <text x="410.0" y="311.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">f_op->read_iter</text>
+  <line x1="410.0" y1="316" x2="410.0" y2="330" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="330" width="700" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410.0" y="353.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">文件系统</text>
+  <text x="410.0" y="367.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">generic_file_read_iter</text>
+  <text x="410.0" y="381.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">filemap_read</text>
+  <line x1="410.0" y1="386" x2="410.0" y2="400" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="400" width="700" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410.0" y="423.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">page cache</text>
+  <text x="410.0" y="437.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">xarray 查找</text>
+  <text x="410.0" y="451.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">未命中→预读</text>
+  <line x1="410.0" y1="456" x2="410.0" y2="470" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="470" width="700" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="410.0" y="493.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">块 I/O 层</text>
+  <text x="410.0" y="507.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">blk_mq_submit_bio</text>
+  <text x="410.0" y="521.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">queue_rq → DMA</text>
+  <line x1="410.0" y1="526" x2="410.0" y2="540" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="540" width="700" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410.0" y="563.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">完成回调</text>
+  <text x="410.0" y="577.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">bio_endio → mpage_end_io</text>
+  <text x="410.0" y="591.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">folio_wake_bit 唤醒</text>
+  <line x1="410.0" y1="596" x2="410.0" y2="610" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="610" width="700" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410.0" y="633.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">返回用户态</text>
+  <text x="410.0" y="647.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">copy_to_user</text>
+  <text x="410.0" y="661.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">sysretq 返回字节</text>
+  <text x="770" y="430" fill="#f9ca24" font-size="11">命中: 直接 copy_to_user</text>
+</svg>

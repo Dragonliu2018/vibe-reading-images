@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="560" viewBox="0 0 820 560" font-family="system-ui, sans-serif">
+  <rect width="820" height="560" fill="#0b0d14"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowL" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+
+  <text x="410.0" y="28" fill="#e8eaf0" font-size="16" font-weight="bold" text-anchor="middle">Linux Kernel 分层架构（v7.1）</text>
+  <rect x="20" y="50" width="130" height="60" rx="6" fill="#4ecdc4" opacity="0.18" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="85.0" y="85.0" fill="#4ecdc4" font-size="13" font-family="system-ui, sans-serif" font-weight="bold" text-anchor="middle">用户态</text>
+  <rect x="180" y="50" width="610" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="485.0" y="82.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">用户进程</text>
+  <text x="485.0" y="96.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">glibc / syscall 指令</text>
+  <rect x="20" y="132" width="130" height="60" rx="6" fill="#80c7ff" opacity="0.18" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="85.0" y="167.0" fill="#80c7ff" font-size="13" font-family="system-ui, sans-serif" font-weight="bold" text-anchor="middle">系统调用接口</text>
+  <rect x="180" y="132" width="610" height="60" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="485.0" y="164.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">entry_SYSCALL_64</text>
+  <text x="485.0" y="178.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">do_syscall_64 → sys_call_table</text>
+  <line x1="485.0" y1="110" x2="485.0" y2="132" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="214" width="130" height="70" rx="6" fill="#6c8ef5" opacity="0.18" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="85.0" y="254.0" fill="#6c8ef5" font-size="13" font-family="system-ui, sans-serif" font-weight="bold" text-anchor="middle">VFS / IPC / 网络</text>
+  <rect x="180" y="214" width="610" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="485.0" y="244.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">fs/ VFS</text>
+  <text x="485.0" y="258.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">net/ socket</text>
+  <text x="485.0" y="272.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">ipc/ SysV·POSIX</text>
+  <line x1="485.0" y1="192" x2="485.0" y2="214" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="306" width="130" height="70" rx="6" fill="#f9ca24" opacity="0.18" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="85.0" y="346.0" fill="#f9ca24" font-size="13" font-family="system-ui, sans-serif" font-weight="bold" text-anchor="middle">内存管理</text>
+  <rect x="180" y="306" width="610" height="70" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="485.0" y="343.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">mm/ buddy·slub</text>
+  <text x="485.0" y="357.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">page cache·mmap·vmscan</text>
+  <line x1="485.0" y1="284" x2="485.0" y2="306" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="398" width="130" height="70" rx="6" fill="#ff6b9d" opacity="0.18" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="85.0" y="438.0" fill="#ff6b9d" font-size="13" font-family="system-ui, sans-serif" font-weight="bold" text-anchor="middle">块 I/O / 设备驱动</text>
+  <rect x="180" y="398" width="610" height="70" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="485.0" y="435.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">block/ blk-mq</text>
+  <text x="485.0" y="449.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">drivers/ 设备模型</text>
+  <line x1="485.0" y1="376" x2="485.0" y2="398" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="490" width="130" height="60" rx="6" fill="#b388ff" opacity="0.18" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="85.0" y="525.0" fill="#b388ff" font-size="13" font-family="system-ui, sans-serif" font-weight="bold" text-anchor="middle">安全框架</text>
+  <rect x="180" y="490" width="610" height="60" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="485.0" y="522.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">security/ LSM hooks</text>
+  <text x="485.0" y="536.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">SELinux·AppArmor·Landlock</text>
+  <line x1="485.0" y1="468" x2="485.0" y2="490" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="20" y="572" width="130" height="60" rx="6" fill="#80c7ff" opacity="0.18" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="85.0" y="607.0" fill="#80c7ff" font-size="13" font-family="system-ui, sans-serif" font-weight="bold" text-anchor="middle">架构层</text>
+  <rect x="180" y="572" width="610" height="60" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="485.0" y="611.8" fill="#e8eaf0" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">arch/x86 启动·页表·中断</text>
+  <line x1="485.0" y1="550" x2="485.0" y2="572" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="800" y="330" fill="#b388ff" font-size="11" text-anchor="end">LSM hooks 横切各层</text>
+</svg>
