@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="500" viewBox="0 0 680 500" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="500" fill="#0b0d14"/>
+
+  <text x="340" y="26" text-anchor="middle" fill="#e8ecf5" font-size="16" font-weight="600">i2c-pnx 加上 device tree 支持后的 probe 调用链（2012）</text>
+
+  <!-- Step 1: of_match -->
+  <rect x="90" y="50" width="500" height="54" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="340" y="74" text-anchor="middle" fill="#e8ecf5" font-size="14">of_match_table 匹配 "nxp,pnx-i2c" → 触发 i2c_pnx_probe</text>
+  <text x="340" y="92" text-anchor="middle" fill="#9aa3c7" font-size="12">新增 i2c_pnx_of_match[] + .of_match_table（platform 驱动 DT 绑定）</text>
+
+  <!-- Step 2: of_node_get (PATTERN) -->
+  <rect x="90" y="134" width="500" height="54" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="340" y="158" text-anchor="middle" fill="#e8ecf5" font-size="14">① adap-&gt;dev.of_node = of_node_get(pdev-&gt;dev.of_node)</text>
+  <text x="340" y="176" text-anchor="middle" fill="#7bed9f" font-size="12">取 adapter 的 of_node 引用 —— 套用 9fd049 立的模式（沿用至今）</text>
+
+  <!-- Step 3: DT config -->
+  <rect x="90" y="218" width="500" height="54" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="340" y="242" text-anchor="middle" fill="#e8ecf5" font-size="14">② 从 DT 读 clock-frequency → speed；设 alg_data-&gt;timeout</text>
+  <text x="340" y="260" text-anchor="middle" fill="#9aa3c7" font-size="12">配置由 DT 提供（默认值降级为 *_DEFAULT）；timeout 改为 per-instance</text>
+
+  <!-- Step 4: add adapter -->
+  <rect x="90" y="302" width="500" height="54" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="340" y="326" text-anchor="middle" fill="#e8ecf5" font-size="14">③ i2c_add_numbered_adapter(adap)</text>
+  <text x="340" y="344" text-anchor="middle" fill="#9aa3c7" font-size="12">注册 adapter（i2c 核心）</text>
+
+  <!-- Step 5: of_i2c_register_devices -->
+  <rect x="90" y="386" width="500" height="54" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="340" y="410" text-anchor="middle" fill="#e8ecf5" font-size="14">④ of_i2c_register_devices(&amp;adap)</text>
+  <text x="340" y="428" text-anchor="middle" fill="#9aa3c7" font-size="12">枚举 adapter 节点的 DT 子节点 → i2c_client（后由 i2c 核心自动注册取代）</text>
+
+  <!-- Arrows -->
+  <path d="M340,104 L340,134" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M340,188 L340,218" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M340,272 L340,302" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M340,356 L340,386" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Legend -->
+  <circle cx="104" cy="470" r="5" fill="#7bed9f"/>
+  <text x="116" y="474" fill="#9aa3c7" font-size="12">绿 = of_node_get 取引用（套用 9fd049 模式；但本 commit 漏了配对的 of_node_put，见正文）</text>
+</svg>

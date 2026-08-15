@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="500" viewBox="0 0 680 500" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="500" fill="#0b0d14"/>
+
+  <text x="340" y="26" text-anchor="middle" fill="#e8ecf5" font-size="16" font-weight="600">of/i2c: OF 支持 generalized 后的注册调用链（2010）</text>
+
+  <!-- Box 1: bus probe -->
+  <rect x="90" y="50" width="500" height="54" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="340" y="74" text-anchor="middle" fill="#e8ecf5" font-size="14">总线 probe：cpm_i2c_probe / iic_probe / fsl_i2c_probe</text>
+  <text x="340" y="92" text-anchor="middle" fill="#9aa3c7" font-size="12">从 platform 设备拿到自己的 device_node</text>
+
+  <!-- Box 2: adap->dev.of_node = of_node_get (PATTERN) -->
+  <rect x="90" y="134" width="500" height="54" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="340" y="158" text-anchor="middle" fill="#e8ecf5" font-size="14">① adap-&gt;dev.of_node = of_node_get(node)</text>
+  <text x="340" y="176" text-anchor="middle" fill="#7bed9f" font-size="12">取 adapter 的 of_node 引用 —— 本 commit 建立的模式（沿用至今）</text>
+
+  <!-- Box 3: i2c_add_adapter -->
+  <rect x="90" y="218" width="500" height="54" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="340" y="242" text-anchor="middle" fill="#e8ecf5" font-size="14">② i2c_add_adapter(adap)</text>
+  <text x="340" y="260" text-anchor="middle" fill="#9aa3c7" font-size="12">注册 adapter（i2c 核心）</text>
+
+  <!-- Box 4: of_i2c_register_devices -->
+  <rect x="90" y="302" width="500" height="54" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="340" y="326" text-anchor="middle" fill="#e8ecf5" font-size="14">③ of_i2c_register_devices(adap)</text>
+  <text x="340" y="344" text-anchor="middle" fill="#9aa3c7" font-size="12">读 adap-&gt;dev.of_node → for_each_child_of_node 遍历子节点</text>
+
+  <!-- Box 5: per child -->
+  <rect x="90" y="386" width="500" height="54" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="340" y="410" text-anchor="middle" fill="#e8ecf5" font-size="14">④ 每个子节点 → 注册 i2c_client</text>
+  <text x="340" y="428" text-anchor="middle" fill="#7bed9f" font-size="12">info.of_node = of_node_get(child) → i2c_new_device(adap, &amp;info)</text>
+
+  <!-- Arrows -->
+  <path d="M340,104 L340,134" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M340,188 L340,218" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M340,272 L340,302" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M340,356 L340,386" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Legend -->
+  <circle cx="104" cy="470" r="5" fill="#7bed9f"/>
+  <text x="116" y="474" fill="#9aa3c7" font-size="12">绿 = of_node_get 取引用的位置（本 commit 建立的引用计数纪律）</text>
+</svg>
