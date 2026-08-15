@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="390" viewBox="0 0 820 390" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect width="820" height="390" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="410" y="26" text-anchor="middle" fill="#e8ecf5" font-size="16" font-weight="600">del_mtd_device() 的 of_node：清零顺序 bug 与快照修复</text>
+
+  <!-- Column headers -->
+  <rect x="30" y="40" width="350" height="32" rx="6" fill="#1a1014" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="205" y="61" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="600">改动前 · 引用泄漏（bug）</text>
+  <rect x="460" y="40" width="350" height="32" rx="6" fill="#0f1c16" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="635" y="61" text-anchor="middle" fill="#7bed9f" font-size="13" font-weight="600">改动后 · 快照修复</text>
+
+  <!-- Row A: entry / snapshot -->
+  <rect x="30" y="100" width="350" height="58" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="205" y="124" text-anchor="middle" fill="#e8ecf5" font-size="14">① else 入口：mtd->dev.of_node 仍有效</text>
+  <text x="205" y="144" text-anchor="middle" fill="#9aa3c7" font-size="12">未先缓存，直接往下走</text>
+  <rect x="460" y="100" width="350" height="58" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="635" y="124" text-anchor="middle" fill="#e8ecf5" font-size="14">① 快照 mtd_of_node = mtd_get_of_node(mtd)</text>
+  <text x="635" y="144" text-anchor="middle" fill="#7bed9f" font-size="12">进入 else 即缓存有效指针</text>
+
+  <!-- Row B: memset -->
+  <rect x="30" y="188" width="350" height="58" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="205" y="212" text-anchor="middle" fill="#e8ecf5" font-size="14">② memset(&amp;mtd->dev, 0, sizeof(mtd->dev))</text>
+  <text x="205" y="232" text-anchor="middle" fill="#e74c3c" font-size="12">mtd->dev.of_node 被清成 NULL</text>
+  <rect x="460" y="188" width="350" height="58" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="635" y="212" text-anchor="middle" fill="#e8ecf5" font-size="14">② memset(&amp;mtd->dev, 0, sizeof(mtd->dev))</text>
+  <text x="635" y="232" text-anchor="middle" fill="#7bed9f" font-size="12">of_node 清零，但 mtd_of_node 快照不受影响</text>
+
+  <!-- Row C: of_node_put -->
+  <rect x="30" y="276" width="350" height="58" rx="6" fill="#13162a" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="205" y="300" text-anchor="middle" fill="#e8ecf5" font-size="14">③ of_node_put(mtd_get_of_node(mtd))</text>
+  <text x="205" y="320" text-anchor="middle" fill="#e74c3c" font-size="12">= of_node_put(NULL) 空操作 → 引用泄漏</text>
+  <rect x="460" y="276" width="350" height="58" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="635" y="300" text-anchor="middle" fill="#e8ecf5" font-size="14">③ of_node_put(mtd_of_node)</text>
+  <text x="635" y="320" text-anchor="middle" fill="#7bed9f" font-size="12">用快照放引用 → refcount 配平</text>
+
+  <!-- Vertical flow arrows (left column) -->
+  <path d="M205,72 L205,100" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M205,158 L205,188" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M205,246 L205,276" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Vertical flow arrows (right column) -->
+  <path d="M635,72 L635,100" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M635,158 L635,188" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M635,246 L635,276" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Legend -->
+  <circle cx="44" cy="366" r="5" fill="#e74c3c"/>
+  <text x="56" y="370" fill="#9aa3c7" font-size="12">红 = 改动前的问题（清零后读到空指针）</text>
+  <circle cx="430" cy="366" r="5" fill="#7bed9f"/>
+  <text x="442" y="370" fill="#9aa3c7" font-size="12">绿 = 修复的快照（先缓存再清零）</text>
+</svg>
