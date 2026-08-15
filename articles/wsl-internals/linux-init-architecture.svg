@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="360" viewBox="0 0 780 360" font-family="system-ui, sans-serif">
+  <rect width="780" height="360" fill="#0b0d14"/>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+    <marker id="au" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+  </defs>
+  <!-- main fork chain (vertical) -->
+  <rect x="60" y="30" width="160" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="140" y="53" fill="#e6e6e6" font-size="13" text-anchor="middle">mini_init（PID 1）</text>
+  <rect x="60" y="100" width="160" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="140" y="123" fill="#e6e6e6" font-size="13" text-anchor="middle">init（分发版 PID 1）</text>
+  <rect x="60" y="170" width="160" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="140" y="193" fill="#e6e6e6" font-size="13" text-anchor="middle">session leader</text>
+  <rect x="60" y="240" width="160" height="36" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="140" y="263" fill="#e6e6e6" font-size="13" text-anchor="middle">relay（forkpty）</text>
+  <rect x="60" y="305" width="160" height="36" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="140" y="328" fill="#e6e6e6" font-size="13" text-anchor="middle">bash（用户进程）</text>
+
+  <path d="M140,66 L140,98" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#au)"/>
+  <path d="M140,136 L140,168" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#au)"/>
+  <path d="M140,206 L140,238" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#au)"/>
+  <path d="M140,276 L140,303" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)"/>
+
+  <!-- auxiliary services (right) -->
+  <text x="440" y="30" fill="#ff6b9d" font-size="12">辅助服务（execl 重 exec /init）</text>
+  <rect x="440" y="40" width="150" height="34" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="515" y="62" fill="#e6e6e6" font-size="13" text-anchor="middle">gns（网络）</text>
+  <rect x="440" y="100" width="150" height="34" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="515" y="122" fill="#e6e6e6" font-size="13" text-anchor="middle">plan9（文件）</text>
+  <rect x="440" y="160" width="150" height="34" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="515" y="182" fill="#e6e6e6" font-size="13" text-anchor="middle">localhost 转发</text>
+  <rect x="440" y="220" width="150" height="34" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="515" y="242" fill="#e6e6e6" font-size="13" text-anchor="middle">drvfs（挂载）</text>
+
+  <path d="M220,48 L440,57" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)"/>
+  <path d="M220,118 L440,117" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)"/>
+  <path d="M220,188 L440,177" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)"/>
+  <path d="M220,258 L440,237" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)"/>
+
+  <text x="300" y="195" fill="#b388ff" font-size="11" text-anchor="middle">argv[0] 分发</text>
+  <text x="300" y="335" fill="#7a86b3" font-size="11">左：三层 poll 消息循环的 fork 链 · 右：mini_init/init 派生的辅助进程</text>
+</svg>

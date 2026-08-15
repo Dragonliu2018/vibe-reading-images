@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="560" viewBox="0 0 820 560" font-family="system-ui, sans-serif">
+  <rect width="820" height="560" fill="#0b0d14"/>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+    <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+    <marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+    <marker id="au" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+  </defs>
+
+  <!-- layer labels -->
+  <text x="40" y="55" fill="#4ecdc4" font-size="14" font-weight="bold">Windows 客户端</text>
+  <text x="40" y="140" fill="#6c8ef5" font-size="14" font-weight="bold">Windows 服务</text>
+  <text x="40" y="250" fill="#f9ca24" font-size="14" font-weight="bold">VM 边界</text>
+  <text x="40" y="345" fill="#b388ff" font-size="14" font-weight="bold">Linux VM 初始化</text>
+  <text x="40" y="455" fill="#ff6b9d" font-size="14" font-weight="bold">Linux 服务</text>
+
+  <!-- Layer 1: clients (y center ~78) -->
+  <g>
+    <rect x="190" y="60" width="120" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="250" y="83" fill="#e6e6e6" font-size="13" text-anchor="middle">wsl.exe</text>
+    <rect x="320" y="60" width="120" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="380" y="83" fill="#e6e6e6" font-size="13" text-anchor="middle">wslc.exe</text>
+    <rect x="450" y="60" width="120" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="510" y="83" fill="#e6e6e6" font-size="13" text-anchor="middle">wslconfig.exe</text>
+    <rect x="580" y="60" width="120" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="640" y="83" fill="#e6e6e6" font-size="13" text-anchor="middle">wslapi.dll</text>
+  </g>
+
+  <!-- Layer 2: service (y center ~165) -->
+  <rect x="300" y="145" width="220" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="170" fill="#e6e6e6" font-size="13" text-anchor="middle">wslservice.exe（COM 服务）</text>
+
+  <!-- Layer 3: hvsocket (y center ~265) -->
+  <rect x="300" y="248" width="220" height="34" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="270" fill="#e6e6e6" font-size="13" text-anchor="middle">hvsocket（AF_VSOCK）</text>
+
+  <!-- Layer 4: linux init (y center ~365) -->
+  <g>
+    <rect x="160" y="350" width="120" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="220" y="373" fill="#e6e6e6" font-size="13" text-anchor="middle">mini_init</text>
+    <rect x="290" y="350" width="120" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="350" y="373" fill="#e6e6e6" font-size="13" text-anchor="middle">init</text>
+    <rect x="420" y="350" width="120" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="480" y="373" fill="#e6e6e6" font-size="13" text-anchor="middle">session leader</text>
+    <rect x="550" y="350" width="120" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="610" y="373" fill="#e6e6e6" font-size="13" text-anchor="middle">gns</text>
+  </g>
+
+  <!-- Layer 5: linux services (y center ~475) -->
+  <g>
+    <rect x="190" y="460" width="120" height="36" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="250" y="483" fill="#e6e6e6" font-size="13" text-anchor="middle">relay</text>
+    <rect x="320" y="460" width="120" height="36" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="380" y="483" fill="#e6e6e6" font-size="13" text-anchor="middle">plan9</text>
+    <rect x="450" y="460" width="120" height="36" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="510" y="483" fill="#e6e6e6" font-size="13" text-anchor="middle">drvfs</text>
+    <rect x="580" y="460" width="120" height="36" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="640" y="483" fill="#e6e6e6" font-size="13" text-anchor="middle">binfmt 互操作</text>
+  </g>
+
+  <!-- arrows between layers -->
+  <path d="M410,96 L410,143" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#ab)"/>
+  <text x="420" y="123" fill="#6c8ef5" font-size="11">COM</text>
+  <path d="M410,185 L410,246" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#ay)"/>
+  <text x="420" y="220" fill="#f9ca24" font-size="11">hvsocket</text>
+  <path d="M410,282 L410,348" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#au)"/>
+  <text x="420" y="318" fill="#b388ff" font-size="11">消息协议</text>
+
+  <!-- fork+exec chain within linux (horizontal) -->
+  <path d="M280,368 L288,368" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#au)"/>
+  <path d="M410,368 L418,368" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#au)"/>
+  <text x="382" y="343" fill="#b388ff" font-size="10" text-anchor="middle">fork</text>
+
+  <!-- linux init -> linux services (fork+exec) -->
+  <path d="M480,386 L390,458" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)"/>
+  <text x="445" y="428" fill="#ff6b9d" font-size="11">fork+exec</text>
+
+  <!-- legend -->
+  <text x="40" y="540" fill="#7a86b3" font-size="11">纵向箭头=跨层通信 · 紫色横向=fork 链 · 粉色=服务派生</text>
+</svg>

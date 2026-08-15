@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="340" viewBox="0 0 760 340" font-family="system-ui, sans-serif">
+  <rect width="760" height="340" fill="#0b0d14"/>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+    <marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+  </defs>
+
+  <!-- states -->
+  <rect x="50" y="120" width="150" height="40" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="125" y="145" fill="#e6e6e6" font-size="14" text-anchor="middle">NotCreated</text>
+  <rect x="305" y="120" width="150" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="380" y="145" fill="#e6e6e6" font-size="14" text-anchor="middle">Running</text>
+  <rect x="560" y="120" width="150" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="635" y="145" fill="#e6e6e6" font-size="14" text-anchor="middle">IdleTerminating</text>
+  <rect x="305" y="250" width="150" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="380" y="275" fill="#e6e6e6" font-size="13" text-anchor="middle">s_VmTerminated</text>
+
+  <!-- transitions -->
+  <path d="M200,140 L303,140" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#ab)"/>
+  <text x="252" y="132" fill="#6c8ef5" font-size="11" text-anchor="middle">_CreateVm（按需）</text>
+  <path d="M455,140 L558,140" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#ay)"/>
+  <text x="506" y="132" fill="#f9ca24" font-size="11" text-anchor="middle">空闲+timeout</text>
+  <!-- back: IdleTerminating -> NotCreated (curve over top) -->
+  <path d="M635,120 Q635,40 125,40 L125,118" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+  <text x="380" y="33" fill="#7a86b3" font-size="11" text-anchor="middle">_VmTerminate（析构等 distroExitThread，m_vmId=GUID_NULL 允许重建）</text>
+  <!-- crash: Running -> s_VmTerminated -->
+  <path d="M380,160 L380,248" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)"/>
+  <text x="390" y="210" fill="#ff6b9d" font-size="11">HCS s_OnExit</text>
+  <!-- s_VmTerminated -> NotCreated -->
+  <path d="M305,270 Q200,270 125,180 L125,162" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)" stroke-dasharray="3 3"/>
+  <text x="200" y="300" fill="#ff6b9d" font-size="11" text-anchor="middle">TerminateByClientId(WILDCARD)</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="620" viewBox="0 0 840 620" font-family="system-ui, sans-serif">
+  <rect width="840" height="620" fill="#0b0d14"/>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+    <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+    <marker id="au" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+  </defs>
+
+  <!-- domain split labels -->
+  <text x="40" y="30" fill="#4ecdc4" font-size="13" font-weight="bold">Windows 侧</text>
+  <text x="40" y="320" fill="#b388ff" font-size="13" font-weight="bold">Linux VM 侧</text>
+  <line x1="40" y1="300" x2="540" y2="300" stroke="#3a3f5c" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- vertical chain nodes (x=160, w=220) -->
+  <g font-size="13" fill="#e6e6e6">
+    <rect x="160" y="44" width="220" height="34" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="270" y="66" text-anchor="middle">wmain</text>
+    <rect x="160" y="104" width="220" height="34" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="270" y="126" text-anchor="middle">WslClient::Main / LaunchProcess</text>
+    <rect x="160" y="164" width="220" height="34" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="270" y="186" text-anchor="middle">SvcComm::LaunchProcess</text>
+    <rect x="160" y="224" width="220" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="270" y="246" text-anchor="middle">wslservice LxssUserSession</text>
+    <rect x="160" y="334" width="220" height="34" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="270" y="356" text-anchor="middle">mini_init（poll 消息循环）</text>
+    <rect x="160" y="394" width="220" height="34" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="270" y="416" text-anchor="middle">init / InitEntryUtilityVm</text>
+    <rect x="160" y="454" width="220" height="34" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="270" y="476" text-anchor="middle">session leader</text>
+    <rect x="160" y="514" width="220" height="34" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="270" y="536" text-anchor="middle">relay（forkpty + IO 中继）</text>
+    <rect x="160" y="574" width="220" height="34" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/><text x="270" y="596" text-anchor="middle">bash（execvpe）</text>
+  </g>
+
+  <!-- vertical arrows -->
+  <path d="M270,78 L270,102" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+  <path d="M270,138 L270,162" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+  <path d="M270,198 L270,222" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#ab)"/><text x="280" y="215" fill="#6c8ef5" font-size="11">COM CreateLxProcess</text>
+  <path d="M270,258 L270,332" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#ar)"/><text x="280" y="298" fill="#7a86b3" font-size="11">HCS VM · hvsocket 50000</text>
+  <path d="M270,368 L270,392" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#au)"/><text x="280" y="385" fill="#b388ff" font-size="11">fork+exec（namespace）</text>
+  <path d="M270,428 L270,452" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#au)"/><text x="280" y="445" fill="#b388ff" font-size="11">fork session leader</text>
+  <path d="M270,488 L270,512" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)"/><text x="280" y="505" fill="#ff6b9d" font-size="11">fork relay</text>
+  <path d="M270,548 L270,572" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+
+  <!-- right side: 5 channels back to wsl.exe -->
+  <rect x="560" y="164" width="240" height="120" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="680" y="188" fill="#e6e6e6" font-size="13" text-anchor="middle">CreateLxProcess 回传 5 handle</text>
+  <text x="680" y="208" fill="#9aa3c0" font-size="12" text-anchor="middle">stdin · stdout · stderr</text>
+  <text x="680" y="228" fill="#9aa3c0" font-size="12" text-anchor="middle">control（终端 resize）</text>
+  <text x="680" y="248" fill="#9aa3c0" font-size="12" text-anchor="middle">interop（进程创建+退出码）</text>
+  <text x="680" y="272" fill="#9aa3c0" font-size="11" text-anchor="middle">→ wsl.exe relay 线程中继</text>
+
+  <!-- arrow from wslservice node to 5-handle box -->
+  <path d="M382,241 L558,224" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#ab)"/>
+  <!-- arrow from relay to wsl.exe relay (5 sockets accept) -->
+  <path d="M382,531 Q520,531 520,300 Q520,244 558,244" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#ac)" stroke-dasharray="3 3"/>
+  <text x="500" y="430" fill="#4ecdc4" font-size="11" text-anchor="end">hvsocket connect ×5</text>
+
+  <!-- exit code back -->
+  <path d="M160,531 Q90,531 90,200 Q90,181 158,181" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#ap)" stroke-dasharray="3 3"/>
+  <text x="100" y="380" fill="#ff6b9d" font-size="11">LxInitMessageExitStatus</text>
+  <text x="100" y="395" fill="#ff6b9d" font-size="11">→ wsl.exe 退出码</text>
+</svg>
