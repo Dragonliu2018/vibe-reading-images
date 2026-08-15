@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="420" viewBox="0 0 840 420" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect width="840" height="420" fill="#0b0d14"/>
+
+  <text x="420" y="26" text-anchor="middle" fill="#e8ecf5" font-size="16" font-weight="600">cci 清理路径调用链：i2c_del_adapter 内部 memset 清零 of_node</text>
+
+  <!-- Headers -->
+  <rect x="30" y="40" width="370" height="32" rx="6" fill="#1a1014" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="215" y="61" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="600">改动前 · put 打在已清零指针上（bug）</text>
+  <rect x="440" y="40" width="370" height="32" rx="6" fill="#0f1c16" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="625" y="61" text-anchor="middle" fill="#7bed9f" font-size="13" font-weight="600">改动后 · 先快照再 del_adapter（修复）</text>
+
+  <!-- Row 1: entry -->
+  <rect x="30" y="100" width="370" height="46" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="215" y="121" text-anchor="middle" fill="#e8ecf5" font-size="14">进入 error_i2c / cci_remove 循环</text>
+  <text x="215" y="139" text-anchor="middle" fill="#9aa3c7" font-size="12">遍历已注册（cci->master[i].cci 非空）的 master</text>
+  <rect x="440" y="100" width="370" height="46" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="625" y="121" text-anchor="middle" fill="#e8ecf5" font-size="14">进入 error_i2c / cci_remove 循环</text>
+  <text x="625" y="139" text-anchor="middle" fill="#9aa3c7" font-size="12">遍历已注册（cci->master[i].cci 非空）的 master</text>
+
+  <!-- Row 2: cache / skip -->
+  <rect x="30" y="176" width="370" height="46" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="215" y="197" text-anchor="middle" fill="#9aa3c7" font-size="14">（改动前不做这步）</text>
+  <text x="215" y="215" text-anchor="middle" fill="#9aa3c7" font-size="12">直接进入 i2c_del_adapter</text>
+  <rect x="440" y="176" width="370" height="46" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="625" y="197" text-anchor="middle" fill="#e8ecf5" font-size="14">① node = adap->dev.of_node</text>
+  <text x="625" y="215" text-anchor="middle" fill="#7bed9f" font-size="12">先快照有效指针，免被 del_adapter 清掉</text>
+
+  <!-- Row 3: i2c_del_adapter (shared, with memset sub-note) -->
+  <rect x="30" y="252" width="370" height="64" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="215" y="272" text-anchor="middle" fill="#e8ecf5" font-size="14">② i2c_del_adapter(&amp;mast[i].adap)</text>
+  <text x="215" y="290" text-anchor="middle" fill="#9aa3c7" font-size="12">内部 device_unregister + memset(&amp;adap->dev, 0)</text>
+  <text x="215" y="308" text-anchor="middle" fill="#e74c3c" font-size="12">→ adap->dev.of_node 被清成 NULL（bd4bc3dbded9）</text>
+  <rect x="440" y="252" width="370" height="64" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="625" y="272" text-anchor="middle" fill="#e8ecf5" font-size="14">② i2c_del_adapter(&amp;mast[i].adap)</text>
+  <text x="625" y="290" text-anchor="middle" fill="#9aa3c7" font-size="12">同样 memset 清零 adap->dev，但 node 不受影响</text>
+  <text x="625" y="308" text-anchor="middle" fill="#7bed9f" font-size="12">快照指针存活</text>
+
+  <!-- Row 4: of_node_put outcome -->
+  <rect x="30" y="346" width="370" height="46" rx="6" fill="#13162a" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="215" y="367" text-anchor="middle" fill="#e8ecf5" font-size="14">③ of_node_put(adap->dev.of_node)</text>
+  <text x="215" y="385" text-anchor="middle" fill="#e74c3c" font-size="12">= put(NULL) 空操作 → 引用泄漏</text>
+  <rect x="440" y="346" width="370" height="46" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="625" y="367" text-anchor="middle" fill="#e8ecf5" font-size="14">③ of_node_put(node)</text>
+  <text x="625" y="385" text-anchor="middle" fill="#7bed9f" font-size="12">用快照放引用 → refcount 配平</text>
+
+  <!-- Arrows left -->
+  <path d="M215,72 L215,100" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M215,146 L215,176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M215,222 L215,252" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M215,316 L215,346" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Arrows right -->
+  <path d="M625,72 L625,100" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M625,146 L625,176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M625,222 L625,252" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M625,316 L625,346" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Legend -->
+  <circle cx="44" cy="408" r="5" fill="#e74c3c"/>
+  <text x="56" y="412" fill="#9aa3c7" font-size="12">红 = 改动前问题（put 读到 NULL）</text>
+  <circle cx="430" cy="408" r="5" fill="#7bed9f"/>
+  <text x="442" y="412" fill="#9aa3c7" font-size="12">绿 = 修复（先快照 of_node）</text>
+</svg>
