@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="360" viewBox="0 0 780 360" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrowN" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+    </marker>
+  </defs>
+
+  <rect width="780" height="360" fill="#0b0d14"/>
+
+  <text x="390" y="26" text-anchor="middle" fill="#e8ecf5" font-size="16" font-weight="600">null_blk I/O 路径：双路径 → 只留 blk-mq</text>
+
+  <!-- 改动前 -->
+  <text x="200" y="56" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="600">改动前 · 两条 I/O 路径</text>
+  <rect x="40" y="68" width="320" height="30" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="200" y="87" text-anchor="middle" fill="#e8ecf5" font-size="12">null_blk I/O（queue_mode 分流）</text>
+  <!-- bio path (removed) -->
+  <rect x="40" y="112" width="320" height="120" rx="6" fill="#1a1014" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="200" y="132" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="600">bio 路径（NULL_Q_BIO）— 整条删除</text>
+  <text x="50" y="152" fill="#9aa3c7" font-size="11">null_submit_bio → alloc_cmd</text>
+  <text x="50" y="168" fill="#e74c3c" font-size="11">  → get_tag(find_first_zero_bit + test_and_set_bit_lock)</text>
+  <text x="50" y="184" fill="#9aa3c7" font-size="11">  → null_handle_bio → end_cmd</text>
+  <text x="50" y="200" fill="#e74c3c" font-size="11">  → free_cmd → put_tag(clear_bit_unlock)</text>
+  <text x="50" y="218" fill="#9aa3c7" font-size="10">（无锁位图 tag 分配，RTRS __rtrs_get_permit 借鉴自这）</text>
+  <!-- blk-mq path (kept) -->
+  <rect x="40" y="246" width="320" height="80" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="200" y="266" text-anchor="middle" fill="#9aa3c7" font-size="12">blk-mq 路径（NULL_Q_MQ）</text>
+  <text x="50" y="286" fill="#9aa3c7" font-size="11">null_queue_rq → blk_mq</text>
+  <text x="50" y="302" fill="#9aa3c7" font-size="11">  → null_handle_rq → blk_mq_end_request</text>
+  <!-- arrows from I/O to both paths -->
+  <path d="M200,98 L200,112" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrowN)"/>
+  <path d="M200,98 L200,246" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrowN)" stroke-dasharray="3 3"/>
+
+  <!-- 改动后 -->
+  <text x="580" y="56" text-anchor="middle" fill="#7bed9f" font-size="13" font-weight="600">改动后 · 只留 blk-mq</text>
+  <rect x="420" y="68" width="320" height="30" rx="6" fill="#13162a" stroke="#2e3354" stroke-width="1.5"/>
+  <text x="580" y="87" text-anchor="middle" fill="#e8ecf5" font-size="12">null_blk I/O（仅 NULL_Q_MQ）</text>
+  <!-- removed bio path ghost -->
+  <rect x="420" y="112" width="320" height="50" rx="6" fill="#0d0f18" stroke="#3a2020" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="580" y="135" text-anchor="middle" fill="#5a4040" font-size="11" text-decoration="line-through">bio 路径 + get_tag/put_tag — 已移除</text>
+  <text x="580" y="150" text-anchor="middle" fill="#5a4040" font-size="10">end_cmd 队列模式分流也删</text>
+  <!-- blk-mq path (kept, green) -->
+  <rect x="420" y="178" width="320" height="100" rx="6" fill="#0f1c16" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="580" y="198" text-anchor="middle" fill="#7bed9f" font-size="12" font-weight="600">blk-mq 路径（唯一保留）</text>
+  <text x="430" y="218" fill="#9aa3c7" font-size="11">null_queue_rq → blk_mq</text>
+  <text x="430" y="234" fill="#9aa3c7" font-size="11">  → null_handle_rq（cmd->rq 改 blk_mq_rq_from_pdu）</text>
+  <text x="430" y="250" fill="#7bed9f" font-size="11">  → blk_mq_end_request（end_cmd 直接内联）</text>
+  <text x="430" y="270" fill="#9aa3c7" font-size="10">nullb_queue/tag_map/cmds[] 等结构一并删</text>
+  <!-- arrow -->
+  <path d="M580,98 L580,178" stroke="#7bed9f" stroke-width="1.5" fill="none" marker-end="url(#arrowG)"/>
+
+  <!-- Legend -->
+  <circle cx="44" cy="344" r="5" fill="#e74c3c"/>
+  <text x="56" y="348" fill="#9aa3c7" font-size="11">红 = 移除的 bio 路径（含 get_tag/put_tag 无锁位图）</text>
+  <circle cx="430" cy="344" r="5" fill="#7bed9f"/>
+  <text x="442" y="348" fill="#9aa3c7" font-size="11">绿 = 保留的 blk-mq 路径（简化后唯一路径）</text>
+</svg>
