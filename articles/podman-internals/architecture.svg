@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="580" viewBox="0 0 860 580" font-family="system-ui, sans-serif">
+  <rect width="860" height="580" fill="#0b0d14"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowYellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+
+  <text x="430" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">Podman 分层架构（同一 CLI，双后端）</text>
+
+  <!-- Layer 1: CLI -->
+  <rect x="260" y="46" width="340" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="430" y="68" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">CLI 入口层</text>
+  <text x="430" y="87" text-anchor="middle" fill="#9aa3c2" font-size="12">cmd/podman（cobra 命令树 + registry）</text>
+
+  <path d="M430,98 L430,122" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="438" y="116" fill="#9aa3c2" font-size="11">ContainerEngine / ImageEngine 接口</text>
+
+  <!-- Layer 2: engine abstraction, split ABI / Tunnel -->
+  <rect x="120" y="124" width="620" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="146" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">引擎抽象层 · pkg/domain</text>
+  <text x="430" y="165" text-anchor="middle" fill="#9aa3c2" font-size="12">entities 接口 + infra 工厂（按 EngineMode 分叉）</text>
+  <text x="240" y="190" text-anchor="middle" fill="#4ecdc4" font-size="12" font-weight="600">ABI 模式（本地）</text>
+  <text x="535" y="190" text-anchor="middle" fill="#f9ca24" font-size="12" font-weight="600">Tunnel 模式（远程）</text>
+
+  <path d="M240,178 L240,220" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+  <path d="M535,178 L535,220" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+
+  <!-- Layer 3 left: libpod core -->
+  <rect x="60" y="222" width="340" height="90" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="230" y="244" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">libpod 核心运行时</text>
+  <text x="230" y="263" text-anchor="middle" fill="#9aa3c2" font-size="11">Runtime / Container / Pod · SQLite State</text>
+  <text x="230" y="281" text-anchor="middle" fill="#9aa3c2" font-size="11">pkg/specgen/generate → OCI spec.Spec</text>
+  <text x="230" y="299" text-anchor="middle" fill="#9aa3c2" font-size="11">→ OCI runtime（crun/runc）+ conmon</text>
+
+  <!-- Layer 3 right: bindings -->
+  <rect x="460" y="222" width="150" height="90" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="535" y="250" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">pkg/bindings</text>
+  <text x="535" y="269" text-anchor="middle" fill="#9aa3c2" font-size="11">Go HTTP 客户端</text>
+  <text x="535" y="287" text-anchor="middle" fill="#9aa3c2" font-size="11">连接存 context</text>
+
+  <!-- HTTP arrow bindings -> api server -->
+  <path d="M610,267 L640,267" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+  <text x="625" y="259" text-anchor="middle" fill="#f9ca24" font-size="10">HTTP</text>
+
+  <!-- pkg/api server -->
+  <rect x="642" y="222" width="158" height="90" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="721" y="250" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">pkg/api</text>
+  <text x="721" y="269" text-anchor="middle" fill="#9aa3c2" font-size="11">REST 服务端</text>
+  <text x="721" y="287" text-anchor="middle" fill="#9aa3c2" font-size="11">Docker + Libpod</text>
+
+  <!-- dashed arrow: api server also uses libpod (route below, in clear corridor at y=336) -->
+  <path d="M721,312 L721,336 L230,336 L230,312" stroke="#7a86b3" stroke-width="1.5" fill="none" stroke-dasharray="5 3" opacity="0.75" marker-end="url(#arrow)"/>
+  <text x="475" y="330" text-anchor="middle" fill="#9aa3c2" font-size="10">服务端也经 abi 委托 libpod（两端终态都是 libpod）</text>
+
+  <!-- Layer 4: integration / extension modules -->
+  <text x="430" y="372" text-anchor="middle" fill="#9aa3c2" font-size="12">集成与扩展模块（消费 libpod / 复用 specgen）</text>
+  <rect x="40" y="386" width="180" height="66" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="130" y="410" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">pkg/systemd</text>
+  <text x="130" y="429" text-anchor="middle" fill="#9aa3c2" font-size="11">Quadlet 转译器</text>
+  <text x="130" y="445" text-anchor="middle" fill="#9aa3c2" font-size="11">.container → .service</text>
+
+  <rect x="240" y="386" width="180" height="66" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="330" y="410" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">kube 集成</text>
+  <text x="330" y="429" text-anchor="middle" fill="#9aa3c2" font-size="11">infra/abi/play.go</text>
+  <text x="330" y="445" text-anchor="middle" fill="#9aa3c2" font-size="11">+ libpod/kube.go</text>
+
+  <rect x="440" y="386" width="180" height="66" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="530" y="410" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">pkg/machine</text>
+  <text x="530" y="429" text-anchor="middle" fill="#9aa3c2" font-size="11">Mac/Win 虚拟机</text>
+  <text x="530" y="445" text-anchor="middle" fill="#9aa3c2" font-size="11">VM 内再跑 podman</text>
+
+  <rect x="640" y="386" width="180" height="66" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="730" y="410" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">pkg/rootless</text>
+  <text x="730" y="429" text-anchor="middle" fill="#9aa3c2" font-size="11">rootless 入口</text>
+  <text x="730" y="445" text-anchor="middle" fill="#9aa3c2" font-size="11">+ reexec</text>
+
+  <!-- external deps bottom -->
+  <text x="430" y="484" text-anchor="middle" fill="#9aa3c2" font-size="12">外部依赖（vendor/：containers/{image,storage,common}, libnetwork, buildah, conmon）</text>
+  <rect x="80" y="500" width="700" height="56" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.2"/>
+  <text x="430" y="522" text-anchor="middle" fill="#e6e8f0" font-size="12">containers/image（镜像拉取/推送） · containers/storage（overlayfs 层存储）</text>
+  <text x="430" y="542" text-anchor="middle" fill="#9aa3c2" font-size="12">libnetwork（Netavark/CNI/pasta） · buildah（镜像构建） · conmon（容器监控进程）</text>
+</svg>

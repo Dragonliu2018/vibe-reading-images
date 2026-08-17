@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="660" viewBox="0 0 860 660" font-family="system-ui, sans-serif">
+  <rect width="860" height="660" fill="#0b0d14"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowYellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+
+  <text x="430" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">podman run 请求数据流（ABI / Tunnel 双后端，合流于 libpod）</text>
+  <text x="430" y="44" text-anchor="middle" fill="#9aa3c2" font-size="11">数据类型：args → ContainerRunOptions → SpecGenerator → spec.Spec → libpod.Container</text>
+
+  <!-- run box -->
+  <rect x="320" y="56" width="220" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="430" y="78" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">podman run</text>
+  <text x="430" y="95" text-anchor="middle" fill="#9aa3c2" font-size="11">cmd/podman/containers/run.go</text>
+
+  <!-- arrow to fork -->
+  <path d="M430,104 L430,128" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- fork box -->
+  <rect x="270" y="130" width="320" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="152" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">infra.NewContainerEngine</text>
+  <text x="430" y="169" text-anchor="middle" fill="#9aa3c2" font-size="11">★ 分叉点：switch EngineMode（runtime_abi.go:16）</text>
+
+  <!-- diverging arrows (orthogonal) -->
+  <path d="M430,178 L430,202 L230,202 L230,222" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+  <path d="M430,178 L430,202 L630,202 L630,222" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+  <text x="250" y="216" fill="#4ecdc4" font-size="11" font-weight="600">ABI（本地）</text>
+  <text x="560" y="216" fill="#f9ca24" font-size="11" font-weight="600">Tunnel（远程）</text>
+
+  <!-- ABI row3 -->
+  <rect x="60" y="224" width="340" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="230" y="246" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">abi.ContainerEngine.ContainerRun</text>
+  <text x="230" y="263" text-anchor="middle" fill="#9aa3c2" font-size="11">进程内直连 libpod</text>
+
+  <!-- Tunnel row3 -->
+  <rect x="460" y="224" width="340" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="630" y="246" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">tunnel.ContainerEngine.ContainerRun</text>
+  <text x="630" y="263" text-anchor="middle" fill="#9aa3c2" font-size="11">委托 bindings HTTP 客户端</text>
+
+  <path d="M230,274 L230,306" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+  <path d="M630,274 L630,306" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+
+  <!-- ABI row4 -->
+  <rect x="60" y="308" width="340" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="230" y="330" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">generate.MakeContainer</text>
+  <text x="230" y="348" text-anchor="middle" fill="#9aa3c2" font-size="11">SpecGenerator → spec.Spec（OCI）</text>
+  <text x="230" y="362" text-anchor="middle" fill="#9aa3c2" font-size="11">+ ExecuteCreate → libpod.NewContainer</text>
+
+  <!-- Tunnel row4 -->
+  <rect x="460" y="308" width="340" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="630" y="330" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">bindings.CreateWithSpec</text>
+  <text x="630" y="348" text-anchor="middle" fill="#9aa3c2" font-size="11">JSON marshal SpecGenerator</text>
+  <text x="630" y="362" text-anchor="middle" fill="#9aa3c2" font-size="11">POST /v?/libpod/containers/create</text>
+
+  <!-- Tunnel row5: api server handler (rejoin) -->
+  <path d="M630,364 L630,396" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+  <rect x="460" y="398" width="340" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="630" y="420" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">pkg/api 服务端 handler</text>
+  <text x="630" y="438" text-anchor="middle" fill="#9aa3c2" font-size="11">反序列化 → 同一套 generate.MakeContainer</text>
+  <text x="630" y="452" text-anchor="middle" fill="#9aa3c2" font-size="11">★ 合流点：与 ABI 共用 libpod 调用</text>
+
+  <!-- ABI row4 -> merge libpod (long vertical on left) -->
+  <path d="M230,364 L230,498" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+  <!-- Tunnel row5 -> merge -->
+  <path d="M630,454 L630,498" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+
+  <!-- merge box: libpod start -->
+  <rect x="170" y="500" width="520" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="430" y="522" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">libpod · Container.Start → init → ociRuntime.CreateContainer</text>
+  <text x="430" y="540" text-anchor="middle" fill="#9aa3c2" font-size="11">生成最终 OCI spec、落盘 config.json、fork+exec conmon</text>
+
+  <path d="M430,556 L430,590" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- shared OCI runtime -->
+  <rect x="190" y="592" width="480" height="48" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="430" y="614" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">OCI runtime：conmon → runc/crun create + start</text>
+  <text x="430" y="631" text-anchor="middle" fill="#9aa3c2" font-size="11">容器进程真正起跑（两种模式共享此尾段）</text>
+</svg>

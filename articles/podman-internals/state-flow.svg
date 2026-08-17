@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" viewBox="0 0 860 380" font-family="system-ui, sans-serif">
+  <rect width="860" height="380" fill="#0b0d14"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowYellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+
+  <text x="430" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">libpod 容器生命周期状态流</text>
+
+  <!-- main row states -->
+  <rect x="30" y="100" width="170" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="115" y="126" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Configured</text>
+  <text x="115" y="144" text-anchor="middle" fill="#9aa3c2" font-size="11">已定义未创建</text>
+
+  <rect x="240" y="100" width="160" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="320" y="126" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Created</text>
+  <text x="320" y="144" text-anchor="middle" fill="#9aa3c2" font-size="11">OCI 容器已建未启</text>
+
+  <rect x="450" y="100" width="160" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.8"/>
+  <text x="530" y="126" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Running</text>
+  <text x="530" y="144" text-anchor="middle" fill="#9aa3c2" font-size="11">运行中</text>
+
+  <rect x="660" y="100" width="170" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="745" y="126" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Exited</text>
+  <text x="745" y="144" text-anchor="middle" fill="#9aa3c2" font-size="11">已停止/退出</text>
+
+  <!-- Paused (below Running) -->
+  <rect x="450" y="250" width="160" height="56" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="530" y="274" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Paused</text>
+  <text x="530" y="292" text-anchor="middle" fill="#9aa3c2" font-size="11">cgroups freezer 暂停</text>
+
+  <!-- Removing (below Exited) -->
+  <rect x="660" y="250" width="170" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="745" y="274" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Removing</text>
+  <text x="745" y="292" text-anchor="middle" fill="#9aa3c2" font-size="11">删除中</text>
+
+  <!-- gone -->
+  <rect x="660" y="332" width="170" height="34" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="745" y="353" text-anchor="middle" fill="#9aa3c2" font-size="12">已移除（落盘清除）</text>
+
+  <!-- arrows -->
+  <path d="M200,130 L240,130" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+  <text x="220" y="123" text-anchor="middle" fill="#4ecdc4" font-size="10">create</text>
+
+  <path d="M400,130 L450,130" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowCyan)"/>
+  <text x="425" y="123" text-anchor="middle" fill="#4ecdc4" font-size="10">start</text>
+
+  <path d="M610,130 L660,130" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="635" y="123" text-anchor="middle" fill="#9aa3c2" font-size="10">stop/kill</text>
+
+  <!-- restart back-arrow above -->
+  <path d="M745,100 L745,72 L530,72 L530,100" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+  <text x="637" y="65" text-anchor="middle" fill="#f9ca24" font-size="10">restart（start 复用）</text>
+
+  <!-- Running <-> Paused -->
+  <path d="M530,160 L530,250" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="538" y="208" fill="#b388ff" font-size="10">pause</text>
+  <path d="M555,250 L555,160" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="563" y="208" fill="#b388ff" font-size="10">resume</text>
+
+  <!-- Exited -> Removing -->
+  <path d="M745,160 L745,250" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="753" y="208" fill="#ff6b9d" font-size="10">rm</text>
+
+  <!-- Created -> Removing (route below Paused/Removing row to avoid crossing pause/resume) -->
+  <path d="M320,160 L320,320 L660,320 L660,306" stroke="#7a86b3" stroke-width="1.5" fill="none" stroke-dasharray="5 3" opacity="0.7" marker-end="url(#arrow)"/>
+  <text x="440" y="314" fill="#9aa3c2" font-size="10">rm（未启动亦可删）</text>
+
+  <!-- Removing -> gone -->
+  <path d="M745,306 L745,332" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+</svg>
