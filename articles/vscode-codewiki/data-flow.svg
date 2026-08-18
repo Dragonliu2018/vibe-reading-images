@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="760" viewBox="0 0 860 760" font-family="system-ui, sans-serif">
+<rect width="860" height="760" fill="#0b0d14"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker></defs>
+<text x="20" y="34" fill="#e8eaf0" font-size="16" font-weight="700">VS Code 桌面启动数据流（进程启动 → 工作台就绪）</text>
+<rect x="30" y="54" width="300" height="686" rx="10" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+<text x="180.0" y="72" fill="#4ecdc4" font-size="12" font-weight="700" text-anchor="middle">Main 主进程</text>
+<rect x="340" y="54" width="170" height="686" rx="10" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+<text x="425.0" y="72" fill="#f9ca24" font-size="12" font-weight="700" text-anchor="middle">Shared Process</text>
+<rect x="530" y="54" width="300" height="686" rx="10" fill="none" stroke="#6c8ef5" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+<text x="680.0" y="72" fill="#6c8ef5" font-size="12" font-weight="700" text-anchor="middle">Renderer 渲染进程</text>
+<rect x="40" y="92" width="280" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<rect x="40" y="92" width="4" height="56" rx="2" fill="#4ecdc4"/>
+<text x="180.0" y="112" fill="#4ecdc4" font-size="12.5" font-weight="700" text-anchor="middle">main.ts</text>
+<text x="180.0" y="130" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">app.ready → bootstrapESM()</text>
+<text x="180.0" y="148" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">parseCLIArgs · enableSandbox</text>
+<rect x="40" y="172" width="280" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<rect x="40" y="172" width="4" height="70" rx="2" fill="#4ecdc4"/>
+<text x="180.0" y="192" fill="#4ecdc4" font-size="12.5" font-weight="700" text-anchor="middle">CodeMain.startup()</text>
+<text x="180.0" y="210" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">createServices (ServiceCollection)</text>
+<text x="180.0" y="228" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">claimInstance 单实例锁</text>
+<rect x="40" y="266" width="280" height="74" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<rect x="40" y="266" width="4" height="74" rx="2" fill="#4ecdc4"/>
+<text x="180.0" y="286" fill="#4ecdc4" font-size="12.5" font-weight="700" text-anchor="middle">CodeApplication.startup()</text>
+<text x="180.0" y="304" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">initServices · initChannels</text>
+<text x="180.0" y="322" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">ProxyChannel.fromService 暴露服务</text>
+<rect x="40" y="360" width="280" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<rect x="40" y="360" width="4" height="60" rx="2" fill="#4ecdc4"/>
+<text x="180.0" y="380" fill="#4ecdc4" font-size="12.5" font-weight="700" text-anchor="middle">openFirstWindow()</text>
+<text x="180.0" y="398" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">CodeWindow = BrowserWindow + preload</text>
+<rect x="40" y="440" width="280" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<rect x="40" y="440" width="4" height="56" rx="2" fill="#4ecdc4"/>
+<text x="180.0" y="460" fill="#4ecdc4" font-size="12.5" font-weight="700" text-anchor="middle">LifecycleMainPhase</text>
+<text x="180.0" y="478" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">Ready → AfterWindowOpen → Eventually</text>
+<rect x="350" y="266" width="160" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<rect x="350" y="266" width="4" height="60" rx="2" fill="#f9ca24"/>
+<text x="430.0" y="286" fill="#f9ca24" font-size="12.5" font-weight="700" text-anchor="middle">SharedProcess</text>
+<text x="430.0" y="304" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">utilityProcess.fork()</text>
+<text x="430.0" y="322" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">延迟到首次连接</text>
+<rect x="350" y="344" width="160" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<rect x="350" y="344" width="4" height="50" rx="2" fill="#f9ca24"/>
+<text x="430.0" y="364" fill="#f9ca24" font-size="12.5" font-weight="700" text-anchor="middle">MessagePort</text>
+<text x="430.0" y="382" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">register channels</text>
+<rect x="540" y="360" width="290" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<rect x="540" y="360" width="4" height="64" rx="2" fill="#6c8ef5"/>
+<text x="685.0" y="380" fill="#6c8ef5" font-size="12.5" font-weight="700" text-anchor="middle">preload.js</text>
+<text x="685.0" y="398" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">ipcRenderer.invoke(config)</text>
+<text x="685.0" y="416" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">contextBridge → window.vscode</text>
+<rect x="540" y="442" width="290" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<rect x="540" y="442" width="4" height="70" rx="2" fill="#6c8ef5"/>
+<text x="685.0" y="462" fill="#6c8ef5" font-size="12.5" font-weight="700" text-anchor="middle">DesktopMain.open()</text>
+<text x="685.0" y="480" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">initServices: ProxyChannel.toService</text>
+<text x="685.0" y="498" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">‖ DOM ready (并行)</text>
+<rect x="540" y="530" width="290" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<rect x="540" y="530" width="4" height="70" rx="2" fill="#6c8ef5"/>
+<text x="685.0" y="550" fill="#6c8ef5" font-size="12.5" font-weight="700" text-anchor="middle">Workbench.startup()</text>
+<text x="685.0" y="568" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">initServices (registerSingleton)</text>
+<text x="685.0" y="586" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">Registry.start (contrib 按 phase)</text>
+<rect x="540" y="618" width="290" height="58" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<rect x="540" y="618" width="4" height="58" rx="2" fill="#6c8ef5"/>
+<text x="685.0" y="638" fill="#6c8ef5" font-size="12.5" font-weight="700" text-anchor="middle">renderWorkbench</text>
+<text x="685.0" y="656" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">Parts · createWorkbenchLayout · layout()</text>
+<rect x="540" y="694" width="290" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<rect x="540" y="694" width="4" height="46" rx="2" fill="#6c8ef5"/>
+<text x="685.0" y="714" fill="#6c8ef5" font-size="12.5" font-weight="700" text-anchor="middle">restore (race 2s)</text>
+<text x="685.0" y="732" fill="#7a86b3" font-size="10.5" text-anchor="middle" opacity="0.9">phase Restored → Eventually</text>
+<line x1="180" y1="152" x2="180" y2="172" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<line x1="180" y1="242" x2="180" y2="266" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<line x1="180" y1="340" x2="180" y2="360" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<line x1="180" y1="420" x2="180" y2="440" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<line x1="320" y1="303" x2="350" y2="303" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<text x="348" y="295" fill="#7a86b3" font-size="10" text-anchor="end" opacity="0.95" paint-order="stroke" stroke="#0b0d14" stroke-width="3">并行 spawn</text>
+<line x1="430" y1="326" x2="430" y2="344" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<path d="M 320 390 L 332 390 L 332 412 L 528 412 L 528 392 L 540 392" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<text x="430" y="408" fill="#7a86b3" font-size="10" text-anchor="middle" opacity="0.9" paint-order="stroke" stroke="#0b0d14" stroke-width="3">loadURL + 配置 IPC</text>
+<path d="M 510 369 L 525 369 L 525 477 L 540 477" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<text x="525" y="435" fill="#7a86b3" font-size="10" opacity="0.95" text-anchor="middle" paint-order="stroke" stroke="#0b0d14" stroke-width="3">MessagePort</text>
+<line x1="685" y1="424" x2="685" y2="442" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<line x1="685" y1="512" x2="685" y2="530" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<line x1="685" y1="600" x2="685" y2="618" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<line x1="685" y1="676" x2="685" y2="694" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+</svg>
