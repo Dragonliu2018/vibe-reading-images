@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="420" viewBox="0 0 880 420" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="880" height="420" fill="#0b0d14"/>
+  <text x="440" y="24" text-anchor="middle" fill="#e8eaf0" font-size="15" font-weight="600">模块依赖关系（运行时调用 / import）</text>
+
+  <!-- nodes -->
+  <g stroke-width="1.5" fill="#13162a">
+    <rect x="50" y="70" width="160" height="40" rx="5" stroke="#6c8ef5"/><text x="130" y="94" text-anchor="middle" fill="#e8eaf0" font-size="13">api/controller</text>
+    <rect x="50" y="160" width="160" height="40" rx="5" stroke="#b388ff"/><text x="130" y="184" text-anchor="middle" fill="#e8eaf0" font-size="13">services</text>
+    <rect x="50" y="300" width="160" height="40" rx="5" stroke="#f9ca24"/><text x="130" y="324" text-anchor="middle" fill="#e8eaf0" font-size="13">store</text>
+    <rect x="340" y="125" width="160" height="40" rx="5" stroke="#ff6b9d"/><text x="420" y="149" text-anchor="middle" fill="#e8eaf0" font-size="13">git 引擎</text>
+    <rect x="600" y="80" width="170" height="40" rx="5" stroke="#ff6b9d"/><text x="685" y="104" text-anchor="middle" fill="#e8eaf0" font-size="13">pipeline CI</text>
+    <rect x="600" y="160" width="170" height="40" rx="5" stroke="#ff6b9d"/><text x="685" y="184" text-anchor="middle" fill="#e8eaf0" font-size="13">gitspace</text>
+    <rect x="600" y="240" width="170" height="40" rx="5" stroke="#ff6b9d"/><text x="685" y="264" text-anchor="middle" fill="#e8eaf0" font-size="13">registry</text>
+  </g>
+
+  <!-- infra band -->
+  <rect x="50" y="355" width="780" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="440" y="379" text-anchor="middle" fill="#80c7ff" font-size="13">基础设施层：job · lock · pubsub · events/stream · livelog · blob · encrypt · audit（全部模块依赖）</text>
+
+  <!-- arrows -->
+  <g fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)">
+    <path d="M130,110 L130,160"/>
+    <path d="M130,200 L130,300"/>
+    <path d="M210,90 L290,90 L290,310 L210,310"/>
+    <path d="M210,180 L275,180 L275,145 L340,145"/>
+    <path d="M600,100 L560,100 L560,125 L420,125"/>
+    <path d="M600,180 L540,180 L540,145 L500,145"/>
+    <path d="M600,260 L560,260 L560,320 L210,320"/>
+    <path d="M685,200 L790,200 L790,355" stroke-dasharray="4,3"/>
+    <path d="M685,280 L685,355" stroke-dasharray="4,3"/>
+  </g>
+  <text x="828" y="278" text-anchor="end" fill="#9aa3c7" font-size="11">依赖基础设施</text>
+</svg>

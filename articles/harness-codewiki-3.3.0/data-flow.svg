@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="600" viewBox="0 0 880 600" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="880" height="600" fill="#0b0d14"/>
+  <text x="440" y="26" text-anchor="middle" fill="#e8eaf0" font-size="15" font-weight="600">创建 Pull Request 端到端数据流</text>
+  <text x="595" y="48" text-anchor="start" fill="#6a7497" font-size="11">数据状态</text>
+
+  <!-- S1 entry -->
+  <rect x="50" y="48" width="500" height="48" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="64" y="68" fill="#e8eaf0" font-size="13" font-weight="600">HTTP POST /v1/repos/{repo_ref}/pullreq</text>
+  <text x="64" y="86" fill="#9aa3c7" font-size="11">Router.ServeHTTP → APIRouter.IsEligibleTraffic(/api/) in app/router/router.go:45</text>
+  <text x="595" y="76" fill="#9aa3c7" font-size="11">HTTP body JSON</text>
+
+  <!-- S2 middleware -->
+  <rect x="50" y="114" width="500" height="48" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="64" y="134" fill="#e8eaf0" font-size="13" font-weight="600">chi 中间件链</text>
+  <text x="64" y="152" fill="#9aa3c7" font-size="11">authn.Attempt → auth.Session 注入 context in app/api/middleware/authn/authn.go:33</text>
+  <text x="595" y="142" fill="#9aa3c7" font-size="11">*auth.Session</text>
+
+  <!-- S3 handler -->
+  <rect x="50" y="180" width="500" height="48" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="64" y="200" fill="#e8eaf0" font-size="13" font-weight="600">handler.HandleCreate</text>
+  <text x="64" y="218" fill="#9aa3c7" font-size="11">DecodeBody → 调 controller.Create in app/api/handler/pullreq/pr_create.go:26</text>
+  <text x="595" y="208" fill="#9aa3c7" font-size="11">pullreq.CreateInput</text>
+
+  <!-- S4 controller create + authz -->
+  <rect x="50" y="246" width="500" height="48" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="64" y="266" fill="#e8eaf0" font-size="13" font-weight="600">controller.Create</text>
+  <text x="64" y="284" fill="#9aa3c7" font-size="11">Sanitize + getRepoCheckAccess 鉴权 + 查重 in app/api/controller/pullreq/pr_create.go:82</text>
+  <text x="595" y="274" fill="#9aa3c7" font-size="11">*types.RepositoryCore</text>
+
+  <!-- S5 git ops -->
+  <rect x="50" y="312" width="500" height="48" rx="5" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="64" y="332" fill="#e8eaf0" font-size="13" font-weight="600">git 操作（FetchObjects/GetRef/MergeBase/DiffStats）</text>
+  <text x="64" y="350" fill="#9aa3c7" font-size="11">经 git.Interface 本地执行原生 git CLI in app/api/controller/pullreq/pr_create.go</text>
+  <text x="595" y="340" fill="#9aa3c7" font-size="11">sha.SHA + DiffStatsOutput</text>
+
+  <!-- transaction container -->
+  <rect x="42" y="370" width="516" height="86" rx="6" fill="none" stroke="#f9ca24" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="56" y="386" fill="#f9ca24" font-size="11" font-weight="600">DB 事务（TxOptLock · 乐观锁重试 ≤5 次）</text>
+
+  <!-- S6 tx -->
+  <rect x="50" y="390" width="500" height="56" rx="5" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="64" y="410" fill="#e8eaf0" font-size="13" font-weight="600">TxOptLock 事务内</text>
+  <text x="64" y="428" fill="#9aa3c7" font-size="11">repoStore.Update(PullReqSeq) → pullreqStore.Create → reviewerStore.Create → git.UpdateRef</text>
+  <text x="595" y="420" fill="#9aa3c7" font-size="11">*types.PullReq (ID 回填)</text>
+
+  <!-- S7 post-tx -->
+  <rect x="50" y="466" width="500" height="48" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="64" y="486" fill="#e8eaf0" font-size="13" font-weight="600">事务后副作用（异步）</text>
+  <text x="64" y="504" fill="#9aa3c7" font-size="11">events.Created → webhook 消费 · sse.Publish 前端推送 · instrument 指标</text>
+  <text x="595" y="494" fill="#9aa3c7" font-size="11">events.Reporter</text>
+
+  <!-- S8 render -->
+  <rect x="50" y="532" width="500" height="48" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="64" y="552" fill="#e8eaf0" font-size="13" font-weight="600">render.JSON(201, pr)</text>
+  <text x="64" y="570" fill="#9aa3c7" font-size="11">handler 唯一出口 in app/api/render/render.go</text>
+  <text x="595" y="560" fill="#9aa3c7" font-size="11">HTTP 201 body</text>
+
+  <!-- down arrows -->
+  <g fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)">
+    <path d="M300,96 L300,114"/>
+    <path d="M300,162 L300,180"/>
+    <path d="M300,228 L300,246"/>
+    <path d="M300,294 L300,312"/>
+    <path d="M300,360 L300,390"/>
+    <path d="M300,446 L300,466"/>
+    <path d="M300,514 L300,532"/>
+  </g>
+</svg>
