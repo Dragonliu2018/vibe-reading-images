@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="640" viewBox="0 0 860 640" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="640" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="430" y="30" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="600">Langfuse v4.11.0 分层架构</text>
+
+  <!-- Layer 1: Clients (cyan = entry) -->
+  <text x="40" y="68" fill="#4ecdc4" font-size="13" font-weight="600">客户端</text>
+  <rect x="40" y="78" width="160" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="120" y="100" text-anchor="middle" fill="#e6e8f0" font-size="13">LLM App SDK</text>
+  <text x="120" y="118" text-anchor="middle" fill="#8a92a8" font-size="11">Python / JS / TS</text>
+
+  <rect x="210" y="78" width="150" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="285" y="100" text-anchor="middle" fill="#e6e8f0" font-size="13">OTLP Exporter</text>
+  <text x="285" y="118" text-anchor="middle" fill="#8a92a8" font-size="11">OpenTelemetry</text>
+
+  <rect x="370" y="78" width="150" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="445" y="100" text-anchor="middle" fill="#e6e8f0" font-size="13">浏览器 UI</text>
+  <text x="445" y="118" text-anchor="middle" fill="#8a92a8" font-size="11">Next.js 前端</text>
+
+  <rect x="530" y="78" width="150" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="605" y="100" text-anchor="middle" fill="#e6e8f0" font-size="13">脚本 / CLI</text>
+  <text x="605" y="118" text-anchor="middle" fill="#8a92a8" font-size="11">REST API 调用</text>
+
+  <!-- Layer 2: web (blue = core logic) -->
+  <text x="40" y="170" fill="#6c8ef5" font-size="13" font-weight="600">web（Next.js 进程）— 鉴权 · 限流 · 入队</text>
+  <rect x="40" y="180" width="640" height="92" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <rect x="56" y="194" width="140" height="62" rx="6" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="126" y="216" text-anchor="middle" fill="#e6e8f0" font-size="12">公开 REST API</text>
+  <text x="126" y="234" text-anchor="middle" fill="#8a92a8" font-size="10">/api/public/*</text>
+  <text x="126" y="248" text-anchor="middle" fill="#8a92a8" font-size="10">ingestion · otel · scim</text>
+
+  <rect x="206" y="194" width="140" height="62" rx="6" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="276" y="216" text-anchor="middle" fill="#e6e8f0" font-size="12">tRPC Server</text>
+  <text x="276" y="234" text-anchor="middle" fill="#8a92a8" font-size="10">/api/trpc/*</text>
+  <text x="276" y="248" text-anchor="middle" fill="#8a92a8" font-size="10">76 feature routers</text>
+
+  <rect x="356" y="194" width="140" height="62" rx="6" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="426" y="216" text-anchor="middle" fill="#e6e8f0" font-size="12">摄入入口</text>
+  <text x="426" y="234" text-anchor="middle" fill="#8a92a8" font-size="10">processEventBatch</text>
+  <text x="426" y="248" text-anchor="middle" fill="#8a92a8" font-size="10">OtelIngestionProcessor</text>
+
+  <rect x="506" y="194" width="160" height="62" rx="6" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="586" y="216" text-anchor="middle" fill="#e6e8f0" font-size="12">UI 页面 + 组件</text>
+  <text x="586" y="234" text-anchor="middle" fill="#8a92a8" font-size="10">pages router</text>
+  <text x="586" y="248" text-anchor="middle" fill="#8a92a8" font-size="10">traces · evals · playground</text>
+
+  <!-- ee (purple) sidecar -->
+  <rect x="700" y="180" width="130" height="92" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="765" y="202" text-anchor="middle" fill="#b388ff" font-size="12" font-weight="600">ee</text>
+  <text x="765" y="220" text-anchor="middle" fill="#8a92a8" font-size="10">企业版包</text>
+  <text x="765" y="236" text-anchor="middle" fill="#8a92a8" font-size="10">SSO · RBAC</text>
+  <text x="765" y="250" text-anchor="middle" fill="#8a92a8" font-size="10">被 web 引用</text>
+
+  <!-- Layer 3: Redis queues (yellow = async/cache) -->
+  <text x="40" y="302" fill="#f9ca24" font-size="13" font-weight="600">Redis 队列（BullMQ）— 进程间解耦层</text>
+  <rect x="40" y="312" width="640" height="62" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="100" y="338" text-anchor="middle" fill="#e6e8f0" font-size="12">IngestionQueue</text>
+  <text x="100" y="356" text-anchor="middle" fill="#8a92a8" font-size="10">分片 by project-eventBody</text>
+  <text x="240" y="338" text-anchor="middle" fill="#e6e8f0" font-size="12">OtelIngestionQueue</text>
+  <text x="240" y="356" text-anchor="middle" fill="#8a92a8" font-size="10">OTLP 原始 payload</text>
+  <text x="380" y="338" text-anchor="middle" fill="#e6e8f0" font-size="12">EvalExecutionQueue</text>
+  <text x="380" y="356" text-anchor="middle" fill="#8a92a8" font-size="10">LLM-as-judge / code</text>
+  <text x="520" y="338" text-anchor="middle" fill="#e6e8f0" font-size="12">BatchExport / Monitor / …</text>
+  <text x="520" y="356" text-anchor="middle" fill="#8a92a8" font-size="10">~20 个队列</text>
+
+  <!-- Layer 4: worker (blue) -->
+  <text x="40" y="412" fill="#6c8ef5" font-size="13" font-weight="600">worker（Express 进程）— 队列消费 · 重活</text>
+  <rect x="40" y="422" width="640" height="92" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <rect x="56" y="436" width="150" height="62" rx="6" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="131" y="458" text-anchor="middle" fill="#e6e8f0" font-size="12">摄入消费</text>
+  <text x="131" y="476" text-anchor="middle" fill="#8a92a8" font-size="10">IngestionService</text>
+  <text x="131" y="490" text-anchor="middle" fill="#8a92a8" font-size="10">→ ClickhouseWriter</text>
+
+  <rect x="216" y="436" width="150" height="62" rx="6" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="291" y="458" text-anchor="middle" fill="#e6e8f0" font-size="12">Eval 执行</text>
+  <text x="291" y="476" text-anchor="middle" fill="#8a92a8" font-size="10">LLM-as-judge</text>
+  <text x="291" y="490" text-anchor="middle" fill="#8a92a8" font-size="10">code eval sandbox</text>
+
+  <rect x="376" y="436" width="150" height="62" rx="6" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="451" y="458" text-anchor="middle" fill="#e6e8f0" font-size="12">后台迁移 / 导出</text>
+  <text x="451" y="476" text-anchor="middle" fill="#8a92a8" font-size="10">backgroundMigrations</text>
+  <text x="451" y="490" text-anchor="middle" fill="#8a92a8" font-size="10">batchExport / monitor</text>
+
+  <rect x="536" y="436" width="130" height="62" rx="6" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="601" y="458" text-anchor="middle" fill="#e6e8f0" font-size="12">In-App Agent</text>
+  <text x="601" y="476" text-anchor="middle" fill="#8a92a8" font-size="10">durable worker run</text>
+  <text x="601" y="490" text-anchor="middle" fill="#8a92a8" font-size="10">→ microvm 沙箱</text>
+
+  <!-- Layer 5: packages/shared (yellow core lib) spanning both processes -->
+  <text x="40" y="552" fill="#f9ca24" font-size="13" font-weight="600">packages/shared — 领域 · 队列契约 · 仓储（web 与 worker 共享，无入向依赖）</text>
+  <rect x="40" y="562" width="790" height="62" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="120" y="588" text-anchor="middle" fill="#e6e8f0" font-size="12">domain（zod）</text>
+  <text x="120" y="606" text-anchor="middle" fill="#8a92a8" font-size="10">traces · observations · scores</text>
+  <text x="280" y="588" text-anchor="middle" fill="#e6e8f0" font-size="12">redis + queues.ts</text>
+  <text x="280" y="606" text-anchor="middle" fill="#8a92a8" font-size="10">BullMQ 分片 · DLQ</text>
+  <text x="440" y="588" text-anchor="middle" fill="#e6e8f0" font-size="12">repositories</text>
+  <text x="440" y="606" text-anchor="middle" fill="#8a92a8" font-size="10">33 个数据访问</text>
+  <text x="600" y="588" text-anchor="middle" fill="#e6e8f0" font-size="12">ingestion · otel</text>
+  <text x="600" y="606" text-anchor="middle" fill="#8a92a8" font-size="10">tableDefinitions</text>
+  <text x="760" y="588" text-anchor="middle" fill="#e6e8f0" font-size="12">in-app-agent</text>
+  <text x="760" y="606" text-anchor="middle" fill="#8a92a8" font-size="10">事件日志共享</text>
+
+  <!-- Arrows: clients → web（四条统一落 web 顶边 y=180） -->
+  <path d="M120,130 L120,180" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow-cyan)"/>
+  <path d="M285,130 L260,180" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow-cyan)"/>
+  <path d="M445,130 L430,180" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow-cyan)"/>
+  <path d="M605,130 L586,180" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow-cyan)"/>
+
+  <!-- Arrows: web → Redis queues（第二条终点右移到 x=380，避开竖箭头 x=280，消除交叉） -->
+  <path d="M280,272 L280,312" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M426,272 L380,312" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Arrows: Redis queues → worker -->
+  <path d="M280,374 L280,422" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Arrow: web → ee (depends on) -->
+  <path d="M680,226 L700,226" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Arrows: web & worker → shared (both depend on shared) -->
+  <path d="M120,514 L120,562" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M360,514 L360,562" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M680,272 L680,562" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)" stroke-dasharray="4,4" opacity="0.7"/>
+
+  <!-- Data stores (right column, cyan/light-blue = external) -->
+  <rect x="730" y="312" width="100" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="780" y="337" text-anchor="middle" fill="#e6e8f0" font-size="12">Postgres</text>
+
+  <rect x="730" y="362" width="100" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="780" y="387" text-anchor="middle" fill="#e6e8f0" font-size="12">ClickHouse</text>
+
+  <rect x="730" y="412" width="100" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="780" y="437" text-anchor="middle" fill="#e6e8f0" font-size="12">S3 Blob</text>
+
+  <text x="780" y="300" text-anchor="middle" fill="#80c7ff" font-size="12" font-weight="600">数据存储</text>
+
+  <!-- Arrow: worker → ClickHouse / Postgres / S3 -->
+  <path d="M680,460 L730,382" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M680,470 L730,432" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- Arrow: web → S3 (ingestion offload) -->
+  <path d="M680,250 L730,432" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)" stroke-dasharray="4,4" opacity="0.7"/>
+
+  <!-- Legend -->
+  <text x="40" y="636" fill="#8a92a8" font-size="11">→ 数据/调用流向 · 实线=同步 · 虚线=异步依赖</text>
+</svg>

@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="680" viewBox="0 0 900 680" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-async" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+    <marker id="arrow-store" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="680" fill="#0b0d14"/>
+
+  <text x="450" y="28" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="600">摄入主链路数据流</text>
+  <text x="450" y="48" text-anchor="middle" fill="#8a92a8" font-size="11">SDK POST /api/public/ingestion → 写入 ClickHouse（实线=同步 · 黄虚线=异步队列 · 蓝=存储）</text>
+
+  <!-- Stage 1: Client -->
+  <rect x="40" y="74" width="160" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="120" y="98" text-anchor="middle" fill="#e6e8f0" font-size="13">SDK / OTLP</text>
+  <text x="120" y="116" text-anchor="middle" fill="#8a92a8" font-size="10">POST batch[]</text>
+  <text x="120" y="66" text-anchor="middle" fill="#4ecdc4" font-size="10" font-weight="600">① 客户端</text>
+
+  <!-- Stage 2: web ingestion endpoint -->
+  <text x="450" y="66" text-anchor="middle" fill="#4ecdc4" font-size="10" font-weight="600">② web 进程（ingestion.ts handler）</text>
+  <rect x="240" y="74" width="430" height="130" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="254" y="86" width="124" height="40" rx="5" fill="#1a1d3a" stroke="#4ecdc4" stroke-width="1" opacity="0.85"/>
+  <text x="316" y="103" text-anchor="middle" fill="#e6e8f0" font-size="11">鉴权+限流</text>
+  <text x="316" y="117" text-anchor="middle" fill="#8a92a8" font-size="9">apiAuth · RateLimit</text>
+
+  <rect x="388" y="86" width="124" height="40" rx="5" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="450" y="103" text-anchor="middle" fill="#e6e8f0" font-size="11">zod 校验</text>
+  <text x="450" y="117" text-anchor="middle" fill="#8a92a8" font-size="9">createIngestionEventSchema</text>
+
+  <rect x="522" y="86" width="134" height="40" rx="5" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="589" y="103" text-anchor="middle" fill="#e6e8f0" font-size="11">分组+排序</text>
+  <text x="589" y="117" text-anchor="middle" fill="#8a92a8" font-size="9">by eventBodyId · sortBatch</text>
+
+  <rect x="254" y="142" width="186" height="50" rx="5" fill="#1a1d3a" stroke="#f9ca24" stroke-width="1" opacity="0.85"/>
+  <text x="347" y="161" text-anchor="middle" fill="#e6e8f0" font-size="11">S3 卸载（allSettled）</text>
+  <text x="347" y="177" text-anchor="middle" fill="#8a92a8" font-size="9">uploadJson · 任一失败 throw 500</text>
+
+  <rect x="470" y="142" width="200" height="50" rx="5" fill="#1a1d3a" stroke="#f9ca24" stroke-width="1" opacity="0.85"/>
+  <text x="570" y="161" text-anchor="middle" fill="#e6e8f0" font-size="11">入队 IngestionQueue</text>
+  <text x="570" y="177" text-anchor="middle" fill="#8a92a8" font-size="9">shard by projectId-eventBodyId · delay</text>
+
+  <!-- Stage 3: Redis queue -->
+  <text x="780" y="66" text-anchor="middle" fill="#f9ca24" font-size="10" font-weight="600">③ Redis 队列</text>
+  <rect x="700" y="142" width="170" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="785" y="161" text-anchor="middle" fill="#e6e8f0" font-size="12">IngestionQueue (sharded)</text>
+  <text x="785" y="177" text-anchor="middle" fill="#8a92a8" font-size="9">payload: fileKey + bucketPrefix</text>
+
+  <!-- Stage 4: worker -->
+  <text x="450" y="248" text-anchor="middle" fill="#4ecdc4" font-size="10" font-weight="600">④ worker 进程（ingestionQueueProcessor）</text>
+  <rect x="40" y="258" width="830" height="118" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+
+  <rect x="54" y="270" width="150" height="44" rx="5" fill="#1a1d3a" stroke="#80c7ff" stroke-width="1" opacity="0.85"/>
+  <text x="129" y="288" text-anchor="middle" fill="#e6e8f0" font-size="11">取 S3 文件</text>
+  <text x="129" y="302" text-anchor="middle" fill="#8a92a8" font-size="9">getS3EventStorageClient</text>
+
+  <rect x="214" y="270" width="160" height="44" rx="5" fill="#1a1d3a" stroke="#f9ca24" stroke-width="1" opacity="0.85"/>
+  <text x="294" y="288" text-anchor="middle" fill="#e6e8f0" font-size="11">seen cache 去重</text>
+  <text x="294" y="302" text-anchor="middle" fill="#8a92a8" font-size="9">recently-processed</text>
+
+  <rect x="384" y="270" width="170" height="44" rx="5" fill="#1a1d3a" stroke="#ff6b9d" stroke-width="1" opacity="0.85"/>
+  <text x="469" y="288" text-anchor="middle" fill="#e6e8f0" font-size="11">二级队列重定向</text>
+  <text x="469" y="302" text-anchor="middle" fill="#8a92a8" font-size="9">S3 SlowDown / 大客户</text>
+
+  <rect x="564" y="270" width="150" height="44" rx="5" fill="#1a1d3a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="639" y="288" text-anchor="middle" fill="#e6e8f0" font-size="11">IngestionService</text>
+  <text x="639" y="302" text-anchor="middle" fill="#8a92a8" font-size="9">merge + map → rows</text>
+
+  <rect x="724" y="270" width="134" height="44" rx="5" fill="#1a1d3a" stroke="#f9ca24" stroke-width="1" opacity="0.85"/>
+  <text x="791" y="288" text-anchor="middle" fill="#e6e8f0" font-size="11">ClickhouseWriter</text>
+  <text x="791" y="302" text-anchor="middle" fill="#8a92a8" font-size="9">addToQueue · 微批</text>
+
+  <rect x="54" y="322" width="804" height="44" rx="5" fill="#0f1224" stroke="#6c8ef5" stroke-width="1" opacity="0.6"/>
+  <text x="456" y="340" text-anchor="middle" fill="#8a92a8" font-size="11">flush（定时 1000ms / 满量 1000）→ backOff 重试 → 失败半拆 / 截断 / drop</text>
+  <text x="456" y="356" text-anchor="middle" fill="#8a92a8" font-size="9">clampDecimal64Fields · maxAttempts=3 · drop 计入指标</text>
+
+  <!-- Stage 5: data stores -->
+  <text x="225" y="406" text-anchor="middle" fill="#80c7ff" font-size="10" font-weight="600">⑤ 数据存储</text>
+  <rect x="40" y="416" width="170" height="56" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="125" y="440" text-anchor="middle" fill="#e6e8f0" font-size="12">ClickHouse</text>
+  <text x="125" y="458" text-anchor="middle" fill="#8a92a8" font-size="10">events_full → MV → events_core</text>
+
+  <rect x="40" y="482" width="170" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="125" y="502" text-anchor="middle" fill="#e6e8f0" font-size="12">Postgres</text>
+  <text x="125" y="518" text-anchor="middle" fill="#8a92a8" font-size="10">元数据 / hasTraces 缓存</text>
+
+  <rect x="40" y="536" width="170" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="125" y="556" text-anchor="middle" fill="#e6e8f0" font-size="12">S3 Blob</text>
+  <text x="125" y="572" text-anchor="middle" fill="#8a92a8" font-size="10">事件 payload 持久化</text>
+
+  <!-- Stage 6: propagation + query -->
+  <text x="560" y="406" text-anchor="middle" fill="#4ecdc4" font-size="10" font-weight="600">⑥ 后续传播 / 查询</text>
+  <rect x="440" y="416" width="430" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="655" y="438" text-anchor="middle" fill="#e6e8f0" font-size="12">EventPropagationQueue</text>
+  <text x="655" y="456" text-anchor="middle" fill="#8a92a8" font-size="10">staging → events_full → events_core · 分区扫描游标</text>
+
+  <rect x="440" y="476" width="430" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="655" y="498" text-anchor="middle" fill="#e6e8f0" font-size="12">TraceUpsertQueue / EvalTrigger</text>
+  <text x="655" y="516" text-anchor="middle" fill="#8a92a8" font-size="10">trace 聚合 · eval job 创建 · monitor · 批量导出</text>
+
+  <rect x="440" y="536" width="430" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="655" y="558" text-anchor="middle" fill="#e6e8f0" font-size="12">查询路径（repositories）</text>
+  <text x="655" y="576" text-anchor="middle" fill="#8a92a8" font-size="10">eventsTable SQL helper · 列式窄列列表 + 详情查 raw</text>
+
+  <!-- Arrows -->
+  <path d="M200,100 L240,106" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- web 内部：S3 卸载 → 入队（水平边到边，中点高度） -->
+  <path d="M440,167 L470,167" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow-async)"/>
+  <!-- 入队 → Redis 队列（web→Redis，右向） -->
+  <path d="M670,167 L700,167" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow-async)"/>
+
+  <!-- S3 upload from web（终点为 S3 Blob 框，非 ClickHouse） -->
+  <path d="M300,204 L30,204 L30,558 L40,558" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow-store)" stroke-dasharray="4,4" opacity="0.7"/>
+
+  <!-- worker → ClickHouse（落右边缘中点，非角） -->
+  <path d="M791,314 L210,444" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow-store)"/>
+  <!-- worker → Postgres (hasTraces cache)，落顶边中点 -->
+  <path d="M639,314 L125,482" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow-store)" stroke-dasharray="4,4" opacity="0.6"/>
+
+  <!-- ClickHouse → propagation -->
+  <path d="M210,460 L440,440" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow-async)" stroke-dasharray="4,4" opacity="0.7"/>
+  <!-- propagation → upsert/eval -->
+  <path d="M655,466 L655,476" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- query reads ClickHouse -->
+  <path d="M440,561 L210,470" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.7" stroke-dasharray="4,4"/>
+
+  <!-- return path to SDK (dashed thin) -->
+  <path d="M300,84 L200,100" stroke="#7a86b3" stroke-width="1" fill="none" marker-end="url(#arrow)" stroke-dasharray="2,4" opacity="0.5"/>
+  <text x="225" y="78" fill="#8a92a8" font-size="9">返回 successes/errors</text>
+
+  <!-- Legend -->
+  <text x="40" y="624" fill="#8a92a8" font-size="11">图例：</text>
+  <rect x="92" y="614" width="16" height="12" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="116" y="624" fill="#8a92a8" font-size="11">入口/web</text>
+  <rect x="172" y="614" width="16" height="12" fill="#13162a" stroke="#6c8ef5"/>
+  <text x="196" y="624" fill="#8a92a8" font-size="11">处理</text>
+  <rect x="236" y="614" width="16" height="12" fill="#13162a" stroke="#f9ca24"/>
+  <text x="260" y="624" fill="#8a92a8" font-size="11">异步队列/缓存</text>
+  <rect x="352" y="614" width="16" height="12" fill="#13162a" stroke="#80c7ff"/>
+  <text x="376" y="624" fill="#8a92a8" font-size="11">数据存储</text>
+  <rect x="448" y="614" width="16" height="12" fill="#13162a" stroke="#ff6b9d"/>
+  <text x="472" y="624" fill="#8a92a8" font-size="11">降级路径</text>
+  <text x="40" y="650" fill="#8a92a8" font-size="11">关键不变量：web 只鉴权+入队（不写 ClickHouse）；worker 只消费+写存储；payload 经 S3 文件指针跨进程传递（非 Redis 大 payload）</text>
+</svg>

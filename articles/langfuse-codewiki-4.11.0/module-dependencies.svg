@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="560" viewBox="0 0 880 560" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="560" fill="#0b0d14"/>
+
+  <text x="440" y="28" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="600">模块依赖关系</text>
+  <text x="440" y="48" text-anchor="middle" fill="#8a92a8" font-size="11">箭头 = import / 调用方向（A → B 表示 A 依赖 B）</text>
+
+  <!-- Left column: external / data stores -->
+  <rect x="40" y="180" width="120" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="100" y="207" text-anchor="middle" fill="#e6e8f0" font-size="12">Postgres</text>
+
+  <rect x="40" y="234" width="120" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="100" y="261" text-anchor="middle" fill="#e6e8f0" font-size="12">ClickHouse</text>
+
+  <rect x="40" y="288" width="120" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="100" y="315" text-anchor="middle" fill="#e6e8f0" font-size="12">Redis</text>
+
+  <rect x="40" y="342" width="120" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="100" y="369" text-anchor="middle" fill="#e6e8f0" font-size="12">S3 Blob</text>
+
+  <text x="100" y="168" text-anchor="middle" fill="#80c7ff" font-size="11" font-weight="600">数据存储</text>
+
+  <!-- Center column: the 8 modules -->
+  <text x="440" y="80" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="600">入口 / 前端</text>
+  <rect x="310" y="90" width="260" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="440" y="112" text-anchor="middle" fill="#e6e8f0" font-size="13">前端架构与 Tracing UI</text>
+  <text x="440" y="128" text-anchor="middle" fill="#8a92a8" font-size="10">web/src/features · 76 features · tRPC client</text>
+
+  <text x="440" y="166" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="600">API 层</text>
+  <rect x="310" y="176" width="260" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="440" y="198" text-anchor="middle" fill="#e6e8f0" font-size="13">公开 API 与鉴权</text>
+  <text x="440" y="214" text-anchor="middle" fill="#8a92a8" font-size="10">public-api · tRPC · apiAuth · RateLimit</text>
+
+  <text x="440" y="252" text-anchor="middle" fill="#6c8ef5" font-size="11" font-weight="600">摄入与队列</text>
+  <rect x="200" y="262" width="240" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="320" y="284" text-anchor="middle" fill="#e6e8f0" font-size="13">摄入管线</text>
+  <text x="320" y="300" text-anchor="middle" fill="#8a92a8" font-size="10">processEventBatch · OtelIngestionProcessor</text>
+
+  <rect x="460" y="262" width="240" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="580" y="284" text-anchor="middle" fill="#e6e8f0" font-size="13">队列基础设施</text>
+  <text x="580" y="300" text-anchor="middle" fill="#8a92a8" font-size="10">BullMQ · sharding · DLQ · 二级队列</text>
+
+  <text x="440" y="338" text-anchor="middle" fill="#6c8ef5" font-size="11" font-weight="600">处理与存储</text>
+  <rect x="200" y="348" width="240" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="320" y="370" text-anchor="middle" fill="#e6e8f0" font-size="13">后台作业处理</text>
+  <text x="320" y="386" text-anchor="middle" fill="#8a92a8" font-size="10">worker · 38+ processors · bg migrations</text>
+
+  <rect x="460" y="348" width="240" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="580" y="370" text-anchor="middle" fill="#e6e8f0" font-size="13">ClickHouse 写入与存储</text>
+  <text x="580" y="386" text-anchor="middle" fill="#8a92a8" font-size="10">ClickhouseWriter · repositories · eventsTable</text>
+
+  <text x="440" y="424" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="600">共享基础</text>
+  <rect x="200" y="434" width="500" height="46" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="450" y="456" text-anchor="middle" fill="#e6e8f0" font-size="13">领域模型与数据定义</text>
+  <text x="450" y="472" text-anchor="middle" fill="#8a92a8" font-size="10">schema.prisma · domain zod · tableDefinitions · db.ts</text>
+
+  <!-- Right column: in-app agent + ee -->
+  <text x="780" y="316" text-anchor="middle" fill="#b388ff" font-size="11" font-weight="600">独立子系统</text>
+  <rect x="720" y="326" width="120" height="46" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="780" y="348" text-anchor="middle" fill="#e6e8f0" font-size="13">应用内 Agent</text>
+  <text x="780" y="364" text-anchor="middle" fill="#8a92a8" font-size="10">microvm 沙箱</text>
+
+  <rect x="720" y="200" width="120" height="46" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="780" y="222" text-anchor="middle" fill="#e6e8f0" font-size="13">ee</text>
+  <text x="780" y="238" text-anchor="middle" fill="#8a92a8" font-size="10">企业版包</text>
+
+  <!-- Arrows: frontend → public API & auth -->
+  <path d="M440,136 L440,176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- public API → ingestion (processEventBatch) -->
+  <path d="M400,222 L360,262" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ingestion → queue infra (enqueue) -->
+  <path d="M440,285 L460,285" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- queue → worker (consume) -->
+  <path d="M580,308 L420,348" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- worker → ClickHouse writer -->
+  <path d="M440,371 L460,371" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- in-app agent → queue (enqueue run) + → shared domain -->
+  <path d="M720,349 L700,348" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.8"/>
+  <path d="M780,372 L580,434" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.8"/>
+
+  <!-- ee → frontend/web -->
+  <path d="M720,223 L570,136" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.8"/>
+
+  <!-- Modules → shared domain：下方两模块以实线示例；上方模块（前端/公开API/摄入/队列）同样依赖 shared，但为避免箭头穿过中间行模块，不逐条画出——见下方图例 -->
+  <path d="M320,394 L360,434" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M580,394 L540,434" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- shared domain → data stores -->
+  <path d="M200,457 L160,202" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M200,457 L160,256" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M200,457 L160,310" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M200,457 L160,364" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ingestion → S3 (direct, via StorageService) -->
+  <path d="M240,308 L160,364" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)" stroke-dasharray="4,4" opacity="0.7"/>
+
+  <!-- Legend -->
+  <text x="40" y="510" fill="#8a92a8" font-size="11">依赖方向：所有模块 → packages/shared（共享基础，黄虚线）；子系统 → 数据存储（蓝实线）</text>
+  <text x="40" y="530" fill="#8a92a8" font-size="11">关键不变量：packages/shared 无入向依赖（不 import web/worker/ee）</text>
+</svg>

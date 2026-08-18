@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="540" viewBox="0 0 860 540" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrow-err" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="540" fill="#0b0d14"/>
+
+  <text x="430" y="28" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="600">In-App Agent Run 状态流</text>
+  <text x="430" y="48" text-anchor="middle" fill="#8a92a8" font-size="11">状态转换由 Postgres CAS 在 runLifecycle.ts 完成 · 绿=正常 · 粉=失败/取消</text>
+
+  <!-- QUEUED -->
+  <rect x="350" y="78" width="160" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="430" y="103" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">QUEUED</text>
+  <text x="430" y="121" text-anchor="middle" fill="#8a92a8" font-size="10">已建行 + 已入 BullMQ</text>
+
+  <!-- RUNNING -->
+  <rect x="350" y="198" width="160" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="223" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">RUNNING</text>
+  <text x="430" y="241" text-anchor="middle" fill="#8a92a8" font-size="10">worker 认领 + 心跳续命</text>
+
+  <!-- AWAITING_APPROVAL -->
+  <rect x="120" y="198" width="170" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="205" y="223" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">AWAITING_APPROVAL</text>
+  <text x="205" y="241" text-anchor="middle" fill="#8a92a8" font-size="10">工具调用待人工批准</text>
+
+  <!-- SUCCEEDED -->
+  <rect x="350" y="330" width="150" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="425" y="355" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">SUCCEEDED</text>
+  <text x="425" y="373" text-anchor="middle" fill="#8a92a8" font-size="10">终态</text>
+
+  <!-- FAILED -->
+  <rect x="560" y="330" width="150" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="635" y="355" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">FAILED</text>
+  <text x="635" y="373" text-anchor="middle" fill="#8a92a8" font-size="10">终态（含错误码）</text>
+
+  <!-- CANCELLED -->
+  <rect x="140" y="330" width="150" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="215" y="355" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">CANCELLED</text>
+  <text x="215" y="373" text-anchor="middle" fill="#8a92a8" font-size="10">终态</text>
+
+  <!-- Transitions -->
+  <!-- QUEUED -> RUNNING (claim) -->
+  <path d="M430,134 L430,198" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow-ok)"/>
+  <text x="438" y="170" fill="#8a92a8" font-size="10">claimRun (CAS)</text>
+
+  <!-- RUNNING -> AWAITING_APPROVAL -->
+  <path d="M350,230 L290,230" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="320" y="224" text-anchor="middle" fill="#8a92a8" font-size="10">需批准</text>
+
+  <!-- AWAITING_APPROVAL -> RUNNING (approved) -->
+  <path d="M290,210 L350,210" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow-ok)"/>
+  <text x="320" y="204" text-anchor="middle" fill="#8a92a8" font-size="10">approved</text>
+
+  <!-- RUNNING -> SUCCEEDED -->
+  <path d="M420,254 L425,330" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow-ok)"/>
+  <text x="370" y="296" fill="#8a92a8" font-size="10">run 完成</text>
+
+  <!-- RUNNING -> FAILED (agent error / watchdog) -->
+  <path d="M510,240 L560,345" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow-err)"/>
+  <text x="540" y="286" fill="#ff6b9d" font-size="10">AGENT_ERROR</text>
+  <text x="540" y="300" fill="#ff6b9d" font-size="10">WORKER_LOST / RUN_TIMEOUT</text>
+
+  <!-- RUNNING -> CANCELLED (user cancel / worker shutdown) -->
+  <path d="M350,246 L290,345" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow-err)"/>
+  <text x="270" y="290" fill="#ff6b9d" font-size="10">CANCELLED</text>
+  <text x="270" y="304" fill="#ff6b9d" font-size="10">WORKER_SHUTDOWN</text>
+
+  <!-- AWAITING_APPROVAL -> FAILED (expired) — 沿左边距下到底部 y=400 横穿再上入 FAILED 底边，避开中间标签区与 RUNNING→SUCCEEDED 竖箭头 -->
+  <path d="M205,254 L30,254 L30,400 L635,400 L635,386" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow-err)"/>
+  <text x="300" y="394" fill="#ff6b9d" font-size="10">APPROVAL_EXPIRED</text>
+
+  <!-- AWAITING_APPROVAL -> SUCCEEDED (approval completes) -->
+  <path d="M260,254 L380,330" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrow-ok)" stroke-dasharray="4,3" opacity="0.7"/>
+
+  <!-- QUEUED -> CANCELLED (reconcile supersedes) -->
+  <path d="M360,134 L240,330" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow-err)" stroke-dasharray="4,3" opacity="0.7"/>
+  <text x="232" y="230" fill="#ff6b9d" font-size="10">reconcile</text>
+  <text x="232" y="244" fill="#ff6b9d" font-size="10">supersede</text>
+
+  <!-- QUEUED -> FAILED (queue timeout / enqueue fail) -->
+  <path d="M510,134 L630,330" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow-err)" stroke-dasharray="4,3" opacity="0.7"/>
+  <text x="560" y="222" fill="#ff6b9d" font-size="10">QUEUE_TIMEOUT</text>
+  <text x="560" y="236" fill="#ff6b9d" font-size="10">ENQUEUE_FAILED</text>
+
+  <!-- Watchdog box (right side) -->
+  <rect x="560" y="78" width="200" height="80" rx="6" fill="#0f1224" stroke="#ff6b9d" stroke-width="1" opacity="0.6"/>
+  <text x="660" y="98" text-anchor="middle" fill="#ff6b9d" font-size="11" font-weight="600">Watchdog / Backstop</text>
+  <text x="660" y="116" text-anchor="middle" fill="#8a92a8" font-size="9">HEARTBEAT_STALE → WORKER_LOST</text>
+  <text x="660" y="130" text-anchor="middle" fill="#8a92a8" font-size="9">RUN_MAX_DURATION → RUN_TIMEOUT</text>
+  <text x="660" y="144" text-anchor="middle" fill="#8a92a8" font-size="9">QUEUE_TIMEOUT / APPROVAL_TTL</text>
+
+  <!-- Reconcile box (left side) -->
+  <rect x="40" y="78" width="200" height="80" rx="6" fill="#0f1224" stroke="#7a86b3" stroke-width="1" opacity="0.6"/>
+  <text x="140" y="98" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">reconcileConversationRuns</text>
+  <text x="140" y="116" text-anchor="middle" fill="#8a92a8" font-size="9">事务内强制单 active run</text>
+  <text x="140" y="130" text-anchor="middle" fill="#8a92a8" font-size="9">新消息到达时 supersedes</text>
+  <text x="140" y="144" text-anchor="middle" fill="#8a92a8" font-size="9">旧 QUEUED / AWAITING</text>
+
+  <!-- Legend -->
+  <text x="40" y="420" fill="#80c7ff" font-size="11" font-weight="600">关键代码位置</text>
+  <text x="40" y="440" fill="#8a92a8" font-size="10">• 状态枚举：InAppAgentRunStatus in packages/shared/src/features/inAppAgent/types.ts</text>
+  <text x="40" y="458" fill="#8a92a8" font-size="10">• CAS 转换：claimRun / heartbeatClaimedRun / reconcileConversationRuns in packages/shared/src/in-app-agent/server/runLifecycle.ts</text>
+  <text x="40" y="476" fill="#8a92a8" font-size="10">• 错误码：InAppAgentRunErrorCode（WORKER_LOST / RUN_TIMEOUT / OUTCOME_UNKNOWN / APPROVAL_EXPIRED …）</text>
+  <text x="40" y="494" fill="#8a92a8" font-size="10">• 状态存为普通字符串列（非 PG enum），加状态免 ALTER TYPE；读者须容忍未知历史值</text>
+  <text x="40" y="520" fill="#8a92a8" font-size="10">实线=主路径 · 虚线=watchdog/reconcile 触发 · 绿=正常推进 · 粉=失败/取消</text>
+</svg>
