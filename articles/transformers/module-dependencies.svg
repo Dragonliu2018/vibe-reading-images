@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="560" viewBox="0 0 820 560" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="560" fill="#0b0d14"/>
+  <text x="410" y="28" fill="#8a93b8" font-size="12" text-anchor="middle">箭头 A→B 表示 A 依赖 B（import / 调用）</text>
+
+  <!-- Row 1: Interface / Registry (top, 青/紫) -->
+  <g font-size="13" fill="#e6e8f0" text-anchor="middle">
+    <rect x="60" y="60" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#4ecdc4" stroke-width="1.5"/><text x="135" y="89">模型注册表</text>
+    <rect x="335" y="60" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#4ecdc4" stroke-width="1.5"/><text x="410" y="89">流水线</text>
+    <rect x="610" y="60" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#4ecdc4" stroke-width="1.5"/><text x="685" y="89">训练框架</text>
+  </g>
+
+  <!-- Row 2: Orchestration (蓝) -->
+  <g font-size="13" fill="#e6e8f0" text-anchor="middle">
+    <rect x="200" y="170" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#6c8ef5" stroke-width="1.5"/><text x="275" y="199">生成框架</text>
+    <rect x="470" y="170" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#6c8ef5" stroke-width="1.5"/><text x="545" y="199">多模态处理</text>
+  </g>
+
+  <!-- Row 3: Model Core (黄) -->
+  <g font-size="13" fill="#e6e8f0" text-anchor="middle">
+    <rect x="60" y="282" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#f9ca24" stroke-width="1.5"/><text x="135" y="311">建模核心</text>
+    <rect x="270" y="282" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#f9ca24" stroke-width="1.5"/><text x="345" y="311">配置系统</text>
+    <rect x="470" y="282" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#f9ca24" stroke-width="1.5"/><text x="545" y="311">KV 缓存</text>
+    <rect x="660" y="282" width="120" height="48" rx="6" fill="#1a1d2e" stroke="#b388ff" stroke-width="1.5"/><text x="720" y="311">量化</text>
+  </g>
+
+  <!-- Row 4: Primitives (粉) -->
+  <g font-size="13" fill="#e6e8f0" text-anchor="middle">
+    <rect x="135" y="392" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#ff6b9d" stroke-width="1.5"/><text x="210" y="421">分词框架</text>
+    <rect x="335" y="392" width="150" height="48" rx="6" fill="#1a1d2e" stroke="#ff6b9d" stroke-width="1.5"/><text x="410" y="421">建模原语</text>
+  </g>
+
+  <!-- Arrows: dependencies (A bottom -> B top edges) -->
+  <!-- 模型注册表 -> 建模核心 (AutoModel.from_pretrained -> PreTrainedModel) -->
+  <path d="M110 108 L110 282" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 模型注册表 -> 配置系统 (AutoConfig) -->
+  <path d="M160 108 L300 282" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 流水线 -> 生成框架 -->
+  <path d="M385 108 L300 170" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 流水线 -> 多模态处理 -->
+  <path d="M435 108 L520 170" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 流水线 -> 建模核心 (load_model) -->
+  <path d="M395 108 L170 282" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 训练框架 -> 建模核心 -->
+  <path d="M660 108 L160 282" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 训练框架 -> 分词框架 -->
+  <path d="M685 108 L230 392" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 生成框架 -> KV 缓存 -->
+  <path d="M320 218 L500 282" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowb)" fill="none"/>
+  <!-- 生成框架 -> 建模原语 (logits/mask) -->
+  <path d="M300 218 L390 392" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowb)" fill="none"/>
+  <!-- 多模态处理 -> 分词框架 (持有 tokenizer) -->
+  <path d="M500 218 L240 392" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowb)" fill="none"/>
+  <!-- 建模核心 -> 配置系统 -->
+  <path d="M210 306 L270 306" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 建模核心 -> KV 缓存 -->
+  <path d="M210 306 L470 306" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 建模核心 -> 量化 (from_pretrained) -->
+  <path d="M210 306 L660 306" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 建模核心 -> 建模原语 -->
+  <path d="M150 330 L370 392" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- 量化 -> 建模核心 (WeightConverter, reverse) dashed -->
+  <path d="M670 282 L195 330" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)" fill="none"/>
+  <!-- 建模原语 -> 配置系统 (rope/mask 读 config) -->
+  <path d="M390 392 L360 330" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- Legend -->
+  <g font-size="11" fill="#8a93b8">
+    <text x="60" y="475">── 依赖（import / 调用）</text>
+    <text x="60" y="495">- - 反向/双向协作</text>
+    <text x="320" y="475" fill="#6c8ef5">── 生成/处理层依赖</text>
+    <text x="320" y="495" fill="#ff6b9d">- - 原语 ↔ 配置</text>
+    <text x="560" y="475">● 青=接口 ● 蓝=编排</text>
+    <text x="560" y="495">● 黄=核心 ● 粉=原语 ● 紫=加速</text>
+  </g>
+</svg>

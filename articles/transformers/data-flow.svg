@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="560" viewBox="0 0 820 560" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="560" fill="#0b0d14"/>
+
+  <!-- Phase labels -->
+  <text x="205" y="30" fill="#4ecdc4" font-size="14" font-weight="600" text-anchor="middle">① 模型加载阶段</text>
+  <text x="615" y="30" fill="#6c8ef5" font-size="14" font-weight="600" text-anchor="middle">② 文本生成阶段</text>
+  <line x1="410" y1="44" x2="410" y2="540" stroke="#2a2e45" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- LOAD PHASE (left, x 20..400) -->
+  <g font-size="12" fill="#e6e8f0" text-anchor="middle">
+    <rect x="40" y="56" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#4ecdc4" stroke-width="1.2"/><text x="115" y="76">AutoModel</text><text x="115" y="92" fill="#8a93b8" font-size="10">.from_pretrained</text>
+    <rect x="220" y="56" width="160" height="44" rx="6" fill="#1a1d2e" stroke="#4ecdc4" stroke-width="1.2"/><text x="300" y="76">AutoConfig</text><text x="300" y="92" fill="#8a93b8" font-size="10">config.json → model_type</text>
+    <rect x="40" y="140" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#f9ca24" stroke-width="1.2"/><text x="115" y="160">PreTrainedModel</text><text x="115" y="176" fill="#8a93b8" font-size="10">.from_pretrained</text>
+    <rect x="220" y="140" width="160" height="44" rx="6" fill="#1a1d2e" stroke="#f9ca24" stroke-width="1.2"/><text x="300" y="160">get_hf_quantizer</text><text x="300" y="176" fill="#8a93b8" font-size="10">量化器介入</text>
+    <rect x="120" y="224" width="200" height="44" rx="6" fill="#1a1d2e" stroke="#f9ca24" stroke-width="1.2"/><text x="220" y="244">WeightConverter</text><text x="220" y="260" fill="#8a93b8" font-size="10">meta → 真实权重（reshape/merge/split）</text>
+    <rect x="120" y="308" width="200" height="44" rx="6" fill="#1a1d2e" stroke="#f9ca24" stroke-width="1.2"/><text x="220" y="328">_finalize_model_loading</text><text x="220" y="344" fill="#8a93b8" font-size="10">tie/init/missing keys</text>
+    <rect x="120" y="392" width="200" height="44" rx="6" fill="#1a1d2e" stroke="#4ecdc4" stroke-width="1.2"/><text x="220" y="412">model 实例</text><text x="220" y="428" fill="#8a93b8" font-size="10">+ generation_config</text>
+  </g>
+  <!-- load arrows -->
+  <path d="M190 78 L220 78" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <path d="M300 100 L150 140" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <path d="M190 162 L220 162" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <path d="M220 184 L220 224" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <path d="M220 268 L220 308" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <path d="M220 352 L220 392" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- bridge arrow load -> generate -->
+  <path d="M320 414 L440 414 L440 56 L480 56" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow)" fill="none"/>
+  <text x="432" y="240" fill="#8a93b8" font-size="10" transform="rotate(90 432 240)">model.generate(input_ids)</text>
+
+  <!-- GENERATE PHASE (right, x 440..800) -->
+  <g font-size="12" fill="#e6e8f0" text-anchor="middle">
+    <rect x="480" y="56" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#6c8ef5" stroke-width="1.2"/><text x="555" y="76">generate</text><text x="555" y="92" fill="#8a93b8" font-size="10">选解码策略</text>
+    <rect x="650" y="56" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#6c8ef5" stroke-width="1.2"/><text x="725" y="76">_prepare_cache</text><text x="725" y="92" fill="#8a93b8" font-size="10">DynamicCache</text>
+    <rect x="480" y="140" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#6c8ef5" stroke-width="1.2"/><text x="555" y="160">_sample</text><text x="555" y="176" fill="#8a93b8" font-size="10">greedy/sampling 循环</text>
+    <rect x="650" y="140" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#6c8ef5" stroke-width="1.2"/><text x="725" y="160">LogitsProcessor</text><text x="725" y="176" fill="#8a93b8" font-size="10">责任链</text>
+    <rect x="480" y="224" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#f9ca24" stroke-width="1.2"/><text x="555" y="244">model.forward</text><text x="555" y="260" fill="#8a93b8" font-size="10">逐 DecoderLayer</text>
+    <rect x="650" y="224" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#f9ca24" stroke-width="1.2"/><text x="725" y="244">Cache.update</text><text x="725" y="260" fill="#8a93b8" font-size="10">K/V 追加/写入</text>
+    <rect x="480" y="308" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#6c8ef5" stroke-width="1.2"/><text x="555" y="328">next_token</text><text x="555" y="344" fill="#8a93b8" font-size="10">argmax / multinomial</text>
+    <rect x="480" y="392" width="150" height="44" rx="6" fill="#1a1d2e" stroke="#4ecdc4" stroke-width="1.2"/><text x="555" y="412">拼接 input_ids</text><text x="555" y="428" fill="#8a93b8" font-size="10">循环至 EOS / max</text>
+  </g>
+  <!-- generate arrows -->
+  <path d="M630 78 L650 78" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowg)" fill="none"/>
+  <path d="M555 100 L555 140" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowg)" fill="none"/>
+  <path d="M630 162 L650 162" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowg)" fill="none"/>
+  <path d="M555 184 L555 224" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowg)" fill="none"/>
+  <path d="M630 246 L650 246" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <path d="M555 268 L555 308" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowg)" fill="none"/>
+  <path d="M555 352 L555 392" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowg)" fill="none"/>
+  <!-- decode loop back arrow -->
+  <path d="M480 414 L450 414 L450 162 L480 162" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrowg)" fill="none"/>
+  <text x="458" y="290" fill="#8a93b8" font-size="10" transform="rotate(90 458 290)">下一步 decode</text>
+
+  <text x="205" y="470" fill="#8a93b8" font-size="11" text-anchor="middle">数据流：repo_id → config → model class → 权重 → model 实例</text>
+  <text x="615" y="470" fill="#8a93b8" font-size="11" text-anchor="middle">数据流：input_ids → logits → next_token → 拼接循环</text>
+</svg>
