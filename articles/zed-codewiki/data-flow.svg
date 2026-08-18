@@ -1,0 +1,68 @@
+<svg width="760" height="410" viewBox="0 0 760 410" xmlns="http://www.w3.org/2000/svg">
+  <rect width="760" height="410" fill="#0b0d14"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <text x="380" y="25" text-anchor="middle" fill="#e8e8f0" font-size="17" font-weight="bold" font-family="system-ui, sans-serif">Zed 按键到像素数据流</text>
+  <text x="200" y="45" text-anchor="middle" fill="#6c8ef5" font-size="12" font-weight="bold" font-family="system-ui, sans-serif">输入 → 模型更新</text>
+  <text x="560" y="45" text-anchor="middle" fill="#4ecdc4" font-size="12" font-weight="bold" font-family="system-ui, sans-serif">渲染 → 输出</text>
+
+  <!-- Left column: input -> model -->
+  <rect x="60" y="60" width="280" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="200" y="82" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">键盘事件 → GPUI 分发</text>
+  <text x="200" y="98" text-anchor="middle" fill="#6c8ef5" font-size="10" font-family="system-ui, sans-serif">gpui</text>
+
+  <rect x="60" y="140" width="280" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="200" y="162" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">Editor::handle_input</text>
+  <text x="200" y="178" text-anchor="middle" fill="#4ecdc4" font-size="10" font-family="system-ui, sans-serif">editor</text>
+
+  <rect x="60" y="220" width="280" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="200" y="242" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">Buffer::edit(Operation)</text>
+  <text x="200" y="258" text-anchor="middle" fill="#f9ca24" font-size="10" font-family="system-ui, sans-serif">text</text>
+
+  <rect x="60" y="300" width="280" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="200" y="322" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">Rope::replace + SumTree 更新</text>
+  <text x="200" y="338" text-anchor="middle" fill="#f9ca24" font-size="10" font-family="system-ui, sans-serif">rope / sum_tree</text>
+
+  <!-- Right column: render -> output -->
+  <rect x="420" y="300" width="280" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="560" y="322" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">BufferSnapshot 生成</text>
+  <text x="560" y="338" text-anchor="middle" fill="#f9ca24" font-size="10" font-family="system-ui, sans-serif">text</text>
+
+  <rect x="420" y="220" width="280" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="560" y="242" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">Editor::render + Element 树</text>
+  <text x="560" y="258" text-anchor="middle" fill="#4ecdc4" font-size="10" font-family="system-ui, sans-serif">editor</text>
+
+  <rect x="420" y="140" width="280" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="560" y="162" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">Taffy 布局 + GPU 绘制</text>
+  <text x="560" y="178" text-anchor="middle" fill="#6c8ef5" font-size="10" font-family="system-ui, sans-serif">gpui</text>
+
+  <rect x="420" y="60" width="280" height="50" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.2"/>
+  <text x="560" y="82" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">屏幕像素</text>
+  <text x="560" y="98" text-anchor="middle" fill="#7bed9f" font-size="10" font-family="system-ui, sans-serif">output</text>
+
+  <!-- Left column arrows (downward) -->
+  <path d="M 200 110 L 200 140" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <text x="210" y="128" text-anchor="start" fill="#9099ba" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">KeyEvent</text>
+  <path d="M 200 190 L 200 220" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <text x="210" y="208" text-anchor="start" fill="#9099ba" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">char / selection</text>
+  <path d="M 200 270 L 200 300" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <text x="210" y="288" text-anchor="start" fill="#9099ba" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">EditOperation</text>
+
+  <!-- Connector (rightward) -->
+  <path d="M 340 325 L 420 325" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <text x="380" y="318" text-anchor="middle" fill="#9099ba" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">BufferSnapshot</text>
+
+  <!-- Right column arrows (upward) -->
+  <path d="M 560 300 L 560 270" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 560 220 L 560 190" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <text x="570" y="208" text-anchor="start" fill="#9099ba" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">Element tree</text>
+  <path d="M 560 140 L 560 110" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <text x="570" y="128" text-anchor="start" fill="#9099ba" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">pixels</text>
+
+  <!-- Legend -->
+  <text x="380" y="388" text-anchor="middle" fill="#7a86b3" font-size="11" font-family="system-ui, sans-serif">蓝 = gpui · 青 = editor · 黄 = text / rope · 绿 = 输出</text>
+</svg>
