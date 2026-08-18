@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="310" viewBox="0 0 700 310" font-family="system-ui, sans-serif">
+  <rect width="700" height="310" fill="#0b0d14"/>
+
+  <text x="350" y="26" text-anchor="middle" fill="#e8ecf5" font-size="16" font-weight="600">rtrs likely/unlikely 移除 benchmark：IOPS 无变化</text>
+
+  <!-- "no difference" annotation (no marker, no rotation) -->
+  <text x="350" y="42" text-anchor="middle" fill="#7bed9f" font-size="12" font-weight="600">无差异（829k → 829k → 829k）</text>
+  <path d="M150,50 L550,50" stroke="#7bed9f" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+
+  <!-- 3 bars (all 829k, same height) -->
+  <rect x="90" y="72" width="120" height="180" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="150" y="66" text-anchor="middle" fill="#e8ecf5" font-size="12">829k</text>
+  <text x="150" y="272" text-anchor="middle" fill="#9aa3c7" font-size="13">改动前</text>
+
+  <rect x="290" y="72" width="120" height="180" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="350" y="66" text-anchor="middle" fill="#e8ecf5" font-size="12">829k</text>
+  <text x="350" y="272" text-anchor="middle" fill="#9aa3c7" font-size="13">交换</text>
+
+  <rect x="490" y="72" width="120" height="180" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="550" y="66" text-anchor="middle" fill="#7bed9f" font-size="12">829k</text>
+  <text x="550" y="272" text-anchor="middle" fill="#9aa3c7" font-size="13">全删</text>
+</svg>
