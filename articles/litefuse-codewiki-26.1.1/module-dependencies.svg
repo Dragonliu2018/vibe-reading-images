@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="540" viewBox="0 0 880 540" font-family="system-ui, sans-serif">
+<rect width="880" height="540" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="arc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<text x="440" y="30" text-anchor="middle" fill="#c9d1e8" font-size="18">模块依赖关系</text>
+<rect x="30" y="90" width="160" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="110" y="111" text-anchor="middle" fill="#c9d1e8" font-size="12">06 公开 API</text>
+<text x="110" y="127" text-anchor="middle" fill="#c9d1e8" font-size="12">与鉴权</text>
+<rect x="30" y="250" width="160" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="110" y="271" text-anchor="middle" fill="#c9d1e8" font-size="12">08 前端</text>
+<text x="110" y="287" text-anchor="middle" fill="#c9d1e8" font-size="12">Tracing UI</text>
+<rect x="230" y="170" width="160" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="310" y="191" text-anchor="middle" fill="#c9d1e8" font-size="12">04 队列</text>
+<text x="310" y="207" text-anchor="middle" fill="#c9d1e8" font-size="12">基础设施</text>
+<rect x="430" y="90" width="160" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="510" y="119" text-anchor="middle" fill="#c9d1e8" font-size="12">01 摄入管线</text>
+<rect x="430" y="330" width="160" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="510" y="351" text-anchor="middle" fill="#c9d1e8" font-size="12">05 Worker</text>
+<text x="510" y="367" text-anchor="middle" fill="#c9d1e8" font-size="12">作业处理</text>
+<rect x="630" y="90" width="160" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="710" y="119" text-anchor="middle" fill="#c9d1e8" font-size="12">02 DorisWriter</text>
+<rect x="630" y="250" width="160" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="710" y="271" text-anchor="middle" fill="#c9d1e8" font-size="12">03 Doris</text>
+<text x="710" y="287" text-anchor="middle" fill="#c9d1e8" font-size="12">查询与表层</text>
+<rect x="630" y="410" width="160" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="710" y="431" text-anchor="middle" fill="#c9d1e8" font-size="12">07 领域</text>
+<text x="710" y="447" text-anchor="middle" fill="#c9d1e8" font-size="12">数据模型</text>
+<!-- 06 -> 04 入队 (folded via gap x=210) -->
+<path d="M190,115 L210,115 L210,195 L230,195" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="218" y="156" text-anchor="start" fill="#8893b3" font-size="10">入队</text>
+<!-- 06 -> 03 read path (route ABOVE boxes y=72 + far right x=820, into 03 right edge) -->
+<path d="M190,115 L190,72 L820,72 L820,275 L790,275" fill="none" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arc)"/>
+<text x="500" y="66" text-anchor="middle" fill="#80c7ff" font-size="10">queryDoris (读路径，绕行)</text>
+<!-- 08 -> 03 read path (horizontal at y=275, clear band) -->
+<path d="M190,275 L630,275" fill="none" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arc)"/>
+<text x="410" y="269" text-anchor="middle" fill="#80c7ff" font-size="10">tRPC 查询</text>
+<!-- 04 -> 01 消费 (folded via gap x=410) -->
+<path d="M390,180 L410,180 L410,115 L430,115" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="418" y="150" text-anchor="start" fill="#8893b3" font-size="10">消费</text>
+<!-- 04 -> 05 (folded via gap x=410) -->
+<path d="M390,210 L410,210 L410,355 L430,355" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- 01 -> 02 addToQueue (horizontal at y=115, clear gap) -->
+<path d="M590,115 L630,115" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="610" y="108" text-anchor="middle" fill="#8893b3" font-size="9">addToQueue</text>
+<!-- 01 -> 07 Prisma 元数据 (folded via gap x=605, down) -->
+<path d="M590,140 L605,140 L605,435 L630,435" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+<text x="612" y="290" text-anchor="start" fill="#8893b3" font-size="9">Prisma 元数据</text>
+<!-- 05 -> 02 (folded via gap x=615, up) -->
+<path d="M590,355 L615,355 L615,115 L630,115" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- 05 -> 03 query/command (folded via gap x=620) -->
+<path d="M590,365 L620,365 L620,290 L630,290" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="585" y="328" text-anchor="end" fill="#8893b3" font-size="9">query/command</text>
+<!-- 02 -> 03 dorisClient (vertical col4) -->
+<path d="M710,140 L710,250" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- 07 -> 03 repositories (vertical col4) -->
+<path d="M710,410 L710,300" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="718" y="358" text-anchor="start" fill="#8893b3" font-size="9">repositories</text>
+<text x="440" y="526" text-anchor="middle" fill="#8893b3" font-size="11">实线=依赖/调用  ·  虚线=读路径或元数据访问  ·  04 被多模块消费（队列契约在 shared）</text>
+</svg>

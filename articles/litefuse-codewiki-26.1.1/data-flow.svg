@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="700" viewBox="0 0 920 700" font-family="system-ui, sans-serif">
+<rect width="920" height="700" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+  <marker id="arc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<text x="460.0" y="28" text-anchor="middle" fill="#c9d1e8" font-size="18">端到端数据流：摄入与查询</text>
+<rect x="70" y="60" width="300" height="40" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="220.0" y="84.0" text-anchor="middle" fill="#c9d1e8" font-size="12">SDK POST /api/public/otel/v1/traces</text>
+<text x="70" y="112" text-anchor="start" fill="#8893b3" font-size="10">createAuthedProjectAPIRoute · verifyAuth + rateLimit</text>
+<rect x="70" y="132" width="300" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="220.0" y="156.0" text-anchor="middle" fill="#c9d1e8" font-size="12">OtelIngestionProcessor.publishToOtelIngestionQueue</text>
+<text x="70" y="184" text-anchor="start" fill="#8893b3" font-size="10">S3 upload + OtelIngestionQueue.add</text>
+<rect x="70" y="204" width="300" height="40" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="220.0" y="228.0" text-anchor="middle" fill="#c9d1e8" font-size="12">otelIngestionQueueProcessor (worker)</text>
+<text x="70" y="256" text-anchor="start" fill="#8893b3" font-size="10">S3 download → processToEvent → EventInput[]</text>
+<rect x="70" y="276" width="300" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="220.0" y="300.0" text-anchor="middle" fill="#c9d1e8" font-size="12">IngestionService.createEventRecord</text>
+<text x="70" y="328" text-anchor="start" fill="#8893b3" font-size="10">prompt/usage 富化 → EventRecordInsertType</text>
+<rect x="70" y="348" width="300" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="220.0" y="372.0" text-anchor="middle" fill="#c9d1e8" font-size="12">DorisWriter.addToQueue → flush</text>
+<text x="70" y="400" text-anchor="start" fill="#8893b3" font-size="10">内存批缓冲, 三触发</text>
+<rect x="70" y="420" width="300" height="40" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="220.0" y="444.0" text-anchor="middle" fill="#c9d1e8" font-size="12">dorisClient.insert (stream load)</text>
+<text x="70" y="472" text-anchor="start" fill="#8893b3" font-size="10">PUT /api/_stream_load, FE 307→BE, timeout 600s</text>
+<rect x="70" y="492" width="300" height="40" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="220.0" y="516.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Doris events_full 表</text>
+<text x="70" y="544" text-anchor="start" fill="#8893b3" font-size="10">UNIQUE KEY + MoW 去重</text>
+<path d="M220.0,102 L220.0,130" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M220.0,174 L220.0,202" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M220.0,246 L220.0,274" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M220.0,318 L220.0,346" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M220.0,390 L220.0,418" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M220.0,462 L220.0,490" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="394" y="208" width="150" height="36" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="469.0" y="222.0" text-anchor="middle" fill="#c9d1e8" font-size="10">PG: traceSession</text>
+<text x="469.0" y="238.0" text-anchor="middle" fill="#c9d1e8" font-size="10">createMany</text>
+<path d="M370,224.0 L394,224.0" fill="none" stroke="#7a86b3" stroke-dasharray="6 4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="560" y="312" width="300" height="40" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="710.0" y="336.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Doris events_full / traces</text>
+<text x="560" y="364" text-anchor="start" fill="#8893b3" font-size="10">project_id 过滤 + 倒排索引</text>
+<rect x="560" y="384" width="300" height="40" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="710.0" y="408.0" text-anchor="middle" fill="#c9d1e8" font-size="12">queryDoris</text>
+<text x="560" y="436" text-anchor="start" fill="#8893b3" font-size="10">DorisParameterProcessor · MySQL pool</text>
+<rect x="560" y="456" width="300" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="710.0" y="480.0" text-anchor="middle" fill="#c9d1e8" font-size="12">getTraceById / buildTraceAggregationQuery</text>
+<text x="560" y="508" text-anchor="start" fill="#8893b3" font-size="10">CTE trace_scalars + trace_root</text>
+<rect x="560" y="528" width="300" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="710.0" y="552.0" text-anchor="middle" fill="#c9d1e8" font-size="12">tRPC traces router</text>
+<text x="560" y="580" text-anchor="start" fill="#8893b3" font-size="10">byIdWithObservationsAndScores</text>
+<rect x="560" y="600" width="300" height="40" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="710.0" y="624.0" text-anchor="middle" fill="#c9d1e8" font-size="12">浏览器 /trace/[traceId]</text>
+<text x="560" y="652" text-anchor="start" fill="#8893b3" font-size="10">TracePage · tRPC useQuery</text>
+<path d="M710.0,354 L710.0,382" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arc)"/>
+<path d="M710.0,426 L710.0,454" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arc)"/>
+<path d="M710.0,498 L710.0,526" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arc)"/>
+<path d="M710.0,570 L710.0,598" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arc)"/>
+<text x="460.0" y="686" text-anchor="middle" fill="#8893b3" font-size="11">左：写路径 SDK→S3+队列→Worker→DorisWriter→Doris (跨 web↔worker 经 Redis)  ·  右：读路径 浏览器→tRPC→queryDoris→Doris (web 直连 Doris)</text>
+</svg>

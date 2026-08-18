@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="270" viewBox="0 0 920 270" font-family="system-ui, sans-serif">
+<rect width="920" height="270" fill="#0b0d14"/>
+<defs>
+  <marker id="ary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+  <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+</defs>
+<text x="460" y="28" text-anchor="middle" fill="#c9d1e8" font-size="18">对象生命周期状态流</text>
+<!-- A) Eval Job (left) -->
+<text x="220" y="58" text-anchor="middle" fill="#f9ca24" font-size="13">Eval Job 生命周期</text>
+<rect x="35" y="122" width="110" height="36" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="90" y="145" text-anchor="middle" fill="#c9d1e8" font-size="11">PENDING</text>
+<rect x="195" y="122" width="110" height="36" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="250" y="145" text-anchor="middle" fill="#c9d1e8" font-size="11">EXECUTING</text>
+<rect x="365" y="77" width="110" height="32" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="420" y="97" text-anchor="middle" fill="#c9d1e8" font-size="11">COMPLETED</text>
+<rect x="365" y="124" width="110" height="32" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="420" y="144" text-anchor="middle" fill="#c9d1e8" font-size="11">FAILED</text>
+<rect x="365" y="171" width="110" height="32" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="420" y="191" text-anchor="middle" fill="#c9d1e8" font-size="11">CANCELLED</text>
+<!-- PENDING -> EXECUTING -->
+<path d="M145,140 L195,140" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#ary)"/>
+<!-- EXECUTING -> COMPLETED (folded up) -->
+<path d="M305,132 L335,132 L335,93 L365,93" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#ary)"/>
+<!-- EXECUTING -> FAILED -->
+<path d="M305,140 L365,140" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#ary)"/>
+<!-- EXECUTING -> CANCELLED (folded down) -->
+<path d="M305,148 L335,148 L335,187 L365,187" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#ary)"/>
+<!-- FAILED -> EXECUTING (DLQ retry, dashed, curved below) -->
+<path d="M365,156 C300,210 220,210 195,148" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#ary)"/>
+<text x="280" y="215" text-anchor="middle" fill="#f9ca24" font-size="9">DLQ 重试</text>
+<text x="220" y="245" text-anchor="middle" fill="#8893b3" font-size="9">createEvalJobs → EvalExecution 队列</text>
+<!-- B) Trace 删除 (right) -->
+<text x="700" y="58" text-anchor="middle" fill="#b388ff" font-size="13">Trace 删除生命周期</text>
+<rect x="485" y="122" width="110" height="36" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="540" y="145" text-anchor="middle" fill="#c9d1e8" font-size="11">active</text>
+<rect x="645" y="122" width="110" height="36" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="700" y="145" text-anchor="middle" fill="#c9d1e8" font-size="11">soft-deleted</text>
+<rect x="805" y="122" width="110" height="36" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="860" y="145" text-anchor="middle" fill="#c9d1e8" font-size="11">purged</text>
+<path d="M595,140 L645,140" fill="none" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arg)"/>
+<text x="620" y="132" text-anchor="middle" fill="#8893b3" font-size="9">BatchAction</text>
+<path d="M755,140 L805,140" fill="none" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arg)"/>
+<text x="780" y="132" text-anchor="middle" fill="#8893b3" font-size="9">Cleaner</text>
+<text x="700" y="245" text-anchor="middle" fill="#8893b3" font-size="9">BatchProjectCleaner / BatchDataRetentionCleaner 定时物理删除</text>
+<text x="460" y="262" text-anchor="middle" fill="#8893b3" font-size="11">左：评估任务状态机 (PENDING→EXECUTING→终态, FAILED 可经 DLQ 重试)  ·  右：Trace 删除两段式 (软删→Cleaner 物理删)</text>
+</svg>

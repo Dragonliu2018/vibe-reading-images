@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="506" viewBox="0 0 880 506" font-family="system-ui, sans-serif">
+<rect width="880" height="506" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+  <marker id="arc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<text x="440.0" y="30" text-anchor="middle" fill="#c9d1e8" font-size="18">Litefuse 分层架构</text>
+<text x="55" y="106" text-anchor="middle" fill="#8893b3" font-size="12">客户端</text>
+<rect x="120" y="76" width="184" height="48" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="212.0" y="104.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Python/JS SDK</text>
+<rect x="312" y="76" width="184" height="48" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="404.0" y="104.0" text-anchor="middle" fill="#c9d1e8" font-size="12">OTel SDK</text>
+<rect x="504" y="76" width="184" height="48" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="596.0" y="104.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Browser</text>
+<text x="55" y="194" text-anchor="middle" fill="#8893b3" font-size="12">Web 应用</text>
+<rect x="120" y="164" width="184" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="212.0" y="192.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Public API</text>
+<rect x="312" y="164" width="184" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="404.0" y="192.0" text-anchor="middle" fill="#c9d1e8" font-size="12">tRPC Routers</text>
+<rect x="504" y="164" width="184" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="596.0" y="192.0" text-anchor="middle" fill="#c9d1e8" font-size="12">UI 组件 (trace2)</text>
+<text x="55" y="282" text-anchor="middle" fill="#8893b3" font-size="12">队列总线</text>
+<rect x="120" y="252" width="184" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="212.0" y="280.0" text-anchor="middle" fill="#c9d1e8" font-size="12">OtelIngestion 分片</text>
+<rect x="312" y="252" width="184" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="404.0" y="280.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Ingestion 分片</text>
+<rect x="504" y="252" width="184" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="596.0" y="280.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Eval/Batch 队列</text>
+<text x="55" y="370" text-anchor="middle" fill="#8893b3" font-size="12">Worker</text>
+<rect x="120" y="340" width="184" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="212.0" y="368.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Ingestion 处理</text>
+<rect x="312" y="340" width="184" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="404.0" y="368.0" text-anchor="middle" fill="#c9d1e8" font-size="12">DorisWriter</text>
+<rect x="504" y="340" width="184" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="596.0" y="368.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Job / Cleaners</text>
+<text x="55" y="458" text-anchor="middle" fill="#8893b3" font-size="12">存储层</text>
+<rect x="120" y="428" width="184" height="48" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="212.0" y="456.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Doris events_full</text>
+<rect x="312" y="428" width="184" height="48" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="404.0" y="456.0" text-anchor="middle" fill="#c9d1e8" font-size="12">Postgres (Prisma)</text>
+<rect x="504" y="428" width="184" height="48" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="596.0" y="456.0" text-anchor="middle" fill="#c9d1e8" font-size="12">S3 blob</text>
+<rect x="730" y="164" width="130" height="224" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="795" y="186" text-anchor="middle" fill="#ff6b9d" font-size="12">@langfuse/shared</text>
+<text x="795" y="214" text-anchor="middle" fill="#c9d1e8" font-size="11">queues 契约</text>
+<text x="795" y="236" text-anchor="middle" fill="#c9d1e8" font-size="11">repositories</text>
+<text x="795" y="258" text-anchor="middle" fill="#c9d1e8" font-size="11">doris client</text>
+<text x="795" y="280" text-anchor="middle" fill="#c9d1e8" font-size="11">domain / prisma</text>
+<path d="M404,126 L404,162" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arw)"/>
+<path d="M404,214 L404,250" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arw)"/>
+<path d="M404,302 L404,338" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arw)"/>
+<path d="M404,390 L404,426" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arw)"/>
+<text x="412" y="144.0" text-anchor="start" fill="#6c8ef5" font-size="10">POST /otel</text>
+<text x="412" y="320.0" text-anchor="start" fill="#6c8ef5" font-size="10">消费</text>
+<text x="412" y="408.0" text-anchor="start" fill="#6c8ef5" font-size="10">stream load</text>
+<path d="M596,124 L596,162" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arc)"/>
+<path d="M596,212 L706,212 L706,420 L212,420 L212,426" fill="none" stroke="#80c7ff" stroke-width="1.5" marker-end="url(#arc)" stroke-dasharray="6 4"/>
+<text x="706" y="300" text-anchor="start" fill="#80c7ff" font-size="10">读路径 queryDoris</text>
+<path d="M730,276 L688,276" fill="none" stroke="#7a86b3" stroke-dasharray="6 4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M730,364 L688,364" fill="none" stroke="#7a86b3" stroke-dasharray="6 4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M730,188 L688,188" fill="none" stroke="#7a86b3" stroke-dasharray="6 4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="440.0" y="496" text-anchor="middle" fill="#8893b3" font-size="11">实线=写路径 (SDK→队列→Worker→Doris)  虚线=读路径 (浏览器→Web→Doris, 跳过队列/Worker)  · shared 横切 Web/Worker</text>
+</svg>
