@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="640" viewBox="0 0 920 640" font-family="system-ui,sans-serif">
+<rect x="0" y="0" width="920" height="640" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  <marker id="arrow-y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+  </marker>
+  <marker id="arrow-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+  </marker>
+  <marker id="arrow-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+  </marker>
+</defs>
+<text x="460" y="28" text-anchor="middle" font-size="17" font-weight="600" fill="#e6e6f0">HV_CONST 搜索数据流（HyperConstImp::searchKnn 七步流水线）</text>
+<text x="460" y="48" text-anchor="middle" font-size="11" fill="#9aa0c0">左：搜索读路径 7 步 · 右：部署写路径 5 步 · 箭头标注数据类型变化</text>
+<rect x="60" y="80" width="500" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="74" y="102" font-size="13.5" font-weight="600" fill="#4ecdc4">① findNearestClusters</text>
+<text x="74" y="120" font-size="10.5" fill="#e6e6f0">centroid_index(HnswImp).searchKnn</text>
+<text x="74" y="134" font-size="9.5" fill="#9aa0c0">query int8[] → cluster_id[] (nprobe)</text>
+<path d="M 310 140 L 310 158" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="60" y="158" width="500" height="60" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="74" y="180" font-size="13.5" font-weight="600" fill="#ff6b9d">② launchLoadClusters</text>
+<text x="74" y="198" font-size="10.5" fill="#e6e6f0">ClusterMap.getStripeBatch → NVMeManager.readSubmit</text>
+<text x="74" y="212" font-size="9.5" fill="#9aa0c0">cluster_id[] → ClusterStripe[] → SPDK 异步读</text>
+<path d="M 310 218 L 310 236" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="60" y="236" width="500" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="74" y="258" font-size="13.5" font-weight="600" fill="#6c8ef5">③ prepareExtrasAndRankPairs</text>
+<text x="74" y="276" font-size="10.5" fill="#e6e6f0">ClusterExtra.getIDsNormsBatch + prepareRankPairs</text>
+<text x="74" y="290" font-size="9.5" fill="#9aa0c0">→ cluster_ids[] + cluster_norms[] + RankPair[]</text>
+<path d="M 310 296 L 310 314" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="60" y="314" width="500" height="60" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="74" y="336" font-size="13.5" font-weight="600" fill="#ff6b9d">④ pollNVMeCompletions</text>
+<text x="74" y="354" font-size="10.5" fill="#e6e6f0">NVMeManager.pollCompletions</text>
+<text x="74" y="368" font-size="9.5" fill="#9aa0c0">轮询 qpair 完成队列 → cluster vecs 就绪</text>
+<path d="M 310 374 L 310 392" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="60" y="392" width="500" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="74" y="414" font-size="13.5" font-weight="600" fill="#f9ca24">⑤ calculateInnerProduct</text>
+<text x="74" y="432" font-size="10.5" fill="#e6e6f0">compute::InnerProductInt8InBatch (AVX2/512)</text>
+<text x="74" y="446" font-size="9.5" fill="#9aa0c0">query × cluster_vecs → int32 IP[]</text>
+<path d="M 310 452 L 310 470" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="60" y="470" width="500" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="74" y="492" font-size="13.5" font-weight="600" fill="#f9ca24">⑥ rankFinalTopK</text>
+<text x="74" y="510" font-size="10.5" fill="#e6e6f0">SearchCPUFuncL2.rankTopK</text>
+<text x="74" y="524" font-size="9.5" fill="#9aa0c0">L2 = -2·IP + q_norm + h_norm → partial_sort</text>
+<path d="M 310 530 L 310 548" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="60" y="548" width="500" height="60" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+<text x="74" y="570" font-size="13.5" font-weight="600" fill="#7bed9f">⑦ 返回 Top-K</text>
+<text x="74" y="588" font-size="10.5" fill="#e6e6f0">ServingWorker → 结果统计 recall/延迟</text>
+<text x="74" y="602" font-size="9.5" fill="#9aa0c0">→ pair&lt;uint64 id, int32 dist&gt;[]</text>
+<rect x="230" y="46" width="160" height="26" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="310" y="64" text-anchor="middle" font-size="11" fill="#4ecdc4">ServingWorker.searchKnn</text>
+<path d="M 310 72 L 310 80" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="570" y="238" font-size="9.5" fill="#ff6b9d">I/O submit</text>
+<text x="570" y="252" font-size="9.5" fill="#ff6b9d">与 ⑤ 计算</text>
+<text x="570" y="266" font-size="9.5" fill="#ff6b9d">重叠</text>
+<text x="750" y="64" text-anchor="middle" font-size="12" font-weight="600" fill="#7bed9f">部署写路径 HyperConstImp::deployIndex</text>
+<rect x="620" y="80" width="260" height="64" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+<text x="632" y="102" font-size="12.5" font-weight="600" fill="#7bed9f">① loadCollectionMeta</text>
+<text x="632" y="120" font-size="10" fill="#e6e6f0">读 collection_meta.json</text>
+<path d="M 750 144 L 750 166" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="620" y="166" width="260" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="632" y="188" font-size="12.5" font-weight="600" fill="#6c8ef5">② initClusterExtra</text>
+<text x="632" y="206" font-size="10" fill="#e6e6f0">初始化 ClusterExtra</text>
+<path d="M 750 230 L 750 252" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="620" y="252" width="260" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="632" y="274" font-size="12.5" font-weight="600" fill="#ff6b9d">③ allocateNVMeSpace</text>
+<text x="632" y="292" font-size="10" fill="#e6e6f0">NVMeAllocator.allocate → Chunk[]</text>
+<text x="632" y="307" font-size="10" fill="#e6e6f0">ClusterMap.allocateChunks 登记条带</text>
+<path d="M 750 316 L 750 338" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="620" y="338" width="260" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="632" y="360" font-size="12.5" font-weight="600" fill="#ff6b9d">④ flushClustersToNVMe</text>
+<text x="632" y="378" font-size="10" fill="#e6e6f0">OfflineWorker write_buffer 攒批</text>
+<text x="632" y="393" font-size="10" fill="#e6e6f0">NVMeManager.writeSubmit (batch=256)</text>
+<path d="M 750 402 L 750 424" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="620" y="424" width="260" height="64" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="632" y="446" font-size="12.5" font-weight="600" fill="#f9ca24">⑤ syncIndex</text>
+<text x="632" y="464" font-size="10" fill="#e6e6f0">saveClusterMap 落盘 cluster_map.bin</text>
+<rect x="620" y="516" width="260" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+<text x="632" y="536" font-size="11.5" font-weight="600" fill="#b388ff">config_nvme_meta（前置）</text>
+<text x="632" y="551" font-size="9.5" fill="#9aa0c0">SPDK probe → NVMeSystemMeta.json</text>
+<path d="M 580 70 L 580 610" stroke="#7a86b3" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.3"/>
+<text x="40" y="625" font-size="10" fill="#9aa0c0">数据类型链：int8 query → uint64 cluster_id → ClusterStripe{nvme_id, lba_id} → int8 cluster vecs → int32 IP → RankPair → pair&lt;id, dist&gt;</text>
+</svg>

@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="600" viewBox="0 0 880 600" font-family="system-ui,sans-serif">
+<rect x="0" y="0" width="880" height="600" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  <marker id="arrow-y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+  </marker>
+  <marker id="arrow-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+  </marker>
+  <marker id="arrow-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+  </marker>
+</defs>
+<text x="440.0" y="30" text-anchor="middle" font-size="17" font-weight="600" fill="#e6e6f0">Helmsman (MiniHyperVec) 分层架构</text>
+<text x="440.0" y="50" text-anchor="middle" font-size="11.5" fill="#9aa0c0">在线 Serving 栈：请求自上而下穿过五层；离线构建独立产出索引文件</text>
+<path d="M 18 95 L 18 545" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5" marker-end="url(#arrow)"/>
+<text x="13" y="320" text-anchor="middle" font-size="10.5" fill="#9aa0c0" transform="rotate(-90 13 320)">搜索请求 / 部署写入</text>
+<rect x="40" y="80" width="120" height="78" rx="8" fill="#4ecdc4" opacity="0.18" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="100.0" y="112.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#4ecdc4">入口层</text>
+<text x="100.0" y="130.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" fill="#9aa0c0">Entry</text>
+<rect x="180.0" y="92" width="148" height="54" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="254.0" y="113.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#e6e6f0">multi_thread_</text>
+<text x="254.0" y="129.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" fill="#9aa0c0">search</text>
+<rect x="354.0" y="92" width="148" height="54" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="428.0" y="113.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#e6e6f0">minihypervec_</text>
+<text x="428.0" y="129.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" fill="#9aa0c0">deploy</text>
+<rect x="528.0" y="92" width="148" height="54" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="602.0" y="113.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#e6e6f0">config_nvme_</text>
+<text x="602.0" y="129.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" fill="#9aa0c0">meta</text>
+<rect x="702.0" y="92" width="148" height="54" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="776.0" y="113.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#e6e6f0">spann_build_</text>
+<text x="776.0" y="129.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" fill="#9aa0c0">index</text>
+<rect x="40" y="174" width="120" height="92" rx="8" fill="#6c8ef5" opacity="0.18" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="100.0" y="213.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#6c8ef5">运行时层</text>
+<text x="100.0" y="231.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" fill="#9aa0c0">Runtime</text>
+<rect x="180.0" y="184" width="148" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="254.0" y="195.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">MiniHyperVecEnv</text>
+<text x="254.0" y="211.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">单例·生命周期</text>
+<rect x="354.0" y="184" width="148" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="428.0" y="195.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">IndexHolder</text>
+<text x="428.0" y="211.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">持有 IndexAbs</text>
+<rect x="528.0" y="184" width="148" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="602.0" y="195.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">ServingWorkerPool</text>
+<text x="602.0" y="211.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">搜索线程池</text>
+<rect x="702.0" y="184" width="148" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="776.0" y="195.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">OfflineWorker</text>
+<text x="776.0" y="211.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">部署写入</text>
+<rect x="180.0" y="224" width="148" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="254.0" y="235.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">SearchResourcePool</text>
+<text x="254.0" y="251.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">per-worker buffer</text>
+<rect x="441.0" y="224" width="148" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="515.0" y="235.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">ClusterMap</text>
+<text x="515.0" y="251.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">cluster→NVMe 条带</text>
+<rect x="702.0" y="224" width="148" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="776.0" y="235.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">ClusterExtra</text>
+<text x="776.0" y="251.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">cluster IDs+norms</text>
+<rect x="40" y="282" width="120" height="88" rx="8" fill="#f9ca24" opacity="0.18" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="100.0" y="319.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#f9ca24">索引层</text>
+<text x="100.0" y="337.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" fill="#9aa0c0">Index</text>
+<rect x="180.0" y="296" width="124" height="58" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="242.0" y="319.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">IndexAbs&lt;T&gt;</text>
+<text x="242.0" y="335.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">抽象基类</text>
+<rect x="316.5" y="296" width="124" height="58" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="378.5" y="319.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">HnswImp</text>
+<text x="378.5" y="335.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">内存头索引</text>
+<rect x="453.0" y="296" width="124" height="58" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="515.0" y="319.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">HyperConstImp</text>
+<text x="515.0" y="335.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">HV_CONST 聚簇</text>
+<rect x="589.5" y="296" width="124" height="58" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="651.5" y="319.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">Compute</text>
+<text x="651.5" y="335.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">distance_cal·rank_cal</text>
+<rect x="726.0" y="296" width="124" height="58" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="788.0" y="319.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">PruningTool</text>
+<text x="788.0" y="335.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">剪枝（可选）</text>
+<rect x="40" y="388" width="120" height="78" rx="8" fill="#ff6b9d" opacity="0.18" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="100.0" y="420.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#ff6b9d">NVMe I/O 层</text>
+<text x="100.0" y="438.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" fill="#9aa0c0">SPDK 用户态</text>
+<rect x="180.0" y="400" width="148" height="54" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="254.0" y="421.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">NVMeManager</text>
+<text x="254.0" y="437.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">多设备路由</text>
+<rect x="354.0" y="400" width="148" height="54" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="428.0" y="421.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">NVMeCtrl</text>
+<text x="428.0" y="437.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">SPDK probe/IO</text>
+<rect x="528.0" y="400" width="148" height="54" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="602.0" y="421.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">NVMeAllocator</text>
+<text x="602.0" y="437.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">chunk 分配</text>
+<rect x="702.0" y="400" width="148" height="54" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="776.0" y="421.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">NVMeMetaHandler</text>
+<text x="776.0" y="437.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">设备元数据</text>
+<rect x="40" y="482" width="120" height="78" rx="8" fill="#b388ff" opacity="0.18" stroke="#b388ff" stroke-width="1.5"/>
+<text x="100.0" y="514.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#b388ff">基础设施</text>
+<text x="100.0" y="532.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" fill="#9aa0c0">Infra</text>
+<rect x="180.0" y="494" width="148" height="54" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="254.0" y="515.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">Collection/Meta</text>
+<text x="254.0" y="531.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">types·CollectionMeta</text>
+<rect x="354.0" y="494" width="148" height="54" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="428.0" y="515.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">File I/O</text>
+<text x="428.0" y="531.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">Dataset·GtReader·files_rw</text>
+<rect x="528.0" y="494" width="148" height="54" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="602.0" y="515.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">hnswlib</text>
+<text x="602.0" y="531.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">vendored HNSW</text>
+<rect x="702.0" y="494" width="148" height="54" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="776.0" y="515.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12.5" fill="#e6e6f0">json</text>
+<text x="776.0" y="531.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#9aa0c0">nlohmann json</text>
+</svg>
