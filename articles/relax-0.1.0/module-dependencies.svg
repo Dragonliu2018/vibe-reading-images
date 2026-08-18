@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="640" viewBox="0 0 900 640" font-family="system-ui, sans-serif">
+  <rect x="0" y="0" width="900" height="640" fill="#0b0d14"/>
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#c5cce8">Relax 模块依赖关系图</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3" opacity="0.6"/>
+    </marker>
+  </defs>
+
+  <!-- entrypoints -->
+  <rect x="370" y="50" width="160" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="450" y="78" text-anchor="middle" font-size="14" font-weight="600" fill="#4ecdc4">entrypoints</text>
+
+  <!-- core -->
+  <rect x="370" y="140" width="160" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="450" y="168" text-anchor="middle" font-size="14" font-weight="600" fill="#6c8ef5">core 编排</text>
+
+  <!-- components -->
+  <rect x="100" y="240" width="160" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="180" y="268" text-anchor="middle" font-size="14" font-weight="600" fill="#ff6b9d">components</text>
+
+  <!-- agentic -->
+  <rect x="640" y="240" width="160" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="720" y="268" text-anchor="middle" font-size="14" font-weight="600" fill="#ff6b9d">agentic</text>
+
+  <!-- engine -->
+  <rect x="370" y="340" width="160" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="450" y="368" text-anchor="middle" font-size="14" font-weight="600" fill="#f9ca24">engine</text>
+
+  <!-- backends -->
+  <rect x="100" y="440" width="160" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="180" y="468" text-anchor="middle" font-size="14" font-weight="600" fill="#b388ff">backends</text>
+
+  <!-- distributed -->
+  <rect x="640" y="440" width="160" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="720" y="468" text-anchor="middle" font-size="14" font-weight="600" fill="#80c7ff">distributed</text>
+
+  <!-- models -->
+  <rect x="100" y="540" width="160" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="180" y="568" text-anchor="middle" font-size="14" font-weight="600" fill="#b388ff">models</text>
+
+  <!-- utils -->
+  <rect x="370" y="540" width="160" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="450" y="568" text-anchor="middle" font-size="14" font-weight="600" fill="#6c8ef5">utils</text>
+
+  <!-- 主依赖箭头 -->
+  <!-- entrypoints -> core -->
+  <path d="M 450,94 L 450,140" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- core -> components -->
+  <path d="M 410,184 L 220,240" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- core -> agentic -->
+  <path d="M 490,184 L 680,240" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- core -> engine (穿过 components/agentic 间隙) -->
+  <path d="M 450,184 L 450,340" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- core -> distributed (绕右侧避让 core->agentic / agentic->engine 对角线) -->
+  <path d="M 530,184 L 820,184 L 820,455 L 800,455" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- components -> backends -->
+  <path d="M 180,284 L 180,440" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- components -> engine -->
+  <path d="M 260,270 L 370,355" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- agentic -> engine -->
+  <path d="M 640,270 L 530,355" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- agentic -> distributed -->
+  <path d="M 720,284 L 720,440" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- engine -> backends (HTTP, dashed) -->
+  <path d="M 370,370 L 260,455" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.6" marker-end="url(#arrowD)"/>
+  <!-- engine -> distributed -->
+  <path d="M 530,370 L 640,455" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- backends -> distributed (上箭头) -->
+  <path d="M 260,455 L 640,455" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- distributed -> backends (下箭头,权重转换反向) -->
+  <path d="M 640,475 L 260,475" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- backends -> models -->
+  <path d="M 180,484 L 180,540" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- engine -> utils 已移除：bridge 折线仍穿 backends<->distributed 横线；
+       utils 被全模块依赖已由下方 3 条虚线 + 图例说明，无需重复 -->
+  <!-- components -> utils (虚线,代表所有模块依赖 utils) -->
+  <path d="M 180,484 L 180,510 L 370,555" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="3 2" opacity="0.6" marker-end="url(#arrowD)"/>
+  <!-- models -> utils -->
+  <path d="M 260,562 L 370,562" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="3 2" opacity="0.6" marker-end="url(#arrowD)"/>
+  <!-- distributed -> utils -->
+  <path d="M 640,484 L 640,510 L 530,555" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="3 2" opacity="0.6" marker-end="url(#arrowD)"/>
+
+  <!-- 标签 -->
+  <text x="455" y="118" font-size="11" fill="#9aa3c8">main()</text>
+  <text x="350" y="240" font-size="11" fill="#9aa3c8">register_all_serve</text>
+  <text x="540" y="240" font-size="11" fill="#9aa3c8">deploy_chat_api</text>
+  <text x="460" y="262" font-size="11" fill="#9aa3c8">sft bootstrap</text>
+  <text x="282" y="448" font-size="11" fill="#9aa3c8">权重转换 convert_to_hf</text>
+  <text x="282" y="492" font-size="11" fill="#9aa3c8">DCS client / NCCL</text>
+  <text x="270" y="380" font-size="11" fill="#9aa3c8" opacity="0.7">HTTP /generate</text>
+
+  <!-- 图例 -->
+  <text x="60" y="612" font-size="11" fill="#9aa3c8">—— 实线：直接调用/import　　- - - 虚线：HTTP 通信 / 共享基础设施依赖（utils 被全模块 import，扇入最高）</text>
+</svg>

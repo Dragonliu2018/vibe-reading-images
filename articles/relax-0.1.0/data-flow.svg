@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="560" viewBox="0 0 880 560" font-family="system-ui, sans-serif">
+  <rect x="0" y="0" width="880" height="560" fill="#0b0d14"/>
+  <text x="440" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#c5cce8">GRPO Colocate 模式一次 RL Step 数据流</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowW" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+    <marker id="arrowD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3" opacity="0.6"/>
+    </marker>
+  </defs>
+
+  <!-- Rollout (top-left) -->
+  <rect x="60" y="70" width="220" height="100" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="170" y="94" text-anchor="middle" font-size="14" font-weight="600" fill="#ff6b9d">Rollout 角色</text>
+  <text x="170" y="114" text-anchor="middle" font-size="11" fill="#9aa3c8">SGLang generate</text>
+  <text x="170" y="132" text-anchor="middle" font-size="11" fill="#9aa3c8">Sample: tokens / response</text>
+  <text x="170" y="150" text-anchor="middle" font-size="11" fill="#9aa3c8">rollout_log_probs / reward</text>
+
+  <!-- Advantages (top-right) -->
+  <rect x="600" y="70" width="220" height="100" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="710" y="94" text-anchor="middle" font-size="14" font-weight="600" fill="#ff6b9d">Advantages 角色</text>
+  <text x="710" y="114" text-anchor="middle" font-size="11" fill="#9aa3c8">compute_advantages_and_returns</text>
+  <text x="710" y="132" text-anchor="middle" font-size="11" fill="#9aa3c8">GRPO: group returns</text>
+  <text x="710" y="150" text-anchor="middle" font-size="11" fill="#9aa3c8">+ advantages / returns</text>
+
+  <!-- TransferQueue (center) -->
+  <rect x="330" y="240" width="220" height="100" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="440" y="264" text-anchor="middle" font-size="14" font-weight="600" fill="#f9ca24">TransferQueue</text>
+  <text x="440" y="284" text-anchor="middle" font-size="11" fill="#9aa3c8">partition = train_{step}</text>
+  <text x="440" y="302" text-anchor="middle" font-size="11" fill="#9aa3c8">流式 PUT / GET</text>
+  <text x="440" y="320" text-anchor="middle" font-size="11" fill="#9aa3c8">可配置 max_staleness</text>
+
+  <!-- Actor (bottom-center) -->
+  <rect x="330" y="420" width="220" height="110" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="440" y="444" text-anchor="middle" font-size="14" font-weight="600" fill="#ff6b9d">Actor 角色</text>
+  <text x="440" y="464" text-anchor="middle" font-size="11" fill="#9aa3c8">Megatron train</text>
+  <text x="440" y="482" text-anchor="middle" font-size="11" fill="#9aa3c8">ref fwd → actor fwd</text>
+  <text x="440" y="500" text-anchor="middle" font-size="11" fill="#9aa3c8">→ advantages → backward</text>
+  <text x="440" y="518" text-anchor="middle" font-size="11" fill="#9aa3c8">→ optimizer step</text>
+
+  <!-- Weight Sync (left) -->
+  <rect x="60" y="420" width="220" height="100" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="170" y="444" text-anchor="middle" font-size="14" font-weight="600" fill="#b388ff">权重同步</text>
+  <text x="170" y="464" text-anchor="middle" font-size="11" fill="#9aa3c8">colocate: CUDA IPC</text>
+  <text x="170" y="482" text-anchor="middle" font-size="11" fill="#9aa3c8">fully_async: DCS NCCL</text>
+  <text x="170" y="500" text-anchor="middle" font-size="11" fill="#9aa3c8">broadcast</text>
+  <text x="170" y="518" text-anchor="middle" font-size="11" fill="#9aa3c8">Megatron → SGLang</text>
+
+  <!-- 箭头：Rollout -> TQ (PUT) -->
+  <path d="M 230,170 L 360,240" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="250" y="200" font-size="11" fill="#9aa3c8">① PUT</text>
+  <text x="250" y="216" font-size="11" fill="#9aa3c8">RolloutBatch</text>
+
+  <!-- TQ -> Advantages (GET) -->
+  <path d="M 520,240 L 650,170" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="560" y="200" font-size="11" fill="#9aa3c8">② GET</text>
+  <text x="560" y="216" font-size="11" fill="#9aa3c8">rollout data</text>
+
+  <!-- Advantages -> TQ (PUT advantages) -->
+  <path d="M 650,170 L 520,300" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="560" y="300" font-size="11" fill="#9aa3c8">③ PUT</text>
+  <text x="560" y="316" font-size="11" fill="#9aa3c8">advantages</text>
+
+  <!-- TQ -> Actor (GET) -->
+  <path d="M 440,340 L 440,420" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="450" y="384" font-size="11" fill="#9aa3c8">④ GET 训练数据</text>
+
+  <!-- Actor -> Weight Sync -->
+  <path d="M 330,470 L 280,470" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="285" y="460" font-size="11" fill="#9aa3c8" text-anchor="end">⑤ update_weights</text>
+
+  <!-- Weight Sync -> Rollout (NCCL broadcast, 黄色强调) -->
+  <path d="M 170,420 L 170,170" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowW)"/>
+  <text x="120" y="290" font-size="11" fill="#f9ca24">⑥ 权重广播</text>
+  <text x="120" y="306" font-size="11" fill="#f9ca24">下一 step</text>
+
+  <!-- barrier 协调（虚线，Rollout 与 Actor GPU 时分共享） -->
+  <path d="M 170,170 C 80,290 80,320 170,420" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="4 3" opacity="0.6" marker-end="url(#arrowD)"/>
+  <text x="40" y="300" font-size="11" fill="#9aa3c8" opacity="0.8">barrier</text>
+  <text x="40" y="316" font-size="11" fill="#9aa3c8" opacity="0.8">offload/onload</text>
+  <text x="40" y="332" font-size="11" fill="#9aa3c8" opacity="0.8">GPU 时分</text>
+
+  <!-- 图例 -->
+  <text x="600" y="448" font-size="11" fill="#9aa3c8">—— 实线：数据流 / 调用</text>
+  <text x="600" y="466" font-size="11" fill="#f9ca24">—— 黄线：权重同步回环</text>
+  <text x="600" y="484" font-size="11" fill="#9aa3c8" opacity="0.8">- - - 虚线：barrier 协调（仅 colocate）</text>
+  <text x="600" y="506" font-size="11" fill="#9aa3c8" opacity="0.8">fully_async 模式：角色独立 GPU，</text>
+  <text x="600" y="522" font-size="11" fill="#9aa3c8" opacity="0.8">无 barrier，TransferQueue 流式 + staleness</text>
+</svg>

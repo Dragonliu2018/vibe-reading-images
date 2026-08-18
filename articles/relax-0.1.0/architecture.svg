@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="600" viewBox="0 0 880 600" font-family="system-ui, sans-serif">
+  <rect x="0" y="0" width="880" height="600" fill="#0b0d14"/>
+  <text x="440" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#c5cce8">Relax 六层服务化架构</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <!-- L1 Entrypoints -->
+  <rect x="50" y="60" width="540" height="64" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="320" y="86" text-anchor="middle" font-size="14" font-weight="600" fill="#4ecdc4">入口层 Entrypoints</text>
+  <text x="320" y="106" text-anchor="middle" font-size="11" fill="#9aa3c8">train.py — 信号处理 · CLI 解析 · Ray/Serve 启动 · Controller 拉起</text>
+
+  <!-- L2 Orchestration -->
+  <rect x="50" y="150" width="540" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="320" y="176" text-anchor="middle" font-size="14" font-weight="600" fill="#6c8ef5">编排层 Orchestration</text>
+  <text x="320" y="196" text-anchor="middle" font-size="11" fill="#9aa3c8">Controller（训练循环+全局重启）· Service（PG+生命周期）· Registry（ROLES+ALGOS）</text>
+
+  <!-- L3 Components -->
+  <rect x="50" y="240" width="540" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="320" y="266" text-anchor="middle" font-size="14" font-weight="600" fill="#ff6b9d">组件层 Components</text>
+  <text x="320" y="286" text-anchor="middle" font-size="11" fill="#9aa3c8">Actor · Rollout · Critic · ActorFwd · Advantages · GenRM · SFT（Ray Serve deployment）</text>
+
+  <!-- L4 Engine -->
+  <rect x="50" y="330" width="540" height="64" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="320" y="356" text-anchor="middle" font-size="14" font-weight="600" fill="#f9ca24">引擎层 Engine</text>
+  <text x="320" y="376" text-anchor="middle" font-size="11" fill="#9aa3c8">SGLang Rollout · Rewards（GenRM）· SlimeRouter · Filters · SFT Engine</text>
+
+  <!-- L5 Backends -->
+  <rect x="50" y="420" width="540" height="64" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="320" y="446" text-anchor="middle" font-size="14" font-weight="600" fill="#b388ff">后端层 Backends</text>
+  <text x="320" y="466" text-anchor="middle" font-size="11" fill="#9aa3c8">Megatron-LM（TP/PP/CP/EP）· SGLang · 权重转换 / 同步</text>
+
+  <!-- L6 Distributed -->
+  <rect x="50" y="510" width="540" height="64" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="320" y="536" text-anchor="middle" font-size="14" font-weight="600" fill="#80c7ff">分布式层 Distributed</text>
+  <text x="320" y="556" text-anchor="middle" font-size="11" fill="#9aa3c8">DCS Checkpoint · Ray Actor Groups（RolloutManager）· Barriers</text>
+
+  <!-- 依赖箭头：上层 → 下层 -->
+  <path d="M 320,124 L 320,150" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 320,214 L 320,240" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 320,304 L 320,330" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 320,394 L 320,420" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 320,484 L 320,510" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 横切模块面板 -->
+  <rect x="620" y="60" width="230" height="514" rx="8" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="735" y="82" text-anchor="middle" font-size="13" fill="#7a86b3">横切模块</text>
+
+  <!-- Agentic RL -->
+  <rect x="636" y="100" width="198" height="96" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="735" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#ff6b9d">Agentic RL</text>
+  <text x="735" y="144" text-anchor="middle" font-size="11" fill="#9aa3c8">pipeline / session / runner</text>
+  <text x="735" y="164" text-anchor="middle" font-size="11" fill="#9aa3c8">多轮 execute→observe→decide</text>
+  <text x="735" y="184" text-anchor="middle" font-size="11" fill="#9aa3c8">loss masking · VLM 上下文承接</text>
+
+  <!-- 模型集成 -->
+  <rect x="636" y="216" width="198" height="76" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="735" y="240" text-anchor="middle" font-size="13" font-weight="600" fill="#b388ff">模型集成 Models</text>
+  <text x="735" y="260" text-anchor="middle" font-size="11" fill="#9aa3c8">Qwen3-Omni · Dots-OCR</text>
+  <text x="735" y="280" text-anchor="middle" font-size="11" fill="#9aa3c8">GLM-MoE-DSA</text>
+
+  <!-- 共享基础设施 -->
+  <rect x="636" y="312" width="198" height="252" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="735" y="336" text-anchor="middle" font-size="13" font-weight="600" fill="#6c8ef5">共享基础设施 utils</text>
+  <text x="735" y="360" text-anchor="middle" font-size="11" fill="#9aa3c8">Sample 数据结构（god #1）</text>
+  <text x="735" y="380" text-anchor="middle" font-size="11" fill="#9aa3c8">Envs 配置单例</text>
+  <text x="735" y="400" text-anchor="middle" font-size="11" fill="#9aa3c8">MetricsService（W&amp;B/TB/ClearML）</text>
+  <text x="735" y="420" text-anchor="middle" font-size="11" fill="#9aa3c8">Multimodal（图/视频/音频）</text>
+  <text x="735" y="440" text-anchor="middle" font-size="11" fill="#9aa3c8">Autoscaler 弹性扩缩容</text>
+  <text x="735" y="460" text-anchor="middle" font-size="11" fill="#9aa3c8">HealthManager 自动恢复</text>
+  <text x="735" y="480" text-anchor="middle" font-size="11" fill="#9aa3c8">StreamingDataLoader</text>
+  <text x="735" y="500" text-anchor="middle" font-size="11" fill="#9aa3c8">OPD / arguments / device</text>
+
+  <!-- 横切→主层 虚线支撑箭头 -->
+  <path d="M 620,160 L 590,160" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="3 2" opacity="0.6" marker-end="url(#arrow)"/>
+  <path d="M 620,254 L 590,254" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="3 2" opacity="0.6" marker-end="url(#arrow)"/>
+  <path d="M 620,438 L 590,438" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="3 2" opacity="0.6" marker-end="url(#arrow)"/>
+</svg>
