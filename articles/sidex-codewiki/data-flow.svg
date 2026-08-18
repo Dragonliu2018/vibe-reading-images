@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="540" viewBox="0 0 820 540" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowEvt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect width="820" height="540" fill="#0b0d14"/>
+
+  <text x="410" y="26" text-anchor="middle" fill="#e6e6e6" font-size="16" font-weight="600">终端请求数据流（请求-响应 + 事件流）</text>
+
+  <!-- 列标题 -->
+  <text x="140" y="62" text-anchor="middle" fill="#80c7ff" font-size="13" font-weight="600">前端 (TypeScript)</text>
+  <text x="430" y="62" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">Rust 后端</text>
+  <text x="700" y="62" text-anchor="middle" fill="#b388ff" font-size="13" font-weight="600">OS / crate</text>
+
+  <!-- 左列：前端 -->
+  <rect x="56" y="80" width="168" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="140" y="100" text-anchor="middle" fill="#e6e6e6" font-size="12">tauriTerminalBackend.ts</text>
+  <text x="140" y="118" text-anchor="middle" fill="#80c7ff" font-size="11">TauriPty.start()</text>
+
+  <rect x="56" y="248" width="168" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="140" y="268" text-anchor="middle" fill="#e6e6e6" font-size="12">_listen()</text>
+  <text x="140" y="286" text-anchor="middle" fill="#80c7ff" font-size="11">terminal-data 回调</text>
+
+  <rect x="56" y="412" width="168" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="140" y="432" text-anchor="middle" fill="#e6e6e6" font-size="12">_onProcessData.fire()</text>
+  <text x="140" y="450" text-anchor="middle" fill="#80c7ff" font-size="11">→ xterm.js 渲染</text>
+
+  <!-- 中列：Rust 后端 -->
+  <rect x="326" y="80" width="208" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="430" y="100" text-anchor="middle" fill="#e6e6e6" font-size="12">Tauri IPC 边界</text>
+  <text x="430" y="118" text-anchor="middle" fill="#4ecdc4" font-size="11">generate_handler! 分发</text>
+
+  <rect x="326" y="168" width="208" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="430" y="188" text-anchor="middle" fill="#e6e6e6" font-size="12">terminal.rs</text>
+  <text x="430" y="206" text-anchor="middle" fill="#6c8ef5" font-size="11">terminal_spawn · TerminalStore</text>
+
+  <rect x="326" y="248" width="208" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="430" y="268" text-anchor="middle" fill="#e6e6e6" font-size="12">reader 线程</text>
+  <text x="430" y="286" text-anchor="middle" fill="#6c8ef5" font-size="11">std::thread · app.emit</text>
+
+  <rect x="326" y="412" width="208" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="430" y="432" text-anchor="middle" fill="#e6e6e6" font-size="12">terminal_write()</text>
+  <text x="430" y="450" text-anchor="middle" fill="#f9ca24" font-size="11">Mutex → writer.write_all</text>
+
+  <!-- 右列：OS / crate -->
+  <rect x="636" y="168" width="128" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="700" y="188" text-anchor="middle" fill="#e6e6e6" font-size="12">portable-pty</text>
+  <text x="700" y="206" text-anchor="middle" fill="#b388ff" font-size="11">openpty → shell</text>
+
+  <!-- PTY master 长框：同时承接 read 和 write -->
+  <rect x="636" y="248" width="128" height="214" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="700" y="350" text-anchor="middle" fill="#e6e6e6" font-size="13">PTY master</text>
+  <text x="700" y="370" text-anchor="middle" fill="#b388ff" font-size="11">reader.read(8KB)</text>
+  <text x="700" y="388" text-anchor="middle" fill="#b388ff" font-size="11">writer.write_all</text>
+
+  <!-- ① invoke(spawn)：左→中（水平） -->
+  <path d="M224,105 L326,105" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="275" y="97" text-anchor="middle" fill="#9aa3c0" font-size="11">invoke(spawn)</text>
+
+  <!-- Tauri IPC → terminal_spawn（中列垂直） -->
+  <path d="M430,130 L430,168" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ② openpty+spawn：中→右（水平） -->
+  <path d="M534,195 L636,195" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="585" y="187" text-anchor="middle" fill="#9aa3c0" font-size="11">openpty+spawn</text>
+
+  <!-- portable-pty → PTY master（右列垂直） -->
+  <path d="M700,218 L700,248" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ③ return terminal_id：L 形折线，中→左（水平后上行，落在 TauriPty 框底中心） -->
+  <path d="M326,222 L140,222 L140,130" stroke="#7a86b3" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="233" y="214" text-anchor="middle" fill="#9aa3c0" font-size="11">return id</text>
+
+  <!-- ④ spawn reader：terminal_spawn → reader（中列垂直） -->
+  <path d="M430,222 L430,248" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ⑤ reader.read：中→右（水平，进 PTY master 左边） -->
+  <path d="M534,275 L636,275" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="585" y="267" text-anchor="middle" fill="#9aa3c0" font-size="11">read PTY</text>
+
+  <!-- ⑥ emit(terminal-data)：中→左（水平，黄） -->
+  <path d="M326,275 L224,275" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowEvt)"/>
+  <text x="275" y="267" text-anchor="middle" fill="#f9ca24" font-size="11">emit(terminal-data)</text>
+
+  <!-- ⑦ _listen → _onProcessData（左列垂直） -->
+  <path d="M140,298 L140,412" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="150" y="358" fill="#9aa3c0" font-size="11">fire</text>
+
+  <!-- ⑧ invoke(write)：左→中（水平） -->
+  <path d="M224,437 L326,437" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="275" y="429" text-anchor="middle" fill="#9aa3c0" font-size="11">invoke(write)</text>
+
+  <!-- ⑨ write_all → shell：中→右（水平，进 PTY master 左边） -->
+  <path d="M534,437 L636,437" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="585" y="429" text-anchor="middle" fill="#9aa3c0" font-size="11">write_all → shell</text>
+
+  <!-- 图例 -->
+  <rect x="56" y="498" width="24" height="3" fill="#7a86b3"/>
+  <text x="88" y="503" fill="#9aa3c0" font-size="11">invoke 请求 / 返回（虚线）</text>
+  <rect x="290" y="498" width="24" height="3" fill="#f9ca24"/>
+  <text x="322" y="503" fill="#f9ca24" font-size="11">emit 事件流（持续推送）</text>
+</svg>

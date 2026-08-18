@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect width="820" height="520" fill="#0b0d14"/>
+
+  <text x="410" y="26" text-anchor="middle" fill="#e6e6e6" font-size="16" font-weight="600">Rust crate 依赖关系（箭头 = depends on）</text>
+
+  <!-- 顶层：src-tauri 命令层 -->
+  <rect x="290" y="50" width="240" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="73" text-anchor="middle" fill="#e6e6e6" font-size="14" font-weight="600">src-tauri/commands</text>
+  <text x="410" y="90" text-anchor="middle" fill="#6c8ef5" font-size="11">命令层 · 依赖全部 crate</text>
+
+  <!-- 一条总线箭头：src-tauri → 领域 crate 容器（替代多条交叉对角线） -->
+  <path d="M410,100 L410,128" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 领域 crate 容器（虚线分组） -->
+  <rect x="32" y="128" width="756" height="172" rx="10" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="5,4" opacity="0.6"/>
+  <text x="44" y="146" fill="#9aa3c0" font-size="11">19 个领域 crate（除下方标注的真实依赖外，互相独立）</text>
+
+  <!-- Row A：独立领域 crate -->
+  <rect x="40" y="158" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="105" y="182" text-anchor="middle" fill="#e6e6e6" font-size="13">terminal</text>
+  <rect x="186" y="158" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="251" y="182" text-anchor="middle" fill="#e6e6e6" font-size="13">git</text>
+  <rect x="332" y="158" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="397" y="182" text-anchor="middle" fill="#e6e6e6" font-size="13">remote</text>
+  <rect x="478" y="158" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="543" y="182" text-anchor="middle" fill="#e6e6e6" font-size="13">dap</text>
+  <rect x="624" y="158" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="689" y="182" text-anchor="middle" fill="#e6e6e6" font-size="13">textmate</text>
+
+  <!-- Row B：有真实依赖的 crate -->
+  <rect x="40" y="252" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="105" y="276" text-anchor="middle" fill="#e6e6e6" font-size="13">extensions</text>
+  <rect x="186" y="252" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="251" y="276" text-anchor="middle" fill="#e6e6e6" font-size="13">extension-api</text>
+  <rect x="332" y="252" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="397" y="276" text-anchor="middle" fill="#e6e6e6" font-size="13">syntax</text>
+  <rect x="478" y="252" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="543" y="276" text-anchor="middle" fill="#e6e6e6" font-size="13">lsp</text>
+  <rect x="624" y="252" width="130" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="689" y="276" text-anchor="middle" fill="#e6e6e6" font-size="13">workspace</text>
+
+  <!-- 底层：共享基础 crate（sidex-text 拉宽，承接 syntax + lsp 的垂直箭头） -->
+  <rect x="332" y="362" width="276" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="470" y="384" text-anchor="middle" fill="#e6e6e6" font-size="14" font-weight="600">sidex-text</text>
+  <text x="470" y="402" text-anchor="middle" fill="#4ecdc4" font-size="11">Position / Range / Rope（共享类型）</text>
+
+  <rect x="624" y="362" width="130" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="689" y="384" text-anchor="middle" fill="#e6e6e6" font-size="14" font-weight="600">sidex-db</text>
+  <text x="689" y="402" text-anchor="middle" fill="#4ecdc4" font-size="11">SQLite 状态存储</text>
+
+  <!-- 真实依赖箭头（黄，全垂直，无对角线） -->
+  <!-- syntax → sidex-text -->
+  <path d="M397,290 L397,362" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowF)"/>
+  <text x="405" y="330" fill="#f9ca24" font-size="11">to_input_edit</text>
+  <!-- lsp → sidex-text -->
+  <path d="M543,290 L543,362" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowF)"/>
+  <text x="551" y="330" fill="#f9ca24" font-size="11">Position/Range</text>
+  <!-- workspace → sidex-db -->
+  <path d="M689,290 L689,362" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowF)"/>
+  <text x="697" y="330" fill="#f9ca24" font-size="11">recent/state</text>
+
+  <!-- 底部说明 -->
+  <text x="40" y="450" fill="#9aa3c0" font-size="12" font-weight="600">松耦合架构</text>
+  <text x="40" y="472" fill="#e6e6e6" font-size="12">terminal · git · remote · dap · textmate · extensions · extension-api · settings · theme · keymap · tasks · update · auth · profiles</text>
+  <text x="40" y="492" fill="#9aa3c0" font-size="11">除 sidex-text（共享类型）与 sidex-db（状态存储）被 syntax/lsp/workspace 引用外，各领域 crate 互相独立、无跨 crate 依赖</text>
+</svg>
