@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="720" viewBox="0 0 860 720">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowrust" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/>
+    </marker>
+    <marker id="arrowpink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <rect width="860" height="720" fill="#0b0d14"/>
+
+  <text x="430" y="28" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="15" font-weight="600">端到端请求数据流</text>
+  <text x="430" y="46" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="11">REST/GraphQL 与 SQL pg-wire 双路径在 OrchestratorApi 汇聚</text>
+
+  <!-- Column labels -->
+  <text x="190" y="74" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="11" font-weight="600">REST / GraphQL 路径（TS）</text>
+  <text x="670" y="74" text-anchor="middle" fill="#b388ff" font-family="system-ui, sans-serif" font-size="11" font-weight="600">SQL pg-wire 路径（Rust）</text>
+
+  <!-- L1: client -->
+  <rect x="80" y="84" width="220" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="190" y="108" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11">前端 SDK / REST 客户端</text>
+
+  <!-- L2: api-gateway -->
+  <rect x="80" y="148" width="220" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="190" y="166" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">api-gateway /load</text>
+  <text x="190" y="182" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">getNormalizedQueries + RLS</text>
+
+  <!-- L3: CompilerApi.getSql -->
+  <rect x="80" y="216" width="220" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="190" y="234" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">CompilerApi.getSql</text>
+  <text x="190" y="250" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">schema-compiler 编译 SQL</text>
+
+  <!-- L4: buildSqlAndParams -->
+  <rect x="80" y="284" width="220" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="190" y="302" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="10">BaseQuery.buildSqlAndParams</text>
+  <text x="190" y="316" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">JS adapter 或 Tesseract Rust</text>
+
+  <!-- R1: psql -->
+  <rect x="560" y="84" width="220" height="38" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="670" y="108" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11">psql / BI 工具</text>
+
+  <!-- R2: CubeSQL pg-wire -->
+  <rect x="560" y="148" width="220" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="670" y="166" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">CubeSQL pg-wire</text>
+  <text x="670" y="182" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">AsyncPostgresShim</text>
+
+  <!-- R3: QueryEngine.plan -->
+  <rect x="560" y="216" width="220" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="670" y="234" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">QueryEngine.plan</text>
+  <text x="670" y="250" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">解析 + e-graph rewrite</text>
+
+  <!-- R4: sqlApiLoad callback -->
+  <rect x="560" y="284" width="220" height="40" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="670" y="302" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="10">CubeScanNode</text>
+  <text x="670" y="316" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">napi 回调 sqlApiLoad</text>
+
+  <!-- M1: OrchestratorApi (convergence) -->
+  <rect x="250" y="360" width="360" height="48" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+  <text x="430" y="380" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">OrchestratorApi.executeQuery</text>
+  <text x="430" y="398" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">双路径汇聚 · continueWaitTimeout · ContinueWaitError → 轮询</text>
+
+  <!-- M2: PreAggregations + QueryCache -->
+  <rect x="250" y="436" width="360" height="48" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="430" y="454" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">PreAggregations 匹配 + QueryCache</text>
+  <text x="430" y="472" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">content/structure 双层版本号 · 三层缓存命中判断</text>
+
+  <!-- M3: QueryQueue -->
+  <rect x="250" y="512" width="360" height="44" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="430" y="530" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">QueryQueue</text>
+  <text x="430" y="546" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">并发控制 · 优先级 · 心跳 · 孤儿清理</text>
+
+  <!-- M4: driver.query -->
+  <rect x="250" y="580" width="360" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="430" y="605" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11">driver.query(sql, values)</text>
+
+  <!-- B1: CubeStore -->
+  <rect x="80" y="650" width="220" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="190" y="668" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">CubeStore</text>
+  <text x="190" y="684" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">预聚合表（Rust OLAP）</text>
+
+  <!-- B2: data sources -->
+  <rect x="560" y="650" width="220" height="44" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="670" y="668" text-anchor="middle" fill="#e8eaf0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">数据源</text>
+  <text x="670" y="684" text-anchor="middle" fill="#7a86b3" font-family="system-ui, sans-serif" font-size="9">Postgres / Snowflake / ...</text>
+
+  <!-- Left column arrows -->
+  <path d="M190,122 L190,148" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M190,192 L190,216" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M190,260 L190,284" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Right column arrows -->
+  <path d="M670,122 L670,148" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#arrowrust)"/>
+  <path d="M670,192 L670,216" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#arrowrust)"/>
+  <path d="M670,260 L670,284" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#arrowrust)"/>
+
+  <!-- Convergence arrows L4 -> M1, R4 -> M1 -->
+  <path d="M220,324 L300,360" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M640,324 L560,360" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#arrowrust)" stroke-dasharray="4 2"/>
+  <text x="610" y="346" fill="#b388ff" font-family="system-ui, sans-serif" font-size="9">napi</text>
+
+  <!-- Middle column arrows -->
+  <path d="M430,408 L430,436" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrowpink)"/>
+  <path d="M430,484 L430,512" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrowpink)"/>
+  <path d="M430,556 L430,580" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrowpink)"/>
+
+  <!-- M4 -> B1, B2 -->
+  <path d="M330,620 L230,650" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M530,620 L630,650" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Return arrow (right side, curved) -->
+  <path d="M760,670 L810,670 L810,100 L300,100" stroke="#4ecdc4" stroke-width="1" fill="none" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#arrow)"/>
+  <text x="430" y="94" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="9">结果返回客户端</text>
+</svg>
