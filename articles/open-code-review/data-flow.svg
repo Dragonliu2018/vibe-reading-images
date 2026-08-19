@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="640" viewBox="0 0 820 640" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="arG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="820" height="640" fill="#0b0d14"/>
+
+  <text x="410" y="30" text-anchor="middle" fill="#e8eaf0" font-size="18" font-weight="700">review 请求数据流</text>
+  <text x="410" y="48" text-anchor="middle" fill="#7a86b3" font-size="12">executeReviewContext → 装配 → agent.New → ag.Run → 输出</text>
+
+  <!-- ===== Main spine (left column, x 80..460) ===== -->
+  <!-- 1. entry -->
+  <rect x="80" y="62" width="380" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="270" y="89" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">executeReviewContext（入口）</text>
+
+  <!-- 2. assembly -->
+  <rect x="80" y="120" width="380" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="270" y="143" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">装配阶段</text>
+  <text x="270" y="162" text-anchor="middle" fill="#9aa3c0" font-size="11">loadCommonContext · loadLLMRuntime · validateResumeIdentity</text>
+  <text x="270" y="176" text-anchor="middle" fill="#9aa3c0" font-size="11">→ commonContext + llmRuntime + SealedInput</text>
+
+  <!-- 3. agent.New -->
+  <rect x="80" y="198" width="380" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="220" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">agent.New</text>
+  <text x="270" y="238" text-anchor="middle" fill="#9aa3c0" font-size="11">写 session_start · initManifest · 构造 llmloop.Runner</text>
+
+  <!-- 4. ag.Run orchestration -->
+  <rect x="80" y="266" width="380" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="289" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">ag.Run 编排</text>
+  <text x="270" y="308" text-anchor="middle" fill="#9aa3c0" font-size="11">loadDiffs → filterDiffs → registerCoverage</text>
+  <text x="270" y="322" text-anchor="middle" fill="#9aa3c0" font-size="11">→ applyResume（复用 checkpoint）</text>
+
+  <!-- 5. dispatch -->
+  <rect x="80" y="346" width="380" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="369" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">dispatchSubtasks（并发 N 文件）</text>
+  <text x="270" y="388" text-anchor="middle" fill="#9aa3c0" font-size="11">executeSubtask → executePlanPhase</text>
+  <text x="270" y="402" text-anchor="middle" fill="#9aa3c0" font-size="11">→ runner.RunPerFile → executeReviewFilter</text>
+
+  <!-- 6. finalize -->
+  <rect x="80" y="426" width="380" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="270" y="453" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">finalizeManifest · session.Finalize</text>
+
+  <!-- 7. emit -->
+  <rect x="80" y="484" width="380" height="58" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="270" y="507" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">emitRunResult</text>
+  <text x="270" y="525" text-anchor="middle" fill="#9aa3c0" font-size="11">diff.ResolveLineNumbers → Markdown/JSON/SARIF</text>
+
+  <!-- spine arrows -->
+  <path d="M 270 106 L 270 120" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ar)"/>
+  <path d="M 270 184 L 270 198" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ar)"/>
+  <path d="M 270 250 L 270 266" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ar)"/>
+  <path d="M 270 330 L 270 346" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ar)"/>
+  <path d="M 270 410 L 270 426" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ar)"/>
+  <path d="M 270 470 L 270 484" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <!-- ===== Tool loop expansion (right column) ===== -->
+  <rect x="500" y="338" width="260" height="150" rx="8" fill="#13162a" fill-opacity="0.6" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="630" y="362" text-anchor="middle" fill="#80c7ff" font-size="13" font-weight="700">工具循环 RunPerFile</text>
+  <text x="630" y="384" text-anchor="middle" fill="#e8eaf0" font-size="11">LLMClient.CompletionsWithCtx</text>
+  <text x="630" y="402" text-anchor="middle" fill="#e8eaf0" font-size="11">↓</text>
+  <text x="630" y="420" text-anchor="middle" fill="#e8eaf0" font-size="11">executeToolCall</text>
+  <text x="630" y="436" text-anchor="middle" fill="#9aa3c0" font-size="10">code_comment → 异步池</text>
+  <text x="630" y="452" text-anchor="middle" fill="#e8eaf0" font-size="11">↓</text>
+  <text x="630" y="470" text-anchor="middle" fill="#e8eaf0" font-size="11">三区压缩 60% / 80%</text>
+  <text x="630" y="484" text-anchor="middle" fill="#9aa3c0" font-size="10">→ 终止判定 / 下一轮</text>
+
+  <!-- link from dispatch to tool loop -->
+  <path d="M 460 378 L 500 378" fill="none" stroke="#80c7ff" stroke-width="1.5" marker-end="url(#arG)"/>
+  <text x="480" y="372" text-anchor="middle" fill="#80c7ff" font-size="10">单文件往返</text>
+
+  <!-- legend -->
+  <text x="80" y="580" fill="#4ecdc4" font-size="11">■ 接口/输出</text>
+  <text x="200" y="580" fill="#6c8ef5" font-size="11">■ 编排主链路</text>
+  <text x="340" y="580" fill="#80c7ff" font-size="11">■ 执行层（工具循环）</text>
+  <text x="500" y="580" fill="#b388ff" font-size="11">■ 会话持久化</text>
+  <text x="80" y="604" fill="#9aa3c0" font-size="10">scan 复用 loadCommonContext/loadLLMRuntime/emitRunResult/Runner，差异：ScanTemplate · Provider.Enumerate · batch 分组 + dedup · NewRequestMeta=nil</text>
+  <text x="80" y="620" fill="#9aa3c0" font-size="10">delegate 只做装配产物输出（文件清单 + 分组规则），不建 LLMClient / 不建 session / 不调 LLM</text>
+</svg>

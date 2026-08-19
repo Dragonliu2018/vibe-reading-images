@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="560" viewBox="0 0 820 560" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="820" height="560" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="410" y="34" text-anchor="middle" fill="#e8eaf0" font-size="18" font-weight="700">OpenCodeReview 分层架构</text>
+  <text x="410" y="54" text-anchor="middle" fill="#7a86b3" font-size="12">确定性工程 × Agent 混合 · 自顶向下依赖</text>
+
+  <!-- ============ Row 1: 接口层 ============ -->
+  <rect x="20" y="74" width="130" height="76" rx="8" fill="#4ecdc4" fill-opacity="0.14" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="85" y="105" text-anchor="middle" fill="#4ecdc4" font-size="14" font-weight="700">接口层</text>
+  <text x="85" y="124" text-anchor="middle" fill="#4ecdc4" font-size="11">cmd/</text>
+
+  <rect x="170" y="74" width="200" height="76" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="270" y="104" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">命令树</text>
+  <text x="270" y="124" text-anchor="middle" fill="#9aa3c0" font-size="11">root · review · scan · delegate</text>
+
+  <rect x="390" y="74" width="200" height="76" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="490" y="104" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">Provider TUI</text>
+  <text x="490" y="124" text-anchor="middle" fill="#9aa3c0" font-size="11">交互式配置 provider/model</text>
+
+  <rect x="610" y="74" width="190" height="76" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="705" y="104" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">输出格式</text>
+  <text x="705" y="124" text-anchor="middle" fill="#9aa3c0" font-size="11">Markdown · JSON · SARIF</text>
+
+  <!-- ============ Row 2: 编排层 ============ -->
+  <rect x="20" y="166" width="130" height="76" rx="8" fill="#6c8ef5" fill-opacity="0.14" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="85" y="197" text-anchor="middle" fill="#6c8ef5" font-size="14" font-weight="700">编排层</text>
+  <text x="85" y="216" text-anchor="middle" fill="#6c8ef5" font-size="11">orchestration</text>
+
+  <rect x="170" y="166" width="200" height="76" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="196" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">ReviewAgent</text>
+  <text x="270" y="216" text-anchor="middle" fill="#9aa3c0" font-size="11">diff 审查 · 并发子审查</text>
+
+  <rect x="390" y="166" width="200" height="76" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="490" y="196" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">ScanAgent</text>
+  <text x="490" y="216" text-anchor="middle" fill="#9aa3c0" font-size="11">全文件扫描 · 批次切分</text>
+
+  <rect x="610" y="166" width="190" height="76" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="705" y="196" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">会话编排</text>
+  <text x="705" y="216" text-anchor="middle" fill="#9aa3c0" font-size="11">manifest · resume · 持久化</text>
+
+  <!-- ============ Row 3: 执行层 ============ -->
+  <rect x="20" y="258" width="130" height="76" rx="8" fill="#80c7ff" fill-opacity="0.14" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="85" y="289" text-anchor="middle" fill="#80c7ff" font-size="14" font-weight="700">执行层</text>
+  <text x="85" y="308" text-anchor="middle" fill="#80c7ff" font-size="11">execution</text>
+
+  <rect x="170" y="258" width="200" height="76" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="270" y="288" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">LLM 工具循环</text>
+  <text x="270" y="308" text-anchor="middle" fill="#9aa3c0" font-size="11">llmloop · 往返 · 上下文压缩</text>
+
+  <rect x="390" y="258" width="200" height="76" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="490" y="288" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">工具集</text>
+  <text x="490" y="308" text-anchor="middle" fill="#9aa3c0" font-size="11">tool · 场景化蒸馏</text>
+
+  <rect x="610" y="258" width="190" height="76" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="705" y="288" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">MCP 外部工具</text>
+  <text x="705" y="308" text-anchor="middle" fill="#9aa3c0" font-size="11">mcp · 扩展 agent 能力</text>
+
+  <!-- ============ Row 4: 能力层 ============ -->
+  <rect x="20" y="350" width="130" height="76" rx="8" fill="#f9ca24" fill-opacity="0.14" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="85" y="381" text-anchor="middle" fill="#f9ca24" font-size="14" font-weight="700">能力层</text>
+  <text x="85" y="400" text-anchor="middle" fill="#f9ca24" font-size="11">capability</text>
+
+  <rect x="170" y="350" width="200" height="76" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="270" y="380" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">LLM Provider</text>
+  <text x="270" y="400" text-anchor="middle" fill="#9aa3c0" font-size="11">llm · 多 provider · 重试</text>
+
+  <rect x="390" y="350" width="200" height="76" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="490" y="380" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">Diff 解析</text>
+  <text x="490" y="400" text-anchor="middle" fill="#9aa3c0" font-size="11">diff · 打包 · 行号定位</text>
+
+  <rect x="610" y="350" width="190" height="76" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="705" y="380" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">Git 封装</text>
+  <text x="705" y="400" text-anchor="middle" fill="#9aa3c0" font-size="11">gitcmd · 限流 Runner</text>
+
+  <!-- ============ Row 5: 基础层 ============ -->
+  <rect x="20" y="442" width="130" height="76" rx="8" fill="#b388ff" fill-opacity="0.14" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="85" y="473" text-anchor="middle" fill="#b388ff" font-size="14" font-weight="700">基础层</text>
+  <text x="85" y="492" text-anchor="middle" fill="#b388ff" font-size="11">foundation</text>
+
+  <rect x="170" y="442" width="148" height="76" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="244" y="472" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">配置体系</text>
+  <text x="244" y="492" text-anchor="middle" fill="#9aa3c0" font-size="11">config · 规则/模板</text>
+
+  <rect x="332" y="442" width="148" height="76" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="406" y="472" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">数据模型</text>
+  <text x="406" y="492" text-anchor="middle" fill="#9aa3c0" font-size="11">model · 共享类型</text>
+
+  <rect x="494" y="442" width="148" height="76" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="568" y="472" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">遥测</text>
+  <text x="568" y="492" text-anchor="middle" fill="#9aa3c0" font-size="11">telemetry · OTel</text>
+
+  <rect x="656" y="442" width="144" height="76" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="728" y="472" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">基础设施</text>
+  <text x="728" y="492" text-anchor="middle" fill="#9aa3c0" font-size="11">stdout · pathutil</text>
+
+  <!-- 依赖方向标注（右侧竖向） -->
+  <text x="805" y="200" text-anchor="end" fill="#7a86b3" font-size="11" transform="rotate(90 805 200)">依赖方向</text>
+</svg>
