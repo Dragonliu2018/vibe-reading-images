@@ -11,13 +11,13 @@
   <rect x="0" y="0" width="820" height="540" fill="#0b0d14"/>
 
   <text x="410" y="32" text-anchor="middle" fill="#e8eaf0" font-size="18" font-weight="700">模块依赖关系</text>
-  <text x="410" y="50" text-anchor="middle" fill="#7a86b3" font-size="12">箭头 = import / 调用方向（A → A 依赖的目标）</text>
+  <text x="410" y="50" text-anchor="middle" fill="#7a86b3" font-size="12">箭头 = A 依赖 / 调用 B（A → B）</text>
 
-  <!-- Row 1: cmd -->
+  <!-- Row 1: cmd  x:285..535  y:70..116 -->
   <rect x="285" y="70" width="250" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
   <text x="410" y="98" text-anchor="middle" fill="#e8eaf0" font-size="14" font-weight="600">命令行接口（cmd）</text>
 
-  <!-- Row 2: ReviewAgent / ScanAgent / Session -->
+  <!-- Row 2  ReviewAgent 100..270 | ScanAgent 325..495 | Session 550..720  y:157..203 -->
   <rect x="100" y="157" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
   <text x="185" y="185" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">ReviewAgent</text>
 
@@ -27,7 +27,7 @@
   <rect x="550" y="157" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
   <text x="635" y="185" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">会话编排 session</text>
 
-  <!-- Row 3: llmloop / tool / mcp -->
+  <!-- Row 3  llmloop 100..270 | tool 325..495 | mcp 550..720  y:252..298 -->
   <rect x="100" y="252" width="170" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
   <text x="185" y="280" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">LLM 工具循环</text>
 
@@ -37,14 +37,14 @@
   <rect x="550" y="252" width="170" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
   <text x="635" y="280" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">MCP</text>
 
-  <!-- Row 4: llm / diff -->
+  <!-- Row 4  llm 212..382 | diff 437..607  y:347..393 -->
   <rect x="212" y="347" width="170" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
   <text x="297" y="375" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">LLM Provider</text>
 
   <rect x="437" y="347" width="170" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
   <text x="522" y="375" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">Diff 解析</text>
 
-  <!-- Row 5: config / model / telemetry -->
+  <!-- Row 5  config 100..270 | model 325..495 | telemetry 550..720  y:442..488 -->
   <rect x="100" y="442" width="170" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
   <text x="185" y="470" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">配置 config</text>
 
@@ -54,46 +54,36 @@
   <rect x="550" y="442" width="170" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
   <text x="635" y="470" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="600">遥测 telemetry</text>
 
-  <!-- ===== Arrows (dependency: source → target) ===== -->
-  <!-- cmd → ReviewAgent / ScanAgent / Session -->
-  <path d="M 340 116 L 190 157" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrB)"/>
+  <!-- ===== Arrows: 起点/终点均落在框边缘，避免交叉 ===== -->
+  <!-- cmd → ReviewAgent / ScanAgent / Session（主链路，蓝） -->
+  <path d="M 335 116 L 185 157" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrB)"/>
   <path d="M 410 116 L 410 157" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrB)"/>
-  <path d="M 485 116 L 630 157" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrB)"/>
+  <path d="M 485 116 L 635 157" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrB)"/>
 
-  <!-- ReviewAgent → llmloop, tool, Session, diff -->
+  <!-- ReviewAgent → llmloop（直下） -->
   <path d="M 185 203 L 185 252" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
-  <path d="M 255 203 L 345 252" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
-  <path d="M 250 185 L 550 185" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- ReviewAgent → Session（水平，右边缘→左边缘） -->
+  <path d="M 270 180 L 550 180" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- ScanAgent → tool（直下） -->
+  <path d="M 410 203 L 410 252" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- ScanAgent → llmloop, tool, Session, diff -->
-  <path d="M 410 203 L 185 252" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" opacity="0.55"/>
-  <path d="M 460 203 L 500 347" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- llmloop → tool（水平右） -->
+  <path d="M 270 275 L 325 275" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- llmloop → llm（右下斜，短） -->
+  <path d="M 235 298 L 297 347" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- tool → diff（右下斜，短） -->
+  <path d="M 460 298 L 522 347" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- mcp → tool（水平左，右框→左框） -->
+  <path d="M 550 275 L 495 275" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- llmloop → llm, tool, diff, session -->
-  <path d="M 200 298 L 280 347" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
-  <path d="M 255 280 L 325 280" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
-  <path d="M 210 252 L 545 252" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" opacity="0.5"/>
-
-  <!-- tool → diff -->
-  <path d="M 470 298 L 510 347" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
-
-  <!-- mcp → tool / llm -->
-  <path d="M 635 298 L 470 298" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" opacity="0.6"/>
-  <path d="M 580 298 L 340 347" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" opacity="0.5"/>
-
-  <!-- Session → llm / diff / model -->
-  <path d="M 615 203 L 340 347" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" opacity="0.5"/>
-  <path d="M 635 203 L 560 347" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" opacity="0.5"/>
-
-  <!-- diff → model -->
-  <path d="M 470 393 L 430 442" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
-  <!-- llm → model (leaf, only via shared types) -->
-  <path d="M 310 393 L 390 442" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" opacity="0.5"/>
+  <!-- llm → model（左下斜） 与 diff → model（左下斜）汇于 model 顶部两侧，V 形不交叉 -->
+  <path d="M 280 393 L 390 442" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <path d="M 540 393 L 430 442" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
 
   <!-- legend -->
-  <rect x="22" y="500" width="16" height="3" fill="#6c8ef5"/>
-  <text x="44" y="504" fill="#9aa3c0" font-size="11">主链路（cmd 装配 → agent 编排）</text>
-  <rect x="250" y="500" width="16" height="3" fill="#7a86b3"/>
-  <text x="272" y="504" fill="#9aa3c0" font-size="11">模块依赖</text>
-  <text x="420" y="504" fill="#9aa3c0" font-size="11">淡色 = 次要/跨层依赖</text>
+  <rect x="22" y="505" width="16" height="3" fill="#6c8ef5"/>
+  <text x="44" y="509" fill="#9aa3c0" font-size="11">主链路（cmd 装配 → agent 编排）</text>
+  <rect x="270" y="505" width="16" height="3" fill="#7a86b3"/>
+  <text x="292" y="509" fill="#9aa3c0" font-size="11">模块依赖</text>
+  <text x="430" y="509" fill="#9aa3c0" font-size="11">次要依赖见正文文字解读</text>
 </svg>
