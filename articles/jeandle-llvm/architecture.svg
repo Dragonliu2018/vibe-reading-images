@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="535" viewBox="0 0 820 535">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="535" fill="#0b0d14"/>
+  <text x="410" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#e0e0e0">Jeandle-LLVM 分层架构</text>
+
+  <!-- jeandle-jdk caller -->
+  <rect x="280" y="55" width="260" height="46" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="410" y="76" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#80c7ff">jeandle-jdk（调用方）</text>
+  <text x="410" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#c0c6dc">jeandle::optimize(Module*, O3)</text>
+
+  <!-- arrow jdk -> L1 -->
+  <path d="M410,101 L410,131" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Layer 1: 流水线层 -->
+  <rect x="30" y="131" width="760" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="50" y="156" text-anchor="start" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#6c8ef5">编译流水线层</text>
+  <text x="50" y="176" text-anchor="start" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c0">编排 pass 顺序，对外暴露 optimize 入口</text>
+  <text x="780" y="166" text-anchor="end" font-family="system-ui, sans-serif" font-size="12" fill="#c0c6dc">Pipeline.cpp · PassBuilder · optdriver</text>
+
+  <!-- arrow L1 -> L2 -->
+  <path d="M410,191 L410,213" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Layer 2: 降级变换层 -->
+  <rect x="30" y="213" width="760" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="50" y="238" text-anchor="start" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#4ecdc4">降级变换层</text>
+  <text x="50" y="258" text-anchor="start" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c0">把 Java 语义 IR 翻译为具体可执行 IR</text>
+  <text x="780" y="248" text-anchor="end" font-family="system-ui, sans-serif" font-size="12" fill="#c0c6dc">JavaOperationLower · InsertGCBarriers · TLSPointerRewrite</text>
+
+  <!-- arrow L2 -> L3 -->
+  <path d="M410,273 L410,295" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Layer 3: GC/IR 基础设施层 -->
+  <rect x="30" y="295" width="760" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="50" y="320" text-anchor="start" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#f9ca24">GC/IR 基础设施层</text>
+  <text x="50" y="340" text-anchor="start" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c0">定义 GC 策略、地址空间、元数据/属性、IR 文本语法</text>
+  <text x="780" y="330" text-anchor="end" font-family="system-ui, sans-serif" font-size="12" fill="#c0c6dc">GCStrategy · Metadata · Attributes · hotspotcc · RS4GC</text>
+
+  <!-- arrow L3 -> L4 -->
+  <path d="M410,355 L410,377" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Layer 4: 目标适配层 -->
+  <rect x="30" y="377" width="760" height="60" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="50" y="402" text-anchor="start" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#ff6b9d">目标适配层</text>
+  <text x="50" y="422" text-anchor="start" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c0">让后端按 Java 调用约定与寄存器约定生成机器码</text>
+  <text x="780" y="412" text-anchor="end" font-family="system-ui, sans-serif" font-size="12" fill="#c0c6dc">X86/AArch64 CallingConv · RegisterInfo · FrameLowering</text>
+
+  <!-- arrow L4 -> LLVM Core -->
+  <path d="M410,437 L410,459" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- LLVM Core -->
+  <rect x="30" y="459" width="760" height="46" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="410" y="480" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#9aa3c0">LLVM Core（上游 20.1.0）</text>
+  <text x="410" y="497" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">PassBuilder · IR · CodeGen · MC</text>
+
+</svg>

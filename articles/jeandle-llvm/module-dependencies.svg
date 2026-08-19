@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="410" viewBox="0 0 820 410">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="410" fill="#0b0d14"/>
+  <text x="410" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#e0e0e0">Jeandle-LLVM 模块依赖关系</text>
+
+  <!-- jeandle-jdk caller -->
+  <rect x="305" y="50" width="210" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="410" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#80c7ff">jeandle-jdk（调用方）</text>
+  <text x="410" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">调用 jeandle::optimize()</text>
+
+  <!-- arrow jdk -> Pipeline -->
+  <path d="M410,94 L410,118" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="418" y="110" text-anchor="start" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">optimize()</text>
+
+  <!-- 编译流水线 (Pipeline) -->
+  <rect x="300" y="118" width="220" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="139" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#6c8ef5">编译流水线</text>
+  <text x="410" y="155" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">Pipeline · PassBuilder</text>
+
+  <!-- Pipeline trunk (no marker) + branches to row 3 -->
+  <path d="M410,164 L410,185" stroke="#7a86b3" stroke-width="1.5" fill="none"/>
+  <!-- left branch to Java操作降级 -->
+  <path d="M410,185 L170,185 L170,210" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="290" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">addPass 阶段1/4</text>
+  <!-- center branch to 运行时降级 -->
+  <path d="M410,185 L410,210" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="418" y="200" text-anchor="start" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">阶段3/5</text>
+
+  <!-- Java操作降级 -->
+  <rect x="70" y="210" width="200" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="170" y="231" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#6c8ef5">Java 操作降级</text>
+  <text x="170" y="247" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">JavaOperationLower</text>
+
+  <!-- 运行时降级 -->
+  <rect x="310" y="210" width="200" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="231" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#4ecdc4">运行时降级</text>
+  <text x="410" y="247" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">TLS + GC Barriers</text>
+
+  <!-- 调用约定与目标适配 -->
+  <text x="650" y="204" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7a86b3">（由后端 CodeGen 触发）</text>
+  <rect x="550" y="210" width="200" height="46" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="650" y="231" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#ff6b9d">调用约定与目标适配</text>
+  <text x="650" y="247" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">X86/AArch64 后端</text>
+
+  <!-- Java操作降级 -> GC 基础设施 (elbow) -->
+  <path d="M170,256 L170,300 L335,300 L335,335" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="252" y="296" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">Attributes</text>
+
+  <!-- 运行时降级 -> GC 基础设施 (straight) -->
+  <path d="M410,256 L410,335" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="418" y="298" text-anchor="start" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">Metadata/AddrSpace</text>
+
+  <!-- 调用约定与目标适配 -> GC 基础设施 (elbow) -->
+  <path d="M650,256 L650,300 L485,300 L485,335" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="568" y="296" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">CallingConv</text>
+
+  <!-- GC 基础设施 (foundation) -->
+  <rect x="300" y="335" width="220" height="46" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="356" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#f9ca24">GC 基础设施</text>
+  <text x="410" y="372" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c0">GCStrategy · Metadata · hotspotcc</text>
+
+</svg>
