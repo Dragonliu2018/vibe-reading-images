@@ -1,82 +1,78 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="600" viewBox="0 0 860 600" font-family="system-ui, sans-serif">
-<rect width="860" height="600" fill="#0b0d14"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="620" viewBox="0 0 860 620" font-family="system-ui, sans-serif">
+<rect width="860" height="620" fill="#0b0d14"/>
 <defs>
-  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
-  </marker>
-  <marker id="arrowC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-    <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
-  </marker>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="arrowY" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+  <marker id="arrowC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
 </defs>
 <text x="430" y="28" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="700">PyTorch 模块依赖关系</text>
-<text x="430" y="46" text-anchor="middle" fill="#9aa0c0" font-size="11">箭头 A→B 表示 A 依赖 B（调用/继承）</text>
+<text x="430" y="46" text-anchor="middle" fill="#9aa0c0" font-size="11">箭头 A→B 表示 A 依赖 B</text>
 
-<!-- Compile pipeline (top row) -->
+<!-- Row 1: compile pipeline -->
 <rect x="40" y="70" width="150" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
 <text x="115" y="98" text-anchor="middle" fill="#e8eaf6" font-size="12">TorchDynamo</text>
-<rect x="210" y="70" width="130" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
-<text x="275" y="98" text-anchor="middle" fill="#e8eaf6" font-size="12">AOTAutograd</text>
-<rect x="360" y="70" width="150" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
-<text x="435" y="98" text-anchor="middle" fill="#e8eaf6" font-size="12">TorchInductor</text>
-<rect x="640" y="70" width="150" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
-<text x="715" y="98" text-anchor="middle" fill="#e8eaf6" font-size="12">分布式 DDP/c10d</text>
+<rect x="240" y="70" width="130" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="305" y="98" text-anchor="middle" fill="#e8eaf6" font-size="12">AOTAutograd</text>
+<rect x="420" y="70" width="150" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="495" y="98" text-anchor="middle" fill="#e8eaf6" font-size="12">TorchInductor</text>
+<rect x="620" y="70" width="160" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="700" y="98" text-anchor="middle" fill="#e8eaf6" font-size="12">分布式 DDP/c10d</text>
 
-<!-- Python API (middle row) -->
-<rect x="40" y="190" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
-<text x="115" y="218" text-anchor="middle" fill="#e8eaf6" font-size="12">torch.fx 图变换</text>
-<rect x="210" y="190" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
-<text x="285" y="218" text-anchor="middle" fill="#e8eaf6" font-size="12">nn.Module</text>
-<rect x="380" y="190" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
-<text x="455" y="218" text-anchor="middle" fill="#e8eaf6" font-size="12">torch.autograd(PY)</text>
+<!-- Row 2: Python API -->
+<rect x="40" y="210" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="115" y="238" text-anchor="middle" fill="#e8eaf6" font-size="12">torch.fx</text>
+<rect x="240" y="210" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="315" y="238" text-anchor="middle" fill="#e8eaf6" font-size="12">nn.Module</text>
+<rect x="440" y="210" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="515" y="238" text-anchor="middle" fill="#e8eaf6" font-size="12">torch.autograd(PY)</text>
 
-<!-- C++ bindings row -->
-<rect x="40" y="300" width="160" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
-<text x="120" y="328" text-anchor="middle" fill="#e8eaf6" font-size="12">TorchScript JIT</text>
-<rect x="230" y="300" width="170" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
-<text x="315" y="328" text-anchor="middle" fill="#e8eaf6" font-size="12">Autograd Engine</text>
-<rect x="430" y="300" width="160" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
-<text x="510" y="328" text-anchor="middle" fill="#e8eaf6" font-size="12">Reducer (c10d)</text>
+<!-- Row 3: C++ bindings -->
+<rect x="40" y="350" width="160" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="120" y="378" text-anchor="middle" fill="#e8eaf6" font-size="12">TorchScript JIT</text>
+<rect x="260" y="350" width="170" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="345" y="378" text-anchor="middle" fill="#e8eaf6" font-size="12">Autograd Engine</text>
+<rect x="480" y="350" width="160" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="560" y="378" text-anchor="middle" fill="#e8eaf6" font-size="12">Reducer (c10d)</text>
 
-<!-- ATen row -->
-<rect x="150" y="410" width="440" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-<text x="370" y="438" text-anchor="middle" fill="#e8eaf6" font-size="12">ATen (Tensor / native ops / Dispatcher)</text>
+<!-- Row 4: ATen -->
+<rect x="170" y="470" width="440" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="390" y="498" text-anchor="middle" fill="#e8eaf6" font-size="12">ATen (Tensor / native ops / Dispatcher)</text>
 
-<!-- c10 row -->
-<rect x="150" y="510" width="440" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-<text x="370" y="538" text-anchor="middle" fill="#e8eaf6" font-size="12">c10 (TensorImpl / Storage / intrusive_ptr)</text>
+<!-- Row 5: c10 -->
+<rect x="170" y="560" width="440" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="390" y="588" text-anchor="middle" fill="#e8eaf6" font-size="12">c10 (TensorImpl / Storage / intrusive_ptr)</text>
 
-<!-- arrows: A depends-on B => arrow from A to B -->
-<!-- Dynamo -> AOTAutograd -> Inductor pipeline -->
-<path d="M190,93 L210,93" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-<path d="M340,93 L360,93" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-<!-- Dynamo -> fx (produces FX graph) -->
-<path d="M115,116 L115,190" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-<!-- Inductor -> fx (consumes FX) -->
-<path d="M400,116 L150,190" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
-<!-- DDP -> nn.Module (wraps) -->
-<path d="M680,116 L300,190" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
-<!-- DDP -> Reducer/autograd -->
-<path d="M700,116 L520,300" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
-<!-- fx -> nn.Module (GraphModule is Module subclass) -->
-<path d="M160,236 L240,236" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-<!-- nn.Module -> autograd(PY) (Parameter is Tensor) -->
-<path d="M360,213 L380,213" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-<!-- JIT -> ATen (ops via Dispatcher) -->
-<path d="M150,346 L260,410" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-<!-- Autograd Engine -> ATen (Autograd dispatch key) -->
-<path d="M315,346 L340,410" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-<!-- Reducer -> Autograd Engine (hook on grad_acc) -->
-<path d="M470,346 L380,346" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
-<!-- torch.autograd(PY) -> Autograd Engine (PyNode bridge) -->
-<path d="M420,236 L330,300" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-<!-- Autograd Engine -> c10 (AutogradMeta on TensorImpl) -->
-<path d="M290,346 L300,510" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowC)"/>
-<!-- ATen -> c10 -->
-<path d="M370,456 L370,510" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowC)"/>
+<!-- arrows: horizontal pipeline (row1) -->
+<path d="M190,93 L240,93" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M370,93 L420,93" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+<!-- Dynamo -> torch.fx (vertical, aligned x=115). Inductor/DDP 消费 fx IR 的关系见数据流图，此处不画远距离斜线避免共线 -->
+<path d="M115,116 L115,210" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<!-- DDP -> Reducer: orthogonal. Down from DDP(700,116) to y=300, left to Reducer(560,350). DDP 包裹 nn.Module 的关系见数据流图 -->
+<path d="M700,116 L700,300 L560,300 L560,350" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
+
+<!-- fx -> nn.Module (horizontal row2) -->
+<path d="M190,233 L240,233" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<!-- nn.Module -> torch.autograd (horizontal row2) -->
+<path d="M390,233 L440,233" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+<!-- JIT -> ATen: orthogonal. Down from JIT(120,396) to y=440, right to ATen left(170,493) -->
+<path d="M120,396 L120,440 L390,440 L390,470" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<!-- Autograd Engine -> ATen: orthogonal. Down from AE(345,396) to y=445, down to ATen(345,470) -->
+<path d="M345,396 L345,470" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<!-- Reducer -> Autograd Engine (horizontal row3) -->
+<path d="M480,373 L430,373" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
+<!-- torch.autograd(PY) -> Autograd Engine: orthogonal. Down from (515,256) to y=303, left to AE(345,350) -->
+<path d="M515,256 L515,303 L345,303 L345,350" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+<!-- Autograd Engine -> c10 (c10 yellow). Down from AE(345,396) — but ATen in between. Route around: left side. -->
+<path d="M345,396 L80,396 L80,560 L170,560" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowC)" opacity="0.8"/>
+<!-- ATen -> c10 (vertical, aligned x=390) -->
+<path d="M390,516 L390,560" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowC)"/>
 
 <!-- legend -->
-<rect x="640" y="300" width="180" height="64" rx="5" fill="#0e1020" stroke="#2a2e45" stroke-width="1"/>
-<text x="655" y="320" fill="#9aa0c0" font-size="10">蓝 = Python API 层</text>
-<text x="655" y="336" fill="#9aa0c0" font-size="10">紫 = C++ 绑定层</text>
-<text x="655" y="352" fill="#9aa0c0" font-size="10">青 = ATen/c10 核心层</text>
+<rect x="660" y="350" width="170" height="64" rx="5" fill="#0e1020" stroke="#2a2e45" stroke-width="1"/>
+<text x="675" y="370" fill="#9aa0c0" font-size="10">蓝 = Python API 层</text>
+<text x="675" y="386" fill="#9aa0c0" font-size="10">紫 = C++ 绑定层</text>
+<text x="675" y="402" fill="#9aa0c0" font-size="10">青 = ATen/c10 核心层</text>
 </svg>
