@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="320" viewBox="0 0 880 320" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="880" height="320" fill="#0b0d14"/>
+
+  <rect x="330" y="20" width="220" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="45" fill="#6c8ef5" font-size="13" font-weight="bold" text-anchor="middle">Megatron 权重（TP/PP/EP 分片）</text>
+
+  <rect x="310" y="85" width="260" height="48" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="440" y="108" fill="#80c7ff" font-size="12" font-weight="bold" text-anchor="middle">common.py</text>
+  <text x="440" y="124" fill="#c9cee0" font-size="11" text-anchor="middle">all_gather_param · 全局命名</text>
+
+  <!-- 四路径 -->
+  <rect x="20"  y="170" width="200" height="72" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="120" y="192" fill="#f9ca24" font-size="12" font-weight="bold" text-anchor="middle">FromTensor</text>
+  <text x="120" y="210" fill="#c9cee0" font-size="11" text-anchor="middle">colocate</text>
+  <text x="120" y="225" fill="#c9cee0" font-size="11" text-anchor="middle">CUDA IPC 直传</text>
+  <text x="120" y="240" fill="#8a91a8" font-size="10" text-anchor="middle">full + tensor</text>
+
+  <rect x="235" y="170" width="200" height="72" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="335" y="192" fill="#f9ca24" font-size="12" font-weight="bold" text-anchor="middle">FromDistributed</text>
+  <text x="335" y="210" fill="#c9cee0" font-size="11" text-anchor="middle">分离部署</text>
+  <text x="335" y="225" fill="#c9cee0" font-size="11" text-anchor="middle">NCCL 分桶广播</text>
+  <text x="335" y="240" fill="#8a91a8" font-size="10" text-anchor="middle">full + nccl</text>
+
+  <rect x="450" y="170" width="200" height="72" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="550" y="192" fill="#f9ca24" font-size="12" font-weight="bold" text-anchor="middle">FromDisk</text>
+  <text x="550" y="210" fill="#c9cee0" font-size="11" text-anchor="middle">外部/跨机型</text>
+  <text x="550" y="225" fill="#c9cee0" font-size="11" text-anchor="middle">全量落盘重载</text>
+  <text x="550" y="240" fill="#8a91a8" font-size="10" text-anchor="middle">full + disk</text>
+
+  <rect x="665" y="170" width="200" height="72" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="765" y="192" fill="#f9ca24" font-size="12" font-weight="bold" text-anchor="middle">FromDiskDelta</text>
+  <text x="765" y="210" fill="#c9cee0" font-size="11" text-anchor="middle">大模型增量</text>
+  <text x="765" y="225" fill="#c9cee0" font-size="11" text-anchor="middle">zstd delta + pull</text>
+  <text x="765" y="240" fill="#8a91a8" font-size="10" text-anchor="middle">delta + disk</text>
+
+  <rect x="330" y="278" width="220" height="38" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="440" y="302" fill="#4ecdc4" font-size="13" font-weight="bold" text-anchor="middle">SGLang 引擎</text>
+
+  <!-- Megatron → common -->
+  <path d="M440,60 L440,85" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- common → 四路径 -->
+  <path d="M380,133 L120,170" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M415,133 L335,170" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M465,133 L550,170" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M500,133 L765,170" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- 四路径 → SGLang -->
+  <path d="M120,242 L380,278" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowy)"/>
+  <path d="M335,242 L410,278" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowy)"/>
+  <path d="M550,242 L470,278" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowy)"/>
+  <path d="M765,242 L500,278" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowy)"/>
+</svg>

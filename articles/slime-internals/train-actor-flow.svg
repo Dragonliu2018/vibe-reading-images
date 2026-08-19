@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="510" viewBox="0 0 480 510" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="510" fill="#0b0d14"/>
+
+  <rect x="120" y="20" width="240" height="40" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="240" y="45" fill="#c9cee0" font-size="12" text-anchor="middle">fill_routing_replay（MoE 时）</text>
+
+  <rect x="120" y="90" width="240" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="240" y="116" fill="#e8eaf0" font-size="12" text-anchor="middle">switch “ref” → ref log_probs</text>
+
+  <rect x="120" y="160" width="240" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="240" y="186" fill="#e8eaf0" font-size="12" text-anchor="middle">switch “teacher” → teacher log_probs</text>
+
+  <rect x="120" y="230" width="240" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="240" y="256" fill="#e8eaf0" font-size="12" text-anchor="middle">switch “old_actor” → old log_probs</text>
+
+  <rect x="120" y="300" width="240" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="240" y="322" fill="#c9cee0" font-size="11" text-anchor="middle">insert critic values</text>
+  <text x="240" y="337" fill="#c9cee0" font-size="11" text-anchor="middle">compute_advantages_and_returns</text>
+
+  <rect x="120" y="370" width="240" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="240" y="396" fill="#6c8ef5" font-size="13" font-weight="bold" text-anchor="middle">train() 优化器步</text>
+
+  <rect x="120" y="440" width="240" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="240" y="466" fill="#e8eaf0" font-size="12" text-anchor="middle">backup(“actor”) + update ref</text>
+
+  <path d="M240,60 L240,90" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M240,134 L240,160" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M240,204 L240,230" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M240,274 L240,300" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M240,344 L240,370" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M240,414 L240,440" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <text x="370" y="183" fill="#f9ca24" font-size="10">TensorBackuper</text>
+  <text x="370" y="196" fill="#8a91a8" font-size="10">_switch_model</text>
+</svg>

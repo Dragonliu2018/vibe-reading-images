@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="340" viewBox="0 0 860 340" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowloop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="860" height="340" fill="#0b0d14"/>
+
+  <!-- Row1: rollout 侧 (L→R) -->
+  <rect x="30"  y="60" width="200" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="130" y="88"  fill="#4ecdc4" font-size="13" font-weight="bold" text-anchor="middle">DataSource</text>
+  <text x="130" y="108" fill="#c9cee0" font-size="11" text-anchor="middle">get_samples · prompt</text>
+  <text x="130" y="124" fill="#8a91a8" font-size="11" text-anchor="middle">+ n_samples_per_prompt</text>
+
+  <rect x="320" y="60" width="220" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="430" y="88"  fill="#4ecdc4" font-size="13" font-weight="bold" text-anchor="middle">generate_rollout</text>
+  <text x="430" y="108" fill="#c9cee0" font-size="11" text-anchor="middle">SGLang /generate + reward</text>
+  <text x="430" y="124" fill="#8a91a8" font-size="11" text-anchor="middle">append_response_tokens</text>
+
+  <rect x="630" y="60" width="200" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="730" y="84"  fill="#4ecdc4" font-size="13" font-weight="bold" text-anchor="middle">转训练数据</text>
+  <text x="730" y="104" fill="#c9cee0" font-size="11" text-anchor="middle">rewards 归一化</text>
+  <text x="730" y="120" fill="#c9cee0" font-size="11" text-anchor="middle">rollout_mask_sums</text>
+
+  <!-- Row2: 训练侧 (R→L) -->
+  <rect x="630" y="220" width="200" height="70" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="730" y="248" fill="#80c7ff" font-size="13" font-weight="bold" text-anchor="middle">build_dp_schedule</text>
+  <text x="730" y="268" fill="#c9cee0" font-size="11" text-anchor="middle">按 rollout_id 分步</text>
+  <text x="730" y="284" fill="#8a91a8" font-size="11" text-anchor="middle">first-fit 打包 · DP 分发</text>
+
+  <rect x="320" y="220" width="220" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="245" fill="#6c8ef5" font-size="13" font-weight="bold" text-anchor="middle">train_actor</text>
+  <text x="430" y="265" fill="#c9cee0" font-size="11" text-anchor="middle">ref/old log_probs → 优势</text>
+  <text x="430" y="281" fill="#c9cee0" font-size="11" text-anchor="middle">policy_loss → 优化器步</text>
+
+  <rect x="30" y="220" width="200" height="70" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="130" y="248" fill="#f9ca24" font-size="13" font-weight="bold" text-anchor="middle">update_weights</text>
+  <text x="130" y="268" fill="#c9cee0" font-size="11" text-anchor="middle">tensor·nccl·disk·delta</text>
+  <text x="130" y="284" fill="#8a91a8" font-size="11" text-anchor="middle">→ SGLang 引擎</text>
+
+  <!-- 箭头 row1 -->
+  <path d="M230,95 L320,95" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="275" y="88" fill="#8a91a8" font-size="11" text-anchor="middle">prompts</text>
+  <path d="M540,95 L630,95" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="585" y="88" fill="#8a91a8" font-size="11" text-anchor="middle">Sample 列表</text>
+
+  <!-- B3 → B4 (下) -->
+  <path d="M730,130 L730,220" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="745" y="180" fill="#8a91a8" font-size="11">RolloutBatch</text>
+
+  <!-- 箭头 row2 (R→L) -->
+  <path d="M630,255 L540,255" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="585" y="248" fill="#8a91a8" font-size="11" text-anchor="middle">per-rank Box</text>
+  <path d="M320,255 L230,255" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="275" y="248" fill="#8a91a8" font-size="11" text-anchor="middle">新权重</text>
+
+  <!-- 回环：update_weights → generate_rollout（新权重回 rollout） -->
+  <path d="M130,220 L130,178 L430,178 L430,130" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowloop)" stroke-dasharray="5,3"/>
+  <text x="280" y="172" fill="#f9ca24" font-size="11" text-anchor="middle">新权重回 rollout 引擎</text>
+</svg>

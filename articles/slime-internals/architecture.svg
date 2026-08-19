@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="470" viewBox="0 0 840 470" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="470" fill="#0b0d14"/>
+
+  <!-- 编排层 -->
+  <rect x="30" y="30" width="780" height="80" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="48" y="52" fill="#6c8ef5" font-size="13" font-weight="bold">编排层</text>
+  <rect x="60" y="62" width="200" height="36" rx="6" fill="#0b0d14" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="160" y="85" fill="#e8eaf0" font-size="13" text-anchor="middle">train.py / train_async.py</text>
+  <rect x="280" y="62" width="510" height="36" rx="6" fill="#0b0d14" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="535" y="85" fill="#e8eaf0" font-size="13" text-anchor="middle">slime/ray: placement_group · RolloutManager · RayTrainGroup</text>
+
+  <!-- Megatron 训练后端 -->
+  <rect x="30" y="140" width="310" height="150" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="48" y="162" fill="#6c8ef5" font-size="13" font-weight="bold">Megatron 训练后端</text>
+  <text x="60" y="188" fill="#c9cee0" font-size="12">actor.py — train_actor</text>
+  <text x="60" y="210" fill="#c9cee0" font-size="12">loss.py — advantage / policy_loss</text>
+  <text x="60" y="232" fill="#c9cee0" font-size="12">model.py / initialize / stateless_adam</text>
+  <text x="60" y="254" fill="#c9cee0" font-size="12">hf_to_megatron / megatron_to_hf</text>
+  <text x="60" y="276" fill="#c9cee0" font-size="12">alignment / kernels</text>
+
+  <!-- 权重同步桥梁 -->
+  <rect x="370" y="166" width="100" height="98" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="190" fill="#f9ca24" font-size="13" font-weight="bold" text-anchor="middle">权重同步</text>
+  <text x="420" y="210" fill="#c9cee0" font-size="11" text-anchor="middle">update_weight</text>
+  <text x="420" y="230" fill="#8a91a8" font-size="10" text-anchor="middle">tensor · nccl</text>
+  <text x="420" y="247" fill="#8a91a8" font-size="10" text-anchor="middle">disk · delta</text>
+
+  <!-- SGLang rollout 后端 -->
+  <rect x="500" y="140" width="310" height="150" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="518" y="162" fill="#4ecdc4" font-size="13" font-weight="bold">SGLang rollout 后端</text>
+  <text x="518" y="188" fill="#c9cee0" font-size="12">sglang_rollout.py — generate</text>
+  <text x="518" y="210" fill="#c9cee0" font-size="12">sglang_engine.py — 引擎 actor</text>
+  <text x="518" y="232" fill="#c9cee0" font-size="12">data_source.py — prompt + buffer</text>
+  <text x="518" y="254" fill="#c9cee0" font-size="12">sglang_config.py — PD 分离</text>
+  <text x="518" y="276" fill="#c9cee0" font-size="12">base_types.py — rollout 契约</text>
+
+  <!-- 支撑层 -->
+  <rect x="30" y="320" width="780" height="65" rx="10" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="48" y="342" fill="#80c7ff" font-size="13" font-weight="bold">支撑层</text>
+  <text x="420" y="365" fill="#c9cee0" font-size="13" text-anchor="middle">slime/utils: ppo_utils · dp_schedule · distributed · health_monitor · arguments · routing_replay</text>
+
+  <!-- 扩展层 -->
+  <rect x="30" y="410" width="780" height="40" rx="10" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="48" y="432" fill="#ff6b9d" font-size="13" font-weight="bold">扩展层</text>
+  <text x="420" y="435" fill="#c9cee0" font-size="12" text-anchor="middle">slime/agent (trajectory · sandbox · harness) · slime_plugins (models · rollout_buffer)</text>
+
+  <!-- 箭头：编排 → 两支柱 -->
+  <path d="M190,110 L190,140" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M645,110 L645,140" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="205" y="128" fill="#8a91a8" font-size="11">装配</text>
+
+  <!-- 箭头：Megatron → 桥梁 → SGLang（权重同步） -->
+  <path d="M340,215 L370,215" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M470,215 L500,215" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 箭头：两支柱 → 支撑层（依赖） -->
+  <path d="M190,290 L190,320" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M645,290 L645,320" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="205" y="308" fill="#8a91a8" font-size="11">依赖</text>
+
+  <!-- 箭头：扩展层 → 支撑层（接入） -->
+  <path d="M190,410 L190,385" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="205" y="402" fill="#8a91a8" font-size="11">接入</text>
+</svg>
