@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="440" viewBox="0 0 740 440">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="740" height="440" fill="#0b0d14"/>
+  <text x="370" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">运行时例程模块内部结构</text>
+
+  <!-- JeandleRuntimeRoutine -->
+  <rect x="40" y="60" width="420" height="120" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="60" y="82" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b388ff">JeandleRuntimeRoutine（AllStatic）</text>
+  <text x="60" y="104" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">_routine_entry: StringMap&lt;address&gt;（名→入口）</text>
+  <text x="60" y="124" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">generate(target_machine, data_layout)</text>
+  <text x="60" y="144" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">get_routine_entry(name)</text>
+  <text x="60" y="164" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">三类例程经 X-Macro 统一声明/生成/注册</text>
+
+  <!-- Three categories -->
+  <rect x="40" y="210" width="200" height="60" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="60" y="230" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">C 例程</text>
+  <text x="60" y="248" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">safepoint_handler · new_instance</text>
+  <text x="60" y="262" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">new_array · multianewarray*</text>
+
+  <rect x="270" y="210" width="200" height="60" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="290" y="230" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ff6b9d">汇编例程</text>
+  <text x="290" y="248" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">exceptional_return</text>
+  <text x="290" y="262" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">exception_handler</text>
+
+  <rect x="500" y="210" width="200" height="60" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="520" y="230" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#4ecdc4">Hotspot 例程</text>
+  <text x="520" y="248" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">dsin/dcos/dtan · drem/frem</text>
+  <text x="520" y="262" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">monitor lock/unlock · NPE</text>
+
+  <!-- JeandleCallVM -->
+  <rect x="40" y="300" width="320" height="110" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="60" y="322" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">JeandleCallVM（AllStatic）</text>
+  <text x="60" y="342" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">generate_call_VM(name, c_func, type, module, code)</text>
+  <text x="60" y="362" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">设 last_Java_sp（read_register + TLS store）</text>
+  <text x="60" y="378" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">调 C 函数 → 清 last_Java_sp/pc</text>
+  <text x="60" y="394" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">返回 oop 从 vm_result 取</text>
+
+  <!-- RuntimeDefinedJavaOps -->
+  <rect x="400" y="300" width="300" height="110" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="322" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">RuntimeDefinedJavaOps</text>
+  <text x="420" y="342" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">define_all(template_module) 启动期注入</text>
+  <text x="420" y="362" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">jeandle.current_thread · safepoint_poll</text>
+  <text x="420" y="378" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">jeandle.card_table_barrier · new_instance</text>
+  <text x="420" y="394" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">define_global_variables（偏移常量）</text>
+
+  <!-- generate calls stub via CallVM -->
+  <path d="M150,180 L150,300" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.6"/>
+  <text x="158" y="246" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">C 例程→桩</text>
+
+</svg>

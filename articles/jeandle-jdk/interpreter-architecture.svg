@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="420" viewBox="0 0 740 420">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="740" height="420" fill="#0b0d14"/>
+  <text x="370" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">抽象解释器模块内部结构</text>
+
+  <!-- JeandleAbstractInterpreter -->
+  <rect x="40" y="60" width="420" height="200" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="60" y="82" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ff6b9d">JeandleAbstractInterpreter（StackObj）</text>
+  <text x="60" y="104" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">_bytecodes(ciBytecodeStream) · _ir_builder · _oops · _work_list</text>
+  <text x="60" y="126" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">interpret() · interpret_block()</text>
+  <text x="60" y="146" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">→ load_constant / if_zero / arith_op / invoke / ...</text>
+  <text x="60" y="166" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">call_java_op() · call_jeandle_routine()</text>
+  <text x="60" y="186" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">→ 模板 JavaOp / 运行时例程</text>
+  <text x="60" y="208" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">do_field_access · do_array_load · newarray</text>
+  <text x="60" y="228" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">null_check · boundary_check · dispatch_exception_to_handler</text>
+  <text x="60" y="250" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">static check_can_parse() — 编译能力边界</text>
+
+  <!-- BasicBlockBuilder -->
+  <rect x="500" y="60" width="200" height="120" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="520" y="82" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">BasicBlockBuilder</text>
+  <text x="520" y="104" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">generate_blocks()</text>
+  <text x="520" y="120" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">setup_exception_handlers()</text>
+  <text x="520" y="136" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">setup_control_flow()</text>
+  <text x="520" y="152" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">mark_loops()</text>
+  <text x="520" y="168" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">remove_dead_blocks()</text>
+
+  <!-- JeandleVMState -->
+  <rect x="40" y="290" width="320" height="110" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="60" y="312" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">JeandleVMState</text>
+  <text x="60" y="332" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">_stack · _locals · _locks（SmallVector&lt;TypedValue&gt;）</text>
+  <text x="60" y="352" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">push/pop · load/store · raw_push/pop</text>
+  <text x="60" y="372" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">copy() · copy_for_exception_handler()</text>
+  <text x="60" y="390" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">match() · update_phi_nodes()</text>
+
+  <!-- JeandleBasicBlock -->
+  <rect x="400" y="290" width="300" height="110" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="312" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">JeandleBasicBlock</text>
+  <text x="420" y="332" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">header/tail llvm::BasicBlock · _jvm</text>
+  <text x="420" y="352" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">predecessors · successors · _initial_jvm</text>
+  <text x="420" y="372" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">merge_VM_state_from()</text>
+  <text x="420" y="390" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">initialize_VM_state_from()</text>
+
+  <!-- Interpreter uses BlockBuilder -->
+  <path d="M460,120 L500,120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <!-- Interpreter uses VMState + BasicBlock -->
+  <path d="M200,260 L200,290" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M380,260 L500,290" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <!-- BasicBlock holds VMState -->
+  <path d="M400,345 L360,345" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.6"/>
+
+</svg>

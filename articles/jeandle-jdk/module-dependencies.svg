@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="490" viewBox="0 0 820 490">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="820" height="490" fill="#0b0d14"/>
+  <text x="410" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">Jeandle 模块依赖关系</text>
+
+  <!-- Left: CompileBroker (entry) -->
+  <rect x="15" y="70" width="150" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="90" y="90" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#4ecdc4">CompileBroker</text>
+  <text x="90" y="106" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">编译任务调度</text>
+
+  <!-- Center: M1 Compilation Driver (x=190 w=440, center=410) -->
+  <rect x="190" y="60" width="440" height="70" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="210" y="82" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">编译驱动</text>
+  <text x="410" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">JeandleCompiler · JeandleCompilation · JeandleFuncSig</text>
+  <text x="410" y="114" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">装配上下文 · 编排流水线 · 安装 nmethod</text>
+
+  <!-- M2 Abstract Interpreter -->
+  <rect x="190" y="150" width="440" height="70" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="210" y="172" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ff6b9d">抽象解释器</text>
+  <text x="410" y="187" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">JeandleAbstractInterpreter · BasicBlockBuilder · JeandleVMState</text>
+  <text x="410" y="204" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">字节码 → 基本块 + SSA(Phi) → LLVM IR</text>
+
+  <!-- M3 Code Generation -->
+  <rect x="190" y="240" width="440" height="70" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="210" y="262" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">代码生成</text>
+  <text x="410" y="277" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">JeandleCompiledCode · ReadELF · Assembler · CompiledCall</text>
+  <text x="410" y="294" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">ELF 解析 · 重定位 · OopMap · 异常表 → Code Cache</text>
+
+  <!-- M4 Runtime Routines -->
+  <rect x="190" y="330" width="440" height="70" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="210" y="352" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b388ff">运行时例程</text>
+  <text x="410" y="367" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">JeandleRuntimeRoutine · JeandleCallVM · RuntimeDefinedJavaOps</text>
+  <text x="410" y="384" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">C/汇编/Hotspot 例程 · VM 调用桩 · 模板 JavaOp</text>
+
+  <!-- Right: jeandle-llvm (external) -->
+  <rect x="660" y="60" width="140" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="730" y="80" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#80c7ff">jeandle-llvm</text>
+  <text x="730" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">IR/opt/MC/ELF</text>
+
+  <!-- Right: Code Cache (external) -->
+  <rect x="660" y="250" width="140" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="730" y="270" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#80c7ff">Code Cache</text>
+  <text x="730" y="286" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">nmethod</text>
+
+  <!-- Bottom cross-cutting: JeandleType (match center width) -->
+  <rect x="190" y="424" width="440" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="410" y="442" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#c9d1e8">JeandleType · TypedValue</text>
+  <text x="410" y="458" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">横切类型映射（Java BasicType ↔ LLVM Type）</text>
+
+  <!-- Arrows: CompileBroker -> M1 (left box ends 165, center starts 190) -->
+  <path d="M165,95 L190,95" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- M1 -> M2 -->
+  <path d="M410,130 L410,150" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <!-- M2 -> M3 -->
+  <path d="M410,220 L410,240" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <!-- M3 -> Code Cache (center ends 630, right starts 660) -->
+  <path d="M630,275 L660,275" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- M2 -> M4 (calls runtime + java_ops) -->
+  <path d="M320,220 L320,330" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.65"/>
+  <!-- M3 -> M4 (resolves routine relocs) -->
+  <path d="M500,240 L500,330" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.65"/>
+
+  <!-- M1/M2 -> jeandle-llvm (dashed feeder) -->
+  <path d="M630,85 L660,85" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr)" fill="none" opacity="0.7"/>
+  <path d="M630,175 L660,90" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr)" fill="none" opacity="0.5"/>
+
+</svg>

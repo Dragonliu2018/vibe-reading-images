@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="720" height="340" fill="#0b0d14"/>
+  <text x="360" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">编译驱动模块内部结构</text>
+
+  <!-- JeandleCompiler -->
+  <rect x="40" y="60" width="300" height="92" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="60" y="82" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#4ecdc4">JeandleCompiler</text>
+  <text x="190" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">: AbstractCompiler</text>
+  <text x="60" y="124" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">_target_machine · _data_layout · _template_buffer</text>
+  <text x="60" y="140" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">create() · initialize() · compile_method()</text>
+
+  <!-- JeandleFuncSig (side) -->
+  <rect x="380" y="60" width="300" height="92" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="82" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">JeandleFuncSig</text>
+  <text x="400" y="104" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">method_name() — 类_方法 命名</text>
+  <text x="400" y="120" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">create_llvm_func() — 生成 LLVM Function</text>
+  <text x="400" y="136" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">setup_description() — GC/调用约定元信息</text>
+
+  <!-- JeandleCompilation -->
+  <rect x="40" y="196" width="640" height="120" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="60" y="218" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">JeandleCompilation（RAII 编译上下文，StackObj）</text>
+  <text x="60" y="240" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">_env · _method · _context · _llvm_module · _code(JeandleCompiledCode) · _error_msg</text>
+  <text x="60" y="262" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">initialize() · setup_llvm_module() · compile_java_method()</text>
+  <text x="60" y="278" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">compile_module() · install_code() · dump_ir() · dump_obj()</text>
+  <text x="60" y="300" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">current()/report_jeandle_error() — 全局编译期访问与错误传播</text>
+
+  <!-- Compiler creates Compilation (compile_method) -->
+  <path d="M190,152 L190,196" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <text x="202" y="178" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">compile_method 构造</text>
+
+  <!-- FuncSig used by Compilation + Compiler -->
+  <path d="M360,106 L380,106" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.6"/>
+  <path d="M530,152 L530,196" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.6"/>
+
+</svg>

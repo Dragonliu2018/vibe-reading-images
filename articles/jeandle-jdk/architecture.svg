@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="528" viewBox="0 0 820 528">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="820" height="528" fill="#0b0d14"/>
+  <text x="410" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">Jeandle 分层架构（JIT 编译流水线）</text>
+
+  <!-- LLVM external side panel (aligned L2..L4) -->
+  <rect x="620" y="136" width="170" height="272" rx="8" fill="none" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="705" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#80c7ff">jeandle-llvm 外部</text>
+  <rect x="640" y="172" width="130" height="44" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="705" y="190" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">IR / IRBuilder / Bitcode</text>
+  <text x="705" y="206" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">llvm/IR</text>
+  <rect x="640" y="224" width="130" height="44" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="705" y="242" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">jeandle::optimize</text>
+  <text x="705" y="258" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">O3 + statepoint RS4GC</text>
+  <rect x="640" y="276" width="130" height="44" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="705" y="294" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">MC / ELF 后端</text>
+  <text x="705" y="310" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">addPassesToEmitMC</text>
+  <rect x="640" y="328" width="130" height="44" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="705" y="346" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">JITLink / StackMap</text>
+  <text x="705" y="362" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">LinkGraph / FaultMap</text>
+  <text x="705" y="396" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">statepoint GC</text>
+
+  <!-- Layer 1: CompileBroker -->
+  <rect x="40" y="52" width="560" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="60" y="74" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#4ecdc4">调度层</text>
+  <text x="320" y="88" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">HotSpot CompileBroker · AbstractCompiler</text>
+  <text x="320" y="103" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">编译任务队列 → JeandleCompiler::compile_method()</text>
+
+  <path d="M320,108 L320,136" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- Layer 2: Compilation Driver -->
+  <rect x="40" y="136" width="560" height="72" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="60" y="158" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">编译驱动层</text>
+  <text x="320" y="173" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">JeandleCompiler · JeandleCompilation · JeandleFuncSig</text>
+  <text x="320" y="190" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">RAII 编译上下文：装配 → 模板 bitcode → 编排 → 安装 nmethod</text>
+
+  <path d="M320,208 L320,236" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- Layer 3: Abstract Interpreter -->
+  <rect x="40" y="236" width="560" height="72" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="60" y="258" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ff6b9d">前端层</text>
+  <text x="320" y="273" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">JeandleAbstractInterpreter · BasicBlockBuilder · JeandleVMState</text>
+  <text x="320" y="290" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">字节码 → 基本块 + SSA(Phi) → LLVM IR（IRBuilder）</text>
+
+  <path d="M320,308 L320,336" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- Layer 4: Optimize & Codegen -->
+  <rect x="40" y="336" width="560" height="72" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="60" y="358" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">后端层</text>
+  <text x="320" y="373" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">JeandleCompiledCode · ReadELF · JeandleAssembler · JeandleCompiledCall</text>
+  <text x="320" y="390" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">ELF 解析 → 重定位/OopMap/异常表 → CodeBuffer → Code Cache</text>
+
+  <path d="M320,408 L320,436" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- Layer 5: Runtime Support -->
+  <rect x="40" y="436" width="560" height="72" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="60" y="458" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b388ff">运行时支持层</text>
+  <text x="320" y="473" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">JeandleRuntimeRoutine · JeandleCallVM · RuntimeDefinedJavaOps</text>
+  <text x="320" y="490" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">C/汇编/Hotspot 例程 · VM 调用桩 · 模板 JavaOp（safepoint/GC）</text>
+
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="520" viewBox="0 0 740 520">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="740" height="520" fill="#0b0d14"/>
+  <text x="370" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">finalize 调用链路（ELF→CodeBuffer）</text>
+
+  <!-- install_obj -->
+  <rect x="200" y="52" width="340" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="370" y="72" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">install_obj</text>
+  <text x="370" y="88" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">createELFObjectFile → _elf</text>
+
+  <path d="M370,96 L370,120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- findFunc -->
+  <rect x="200" y="120" width="340" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="370" y="140" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">ReadELF::findFunc（定位 .text 段）</text>
+  <text x="370" y="156" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">align · offset · code_size</text>
+
+  <path d="M370,164 L370,188" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- setup + emit -->
+  <rect x="140" y="188" width="460" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="370" y="208" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">setup_frame_size · 初始化 CodeBuffer/Assembler</text>
+  <text x="370" y="226" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">ic_check · verified_entry · stack_overflow_check · emit_insts(.text)</text>
+
+  <path d="M370,244 L370,268" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- resolve_reloc_info -->
+  <rect x="120" y="268" width="500" height="80" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="370" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#c9d1e8">resolve_reloc_info</text>
+  <text x="370" y="308" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">Step1 JITLink: routine/const/oop 重定位 → JeandleReloc*</text>
+  <text x="370" y="326" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">Step2 .llvm_stackmaps: record→OopMap→CallReloc（按 statepoint id/offset 匹配）</text>
+  <text x="370" y="342" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">Step3 sort · Step4 fixup_offset(prolog) + emit_reloc</text>
+
+  <path d="M370,348 L370,372" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- build tables -->
+  <rect x="120" y="372" width="500" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="370" y="392" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">build_exception_handler_table · build_implicit_exception_table</text>
+  <text x="370" y="410" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">.gcc_except_table(ULEB128) · .llvm_faultmaps(FaultMapParser)</text>
+
+  <path d="M370,428 L370,452" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- finalize stubs + offsets -->
+  <rect x="160" y="452" width="420" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="370" y="472" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">finalize_stubs · set CodeOffsets · emit_exception_handler</text>
+  <text x="370" y="488" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">→ CodeBuffer 完成，交 install_code 装入 Code Cache</text>
+
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="440" viewBox="0 0 740 440">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="740" height="440" fill="#0b0d14"/>
+  <text x="370" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">代码生成模块内部结构</text>
+
+  <!-- JeandleCompiledCode -->
+  <rect x="40" y="60" width="440" height="250" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="60" y="82" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">JeandleCompiledCode（StackObj）</text>
+  <text x="60" y="104" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">_obj(ObjectBuffer) · _elf(ELFObject) · _code_buffer(CodeBuffer)</text>
+  <text x="60" y="124" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">_routine_call_sites · _non_routine_call_sites · _oop_handles · _const_sections</text>
+  <text x="60" y="146" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">_exception_handler_table · _implicit_exception_table · _offsets</text>
+  <text x="60" y="172" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#c9d1e8">finalize() 主流程</text>
+  <text x="60" y="192" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">setup_frame_size · ReadELF::findFunc</text>
+  <text x="60" y="210" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">resolve_reloc_info（JITLink + StackMap）</text>
+  <text x="60" y="228" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">build_oop_map · build_exception_handler_table</text>
+  <text x="60" y="246" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">build_implicit_exception_table</text>
+  <text x="60" y="272" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">install_obj · setup_frame_size · lookup_const_section</text>
+  <text x="60" y="294" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">frame_size_in_slots</text>
+
+  <!-- JeandleAssembler (collaborator) -->
+  <rect x="520" y="60" width="180" height="92" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="540" y="82" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">JeandleAssembler</text>
+  <text x="540" y="102" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">emit_insts/consts</text>
+  <text x="540" y="118" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">emit_*_call_site</text>
+  <text x="540" y="134" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">emit_oop/const_reloc</text>
+  <text x="540" y="146" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">is_*_reloc_kind</text>
+
+  <!-- ReadELF (collaborator) -->
+  <rect x="520" y="180" width="180" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="540" y="202" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">ReadELF</text>
+  <text x="540" y="222" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">findFunc(符号→段/offset/size)</text>
+  <text x="540" y="238" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">findSection(段名→offset/size)</text>
+
+  <!-- Reloc hierarchy -->
+  <rect x="40" y="340" width="660" height="80" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="60" y="362" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b388ff">JeandleReloc 层次（arena 分配，cpp 内部）</text>
+  <text x="60" y="384" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">JeandleReloc(基类,offset,fixup_offset)</text>
+  <text x="60" y="402" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">├ JeandleConstReloc（常量重定位）　├ JeandleCallReloc（调用点+OopMap+scope）　└ JeandleOopReloc（oop 句柄）</text>
+  <text x="60" y="416" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">emit_reloc() 多态分派到 JeandleAssembler</text>
+
+  <!-- arrows -->
+  <path d="M480,120 L520,106" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.6"/>
+  <path d="M480,210 L520,210" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.6"/>
+  <path d="M360,310 L360,340" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.6"/>
+
+</svg>

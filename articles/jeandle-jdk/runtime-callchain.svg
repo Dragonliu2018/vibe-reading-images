@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="420" viewBox="0 0 740 420">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="740" height="420" fill="#0b0d14"/>
+  <text x="370" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">运行期：编译产物回访 JVM</text>
+
+  <!-- compiled code -->
+  <rect x="260" y="56" width="220" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="370" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">Jeandle 编译产物（nmethod）</text>
+  <text x="370" y="92" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">运行于 Code Cache</text>
+
+  <path d="M370,100 L370,124" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- safepoint poll -->
+  <rect x="40" y="124" width="200" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="140" y="146" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">回跳处 safepoint 轮询</text>
+  <text x="140" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">jeandle.safepoint_poll</text>
+  <text x="140" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">→ TLS poll word → handler</text>
+
+  <!-- allocation -->
+  <rect x="270" y="124" width="200" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="370" y="146" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">对象分配</text>
+  <text x="370" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">jeandle.new_instance</text>
+  <text x="370" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">→ new_instance 例程 → TLS vm_result</text>
+
+  <!-- invoke -->
+  <rect x="500" y="124" width="200" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="600" y="146" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">方法调用</text>
+  <text x="600" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">static/dynamic stub</text>
+  <text x="600" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">→ SharedRuntime 解析目标</text>
+
+  <path d="M140,188 L140,212" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M370,188 L370,212" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M600,188 L600,212" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- VM state adjust -->
+  <rect x="120" y="212" width="500" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="370" y="232" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">运行时例程（C/汇编，经 stub 进入）</text>
+  <text x="370" y="250" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">safepoint_handler · new_instance/new_array · SharedRuntime::resolve</text>
+
+  <path d="M370,268 L370,292" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- GC: statepoint -->
+  <rect x="120" y="292" width="500" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="370" y="312" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">GC 驻留（statepoint）</text>
+  <text x="370" y="330" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">调用点 StackMap 记录 OopMap → GC 移动对象 → 编译代码继续</text>
+
+  <path d="M370,348 L370,372" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- return -->
+  <rect x="220" y="372" width="300" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="370" y="395" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">返回编译代码继续执行</text>
+
+</svg>

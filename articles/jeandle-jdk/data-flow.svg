@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="576" viewBox="0 0 720 576">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="720" height="576" fill="#0b0d14"/>
+  <text x="360" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">Jeandle 编译数据流（compile_java_method）</text>
+
+  <!-- Stage 1: ciMethod -->
+  <rect x="120" y="52" width="480" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="140" y="74" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#4ecdc4">入口</text>
+  <text x="360" y="88" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">ciMethod · ciBytecodeStream</text>
+  <text x="360" y="103" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">Java 字节码 + CI 元信息（max_stack/locals, liveness）</text>
+
+  <path d="M360,108 L360,136" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <text x="372" y="126" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">check_can_parse 前置校验</text>
+
+  <!-- Stage 2: BasicBlockBuilder -->
+  <rect x="120" y="136" width="480" height="56" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="140" y="158" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ff6b9d">构块</text>
+  <text x="360" y="172" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">BasicBlockBuilder::generate_blocks · setup_control_flow · mark_loops</text>
+  <text x="360" y="187" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">ciMethodBlocks → bci2block + 前驱/后继 + 循环头 + RPO</text>
+
+  <path d="M360,192 L360,220" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <text x="372" y="210" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">JeandleBasicBlock + JeandleVMState</text>
+
+  <!-- Stage 3: Abstract Interpreter -->
+  <rect x="120" y="220" width="480" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="140" y="242" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ff6b9d">翻译</text>
+  <text x="360" y="257" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">JeandleAbstractInterpreter::interpret_block</text>
+  <text x="360" y="274" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">逐块遍历 work_list · 字节码 switch → IRBuilder 生成 IR + Phi 合并</text>
+
+  <path d="M360,284 L360,312" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <text x="372" y="302" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">llvm::Module (LLVM IR)</text>
+
+  <!-- Stage 4: Optimize -->
+  <rect x="120" y="312" width="480" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="140" y="334" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">优化</text>
+  <text x="360" y="348" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">verifyModule · llvm::jeandle::optimize(O3)</text>
+  <text x="360" y="363" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">标准 pass + statepoint RS4GC（GC 重写 + 驻留点）</text>
+
+  <path d="M360,368 L360,396" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <text x="372" y="386" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">优化后 IR</text>
+
+  <!-- Stage 5: MC emission -->
+  <rect x="120" y="396" width="480" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="140" y="418" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">发射</text>
+  <text x="360" y="432" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">compile_module · addPassesToEmitMC</text>
+  <text x="360" y="447" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">legacy::PassManager → 二进制指令 → ELF object (.o)</text>
+
+  <path d="M360,452 L360,480" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <text x="372" y="470" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">ELF .o</text>
+
+  <!-- Stage 6: finalize + install -->
+  <rect x="120" y="480" width="480" height="72" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="140" y="502" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">装载</text>
+  <text x="360" y="517" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">JeandleCompiledCode::finalize · install_code</text>
+  <text x="360" y="534" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">ReadELF + JITLink 重定位 + StackMap→OopMap + 异常表</text>
+  <text x="360" y="548" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">→ CodeBuffer → register_method → Code Cache (nmethod)</text>
+
+</svg>
