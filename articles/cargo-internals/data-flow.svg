@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="625" viewBox="0 0 860 625" font-family="system-ui, sans-serif">
+<rect width="860" height="625" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+</defs>
+<text x="430" y="30" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="700">cargo build 端到端数据流</text>
+
+<!-- Stage boxes (centered, w=340) -->
+<rect x="260" y="54" width="340" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="430" y="82" text-anchor="middle" fill="#e8eaf6" font-size="13">① Cargo.toml 清单文件</text>
+<line x1="430" y1="100" x2="430" y2="120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="612" y="114" fill="#f9ca24" font-size="11">TomlManifest</text>
+
+<rect x="260" y="120" width="340" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="430" y="148" text-anchor="middle" fill="#e8eaf6" font-size="13">② Workspace::new() 装配 packages</text>
+<line x1="430" y1="166" x2="430" y2="186" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="612" y="180" fill="#f9ca24" font-size="11">Workspace</text>
+
+<rect x="260" y="186" width="340" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="430" y="208" text-anchor="middle" fill="#e8eaf6" font-size="13">③ resolve_ws_with_opts()</text>
+<text x="430" y="224" text-anchor="middle" fill="#9aa0c0" font-size="11">sources.query + resolver::resolve() DFS 回溯</text>
+<line x1="430" y1="232" x2="430" y2="252" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="612" y="246" fill="#f9ca24" font-size="11">WorkspaceResolve</text>
+
+<rect x="260" y="252" width="340" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="430" y="280" text-anchor="middle" fill="#e8eaf6" font-size="13">④ Cargo.lock + PackageSet</text>
+<line x1="430" y1="298" x2="430" y2="318" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="612" y="312" fill="#f9ca24" font-size="11">Resolve+PackageSet</text>
+
+<rect x="260" y="318" width="340" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="430" y="346" text-anchor="middle" fill="#e8eaf6" font-size="13">⑤ UnitGenerator 生成 root Units</text>
+<line x1="430" y1="364" x2="430" y2="384" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="612" y="378" fill="#f9ca24" font-size="11">Vec&lt;Unit&gt;</text>
+
+<rect x="260" y="384" width="340" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="430" y="412" text-anchor="middle" fill="#e8eaf6" font-size="13">⑥ build_unit_dependencies → UnitGraph</text>
+<line x1="430" y1="430" x2="430" y2="450" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="612" y="444" fill="#f9ca24" font-size="11">UnitGraph</text>
+
+<rect x="260" y="450" width="340" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="430" y="478" text-anchor="middle" fill="#e8eaf6" font-size="13">⑦ BuildContext 前端 (create_bcx)</text>
+<line x1="430" y1="496" x2="430" y2="516" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="612" y="510" fill="#f9ca24" font-size="11">BuildContext</text>
+
+<rect x="260" y="516" width="340" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="430" y="538" text-anchor="middle" fill="#e8eaf6" font-size="13">⑧ BuildRunner + JobQueue</text>
+<text x="430" y="554" text-anchor="middle" fill="#9aa0c0" font-size="11">fingerprint 判定 Dirty/Fresh</text>
+<line x1="430" y1="562" x2="430" y2="582" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="612" y="576" fill="#f9ca24" font-size="11">Dirty/Fresh</text>
+
+<rect x="260" y="582" width="340" height="36" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="430" y="605" text-anchor="middle" fill="#e8eaf6" font-size="13">⑨ drain_the_queue → rustc×N → Compilation</text>
+</svg>

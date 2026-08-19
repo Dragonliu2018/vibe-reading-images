@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="390" viewBox="0 0 860 390" font-family="system-ui, sans-serif">
+<rect width="860" height="390" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+</defs>
+<text x="430" y="30" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="700">Cargo 模块依赖关系（箭头 = 依赖方向）</text>
+
+<!-- Row1: pipeline top -->
+<rect x="60" y="70" width="150" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="135" y="97" text-anchor="middle" fill="#e8eaf6" font-size="13">CLI 命令分发</text>
+<rect x="250" y="70" width="150" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="325" y="97" text-anchor="middle" fill="#e8eaf6" font-size="13">操作层 ops</text>
+<rect x="440" y="70" width="150" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="515" y="97" text-anchor="middle" fill="#e8eaf6" font-size="13">编译器 compiler</text>
+
+<!-- Row2: domain/resolve -->
+<rect x="60" y="190" width="150" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="135" y="217" text-anchor="middle" fill="#e8eaf6" font-size="13">依赖解析 resolver</text>
+<rect x="250" y="190" width="150" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="325" y="217" text-anchor="middle" fill="#e8eaf6" font-size="13">源管理 sources</text>
+<rect x="440" y="190" width="150" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="515" y="217" text-anchor="middle" fill="#e8eaf6" font-size="13">工作区 workspace</text>
+
+<!-- Row3: cross-cutting base -->
+<rect x="40" y="300" width="780" height="60" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="430" y="325" text-anchor="middle" fill="#80c7ff" font-size="13" font-weight="600">基础设施层（cross-cutting）</text>
+<text x="430" y="346" text-anchor="middle" fill="#9aa0c0" font-size="12">context: GlobalContext · util · diagnostics — 被所有上层模块依赖</text>
+
+<!-- arrows row1 -->
+<line x1="210" y1="92" x2="246" y2="92" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="400" y1="92" x2="436" y2="92" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- ops fans down -->
+<line x1="290" y1="114" x2="155" y2="186" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="325" y1="114" x2="325" y2="186" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="365" y1="114" x2="500" y2="186" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- compiler down -->
+<line x1="515" y1="114" x2="515" y2="186" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- row2 chain -->
+<line x1="210" y1="212" x2="246" y2="212" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="400" y1="212" x2="436" y2="212" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- workspace down to base -->
+<line x1="515" y1="234" x2="515" y2="296" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="325" y1="234" x2="325" y2="296" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="135" y1="234" x2="135" y2="296" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

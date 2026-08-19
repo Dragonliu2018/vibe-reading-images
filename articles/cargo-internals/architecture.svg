@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="558" viewBox="0 0 860 558" font-family="system-ui, sans-serif">
+<rect width="860" height="558" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+</defs>
+<text x="430" y="30" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="700">Cargo v0.100.0 分层架构</text>
+
+<!-- L1: 命令入口层 -->
+<rect x="40" y="58" width="780" height="88" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="60" y="80" fill="#4ecdc4" font-size="13" font-weight="600">命令入口层 (src/bin/cargo: main.rs, cli.rs, commands/*.rs)</text>
+<rect x="60" y="92" width="180" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="150" y="116" text-anchor="middle" fill="#e8eaf6" font-size="12">main() 进程入口</text>
+<rect x="256" y="92" width="180" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="346" y="116" text-anchor="middle" fill="#e8eaf6" font-size="12">cli::main() 参数分发</text>
+<rect x="452" y="92" width="180" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="542" y="116" text-anchor="middle" fill="#e8eaf6" font-size="12">commands/build.rs 等</text>
+<rect x="648" y="92" width="152" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="724" y="116" text-anchor="middle" fill="#e8eaf6" font-size="12">command_prelude</text>
+
+<!-- L2: 操作编排层 -->
+<rect x="40" y="156" width="780" height="88" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="60" y="178" fill="#6c8ef5" font-size="13" font-weight="600">操作编排层 (src/ops: 每条命令的薄封装)</text>
+<rect x="60" y="190" width="180" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="150" y="214" text-anchor="middle" fill="#e8eaf6" font-size="12">cargo_compile::compile()</text>
+<rect x="256" y="190" width="180" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="346" y="214" text-anchor="middle" fill="#e8eaf6" font-size="12">resolve::resolve_ws_with_opts</text>
+<rect x="452" y="190" width="180" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="542" y="214" text-anchor="middle" fill="#e8eaf6" font-size="12">registry::publish/search/yank</text>
+<rect x="648" y="190" width="152" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="724" y="214" text-anchor="middle" fill="#e8eaf6" font-size="12">add/new/install/vendor</text>
+
+<!-- L3: 编译引擎层 -->
+<rect x="40" y="254" width="780" height="98" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="60" y="276" fill="#b388ff" font-size="13" font-weight="600">编译引擎层 (src/compiler: 驱动 rustc/rustdoc)</text>
+<rect x="60" y="288" width="150" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="135" y="312" text-anchor="middle" fill="#e8eaf6" font-size="12">BuildContext 前端</text>
+<rect x="226" y="288" width="150" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="301" y="312" text-anchor="middle" fill="#e8eaf6" font-size="12">BuildRunner 协调</text>
+<rect x="392" y="288" width="150" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="467" y="312" text-anchor="middle" fill="#e8eaf6" font-size="12">fingerprint 增量</text>
+<rect x="558" y="288" width="120" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="618" y="312" text-anchor="middle" fill="#e8eaf6" font-size="12">job_queue 并发</text>
+<rect x="694" y="288" width="106" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="747" y="312" text-anchor="middle" fill="#e8eaf6" font-size="12">unit_dependencies</text>
+<rect x="60" y="336" width="240" height="10" fill="none"/>
+<text x="180" y="346" text-anchor="middle" fill="#9aa0c0" font-size="11">custom_build (build script) · layout (产物布局) · lto · timings</text>
+
+<!-- L4: 领域与解析层 -->
+<rect x="40" y="362" width="780" height="88" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="60" y="384" fill="#f9ca24" font-size="13" font-weight="600">领域与解析层 (workspace + resolver + sources)</text>
+<rect x="60" y="396" width="150" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="135" y="420" text-anchor="middle" fill="#e8eaf6" font-size="12">Manifest/Package</text>
+<rect x="226" y="396" width="150" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="301" y="420" text-anchor="middle" fill="#e8eaf6" font-size="12">SourceId/PackageId</text>
+<rect x="392" y="396" width="150" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="467" y="420" text-anchor="middle" fill="#e8eaf6" font-size="12">resolver::resolve()</text>
+<rect x="558" y="396" width="120" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="618" y="420" text-anchor="middle" fill="#e8eaf6" font-size="12">Source trait</text>
+<rect x="694" y="396" width="106" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="747" y="420" text-anchor="middle" fill="#e8eaf6" font-size="12">RegistrySource/Git</text>
+
+<!-- L5: 基础设施层 -->
+<rect x="40" y="460" width="780" height="78" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="60" y="482" fill="#80c7ff" font-size="13" font-weight="600">基础设施层 (cross-cutting: 配置 / 工具 / 诊断)</text>
+<rect x="60" y="494" width="180" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="150" y="518" text-anchor="middle" fill="#e8eaf6" font-size="12">context: GlobalContext</text>
+<rect x="256" y="494" width="180" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="346" y="518" text-anchor="middle" fill="#e8eaf6" font-size="12">util: 网络/锁/interning</text>
+<rect x="452" y="494" width="180" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="542" y="518" text-anchor="middle" fill="#e8eaf6" font-size="12">diagnostics: lints/passes</text>
+<rect x="648" y="494" width="152" height="38" rx="5" fill="#1a1d2a" stroke="#7a86b3" stroke-width="1"/>
+<text x="724" y="518" text-anchor="middle" fill="#e8eaf6" font-size="12">crates: cargo-util 等</text>
+
+<!-- dependency arrows (layer to layer, downward) -->
+<line x1="150" y1="146" x2="150" y2="156" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="346" y1="146" x2="346" y2="156" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="542" y1="146" x2="542" y2="156" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="150" y1="244" x2="150" y2="254" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="346" y1="244" x2="346" y2="254" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="467" y1="352" x2="467" y2="362" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="301" y1="352" x2="301" y2="362" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="150" y1="450" x2="150" y2="460" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="542" y1="450" x2="542" y2="460" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>
