@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="320" viewBox="0 0 860 320" font-family="system-ui, sans-serif">
+<rect x="0" y="0" width="860" height="320" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+</defs>
+<text x="430.0" y="30" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">数据连接器管道</text><text x="30" y="60" text-anchor="start" fill="#ff6b9d" font-size="13" font-weight="600" font-family="system-ui, sans-serif">Source (策略)</text><rect x="30" y="78" width="150" height="38" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<rect x="30" y="78" width="150" height="38" rx="8" fill="none" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="105.0" y="97.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">mysql.ts</text>
+<rect x="30" y="124" width="150" height="38" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<rect x="30" y="124" width="150" height="38" rx="8" fill="none" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="105.0" y="143.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">mongo.ts</text>
+<rect x="30" y="170" width="150" height="38" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<rect x="30" y="170" width="150" height="38" rx="8" fill="none" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="105.0" y="189.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">redis-stream.ts</text>
+<rect x="30" y="216" width="150" height="38" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<rect x="30" y="216" width="150" height="38" rx="8" fill="none" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="105.0" y="235.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">jsonl.ts</text>
+<rect x="250" y="120" width="200" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<rect x="250" y="120" width="200" height="70" rx="8" fill="none" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="350.0" y="137.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">Runner</text>
+<text x="350.0" y="155.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">runConnector()</text>
+<text x="350.0" y="173.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">for await readChanges</text>
+<rect x="520" y="120" width="200" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<rect x="520" y="120" width="200" height="50" rx="8" fill="none" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="620.0" y="127.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">Sink</text>
+<text x="620.0" y="145.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">ConnectorSink.flush()</text>
+<text x="620.0" y="163.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">批量 upsert</text>
+<rect x="250" y="250" width="200" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<rect x="250" y="250" width="200" height="50" rx="8" fill="none" stroke="#b388ff" stroke-width="1.5"/>
+<text x="350.0" y="257.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">StateStore</text>
+<text x="350.0" y="275.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">saveConnectorState()</text>
+<text x="350.0" y="293.0" text-anchor="middle" fill="#e6e8f0" font-size="11" font-family="system-ui, sans-serif">state.json 游标</text>
+<rect x="520" y="250" width="200" height="50" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<rect x="520" y="250" width="200" height="50" rx="8" fill="none" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="620.0" y="266.0" text-anchor="middle" fill="#e6e8f0" font-size="10" font-family="system-ui, sans-serif">火山引擎 dataWrite</text>
+<text x="620.0" y="284.0" text-anchor="middle" fill="#e6e8f0" font-size="10" font-family="system-ui, sans-serif">POST /api/v1/dataset/{id}/write</text>
+<path d="M180,97 L250,140" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/><path d="M180,143 L250,140" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/><path d="M180,189 L250,140" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/><path d="M180,235 L250,140" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/><path d="M450,145 L520,145" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/><path d="M620,170 L620,250" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/><path d="M350,190 L350,250" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/><path d="M250,275 L220,275 L220,155 L250,155" stroke="#b388ff" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><text x="195" y="220" text-anchor="end" fill="#b388ff" font-size="10" font-family="system-ui, sans-serif">resume</text>
+</svg>
