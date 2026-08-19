@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="360" viewBox="0 0 860 360">
+  <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="860" height="360" fill="#0b0d14"/>
+  <text x="430" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">编译数据流：源码到产物</text>
+  <rect x="7" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="43.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#4ecdc4">源码</text>
+  <text x="43.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">SourceFile</text>
+  <rect x="93" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="129.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#6c8ef5">Token</text>
+  <text x="129.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">TokenStream</text>
+  <rect x="179" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="215.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#6c8ef5">AST</text>
+  <text x="215.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">ast::Crate</text>
+  <rect x="265" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="301.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#6c8ef5">AST'</text>
+  <text x="301.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">展开后</text>
+  <rect x="351" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="387.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#6c8ef5">HIR</text>
+  <text x="387.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">OwnerInfo</text>
+  <rect x="437" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="473.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#ff6b9d">Ty/Res</text>
+  <text x="473.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">TypeckResults</text>
+  <rect x="523" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="559.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#f9ca24">THIR</text>
+  <text x="559.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">thir</text>
+  <rect x="609" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="645.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#f9ca24">MIR</text>
+  <text x="645.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">Body&lt;CFG&gt;</text>
+  <rect x="695" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="731.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#b388ff">LLVM IR</text>
+  <text x="731.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">ModuleLlvm</text>
+  <rect x="781" y="120" width="72" height="40" rx="5" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="817.0" y="137" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#b388ff">Object</text>
+  <text x="817.0" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8b95b8">.o / rlib</text>
+  <path d="M79,140.0 L93,140.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M165,140.0 L179,140.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M251,140.0 L265,140.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M337,140.0 L351,140.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M423,140.0 L437,140.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M509,140.0 L523,140.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M595,140.0 L609,140.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M681,140.0 L695,140.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <path d="M767,140.0 L781,140.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+  <text x="86.0" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">lexer</text>
+  <text x="172.0" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">parse</text>
+  <text x="258.0" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">expand+resolve</text>
+  <text x="344.0" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">lower</text>
+  <text x="430.0" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">typeck</text>
+  <text x="516.0" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">thir</text>
+  <text x="602.0" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">mir_build</text>
+  <text x="688.0" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">codegen</text>
+  <text x="774.0" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">link</text>
+  <text x="430" y="220" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">实际执行是 demand-driven：codegen 触发 optimized_mir → mir_borrowck → typeck → mir_built → lower_to_hir → resolver</text>
+  <text x="430" y="240" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">analysis() 先显式跑 typeck/borrowck，codegen 时这些 query 命中缓存（green 节点）</text>
+
+  <!-- reverse cascade box -->
+  <rect x="120" y="266" width="620" height="70" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.5"/>
+  <text x="430" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#7bed9f">反向触发链（query 依赖）</text>
+  <text x="430" y="308" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">codegen_crate → collect_and_partition_mono_items → optimized_mir → mir_borrowck → typeck</text>
+  <text x="430" y="324" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1e8">→ mir_built → lower_to_hir → resolver_for_lowering</text>
+</svg>

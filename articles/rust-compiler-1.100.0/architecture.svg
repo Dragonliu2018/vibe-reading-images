@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="520" viewBox="0 0 860 520">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  </defs>
+  <rect width="860" height="520" fill="#0b0d14"/>
+  <text x="430" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#c9d1e8">rustc 分层架构（编译流水线）</text>
+
+  <!-- Cross-cutting side panel (aligned L1..L5) -->
+  <rect x="660" y="52" width="180" height="424" rx="8" fill="none" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="750" y="74" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#80c7ff">横切基础设施</text>
+  <rect x="680" y="86" width="140" height="44" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="750" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">TyCtxt 全局上下文</text>
+  <text x="750" y="120" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">rustc_middle</text>
+  <rect x="680" y="138" width="140" height="44" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="750" y="156" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">查询系统 Query</text>
+  <text x="750" y="172" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">rustc_query_impl</text>
+  <rect x="680" y="190" width="140" height="44" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="750" y="208" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">Span 源位置</text>
+  <text x="750" y="224" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">rustc_span</text>
+  <rect x="680" y="242" width="140" height="44" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="750" y="260" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">错误诊断</text>
+  <text x="750" y="276" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">rustc_errors</text>
+  <rect x="680" y="294" width="140" height="44" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="750" y="312" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#c9d1e8">数据结构</text>
+  <text x="750" y="328" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8b95b8">rustc_data_structures</text>
+  <text x="750" y="362" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">demand-driven 惰性求值</text>
+  <text x="750" y="380" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">增量编译 / 并行 query</text>
+
+  <!-- Layer 1: Entry -->
+  <rect x="40" y="52" width="600" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="60" y="74" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#4ecdc4">入口层</text>
+  <text x="340" y="88" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">rustc_driver_impl · rustc_interface · rustc_session</text>
+  <text x="340" y="103" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">main → run_compiler → 回调注入 → 模式分发</text>
+
+  <path d="M340,108 L340,136" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- Layer 2: Frontend -->
+  <rect x="40" y="136" width="600" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="60" y="158" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6c8ef5">前端层</text>
+  <text x="340" y="173" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">lexer · parse · ast · expand · ast_lowering · resolve</text>
+  <text x="340" y="190" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">源码 → Token → AST →（宏展开固定点）→ HIR + Res</text>
+
+  <path d="M340,200 L340,228" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- Layer 3: Type System -->
+  <rect x="40" y="228" width="600" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="60" y="250" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ff6b9d">类型系统层</text>
+  <text x="340" y="265" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">hir_typeck · hir_analysis · infer · trait_selection · next_solver</text>
+  <text x="340" y="282" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">类型推导 + coercion + trait obligation 求解 → TypeckResults</text>
+
+  <path d="M340,292 L340,320" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- Layer 4: MIR -->
+  <rect x="40" y="320" width="600" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="60" y="342" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#f9ca24">MIR 层</text>
+  <text x="340" y="357" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">mir_build · mir_transform · mir_dataflow · borrowck</text>
+  <text x="340" y="374" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">HIR → MIR(CFG) → 数据流分析 → NLL 借用检查 → 优化</text>
+
+  <path d="M340,384 L340,412" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+  <!-- Layer 5: Backend -->
+  <rect x="40" y="412" width="600" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="60" y="434" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b388ff">后端层</text>
+  <text x="340" y="449" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#c9d1e8">monomorphize · codegen_ssa · codegen_llvm · link</text>
+  <text x="340" y="466" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">单态化 → MIR→LLVM IR → 目标文件 → 链接产物</text>
+
+  <text x="370" y="498" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b95b8">所有层经 TyCtxt 查询驱动，产物经 arena/intern 共享</text>
+</svg>
