@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="490" viewBox="0 0 800 490" font-family="system-ui, sans-serif">
+<rect width="800" height="490" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+
+  <marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+  </marker>
+
+</defs>
+<text x="400.0" y="28" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="600">Miles 模块依赖关系</text>
+<rect x="45" y="44" width="170" height="92" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.4"/>
+<text x="130" y="82" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">启动配置</text>
+<text x="130" y="102" text-anchor="middle" fill="#7a86b3" font-size="9.5">scripts + arguments</text>
+<text x="130" y="116" text-anchor="middle" fill="#7a86b3" font-size="9.5">+ true_on_policy</text>
+<rect x="295" y="44" width="170" height="92" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
+<text x="380" y="82" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">异步编排</text>
+<text x="380" y="102" text-anchor="middle" fill="#7a86b3" font-size="9.5">Cell + Group</text>
+<text x="380" y="116" text-anchor="middle" fill="#7a86b3" font-size="9.5">+ RolloutManager</text>
+<rect x="575" y="44" width="170" height="92" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.4"/>
+<text x="660" y="82" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">Rollout/Router</text>
+<text x="660" y="102" text-anchor="middle" fill="#7a86b3" font-size="9.5">Generate/Filter/RM</text>
+<text x="660" y="116" text-anchor="middle" fill="#7a86b3" font-size="9.5">+ Session + Router</text>
+<rect x="45" y="184" width="170" height="92" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.4"/>
+<text x="130" y="222" text-anchor="middle" fill="#80c7ff" font-size="13" font-weight="600">容错审计</text>
+<text x="130" y="242" text-anchor="middle" fill="#7a86b3" font-size="9.5">health_checker</text>
+<text x="130" y="256" text-anchor="middle" fill="#7a86b3" font-size="9.5">+ control_server + IndepDP</text>
+<rect x="295" y="184" width="170" height="92" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.4"/>
+<text x="380" y="222" text-anchor="middle" fill="#80c7ff" font-size="13" font-weight="600">共享基础</text>
+<text x="380" y="242" text-anchor="middle" fill="#7a86b3" font-size="9.5">types + misc</text>
+<text x="380" y="256" text-anchor="middle" fill="#7a86b3" font-size="9.5">+ http + replay</text>
+<rect x="575" y="184" width="170" height="92" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
+<text x="660" y="222" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">训练后端</text>
+<text x="660" y="242" text-anchor="middle" fill="#7a86b3" font-size="9.5">Megatron/FSDP</text>
+<text x="660" y="256" text-anchor="middle" fill="#7a86b3" font-size="9.5">+ SGLang + WeightSync</text>
+<rect x="45" y="324" width="170" height="92" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.4"/>
+<text x="130" y="362" text-anchor="middle" fill="#80c7ff" font-size="13" font-weight="600">可观测性</text>
+<text x="130" y="382" text-anchor="middle" fill="#7a86b3" font-size="9.5">MetricStore</text>
+<text x="130" y="396" text-anchor="middle" fill="#7a86b3" font-size="9.5">+ Collector + Dump</text>
+<rect x="575" y="324" width="170" height="92" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.4"/>
+<text x="660" y="362" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">插件系统</text>
+<text x="660" y="382" text-anchor="middle" fill="#7a86b3" font-size="9.5">mbridge + models</text>
+<text x="660" y="396" text-anchor="middle" fill="#7a86b3" font-size="9.5">+ optimizers</text>
+<path d="M215,90 L293,90" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M467,90 L573,90" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M465,100 L530,100 L530,220 L575,220" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M660,138 L660,182" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M575,230 L465,230" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M380,138 L380,182" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M295,100 L255,100 L255,230 L215,230" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M660,322 L660,278" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrowp)" stroke-dasharray="4,3"/>
+<text x="130" y="320" text-anchor="middle" fill="#7a86b3" font-size="9">← orch / rollout（hooks 注入）</text>
+<text x="24" y="474" fill="#7a86b3" font-size="10">实线 = 直接依赖（A→B：A 调用 B）  ·  虚线粉 = 插件经 CLI 注入（依赖反转）</text>
+</svg>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="540" viewBox="0 0 920 540" font-family="system-ui, sans-serif">
+<rect width="920" height="540" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+
+  <marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+  </marker>
+
+</defs>
+<text x="460.0" y="30" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="600">Miles 分层架构</text>
+<rect x="24" y="52" width="688" height="78" rx="8" fill="none" stroke="#4ecdc4" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="5,4"/>
+<text x="34" y="95.0" fill="#4ecdc4" font-size="11.5" font-weight="600">入口与配置层</text>
+<rect x="120" y="68" width="139" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="190" y="87" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">Launch Scripts</text>
+<text x="190" y="103" text-anchor="middle" fill="#7a86b3" font-size="9.5">scripts/run_*.py</text>
+<rect x="271" y="68" width="139" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="340" y="87" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">command_utils</text>
+<text x="340" y="103" text-anchor="middle" fill="#7a86b3" font-size="9.5">execute_train()</text>
+<rect x="422" y="68" width="139" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="492" y="87" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">true_on_policy</text>
+<text x="492" y="103" text-anchor="middle" fill="#7a86b3" font-size="9.5">契约 + LaunchPlan</text>
+<rect x="573" y="68" width="139" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="642" y="87" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">arguments</text>
+<text x="642" y="103" text-anchor="middle" fill="#7a86b3" font-size="9.5">parse_args() / 4-knob</text>
+<rect x="24" y="144" width="688" height="78" rx="8" fill="none" stroke="#6c8ef5" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="5,4"/>
+<text x="34" y="187.0" fill="#6c8ef5" font-size="11.5" font-weight="600">异步编排层</text>
+<rect x="120" y="160" width="139" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="190" y="179" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">RayTrainCell</text>
+<text x="190" y="195" text-anchor="middle" fill="#7a86b3" font-size="9.5">Cell 状态机</text>
+<rect x="271" y="160" width="139" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="340" y="179" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">RayTrainGroup</text>
+<text x="340" y="195" text-anchor="middle" fill="#7a86b3" font-size="9.5">train / update_weights</text>
+<rect x="422" y="160" width="139" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="492" y="179" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">RolloutManager</text>
+<text x="492" y="195" text-anchor="middle" fill="#7a86b3" font-size="9.5">generate / eval</text>
+<rect x="573" y="160" width="139" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="642" y="179" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">PlacementGroup</text>
+<text x="642" y="195" text-anchor="middle" fill="#7a86b3" font-size="9.5">GPU bundle 分配</text>
+<rect x="24" y="236" width="688" height="78" rx="8" fill="none" stroke="#f9ca24" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="5,4"/>
+<text x="34" y="279.0" fill="#f9ca24" font-size="11.5" font-weight="600">生成与路由层</text>
+<rect x="120" y="252" width="109" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="174" y="271" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">Generate Hub</text>
+<text x="174" y="287" text-anchor="middle" fill="#7a86b3" font-size="9.5">3 种生成模式</text>
+<rect x="241" y="252" width="109" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="295" y="271" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">Filter Hub</text>
+<text x="295" y="287" text-anchor="middle" fill="#7a86b3" font-size="9.5">dynamic filter</text>
+<rect x="362" y="252" width="109" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="416" y="271" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">RM Hub</text>
+<text x="416" y="287" text-anchor="middle" fill="#7a86b3" font-size="9.5">async_rm</text>
+<rect x="482" y="252" width="109" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="537" y="271" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">Session + TITO</text>
+<text x="537" y="287" text-anchor="middle" fill="#7a86b3" font-size="9.5">增量分词 / R3</text>
+<rect x="603" y="252" width="109" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="658" y="271" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">MilesRouter</text>
+<text x="658" y="287" text-anchor="middle" fill="#7a86b3" font-size="9.5">负载均衡 / 健康检查</text>
+<rect x="24" y="328" width="688" height="78" rx="8" fill="none" stroke="#6c8ef5" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="5,4"/>
+<text x="34" y="371.0" fill="#6c8ef5" font-size="11.5" font-weight="600">训练后端层</text>
+<rect x="120" y="344" width="139" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="190" y="363" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">MegatronTrainActor</text>
+<text x="190" y="379" text-anchor="middle" fill="#7a86b3" font-size="9.5">TP/PP/CP/EP</text>
+<rect x="271" y="344" width="139" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="340" y="363" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">FSDPTrainActor</text>
+<text x="340" y="379" text-anchor="middle" fill="#7a86b3" font-size="9.5">HF 原生</text>
+<rect x="422" y="344" width="139" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="492" y="363" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">SGLangEngine</text>
+<text x="492" y="379" text-anchor="middle" fill="#7a86b3" font-size="9.5">rollout 引擎</text>
+<rect x="573" y="344" width="139" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="642" y="363" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">Weight Sync</text>
+<text x="642" y="379" text-anchor="middle" fill="#7a86b3" font-size="9.5">P2P / Broadcast / IPC</text>
+<rect x="24" y="420" width="688" height="78" rx="8" fill="none" stroke="#80c7ff" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="5,4"/>
+<text x="34" y="463.0" fill="#80c7ff" font-size="11.5" font-weight="600">基础设施层</text>
+<rect x="120" y="436" width="89" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="164" y="455" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">types</text>
+<text x="164" y="471" text-anchor="middle" fill="#7a86b3" font-size="9.5">Sample 数据契约</text>
+<rect x="221" y="436" width="89" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="265" y="455" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">ft_utils</text>
+<text x="265" y="471" text-anchor="middle" fill="#7a86b3" font-size="9.5">容错 / IndepDP</text>
+<rect x="321" y="436" width="89" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="366" y="455" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">audit_utils</text>
+<text x="366" y="471" text-anchor="middle" fill="#7a86b3" font-size="9.5">事件审计</text>
+<rect x="422" y="436" width="89" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="466" y="455" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">tracking_utils</text>
+<text x="466" y="471" text-anchor="middle" fill="#7a86b3" font-size="9.5">结构化日志</text>
+<rect x="523" y="436" width="89" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="567" y="455" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">dashboard</text>
+<text x="567" y="471" text-anchor="middle" fill="#7a86b3" font-size="9.5">可观测 UI</text>
+<rect x="623" y="436" width="89" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="668" y="455" text-anchor="middle" fill="#e8eaf6" font-size="11.5" font-weight="600">misc / http</text>
+<text x="668" y="471" text-anchor="middle" fill="#7a86b3" font-size="9.5">工具函数</text>
+<path d="M368,130 L368,142" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M368,222 L368,234" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M368,314 L368,326" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M368,406 L368,418" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<rect x="742" y="144" width="150" height="262" rx="8" fill="none" stroke="#ff6b9d" stroke-opacity="0.4" stroke-width="1.5" stroke-dasharray="5,4"/>
+<text x="817.0" y="138" text-anchor="middle" fill="#ff6b9d" font-size="11.5" font-weight="600">插件系统</text>
+<rect x="752" y="160" width="130" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="817.0" y="184" text-anchor="middle" fill="#e8eaf6" font-size="11" font-weight="600">mbridge</text>
+<text x="817.0" y="202" text-anchor="middle" fill="#7a86b3" font-size="9.5">HF↔Megatron 转换</text>
+<rect x="752" y="224" width="130" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="817.0" y="248" text-anchor="middle" fill="#e8eaf6" font-size="11" font-weight="600">model specs</text>
+<text x="817.0" y="266" text-anchor="middle" fill="#7a86b3" font-size="9.5">自定义 attention</text>
+<rect x="752" y="288" width="130" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="817.0" y="312" text-anchor="middle" fill="#e8eaf6" font-size="11" font-weight="600">megatron_bridge</text>
+<text x="817.0" y="330" text-anchor="middle" fill="#7a86b3" font-size="9.5">Nemotron-H MoE</text>
+<rect x="752" y="352" width="130" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="817.0" y="376" text-anchor="middle" fill="#e8eaf6" font-size="11" font-weight="600">optimizers</text>
+<text x="817.0" y="394" text-anchor="middle" fill="#7a86b3" font-size="9.5">NVMe streaming</text>
+<path d="M744,183 L714,183" stroke="#ff6b9d" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowp)" opacity="0.75"/>
+<path d="M744,275 L714,275" stroke="#ff6b9d" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowp)" opacity="0.75"/>
+<path d="M744,367 L714,367" stroke="#ff6b9d" stroke-width="1.3" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowp)" opacity="0.75"/>
+<text x="24" y="516" fill="#7a86b3" font-size="10">实线箭头 = 层间依赖方向（上层依赖下层）  ·  虚线粉箭头 = 插件经 CLI 参数注入（依赖反转）</text>
+</svg>

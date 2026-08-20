@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="470" viewBox="0 0 900 470" font-family="system-ui, sans-serif">
+<rect width="900" height="470" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+
+  <marker id="arrowr" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#e74c3c"/>
+  </marker>
+
+  <marker id="arrowg" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+  </marker>
+
+</defs>
+<text x="450.0" y="28" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="600">RayTrainCell 状态机（容错恢复）</text>
+<rect x="75.0" y="93.0" width="150" height="74" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="150" y="122" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="600">StatePending</text>
+<text x="150" y="152" text-anchor="middle" fill="#7a86b3" font-size="9">等待分配 GPU</text>
+<rect x="305.0" y="93.0" width="150" height="74" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="380" y="122" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="600">StateAllocated</text>
+<text x="380" y="137" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="600">Uninitialized</text>
+<text x="380" y="152" text-anchor="middle" fill="#7a86b3" font-size="9">已分配 actor</text>
+<text x="380" y="165" text-anchor="middle" fill="#7a86b3" font-size="9">未 init</text>
+<rect x="535.0" y="93.0" width="150" height="74" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+<text x="610" y="122" text-anchor="middle" fill="#7bed9f" font-size="11" font-weight="600">StateAllocated</text>
+<text x="610" y="137" text-anchor="middle" fill="#7bed9f" font-size="11" font-weight="600">Alive</text>
+<text x="610" y="152" text-anchor="middle" fill="#7a86b3" font-size="9">已 init · 健康运行</text>
+<text x="610" y="165" text-anchor="middle" fill="#7a86b3" font-size="9">参与训练</text>
+<rect x="305.0" y="263.0" width="150" height="74" rx="8" fill="#13162a" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="380" y="292" text-anchor="middle" fill="#e74c3c" font-size="11" font-weight="600">StateAllocated</text>
+<text x="380" y="307" text-anchor="middle" fill="#e74c3c" font-size="11" font-weight="600">Errored</text>
+<text x="380" y="322" text-anchor="middle" fill="#7a86b3" font-size="9">运行中出错</text>
+<text x="380" y="335" text-anchor="middle" fill="#7a86b3" font-size="9">actor 被 kill</text>
+<rect x="75.0" y="263.0" width="150" height="74" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="150" y="292" text-anchor="middle" fill="#b388ff" font-size="11" font-weight="600">StateStopped</text>
+<text x="150" y="322" text-anchor="middle" fill="#7a86b3" font-size="9">已停止</text>
+<text x="150" y="335" text-anchor="middle" fill="#7a86b3" font-size="9">actor 已 kill</text>
+<path d="M225,130 L305,130" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="265.0" y="78" text-anchor="middle" fill="#7a86b3" font-size="9">allocate_for_pending()</text>
+<path d="M455,130 L535,130" stroke="#7bed9f" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="495.0" y="78" text-anchor="middle" fill="#7bed9f" font-size="9">init() → _mark_as_alive()</text>
+<path d="M560,167 L430,263" stroke="#e74c3c" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="523.0" y="215.0" text-anchor="start" fill="#e74c3c" font-size="9">execute 失败</text>
+<path d="M305,300 L225,300" stroke="#e74c3c" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="265.0" y="292" text-anchor="middle" fill="#e74c3c" font-size="9">stop()</text>
+<path d="M150,263 L150,167" stroke="#7bed9f" stroke-width="1.5" fill="none" marker-end="url(#arrow)" stroke-dasharray="5,3"/>
+<text x="60" y="215.0" text-anchor="middle" fill="#7bed9f" font-size="9">mark_as_pending()</text>
+<path d="M610,93.0 L610,60 L68,60 L68,300 L73,300" stroke="#b388ff" stroke-width="1.4" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow)"/>
+<text x="339.0" y="52" text-anchor="middle" fill="#b388ff" font-size="9.5">stop()（offload / 正常停止）</text>
+<rect x="40" y="410" width="820" height="44" rx="6" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.4" stroke-width="1"/>
+<text x="54" y="428" fill="#7bed9f" font-size="10" font-weight="600">原地恢复（no restart, no pause）</text>
+<text x="54" y="444" fill="#7a86b3" font-size="9">_refresh_cells()：alive cell 经 NCCL 发 in-memory checkpoint → healing cell recv_ckpt → 重建 PG（quorum_id++）</text>
+</svg>
