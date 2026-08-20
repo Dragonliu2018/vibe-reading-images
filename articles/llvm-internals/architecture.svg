@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="515" viewBox="0 0 820 515" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="820" height="515" fill="#0b0d14"/>
+
+  <!-- title -->
+  <text x="290" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="#e8ecff">LLVM 编译流水线分层架构</text>
+
+  <!-- Layer 1: Frontend -->
+  <rect x="40" y="64" width="500" height="60" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="290" y="84" text-anchor="middle" font-size="15" font-weight="700" fill="#80c7ff">前端层 Frontend</text>
+  <text x="290" y="102" text-anchor="middle" font-size="12" fill="#cfd6f5">Clang · Flang</text>
+  <text x="290" y="118" text-anchor="middle" font-size="11" fill="#9aa3c7">（生成 LLVM IR）</text>
+
+  <!-- Layer 2: IR -->
+  <rect x="40" y="152" width="500" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="290" y="172" text-anchor="middle" font-size="15" font-weight="700" fill="#6c8ef5">IR 中间表示层</text>
+  <text x="290" y="190" text-anchor="middle" font-size="12" fill="#cfd6f5">Module · Function · Instruction</text>
+  <text x="290" y="206" text-anchor="middle" font-size="11" fill="#9aa3c7">AsmParser · Bitcode · IRReader</text>
+
+  <!-- Layer 3: Middle-end -->
+  <rect x="40" y="240" width="500" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="290" y="260" text-anchor="middle" font-size="15" font-weight="700" fill="#f9ca24">中端优化层（opt）</text>
+  <text x="290" y="278" text-anchor="middle" font-size="12" fill="#cfd6f5">Pass Manager · Analysis</text>
+  <text x="290" y="294" text-anchor="middle" font-size="11" fill="#9aa3c7">Transforms（Scalar / IPO / Vectorize）</text>
+
+  <!-- Layer 4: Backend -->
+  <rect x="40" y="328" width="500" height="60" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="290" y="348" text-anchor="middle" font-size="15" font-weight="700" fill="#ff6b9d">后端层（llc / CodeGen）</text>
+  <text x="290" y="366" text-anchor="middle" font-size="12" fill="#cfd6f5">CodeGen · Target</text>
+  <text x="290" y="382" text-anchor="middle" font-size="11" fill="#9aa3c7">SelectionDAG · GlobalISel · RegAlloc</text>
+
+  <!-- Layer 5: MC -->
+  <rect x="40" y="416" width="500" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="290" y="436" text-anchor="middle" font-size="15" font-weight="700" fill="#4ecdc4">机器码层（MC）</text>
+  <text x="290" y="454" text-anchor="middle" font-size="12" fill="#cfd6f5">MCStreamer · MCAssembler</text>
+  <text x="290" y="470" text-anchor="middle" font-size="11" fill="#9aa3c7">Object（ELF / MachO / COFF）</text>
+
+  <!-- Down arrows between layers (data flow) -->
+  <path d="M290,124 L290,150" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M290,212 L290,238" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M290,300 L290,326" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M290,388 L290,414" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Arrow data-type labels -->
+  <text x="300" y="141" text-anchor="start" font-size="12" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">IR</text>
+  <text x="300" y="229" text-anchor="start" font-size="12" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">Module</text>
+  <text x="300" y="317" text-anchor="start" font-size="12" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">优化后 IR</text>
+  <text x="300" y="405" text-anchor="start" font-size="12" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">MachineInstr</text>
+
+  <!-- Infrastructure side bar (spans all layers) -->
+  <rect x="580" y="64" width="200" height="412" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="680" y="86" text-anchor="middle" font-size="15" font-weight="700" fill="#b388ff">基础设施</text>
+  <text x="680" y="105" text-anchor="middle" font-size="12" fill="#cfd6f5">Support · ADT</text>
+  <line x1="600" y1="120" x2="760" y2="120" stroke="#b388ff" stroke-width="1" opacity="0.4"/>
+  <text x="680" y="155" text-anchor="middle" font-size="12" fill="#cfd6f5">SmallVector</text>
+  <text x="680" y="205" text-anchor="middle" font-size="12" fill="#cfd6f5">StringRef</text>
+  <text x="680" y="255" text-anchor="middle" font-size="12" fill="#cfd6f5">APInt</text>
+  <text x="680" y="305" text-anchor="middle" font-size="12" fill="#cfd6f5">DenseMap</text>
+  <text x="680" y="355" text-anchor="middle" font-size="12" fill="#cfd6f5">Error / Expected</text>
+  <text x="680" y="405" text-anchor="middle" font-size="12" fill="#cfd6f5">raw_ostream</text>
+  <text x="680" y="455" text-anchor="middle" font-size="11" fill="#9aa3c7">（纵向贯穿所有层）</text>
+
+  <!-- bottom note -->
+  <text x="290" y="504" text-anchor="middle" font-size="11" fill="#9aa3c7">↓ 数据自上而下流动 · 基础设施纵向贯穿，非数据流</text>
+</svg>

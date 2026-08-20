@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="320" viewBox="0 0 780 320" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="780" height="320" fill="#0b0d14"/>
+
+  <text x="390" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#e8ecff">LLVM 端到端编译数据流</text>
+
+  <!-- Row 1: left to right -->
+  <rect x="30" y="60" width="150" height="60" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="105" y="84" text-anchor="middle" font-size="14" font-weight="700" fill="#80c7ff">源码 Source</text>
+  <text x="105" y="104" text-anchor="middle" font-size="11" fill="#9aa3c7">Clang / Flang</text>
+
+  <rect x="220" y="60" width="150" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="295" y="84" text-anchor="middle" font-size="14" font-weight="700" fill="#6c8ef5">LLVM IR</text>
+  <text x="295" y="104" text-anchor="middle" font-size="11" fill="#9aa3c7">Module · Function</text>
+
+  <rect x="410" y="60" width="150" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="485" y="84" text-anchor="middle" font-size="14" font-weight="700" fill="#f9ca24">opt 中端优化</text>
+  <text x="485" y="104" text-anchor="middle" font-size="11" fill="#9aa3c7">PassBuilder · Transforms</text>
+
+  <rect x="600" y="60" width="150" height="60" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="675" y="84" text-anchor="middle" font-size="14" font-weight="700" fill="#ff6b9d">指令选择 ISel</text>
+  <text x="675" y="104" text-anchor="middle" font-size="11" fill="#9aa3c7">SelectionDAG · GlobalISel</text>
+
+  <!-- Row 2: right to left -->
+  <rect x="600" y="200" width="150" height="60" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="675" y="224" text-anchor="middle" font-size="14" font-weight="700" fill="#ff6b9d">寄存器分配</text>
+  <text x="675" y="244" text-anchor="middle" font-size="11" fill="#9aa3c7">RegAlloc · 调度</text>
+
+  <rect x="315" y="200" width="150" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="390" y="224" text-anchor="middle" font-size="14" font-weight="700" fill="#4ecdc4">AsmPrinter / MC</text>
+  <text x="390" y="244" text-anchor="middle" font-size="11" fill="#9aa3c7">MCStreamer · MCAssembler</text>
+
+  <rect x="30" y="200" width="150" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="105" y="224" text-anchor="middle" font-size="14" font-weight="700" fill="#4ecdc4">目标文件</text>
+  <text x="105" y="244" text-anchor="middle" font-size="11" fill="#9aa3c7">ELF · MachO · COFF</text>
+
+  <!-- Row 1 arrows (right) -->
+  <path d="M180,90 L216,90" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="200" y="82" text-anchor="middle" font-size="11" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">Module</text>
+
+  <path d="M370,90 L406,90" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="390" y="82" text-anchor="middle" font-size="11" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">IR</text>
+
+  <path d="M560,90 L596,90" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="580" y="82" text-anchor="middle" font-size="11" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">优化后</text>
+
+  <!-- ISel -> RegAlloc (down) -->
+  <path d="M675,120 L675,196" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="685" y="156" text-anchor="start" font-size="11" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">MachineInstr</text>
+  <text x="685" y="172" text-anchor="start" font-size="11" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">(vreg, SSA)</text>
+
+  <!-- Row 2 arrows (left) -->
+  <path d="M600,230 L469,230" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="534" y="222" text-anchor="middle" font-size="11" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">phys reg</text>
+
+  <path d="M315,230 L184,230" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="249" y="222" text-anchor="middle" font-size="11" fill="#7a86b3" paint-order="stroke" stroke="#0b0d14" stroke-width="3">MCInst → bytes</text>
+
+  <text x="390" y="298" text-anchor="middle" font-size="11" fill="#9aa3c7">opt 处理 IR→IR 优化 · llc 处理 IR→目标代码（指令选择→寄存器分配→MC 发射）</text>
+</svg>
