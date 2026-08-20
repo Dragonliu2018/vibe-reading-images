@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="764" viewBox="0 0 860 764" font-family="system-ui, sans-serif">
+<rect x="0" y="0" width="860" height="764" fill="#0b0d14"/>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+<marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+<marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+</defs>
+<text x="490.0" y="18" font-size="14" fill="#e6e8f0" text-anchor="middle" font-weight="bold">InfluxDB 3 Core 分层架构</text>
+<rect x="20" y="28" width="80" height="58" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="60.0" y="62.0" font-size="12" fill="#6c8ef5" text-anchor="middle" font-weight="bold">接口层</text>
+<rect x="140" y="28" width="700" height="58" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.0" stroke-dasharray="4 3"/>
+<rect x="140.0" y="40.0" width="344.0" height="34.0" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="312.0" y="55.0" font-size="12" fill="#6c8ef5" text-anchor="middle" font-weight="bold">influxdb3_server</text>
+<text x="312.0" y="69.0" font-size="10" fill="#9aa0b4" text-anchor="middle">HTTP :8181 · FlightSQL gRPC</text>
+<rect x="496.0" y="40.0" width="344.0" height="34.0" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="668.0" y="55.0" font-size="12" fill="#6c8ef5" text-anchor="middle" font-weight="bold">influxdb3</text>
+<text x="668.0" y="69.0" font-size="10" fill="#9aa0b4" text-anchor="middle">CLI 子命令</text>
+<rect x="20" y="112" width="80" height="58" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="60.0" y="146.0" font-size="12" fill="#4ecdc4" text-anchor="middle" font-weight="bold">编排层</text>
+<rect x="140" y="112" width="700" height="58" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.0" stroke-dasharray="4 3"/>
+<rect x="140.0" y="124.0" width="344.0" height="34.0" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="312.0" y="139.0" font-size="12" fill="#4ecdc4" text-anchor="middle" font-weight="bold">serve_main</text>
+<text x="312.0" y="153.0" font-size="10" fill="#9aa0b4" text-anchor="middle">顺序装配 8 子系统</text>
+<rect x="496.0" y="124.0" width="344.0" height="34.0" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="668.0" y="139.0" font-size="12" fill="#4ecdc4" text-anchor="middle" font-weight="bold">startup + clap_blocks</text>
+<text x="668.0" y="153.0" font-size="10" fill="#9aa0b4" text-anchor="middle">env 兼容 · 配置</text>
+<rect x="20" y="196" width="80" height="128" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="60.0" y="265.0" font-size="12" fill="#f9ca24" text-anchor="middle" font-weight="bold">存储引擎层</text>
+<rect x="140" y="196" width="700" height="128" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.0" stroke-dasharray="4 3"/>
+<rect x="140.0" y="208.0" width="225.33333333333334" height="46.0" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="252.66666666666669" y="229.0" font-size="12" fill="#f9ca24" text-anchor="middle" font-weight="bold">influxdb3_write</text>
+<text x="252.66666666666669" y="243.0" font-size="10" fill="#9aa0b4" text-anchor="middle">WriteBuffer / Persister</text>
+<rect x="377.33333333333337" y="208.0" width="225.33333333333334" height="46.0" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="490.00000000000006" y="229.0" font-size="12" fill="#f9ca24" text-anchor="middle" font-weight="bold">influxdb3_wal</text>
+<text x="490.00000000000006" y="243.0" font-size="10" fill="#9aa0b4" text-anchor="middle">WalObjectStore</text>
+<rect x="614.6666666666667" y="208.0" width="225.33333333333334" height="46.0" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="727.3333333333334" y="229.0" font-size="12" fill="#f9ca24" text-anchor="middle" font-weight="bold">influxdb3_cache</text>
+<text x="727.3333333333334" y="243.0" font-size="10" fill="#9aa0b4" text-anchor="middle">Last/Distinct/Parquet</text>
+<rect x="140.0" y="266.0" width="225.33333333333334" height="46.0" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="252.66666666666669" y="287.0" font-size="12" fill="#f9ca24" text-anchor="middle" font-weight="bold">parquet_file</text>
+<text x="252.66666666666669" y="301.0" font-size="10" fill="#9aa0b4" text-anchor="middle">Parquet 列式</text>
+<rect x="377.33333333333337" y="266.0" width="225.33333333333334" height="46.0" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="490.00000000000006" y="287.0" font-size="12" fill="#f9ca24" text-anchor="middle" font-weight="bold">object_store_mem_cache</text>
+<text x="490.00000000000006" y="301.0" font-size="10" fill="#9aa0b4" text-anchor="middle">S3-FIFO 缓存</text>
+<rect x="614.6666666666667" y="266.0" width="225.33333333333334" height="46.0" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="727.3333333333334" y="287.0" font-size="12" fill="#f9ca24" text-anchor="middle" font-weight="bold">line_protocol · mutable_batch</text>
+<text x="727.3333333333334" y="301.0" font-size="10" fill="#9aa0b4" text-anchor="middle">LinearBuffer</text>
+<rect x="20" y="350" width="80" height="58" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="60.0" y="384.0" font-size="12" fill="#b388ff" text-anchor="middle" font-weight="bold">元数据层</text>
+<rect x="140" y="350" width="700" height="58" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.0" stroke-dasharray="4 3"/>
+<rect x="140.0" y="362.0" width="700.0" height="34.0" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="490.0" y="377.0" font-size="12" fill="#b388ff" text-anchor="middle" font-weight="bold">influxdb3_catalog</text>
+<text x="490.0" y="391.0" font-size="10" fill="#9aa0b4" text-anchor="middle">事件溯源 · 版本化 format/log/snapshot</text>
+<rect x="20" y="434" width="80" height="58" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="60.0" y="468.0" font-size="12" fill="#6c8ef5" text-anchor="middle" font-weight="bold">查询引擎层</text>
+<rect x="140" y="434" width="700" height="58" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.0" stroke-dasharray="4 3"/>
+<rect x="140.0" y="446.0" width="344.0" height="34.0" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="312.0" y="461.0" font-size="12" fill="#6c8ef5" text-anchor="middle" font-weight="bold">influxdb3_query_executor</text>
+<text x="312.0" y="475.0" font-size="10" fill="#9aa0b4" text-anchor="middle">QueryExecutorImpl / QueryTable</text>
+<rect x="496.0" y="446.0" width="344.0" height="34.0" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="668.0" y="461.0" font-size="12" fill="#6c8ef5" text-anchor="middle" font-weight="bold">core/iox_query</text>
+<text x="668.0" y="475.0" font-size="10" fill="#9aa0b4" text-anchor="middle">IOxSessionContext · DataFusion · pruning</text>
+<rect x="20" y="518" width="80" height="58" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="60.0" y="552.0" font-size="12" fill="#ff6b9d" text-anchor="middle" font-weight="bold">扩展层</text>
+<rect x="140" y="518" width="700" height="58" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.0" stroke-dasharray="4 3"/>
+<rect x="140.0" y="530.0" width="344.0" height="34.0" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="312.0" y="545.0" font-size="12" fill="#ff6b9d" text-anchor="middle" font-weight="bold">influxdb3_processing_engine</text>
+<text x="312.0" y="559.0" font-size="10" fill="#9aa0b4" text-anchor="middle">Python VM · scheduler · triggers</text>
+<rect x="496.0" y="530.0" width="344.0" height="34.0" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="668.0" y="545.0" font-size="12" fill="#ff6b9d" text-anchor="middle" font-weight="bold">influxdb3_py_api</text>
+<text x="668.0" y="559.0" font-size="10" fill="#9aa0b4" text-anchor="middle">PyO3 绑定</text>
+<rect x="20" y="602" width="80" height="58" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="60.0" y="636.0" font-size="12" fill="#80c7ff" text-anchor="middle" font-weight="bold">横切关注</text>
+<rect x="140" y="602" width="700" height="58" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.0" stroke-dasharray="4 3"/>
+<rect x="140.0" y="614.0" width="225.33333333333334" height="34.0" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="252.66666666666669" y="629.0" font-size="12" fill="#80c7ff" text-anchor="middle" font-weight="bold">influxdb3_authz + core/authz</text>
+<text x="252.66666666666669" y="643.0" font-size="10" fill="#9aa0b4" text-anchor="middle">Token · RBAC</text>
+<rect x="377.33333333333337" y="614.0" width="225.33333333333334" height="34.0" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="490.00000000000006" y="629.0" font-size="12" fill="#80c7ff" text-anchor="middle" font-weight="bold">core/trace + core/metric</text>
+<text x="490.00000000000006" y="643.0" font-size="10" fill="#9aa0b4" text-anchor="middle">可观测性</text>
+<rect x="614.6666666666667" y="614.0" width="225.33333333333334" height="34.0" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="727.3333333333334" y="629.0" font-size="12" fill="#80c7ff" text-anchor="middle" font-weight="bold">telemetry + shutdown</text>
+<text x="727.3333333333334" y="643.0" font-size="10" fill="#9aa0b4" text-anchor="middle">生命周期</text>
+<rect x="140" y="686" width="700" height="44" rx="6" fill="#13162a" stroke="#5a6480" stroke-width="1.5"/>
+<text x="490.0" y="713.0" font-size="12" fill="#80c7ff" text-anchor="middle" font-weight="bold">对象存储 (S3 / Azure / GCP / 本地) — diskless：WAL 与 Parquet 均持久化于此</text>
+<path d="M490.0,86 L490.0,112" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a)"/>
+<path d="M490.0,170 L490.0,196" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a)"/>
+<path d="M490.0,324 L490.0,350" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a)"/>
+<path d="M490.0,408 L490.0,434" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a)"/>
+<path d="M490.0,492 L490.0,518" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a)"/>
+<path d="M490.0,576 L490.0,602" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a)"/>
+<path d="M490.0,660 L490.0,686" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a)"/>
+<path d="M840,298 L852,298 L852,708.0 L840,708.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a)"/>
+<text x="850" y="503.0" font-size="9" fill="#80c7ff" text-anchor="end">持久化</text>
+<path d="M140,466 L120,466 L120,298 L140,298" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#ab)" stroke-dasharray="5 4" opacity="0.85"/>
+<text x="124" y="382.0" font-size="9" fill="#6c8ef5" text-anchor="start">读 chunks</text>
+<path d="M140,550 L110,550 L110,298 L140,298" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#ap)" stroke-dasharray="5 4" opacity="0.7"/>
+<text x="114" y="436.0" font-size="9" fill="#ff6b9d" text-anchor="start">WAL 触发</text>
+<path d="M490.0,550 L490.0,548 L490.0,492" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#ap)" stroke-dasharray="5 4" opacity="0.7"/>
+<text x="490" y="510" font-size="9" fill="#ff6b9d" text-anchor="start">in-process</text>
+<text x="490.0" y="748" font-size="10" fill="#80c7ff" text-anchor="middle">虚线 = 横切 / 钩入，不属任一具体层</text>
+</svg>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="644" viewBox="0 0 920 644" font-family="system-ui, sans-serif">
+<rect x="0" y="0" width="920" height="644" fill="#0b0d14"/>
+<defs>
+<marker id="w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+<marker id="q" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+</defs>
+<text x="460.0" y="20" font-size="15" fill="#e6e8f0" text-anchor="middle" font-weight="bold">写入与查询数据流</text>
+<rect x="32" y="38" width="396" height="574" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.0" stroke-dasharray="4 3"/>
+<rect x="492" y="38" width="396" height="504" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.0" stroke-dasharray="4 3"/>
+<text x="230.0" y="52" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="bold">写入路径</text>
+<text x="690.0" y="52" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="bold">查询路径</text>
+<rect x="40" y="68" width="380" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="230.0" y="89.0" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="bold">HTTP</text>
+<text x="230.0" y="105.0" font-size="10" fill="#9aa0b4" text-anchor="middle">/write_lp</text>
+<path d="M230.0,114 L230.0,138" fill="none" stroke="#f9ca24" stroke-width="1.8" marker-end="url(#w)"/>
+<rect x="40" y="138" width="380" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="230.0" y="159.0" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="bold">parse_lines</text>
+<text x="230.0" y="175.0" font-size="10" fill="#9aa0b4" text-anchor="middle">Line Protocol 解析</text>
+<path d="M230.0,184 L230.0,208" fill="none" stroke="#f9ca24" stroke-width="1.8" marker-end="url(#w)"/>
+<rect x="40" y="208" width="380" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="230.0" y="229.0" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="bold">WriteValidator</text>
+<text x="230.0" y="245.0" font-size="10" fill="#9aa0b4" text-anchor="middle">校验 + 建表 + chunk_time</text>
+<path d="M230.0,254 L230.0,278" fill="none" stroke="#f9ca24" stroke-width="1.8" marker-end="url(#w)"/>
+<rect x="40" y="278" width="380" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="230.0" y="299.0" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="bold">wal.write_ops</text>
+<text x="230.0" y="315.0" font-size="10" fill="#9aa0b4" text-anchor="middle">WriteBatch → WAL</text>
+<path d="M230.0,324 L230.0,348" fill="none" stroke="#f9ca24" stroke-width="1.8" marker-end="url(#w)"/>
+<rect x="40" y="348" width="380" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="230.0" y="369.0" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="bold">WAL 文件</text>
+<text x="230.0" y="385.0" font-size="10" fill="#9aa0b4" text-anchor="middle">obj_store.put 持久化</text>
+<path d="M230.0,394 L230.0,418" fill="none" stroke="#f9ca24" stroke-width="1.8" marker-end="url(#w)"/>
+<rect x="40" y="418" width="380" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="230.0" y="439.0" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="bold">QueryableBuffer</text>
+<text x="230.0" y="455.0" font-size="10" fill="#9aa0b4" text-anchor="middle">notify 回调 → 缓存更新</text>
+<path d="M230.0,464 L230.0,488" fill="none" stroke="#f9ca24" stroke-width="1.8" marker-end="url(#w)"/>
+<rect x="40" y="488" width="380" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="230.0" y="509.0" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="bold">TableBuffer</text>
+<text x="230.0" y="525.0" font-size="10" fill="#9aa0b4" text-anchor="middle">Arrow builders 内存缓冲</text>
+<path d="M230.0,534 L230.0,558" fill="none" stroke="#f9ca24" stroke-width="1.8" marker-end="url(#w)"/>
+<rect x="40" y="558" width="380" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="230.0" y="579.0" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="bold">Persister</text>
+<text x="230.0" y="595.0" font-size="10" fill="#9aa0b4" text-anchor="middle">Parquet → object store</text>
+<rect x="500" y="68" width="380" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="690.0" y="89.0" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="bold">HTTP</text>
+<text x="690.0" y="105.0" font-size="10" fill="#9aa0b4" text-anchor="middle">/query_sql</text>
+<path d="M690.0,114 L690.0,138" fill="none" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#q)"/>
+<rect x="500" y="138" width="380" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="690.0" y="159.0" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="bold">QueryExecutorImpl</text>
+<text x="690.0" y="175.0" font-size="10" fill="#9aa0b4" text-anchor="middle">query_sql 入口</text>
+<path d="M690.0,184 L690.0,208" fill="none" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#q)"/>
+<rect x="500" y="208" width="380" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="690.0" y="229.0" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="bold">IOxSessionContext</text>
+<text x="690.0" y="245.0" font-size="10" fill="#9aa0b4" text-anchor="middle">DedicatedExecutor 隔离</text>
+<path d="M690.0,254 L690.0,278" fill="none" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#q)"/>
+<rect x="500" y="278" width="380" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="690.0" y="299.0" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="bold">Planner.sql</text>
+<text x="690.0" y="315.0" font-size="10" fill="#9aa0b4" text-anchor="middle">逻辑 + 物理 plan</text>
+<path d="M690.0,324 L690.0,348" fill="none" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#q)"/>
+<rect x="500" y="348" width="380" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="690.0" y="369.0" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="bold">QueryTable.scan</text>
+<text x="690.0" y="385.0" font-size="10" fill="#9aa0b4" text-anchor="middle">get_table_chunks</text>
+<path d="M690.0,394 L690.0,418" fill="none" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#q)"/>
+<rect x="500" y="418" width="380" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="690.0" y="439.0" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="bold">ChunkTableProvider</text>
+<text x="690.0" y="455.0" font-size="10" fill="#9aa0b4" text-anchor="middle">pruning 裁剪</text>
+<path d="M690.0,464 L690.0,488" fill="none" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#q)"/>
+<rect x="500" y="488" width="380" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="690.0" y="509.0" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="bold">DataSourceExec</text>
+<text x="690.0" y="525.0" font-size="10" fill="#9aa0b4" text-anchor="middle">Parquet / cache → RecordBatch</text>
+<path d="M500,441.0 L460.0,441.0 L460.0,511.0 L420,511.0" fill="none" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#q)" stroke-dasharray="5 4" opacity="0.7"/>
+<text x="468.0" y="476.0" font-size="10" fill="#6c8ef5" text-anchor="start">读 chunks</text>
+<text x="300.0" y="270.0" font-size="10" fill="#f9ca24" text-anchor="start">→ Catalog 更新</text>
+<text x="620.0" y="124.0" font-size="10" fill="#6c8ef5" text-anchor="end">← 读 Catalog</text>
+<text x="460.0" y="628" font-size="11" fill="#80c7ff" text-anchor="middle">对象存储底层：WAL 文件（写入持久化）与 Parquet 文件（查询读取）共用同一 object store</text>
+</svg>

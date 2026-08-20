@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="560" viewBox="0 0 940 560" font-family="system-ui, sans-serif">
+<rect x="0" y="0" width="940" height="560" fill="#0b0d14"/>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+<marker id="y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+<marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+<marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+<marker id="l" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<text x="470.0" y="20" font-size="14" fill="#e6e8f0" text-anchor="middle" font-weight="bold">模块依赖关系（A → B = A 依赖 B）</text>
+<rect x="360.0" y="36" width="200" height="48" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="460" y="57.0" font-size="11" fill="#4ecdc4" text-anchor="middle" font-weight="bold">influxdb3</text>
+<text x="460" y="71.0" font-size="9" fill="#9aa0b4" text-anchor="middle">serve_main 装配</text>
+<rect x="345.0" y="124" width="230" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="460" y="145.0" font-size="11" fill="#6c8ef5" text-anchor="middle" font-weight="bold">influxdb3_server</text>
+<text x="460" y="159.0" font-size="9" fill="#9aa0b4" text-anchor="middle">HTTP / gRPC 入口</text>
+<rect x="70.0" y="212" width="220" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="180" y="233.0" font-size="11" fill="#f9ca24" text-anchor="middle" font-weight="bold">influxdb3_write</text>
+<text x="180" y="247.0" font-size="9" fill="#9aa0b4" text-anchor="middle">WriteBuffer / Persister</text>
+<rect x="510.0" y="212" width="300" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="660" y="233.0" font-size="11" fill="#6c8ef5" text-anchor="middle" font-weight="bold">query_executor + iox_query</text>
+<text x="660" y="247.0" font-size="9" fill="#9aa0b4" text-anchor="middle">DataFusion 查询</text>
+<rect x="80.0" y="300" width="200" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="180" y="321.0" font-size="11" fill="#f9ca24" text-anchor="middle" font-weight="bold">influxdb3_wal</text>
+<text x="180" y="335.0" font-size="9" fill="#9aa0b4" text-anchor="middle">WalObjectStore</text>
+<rect x="330.0" y="300" width="220" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="440" y="321.0" font-size="11" fill="#f9ca24" text-anchor="middle" font-weight="bold">influxdb3_cache</text>
+<text x="440" y="335.0" font-size="9" fill="#9aa0b4" text-anchor="middle">Last / Distinct / Parquet</text>
+<rect x="170.0" y="388" width="260" height="48" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="300" y="409.0" font-size="11" fill="#b388ff" text-anchor="middle" font-weight="bold">influxdb3_catalog</text>
+<text x="300" y="423.0" font-size="9" fill="#9aa0b4" text-anchor="middle">事件溯源 · 元数据</text>
+<rect x="490.0" y="388" width="300" height="48" rx="6" fill="#13162a" stroke="#5a6480" stroke-width="1.5"/>
+<text x="640" y="409.0" font-size="11" fill="#5a6480" text-anchor="middle" font-weight="bold">parquet_file + object_store</text>
+<text x="640" y="423.0" font-size="9" fill="#9aa0b4" text-anchor="middle">S3-FIFO · 对象存储</text>
+<rect x="40.0" y="476" width="280" height="48" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="180" y="497.0" font-size="11" fill="#ff6b9d" text-anchor="middle" font-weight="bold">processing_engine + py_api</text>
+<text x="180" y="511.0" font-size="9" fill="#9aa0b4" text-anchor="middle">Python VM 插件</text>
+<rect x="560.0" y="476" width="240" height="48" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="680" y="497.0" font-size="11" fill="#80c7ff" text-anchor="middle" font-weight="bold">authz + core/authz</text>
+<text x="680" y="511.0" font-size="9" fill="#9aa0b4" text-anchor="middle">Token / RBAC</text>
+<path d="M460,84 L460,124" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a)"/>
+<path d="M440,172 L440,184 L180,184 L180,212" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#b)"/>
+<path d="M480,172 L480,184 L660,184 L660,212" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#b)"/>
+<path d="M180,260 L180,300" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#y)"/>
+<path d="M290,228 L440,228 L440,300" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#y)"/>
+<path d="M210,260 L210,272 L300,272 L300,388" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#y)"/>
+<path d="M550,348 L550,388" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#y)"/>
+<path d="M180,348 L180,360 L490,360 L490,388" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#y)"/>
+<path d="M660,260 L660,388" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#b)"/>
+<path d="M660,260 L660,378 L430,378 L430,388" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#b)"/>
+<path d="M800,500 L900,500 L900,450 L430,450 L430,436" fill="none" stroke="#80c7ff" stroke-width="1.5" marker-end="url(#l)"/>
+<path d="M510,244 L290,244" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#b)" stroke-dasharray="5 4" opacity="0.75"/>
+<text x="400" y="238" font-size="9" fill="#6c8ef5" text-anchor="middle">读 chunks</text>
+<path d="M40,490 L24,490 L24,324 L80,324" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#p)" stroke-dasharray="5 4" opacity="0.75"/>
+<text x="28" y="412" font-size="9" fill="#ff6b9d" text-anchor="start">WAL notify</text>
+<path d="M40,510 L12,510 L12,194 L660,194 L660,212" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#p)" stroke-dasharray="5 4" opacity="0.7"/>
+<text x="16" y="346" font-size="9" fill="#ff6b9d" text-anchor="start">in-proc</text>
+<text x="470.0" y="548" font-size="10" fill="#80c7ff" text-anchor="middle">虚线 = 运行时钩入（读缓存 / 回调 / in-process / 鉴权），非编译期依赖</text>
+</svg>
