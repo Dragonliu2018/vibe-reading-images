@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowq" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="520" fill="#0b0d14"/>
+
+  <text x="400" y="28" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">分布式 SELECT 数据流</text>
+
+  <!-- Column headers -->
+  <text x="170" y="58" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">Coordinator (QD)</text>
+  <text x="630" y="58" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">Segment (QE)</text>
+
+  <!-- QD pipeline -->
+  <rect x="40" y="70" width="260" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="170" y="95" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">exec_simple_query</text>
+
+  <rect x="40" y="120" width="260" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="170" y="142" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">parse → analyze → rewrite</text>
+  <text x="170" y="160" text-anchor="middle" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="11">RawStmt → Query</text>
+
+  <rect x="40" y="185" width="260" height="55" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="170" y="207" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">plan（ORCA / PG planner）</text>
+  <text x="170" y="225" text-anchor="middle" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="11">cdb 插 Motion → PlannedStmt</text>
+
+  <rect x="40" y="255" width="260" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="170" y="277" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">ExecutorStart</text>
+  <text x="170" y="295" text-anchor="middle" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="11">CdbDispatchPlan 建 Gang</text>
+
+  <rect x="40" y="320" width="260" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="170" y="345" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">InitPlan（PlanState 树）</text>
+
+  <rect x="40" y="375" width="260" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="170" y="397" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">ExecutePlan（Gather 接收）</text>
+  <text x="170" y="415" text-anchor="middle" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="11">ExecProcNode 拉 tuple</text>
+
+  <rect x="40" y="440" width="260" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="170" y="465" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">返回客户端</text>
+
+  <!-- QE pipeline -->
+  <rect x="500" y="255" width="260" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="630" y="277" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">exec_mpp_query</text>
+  <text x="630" y="295" text-anchor="middle" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="11">反序列化 Plan + SliceTable</text>
+
+  <rect x="500" y="320" width="260" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="630" y="345" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">SetupInterconnect</text>
+
+  <rect x="500" y="375" width="260" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="630" y="397" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="13">sender Motion 执行</text>
+  <text x="630" y="415" text-anchor="middle" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="11">SendTuple 发出</text>
+
+  <!-- QD vertical arrows -->
+  <path d="M170,110 L170,120" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M170,170 L170,185" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M170,240 L170,255" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M170,305 L170,320" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M170,360 L170,375" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M170,425 L170,440" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- QE vertical arrows -->
+  <path d="M630,305 L630,320" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M630,360 L630,375" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Cross: dispatch M message (QD -> QE) at y=280 -->
+  <path d="M300,280 L500,280" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#arrowq)"/>
+  <text x="400" y="272" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="11">'M' 消息派发</text>
+
+  <!-- Cross: Motion tuple (QE -> QD) at y=400 -->
+  <path d="M500,400 L300,400" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="400" y="392" text-anchor="middle" fill="#a0a8c0" font-family="system-ui, sans-serif" font-size="11">Motion tuple（interconnect）</text>
+
+  <!-- Legend -->
+  <text x="400" y="500" text-anchor="middle" fill="#6a7088" font-family="system-ui, sans-serif" font-size="11">青 = QD 路径 · 黄 = QE 路径 · 蓝 = 分布式执行/优化器核心</text>
+</svg>

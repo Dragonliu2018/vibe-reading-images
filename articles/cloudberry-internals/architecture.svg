@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="760" height="520" fill="#0b0d14"/>
+
+  <!-- Title -->
+  <text x="380" y="30" text-anchor="middle" fill="#e6e8f0" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Cloudberry 分层架构</text>
+
+  <!-- Layer 1: 客户端层 -->
+  <rect x="40" y="55" width="680" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="70" y="80" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">客户端层</text>
+  <text x="70" y="102" fill="#a0a8c0" font-family="system-ui, sans-serif" font-size="12">psql · JDBC/ODBC</text>
+  <text x="420" y="92" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle">libpq 协议连 coordinator</text>
+
+  <!-- arrow 1->2 -->
+  <path d="M380,115 L380,135" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Layer 2: 接口与进程层 -->
+  <rect x="40" y="140" width="680" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="70" y="165" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">接口与进程层</text>
+  <text x="70" y="187" fill="#a0a8c0" font-family="system-ui, sans-serif" font-size="12">postmaster · tcop/postgres.c · libpq/</text>
+  <text x="420" y="176" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle">exec_simple_query 处理查询</text>
+
+  <!-- arrow 2->3 -->
+  <path d="M380,200 L380,220" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Layer 3: 优化器层 -->
+  <rect x="40" y="225" width="680" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="70" y="250" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">优化器层</text>
+  <text x="70" y="272" fill="#a0a8c0" font-family="system-ui, sans-serif" font-size="12">optimizer/ (CBDB并行+AQUMV) · gpopt/ · gporca/</text>
+  <text x="70" y="290" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="11">standard_planner → optimizer=on 走 ORCA，否则 PG planner</text>
+
+  <!-- arrow 3->4 -->
+  <path d="M380,295 L380,315" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Layer 4: 分布式执行层 -->
+  <rect x="40" y="320" width="680" height="70" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="70" y="345" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">分布式执行层</text>
+  <text x="70" y="367" fill="#a0a8c0" font-family="system-ui, sans-serif" font-size="12">cdb/ (Motion/Gang/interconnect/DTX) · executor/nodeMotion.c</text>
+  <text x="70" y="385" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="11">插 Motion 改写计划 · 派发 segment · Volcano 驱动</text>
+
+  <!-- arrow 4->5 -->
+  <path d="M380,390 L380,410" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Layer 5: 存储与容错层 -->
+  <rect x="40" y="415" width="680" height="70" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="70" y="440" fill="#80c7ff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">存储与容错层</text>
+  <text x="70" y="462" fill="#a0a8c0" font-family="system-ui, sans-serif" font-size="12">access/ · storage/ · fts/ (顶层) · gpMgmt/</text>
+  <text x="70" y="480" fill="#8a92a8" font-family="system-ui, sans-serif" font-size="11">PostgreSQL 16 内核 · AO 存储 · FTS 保活</text>
+
+  <!-- Legend -->
+  <text x="380" y="510" text-anchor="middle" fill="#6a7088" font-family="system-ui, sans-serif" font-size="11">箭头：查询经各层向下处理，结果汇总回流</text>
+</svg>
