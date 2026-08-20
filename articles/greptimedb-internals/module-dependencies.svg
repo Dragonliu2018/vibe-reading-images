@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 585 480" width="585" height="480" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="585" height="480" fill="#0b0d14"/>
+
+  <text x="292" y="22" text-anchor="middle" fill="#e6e6f0" font-size="16" font-weight="700">GreptimeDB 模块依赖关系</text>
+
+  <!-- servers -->
+  <rect x="235" y="44" width="130" height="46" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="300" y="67" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">servers</text>
+
+  <!-- frontend -->
+  <rect x="235" y="130" width="130" height="46" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="300" y="153" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">frontend</text>
+
+  <!-- operator -->
+  <rect x="35" y="220" width="130" height="46" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="100" y="243" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">operator</text>
+
+  <!-- query -->
+  <rect x="235" y="220" width="130" height="46" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="300" y="243" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">query</text>
+
+  <!-- flow -->
+  <rect x="435" y="220" width="130" height="46" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="500" y="243" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">flow</text>
+
+  <!-- partition -->
+  <rect x="35" y="310" width="130" height="46" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="100" y="333" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">partition</text>
+
+  <!-- sql -->
+  <rect x="235" y="310" width="130" height="46" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="300" y="333" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">sql</text>
+
+  <!-- metric-engine -->
+  <rect x="435" y="310" width="130" height="46" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="500" y="333" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">metric-engine</text>
+
+  <!-- mito2 -->
+  <rect x="235" y="400" width="130" height="46" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85" stroke-width="1.5"/>
+  <text x="300" y="423" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">mito2</text>
+
+  <!-- index -->
+  <rect x="435" y="400" width="130" height="46" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="500" y="423" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">index</text>
+
+  <!-- edges -->
+  <!-- servers -> frontend -->
+  <path d="M300,90 L300,130" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- frontend -> query -->
+  <path d="M300,176 L300,220" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- frontend -> operator (elbow) -->
+  <path d="M280,176 L280,200 L100,200 L100,220" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- flow -> frontend (dashed back-ref) -->
+  <path d="M480,220 L480,200 L320,200 L320,176" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="6 4" fill="none" marker-end="url(#arrow)"/>
+  <!-- flow -> query -->
+  <path d="M435,243 L367,243" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- operator -> partition -->
+  <path d="M100,266 L100,310" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- query -> sql -->
+  <path d="M300,266 L300,310" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- metric-engine -> mito2 (elbow) -->
+  <path d="M460,356 L460,378 L320,378 L320,400" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- index -> mito2 -->
+  <path d="M435,423 L367,423" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- legend -->
+  <line x1="35" y1="462" x2="75" y2="462" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="82" y="462" dominant-baseline="central" fill="#8a90b0" font-size="11">依赖 / 调用</text>
+  <line x1="200" y1="462" x2="240" y2="462" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <text x="247" y="462" dominant-baseline="central" fill="#8a90b0" font-size="11">反向引用（meta-client / FrontendClient）</text>
+</svg>

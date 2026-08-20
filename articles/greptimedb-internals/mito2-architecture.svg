@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 770 430" width="770" height="430" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="770" height="430" fill="#0b0d14"/>
+
+  <text x="385" y="22" text-anchor="middle" fill="#e6e6f0" font-size="16" font-weight="700">mito2 Region 存储引擎内部架构</text>
+
+  <!-- MitoEngine -->
+  <rect x="340" y="40" width="140" height="48" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <text x="410" y="64" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">MitoEngine</text>
+
+  <!-- RegionWorkerLoop -->
+  <rect x="320" y="130" width="180" height="48" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8" stroke-width="1"/>
+  <text x="410" y="148" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">RegionWorkerLoop</text>
+  <text x="410" y="166" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">WorkerGroup · 单写线程</text>
+
+  <!-- Wal -->
+  <rect x="70" y="230" width="140" height="48" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="140" y="254" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">Wal</text>
+
+  <!-- Memtable -->
+  <rect x="340" y="230" width="140" height="48" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="410" y="248" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">Memtable</text>
+  <text x="410" y="266" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">TimeSeries / Bulk</text>
+
+  <!-- CompactionScheduler -->
+  <rect x="610" y="230" width="140" height="48" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="680" y="248" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">CompactionScheduler</text>
+  <text x="680" y="266" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">Picker + Compactor</text>
+
+  <!-- SST / AccessLayer -->
+  <rect x="340" y="330" width="140" height="48" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8" stroke-width="1"/>
+  <text x="410" y="348" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">AccessLayer · SST</text>
+  <text x="410" y="366" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">Parquet + Puffin 索引</text>
+
+  <!-- ManifestManager -->
+  <rect x="610" y="330" width="140" height="48" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="680" y="348" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">ManifestManager</text>
+  <text x="680" y="366" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">RegionEdit 持久化</text>
+
+  <!-- Scanner -->
+  <rect x="70" y="330" width="140" height="48" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.75" stroke-width="1"/>
+  <text x="140" y="348" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="13">Scanner</text>
+  <text x="140" y="366" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">读路径，不走 worker</text>
+
+  <!-- edges -->
+  <path d="M410,88 L410,130" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- read bypass (dashed) -->
+  <path d="M340,64 L50,64 L50,354 L70,354" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="6 4" fill="none" marker-end="url(#arrow)"/>
+  <text x="195" y="56" text-anchor="middle" fill="#4ecdc4" font-size="10">handle_query（读）</text>
+  <!-- loop -> wal -->
+  <path d="M380,178 L380,204 L140,204 L140,230" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="255" y="196" text-anchor="middle" fill="#8a90b0" font-size="10">write_wal</text>
+  <!-- loop -> memtable -->
+  <path d="M410,178 L410,230" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="430" y="206" fill="#8a90b0" font-size="10">write_memtable</text>
+  <!-- loop -> compaction -->
+  <path d="M440,178 L440,204 L680,204 L680,230" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="560" y="196" text-anchor="middle" fill="#8a90b0" font-size="10">schedule</text>
+  <!-- memtable -> sst (flush) -->
+  <path d="M410,278 L410,330" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="430" y="306" fill="#8a90b0" font-size="10">flush</text>
+  <!-- compaction -> sst (merge) -->
+  <path d="M680,278 L680,304 L440,304 L440,330" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="560" y="296" text-anchor="middle" fill="#8a90b0" font-size="10">merge</text>
+  <!-- sst -> manifest -->
+  <path d="M480,354 L610,354" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="545" y="346" text-anchor="middle" fill="#8a90b0" font-size="10">manifest</text>
+  <!-- scanner -> sst (scan) -->
+  <path d="M210,354 L340,354" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="275" y="346" text-anchor="middle" fill="#8a90b0" font-size="10">scan</text>
+
+  <text x="385" y="402" text-anchor="middle" fill="#7a86b3" font-size="11">VersionControl 以 CoW Version 持有 memtables + ssts 快照；写串行化于 worker，读取快照异步并发</text>
+</svg>

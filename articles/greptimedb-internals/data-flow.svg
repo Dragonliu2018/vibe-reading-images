@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 360" width="980" height="360" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="980" height="360" fill="#0b0d14"/>
+
+  <text x="490" y="22" text-anchor="middle" fill="#e6e6f0" font-size="16" font-weight="700">GreptimeDB 请求数据流（写入 / 查询两条主链路）</text>
+
+  <!-- Write lane label -->
+  <text x="20" y="48" fill="#f9ca24" font-size="13" font-weight="700">写入链路 Write Path</text>
+
+  <!-- Write boxes -->
+  <rect x="20" y="56" width="130" height="52" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="85" y="78" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">servers</text>
+  <text x="85" y="94" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">mysql·otlp·prom</text>
+
+  <rect x="180" y="56" width="130" height="52" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="245" y="78" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">frontend</text>
+  <text x="245" y="94" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">Inserter</text>
+
+  <rect x="340" y="56" width="130" height="52" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="405" y="78" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">operator</text>
+  <text x="405" y="94" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">分区 + 按 peer 分组</text>
+
+  <rect x="500" y="56" width="130" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="565" y="78" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">RegionServer</text>
+  <text x="565" y="94" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">datanode</text>
+
+  <rect x="660" y="56" width="130" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8" stroke-width="1"/>
+  <text x="725" y="78" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">mito2 worker</text>
+  <text x="725" y="94" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">handle_write</text>
+
+  <rect x="820" y="56" width="130" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8" stroke-width="1"/>
+  <text x="885" y="78" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">WAL + memtable</text>
+  <text x="885" y="94" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">落盘 + 内存</text>
+
+  <!-- Write arrows -->
+  <path d="M150,82 L178,82" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M310,82 L338,82" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M470,82 L498,82" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M630,82 L658,82" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M790,82 L818,82" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- async flush note -->
+  <text x="885" y="128" text-anchor="middle" fill="#8a90b0" font-size="10">↑ 异步 flush → SST</text>
+
+  <!-- Read lane label -->
+  <text x="20" y="200" fill="#7bed9f" font-size="13" font-weight="700">查询链路 Read Path</text>
+
+  <!-- Read boxes -->
+  <rect x="20" y="208" width="130" height="52" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="85" y="230" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">servers</text>
+  <text x="85" y="246" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">mysql·promql</text>
+
+  <rect x="180" y="208" width="130" height="52" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="245" y="230" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">frontend</text>
+  <text x="245" y="246" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">QueryEngine</text>
+
+  <rect x="340" y="208" width="130" height="52" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="405" y="230" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">query</text>
+  <text x="405" y="246" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">planner→plan→opt</text>
+
+  <rect x="500" y="208" width="130" height="52" rx="5" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="565" y="230" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">dist_plan</text>
+  <text x="565" y="246" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">scatter + 分区裁剪</text>
+
+  <rect x="660" y="208" width="130" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.7" stroke-width="1"/>
+  <text x="725" y="230" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">RegionServer</text>
+  <text x="725" y="246" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">datanode</text>
+
+  <rect x="820" y="208" width="130" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8" stroke-width="1"/>
+  <text x="885" y="230" text-anchor="middle" dominant-baseline="central" fill="#d6d9e8" font-size="12">mito2 read</text>
+  <text x="885" y="246" text-anchor="middle" dominant-baseline="central" fill="#8a90b0" font-size="10">memtable + SST</text>
+
+  <!-- Read arrows -->
+  <path d="M150,234 L178,234" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M310,234 L338,234" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M470,234 L498,234" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M630,234 L658,234" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M790,234 L818,234" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- return arrow -->
+  <path d="M885,290 L85,290" stroke="#7bed9f" stroke-width="1.5" stroke-dasharray="6 4" fill="none" marker-end="url(#arrowret)"/>
+  <text x="490" y="282" text-anchor="middle" fill="#7bed9f" font-size="11">RecordBatch 结果沿原路返回</text>
+
+  <text x="490" y="330" text-anchor="middle" fill="#7a86b3" font-size="11">standalone 模式下 frontend / datanode / metasrv 同进程；分布式模式经 gRPC 跨网络</text>
+</svg>
