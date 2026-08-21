@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="540" viewBox="0 0 880 540" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="880" height="540" fill="#0b0d14"/>
+  <text x="440" y="30" text-anchor="middle" font-size="16" fill="#e8ecf5" font-weight="bold">Apache Druid 分层架构</text>
+
+  <!-- L1 接入层 #4ecdc4 -->
+  <rect x="20" y="48" width="120" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="80" y="70" text-anchor="middle" font-size="12" fill="#4ecdc4" font-weight="bold">接入层</text>
+  <text x="80" y="86" text-anchor="middle" font-size="9" fill="#4ecdc4">Access</text>
+  <rect x="150" y="48" width="228" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="264" y="78" text-anchor="middle" font-size="13" fill="#e8ecf5">Web Console</text>
+  <rect x="390" y="48" width="228" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="504" y="78" text-anchor="middle" font-size="13" fill="#e8ecf5">HTTP API</text>
+  <rect x="630" y="48" width="228" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="744" y="78" text-anchor="middle" font-size="13" fill="#e8ecf5">JDBC / SQL</text>
+
+  <!-- L2 节点进程 #6c8ef5 -->
+  <rect x="20" y="132" width="120" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="80" y="154" text-anchor="middle" font-size="12" fill="#6c8ef5" font-weight="bold">节点进程</text>
+  <text x="80" y="170" text-anchor="middle" font-size="9" fill="#6c8ef5">Nodes</text>
+  <rect x="150" y="132" width="111" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="205" y="162" text-anchor="middle" font-size="12" fill="#e8ecf5">Router</text>
+  <rect x="269" y="132" width="111" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="324" y="162" text-anchor="middle" font-size="12" fill="#e8ecf5">Broker</text>
+  <rect x="388" y="132" width="111" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="443" y="162" text-anchor="middle" font-size="12" fill="#e8ecf5">Coordinator</text>
+  <rect x="507" y="132" width="111" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="562" y="162" text-anchor="middle" font-size="12" fill="#e8ecf5">Overlord</text>
+  <rect x="626" y="132" width="111" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="681" y="162" text-anchor="middle" font-size="12" fill="#e8ecf5">Historical</text>
+  <rect x="745" y="132" width="111" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="800" y="158" text-anchor="middle" font-size="12" fill="#e8ecf5">MM /</text>
+  <text x="800" y="174" text-anchor="middle" font-size="12" fill="#e8ecf5">Indexer</text>
+
+  <!-- L3 引擎层 #f9ca24 -->
+  <rect x="20" y="216" width="120" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+  <text x="80" y="238" text-anchor="middle" font-size="12" fill="#f9ca24" font-weight="bold">引擎层</text>
+  <text x="80" y="254" text-anchor="middle" font-size="9" fill="#f9ca24">Engine</text>
+  <rect x="150" y="216" width="228" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="264" y="238" text-anchor="middle" font-size="13" fill="#e8ecf5">查询引擎</text>
+  <text x="264" y="256" text-anchor="middle" font-size="10" fill="#9aa3c7">Sequence · 聚合 · 表达式</text>
+  <rect x="390" y="216" width="228" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="504" y="238" text-anchor="middle" font-size="13" fill="#e8ecf5">Druid SQL</text>
+  <text x="504" y="256" text-anchor="middle" font-size="10" fill="#9aa3c7">Calcite 规划</text>
+  <rect x="630" y="216" width="228" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="744" y="238" text-anchor="middle" font-size="13" fill="#e8ecf5">MSQ</text>
+  <text x="744" y="256" text-anchor="middle" font-size="10" fill="#9aa3c7">多阶段执行</text>
+
+  <!-- L4 数据内核 #b388ff -->
+  <rect x="20" y="300" width="120" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="2"/>
+  <text x="80" y="322" text-anchor="middle" font-size="12" fill="#b388ff" font-weight="bold">数据内核</text>
+  <text x="80" y="338" text-anchor="middle" font-size="9" fill="#b388ff">Data Kernel</text>
+  <rect x="150" y="300" width="228" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="264" y="322" text-anchor="middle" font-size="13" fill="#e8ecf5">Segment</text>
+  <text x="264" y="340" text-anchor="middle" font-size="10" fill="#9aa3c7">列式格式</text>
+  <rect x="390" y="300" width="228" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="504" y="322" text-anchor="middle" font-size="13" fill="#e8ecf5">Column 模型</text>
+  <text x="504" y="340" text-anchor="middle" font-size="10" fill="#9aa3c7">选择器 · 向量化</text>
+  <rect x="630" y="300" width="228" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="744" y="322" text-anchor="middle" font-size="13" fill="#e8ecf5">IncrementalIndex</text>
+  <text x="744" y="340" text-anchor="middle" font-size="10" fill="#9aa3c7">实时增量索引</text>
+
+  <!-- L5 协调层 #80c7ff -->
+  <rect x="20" y="384" width="120" height="52" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="2"/>
+  <text x="80" y="406" text-anchor="middle" font-size="12" fill="#80c7ff" font-weight="bold">协调层</text>
+  <text x="80" y="422" text-anchor="middle" font-size="9" fill="#80c7ff">Coordination</text>
+  <rect x="150" y="384" width="228" height="52" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="264" y="406" text-anchor="middle" font-size="13" fill="#e8ecf5">数据均衡</text>
+  <text x="264" y="424" text-anchor="middle" font-size="10" fill="#9aa3c7">Rules · Cost 模型</text>
+  <rect x="390" y="384" width="228" height="52" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="504" y="406" text-anchor="middle" font-size="13" fill="#e8ecf5">任务调度</text>
+  <text x="504" y="424" text-anchor="middle" font-size="10" fill="#9aa3c7">TaskRunner · Supervisor</text>
+  <rect x="630" y="384" width="228" height="52" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="744" y="406" text-anchor="middle" font-size="13" fill="#e8ecf5">服务发现</text>
+  <text x="744" y="424" text-anchor="middle" font-size="10" fill="#9aa3c7">Leader 选举 · ZK</text>
+
+  <!-- L6 存储后端 #ff6b9d -->
+  <rect x="20" y="468" width="120" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+  <text x="80" y="490" text-anchor="middle" font-size="12" fill="#ff6b9d" font-weight="bold">存储后端</text>
+  <text x="80" y="506" text-anchor="middle" font-size="9" fill="#ff6b9d">Backends</text>
+  <rect x="150" y="468" width="228" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="264" y="490" text-anchor="middle" font-size="13" fill="#e8ecf5">Deep Storage</text>
+  <text x="264" y="508" text-anchor="middle" font-size="10" fill="#9aa3c7">S3 · HDFS · GCS</text>
+  <rect x="390" y="468" width="228" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="504" y="490" text-anchor="middle" font-size="13" fill="#e8ecf5">Metadata Storage</text>
+  <text x="504" y="508" text-anchor="middle" font-size="10" fill="#9aa3c7">MySQL · PostgreSQL</text>
+  <rect x="630" y="468" width="228" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="744" y="490" text-anchor="middle" font-size="13" fill="#e8ecf5">ZooKeeper</text>
+  <text x="744" y="508" text-anchor="middle" font-size="10" fill="#9aa3c7">集群协调</text>
+
+  <!-- 依赖箭头（上层调用下层） -->
+  <path d="M320,184 L320,216" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M800,184 L800,216" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M264,268 L264,300" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M504,268 L504,300" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="860" y="534" text-anchor="end" font-size="9" fill="#6b7595">↓ 上层依赖 / 调用下层</text>
+</svg>

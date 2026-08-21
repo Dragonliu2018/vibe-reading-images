@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="480" viewBox="0 0 920 480" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="920" height="480" fill="#0b0d14"/>
+  <text x="460" y="30" text-anchor="middle" font-size="16" fill="#e8ecf5" font-weight="bold">数据摄入流程（批 / 流统一）</text>
+
+  <!-- Row A: entry -->
+  <rect x="40" y="50" width="400" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="240" y="70" text-anchor="middle" font-size="12" fill="#e8ecf5">流摄入：Supervisor（Overlord）</text>
+  <text x="240" y="86" text-anchor="middle" font-size="9" fill="#9aa3c7">周期创建 SeekableStreamIndexTask</text>
+  <rect x="480" y="50" width="400" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="680" y="70" text-anchor="middle" font-size="12" fill="#e8ecf5">批摄入：IndexTask</text>
+  <text x="680" y="86" text-anchor="middle" font-size="9" fill="#9aa3c7">determinePartitions → buildSegments</text>
+
+  <!-- Row B: input -->
+  <rect x="40" y="114" width="400" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="240" y="134" text-anchor="middle" font-size="12" fill="#e8ecf5">RecordSupplier → StreamChunkReader</text>
+  <text x="240" y="150" text-anchor="middle" font-size="9" fill="#9aa3c7">Kafka / Kinesis offset + checkpoint</text>
+  <rect x="480" y="114" width="400" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="680" y="134" text-anchor="middle" font-size="12" fill="#e8ecf5">InputSource + InputFormat → reader</text>
+  <text x="680" y="150" text-anchor="middle" font-size="9" fill="#9aa3c7">isSplittable → createSplits 并行</text>
+
+  <!-- merge to InputRow -->
+  <rect x="340" y="178" width="240" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="460" y="203" text-anchor="middle" font-size="13" fill="#e8ecf5">InputRow</text>
+
+  <!-- common pipeline -->
+  <rect x="160" y="238" width="600" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="460" y="264" text-anchor="middle" font-size="12" fill="#e8ecf5">Appenderator.add（BatchAppenderator / StreamAppenderator）</text>
+
+  <rect x="160" y="298" width="600" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="460" y="318" text-anchor="middle" font-size="12" fill="#e8ecf5">Sink → IncrementalIndex.add</text>
+  <text x="460" y="334" text-anchor="middle" font-size="9" fill="#9aa3c7">ConcurrentSkipListMap + Aggregator（rollup）</text>
+
+  <rect x="160" y="358" width="600" height="42" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="460" y="378" text-anchor="middle" font-size="12" fill="#e8ecf5">persist → IndexMerger.merge → push（DataSegmentPusher）</text>
+  <text x="460" y="394" text-anchor="middle" font-size="9" fill="#9aa3c7">Deep Storage</text>
+
+  <rect x="160" y="418" width="600" height="42" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="460" y="438" text-anchor="middle" font-size="12" fill="#e8ecf5">publish metadata → Coordinator 加载 → Historical handoff</text>
+  <text x="460" y="454" text-anchor="middle" font-size="9" fill="#9aa3c7">exactly-once（流：Committer offset 快照）</text>
+
+  <!-- arrows -->
+  <path d="M240,94 L240,114" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowt)"/>
+  <path d="M680,94 L680,114" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowb)"/>
+  <path d="M240,158 L380,178" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M680,158 L540,178" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M460,218 L460,238" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M460,280 L460,298" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M460,340 L460,358" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M460,400 L460,418" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

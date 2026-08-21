@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="480" viewBox="0 0 920 480" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/>
+    </marker>
+    <marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="920" height="480" fill="#0b0d14"/>
+  <text x="460" y="30" text-anchor="middle" font-size="16" fill="#e8ecf5" font-weight="bold">关键状态流转</text>
+
+  <!-- Left panel: Overlord Task lifecycle -->
+  <rect x="30" y="50" width="410" height="410" rx="8" fill="none" stroke="#b388ff" stroke-width="1" stroke-dasharray="5 4" opacity="0.7"/>
+  <text x="42" y="68" font-size="11" fill="#b388ff" font-weight="bold">Overlord Task 生命周期</text>
+
+  <rect x="150" y="92" width="170" height="40" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="235" y="117" text-anchor="middle" font-size="12" fill="#e8ecf5">PENDING</text>
+
+  <rect x="150" y="172" width="170" height="40" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="235" y="197" text-anchor="middle" font-size="12" fill="#e8ecf5">RUNNING</text>
+
+  <rect x="55" y="282" width="150" height="40" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="130" y="307" text-anchor="middle" font-size="12" fill="#e8ecf5">SUCCESS</text>
+  <rect x="265" y="282" width="150" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="340" y="307" text-anchor="middle" font-size="12" fill="#e8ecf5">FAILED</text>
+
+  <path d="M235,132 L235,172" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M195,212 L150,282" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M275,212 L320,282" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="245" y="156" font-size="9" fill="#9aa3c7">TaskRunner 派发</text>
+  <text x="60" y="262" font-size="9" fill="#9aa3c7">run() 返回</text>
+
+  <text x="55" y="360" font-size="9" fill="#6b7595">TaskLockbox 时间区间锁保证 segment 版本顺序</text>
+  <text x="55" y="378" font-size="9" fill="#6b7595">Supervisor 周期生成 task · 失败可恢复（canRestore）</text>
+  <text x="55" y="396" font-size="9" fill="#6b7595">流摄入：Committer offset 快照 → exactly-once</text>
+
+  <!-- Right panel: MSQ ControllerStagePhase -->
+  <rect x="480" y="50" width="410" height="410" rx="8" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="5 4" opacity="0.7"/>
+  <text x="492" y="68" font-size="11" fill="#f9ca24" font-weight="bold">MSQ ControllerStagePhase</text>
+
+  <rect x="540" y="92" width="200" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="640" y="115" text-anchor="middle" font-size="12" fill="#e8ecf5">NEW</text>
+  <rect x="540" y="146" width="200" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="640" y="169" text-anchor="middle" font-size="12" fill="#e8ecf5">READING_INPUT</text>
+  <rect x="540" y="200" width="200" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="640" y="223" text-anchor="middle" font-size="12" fill="#e8ecf5">MERGING_STATISTICS</text>
+  <rect x="540" y="254" width="200" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="640" y="277" text-anchor="middle" font-size="12" fill="#e8ecf5">RESULTS_READY</text>
+  <rect x="540" y="326" width="200" height="36" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="640" y="349" text-anchor="middle" font-size="12" fill="#e8ecf5">FINISHED</text>
+
+  <rect x="780" y="200" width="90" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="825" y="223" text-anchor="middle" font-size="11" fill="#e8ecf5">RETRYING</text>
+
+  <path d="M640,128 L640,146" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M640,182 L640,200" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M640,236 L640,254" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M640,290 L640,326" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <path d="M740,218 L780,218" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M780,236 Q700,260 640,236" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="700" y="258" font-size="9" fill="#9aa3c7">worker 重跑</text>
+
+  <path d="M540,272 Q500,360 580,344" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="495" y="320" font-size="9" fill="#9aa3c7">完成清理</text>
+
+  <text x="540" y="396" font-size="9" fill="#6b7595">GLOBAL_SORT 需先收集 key statistics → 生成 partition 边界</text>
+  <text x="540" y="414" font-size="9" fill="#6b7595">RETRIABLE 错误（CanceledFault / RpcFailed）触发 RETRYING</text>
+  <text x="540" y="432" font-size="9" fill="#6b7595">kernel 单线程化：所有状态变更经 kernelManipulationQueue 串行</text>
+</svg>
