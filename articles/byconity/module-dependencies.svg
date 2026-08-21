@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="760" height="520" fill="#0b0d14"/>
+  <text x="380" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e0e4f0">ByConity 核心模块依赖关系</text>
+  <text x="380" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6a708f">箭头 = 依赖方向（A → B 表示 A 依赖 B）· 仅画关键依赖</text>
+
+  <!-- Row 1: 上层模块 -->
+  <rect x="40" y="66" width="150" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="115" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">Optimizer</text>
+  <text x="115" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">Cascades CBO</text>
+
+  <rect x="230" y="66" width="150" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="305" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">DaemonManager</text>
+  <text x="305" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">后台任务编排</text>
+
+  <rect x="420" y="66" width="150" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="495" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">Transaction / TSO</text>
+  <text x="495" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">事务 · 时间戳</text>
+
+  <rect x="610" y="66" width="120" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="670" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">ResourceMgmt</text>
+  <text x="670" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">VW · 调度</text>
+
+  <!-- Row 2: CloudServices（中心枢纽，x=230-530） -->
+  <rect x="230" y="176" width="300" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="380" y="200" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">CloudServices</text>
+  <text x="380" y="218" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">协调枢纽 · BG 线程 · RPC · 去重</text>
+
+  <!-- Row 3: WorkerTasks（x=230-380） -->
+  <rect x="230" y="286" width="150" height="48" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="305" y="307" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">WorkerTasks</text>
+  <text x="305" y="324" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">merge/mutate 执行</text>
+
+  <!-- Row 4: 基础层 -->
+  <rect x="40" y="396" width="150" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="115" y="417" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">Catalog</text>
+  <text x="115" y="434" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">元数据 → FDB</text>
+
+  <rect x="270" y="396" width="150" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="345" y="417" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">ServiceDiscovery</text>
+  <text x="345" y="434" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">服务发现 · 一致性哈希</text>
+
+  <rect x="500" y="396" width="150" height="48" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="575" y="417" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">Disks</text>
+  <text x="575" y="434" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">共享存储抽象</text>
+
+  <!-- ====== 箭头（9 条关键依赖，全部折线，走空隙通道）====== -->
+
+  <!-- 1. Optimizer → Catalog (垂直 x=115，CloudServices 左侧空隙) -->
+  <path d="M115,114 L115,396" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="122" y="260" font-family="system-ui, sans-serif" font-size="10" fill="#6a708f">stats</text>
+
+  <!-- 2. DaemonManager → CloudServices (垂直) -->
+  <path d="M305,114 L305,176" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 3. Transaction → Catalog (折线：下→左→下，走 y=160 间隙，x=140 在 CS 左侧) -->
+  <path d="M495,114 L495,160 L140,160 L140,396" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 4. ResourceMgmt → ServiceDiscovery (折线：下→左→下，走右侧 x=670 通道到 y=355) -->
+  <path d="M670,114 L670,355 L345,355 L345,396" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 5. CloudServices → WorkerTasks (垂直) -->
+  <path d="M305,232 L305,286" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 6. CloudServices → Catalog (折线：下→左→下，走 y=370 间隙) -->
+  <path d="M270,232 L270,370 L115,370 L115,396" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 7. CloudServices → Disks (折线：下→右→下，走 y=365 间隙) -->
+  <path d="M490,232 L490,365 L575,365 L575,396" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 8. WorkerTasks → Catalog (折线：下→左→下，走 y=350 间隙) -->
+  <path d="M275,334 L275,350 L90,350 L90,396" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 9. WorkerTasks → Disks (折线：下→右→下，走 y=350 间隙，与 #8 对称方向) -->
+  <path d="M335,334 L335,350 L560,350 L560,396" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 观察文字 -->
+  <text x="20" y="474" font-family="system-ui, sans-serif" font-size="11" fill="#6a708f">· Catalog、ServiceDiscovery、Disks 是高扇入基础层；CloudServices 是协调枢纽</text>
+  <text x="20" y="494" font-family="system-ui, sans-serif" font-size="11" fill="#6a708f">· 仅画 9 条关键依赖，完整依赖关系见各模块文档的「模块间交互」章</text>
+</svg>

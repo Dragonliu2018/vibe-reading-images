@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/>
+    </marker>
+  </defs>
+  <rect width="760" height="520" fill="#0b0d14"/>
+  <text x="380" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#e0e4f0">ByConity 存算分离架构</text>
+
+  <!-- 客户端层 -->
+  <rect x="185" y="50" width="170" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="270" y="77" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e0e4f0">SQL 客户端 · HTTP/MySQL</text>
+
+  <!-- 计算层 -->
+  <rect x="185" y="120" width="170" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">Server</text>
+  <text x="270" y="160" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">解析 · 优化 · 编排</text>
+  <rect x="535" y="120" width="170" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="620" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">Worker</text>
+  <text x="620" y="160" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">PlanSegment 执行</text>
+
+  <!-- 协调服务层 -->
+  <rect x="20" y="200" width="140" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="90" y="222" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">DaemonManager</text>
+  <text x="90" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">后台任务编排</text>
+  <rect x="190" y="200" width="160" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="270" y="222" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">ResourceManager</text>
+  <text x="270" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">VW · 选 worker</text>
+  <rect x="400" y="200" width="140" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="470" y="222" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">TSO Server</text>
+  <text x="470" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">全局时间戳</text>
+
+  <!-- 元数据层 -->
+  <rect x="15" y="280" width="150" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="90" y="302" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">Catalog</text>
+  <text x="90" y="320" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">MVCC · 代理</text>
+  <rect x="195" y="280" width="150" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="270" y="302" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">FoundationDB</text>
+  <text x="270" y="320" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">ACID · CAS</text>
+
+  <!-- 共享存储层 -->
+  <rect x="510" y="360" width="220" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="620" y="382" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">DiskByteS3 / HDFS</text>
+  <text x="620" y="400" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">共享存储 + 本地 SSD 缓存</text>
+
+  <!-- ====== 箭头（全部垂直/水平/折线，无斜线）====== -->
+
+  <!-- 1. Client → Server (垂直) -->
+  <path d="M270,94 L270,120" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 2. Server ↔ Worker (水平双向) -->
+  <path d="M355,146 L535,146" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow-blue)" marker-start="url(#arrow-blue)"/>
+  <text x="445" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6c8ef5">PlanSegment</text>
+
+  <!-- 3. Server → ResourceManager (垂直，同列) -->
+  <path d="M270,172 L270,200" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="280" y="188" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c7">选 worker</text>
+
+  <!-- 4. Server → TSO (折线：下→右→下) -->
+  <path d="M300,172 L300,190 L470,190 L470,200" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="385" y="184" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c7">时间戳</text>
+
+  <!-- 5. Server → Catalog (折线：下→左→下，走计算层与协调层之间的间隙) -->
+  <path d="M240,172 L240,186 L90,186 L90,280" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="165" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c7">元数据</text>
+
+  <!-- 6. DaemonManager → Server (折线：上→右→上，虚线控制面) -->
+  <path d="M90,200 L90,196 L240,196 L240,172" fill="none" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-dash)"/>
+  <text x="165" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#80c7ff">触发 BG</text>
+
+  <!-- 7. Catalog → FoundationDB (水平) -->
+  <path d="M165,306 L195,306" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 8. Worker → 共享存储 (垂直，x=620 穿过协调层和元数据层的空隙) -->
+  <path d="M620,172 L620,360" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="630" y="270" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3c7">读/写 part</text>
+
+  <!-- 9. Worker → Catalog (折线：下→左→下，虚线回访。走协调层与元数据层之间的间隙 y=264) -->
+  <path d="M640,172 L640,264 L90,264 L90,280" fill="none" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-dash)"/>
+  <text x="365" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#80c7ff">回访取元数据</text>
+
+  <!-- 图例 -->
+  <text x="20" y="448" font-family="system-ui, sans-serif" font-size="12" fill="#9aa3c7" font-weight="600">图例</text>
+  <line x1="20" y1="468" x2="60" y2="468" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="68" y="472" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">同步调用</text>
+  <line x1="160" y1="468" x2="200" y2="468" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-dash)"/>
+  <text x="208" y="472" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">RPC 回访 / 异步触发</text>
+  <text x="20" y="498" font-family="system-ui, sans-serif" font-size="11" fill="#6a708f">单一 clickhouse 二进制按 cnch_type 分离为 5 类服务，元数据集中存 FDB，数据存远端共享存储。</text>
+</svg>

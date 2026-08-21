@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="500" viewBox="0 0 940 500">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-rpc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/>
+    </marker>
+    <marker id="arrow-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+  <rect width="940" height="500" fill="#0b0d14"/>
+  <text x="470" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#e0e4f0">后台任务三层管线（以 merge 为例）</text>
+
+  <!-- Lane 1: DaemonManager -->
+  <rect x="30" y="60" width="270" height="300" rx="8" fill="none" stroke="#2a2e48" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="48" y="82" font-family="system-ui, sans-serif" font-size="12" fill="#b388ff" font-weight="600">① DaemonManager（编排）</text>
+  <rect x="48" y="96" width="234" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="165" y="114" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">DaemonJobServerBGThread</text>
+  <text x="165" y="131" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">遍历 Catalog 全表</text>
+  <rect x="48" y="156" width="234" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="165" y="174" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">TargetServerCalculator</text>
+  <text x="165" y="191" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">一致性哈希定位目标 server</text>
+  <rect x="48" y="216" width="234" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="165" y="234" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">BackgroudJobExecutor</text>
+  <text x="165" y="251" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">sync → start/stop/remove</text>
+  <path d="M165,140 L165,156" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M165,200 L165,216" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Lane 2: Server BG thread -->
+  <rect x="335" y="60" width="270" height="300" rx="8" fill="none" stroke="#2a2e48" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="353" y="82" font-family="system-ui, sans-serif" font-size="12" fill="#6c8ef5" font-weight="600">② Server 后台线程（CloudServices）</text>
+  <rect x="353" y="96" width="234" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="470" y="114" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">CnchMergeMutateThread</text>
+  <text x="470" y="131" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">runImpl · 周期调度</text>
+  <rect x="353" y="156" width="234" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="470" y="174" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">trySelectPartsToMerge</text>
+  <text x="470" y="191" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">6 步选 part · 建事务</text>
+  <rect x="353" y="216" width="234" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="470" y="234" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">submitFutureManipulationTask</text>
+  <text x="470" y="251" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">CnchWorkerClient RPC</text>
+  <path d="M470,140 L470,156" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M470,200 L470,216" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Lane 3: Worker -->
+  <rect x="640" y="60" width="270" height="300" rx="8" fill="none" stroke="#2a2e48" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="658" y="82" font-family="system-ui, sans-serif" font-size="12" fill="#6c8ef5" font-weight="600">③ Worker（WorkerTasks 执行）</text>
+  <rect x="658" y="96" width="234" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="775" y="114" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">CnchWorkerServiceImpl</text>
+  <text x="775" y="131" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">submitManipulationTask</text>
+  <rect x="658" y="156" width="234" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="775" y="174" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">CloudMergeTreeMergeTask</text>
+  <text x="775" y="191" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">MergeTreeDataMerger + 预取</text>
+  <rect x="658" y="216" width="234" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="775" y="234" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">dumpAndCommitCnchParts</text>
+  <text x="775" y="251" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">写共享存储 + 事务提交</text>
+  <path d="M775,140 L775,156" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M775,200 L775,216" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 跨 lane RPC 箭头 -->
+  <path d="M282,238 L353,238" fill="none" stroke="#80c7ff" stroke-width="1.5" marker-end="url(#arrow-rpc)"/>
+  <text x="317" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#80c7ff">触发 BG</text>
+  <path d="M587,238 L658,238" fill="none" stroke="#80c7ff" stroke-width="1.5" marker-end="url(#arrow-rpc)"/>
+  <text x="622" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#80c7ff">下发 task</text>
+
+  <!-- 底层：Catalog + 共享存储 -->
+  <rect x="180" y="400" width="240" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="300" y="422" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">Catalog (FDB)</text>
+  <text x="300" y="440" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">part 元数据 · 状态持久化</text>
+  <rect x="520" y="400" width="240" height="50" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="640" y="422" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">共享存储 (S3/HDFS)</text>
+  <text x="640" y="440" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">新 part 落盘</text>
+
+  <!-- Worker -> 共享存储 (写 part) -->
+  <path d="M775,260 L775,380 L640,400" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="710" y="372" font-family="system-ui, sans-serif" font-size="11" fill="#ff6b9d">写 part</text>
+  <!-- Worker -> Catalog (commit回写) -->
+  <path d="M658,238 L560,238 L300,400" fill="none" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow-back)"/>
+  <text x="430" y="372" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#4ecdc4">commit 回报（CnchServerClient）</text>
+  <!-- BG job 状态存 Catalog -->
+  <path d="M165,260 L165,380 L300,400" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <text x="120" y="372" font-family="system-ui, sans-serif" font-size="11" fill="#f9ca24">状态存 Catalog</text>
+
+  <text x="30" y="482" font-family="system-ui, sans-serif" font-size="11" fill="#6a708f">DaemonManager 编排（无状态 server 选 part）→ server 选 part 下发 → worker 执行 IO 与提交，状态全程持久化到 Catalog。</text>
+</svg>

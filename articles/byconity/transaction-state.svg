@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrow-fail" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <rect width="820" height="520" fill="#0b0d14"/>
+  <text x="410" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#e0e4f0">事务生命周期状态流</text>
+
+  <!-- TSO -->
+  <rect x="330" y="62" width="160" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="84" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">TSO</text>
+  <text x="410" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">start_ts · commit_ts</text>
+
+  <!-- LockManager -->
+  <rect x="110" y="62" width="170" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="195" y="84" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e4f0">LockManager</text>
+  <text x="195" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">IntentLock · 心跳续期</text>
+
+  <!-- Aborted -->
+  <rect x="70" y="200" width="150" height="76" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="145" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">Aborted</text>
+  <text x="145" y="248" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">CAS: Running→Aborted</text>
+  <text x="145" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6a708f">超时 / 冲突抢占</text>
+
+  <!-- Running -->
+  <rect x="335" y="200" width="150" height="76" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="410" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">Running</text>
+  <text x="410" y="248" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">createTransaction</text>
+  <text x="410" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">appendAction · precommit</text>
+
+  <!-- Finished -->
+  <rect x="600" y="200" width="150" height="76" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="675" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e0e4f0">Finished</text>
+  <text x="675" y="248" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">CAS: Running→Finished</text>
+  <text x="675" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">commit_ts 已确定</text>
+
+  <!-- TSO -> Running (start_ts) -->
+  <path d="M410,112 L410,200" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <text x="420" y="160" font-family="system-ui, sans-serif" font-size="11" fill="#f9ca24">start_ts</text>
+  <!-- LockManager -> Running -->
+  <path d="M265,87 L335,210" fill="none" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+
+  <!-- Running -> Finished (commit) -->
+  <path d="M485,238 L600,238" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-ok)"/>
+  <text x="542" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#4ecdc4">commit()</text>
+  <!-- TSO -> commit (commit_ts) -->
+  <path d="M455,112 L640,200" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <text x="560" y="150" font-family="system-ui, sans-serif" font-size="11" fill="#f9ca24">commit_ts</text>
+  <!-- Running -> Aborted (abort) -->
+  <path d="M335,238 L220,238" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow-fail)"/>
+  <text x="277" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#ff6b9d">abort()</text>
+
+  <!-- clean actions -->
+  <rect x="600" y="330" width="150" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="675" y="354" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">clean: postCommit</text>
+  <text x="675" y="372" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">setCommitTime 打 part</text>
+  <path d="M675,276 L675,330" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrow-ok)"/>
+
+  <rect x="70" y="330" width="150" height="56" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="145" y="354" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e0e4f0">clean: applyUndos</text>
+  <text x="145" y="372" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3c7">回滚中间 part</text>
+  <path d="M145,276 L145,330" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow-fail)"/>
+
+  <!-- record 删除 -->
+  <rect x="600" y="420" width="150" height="48" rx="6" fill="#13162a" stroke="#6a708f" stroke-width="1.5"/>
+  <text x="675" y="442" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa3c7">TTL 删 record</text>
+  <text x="675" y="459" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6a708f">延时 ~5 分钟</text>
+  <path d="M675,386 L675,420" fill="none" stroke="#6a708f" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="70" y="420" width="150" height="48" rx="6" fill="#13162a" stroke="#6a708f" stroke-width="1.5"/>
+  <text x="145" y="442" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa3c7">立即删 record</text>
+  <text x="145" y="459" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6a708f">applyUndos 后</text>
+  <path d="M145,386 L145,420" fill="none" stroke="#6a708f" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="410" y="500" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6a708f">scanActiveTransactions 后台扫描（~10min）强制清理过期事务（~24h）；CAS 由 FoundationDB 保证原子状态转换。</text>
+</svg>
