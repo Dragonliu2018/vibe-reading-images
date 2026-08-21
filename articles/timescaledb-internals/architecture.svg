@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="700" viewBox="0 0 820 700" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="700" fill="#0b0d14"/>
+
+  <text x="410" y="30" text-anchor="middle" font-size="17" fill="#e4e7f3" font-weight="600">TimescaleDB 分层架构（2.29.2）</text>
+  <text x="410" y="50" text-anchor="middle" font-size="12" fill="#9aa3c0">PostgreSQL 扩展 · Apache（src/）+ Timescale License（tsl/）双许可桥</text>
+
+  <!-- Layer 1: Loader -->
+  <circle cx="33" cy="62" r="5" fill="#4ecdc4"/>
+  <text x="44" y="66" font-size="13" fill="#4ecdc4" font-weight="600">加载引导层</text>
+  <g>
+    <rect x="27" y="80" width="175" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+    <text x="114" y="104" text-anchor="middle" font-size="13" fill="#e4e7f3">loader.so</text>
+    <text x="114" y="122" text-anchor="middle" font-size="11" fill="#9aa3c0">_PG_init 引导</text>
+
+    <rect x="224" y="80" width="175" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+    <text x="311" y="104" text-anchor="middle" font-size="13" fill="#e4e7f3">post_parse_analyze</text>
+    <text x="311" y="122" text-anchor="middle" font-size="11" fill="#9aa3c0">_hook 延迟触发加载</text>
+
+    <rect x="421" y="80" width="175" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+    <text x="508" y="104" text-anchor="middle" font-size="13" fill="#e4e7f3">do_load</text>
+    <text x="508" y="122" text-anchor="middle" font-size="11" fill="#9aa3c0">→ ts_post_load_init</text>
+
+    <rect x="618" y="80" width="175" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+    <text x="705" y="104" text-anchor="middle" font-size="13" fill="#e4e7f3">License GUC</text>
+    <text x="705" y="122" text-anchor="middle" font-size="11" fill="#9aa3c0">apache / timescale</text>
+  </g>
+  <path d="M 15 140 L 15 180" stroke="#7a86b3" stroke-width="1.5" opacity="0.55" marker-end="url(#arrow)"/>
+
+  <!-- Layer 2: SQL Interception & Planning -->
+  <circle cx="33" cy="182" r="5" fill="#6c8ef5"/>
+  <text x="44" y="186" font-size="13" fill="#6c8ef5" font-weight="600">SQL 拦截与规划层</text>
+  <g>
+    <rect x="27" y="200" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="114" y="224" text-anchor="middle" font-size="13" fill="#e4e7f3">process_utility</text>
+    <text x="114" y="242" text-anchor="middle" font-size="11" fill="#9aa3c0">DDL 拦截分发</text>
+
+    <rect x="224" y="200" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="311" y="224" text-anchor="middle" font-size="13" fill="#e4e7f3">planner</text>
+    <text x="311" y="242" text-anchor="middle" font-size="11" fill="#9aa3c0">查询规划重写</text>
+
+    <rect x="421" y="200" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="508" y="224" text-anchor="middle" font-size="13" fill="#e4e7f3">executor hooks</text>
+    <text x="508" y="242" text-anchor="middle" font-size="11" fill="#9aa3c0">ModifyTable 拦截</text>
+
+    <rect x="618" y="200" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="705" y="224" text-anchor="middle" font-size="13" fill="#e4e7f3">CrossModuleFunctions</text>
+    <text x="705" y="242" text-anchor="middle" font-size="11" fill="#9aa3c0">ABI 双许可桥</text>
+  </g>
+  <path d="M 15 260 L 15 300" stroke="#7a86b3" stroke-width="1.5" opacity="0.55" marker-end="url(#arrow)"/>
+
+  <!-- Layer 3: Core Data Model -->
+  <circle cx="33" cy="302" r="5" fill="#6c8ef5"/>
+  <text x="44" y="306" font-size="13" fill="#6c8ef5" font-weight="600">核心数据模型层</text>
+  <g>
+    <rect x="27" y="320" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="114" y="344" text-anchor="middle" font-size="13" fill="#e4e7f3">Hypertable</text>
+    <text x="114" y="362" text-anchor="middle" font-size="11" fill="#9aa3c0">逻辑表 + 维度空间</text>
+
+    <rect x="224" y="320" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="311" y="344" text-anchor="middle" font-size="13" fill="#e4e7f3">Dimension / Slice</text>
+    <text x="311" y="362" text-anchor="middle" font-size="11" fill="#9aa3c0">时间 / 空间分区</text>
+
+    <rect x="421" y="320" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="508" y="344" text-anchor="middle" font-size="13" fill="#e4e7f3">Chunk</text>
+    <text x="508" y="362" text-anchor="middle" font-size="11" fill="#9aa3c0">物理分区表</text>
+
+    <rect x="618" y="320" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="705" y="344" text-anchor="middle" font-size="13" fill="#e4e7f3">TS Catalog</text>
+    <text x="705" y="362" text-anchor="middle" font-size="11" fill="#9aa3c0">元数据表 + Scanner</text>
+  </g>
+  <path d="M 15 380 L 15 420" stroke="#7a86b3" stroke-width="1.5" opacity="0.55" marker-end="url(#arrow)"/>
+
+  <!-- Layer 4: Execution Engine -->
+  <circle cx="33" cy="422" r="5" fill="#ff6b9d"/>
+  <text x="44" y="426" font-size="13" fill="#ff6b9d" font-weight="600">执行引擎层（自定义 Scan 节点）</text>
+  <g>
+    <rect x="27" y="440" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="114" y="464" text-anchor="middle" font-size="13" fill="#e4e7f3">ChunkAppend</text>
+    <text x="114" y="482" text-anchor="middle" font-size="11" fill="#9aa3c0">并行扫描 + 剪枝</text>
+
+    <rect x="224" y="440" width="175" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="311" y="464" text-anchor="middle" font-size="13" fill="#e4e7f3">ColumnarScan</text>
+    <text x="311" y="482" text-anchor="middle" font-size="11" fill="#9aa3c0">列存扫描 + 谓词下推</text>
+
+    <rect x="421" y="440" width="175" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="508" y="464" text-anchor="middle" font-size="13" fill="#e4e7f3">VectorAgg</text>
+    <text x="508" y="482" text-anchor="middle" font-size="11" fill="#9aa3c0">向量化聚合</text>
+
+    <rect x="618" y="440" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="705" y="464" text-anchor="middle" font-size="13" fill="#e4e7f3">ModifyHypertableExec</text>
+    <text x="705" y="482" text-anchor="middle" font-size="11" fill="#9aa3c0">插入按行路由 chunk</text>
+  </g>
+  <path d="M 15 500 L 15 540" stroke="#7a86b3" stroke-width="1.5" opacity="0.55" marker-end="url(#arrow)"/>
+
+  <!-- Layer 5: Storage & Background -->
+  <circle cx="33" cy="542" r="5" fill="#f9ca24"/>
+  <text x="44" y="546" font-size="13" fill="#f9ca24" font-weight="600">存储与后台层</text>
+  <g>
+    <rect x="27" y="560" width="175" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="114" y="584" text-anchor="middle" font-size="13" fill="#e4e7f3">Compression</text>
+    <text x="114" y="602" text-anchor="middle" font-size="11" fill="#9aa3c0">列存压缩引擎</text>
+
+    <rect x="224" y="560" width="175" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="311" y="584" text-anchor="middle" font-size="13" fill="#e4e7f3">Continuous Aggs</text>
+    <text x="311" y="602" text-anchor="middle" font-size="11" fill="#9aa3c0">实时物化视图</text>
+
+    <rect x="421" y="560" width="175" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="508" y="584" text-anchor="middle" font-size="13" fill="#e4e7f3">BGW Scheduler</text>
+    <text x="508" y="602" text-anchor="middle" font-size="11" fill="#9aa3c0">后台 Job / Policy</text>
+
+    <rect x="618" y="560" width="175" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="705" y="584" text-anchor="middle" font-size="13" fill="#e4e7f3">Chunk Ops</text>
+    <text x="705" y="602" text-anchor="middle" font-size="11" fill="#9aa3c0">merge / split / reorder</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(27, 648)">
+    <rect x="0" y="0" width="14" height="14" rx="3" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+    <text x="22" y="11" font-size="12" fill="#9aa3c0">加载引导</text>
+    <rect x="100" y="0" width="14" height="14" rx="3" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="122" y="11" font-size="12" fill="#9aa3c0">Apache 开源（src/）</text>
+    <rect x="280" y="0" width="14" height="14" rx="3" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="302" y="11" font-size="12" fill="#9aa3c0">Timescale License 企业版（tsl/）</text>
+    <rect x="560" y="0" width="14" height="14" rx="3" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+    <text x="582" y="11" font-size="12" fill="#9aa3c0">存储 / 后台</text>
+  </g>
+  <text x="480" y="685" text-anchor="middle" font-size="11" fill="#6c8ef5" opacity="0.7">↑ 上层依赖下层（左侧竖箭头）</text>
+</svg>

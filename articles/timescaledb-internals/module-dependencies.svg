@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="600" fill="#0b0d14"/>
+
+  <text x="480" y="26" text-anchor="middle" font-size="17" fill="#e4e7f3" font-weight="600">TimescaleDB 模块依赖关系</text>
+  <text x="480" y="44" text-anchor="middle" font-size="11" fill="#9aa3c0">Apache（src/）经 CrossModuleFunctions ABI 桥运行时调用 Timescale License（tsl/），不静态链接</text>
+
+  <!-- Loader -->
+  <rect x="380" y="58" width="200" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="480" y="77" text-anchor="middle" font-size="13" fill="#e4e7f3">加载引导 / Loader</text>
+  <text x="480" y="94" text-anchor="middle" font-size="11" fill="#9aa3c0">loader.so · License GUC</text>
+
+  <!-- Apache column (left) -->
+  <g>
+    <rect x="40" y="140" width="210" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="145" y="162" text-anchor="middle" font-size="13" fill="#e4e7f3">process_utility</text>
+    <text x="145" y="178" text-anchor="middle" font-size="11" fill="#9aa3c0">DDL 拦截分发</text>
+
+    <rect x="40" y="208" width="210" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="145" y="230" text-anchor="middle" font-size="13" fill="#e4e7f3">planner</text>
+    <text x="145" y="246" text-anchor="middle" font-size="11" fill="#9aa3c0">查询规划重写</text>
+
+    <rect x="40" y="276" width="210" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="145" y="298" text-anchor="middle" font-size="13" fill="#e4e7f3">Hypertable &amp; 维度</text>
+    <text x="145" y="314" text-anchor="middle" font-size="11" fill="#9aa3c0">分区数据模型</text>
+
+    <rect x="40" y="344" width="210" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="145" y="366" text-anchor="middle" font-size="13" fill="#e4e7f3">Chunk 管理</text>
+    <text x="145" y="382" text-anchor="middle" font-size="11" fill="#9aa3c0">物理分区表</text>
+
+    <rect x="40" y="412" width="210" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="145" y="434" text-anchor="middle" font-size="13" fill="#e4e7f3">BGW 调度</text>
+    <text x="145" y="450" text-anchor="middle" font-size="11" fill="#9aa3c0">后台 Job / Policy</text>
+  </g>
+
+  <!-- TSL column (right) -->
+  <g>
+    <rect x="710" y="140" width="210" height="48" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="815" y="162" text-anchor="middle" font-size="13" fill="#e4e7f3">Compression</text>
+    <text x="815" y="178" text-anchor="middle" font-size="11" fill="#9aa3c0">列存压缩引擎</text>
+
+    <rect x="710" y="208" width="210" height="48" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="815" y="230" text-anchor="middle" font-size="13" fill="#e4e7f3">Continuous Aggs</text>
+    <text x="815" y="246" text-anchor="middle" font-size="11" fill="#9aa3c0">实时物化视图</text>
+
+    <rect x="710" y="276" width="210" height="48" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="815" y="298" text-anchor="middle" font-size="13" fill="#e4e7f3">Columnar &amp; VectorAgg</text>
+    <text x="815" y="314" text-anchor="middle" font-size="11" fill="#9aa3c0">列存扫描 / 向量化</text>
+
+    <rect x="710" y="344" width="210" height="48" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="815" y="366" text-anchor="middle" font-size="13" fill="#e4e7f3">Chunk Ops</text>
+    <text x="815" y="382" text-anchor="middle" font-size="11" fill="#9aa3c0">merge / split / reorder</text>
+  </g>
+
+  <!-- Bridge label box (center gap) -->
+  <rect x="360" y="300" width="240" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.9"/>
+  <text x="480" y="320" text-anchor="middle" font-size="12" fill="#9aa3c0">CrossModuleFunctions</text>
+  <text x="480" y="336" text-anchor="middle" font-size="12" fill="#9aa3c0">ABI 双许可桥（ts_cm_functions）</text>
+
+  <!-- TS Catalog (bottom center) -->
+  <rect x="380" y="500" width="200" height="46" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+  <text x="480" y="519" text-anchor="middle" font-size="13" fill="#e4e7f3">TS Catalog</text>
+  <text x="480" y="536" text-anchor="middle" font-size="11" fill="#9aa3c0">元数据表 + Scanner</text>
+
+  <!-- Arrows -->
+  <!-- Loader loads Apache (left) and lazy-loads TSL (right) -->
+  <path d="M 420 104 L 160 140" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 540 104 L 800 140" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Apache -> TSL via bridge: process_utility delegates compression DDL -->
+  <path d="M 250 164 L 710 164" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="480" y="158" text-anchor="middle" font-size="11" fill="#6c8ef5">DDL / 操作委托</text>
+
+  <!-- Apache -> TSL via bridge: planner injects columnar nodes -->
+  <path d="M 250 232 L 710 296" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="330" y="258" font-size="11" fill="#6c8ef5">查询注入</text>
+
+  <!-- Columnar calls Compression to decompress (within TSL): routed through left gap to avoid crossing Continuous Aggs box -->
+  <path d="M 710 300 L 695 300 L 695 164 L 710 164" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="688" y="236" text-anchor="end" font-size="11" fill="#ff6b9d">调用解压</text>
+
+  <!-- Left column -> Catalog -->
+  <path d="M 145 460 L 400 500" stroke="#7a86b3" stroke-width="1.5" opacity="0.6" fill="none" marker-end="url(#arrow)"/>
+  <!-- Right column -> Catalog -->
+  <path d="M 815 392 L 560 500" stroke="#7a86b3" stroke-width="1.5" opacity="0.6" fill="none" marker-end="url(#arrow)"/>
+  <text x="460" y="486" text-anchor="middle" font-size="11" fill="#f9ca24" opacity="0.8">元数据读写</text>
+
+  <!-- Legend -->
+  <g transform="translate(40, 560)">
+    <rect x="0" y="0" width="14" height="14" rx="3" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+    <text x="22" y="11" font-size="12" fill="#9aa3c0">加载引导</text>
+    <rect x="110" y="0" width="14" height="14" rx="3" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+    <text x="132" y="11" font-size="12" fill="#9aa3c0">Apache 开源（src/）</text>
+    <rect x="300" y="0" width="14" height="14" rx="3" fill="#13162a" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="322" y="11" font-size="12" fill="#9aa3c0">Timescale License（tsl/）</text>
+    <rect x="540" y="0" width="14" height="14" rx="3" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+    <text x="562" y="11" font-size="12" fill="#9aa3c0">共享元数据基座</text>
+  </g>
+</svg>
