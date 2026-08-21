@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="624" viewBox="0 0 860 624" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="860" height="624" fill="#0b0d14"/>
+
+  <text x="430" y="28" text-anchor="middle" fill="#e8eaf2" font-size="17" font-weight="600">Apache Arrow C++ 分层架构</text>
+
+  <!-- format spec bar -->
+  <rect x="150" y="46" width="420" height="32" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="360" y="66" text-anchor="middle" fill="#c9cee0" font-size="12">格式规范 format/ · FlatBuffers(Schema/Message/File) + Flight.proto</text>
+
+  <!-- L6 Transport -->
+  <rect x="150" y="100" width="420" height="58" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="360" y="122" text-anchor="middle" fill="#e8eaf2" font-size="14" font-weight="600">传输层 Transport</text>
+  <text x="360" y="142" text-anchor="middle" fill="#c9cee0" font-size="12">ipc · flight（RPC）</text>
+
+  <!-- L5 Dataset -->
+  <rect x="150" y="188" width="420" height="58" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="360" y="210" text-anchor="middle" fill="#e8eaf2" font-size="14" font-weight="600">数据访问 Dataset</text>
+  <text x="360" y="230" text-anchor="middle" fill="#c9cee0" font-size="12">dataset（Scanner 编排 Acero + 文件格式 + 分区）</text>
+
+  <!-- L4 IO + file formats -->
+  <rect x="150" y="276" width="420" height="58" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="360" y="298" text-anchor="middle" fill="#e8eaf2" font-size="14" font-weight="600">I/O 与文件格式</text>
+  <text x="360" y="318" text-anchor="middle" fill="#c9cee0" font-size="12">io · filesystem · parquet · csv · json</text>
+
+  <!-- L3 Acero -->
+  <rect x="150" y="364" width="420" height="58" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="360" y="386" text-anchor="middle" fill="#e8eaf2" font-size="14" font-weight="600">执行引擎 Acero</text>
+  <text x="360" y="406" text-anchor="middle" fill="#c9cee0" font-size="12">acero（push-based ExecPlan 流水线）</text>
+
+  <!-- L2 Compute -->
+  <rect x="150" y="452" width="420" height="58" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="360" y="474" text-anchor="middle" fill="#e8eaf2" font-size="14" font-weight="600">计算内核 Compute</text>
+  <text x="360" y="494" text-anchor="middle" fill="#c9cee0" font-size="12">compute（Function / Kernel / Expression）</text>
+
+  <!-- L1 Core types & memory (foundation) -->
+  <rect x="150" y="540" width="420" height="58" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="360" y="562" text-anchor="middle" fill="#e8eaf2" font-size="14" font-weight="600">核心类型与内存 Core</text>
+  <text x="360" y="582" text-anchor="middle" fill="#c9cee0" font-size="12">type · buffer · memory_pool · array · datum</text>
+
+  <!-- Gandiva side box (aligns with compute) -->
+  <rect x="600" y="452" width="190" height="58" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="695" y="474" text-anchor="middle" fill="#e8eaf2" font-size="14" font-weight="600">Gandiva</text>
+  <text x="695" y="494" text-anchor="middle" fill="#c9cee0" font-size="12">LLVM JIT 表达式编译</text>
+
+  <!-- downward dependency arrows (upper depends on lower) -->
+  <path d="M360,78 L360,100" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M360,158 L360,188" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M360,246 L360,276" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M360,334 L360,364" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M360,422 L360,452" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M360,510 L360,540" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 依赖 label on first arrow -->
+  <text x="372" y="92" fill="#7a86b3" font-size="11">依赖</text>
+
+  <!-- Gandiva -> Compute (alternative expression path) -->
+  <path d="M600,481 L570,481" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-dash)"/>
+  <text x="585" y="473" text-anchor="middle" fill="#6c8ef5" font-size="10">替代</text>
+
+  <!-- legend -->
+  <rect x="600" y="540" width="190" height="58" rx="6" fill="#0b0d14" stroke="#2a2e44" stroke-width="1"/>
+  <text x="612" y="558" fill="#7a86b3" font-size="11">— 上层依赖下层</text>
+  <text x="612" y="574" fill="#6c8ef5" font-size="11">- - Gandiva 并行 JIT 路径</text>
+  <text x="612" y="590" fill="#7a86b3" font-size="11">- - format/ 规范（代码生成）</text>
+</svg>

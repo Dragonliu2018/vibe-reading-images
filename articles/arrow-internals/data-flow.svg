@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="360" viewBox="0 0 880 360" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="360" fill="#0b0d14"/>
+
+  <text x="440" y="28" text-anchor="middle" fill="#e8eaf2" font-size="17" font-weight="600">Dataset 扫描数据流与零拷贝边界</text>
+
+  <!-- stage 1: Scanner -->
+  <rect x="30" y="70" width="108" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="84" y="96" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">Scanner</text>
+  <text x="84" y="114" text-anchor="middle" fill="#c9cee0" font-size="11">ToTable()</text>
+  <text x="84" y="128" text-anchor="middle" fill="#9aa0b8" font-size="10">入口</text>
+
+  <!-- stage 2: Acero scan node -->
+  <rect x="170" y="70" width="108" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="224" y="96" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">scan 节点</text>
+  <text x="224" y="114" text-anchor="middle" fill="#c9cee0" font-size="11">Acero</text>
+  <text x="224" y="128" text-anchor="middle" fill="#9aa0b8" font-size="10">pull generator</text>
+
+  <!-- stage 3: Parquet read -->
+  <rect x="310" y="70" width="108" height="70" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="364" y="92" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">Parquet 读取</text>
+  <text x="364" y="108" text-anchor="middle" fill="#c9cee0" font-size="10">RowGroup→Page</text>
+  <text x="364" y="122" text-anchor="middle" fill="#c9cee0" font-size="10">→解码 encoding</text>
+  <text x="364" y="134" text-anchor="middle" fill="#e74c3c" font-size="10">① 拷贝点</text>
+
+  <!-- stage 4: TransferZeroCopy -> ArrayData (zero-copy boundary) -->
+  <rect x="450" y="70" width="108" height="70" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+  <text x="504" y="92" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">TransferZeroCopy</text>
+  <text x="504" y="108" text-anchor="middle" fill="#c9cee0" font-size="10">→ ArrayData</text>
+  <text x="504" y="122" text-anchor="middle" fill="#c9cee0" font-size="10">buffers[1]</text>
+  <text x="504" y="134" text-anchor="middle" fill="#f9ca24" font-size="10">零拷贝起点</text>
+
+  <!-- stage 5: Acero filter/project/sink -->
+  <rect x="590" y="70" width="108" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="644" y="92" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">filter/project</text>
+  <text x="644" y="108" text-anchor="middle" fill="#c9cee0" font-size="11">→ sink</text>
+  <text x="644" y="122" text-anchor="middle" fill="#c9cee0" font-size="10">push 流水线</text>
+  <text x="644" y="134" text-anchor="middle" fill="#e74c3c" font-size="10">② ③ 拷贝点</text>
+
+  <!-- stage 6: Table -->
+  <rect x="730" y="70" width="108" height="70" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="784" y="96" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">Table</text>
+  <text x="784" y="114" text-anchor="middle" fill="#c9cee0" font-size="11">FromRecordBatches</text>
+  <text x="784" y="128" text-anchor="middle" fill="#9aa0b8" font-size="10">输出</text>
+
+  <!-- arrows -->
+  <path d="M138,105 L170,105" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M278,105 L310,105" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M418,105 L450,105" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-y)"/>
+  <path d="M558,105 L590,105" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-y)"/>
+  <path d="M698,105 L730,105" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow-y)"/>
+
+  <!-- zero-copy bracket under stages 4-6 -->
+  <path d="M450,160 L450,170 L838,170 L838,160" fill="none" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="644" y="190" text-anchor="middle" fill="#f9ca24" font-size="12">零拷贝区间：ArrayData → ExecBatch → RecordBatch → Table</text>
+
+  <!-- pull / push annotation -->
+  <text x="154" y="64" text-anchor="middle" fill="#9aa0b8" font-size="10">构建 plan</text>
+  <text x="294" y="64" text-anchor="middle" fill="#9aa0b8" font-size="10">拉取</text>
+  <text x="434" y="64" text-anchor="middle" fill="#9aa0b8" font-size="10">解码</text>
+
+  <!-- copy points legend -->
+  <rect x="40" y="215" width="800" height="120" rx="8" fill="#0e1018" stroke="#2a2e44" stroke-width="1"/>
+  <text x="56" y="240" fill="#e8eaf2" font-size="13" font-weight="600">数据拷贝点（仅 3 处）</text>
+  <text x="56" y="264" fill="#e74c3c" font-size="12">① Parquet page 解码：encoding（RLE/字典/Delta）→ 原始值，写入 RecordReader buffer，不可避免</text>
+  <text x="56" y="286" fill="#e74c3c" font-size="12">② compute::Filter() 过滤行：分配新数组存放命中行（field_ref 投影与 RecordBatch::Slice 仍零拷贝）</text>
+  <text x="56" y="308" fill="#e74c3c" font-size="12">③ 投影中的计算表达式（算术/cast）：分配新 buffer 存结果</text>
+  <text x="56" y="330" fill="#7bed9f" font-size="12">其余环节（ArrayData 传递、ExecBatch 跨节点、Slice、纯字段投影）均为 shared_ptr 引用计数零拷贝</text>
+</svg>

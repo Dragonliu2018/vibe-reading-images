@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="440" viewBox="0 0 860 440" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="860" height="440" fill="#0b0d14"/>
+
+  <text x="430" y="26" text-anchor="middle" fill="#e8eaf2" font-size="17" font-weight="600">Apache Arrow C++ 模块依赖关系</text>
+
+  <!-- T1: Dataset, Flight -->
+  <rect x="65" y="35" width="150" height="50" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="140" y="57" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">Dataset</text>
+  <text x="140" y="74" text-anchor="middle" fill="#c9cee0" font-size="11">dataset（Scanner 编排）</text>
+
+  <rect x="565" y="35" width="150" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="640" y="57" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">Flight</text>
+  <text x="640" y="74" text-anchor="middle" fill="#c9cee0" font-size="11">flight（RPC）</text>
+
+  <!-- T2: Acero, IPC -->
+  <rect x="65" y="135" width="150" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="140" y="157" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">Acero</text>
+  <text x="140" y="174" text-anchor="middle" fill="#c9cee0" font-size="11">acero（push 执行）</text>
+
+  <rect x="565" y="135" width="150" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="640" y="157" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">IPC</text>
+  <text x="640" y="174" text-anchor="middle" fill="#c9cee0" font-size="11">ipc（序列化）</text>
+
+  <!-- T3: Compute, Gandiva, Parquet -->
+  <rect x="65" y="235" width="150" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="140" y="257" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">Compute</text>
+  <text x="140" y="274" text-anchor="middle" fill="#c9cee0" font-size="11">compute（kernel）</text>
+
+  <rect x="265" y="235" width="150" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="340" y="257" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">Gandiva</text>
+  <text x="340" y="274" text-anchor="middle" fill="#c9cee0" font-size="11">LLVM JIT</text>
+
+  <rect x="465" y="235" width="150" height="50" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="540" y="257" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">Parquet</text>
+  <text x="540" y="274" text-anchor="middle" fill="#c9cee0" font-size="11">parquet（列式文件）</text>
+
+  <!-- T4 foundation: Core bar + IO -->
+  <rect x="120" y="335" width="440" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="340" y="357" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">核心类型与内存 Core</text>
+  <text x="340" y="374" text-anchor="middle" fill="#c9cee0" font-size="11">type · buffer · memory_pool · array · datum</text>
+
+  <rect x="590" y="335" width="150" height="50" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="665" y="357" text-anchor="middle" fill="#e8eaf2" font-size="13" font-weight="600">I/O 与文件系统</text>
+  <text x="665" y="374" text-anchor="middle" fill="#c9cee0" font-size="11">io · filesystem</text>
+
+  <!-- arrows: dependent -> dependency -->
+  <!-- Dataset -> Acero (col L) -->
+  <path d="M140,85 L140,135" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Acero -> Compute (col L) -->
+  <path d="M140,185 L140,235" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Compute -> Core -->
+  <path d="M140,285 L140,335" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Flight -> IPC (col R) -->
+  <path d="M640,85 L640,135" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- IPC -> IO (col R, skips T3 at clear x) -->
+  <path d="M640,185 L640,335" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Gandiva -> Core -->
+  <path d="M340,285 L340,335" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Parquet -> Core -->
+  <path d="M540,285 L540,335" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Dataset -> Parquet (orchestration, diagonal) -->
+  <path d="M215,85 L540,235" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow-pink)"/>
+  <!-- IO -> Core (foundation: IO depends on Core) -->
+  <path d="M590,360 L560,360" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- legend / note -->
+  <rect x="40" y="400" width="780" height="30" rx="6" fill="#0b0d14" stroke="#2a2e44" stroke-width="1"/>
+  <text x="50" y="419" fill="#9aa0b8" font-size="11">灰箭头 = 依赖 · 粉箭头 = Dataset 编排链 · Dataset 还依赖 Compute/Core/IO，Flight 还依赖 Core/IO（省略以保持清晰）</text>
+</svg>
