@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="480" viewBox="0 0 760 480" font-family="system-ui, sans-serif">
+<rect width="760" height="480" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+</defs>
+<text x="380" y="28" text-anchor="middle" fill="#e6e8f0" font-size="18" font-weight="600">键类型体系（entity/key.hpp）</text>
+
+<!-- KeyClass -->
+<rect x="300" y="56" width="160" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="380" y="83" text-anchor="middle" fill="#e6e8f0" font-size="13">KeyClass: ATOM / REF</text>
+
+<!-- AtomKey & RefKey -->
+<rect x="80" y="130" width="240" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="200" y="154" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">AtomKeyImpl (AtomKey)</text>
+<text x="200" y="174" text-anchor="middle" fill="#9aa3c0" font-size="11">不可变 · 内容寻址 · 可哈希</text>
+<text x="200" y="188" text-anchor="middle" fill="#9aa3c0" font-size="10">AtomKeyPacked (#pragma pack, 40B)</text>
+<rect x="440" y="130" width="240" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="560" y="154" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">RefKey</text>
+<text x="560" y="174" text-anchor="middle" fill="#9aa3c0" font-size="11">可变 · 仅 id() 定位</text>
+<text x="560" y="188" text-anchor="middle" fill="#9aa3c0" font-size="10">非内容寻址</text>
+<line x1="340" y1="78" x2="220" y2="128" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="420" y1="78" x2="540" y2="128" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- AtomKey fields -->
+<text x="80" y="220" fill="#9aa3c0" font-size="11">字段：id_(StreamId) · version_id_ · creation_ts_ · content_hash_ · key_type_ · index_start_ · index_end_</text>
+
+<!-- ATOM key types -->
+<text x="80" y="252" fill="#6c8ef5" font-size="13" font-weight="600">ATOM 键类型（不可变，存数据/索引）</text>
+<rect x="80" y="262" width="120" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="140" y="287" text-anchor="middle" fill="#e6e8f0" font-size="12">TABLE_DATA</text>
+<rect x="210" y="262" width="120" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="270" y="287" text-anchor="middle" fill="#e6e8f0" font-size="12">TABLE_INDEX</text>
+<rect x="340" y="262" width="90" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="385" y="287" text-anchor="middle" fill="#e6e8f0" font-size="12">VERSION</text>
+<rect x="440" y="262" width="110" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="495" y="287" text-anchor="middle" fill="#e6e8f0" font-size="12">SYMBOL_LIST</text>
+<rect x="560" y="262" width="120" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="620" y="287" text-anchor="middle" fill="#e6e8f0" font-size="12">COLUMN_STATS</text>
+
+<!-- REF key types -->
+<text x="80" y="332" fill="#ff6b9d" font-size="13" font-weight="600">REF 键类型（可变，指向 ATOM）</text>
+<rect x="80" y="342" width="120" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="140" y="367" text-anchor="middle" fill="#e6e8f0" font-size="12">VERSION_REF</text>
+<rect x="210" y="342" width="120" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="270" y="367" text-anchor="middle" fill="#e6e8f0" font-size="12">SNAPSHOT_REF</text>
+<rect x="340" y="342" width="120" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="400" y="367" text-anchor="middle" fill="#e6e8f0" font-size="12">APPEND_REF</text>
+<rect x="470" y="342" width="70" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="505" y="367" text-anchor="middle" fill="#e6e8f0" font-size="12">LOCK</text>
+<rect x="550" y="342" width="110" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/><text x="605" y="367" text-anchor="middle" fill="#e6e8f0" font-size="11">ATOMIC_LOCK</text>
+
+<!-- virtual -->
+<text x="80" y="416" fill="#9aa3c0" font-size="12" font-weight="600">虚拟键（不独立存盘，仅存在于 VERSION 段内）</text>
+<rect x="80" y="426" width="120" height="34" rx="6" fill="#1a1d2e" stroke="#9aa3c0" stroke-width="1"/><text x="140" y="448" text-anchor="middle" fill="#9aa3c0" font-size="11">TOMBSTONE</text>
+<rect x="210" y="426" width="130" height="34" rx="6" fill="#1a1d2e" stroke="#9aa3c0" stroke-width="1"/><text x="275" y="448" text-anchor="middle" fill="#9aa3c0" font-size="11">TOMBSTONE_ALL</text>
+<text x="360" y="448" fill="#9aa3c0" font-size="11">key_types_write_precedence() 定义写入顺序 DATA→INDEX→VERSION→REF</text>
+</svg>

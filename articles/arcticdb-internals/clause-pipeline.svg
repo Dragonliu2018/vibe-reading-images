@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="430" viewBox="0 0 780 430" font-family="system-ui, sans-serif">
+<rect width="780" height="430" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+</defs>
+<text x="390" y="28" text-anchor="middle" fill="#e6e8f0" font-size="18" font-weight="600">查询处理：Clause 管道与表达式树</text>
+
+<!-- Clause pipeline (top) -->
+<text x="40" y="64" fill="#6c8ef5" font-size="13" font-weight="600">Clause 管道（folly::Poly&lt;IClause&gt; 链式）</text>
+<rect x="40" y="78" width="120" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="100" y="105" text-anchor="middle" fill="#e6e8f0" font-size="13">FilterClause</text>
+<rect x="200" y="78" width="120" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="260" y="105" text-anchor="middle" fill="#e6e8f0" font-size="13">ProjectClause</text>
+<rect x="360" y="78" width="150" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="435" y="105" text-anchor="middle" fill="#e6e8f0" font-size="12">AggregationClause</text>
+<rect x="550" y="78" width="120" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="610" y="105" text-anchor="middle" fill="#e6e8f0" font-size="13">SortClause</text>
+<line x1="160" y1="100" x2="198" y2="100" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="320" y1="100" x2="358" y2="100" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="510" y1="100" x2="548" y2="100" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="100" y="140" text-anchor="middle" fill="#9aa3c0" font-size="10">structure_for_processing</text>
+<text x="100" y="154" text-anchor="middle" fill="#9aa3c0" font-size="10">→ process()</text>
+
+<!-- Expression tree (bottom) -->
+<text x="40" y="190" fill="#f9ca24" font-size="13" font-weight="600">表达式树（ExpressionContext，根节点 compute() 递归求值，子树按 label 备忘）</text>
+<rect x="330" y="210" width="120" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="390" y="235" text-anchor="middle" fill="#e6e8f0" font-size="13">AND</text>
+<rect x="220" y="290" width="100" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="270" y="315" text-anchor="middle" fill="#e6e8f0" font-size="13">&gt; (GT)</text>
+<rect x="460" y="290" width="100" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="510" y="315" text-anchor="middle" fill="#e6e8f0" font-size="13">&lt; (LT)</text>
+<rect x="140" y="360" width="90" height="36" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="185" y="383" text-anchor="middle" fill="#e6e8f0" font-size="12">col(a)</text>
+<rect x="250" y="360" width="70" height="36" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="285" y="383" text-anchor="middle" fill="#e6e8f0" font-size="12">5</text>
+<rect x="400" y="360" width="90" height="36" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="445" y="383" text-anchor="middle" fill="#e6e8f0" font-size="12">col(b)</text>
+<rect x="510" y="360" width="70" height="36" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="545" y="383" text-anchor="middle" fill="#e6e8f0" font-size="12">10</text>
+<line x1="360" y1="250" x2="290" y2="288" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="420" y1="250" x2="490" y2="288" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="250" y1="330" x2="200" y2="358" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="290" y1="330" x2="290" y2="358" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="490" y1="330" x2="460" y2="358" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="530" y1="330" x2="540" y2="358" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<text x="660" y="235" fill="#9aa3c0" font-size="11">表示：</text>
+<text x="660" y="253" fill="#9aa3c0" font-size="11">(a &gt; 5)</text>
+<text x="660" y="271" fill="#9aa3c0" font-size="11">AND</text>
+<text x="660" y="289" fill="#9aa3c0" font-size="11">(b &lt; 10)</text>
+</svg>

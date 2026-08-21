@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" font-family="system-ui, sans-serif">
+<rect width="760" height="430" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="arrowc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+</defs>
+<text x="380" y="28" text-anchor="middle" fill="#e6e8f0" font-size="18" font-weight="600">Python ↔ C++ pybind11 桥</text>
+
+<!-- Python side -->
+<rect x="30" y="56" width="300" height="320" rx="10" fill="none" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="50" y="78" fill="#4ecdc4" font-size="13" font-weight="600">Python 层</text>
+<rect x="60" y="92" width="240" height="40" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="180" y="117" text-anchor="middle" fill="#e6e8f0" font-size="13">Arctic / Library</text>
+<rect x="60" y="146" width="240" height="40" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="180" y="171" text-anchor="middle" fill="#e6e8f0" font-size="13">NativeVersionStore</text>
+<rect x="60" y="200" width="240" height="40" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="180" y="225" text-anchor="middle" fill="#e6e8f0" font-size="13">_normalization.normalize()</text>
+<rect x="60" y="254" width="240" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="180" y="277" text-anchor="middle" fill="#e6e8f0" font-size="12">PandasData / InputFrame</text>
+<text x="180" y="295" text-anchor="middle" fill="#9aa3c0" font-size="10">numpy 数组引用 + 元数据</text>
+<text x="60" y="334" fill="#9aa3c0" font-size="11">释放 GIL → 长时 C++ 操作并行</text>
+
+<!-- C++ side -->
+<rect x="430" y="56" width="300" height="320" rx="10" fill="none" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="450" y="78" fill="#6c8ef5" font-size="13" font-weight="600">C++ 层（arcticdb_ext.so）</text>
+<rect x="460" y="92" width="240" height="40" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/><text x="580" y="117" text-anchor="middle" fill="#e6e8f0" font-size="13">python_module.cpp</text>
+<rect x="460" y="146" width="240" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="580" y="171" text-anchor="middle" fill="#e6e8f0" font-size="13">PythonVersionStore</text>
+<rect x="460" y="200" width="240" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="580" y="225" text-anchor="middle" fill="#e6e8f0" font-size="13">version_store_api.cpp</text>
+<rect x="460" y="254" width="240" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="580" y="277" text-anchor="middle" fill="#e6e8f0" font-size="12">InputTensorFrame</text>
+<text x="580" y="295" text-anchor="middle" fill="#9aa3c0" font-size="10">write() / read() 入口</text>
+<text x="460" y="334" fill="#9aa3c0" font-size="11">异常映射：NoSuchVersion→KeyError</text>
+
+<!-- Bridge arrows -->
+<line x1="300" y1="172" x2="458" y2="172" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowc)"/>
+<text x="379" y="164" text-anchor="middle" fill="#9aa3c0" font-size="10">pybind11</text>
+<line x1="300" y1="282" x2="458" y2="282" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowc)"/>
+<text x="379" y="274" text-anchor="middle" fill="#9aa3c0" font-size="10">零拷贝(数值)</text>
+<line x1="458" y1="305" x2="300" y2="305" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="379" y="320" text-anchor="middle" fill="#9aa3c0" font-size="10">OutputFrame → DataFrame</text>
+
+<text x="380" y="402" text-anchor="middle" fill="#9aa3c0" font-size="11">PYBIND11_MODULE(arcticdb_ext) 注册各模块 register_bindings + 异常翻译 + post-fork 重置调度器/LMDB</text>
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="550" viewBox="0 0 760 550" font-family="system-ui, sans-serif">
+<rect width="760" height="550" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="arrowd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+</defs>
+<text x="330" y="28" text-anchor="middle" fill="#e6e8f0" font-size="18" font-weight="600">模块依赖关系（箭头 = 依赖方向）</text>
+
+<!-- ===== Main layered grid (left/center) ===== -->
+<!-- Row 1: Python API -->
+<rect x="250" y="52" width="140" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="320" y="79" text-anchor="middle" fill="#e6e8f0" font-size="13">Python API 层</text>
+
+<!-- Row 2: Python Bindings -->
+<rect x="250" y="126" width="140" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="320" y="153" text-anchor="middle" fill="#e6e8f0" font-size="13">Python 绑定 python/</text>
+
+<!-- Row 3: Version Engine -->
+<rect x="240" y="200" width="160" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="320" y="227" text-anchor="middle" fill="#e6e8f0" font-size="13">版本引擎 version/</text>
+
+<!-- Row 4: Pipeline | Processing -->
+<rect x="110" y="274" width="140" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="180" y="301" text-anchor="middle" fill="#e6e8f0" font-size="13">读写管道 pipeline/</text>
+<rect x="390" y="274" width="140" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="460" y="301" text-anchor="middle" fill="#e6e8f0" font-size="13">查询处理 processing/</text>
+
+<!-- Row 5: Codec | Storage -->
+<rect x="110" y="348" width="140" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="180" y="375" text-anchor="middle" fill="#e6e8f0" font-size="13">编解码 codec/</text>
+<rect x="390" y="348" width="140" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="460" y="375" text-anchor="middle" fill="#e6e8f0" font-size="13">存储后端 storage/</text>
+
+<!-- Row 6: Column Store (shared core data format) -->
+<rect x="250" y="422" width="140" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="320" y="449" text-anchor="middle" fill="#e6e8f0" font-size="13">列式存储 column_store/</text>
+
+<!-- Foundation: Entity -->
+<rect x="80" y="490" width="500" height="40" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="330" y="515" text-anchor="middle" fill="#e6e8f0" font-size="13">核心类型 entity/ — 全库地基，被所有上层模块依赖</text>
+
+<!-- ===== Side panel: Stream + Async (cross-cutting) ===== -->
+<rect x="600" y="200" width="100" height="222" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="650" y="226" text-anchor="middle" fill="#f9ca24" font-size="12" font-weight="600">流式+异步</text>
+<text x="650" y="248" text-anchor="middle" fill="#e6e8f0" font-size="11">stream/</text>
+<text x="650" y="266" text-anchor="middle" fill="#e6e8f0" font-size="11">async/</text>
+<text x="650" y="300" text-anchor="middle" fill="#9aa3c0" font-size="10">横切基础设施</text>
+<text x="650" y="318" text-anchor="middle" fill="#9aa3c0" font-size="10">被引擎 / 管道</text>
+<text x="650" y="334" text-anchor="middle" fill="#9aa3c0" font-size="10">/ 存储调用</text>
+<text x="650" y="395" text-anchor="middle" fill="#9aa3c0" font-size="10">TaskScheduler</text>
+<text x="650" y="411" text-anchor="middle" fill="#9aa3c0" font-size="10">双线程池</text>
+
+<!-- ===== Arrows (solid, downward) ===== -->
+<!-- Spine: API -> Bindings -> Engine -->
+<line x1="320" y1="96" x2="320" y2="126" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="320" y1="170" x2="320" y2="200" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Engine fork -> Pipeline (left) & Processing (right) -->
+<line x1="320" y1="244" x2="320" y2="259" stroke="#7a86b3" stroke-width="1.5"/>
+<line x1="180" y1="259" x2="460" y2="259" stroke="#7a86b3" stroke-width="1.5"/>
+<line x1="180" y1="259" x2="180" y2="274" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="460" y1="259" x2="460" y2="274" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Pipeline -> Codec (straight down) -->
+<line x1="160" y1="318" x2="160" y2="348" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Confluence trunk into Column Store (x=320, y=335..422) -->
+<!-- Pipeline -> trunk -->
+<path d="M200,318 L200,335 L320,335" fill="none" stroke="#7a86b3" stroke-width="1.5"/>
+<!-- Processing -> trunk -->
+<path d="M460,318 L460,335 L320,335" fill="none" stroke="#7a86b3" stroke-width="1.5"/>
+<!-- Codec -> trunk -->
+<path d="M180,392 L180,407 L320,407" fill="none" stroke="#7a86b3" stroke-width="1.5"/>
+<!-- Storage -> trunk -->
+<path d="M460,392 L460,407 L320,407" fill="none" stroke="#7a86b3" stroke-width="1.5"/>
+<!-- Trunk down into Column Store -->
+<line x1="320" y1="335" x2="320" y2="422" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Column Store / Codec / Storage -> Entity (foundation) -->
+<line x1="320" y1="466" x2="320" y2="490" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="130" y1="392" x2="130" y2="490" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="490" y1="392" x2="490" y2="490" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- ===== Dashed: cross-cutting deps on Stream+Async ===== -->
+<line x1="400" y1="222" x2="600" y2="222" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowd)"/>
+<line x1="530" y1="370" x2="600" y2="370" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowd)"/>
+
+<text x="750" y="540" text-anchor="end" fill="#9aa3c0" font-size="11">虚线 = 横切依赖</text>
+</svg>

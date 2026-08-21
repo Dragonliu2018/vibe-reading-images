@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560" font-family="system-ui, sans-serif">
+<rect width="800" height="560" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="arrowc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+  <marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+</defs>
+<text x="400" y="28" text-anchor="middle" fill="#e6e8f0" font-size="18" font-weight="600">ArcticDB 分层架构</text>
+
+<!-- Layer 1: Python API (cyan) -->
+<rect x="20" y="50" width="660" height="64" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="34" y="86" fill="#4ecdc4" font-size="13" font-weight="600">Python API 层</text>
+<rect x="170" y="64" width="110" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="225" y="87" text-anchor="middle" fill="#e6e8f0" font-size="13">Arctic</text>
+<rect x="300" y="64" width="110" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="355" y="87" text-anchor="middle" fill="#e6e8f0" font-size="13">Library</text>
+<rect x="430" y="64" width="150" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="505" y="87" text-anchor="middle" fill="#e6e8f0" font-size="13">NativeVersionStore</text>
+<rect x="600" y="64" width="70" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/><text x="635" y="87" text-anchor="middle" fill="#e6e8f0" font-size="12">归一化</text>
+
+<!-- Layer 2: Version engine (blue) -->
+<rect x="20" y="134" width="660" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="34" y="170" fill="#6c8ef5" font-size="13" font-weight="600">版本引擎层</text>
+<rect x="170" y="148" width="150" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="245" y="171" text-anchor="middle" fill="#e6e8f0" font-size="13">version_store_api</text>
+<rect x="340" y="148" width="160" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="420" y="171" text-anchor="middle" fill="#e6e8f0" font-size="13">local_versioned_engine</text>
+<rect x="520" y="148" width="150" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="595" y="171" text-anchor="middle" fill="#e6e8f0" font-size="13">VersionMap 缓存</text>
+
+<!-- Layer 3: Pipeline (blue) -->
+<rect x="20" y="218" width="660" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="34" y="254" fill="#6c8ef5" font-size="13" font-weight="600">读写管道层</text>
+<rect x="170" y="232" width="110" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="225" y="255" text-anchor="middle" fill="#e6e8f0" font-size="13">write_frame</text>
+<rect x="300" y="232" width="110" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="355" y="255" text-anchor="middle" fill="#e6e8f0" font-size="13">read_frame</text>
+<rect x="430" y="232" width="90" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="475" y="255" text-anchor="middle" fill="#e6e8f0" font-size="13">slicing</text>
+<rect x="540" y="232" width="130" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="605" y="255" text-anchor="middle" fill="#e6e8f0" font-size="13">PipelineContext</text>
+
+<!-- Layer 4: Processing (blue) -->
+<rect x="20" y="302" width="660" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="34" y="338" fill="#6c8ef5" font-size="13" font-weight="600">查询处理层</text>
+<rect x="190" y="316" width="110" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="245" y="339" text-anchor="middle" fill="#e6e8f0" font-size="13">Clause</text>
+<rect x="320" y="316" width="130" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="385" y="339" text-anchor="middle" fill="#e6e8f0" font-size="13">ExpressionNode</text>
+<rect x="470" y="316" width="150" height="36" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/><text x="545" y="339" text-anchor="middle" fill="#e6e8f0" font-size="13">Aggregation</text>
+
+<!-- Layer 5: Column store + codec (yellow) -->
+<rect x="20" y="386" width="660" height="64" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="34" y="422" fill="#f9ca24" font-size="13" font-weight="600">列式与编解码</text>
+<rect x="170" y="400" width="130" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/><text x="235" y="423" text-anchor="middle" fill="#e6e8f0" font-size="13">SegmentInMemory</text>
+<rect x="320" y="400" width="150" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/><text x="395" y="423" text-anchor="middle" fill="#e6e8f0" font-size="13">Column / StringPool</text>
+<rect x="490" y="400" width="130" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/><text x="555" y="423" text-anchor="middle" fill="#e6e8f0" font-size="13">Codec LZ4/ZSTD</text>
+
+<!-- Layer 6: Storage (purple) -->
+<rect x="20" y="470" width="660" height="64" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="34" y="506" fill="#b388ff" font-size="13" font-weight="600">存储后端层</text>
+<rect x="160" y="484" width="60" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="190" y="507" text-anchor="middle" fill="#e6e8f0" font-size="12">S3</text>
+<rect x="232" y="484" width="64" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="264" y="507" text-anchor="middle" fill="#e6e8f0" font-size="12">Azure</text>
+<rect x="308" y="484" width="60" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="338" y="507" text-anchor="middle" fill="#e6e8f0" font-size="12">LMDB</text>
+<rect x="380" y="484" width="64" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="412" y="507" text-anchor="middle" fill="#e6e8f0" font-size="12">Mongo</text>
+<rect x="456" y="484" width="64" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="488" y="507" text-anchor="middle" fill="#e6e8f0" font-size="12">Memory</text>
+<rect x="532" y="484" width="86" height="36" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/><text x="575" y="507" text-anchor="middle" fill="#e6e8f0" font-size="12">GCP/NFS</text>
+
+<!-- Cross-cutting: Async (spans version engine down to storage layer) -->
+<rect x="700" y="134" width="80" height="400" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="740" y="156" text-anchor="middle" fill="#f9ca24" font-size="12" font-weight="600">异步调度</text>
+<text x="740" y="184" text-anchor="middle" fill="#e6e8f0" font-size="12">TaskScheduler</text>
+<text x="740" y="232" text-anchor="middle" fill="#9aa3c0" font-size="11">CPU 池</text>
+<text x="740" y="254" text-anchor="middle" fill="#9aa3c0" font-size="11">压缩/计算</text>
+<text x="740" y="475" text-anchor="middle" fill="#9aa3c0" font-size="11">I/O 池</text>
+<text x="740" y="497" text-anchor="middle" fill="#9aa3c0" font-size="11">存储读写</text>
+<text x="740" y="525" text-anchor="middle" fill="#9aa3c0" font-size="11">cgroup 感知</text>
+
+<!-- Inter-layer arrows (down) -->
+<line x1="350" y1="114" x2="350" y2="132" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="350" y1="198" x2="350" y2="216" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="350" y1="282" x2="350" y2="300" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="350" y1="366" x2="350" y2="384" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="350" y1="450" x2="350" y2="468" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- Async feeds pipeline/storage (dashed, yellow) -->
+<line x1="700" y1="250" x2="680" y2="250" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowy)"/>
+<line x1="700" y1="502" x2="680" y2="502" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowy)"/>
+
+</svg>

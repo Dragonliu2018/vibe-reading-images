@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" font-family="system-ui, sans-serif">
+<rect width="760" height="500" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+</defs>
+<text x="380" y="28" text-anchor="middle" fill="#e6e8f0" font-size="18" font-weight="600">存储抽象与后端</text>
+
+<!-- Store interface -->
+<rect x="250" y="56" width="260" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="380" y="85" text-anchor="middle" fill="#e6e8f0" font-size="14">Store : StreamSink, StreamSource</text>
+<text x="525" y="85" fill="#9aa3c0" font-size="11">高层非泄漏抽象</text>
+
+<!-- AsyncStore -->
+<rect x="250" y="124" width="260" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="380" y="151" text-anchor="middle" fill="#e6e8f0" font-size="13">AsyncStore（Folly Future 包装）</text>
+<line x1="380" y1="104" x2="380" y2="122" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Storage base -->
+<rect x="250" y="190" width="260" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="380" y="217" text-anchor="middle" fill="#e6e8f0" font-size="13">Storage 基类（do_write/read/remove…）</text>
+<line x1="380" y1="168" x2="380" y2="188" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- storage_factory -->
+<rect x="540" y="190" width="170" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="625" y="217" text-anchor="middle" fill="#e6e8f0" font-size="12">storage_factory.cpp</text>
+<line x1="540" y1="212" x2="512" y2="212" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="625" y="250" text-anchor="middle" fill="#9aa3c0" font-size="10">create_storage() 按 protobuf 分发</text>
+
+<!-- Backends row 1 -->
+<rect x="40" y="280" width="120" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="100" y="307" text-anchor="middle" fill="#e6e8f0" font-size="13">S3Storage</text>
+<rect x="180" y="280" width="120" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="240" y="307" text-anchor="middle" fill="#e6e8f0" font-size="13">AzureStorage</text>
+<rect x="320" y="280" width="120" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="380" y="307" text-anchor="middle" fill="#e6e8f0" font-size="13">LmdbStorage</text>
+<rect x="460" y="280" width="120" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="520" y="307" text-anchor="middle" fill="#e6e8f0" font-size="13">MongoStorage</text>
+<rect x="600" y="280" width="120" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="660" y="307" text-anchor="middle" fill="#e6e8f0" font-size="13">MemoryStorage</text>
+<!-- Backends row 2 -->
+<rect x="110" y="344" width="140" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="180" y="371" text-anchor="middle" fill="#e6e8f0" font-size="12">GCPXMLStorage</text>
+<rect x="290" y="344" width="140" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="360" y="371" text-anchor="middle" fill="#e6e8f0" font-size="12">NfsBackedStorage</text>
+<rect x="470" y="344" width="140" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="540" y="371" text-anchor="middle" fill="#e6e8f0" font-size="12">MappedFileStorage</text>
+<!-- Storage -> backends (fan out) -->
+<line x1="300" y1="234" x2="100" y2="278" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+<line x1="340" y1="234" x2="240" y2="278" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+<line x1="380" y1="234" x2="380" y2="278" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+<line x1="420" y1="234" x2="520" y2="278" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+<line x1="460" y1="234" x2="660" y2="278" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+
+<text x="380" y="420" text-anchor="middle" fill="#9aa3c0" font-size="11">每个后端实现 do_write / do_read / do_remove / do_key_exists / do_iterate_type_until_match</text>
+<text x="380" y="442" text-anchor="middle" fill="#9aa3c0" font-size="11">SupportsAtomicWrites：NO / YES / NEEDS_TEST（test_atomic_write_support 实测写两次验证）</text>
+<text x="380" y="464" text-anchor="middle" fill="#9aa3c0" font-size="11">虚线后端 = 文档少提的扩展后端（GCP/NFS/MappedFile）</text>
+</svg>
