@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="260" viewBox="0 0 820 260" font-family="system-ui, sans-serif">
+<rect width="820" height="260" fill="#0b0d14"/>
+<defs>
+  <marker id="a_df" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker></defs>
+  <text x="410.0" y="26" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="600">DataFusion 查询数据流</text>
+  <text x="410.0" y="46" text-anchor="middle" fill="#9aa3c0" font-size="11" font-weight="400">示例：SELECT a, MIN(b) FROM t WHERE a&lt;=b GROUP BY a LIMIT 100</text>
+  <rect x="13.0" y="72" width="125" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="75.5" y="93.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">SQL</text>
+  <text x="75.5" y="109.0" text-anchor="middle" fill="#9aa3c0" font-size="10">String</text>
+  <rect x="236.0" y="72" width="125" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="298.5" y="93.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">DFParser</text>
+  <text x="298.5" y="109.0" text-anchor="middle" fill="#9aa3c0" font-size="10">sql crate</text>
+  <rect x="459.0" y="72" width="125" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="521.5" y="93.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">SqlToRel</text>
+  <text x="521.5" y="109.0" text-anchor="middle" fill="#9aa3c0" font-size="10">sql crate</text>
+  <rect x="682.0" y="72" width="125" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="744.5" y="93.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">Analyzer +</text>
+  <text x="744.5" y="109.0" text-anchor="middle" fill="#9aa3c0" font-size="10">Optimizer</text>
+  <rect x="13.0" y="172" width="125" height="50" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="75.5" y="193.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">Vec&lt;RecordBatch&gt;</text>
+  <text x="75.5" y="209.0" text-anchor="middle" fill="#9aa3c0" font-size="10">输出</text>
+  <rect x="236.0" y="172" width="125" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="298.5" y="193.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">execute()</text>
+  <text x="298.5" y="209.0" text-anchor="middle" fill="#9aa3c0" font-size="10">physical-plan</text>
+  <rect x="459.0" y="172" width="125" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="521.5" y="193.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">Physical</text>
+  <text x="521.5" y="209.0" text-anchor="middle" fill="#9aa3c0" font-size="10">Optimizer</text>
+  <rect x="682.0" y="172" width="125" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="744.5" y="193.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">DefaultPhysical</text>
+  <text x="744.5" y="209.0" text-anchor="middle" fill="#9aa3c0" font-size="10">Planner (core)</text>
+  <path d="M138.0,97.0 L234.0,97.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_df)"/>
+  <text x="187.0" y="88.0" text-anchor="middle" fill="#9aa3c0" font-size="10" font-weight="400">SQL</text>
+  <path d="M361.0,97.0 L457.0,97.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_df)"/>
+  <text x="410.0" y="88.0" text-anchor="middle" fill="#9aa3c0" font-size="10" font-weight="400">AST</text>
+  <path d="M584.0,97.0 L680.0,97.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_df)"/>
+  <text x="633.0" y="88.0" text-anchor="middle" fill="#9aa3c0" font-size="10" font-weight="400">LogicalPlan</text>
+  <path d="M744.5,122 L744.5,170" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_df)"/>
+  <text x="754.5" y="147.0" text-anchor="start" fill="#9aa3c0" font-size="10" font-weight="400">LogicalPlan</text>
+  <path d="M682.0,197.0 L586.0,197.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_df)"/>
+  <text x="634.0" y="188.0" text-anchor="middle" fill="#9aa3c0" font-size="10" font-weight="400">ExecutionPlan</text>
+  <path d="M459.0,197.0 L363.0,197.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_df)"/>
+  <text x="411.0" y="188.0" text-anchor="middle" fill="#9aa3c0" font-size="10" font-weight="400">ExecutionPlan</text>
+  <path d="M236.0,197.0 L140.0,197.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_df)"/>
+  <text x="188.0" y="188.0" text-anchor="middle" fill="#9aa3c0" font-size="10" font-weight="400">RecordBatch</text>
+  <text x="30" y="248" text-anchor="start" fill="#4ecdc4" font-size="11" font-weight="400">■ 规划阶段（逻辑计划）</text>
+  <text x="270" y="248" text-anchor="start" fill="#f9ca24" font-size="11" font-weight="400">■ 物理阶段（执行计划）</text>
+  <text x="510" y="248" text-anchor="start" fill="#9aa3c0" font-size="11" font-weight="400">■ 编排 / 输出</text>
+</svg>

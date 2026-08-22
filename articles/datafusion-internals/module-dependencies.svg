@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" font-family="system-ui, sans-serif">
+<rect width="920" height="520" fill="#0b0d14"/>
+<defs>
+  <marker id="a_dep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker></defs>
+  <text x="460.0" y="28" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="600">DataFusion 模块依赖关系</text>
+  <text x="460.0" y="48" text-anchor="middle" fill="#9aa3c0" font-size="11" font-weight="400">箭头 A→B = A 依赖 B · 横向为查询流水线骨架</text>
+  <rect x="12.0" y="210" width="126" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="75.0" y="228.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">sql</text>
+  <text x="75.0" y="244.0" text-anchor="middle" fill="#9aa3c0" font-size="10">解析规划</text>
+  <rect x="166.0" y="210" width="126" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="229.0" y="228.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">expr</text>
+  <text x="229.0" y="244.0" text-anchor="middle" fill="#9aa3c0" font-size="10">LogicalPlan</text>
+  <rect x="320.0" y="210" width="126" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="383.0" y="228.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">optimizer</text>
+  <text x="383.0" y="244.0" text-anchor="middle" fill="#9aa3c0" font-size="10">逻辑优化</text>
+  <rect x="474.0" y="210" width="126" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="537.0" y="228.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">physical-plan</text>
+  <text x="537.0" y="244.0" text-anchor="middle" fill="#9aa3c0" font-size="10">物理算子</text>
+  <rect x="628.0" y="210" width="126" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="691.0" y="228.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">physical-expr</text>
+  <text x="691.0" y="244.0" text-anchor="middle" fill="#9aa3c0" font-size="10">表达式求值</text>
+  <rect x="782.0" y="210" width="126" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="845.0" y="228.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">physical-optimizer</text>
+  <text x="845.0" y="244.0" text-anchor="middle" fill="#9aa3c0" font-size="10">物理优化</text>
+  <rect x="355.0" y="80" width="210" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="460.0" y="100.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">core</text>
+  <text x="460.0" y="116.0" text-anchor="middle" fill="#9aa3c0" font-size="10">SessionContext · 编排</text>
+  <rect x="474.0" y="320" width="126" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="537.0" y="338.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">datasource</text>
+  <text x="537.0" y="354.0" text-anchor="middle" fill="#9aa3c0" font-size="10">文件表</text>
+  <rect x="292.0" y="320" width="126" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="355.0" y="338.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">catalog</text>
+  <text x="355.0" y="354.0" text-anchor="middle" fill="#9aa3c0" font-size="10">目录抽象</text>
+  <rect x="166.0" y="320" width="126" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="229.0" y="338.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">functions</text>
+  <text x="229.0" y="354.0" text-anchor="middle" fill="#9aa3c0" font-size="10">UDF 库</text>
+  <rect x="230.0" y="420" width="460" height="48" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="460.0" y="440.0" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">common</text>
+  <text x="460.0" y="456.0" text-anchor="middle" fill="#9aa3c0" font-size="10">DFSchema · TreeNode · Error · Config</text>
+  <path d="M138.0,232.0 L164.0,232.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M292.0,232.0 L318.0,232.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M446.0,232.0 L472.0,232.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M600.0,232.0 L626.0,232.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M754.0,232.0 L780.0,232.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M460.0,128 L460.0,169.0" fill="none" stroke="#7a86b3" stroke-width="1.5"/>
+  <path d="M460.0,169.0 L75.0,169.0" fill="none" stroke="#7a86b3" stroke-width="1.5"/>
+  <path d="M75.0,169.0 L75.0,208" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M460.0,169.0 L537.0,169.0" fill="none" stroke="#7a86b3" stroke-width="1.5"/>
+  <path d="M537.0,169.0 L537.0,208" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M537.0,320 L537.0,256" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M418.0,342.0 L472.0,342.0" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M229.0,320 L229.0,256" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_dep)"/>
+  <path d="M691.0,254 L691.0,418" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#a_dep)"/>
+  <path d="M537.0,364 L537.0,418" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#a_dep)"/>
+  <path d="M229.0,364 L229.0,418" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#a_dep)"/>
+  <text x="30" y="502" text-anchor="start" fill="#6c8ef5" font-size="11" font-weight="400">■ 编排</text>
+  <text x="120" y="502" text-anchor="start" fill="#4ecdc4" font-size="11" font-weight="400">■ 查询规划</text>
+  <text x="240" y="502" text-anchor="start" fill="#f9ca24" font-size="11" font-weight="400">■ 物理执行</text>
+  <text x="360" y="502" text-anchor="start" fill="#ff6b9d" font-size="11" font-weight="400">■ 数据源/函数（扩展点）</text>
+  <text x="560" y="502" text-anchor="start" fill="#b388ff" font-size="11" font-weight="400">■ 公共基础</text>
+</svg>

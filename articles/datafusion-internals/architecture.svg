@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="604" viewBox="0 0 820 604" font-family="system-ui, sans-serif">
+<rect width="820" height="604" fill="#0b0d14"/>
+<defs>
+  <marker id="a_arch" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+</defs>
+  <text x="410.0" y="30" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="600">DataFusion 分层架构</text>
+  <text x="410.0" y="50" text-anchor="middle" fill="#9aa3c0" font-size="11" font-weight="400">上层依赖下层 · 箭头表示依赖方向</text>
+  <rect x="30" y="74" width="760" height="78" rx="10" fill="none" stroke="#6c8ef5" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+  <text x="46" y="96" text-anchor="start" fill="#6c8ef5" font-size="13" font-weight="600">API &amp; 编排层</text>
+  <rect x="133.0" y="106" width="560" height="38" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="413.0" y="121.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">core · session</text>
+  <text x="413.0" y="137.0" text-anchor="middle" fill="#9aa3c0" font-size="10">SessionContext · DataFrame · PhysicalPlanner</text>
+  <rect x="30" y="182" width="760" height="78" rx="10" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+  <text x="46" y="204" text-anchor="start" fill="#4ecdc4" font-size="13" font-weight="600">查询规划层</text>
+  <rect x="128.0" y="214" width="170" height="38" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="213.0" y="229.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">sql</text>
+  <text x="213.0" y="245.0" text-anchor="middle" fill="#9aa3c0" font-size="10">DFParser · SqlToRel</text>
+  <rect x="328.0" y="214" width="170" height="38" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="413.0" y="229.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">expr</text>
+  <text x="413.0" y="245.0" text-anchor="middle" fill="#9aa3c0" font-size="10">LogicalPlan · Expr</text>
+  <rect x="528.0" y="214" width="170" height="38" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="613.0" y="229.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">optimizer</text>
+  <text x="613.0" y="245.0" text-anchor="middle" fill="#9aa3c0" font-size="10">Analyzer · OptimizerRule</text>
+  <rect x="30" y="290" width="760" height="78" rx="10" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+  <text x="46" y="312" text-anchor="start" fill="#f9ca24" font-size="13" font-weight="600">物理执行层</text>
+  <rect x="112.0" y="322" width="128" height="38" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="176.0" y="337.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">physical-plan</text>
+  <text x="176.0" y="353.0" text-anchor="middle" fill="#9aa3c0" font-size="10">ExecutionPlan · 算子</text>
+  <rect x="270.0" y="322" width="128" height="38" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="334.0" y="337.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">physical-expr</text>
+  <text x="334.0" y="353.0" text-anchor="middle" fill="#9aa3c0" font-size="10">PhysicalExpr · 等价类</text>
+  <rect x="428.0" y="322" width="128" height="38" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="492.0" y="337.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">physical-optimizer</text>
+  <text x="492.0" y="353.0" text-anchor="middle" fill="#9aa3c0" font-size="10">PhysicalOptimizerRule</text>
+  <rect x="586.0" y="322" width="128" height="38" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="650.0" y="337.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">execution</text>
+  <text x="650.0" y="353.0" text-anchor="middle" fill="#9aa3c0" font-size="10">TaskContext · 流</text>
+  <rect x="30" y="398" width="760" height="78" rx="10" fill="none" stroke="#ff6b9d" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+  <text x="46" y="420" text-anchor="start" fill="#ff6b9d" font-size="13" font-weight="600">数据源与函数层</text>
+  <rect x="128.0" y="430" width="170" height="38" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="213.0" y="445.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">catalog</text>
+  <text x="213.0" y="461.0" text-anchor="middle" fill="#9aa3c0" font-size="10">CatalogProvider</text>
+  <rect x="328.0" y="430" width="170" height="38" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="413.0" y="445.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">datasource</text>
+  <text x="413.0" y="461.0" text-anchor="middle" fill="#9aa3c0" font-size="10">ListingTable · 文件源</text>
+  <rect x="528.0" y="430" width="170" height="38" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="613.0" y="445.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">functions</text>
+  <text x="613.0" y="461.0" text-anchor="middle" fill="#9aa3c0" font-size="10">ScalarUDF/Agg/Window</text>
+  <rect x="30" y="506" width="760" height="78" rx="10" fill="none" stroke="#b388ff" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+  <text x="46" y="528" text-anchor="start" fill="#b388ff" font-size="13" font-weight="600">公共基础层</text>
+  <rect x="133.0" y="538" width="560" height="38" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="413.0" y="553.0" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">common</text>
+  <text x="413.0" y="569.0" text-anchor="middle" fill="#9aa3c0" font-size="10">DFSchema · TreeNode · Error · ConfigOptions</text>
+  <path d="M410.0,152 L410.0,180" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_arch)"/>
+  <path d="M410.0,260 L410.0,288" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_arch)"/>
+  <path d="M410.0,368 L410.0,396" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_arch)"/>
+  <path d="M410.0,476 L410.0,504" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#a_arch)"/>
+</svg>
