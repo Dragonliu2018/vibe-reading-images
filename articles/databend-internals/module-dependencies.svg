@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="475" viewBox="0 0 880 475" font-family="system-ui, sans-serif">
+<rect width="880" height="475" fill="#0b0d14"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker><marker id="arrowg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker><marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker></defs>
+<text x="440" y="28" text-anchor="middle" fill="#e8ecf5" font-size="16" font-weight="bold">Databend 模块依赖关系</text>
+
+<!-- Row 1: service (top center) -->
+<rect x="360" y="55" width="160" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+<text x="440" y="78" text-anchor="middle" fill="#e8ecf5" font-size="13" font-weight="600">服务层 query-service</text>
+<text x="440" y="94" text-anchor="middle" fill="#9aa3c7" font-size="10">servers/sessions/interpreters</text>
+
+<!-- Row 2: compilation + execution chain (left to right) -->
+<rect x="35" y="160" width="130" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="100" y="183" text-anchor="middle" fill="#e8ecf5" font-size="13">SQL 解析</text>
+<text x="100" y="199" text-anchor="middle" fill="#9aa3c7" font-size="10">ast / nom+pratt</text>
+<rect x="205" y="160" width="130" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="270" y="183" text-anchor="middle" fill="#e8ecf5" font-size="13">SQL 编译</text>
+<text x="270" y="199" text-anchor="middle" fill="#9aa3c7" font-size="10">binder / planner</text>
+<rect x="375" y="160" width="130" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="440" y="183" text-anchor="middle" fill="#e8ecf5" font-size="13">优化器</text>
+<text x="440" y="199" text-anchor="middle" fill="#9aa3c7" font-size="10">Cascades / DPhyp</text>
+<rect x="545" y="160" width="130" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="610" y="183" text-anchor="middle" fill="#e8ecf5" font-size="13">执行引擎</text>
+<text x="610" y="199" text-anchor="middle" fill="#9aa3c7" font-size="10">pipeline / processor</text>
+<rect x="715" y="160" width="130" height="50" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="780" y="183" text-anchor="middle" fill="#e8ecf5" font-size="13">存储引擎</text>
+<text x="780" y="199" text-anchor="middle" fill="#9aa3c7" font-size="10">fuse / Parquet</text>
+
+<!-- Row 3: shared modules -->
+<rect x="205" y="270" width="130" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="270" y="293" text-anchor="middle" fill="#e8ecf5" font-size="13">函数库</text>
+<text x="270" y="309" text-anchor="middle" fill="#9aa3c7" font-size="10">scalar / aggregate</text>
+<rect x="375" y="270" width="130" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+<text x="440" y="293" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">表达式与列式</text>
+<text x="440" y="309" text-anchor="middle" fill="#9aa3c7" font-size="10">fan-in 7187 ★</text>
+<rect x="715" y="270" width="130" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="780" y="293" text-anchor="middle" fill="#e8ecf5" font-size="13">元数据服务</text>
+<text x="780" y="309" text-anchor="middle" fill="#9aa3c7" font-size="10">Raft / KV API</text>
+
+<!-- Row 4: common base (full width bar) -->
+<rect x="35" y="385" width="810" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="440" y="408" text-anchor="middle" fill="#e8ecf5" font-size="13">公共基础 common-base</text>
+<text x="440" y="424" text-anchor="middle" fill="#9aa3c7" font-size="10">Runtime · GlobalInstance · ErrorCode · hashtable · BinaryIO · DataOperator(OpenDAL) — 被所有模块依赖</text>
+
+<!-- Arrows: service → chain (dashed, orchestrates compile + execute) -->
+<path d="M400,105 L270,160" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrowg)" opacity="0.6" stroke-dasharray="4,3"/>
+<path d="M480,105 L610,160" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrowg)" opacity="0.6" stroke-dasharray="4,3"/>
+
+<!-- Arrows: chain flow (solid blue, left to right) -->
+<path d="M165,185 L203,185" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<path d="M335,185 L373,185" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<path d="M505,185 L543,185" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<path d="M675,185 L713,185" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+
+<!-- Arrows: chain → shared (dashed vertical, no crossing) -->
+<path d="M440,210 L440,270" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrowg)" opacity="0.6" stroke-dasharray="4,3"/>
+<path d="M335,295 L373,295" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrowg)" opacity="0.6" stroke-dasharray="4,3"/>
+<path d="M780,210 L780,270" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrowg)" opacity="0.6" stroke-dasharray="4,3"/>
+
+<!-- Arrows: shared → common base (dotted, infra dependency) -->
+<path d="M270,320 L270,385" stroke="#80c7ff" stroke-width="1" opacity="0.35" stroke-dasharray="2,4"/>
+<path d="M440,320 L440,385" stroke="#80c7ff" stroke-width="1" opacity="0.35" stroke-dasharray="2,4"/>
+<path d="M780,320 L780,385" stroke="#80c7ff" stroke-width="1" opacity="0.35" stroke-dasharray="2,4"/>
+
+<!-- Gap labels -->
+<text x="440" y="148" text-anchor="middle" font-size="9" fill="#9aa3c7">↑ service 编排编译与执行</text>
+<text x="440" y="252" text-anchor="middle" font-size="9" fill="#9aa3c7">↑ Planner/Optimizer/Execution/Fuse 均依赖 expression（fan-in 7187）</text>
+
+<!-- Legend -->
+<text x="35" y="455" font-size="10" fill="#9aa3c7">实线蓝 = 编译执行主链</text>
+<text x="200" y="455" font-size="10" fill="#9aa3c7">虚线灰 = 模块依赖</text>
+<text x="345" y="455" font-size="10" fill="#9aa3c7">点线蓝 = 依赖基础设施</text>
+<text x="500" y="455" font-size="10" fill="#9aa3c7">注：service 亦经 UserApiProvider 访问 MetaService（图略）</text>
+</svg>

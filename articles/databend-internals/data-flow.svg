@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="475" viewBox="0 0 880 475" font-family="system-ui, sans-serif">
+<rect width="880" height="475" fill="#0b0d14"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker><marker id="arrowc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker></defs>
+<text x="440" y="26" text-anchor="middle" fill="#e8ecf5" font-size="16" font-weight="bold">查询执行数据流（SELECT 路径）</text>
+
+<!-- Section labels -->
+<text x="20" y="96" fill="#9aa3c7" font-size="11" font-weight="600">① 编译</text>
+<text x="20" y="211" fill="#9aa3c7" font-size="11" font-weight="600">② 存储读</text>
+<text x="20" y="326" fill="#9aa3c7" font-size="11" font-weight="600">③ 执行</text>
+
+<!-- Row 1: compile (L→R) -->
+<rect x="80" y="70" width="130" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="145" y="94" text-anchor="middle" fill="#e8ecf5" font-size="12.5">SQL Text</text>
+<text x="145" y="110" text-anchor="middle" fill="#9aa3c7" font-size="9.5">do_query()</text>
+<rect x="240" y="70" width="130" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="305" y="94" text-anchor="middle" fill="#e8ecf5" font-size="12.5">Statement</text>
+<text x="305" y="110" text-anchor="middle" fill="#9aa3c7" font-size="9.5">AST</text>
+<rect x="400" y="70" width="130" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="465" y="94" text-anchor="middle" fill="#e8ecf5" font-size="12.5">SExpr</text>
+<text x="465" y="110" text-anchor="middle" fill="#9aa3c7" font-size="9.5">逻辑计划</text>
+<rect x="560" y="70" width="130" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="625" y="94" text-anchor="middle" fill="#e8ecf5" font-size="12.5">SExpr</text>
+<text x="625" y="110" text-anchor="middle" fill="#9aa3c7" font-size="9.5">优化后</text>
+<rect x="720" y="70" width="130" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="785" y="94" text-anchor="middle" fill="#e8ecf5" font-size="12.5">PhysicalPlan</text>
+<text x="785" y="110" text-anchor="middle" fill="#9aa3c7" font-size="9.5">物理计划</text>
+
+<!-- Row 1 horizontal arrows + labels -->
+<path d="M210,96 L238,96" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowc)" opacity="0.85"/>
+<text x="224" y="88" text-anchor="middle" font-size="9" fill="#9aa3c7">tokenize</text>
+<path d="M370,96 L398,96" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowc)" opacity="0.85"/>
+<text x="384" y="88" text-anchor="middle" font-size="9" fill="#9aa3c7">bind</text>
+<path d="M530,96 L558,96" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowc)" opacity="0.85"/>
+<text x="544" y="88" text-anchor="middle" font-size="9" fill="#9aa3c7">optimize</text>
+<path d="M690,96 L718,96" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowc)" opacity="0.85"/>
+<text x="704" y="88" text-anchor="middle" font-size="9" fill="#9aa3c7">build</text>
+
+<!-- Down arrow: PhysicalPlan → Snapshot (right turn) -->
+<path d="M785,122 L785,183" stroke="#7a86b3" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+<!-- Row 2: storage read (R→L) -->
+<rect x="720" y="185" width="130" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="785" y="209" text-anchor="middle" fill="#e8ecf5" font-size="12.5">Snapshot</text>
+<text x="785" y="225" text-anchor="middle" fill="#9aa3c7" font-size="9.5">快照/MVCC</text>
+<rect x="560" y="185" width="130" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="625" y="209" text-anchor="middle" fill="#e8ecf5" font-size="12.5">Segment</text>
+<text x="625" y="225" text-anchor="middle" fill="#9aa3c7" font-size="9.5">段级裁剪</text>
+<rect x="400" y="185" width="130" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="465" y="209" text-anchor="middle" fill="#e8ecf5" font-size="12.5">Block</text>
+<text x="465" y="225" text-anchor="middle" fill="#9aa3c7" font-size="9.5">块级裁剪</text>
+<rect x="240" y="185" width="130" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="305" y="209" text-anchor="middle" fill="#e8ecf5" font-size="12.5">ColumnBlock</text>
+<text x="305" y="225" text-anchor="middle" fill="#9aa3c7" font-size="9.5">Parquet 反序列化</text>
+
+<!-- Row 2 horizontal arrows (R→L) -->
+<path d="M720,211 L692,211" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.8"/>
+<text x="706" y="203" text-anchor="middle" font-size="9" fill="#9aa3c7">读段</text>
+<path d="M560,211 L532,211" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.8"/>
+<text x="546" y="203" text-anchor="middle" font-size="9" fill="#9aa3c7">读块</text>
+<path d="M400,211 L372,211" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.8"/>
+<text x="386" y="203" text-anchor="middle" font-size="9" fill="#9aa3c7">解码</text>
+
+<!-- Down arrow: ColumnBlock → Pipeline (left turn) -->
+<path d="M305,237 L305,298" stroke="#7a86b3" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+<!-- Row 3: execute (L→R) -->
+<rect x="240" y="300" width="130" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="305" y="324" text-anchor="middle" fill="#e8ecf5" font-size="12.5">Pipeline</text>
+<text x="305" y="340" text-anchor="middle" fill="#9aa3c7" font-size="9.5">Processor DAG</text>
+<rect x="400" y="300" width="130" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="465" y="324" text-anchor="middle" fill="#e8ecf5" font-size="12.5">Processor</text>
+<text x="465" y="340" text-anchor="middle" fill="#9aa3c7" font-size="9.5">向量化执行</text>
+<rect x="560" y="300" width="130" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="625" y="324" text-anchor="middle" fill="#e8ecf5" font-size="12.5">DataBlock 流</text>
+<text x="625" y="340" text-anchor="middle" fill="#9aa3c7" font-size="9.5">async_channel 桥接</text>
+
+<!-- Row 3 horizontal arrows -->
+<path d="M370,326 L398,326" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<text x="384" y="318" text-anchor="middle" font-size="9" fill="#9aa3c7">调度</text>
+<path d="M530,326 L558,326" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85"/>
+<text x="544" y="318" text-anchor="middle" font-size="9" fill="#9aa3c7">产出</text>
+
+<!-- Bottom infrastructure bar -->
+<rect x="80" y="380" width="770" height="44" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="465" y="400" text-anchor="middle" fill="#e8ecf5" font-size="12">MetaService (Raft CAS) · 对象存储 S3/GCS/Azure (OpenDAL DataOperator)</text>
+<text x="465" y="416" text-anchor="middle" fill="#9aa3c7" font-size="9.5">写路径：append_data → SerializeBlock(Parquet) → commit_insertion → CAS 新 Snapshot（乐观锁重试）</text>
+
+<!-- Legend -->
+<text x="80" y="450" font-size="10" fill="#9aa3c7">紫=编译 · 粉=存储读 · 黄=执行 · 青=结果流 · 蓝=基础设施</text>
+</svg>
