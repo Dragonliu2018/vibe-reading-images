@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="520" viewBox="0 0 840 520">
+  <rect width="840" height="520" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .gpu { stroke: #f9ca24; stroke-width: 1.5; fill: none; }
+    .dtype { font-family: system-ui, sans-serif; font-size: 9px; fill: #5a6885; font-style: italic; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <text x="420" y="24" text-anchor="middle" fill="#8892a8" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Managers — event_loop_overlap 调用链</text>
+
+  <rect x="260" y="40" width="320" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="420" y="58" text-anchor="middle" class="label" fill="#4ecdc4">recv_requests · process_input_requests</text>
+  <text x="420" y="73" text-anchor="middle" class="mod">scheduler.py:1770 · ZMQ PULL → waiting_queue</text>
+  <path d="M 420 84 L 420 100" class="arrow" marker-end="url(#ah)"/>
+  <text x="590" y="58" class="dtype">TokenizedReq</text>
+
+  <rect x="260" y="102" width="320" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="420" y="120" text-anchor="middle" class="label" fill="#4ecdc4">get_next_batch_to_run</text>
+  <text x="420" y="135" text-anchor="middle" class="mod">scheduler.py:3015 · SchedulePolicy + PrefillAdder</text>
+  <path d="M 420 146 L 420 162" class="arrow" marker-end="url(#ah)"/>
+  <text x="590" y="120" class="dtype">NextBatchPlan</text>
+
+  <rect x="260" y="164" width="320" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="182" text-anchor="middle" class="label" fill="#f9ca24">run_batch (GPU forward)</text>
+  <text x="420" y="197" text-anchor="middle" class="mod">scheduler.py:3626 · TpModelWorker.forward</text>
+  <path d="M 420 208 L 420 224" class="gpu" marker-end="url(#ahy)"/>
+  <text x="590" y="182" class="dtype">ScheduleBatch</text>
+
+  <rect x="260" y="226" width="320" height="44" rx="8" fill="#13162a" stroke="#5a6075" stroke-width="1.5"/>
+  <text x="420" y="244" text-anchor="middle" class="label" fill="#5a6075">result_queue.append(batch.copy(), result)</text>
+  <text x="420" y="259" text-anchor="middle" class="mod">scheduler.py:1804 · 延迟一步处理</text>
+  <path d="M 420 270 L 420 286" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="260" y="288" width="320" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="420" y="306" text-anchor="middle" class="label" fill="#4ecdc4">process_batch_result (上一轮)</text>
+  <text x="420" y="321" text-anchor="middle" class="mod">scheduler.py:3922 · output_streamer → ZMQ</text>
+  <path d="M 260 310 L 200 310 L 200 62 L 260 62" class="arrow" marker-end="url(#ah)" opacity="0.5"/>
+  <text x="205" y="186" class="dtype" transform="rotate(-90 205 186)">next iteration</text>
+
+  <!-- Side boxes -->
+  <rect x="620" y="164" width="190" height="44" rx="8" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="715" y="182" text-anchor="middle" class="mod" fill="#f9ca24">GPU forward 启动</text>
+  <text x="715" y="197" text-anchor="middle" class="mod" fill="#f9ca24">非阻塞</text>
+
+  <rect x="620" y="288" width="190" height="44" rx="8" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="715" y="306" text-anchor="middle" class="mod" fill="#4ecdc4">CPU 处理上一轮</text>
+  <text x="715" y="321" text-anchor="middle" class="mod" fill="#4ecdc4">与 GPU 并行</text>
+
+  <line x1="715" y1="208" x2="715" y2="288" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="725" y="248" class="dtype">overlap</text>
+
+  <!-- mem_cache box -->
+  <rect x="20" y="102" width="200" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="120" y="120" text-anchor="middle" class="label" fill="#ff6b9d">mem_cache</text>
+  <text x="120" y="135" text-anchor="middle" class="mod">match_prefix · insert · evict</text>
+  <path d="M 260 120 L 220 124" class="arrow" marker-end="url(#ah)" opacity="0.5"/>
+
+  <!-- TpModelWorker box -->
+  <rect x="260" y="370" width="320" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="390" text-anchor="middle" class="label" fill="#f9ca24">TpModelWorker → ModelRunner</text>
+  <text x="420" y="405" text-anchor="middle" class="mod">ForwardBatch.init_new · model.forward</text>
+  <text x="420" y="419" text-anchor="middle" class="mod">sample → next_token_ids</text>
+  <path d="M 420 210 L 420 370" class="gpu" marker-end="url(#ahy)" opacity="0.4"/>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+    <marker id="ahy" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f9ca24"/>
+    </marker>
+  </defs>
+</svg>

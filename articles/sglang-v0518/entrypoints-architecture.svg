@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="500" viewBox="0 0 820 500">
+  <rect width="820" height="500" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .ipc { stroke: #ff6b9d; stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <!-- Main process boundary -->
+  <rect x="15" y="35" width="530" height="450" rx="12" fill="none" stroke="#2a3040" stroke-width="1" stroke-dasharray="6 4"/>
+  <text x="280" y="28" text-anchor="middle" class="lbl" fill="#6c8ef5">主进程 (HTTP Server + TokenizerManager)</text>
+
+  <!-- Subprocess boundary -->
+  <rect x="570" y="35" width="230" height="450" rx="12" fill="none" stroke="#2a3040" stroke-width="1" stroke-dasharray="6 4"/>
+  <text x="685" y="28" text-anchor="middle" class="lbl" fill="#4ecdc4">子进程</text>
+
+  <!-- CLI -->
+  <rect x="30" y="50" width="170" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="115" y="70" text-anchor="middle" class="label" fill="#6c8ef5">cli/serve.py</text>
+  <text x="115" y="86" text-anchor="middle" class="mod">serve() · ServeBackendRegistry</text>
+
+  <path d="M 200 74 L 230 74" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- launch_server -->
+  <rect x="230" y="50" width="170" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="315" y="70" text-anchor="middle" class="label" fill="#6c8ef5">launch_server</text>
+  <text x="315" y="86" text-anchor="middle" class="mod">run_server · http_server.py</text>
+
+  <path d="M 315 98 L 315 125" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Engine -->
+  <rect x="150" y="127" width="330" height="68" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="315" y="148" text-anchor="middle" class="label" fill="#6c8ef5">Engine (engine.py:207)</text>
+  <text x="315" y="165" text-anchor="middle" class="mod">EngineScoreMixin + EngineBase(ABC)</text>
+  <text x="315" y="180" text-anchor="middle" class="mod">_launch_subprocesses · generate · encode</text>
+
+  <!-- FastAPI -->
+  <rect x="30" y="220" width="240" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="150" y="240" text-anchor="middle" class="label" fill="#6c8ef5">FastAPI + uvicorn</text>
+  <text x="150" y="256" text-anchor="middle" class="mod">http_server.py:2766</text>
+  <text x="150" y="270" text-anchor="middle" class="mod">CORS · Auth · Decompress</text>
+
+  <!-- OpenAI/Anthropic API -->
+  <rect x="30" y="300" width="240" height="68" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="150" y="320" text-anchor="middle" class="label" fill="#6c8ef5">OpenAI/Anthropic/Ollama</text>
+  <text x="150" y="337" text-anchor="middle" class="mod">serving_chat.py · serving_base.py(ABC)</text>
+  <text x="150" y="352" text-anchor="middle" class="mod">_convert_to_internal_request</text>
+
+  <path d="M 150 280 L 150 300" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 150 368 L 150 395" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- TokenizerManager -->
+  <rect x="30" y="397" width="240" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="150" y="417" text-anchor="middle" class="label" fill="#4ecdc4">TokenizerManager</text>
+  <text x="150" y="433" text-anchor="middle" class="mod">generate_request · asyncio</text>
+  <text x="150" y="447" text-anchor="middle" class="mod">tokenize · dispatch · 聚合</text>
+
+  <path d="M 315 195 L 315 220 L 270 235" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 270 334 L 270 300 L 270 284 L 270 270" class="arrow" marker-end="url(#ah)" opacity="0.5"/>
+
+  <!-- ZMQ to subprocesses -->
+  <path d="M 270 427 L 580 120" class="ipc" marker-end="url(#ahp)"/>
+  <text x="430" y="270" class="lbl" fill="#ff6b9d">ZMQ PUSH</text>
+
+  <path d="M 270 427 L 580 427" class="ipc" marker-end="url(#ahp)"/>
+  <text x="420" y="420" class="lbl" fill="#ff6b9d">ZMQ PUSH</text>
+
+  <!-- Scheduler subprocess -->
+  <rect x="580" y="80" width="210" height="80" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="685" y="100" text-anchor="middle" class="label" fill="#4ecdc4">Scheduler 子进程</text>
+  <text x="685" y="117" text-anchor="middle" class="mod">run_scheduler_process</text>
+  <text x="685" y="132" text-anchor="middle" class="mod">mp.Process · 每 TP rank 一个</text>
+  <text x="685" y="147" text-anchor="middle" class="mod">独占 GPU · NCCL 通信域</text>
+
+  <!-- Detokenizer subprocess -->
+  <rect x="580" y="397" width="210" height="68" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="685" y="417" text-anchor="middle" class="label" fill="#4ecdc4">Detokenizer 子进程</text>
+  <text x="685" y="434" text-anchor="middle" class="mod">run_detokenizer_process</text>
+  <text x="685" y="449" text-anchor="middle" class="mod">batch_decode · trim_stop</text>
+
+  <!-- Watchdog -->
+  <rect x="370" y="127" width="110" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="425" y="145" text-anchor="middle" class="mod" fill="#f9ca24">Watchdog</text>
+  <text x="425" y="158" text-anchor="middle" class="mod" fill="#f9ca24">1s 轮询</text>
+  <path d="M 425 127 L 425 105" class="arrow" marker-end="url(#ah)" opacity="0.4"/>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+    <marker id="ahp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+</svg>

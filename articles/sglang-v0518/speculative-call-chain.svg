@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="540" viewBox="0 0 840 540">
+  <rect width="840" height="540" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .gpu { stroke: #f9ca24; stroke-width: 1.5; fill: none; }
+    .dtype { font-family: system-ui, sans-serif; font-size: 9px; fill: #5a6885; font-style: italic; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <text x="420" y="24" text-anchor="middle" fill="#8892a8" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Speculative — EAGLE verify 调用链</text>
+
+  <!-- 1. forward_batch_generation -->
+  <rect x="260" y="40" width="320" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="420" y="58" text-anchor="middle" class="label" fill="#ff6b9d">forward_batch_generation</text>
+  <text x="420" y="73" text-anchor="middle" class="mod">eagle_worker_v2.py:1108 · Scheduler 调入口</text>
+  <path d="M 420 84 L 420 100" class="arrow" marker-end="url(#ah)"/>
+  <text x="590" y="58" class="dtype">ScheduleBatch</text>
+
+  <!-- 2. draft -->
+  <rect x="240" y="102" width="360" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="120" text-anchor="middle" class="label" fill="#f9ca24">draft_worker.draft</text>
+  <text x="420" y="135" text-anchor="middle" class="mod">eagle_worker_v2.py:1180 · 多步自回归生成候选树</text>
+  <path d="M 420 146 L 420 162" class="gpu" marker-end="url(#ahy)"/>
+  <text x="590" y="120" class="dtype">→ 候选 token 树</text>
+
+  <!-- 3. build_tree -->
+  <rect x="240" y="164" width="360" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="182" text-anchor="middle" class="label" fill="#f9ca24">build_tree_kernel_efficient</text>
+  <text x="420" y="197" text-anchor="middle" class="mod">eagle_utils.py:147 · tree attention mask + retrieve_index</text>
+  <path d="M 420 208 L 420 224" class="gpu" marker-end="url(#ahy)"/>
+
+  <!-- 4. verify -->
+  <rect x="220" y="226" width="400" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="420" y="244" text-anchor="middle" class="label" fill="#4ecdc4">target_worker.forward_batch_generation(is_verify=True)</text>
+  <text x="420" y="259" text-anchor="middle" class="mod">eagle_worker_common.py:562 · TARGET_VERIFY forward</text>
+  <path d="M 420 270 L 420 286" class="arrow" marker-end="url(#ah)"/>
+  <text x="630" y="244" class="dtype">ForwardBatch</text>
+
+  <!-- 5. eagle_sample -->
+  <rect x="220" y="288" width="400" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="420" y="306" text-anchor="middle" class="label" fill="#ff6b9d">eagle_sample — 树形接受/拒绝</text>
+  <text x="420" y="321" text-anchor="middle" class="mod">eagle_utils.py:649 · greedy/sampling → accept_lens</text>
+  <path d="M 420 332 L 420 348" class="arrow" marker-end="url(#ah)"/>
+  <text x="630" y="306" class="dtype">accept_lens</text>
+
+  <!-- 6. move_accept -->
+  <rect x="220" y="350" width="400" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="420" y="368" text-anchor="middle" class="label" fill="#ff6b9d">move_accept_tokens_to_target_kvcache</text>
+  <text x="420" y="383" text-anchor="middle" class="mod">eagle_worker_common.py:422 · draft 临时区 → target 连续区</text>
+  <path d="M 420 394 L 420 410" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- 7. on_publish -->
+  <rect x="240" y="412" width="360" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="420" y="430" text-anchor="middle" class="label" fill="#b388ff">on_publish(new_seq_lens)</text>
+  <text x="420" y="445" text-anchor="middle" class="mod">FutureMap.publish · overlap 下一轮 prep</text>
+  <path d="M 420 456 L 420 472" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- 8. draft_extend -->
+  <rect x="240" y="474" width="360" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="492" text-anchor="middle" class="label" fill="#f9ca24">draft_extend_for_decode</text>
+  <text x="420" y="507" text-anchor="middle" class="mod">eagle_worker_v2.py:859 · 用 verify hidden 填充 draft KV</text>
+
+  <!-- mem_cache side -->
+  <rect x="20" y="102" width="180" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="110" y="120" text-anchor="middle" class="label" fill="#ff6b9d">draft KV pool</text>
+  <text x="110" y="135" text-anchor="middle" class="mod">alloc_memory_pool</text>
+  <path d="M 200 124 L 240 124" class="arrow" marker-end="url(#ah)" opacity="0.4"/>
+
+  <rect x="20" y="350" width="180" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="110" y="368" text-anchor="middle" class="label" fill="#ff6b9d">target KV pool</text>
+  <text x="110" y="383" text-anchor="middle" class="mod">mem_cache</text>
+  <path d="M 200 372 L 220 372" class="arrow" marker-end="url(#ah)" opacity="0.4"/>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+    <marker id="ahy" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f9ca24"/>
+    </marker>
+  </defs>
+</svg>

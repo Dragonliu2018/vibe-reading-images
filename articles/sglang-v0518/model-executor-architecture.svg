@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="500" viewBox="0 0 840 500">
+  <rect width="840" height="500" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <!-- Center: ModelRunner -->
+  <rect x="270" y="30" width="300" height="80" rx="8" fill="#1a1e2e" stroke="#f9ca24" stroke-width="2"/>
+  <text x="420" y="52" text-anchor="middle" class="label" fill="#f9ca24">ModelRunner (model_runner.py:284)</text>
+  <text x="420" y="70" text-anchor="middle" class="mod">model: nn.Module · attn_backend · sampler</text>
+  <text x="420" y="86" text-anchor="middle" class="mod">req_to_token_pool · token_to_kv_pool_allocator</text>
+  <text x="420" y="100" text-anchor="middle" class="mod">_forward_raw · forward · sample</text>
+
+  <!-- ForwardContext -->
+  <rect x="610" y="30" width="210" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="715" y="50" text-anchor="middle" class="label" fill="#4ecdc4">ForwardContext</text>
+  <text x="715" y="66" text-anchor="middle" class="mod">forward_context.py:34 · 全局单例</text>
+  <path d="M 570 55 L 610 55" class="arrow" marker-end="url(#ah)"/>
+  <text x="590" y="48" text-anchor="middle" class="lbl">set</text>
+
+  <!-- Three runners -->
+  <text x="420" y="140" text-anchor="middle" class="label" fill="#8892a8">_forward_raw 三路分发 (model_runner.py:1641)</text>
+
+  <rect x="30" y="155" width="230" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="145" y="175" text-anchor="middle" class="label" fill="#f9ca24">DecodeCudaGraphRunner</text>
+  <text x="145" y="191" text-anchor="middle" class="mod">can_run_graph → execute()</text>
+  <text x="145" y="205" text-anchor="middle" class="mod">分桶 padding · graph 重放</text>
+
+  <rect x="300" y="155" width="230" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="415" y="175" text-anchor="middle" class="label" fill="#f9ca24">PrefillCudaGraphRunner</text>
+  <text x="415" y="191" text-anchor="middle" class="mod">EXTEND + can_run_graph</text>
+  <text x="415" y="205" text-anchor="middle" class="mod">token 维度分桶</text>
+
+  <rect x="570" y="155" width="230" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="685" y="175" text-anchor="middle" class="label" fill="#4ecdc4">EagerRunner</text>
+  <text x="685" y="191" text-anchor="middle" class="mod">decode / extend / idle</text>
+  <text x="685" y="205" text-anchor="middle" class="mod">直接 model.forward</text>
+
+  <path d="M 340 110 L 145 155" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 420 110 L 415 155" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 500 110 L 685 155" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Backends -->
+  <text x="420" y="245" text-anchor="middle" class="label" fill="#8892a8">CUDA Graph Backend 体系</text>
+
+  <rect x="30" y="260" width="230" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="145" y="280" text-anchor="middle" class="label" fill="#b388ff">FullCudaGraphBackend</text>
+  <text x="145" y="296" text-anchor="middle" class="mod">每 shape 一个 CUDAGraph</text>
+
+  <rect x="300" y="260" width="230" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="415" y="280" text-anchor="middle" class="label" fill="#b388ff">BreakableCudaGraphBackend</text>
+  <text x="415" y="296" text-anchor="middle" class="mod">分段捕获 + Dedup 去重</text>
+
+  <rect x="570" y="260" width="230" height="50" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="685" y="280" text-anchor="middle" class="label" fill="#b388ff">TcPiecewiseCudaGraphBackend</text>
+  <text x="685" y="296" text-anchor="middle" class="mod">torch.compile 驱动</text>
+
+  <!-- ForwardBatch -->
+  <rect x="30" y="340" width="380" height="80" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="220" y="360" text-anchor="middle" class="label" fill="#4ecdc4">ForwardBatch (forward_batch_info.py:377)</text>
+  <text x="220" y="378" text-anchor="middle" class="mod">@dataclass · ~80 字段 · init_new(batch, model_runner)</text>
+  <text x="220" y="393" text-anchor="middle" class="mod">forward_mode · input_ids · positions · out_cache_loc</text>
+  <text x="220" y="408" text-anchor="middle" class="mod">+ ForwardBatchDeepSeekMHAMixin</text>
+
+  <!-- HookManager + Buffers -->
+  <rect x="440" y="340" width="360" height="80" rx="8" fill="#13162a" stroke="#5a6075" stroke-width="1.5"/>
+  <text x="620" y="360" text-anchor="middle" class="label" fill="#5a6075">HookManager · ForwardInputBuffers</text>
+  <text x="620" y="378" text-anchor="middle" class="mod">hook_manager.py · JSON 配置驱动 PyTorch hook</text>
+  <text x="620" y="393" text-anchor="middle" class="mod">input_buffers.py · share_input_buffer flyweight</text>
+  <text x="620" y="408" text-anchor="middle" class="mod">跨 runner 共享 static buffer</text>
+
+  <!-- Arrows from runners to backends -->
+  <path d="M 145 215 L 145 260" class="arrow" marker-end="url(#ah)" opacity="0.5"/>
+  <path d="M 415 215 L 415 260" class="arrow" marker-end="url(#ah)" opacity="0.5"/>
+
+  <!-- Arrow to ForwardBatch -->
+  <path d="M 145 215 L 145 230 L 220 340" class="arrow" marker-end="url(#ah)" opacity="0.4"/>
+  <path d="M 415 215 L 415 230 L 220 340" class="arrow" marker-end="url(#ah)" opacity="0.4"/>
+  <path d="M 685 215 L 685 230 L 620 340" class="arrow" marker-end="url(#ah)" opacity="0.4"/>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+  </defs>
+</svg>

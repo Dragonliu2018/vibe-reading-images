@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="540" viewBox="0 0 840 540">
+  <rect width="840" height="540" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .ipc { stroke: #ff6b9d; stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <!-- Top: ingest managers -->
+  <rect x="40" y="30" width="240" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="160" y="50" text-anchor="middle" class="label" fill="#4ecdc4">TokenizerManager</text>
+  <text x="160" y="66" text-anchor="middle" class="mod">asyncio · tokenize/dispatch/聚合</text>
+
+  <rect x="560" y="30" width="240" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="680" y="50" text-anchor="middle" class="label" fill="#4ecdc4">DataParallelController</text>
+  <text x="680" y="66" text-anchor="middle" class="mod">DP 路由 · LoadBalanceMethod</text>
+
+  <!-- Center: Scheduler + mixins -->
+  <rect x="180" y="120" width="480" height="120" rx="8" fill="#1a1e2e" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="420" y="143" text-anchor="middle" class="label" fill="#4ecdc4">Scheduler（6 Mixin 组合）</text>
+  <text x="420" y="161" text-anchor="middle" class="mod">event_loop_normal / overlap · get_next_batch_to_run · run_batch</text>
+  <line x1="200" y1="172" x2="640" y2="172" stroke="#2a3040" stroke-width="1"/>
+  <text x="420" y="190" text-anchor="middle" class="mod" fill="#b388ff">DisaggregationDecode · DisaggregationPrefill · Multiplex</text>
+  <text x="420" y="206" text-anchor="middle" class="mod" fill="#b388ff">PP · Dllm · MlxOverlap</text>
+  <text x="420" y="225" text-anchor="middle" class="lbl">每个 Mixin 一个垂直特性，__init__ 只做编排</text>
+
+  <!-- ingest → scheduler -->
+  <path d="M 160 78 L 300 120" class="ipc" marker-end="url(#ahp)"/>
+  <path d="M 680 78 L 540 120" class="ipc" marker-end="url(#ahp)"/>
+  <text x="195" y="100" class="lbl">ZMQ PUSH</text>
+  <text x="585" y="100" text-anchor="end" class="lbl">dispatch</text>
+
+  <!-- Left: data structures + policy -->
+  <rect x="20" y="290" width="200" height="100" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="120" y="312" text-anchor="middle" class="label" fill="#f9ca24">ScheduleBatch · Req</text>
+  <text x="120" y="330" text-anchor="middle" class="mod">init_new · prepare_for_extend</text>
+  <text x="120" y="346" text-anchor="middle" class="mod">prepare_for_decode · mix_with_running</text>
+  <text x="120" y="362" text-anchor="middle" class="mod">filter_batch · retract_decode</text>
+  <text x="120" y="378" text-anchor="middle" class="lbl">CPU 侧批次数据</text>
+
+  <rect x="20" y="410" width="200" height="60" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="120" y="432" text-anchor="middle" class="label" fill="#b388ff">SchedulePolicy · PrefillAdder</text>
+  <text x="120" y="450" text-anchor="middle" class="mod">calc_priority · add_one_req</text>
+  <text x="120" y="463" text-anchor="middle" class="mod">LPM/DFS/FCFS · KV 预算准入</text>
+
+  <!-- Scheduler → data/policy -->
+  <path d="M 250 240 L 120 290" class="arrow" marker-end="url(#ah)"/>
+  <text x="160" y="262" class="lbl">组批/排序</text>
+
+  <!-- Right: scheduler_components -->
+  <rect x="620" y="290" width="200" height="180" rx="8" fill="#13162a" stroke="#5a6075" stroke-width="1.5"/>
+  <text x="720" y="312" text-anchor="middle" class="label" fill="#5a6075">scheduler_components/</text>
+  <text x="720" y="332" text-anchor="middle" class="mod">IpcChannels · RequestReceiver</text>
+  <text x="720" y="348" text-anchor="middle" class="mod">BatchResultProcessor</text>
+  <text x="720" y="364" text-anchor="middle" class="mod">OutputStreamer · MetricsReporter</text>
+  <text x="720" y="380" text-anchor="middle" class="mod">ProfilerManager · LoadInquirer</text>
+  <text x="720" y="396" text-anchor="middle" class="mod">FlushWrapper · WeightUpdater</text>
+  <text x="720" y="412" text-anchor="middle" class="mod">InvariantChecker · IdleSleeper</text>
+  <text x="720" y="432" text-anchor="middle" class="lbl">辅助功能 Component 拆分</text>
+
+  <path d="M 590 240 L 720 290" class="arrow" marker-end="url(#ah)"/>
+  <text x="660" y="262" class="lbl">委托</text>
+
+  <!-- Bottom: Detokenizer + TpWorker -->
+  <rect x="250" y="440" width="160" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="330" y="460" text-anchor="middle" class="label" fill="#4ecdc4">DetokenizerManager</text>
+  <text x="330" y="476" text-anchor="middle" class="mod">子进程 · batch_decode</text>
+
+  <rect x="430" y="440" width="160" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="510" y="460" text-anchor="middle" class="label" fill="#f9ca24">TpModelWorker</text>
+  <text x="510" y="476" text-anchor="middle" class="mod">→ ModelRunner（model_executor）</text>
+
+  <path d="M 420 240 L 330 440" class="ipc" marker-end="url(#ahp)"/>
+  <text x="355" y="345" class="lbl">输出 → ZMQ</text>
+  <path d="M 420 240 L 510 440" class="arrow" marker-end="url(#ah)"/>
+  <text x="485" y="345" class="lbl">forward</text>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+    <marker id="ahp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+</svg>

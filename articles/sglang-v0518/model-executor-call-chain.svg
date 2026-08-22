@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="540" viewBox="0 0 840 540">
+  <rect width="840" height="540" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .dtype { font-family: system-ui, sans-serif; font-size: 9px; fill: #5a6885; font-style: italic; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <text x="420" y="24" text-anchor="middle" fill="#8892a8" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Model Executor — forward 调用链</text>
+
+  <!-- Entry -->
+  <rect x="280" y="40" width="280" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="420" y="58" text-anchor="middle" class="label" fill="#4ecdc4">Scheduler.run_batch → TpModelWorker.forward</text>
+  <text x="420" y="73" text-anchor="middle" class="mod">scheduler.py:3626</text>
+  <path d="M 420 84 L 420 100" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- ForwardBatch.init_new -->
+  <rect x="260" y="102" width="320" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="420" y="120" text-anchor="middle" class="label" fill="#4ecdc4">ForwardBatch.init_new(batch, model_runner)</text>
+  <text x="420" y="135" text-anchor="middle" class="mod">forward_batch_info.py:703 · CPU→GPU 张量</text>
+  <path d="M 420 146 L 420 162" class="arrow" marker-end="url(#ah)"/>
+  <text x="590" y="120" class="dtype">ScheduleBatch → ForwardBatch</text>
+
+  <!-- ModelRunner.forward -->
+  <rect x="260" y="164" width="320" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="182" text-anchor="middle" class="label" fill="#f9ca24">ModelRunner.forward → _forward_raw</text>
+  <text x="420" y="197" text-anchor="middle" class="mod">model_runner.py:1497 → :1641 · 发布 ForwardContext</text>
+  <path d="M 420 208 L 420 224" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Decision diamond -->
+  <rect x="290" y="226" width="260" height="40" rx="20" fill="#13162a" stroke="#5a6075" stroke-width="1.5"/>
+  <text x="420" y="246" text-anchor="middle" class="label" fill="#5a6075">can_run_graph? forward_mode?</text>
+  <text x="420" y="260" text-anchor="middle" class="mod">DECODE/IDLE → graph · EXTEND → prefill_cg · else → eager</text>
+
+  <!-- Three paths -->
+  <path d="M 290 246 L 140 246 L 140 290" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 420 266 L 420 290" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 550 246 L 700 246 L 700 290" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Path A: Decode CUDA Graph -->
+  <rect x="30" y="292" width="220" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="140" y="312" text-anchor="middle" class="label" fill="#f9ca24">路径 A: Decode CG 重放</text>
+  <text x="140" y="328" text-anchor="middle" class="mod">decode_cuda_graph_runner.execute</text>
+  <text x="140" y="342" text-anchor="middle" class="mod">backend.replay(shape_key)</text>
+
+  <!-- Path C: Prefill CUDA Graph -->
+  <rect x="290" y="292" width="260" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="312" text-anchor="middle" class="label" fill="#f9ca24">路径 B/C: Prefill CG / Split</text>
+  <text x="420" y="328" text-anchor="middle" class="mod">prefill_cuda_graph_runner.execute</text>
+  <text x="420" y="342" text-anchor="middle" class="mod">_pad_to_bucket · 2x padding 限制</text>
+
+  <!-- Path D: EagerRunner -->
+  <rect x="590" y="292" width="220" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="700" y="312" text-anchor="middle" class="label" fill="#4ecdc4">路径 D: EagerRunner</text>
+  <text x="700" y="328" text-anchor="middle" class="mod">eager_runner.execute</text>
+  <text x="700" y="342" text-anchor="middle" class="mod">model.forward(input_ids, pos, fb)</text>
+
+  <!-- model.forward -->
+  <rect x="230" y="380" width="380" height="60" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="420" y="400" text-anchor="middle" class="label" fill="#b388ff">model.forward → layers (Attention · MLP · MoE · Norm)</text>
+  <text x="420" y="416" text-anchor="middle" class="mod">get_attn_backend() · get_token_to_kv_pool()</text>
+  <text x="420" y="430" text-anchor="middle" class="mod">set_kv_buffer · get_key/value_buffer</text>
+
+  <path d="M 140 352 L 140 370 L 420 380" class="arrow" marker-end="url(#ah)" opacity="0.5"/>
+  <path d="M 420 352 L 420 380" class="arrow" marker-end="url(#ah)" opacity="0.5"/>
+  <path d="M 700 352 L 700 370 L 420 380" class="arrow" marker-end="url(#ah)" opacity="0.5"/>
+
+  <!-- Sample -->
+  <rect x="280" y="460" width="280" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="420" y="478" text-anchor="middle" class="label" fill="#4ecdc4">ModelRunner.sample → next_token_ids</text>
+  <text x="420" y="493" text-anchor="middle" class="mod">model_runner.py:1758 · LogitsProcessorOutput</text>
+  <path d="M 420 440 L 420 460" class="arrow" marker-end="url(#ah)"/>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+  </defs>
+</svg>

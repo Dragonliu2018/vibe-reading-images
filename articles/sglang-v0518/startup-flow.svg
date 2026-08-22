@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="540" viewBox="0 0 820 540">
+  <rect width="820" height="540" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+    .dtype { font-family: system-ui, sans-serif; font-size: 9px; fill: #5a6885; font-style: italic; }
+  </style>
+
+  <text x="410" y="24" text-anchor="middle" fill="#8892a8" font-family="system-ui, sans-serif" font-size="13" font-weight="600">SGLang 启动流程 — 三进程装配</text>
+
+  <!-- Step 1: CLI -->
+  <rect x="280" y="40" width="260" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="60" text-anchor="middle" class="label" fill="#6c8ef5">sglang serve --model-path ...</text>
+  <text x="410" y="76" text-anchor="middle" class="mod">cli/serve.py: serve() · ServeBackendRegistry</text>
+  <path d="M 410 88 L 410 113" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Step 2: launch_server -->
+  <rect x="260" y="115" width="300" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="135" text-anchor="middle" class="label" fill="#6c8ef5">launch_server · run_server</text>
+  <text x="410" y="151" text-anchor="middle" class="mod">launch_server.py:16 · http_server.py:2766</text>
+  <path d="M 410 163 L 410 188" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Step 3: Engine._launch_subprocesses -->
+  <rect x="220" y="190" width="380" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="210" text-anchor="middle" class="label" fill="#6c8ef5">Engine._launch_subprocesses</text>
+  <text x="410" y="226" text-anchor="middle" class="mod">engine.py:1060 · PortArgs.init_new → 分配 ZMQ ipc</text>
+  <path d="M 410 238 L 410 263" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Three branches: Scheduler / Detokenizer / TokenizerManager -->
+  <path d="M 410 263 L 410 275 L 150 275 L 150 290" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 410 275 L 410 290" class="arrow" marker-end="url(#ah)"/>
+  <path d="M 410 275 L 670 275 L 670 290" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- Scheduler subprocess -->
+  <rect x="30" y="292" width="240" height="80" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="150" y="312" text-anchor="middle" class="label" fill="#4ecdc4">Scheduler 子进程</text>
+  <text x="150" y="328" text-anchor="middle" class="mod">mp.Process(run_scheduler_process)</text>
+  <text x="150" y="344" text-anchor="middle" class="mod">load_model → build_kv_cache</text>
+  <text x="150" y="360" text-anchor="middle" class="mod">→ init_cuda_graphs → ready</text>
+
+  <!-- TokenizerManager (main process) -->
+  <rect x="290" y="292" width="240" height="80" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="312" text-anchor="middle" class="label" fill="#4ecdc4">TokenizerManager (主进程)</text>
+  <text x="410" y="328" text-anchor="middle" class="mod">init_tokenizer_manager_func</text>
+  <text x="410" y="344" text-anchor="middle" class="mod">ZMQ sockets 初始化</text>
+  <text x="410" y="360" text-anchor="middle" class="mod">asyncio 事件循环</text>
+
+  <!-- Detokenizer subprocess -->
+  <rect x="550" y="292" width="240" height="80" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="670" y="312" text-anchor="middle" class="label" fill="#4ecdc4">Detokenizer 子进程</text>
+  <text x="670" y="328" text-anchor="middle" class="mod">mp.Process(run_detokenizer_process)</text>
+  <text x="670" y="344" text-anchor="middle" class="mod">worker_num > 1 → N 个</text>
+  <text x="670" y="360" text-anchor="middle" class="mod">+ MultiDetokenizerRouter</text>
+
+  <!-- Converge to wait_for_ready -->
+  <path d="M 150 372 L 150 395 L 410 395 L 410 405" class="arrow" marker-end="url(#ah)" opacity="0.6"/>
+  <path d="M 670 372 L 670 395 L 410 395" class="arrow" marker-end="url(#ah)" opacity="0.6" style="marker-end: none"/>
+  <path d="M 410 372 L 410 405" class="arrow" marker-end="url(#ah)" opacity="0.6"/>
+
+  <!-- wait_for_ready -->
+  <rect x="260" y="407" width="300" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="427" text-anchor="middle" class="label" fill="#f9ca24">wait_for_ready · SubprocessWatchdog</text>
+  <text x="410" y="443" text-anchor="middle" class="mod">mp.Pipe 等就绪 · watchdog 监控存活</text>
+  <path d="M 410 455 L 410 480" class="arrow" marker-end="url(#ah)"/>
+
+  <!-- HTTP server ready -->
+  <rect x="240" y="482" width="340" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="502" text-anchor="middle" class="label" fill="#6c8ef5">FastAPI + uvicorn 启动</text>
+  <text x="410" y="518" text-anchor="middle" class="mod">http_server.py · 监听端口 30000</text>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+  </defs>
+</svg>

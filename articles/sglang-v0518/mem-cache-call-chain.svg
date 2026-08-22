@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="500" viewBox="0 0 840 500">
+  <rect width="840" height="500" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .dtype { font-family: system-ui, sans-serif; font-size: 9px; fill: #5a6885; font-style: italic; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <text x="420" y="24" text-anchor="middle" fill="#8892a8" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Memory Cache — match_prefix / insert / evict 调用链</text>
+
+  <!-- match_prefix chain -->
+  <rect x="30" y="40" width="780" height="24" rx="4" fill="#1a1e2e" stroke="#2a3040" stroke-width="1"/>
+  <text x="420" y="56" text-anchor="middle" class="label" fill="#ff6b9d">match_prefix 链</text>
+
+  <rect x="30" y="70" width="240" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="150" y="88" text-anchor="middle" class="label" fill="#4ecdc4">Scheduler.match_prefix</text>
+  <text x="150" y="103" text-anchor="middle" class="mod">→ RadixCache.match_prefix</text>
+
+  <path d="M 270 92 L 300 92" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="300" y="70" width="260" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="430" y="88" text-anchor="middle" class="label" fill="#ff6b9d">_match_prefix_helper</text>
+  <text x="430" y="103" text-anchor="middle" class="mod">radix_cache.py:678 · 遍历 TreeNode</text>
+
+  <path d="M 560 92 L 590 92" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="590" y="70" width="220" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="700" y="88" text-anchor="middle" class="label" fill="#ff6b9d">RadixKey.match</text>
+  <text x="700" y="103" text-anchor="middle" class="mod">:181 · 指数搜索 + 二分</text>
+
+  <path d="M 700 114 L 700 130" class="arrow" marker-end="url(#ah)" opacity="0.5"/>
+
+  <rect x="540" y="132" width="270" height="40" rx="8" fill="#13162a" stroke="#5a6075" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="675" y="150" text-anchor="middle" class="mod">→ page_aligned · _split_node</text>
+  <text x="675" y="163" text-anchor="middle" class="mod">→ MatchResult(device_indices, last_node)</text>
+
+  <text x="150" y="130" class="dtype" text-anchor="middle">MatchPrefixParams(key)</text>
+  <text x="430" y="130" class="dtype" text-anchor="middle">child_key → dict lookup</text>
+  <text x="700" y="130" class="dtype" text-anchor="middle">→ matched_tokens</text>
+
+  <!-- insert chain -->
+  <rect x="30" y="200" width="780" height="24" rx="4" fill="#1a1e2e" stroke="#2a3040" stroke-width="1"/>
+  <text x="420" y="216" text-anchor="middle" class="label" fill="#ff6b9d">insert 链</text>
+
+  <rect x="30" y="230" width="260" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="160" y="248" text-anchor="middle" class="label" fill="#4ecdc4">cache_finished_req</text>
+  <text x="160" y="263" text-anchor="middle" class="mod">radix_cache.py:458</text>
+
+  <path d="M 290 252 L 320 252" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="320" y="230" width="240" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="440" y="248" text-anchor="middle" class="label" fill="#ff6b9d">_insert_helper</text>
+  <text x="440" y="263" text-anchor="middle" class="mod">radix_cache.py:737 · 遍历+分裂</text>
+
+  <path d="M 560 252 L 590 252" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="590" y="230" width="220" height="44" rx="8" fill="#13162a" stroke="#5a6075" stroke-width="1.5"/>
+  <text x="700" y="248" text-anchor="middle" class="mod">_split_node · _delete_leaf</text>
+  <text x="700" y="263" text-anchor="middle" class="mod">value.clone() · 链接 TreeNode</text>
+
+  <!-- evict chain -->
+  <rect x="30" y="300" width="780" height="24" rx="4" fill="#1a1e2e" stroke="#2a3040" stroke-width="1"/>
+  <text x="420" y="316" text-anchor="middle" class="label" fill="#ff6b9d">evict 链</text>
+
+  <rect x="30" y="330" width="260" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="160" y="348" text-anchor="middle" class="label" fill="#4ecdc4">RadixCache.evict</text>
+  <text x="160" y="363" text-anchor="middle" class="mod">radix_cache.py:592</text>
+
+  <path d="M 290 352 L 320 352" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="320" y="330" width="240" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="440" y="348" text-anchor="middle" class="label" fill="#b388ff">eviction_strategy.get_priority</text>
+  <text x="440" y="363" text-anchor="middle" class="mod">heapq 最小堆排序</text>
+
+  <path d="M 560 352 L 590 352" class="arrow" marker-end="url(#ah)"/>
+
+  <rect x="590" y="330" width="220" height="44" rx="8" fill="#13162a" stroke="#5a6075" stroke-width="1.5"/>
+  <text x="700" y="348" text-anchor="middle" class="mod">free_segment(value)</text>
+  <text x="700" y="363" text-anchor="middle" class="mod">_delete_leaf · 更新 evictable</text>
+
+  <!-- Attention interface -->
+  <rect x="30" y="420" width="780" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="420" y="440" text-anchor="middle" class="label" fill="#f9ca24">KVCache ↔ Attention 层接口</text>
+  <text x="420" y="458" text-anchor="middle" class="mod">set_kv_buffer(layer, loc, cache_k, cache_v) · get_key_buffer(layer_id) · get_value_buffer(layer_id)</text>
+  <text x="420" y="472" text-anchor="middle" class="mod">move_kv_cache(tgt, src) · get_cpu_copy(indices) → HiCache L2</text>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+  </defs>
+</svg>

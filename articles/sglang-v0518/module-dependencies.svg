@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520">
+  <rect width="820" height="520" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .ipc { stroke: #ff6b9d; stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <!-- Left: external clients -->
+  <rect x="20" y="180" width="120" height="50" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="80" y="200" text-anchor="middle" class="label" fill="#6c8ef5">Client</text>
+  <text x="80" y="216" text-anchor="middle" class="mod">HTTP / OpenAI SDK</text>
+
+  <!-- 1. entrypoints -->
+  <rect x="180" y="140" width="150" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="255" y="162" text-anchor="middle" class="label" fill="#6c8ef5">entrypoints</text>
+  <text x="255" y="180" text-anchor="middle" class="mod">Engine · HTTP Server</text>
+  <text x="255" y="195" text-anchor="middle" class="mod">OpenAI/Anthropic API</text>
+
+  <!-- 2. managers (center top) -->
+  <rect x="370" y="140" width="160" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="450" y="162" text-anchor="middle" class="label" fill="#4ecdc4">managers</text>
+  <text x="450" y="180" text-anchor="middle" class="mod">Scheduler</text>
+  <text x="450" y="195" text-anchor="middle" class="mod">TokenizerManager</text>
+
+  <!-- 3. model_executor (center) -->
+  <rect x="370" y="250" width="160" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="450" y="272" text-anchor="middle" class="label" fill="#f9ca24">model_executor</text>
+  <text x="450" y="290" text-anchor="middle" class="mod">ModelRunner · ForwardBatch</text>
+  <text x="450" y="303" text-anchor="middle" class="mod">CUDA Graph</text>
+
+  <!-- 4. mem_cache (center bottom) -->
+  <rect x="370" y="350" width="160" height="60" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="450" y="372" text-anchor="middle" class="label" fill="#ff6b9d">mem_cache</text>
+  <text x="450" y="390" text-anchor="middle" class="mod">RadixCache</text>
+  <text x="450" y="403" text-anchor="middle" class="mod">MemoryPool · Allocator</text>
+
+  <!-- 5. speculative (right top) -->
+  <rect x="600" y="140" width="150" height="70" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="675" y="162" text-anchor="middle" class="label" fill="#ff6b9d">speculative</text>
+  <text x="675" y="180" text-anchor="middle" class="mod">EAGLE · DFlash</text>
+  <text x="675" y="195" text-anchor="middle" class="mod">n-gram · spec_registry</text>
+
+  <!-- 6. models + layers (right bottom) -->
+  <rect x="600" y="320" width="150" height="60" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="675" y="342" text-anchor="middle" class="label" fill="#b388ff">models + layers</text>
+  <text x="675" y="360" text-anchor="middle" class="mod">Attention · MoE</text>
+  <text x="675" y="373" text-anchor="middle" class="mod">Quant · model.forward</text>
+
+  <!-- Arrows: client → entrypoints -->
+  <path d="M 140 205 L 180 180" class="arrow" marker-end="url(#ah)"/>
+  <text x="148" y="178" class="lbl">HTTP</text>
+
+  <!-- entrypoints → managers (ZMQ) -->
+  <path d="M 330 175 L 370 175" class="ipc" marker-end="url(#ahp)"/>
+  <text x="350" y="168" text-anchor="middle" class="lbl">ZMQ</text>
+
+  <!-- managers → model_executor -->
+  <path d="M 450 210 L 450 250" class="arrow" marker-end="url(#ah)"/>
+  <text x="460" y="234" class="lbl">forward</text>
+
+  <!-- model_executor → mem_cache -->
+  <path d="M 450 310 L 450 350" class="arrow" marker-end="url(#ah)"/>
+  <text x="460" y="334" class="lbl">KV 读写</text>
+
+  <!-- managers → speculative (dashed, cross-cut) -->
+  <path d="M 530 175 L 600 175" class="ipc" marker-end="url(#ahp)"/>
+  <text x="565" y="168" text-anchor="middle" class="lbl">draft→verify</text>
+
+  <!-- speculative → model_executor (verify) -->
+  <path d="M 675 210 L 675 250 L 530 280" class="arrow" marker-end="url(#ah)"/>
+  <text x="615" y="245" class="lbl">verify forward</text>
+
+  <!-- model_executor → models+layers -->
+  <path d="M 530 280 L 600 350" class="arrow" marker-end="url(#ah)"/>
+  <text x="575" y="320" class="lbl">model.forward</text>
+
+  <!-- speculative → mem_cache (draft KV) -->
+  <path d="M 600 200 L 530 380" class="ipc" marker-end="url(#ahp)" opacity="0.7"/>
+  <text x="580" y="290" class="lbl">draft KV</text>
+
+  <!-- managers → mem_cache (prefix match) -->
+  <path d="M 370 200 L 370 350 L 370 350" class="arrow" marker-end="url(#ah)" opacity="0.6"/>
+  <text x="345" y="280" class="lbl" text-anchor="end">prefix<br/>match</text>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+    <marker id="ahp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+</svg>

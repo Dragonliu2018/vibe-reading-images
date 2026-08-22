@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="540" viewBox="0 0 840 540">
+  <rect width="840" height="540" fill="#0b0d14"/>
+  <style>
+    .label { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
+    .mod { font-family: system-ui, sans-serif; font-size: 10px; fill: #a0aec0; }
+    .arrow { stroke: #363b62; stroke-width: 1.5; fill: none; }
+    .lbl { font-family: system-ui, sans-serif; font-size: 10px; fill: #7a85a3; }
+  </style>
+
+  <!-- Top: RadixCache -->
+  <rect x="180" y="30" width="480" height="80" rx="8" fill="#1a1e2e" stroke="#ff6b9d" stroke-width="2"/>
+  <text x="420" y="52" text-anchor="middle" class="label" fill="#ff6b9d">RadixCache (radix_cache.py:303)</text>
+  <text x="420" y="70" text-anchor="middle" class="mod">match_prefix · insert · evict · inc/dec_lock_ref</text>
+  <text x="420" y="86" text-anchor="middle" class="mod">继承 BasePrefixCache(ABC) + KVCacheEventMixin</text>
+  <text x="420" y="100" text-anchor="middle" class="mod">HiRadixCache → 三层缓存 (GPU + Host + Remote)</text>
+
+  <!-- TreeNode -->
+  <rect x="20" y="130" width="240" height="100" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="140" y="150" text-anchor="middle" class="label" fill="#ff6b9d">TreeNode (radix_cache.py:238)</text>
+  <text x="140" y="168" text-anchor="middle" class="mod">children · parent · key: RadixKey</text>
+  <text x="140" y="184" text-anchor="middle" class="mod">value: Tensor (KV slot 索引)</text>
+  <text x="140" y="200" text-anchor="middle" class="mod">lock_ref · last_access_time · hit_count</text>
+  <text x="140" y="216" text-anchor="middle" class="mod">host_value · hash_value</text>
+
+  <!-- RadixKey -->
+  <rect x="290" y="130" width="260" height="70" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="420" y="150" text-anchor="middle" class="label" fill="#ff6b9d">RadixKey (radix_cache.py:59)</text>
+  <text x="420" y="168" text-anchor="middle" class="mod">match(): 指数搜索 + 二分</text>
+  <text x="420" y="184" text-anchor="middle" class="mod">O((log m)²) 避免逐 token Python 循环</text>
+
+  <!-- EvictPolicy -->
+  <rect x="580" y="130" width="240" height="70" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="700" y="150" text-anchor="middle" class="label" fill="#b388ff">EvictionStrategy</text>
+  <text x="700" y="168" text-anchor="middle" class="mod">LRU · LFU · FIFO · MRU · FILO</text>
+  <text x="700" y="184" text-anchor="middle" class="mod">Priority · SLRU</text>
+
+  <!-- Three layers -->
+  <text x="420" y="260" text-anchor="middle" class="label" fill="#8892a8">三层 MemoryPool 架构（物理池与逻辑树分离）</text>
+
+  <rect x="20" y="280" width="260" height="80" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="150" y="300" text-anchor="middle" class="label" fill="#4ecdc4">Layer 1: ReqToTokenPool</text>
+  <text x="150" y="318" text-anchor="middle" class="mod">memory_pool.py:256</text>
+  <text x="150" y="334" text-anchor="middle" class="mod">req_to_token[size, max_ctx_len]</text>
+  <text x="150" y="350" text-anchor="middle" class="mod">请求 → token 位置映射</text>
+
+  <rect x="290" y="280" width="260" height="80" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="420" y="300" text-anchor="middle" class="label" fill="#4ecdc4">Layer 2: TokenToKVPoolAllocator</text>
+  <text x="420" y="318" text-anchor="middle" class="mod">allocator/ · alloc · free_segment</text>
+  <text x="420" y="334" text-anchor="middle" class="mod">TokenToKVPoolAllocator (token)</text>
+  <text x="420" y="350" text-anchor="middle" class="mod">PagedTokenToKVPoolAllocator (page)</text>
+
+  <rect x="560" y="280" width="260" height="80" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="690" y="300" text-anchor="middle" class="label" fill="#4ecdc4">Layer 3: KVCache (ABC)</text>
+  <text x="690" y="318" text-anchor="middle" class="mod">memory_pool.py:1624</text>
+  <text x="690" y="334" text-anchor="middle" class="mod">MHATokenToKVPool · MLATokenToKVPool</text>
+  <text x="690" y="350" text-anchor="middle" class="mod">FP4 · MXFP8 · PageMajor 变体</text>
+
+  <!-- Arrows between layers -->
+  <path d="M 280 320 L 290 320" class="arrow" marker-end="url(#ah)"/>
+  <text x="285" y="312" text-anchor="middle" class="lbl">slot 索引</text>
+  <path d="M 550 320 L 560 320" class="arrow" marker-end="url(#ah)"/>
+  <text x="555" y="312" text-anchor="middle" class="lbl">读写</text>
+
+  <!-- RadixCache → layers -->
+  <path d="M 300 110 L 150 280" class="arrow" marker-end="url(#ah)" opacity="0.4"/>
+  <path d="M 420 110 L 420 280" class="arrow" marker-end="url(#ah)" opacity="0.4"/>
+  <path d="M 540 110 L 690 280" class="arrow" marker-end="url(#ah)" opacity="0.4"/>
+
+  <!-- Registry -->
+  <rect x="180" y="390" width="480" height="60" rx="8" fill="#13162a" stroke="#5a6075" stroke-width="1.5"/>
+  <text x="420" y="410" text-anchor="middle" class="label" fill="#5a6075">registry.py · register_radix_cache_backend</text>
+  <text x="420" y="428" text-anchor="middle" class="mod">default_radix_cache_factory → RadixCache / HiRadixCache / UnifiedRadixCache / ChunkCache ...</text>
+
+  <path d="M 420 360 L 420 390" class="arrow" marker-end="url(#ah)" opacity="0.3"/>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#363b62"/>
+    </marker>
+  </defs>
+</svg>
