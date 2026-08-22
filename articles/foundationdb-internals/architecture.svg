@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="620" viewBox="0 0 880 620" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="620" fill="#0b0d14"/>
+
+  <text x="440" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">FoundationDB 分层架构</text>
+
+  <!-- Layer 1: 客户端层 (青 #4ecdc4) -->
+  <rect x="20" y="46" width="840" height="58" rx="8" fill="none" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="36" y="80" fill="#4ecdc4" font-size="13" font-weight="600">客户端层</text>
+  <text x="36" y="95" fill="#7a86b3" font-size="10">Client</text>
+  <rect x="250" y="56" width="300" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="400" y="73" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">fdbclient</text>
+  <text x="400" y="89" text-anchor="middle" fill="#9aa3c4" font-size="10">NativeAPI · RYW 缓存 · 定位缓存 · SpecialKeySpace</text>
+  <rect x="570" y="56" width="270" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="705" y="73" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">bindings</text>
+  <text x="705" y="89" text-anchor="middle" fill="#9aa3c4" font-size="10">C · Python · Go · Java · Ruby</text>
+
+  <path d="M 440 104 L 440 116" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- Layer 2: 控制平面 (紫 #b388ff) -->
+  <rect x="20" y="116" width="840" height="68" rx="8" fill="none" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="36" y="145" fill="#b388ff" font-size="13" font-weight="600">控制平面</text>
+  <text x="36" y="160" fill="#7a86b3" font-size="10">Control Plane</text>
+  <text x="36" y="175" fill="#7a86b3" font-size="10">(CC + 协调器)</text>
+  <g font-size="12" font-weight="600" fill="#e6e8f0">
+    <rect x="170" y="126" width="128" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+    <text x="234" y="146" text-anchor="middle">ClusterController</text>
+    <text x="234" y="164" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">Paxos 选举 · 角色招募</text>
+    <rect x="306" y="126" width="128" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+    <text x="370" y="146" text-anchor="middle">ClusterRecovery</text>
+    <text x="370" y="164" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">9 阶段恢复状态机</text>
+    <rect x="442" y="126" width="128" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+    <text x="506" y="146" text-anchor="middle">Worker</text>
+    <text x="506" y="164" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">进程承载多角色</text>
+    <rect x="578" y="126" width="128" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+    <text x="642" y="146" text-anchor="middle">DataDistributor</text>
+    <text x="642" y="164" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">分片 · 迁移 · 负载</text>
+    <rect x="714" y="126" width="128" height="50" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+    <text x="778" y="146" text-anchor="middle">Ratekeeper</text>
+    <text x="778" y="164" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">限流</text>
+  </g>
+
+  <path d="M 440 184 L 440 196" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- Layer 3: 事务系统 (蓝 #6c8ef5) -->
+  <rect x="20" y="196" width="840" height="68" rx="8" fill="none" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="36" y="225" fill="#6c8ef5" font-size="13" font-weight="600">事务系统</text>
+  <text x="36" y="240" fill="#7a86b3" font-size="10">Transaction</text>
+  <text x="36" y="255" fill="#7a86b3" font-size="10">System</text>
+  <g font-size="12" font-weight="600" fill="#e6e8f0">
+    <rect x="220" y="206" width="150" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+    <text x="295" y="226" text-anchor="middle">CommitProxy</text>
+    <text x="295" y="244" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">批量提交 · 写 TLog</text>
+    <rect x="380" y="206" width="150" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+    <text x="455" y="226" text-anchor="middle">GRVProxy</text>
+    <text x="455" y="244" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">授予读版本</text>
+    <rect x="540" y="206" width="150" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+    <text x="615" y="226" text-anchor="middle">Resolver</text>
+    <text x="615" y="244" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">OCC 冲突检测</text>
+    <rect x="700" y="206" width="150" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+    <text x="775" y="226" text-anchor="middle">Sequencer</text>
+    <text x="775" y="244" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">Master · 版本分配</text>
+  </g>
+
+  <path d="M 440 264 L 440 276" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- Layer 4: 事务日志 (黄 #f9ca24) -->
+  <rect x="20" y="276" width="840" height="58" rx="8" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="36" y="306" fill="#f9ca24" font-size="13" font-weight="600">事务日志</text>
+  <text x="36" y="321" fill="#7a86b3" font-size="10">Transaction Log</text>
+  <g font-size="12" font-weight="600" fill="#e6e8f0">
+    <rect x="230" y="286" width="180" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+    <text x="320" y="303" text-anchor="middle">TLog</text>
+    <text x="320" y="319" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">持久 mutation 日志 · tag 分区 · spilling</text>
+    <rect x="420" y="286" width="180" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+    <text x="510" y="303" text-anchor="middle">LogSystem</text>
+    <text x="510" y="319" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">日志拓扑 · generation 切换</text>
+    <rect x="610" y="286" width="180" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+    <text x="700" y="303" text-anchor="middle">LogRouter</text>
+    <text x="700" y="319" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">跨 region 转发</text>
+  </g>
+
+  <path d="M 440 334 L 440 346" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- Layer 5: 存储层 (浅蓝 #80c7ff) -->
+  <rect x="20" y="346" width="840" height="68" rx="8" fill="none" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="36" y="375" fill="#80c7ff" font-size="13" font-weight="600">存储层</text>
+  <text x="36" y="390" fill="#7a86b3" font-size="10">Storage</text>
+  <g font-size="12" font-weight="600" fill="#e6e8f0">
+    <rect x="190" y="356" width="200" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+    <text x="290" y="376" text-anchor="middle">StorageServer</text>
+    <text x="290" y="394" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">MVCC 内存 · pull TLog · 读写服务</text>
+    <rect x="400" y="356" width="200" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+    <text x="500" y="376" text-anchor="middle">Redwood</text>
+    <text x="500" y="394" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">VersionedBTree · 自研 B-tree</text>
+    <rect x="610" y="356" width="200" height="50" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+    <text x="710" y="376" text-anchor="middle">Memory / RocksDB</text>
+    <text x="710" y="394" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">备选存储引擎</text>
+  </g>
+
+  <path d="M 440 414 L 440 426" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- Layer 6: 基础设施 (foundation) -->
+  <rect x="20" y="426" width="840" height="68" rx="8" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="36" y="455" fill="#f9ca24" font-size="13" font-weight="600">基础设施</text>
+  <text x="36" y="470" fill="#7a86b3" font-size="10">Infrastructure</text>
+  <text x="36" y="485" fill="#7a86b3" font-size="10">(全栈基石)</text>
+  <g font-size="12" font-weight="600" fill="#e6e8f0">
+    <rect x="190" y="436" width="290" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+    <text x="335" y="456" text-anchor="middle">flow</text>
+    <text x="335" y="474" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">Future/Promise · C++20 协程 · Net2 · FastAlloc · Arena</text>
+    <rect x="490" y="436" width="290" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+    <text x="635" y="456" text-anchor="middle">fdbrpc</text>
+    <text x="635" y="474" text-anchor="middle" fill="#9aa3c4" font-size="10" font-weight="400">FlowTransport · LoadBalance · ReplyPromise · Sim2</text>
+  </g>
+
+  <!-- Cross-cutting: 模拟测试 -->
+  <rect x="20" y="514" width="840" height="46" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.95"/>
+  <text x="36" y="538" fill="#ff6b9d" font-size="13" font-weight="600">模拟测试</text>
+  <text x="36" y="552" fill="#7a86b3" font-size="10">Simulation</text>
+  <text x="220" y="534" fill="#e6e8f0" font-size="12" font-weight="600">Workloads + SimulatedCluster</text>
+  <text x="220" y="550" fill="#9aa3c4" font-size="10">复用 flow + fdbrpc 模拟原语，单进程确定性模拟整个集群（同一份 fdbd 代码，仅 I/O 换模拟实现）</text>
+  <path d="M 190 537 L 190 537" stroke="#ff6b9d" stroke-width="1.2" fill="none"/>
+
+  <!-- Ops tools note -->
+  <rect x="20" y="574" width="840" height="36" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1" stroke-dasharray="3 3" opacity="0.8"/>
+  <text x="36" y="596" fill="#7a86b3" font-size="12" font-weight="600">运维工具</text>
+  <text x="220" y="596" fill="#9aa3c4" font-size="11">fdbcli（CLI）· fdbmonitor（进程监控）· fdbbackup（备份）· fdbctl（控制面）</text>
+
+  <!-- Legend -->
+  <text x="780" y="596" text-anchor="end" fill="#7a86b3" font-size="10">↓ 依赖方向（上层依赖下层）</text>
+</svg>
