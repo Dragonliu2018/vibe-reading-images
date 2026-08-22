@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="440" viewBox="0 0 880 440" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="880" height="440" fill="#0b0d14"/>
+  <text x="440" y="28" text-anchor="middle" font-size="16" fill="#e8ecf5" font-weight="bold">Pipeline 执行模型与事件状态机</text>
+
+  <!-- Top: Pipeline structure -->
+  <text x="440" y="60" text-anchor="middle" font-size="13" fill="#6c8ef5" font-weight="bold">Pipeline 三段式结构</text>
+
+  <rect x="80" y="75" width="150" height="50" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="155" y="97" text-anchor="middle" font-size="13" fill="#e8ecf5">Source</text>
+  <text x="155" y="115" text-anchor="middle" font-size="10" fill="#9aa3c7">GetData() → DataChunk</text>
+
+  <path d="M230,100 L270,100" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="270" y="75" width="260" height="50" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="97" text-anchor="middle" font-size="13" fill="#e8ecf5">Operators (链式)</text>
+  <text x="400" y="115" text-anchor="middle" font-size="10" fill="#9aa3c7">Filter → Projection → Join → Aggregate ...</text>
+
+  <path d="M530,100 L570,100" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="570" y="75" width="150" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="645" y="97" text-anchor="middle" font-size="13" fill="#e8ecf5">Sink</text>
+  <text x="645" y="115" text-anchor="middle" font-size="10" fill="#9aa3c7">Sink() + Combine()</text>
+
+  <!-- Morsel-driven parallelism -->
+  <text x="440" y="160" text-anchor="middle" font-size="13" fill="#6c8ef5" font-weight="bold">Morsel-Driven 并行</text>
+
+  <rect x="80" y="175" width="180" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="170" y="200" text-anchor="middle" font-size="12" fill="#e8ecf5">PipelineTask #1</text>
+
+  <rect x="280" y="175" width="180" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="370" y="200" text-anchor="middle" font-size="12" fill="#e8ecf5">PipelineTask #2</text>
+
+  <rect x="480" y="175" width="180" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="570" y="200" text-anchor="middle" font-size="12" fill="#e8ecf5">PipelineTask #N</text>
+
+  <text x="700" y="200" font-size="11" fill="#9aa3c7">共享 1 个 Pipeline</text>
+  <text x="700" y="214" font-size="10" fill="#9aa3c7">max_threads 个 Task</text>
+
+  <!-- Concurrent queue -->
+  <rect x="80" y="230" width="580" height="40" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="370" y="255" text-anchor="middle" font-size="12" fill="#9aa3c7">ConcurrentQueue (moodycamel 无锁队列) → TaskScheduler 线程池</text>
+
+  <!-- 5-Event chain -->
+  <text x="440" y="305" text-anchor="middle" font-size="13" fill="#f9ca24" font-weight="bold">每个 Pipeline 的 5-Event 状态机</text>
+
+  <rect x="30" y="320" width="120" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="90" y="342" text-anchor="middle" font-size="11" fill="#e8ecf5">Initialize</text>
+  <text x="90" y="358" text-anchor="middle" font-size="9" fill="#9aa3c7">init sink state</text>
+
+  <path d="M150,343 L180,343" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="180" y="320" width="120" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="240" y="342" text-anchor="middle" font-size="11" fill="#e8ecf5">Execute</text>
+  <text x="240" y="358" text-anchor="middle" font-size="9" fill="#9aa3c7">多线程 morsel</text>
+
+  <path d="M300,343 L330,343" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="330" y="320" width="120" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="390" y="342" text-anchor="middle" font-size="11" fill="#e8ecf5">PrepareFinish</text>
+  <text x="390" y="358" text-anchor="middle" font-size="9" fill="#9aa3c7">内存规划 (TMM)</text>
+
+  <path d="M450,343 L480,343" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="480" y="320" width="120" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="540" y="342" text-anchor="middle" font-size="11" fill="#e8ecf5">Finish</text>
+  <text x="540" y="358" text-anchor="middle" font-size="9" fill="#9aa3c7">Finalize (单线程)</text>
+
+  <path d="M600,343 L630,343" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="630" y="320" width="120" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="690" y="342" text-anchor="middle" font-size="11" fill="#e8ecf5">Complete</text>
+  <text x="690" y="358" text-anchor="middle" font-size="9" fill="#9aa3c7">标记完成</text>
+
+  <!-- Dependency note -->
+  <rect x="30" y="385" width="820" height="40" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1" opacity="0.4"/>
+  <text x="440" y="402" text-anchor="middle" font-size="10" fill="#9aa3c7">Event DAG 依赖：Join build pipeline Complete → probe pipeline Initialize</text>
+  <text x="440" y="418" text-anchor="middle" font-size="10" fill="#9aa3c7">每个 Event 用 atomic 计数器追踪 finished_dependencies / finished_tasks，无锁推进</text>
+</svg>

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="465" viewBox="0 0 880 465" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="880" height="465" fill="#0b0d14"/>
+  <text x="440" y="28" text-anchor="middle" font-size="16" fill="#e8ecf5" font-weight="bold">DuckDB 模块依赖关系</text>
+
+  <!-- Main / Client (top) #4ecdc4 -->
+  <rect x="340" y="50" width="160" height="48" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="420" y="72" text-anchor="middle" font-size="13" fill="#e8ecf5">Client &amp; Extension</text>
+  <text x="420" y="88" text-anchor="middle" font-size="10" fill="#9aa3c7">src/main/</text>
+
+  <!-- Query Pipeline row #6c8ef5 -->
+  <rect x="50" y="150" width="130" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="115" y="172" text-anchor="middle" font-size="13" fill="#e8ecf5">Parser</text>
+  <text x="115" y="188" text-anchor="middle" font-size="10" fill="#9aa3c7">src/parser/</text>
+
+  <rect x="220" y="150" width="130" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="285" y="172" text-anchor="middle" font-size="13" fill="#e8ecf5">Planner</text>
+  <text x="285" y="188" text-anchor="middle" font-size="10" fill="#9aa3c7">src/planner/</text>
+
+  <rect x="390" y="150" width="130" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="455" y="172" text-anchor="middle" font-size="13" fill="#e8ecf5">Optimizer</text>
+  <text x="455" y="188" text-anchor="middle" font-size="10" fill="#9aa3c7">src/optimizer/</text>
+
+  <rect x="560" y="150" width="130" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="625" y="172" text-anchor="middle" font-size="13" fill="#e8ecf5">Execution</text>
+  <text x="625" y="188" text-anchor="middle" font-size="10" fill="#9aa3c7">src/execution/</text>
+
+  <rect x="730" y="150" width="130" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="795" y="172" text-anchor="middle" font-size="13" fill="#e8ecf5">Parallel</text>
+  <text x="795" y="188" text-anchor="middle" font-size="10" fill="#9aa3c7">src/parallel/</text>
+
+  <!-- Cross-module dependency labels in gap (no diagonal arrows to avoid crossing) -->
+  <text x="285" y="226" text-anchor="middle" font-size="9" fill="#9aa3c7">↓ 查表/列</text>
+  <text x="625" y="226" text-anchor="middle" font-size="9" fill="#9aa3c7">↓ 调 UDF</text>
+  <text x="455" y="226" text-anchor="middle" font-size="9" fill="#9aa3c7">Planner 查函数 · Execution 读存储 (TableFunction)</text>
+
+  <!-- Storage row #f9ca24 -->
+  <rect x="220" y="240" width="130" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="285" y="262" text-anchor="middle" font-size="13" fill="#e8ecf5">Storage</text>
+  <text x="285" y="278" text-anchor="middle" font-size="10" fill="#9aa3c7">src/storage/</text>
+
+  <rect x="390" y="240" width="130" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="455" y="262" text-anchor="middle" font-size="13" fill="#e8ecf5">Catalog</text>
+  <text x="455" y="278" text-anchor="middle" font-size="10" fill="#9aa3c7">src/catalog/</text>
+
+  <rect x="560" y="240" width="130" height="48" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="625" y="262" text-anchor="middle" font-size="13" fill="#e8ecf5">Function</text>
+  <text x="625" y="278" text-anchor="middle" font-size="10" fill="#9aa3c7">src/function/</text>
+
+  <!-- Infrastructure #b388ff (bottom, spans width) -->
+  <rect x="50" y="350" width="810" height="48" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="455" y="372" text-anchor="middle" font-size="13" fill="#e8ecf5">Common Types / Vector (src/common/)</text>
+  <text x="455" y="390" text-anchor="middle" font-size="10" fill="#9aa3c7">LogicalType · PhysicalType · DataChunk · Vector · VectorOperations — 被所有模块依赖</text>
+
+  <!-- Arrows: Main → pipeline modules (vertical, clean) -->
+  <path d="M380,98 L115,150" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.5" stroke-dasharray="4,3"/>
+  <path d="M400,98 L285,150" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.5" stroke-dasharray="4,3"/>
+  <path d="M440,98 L455,150" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.5" stroke-dasharray="4,3"/>
+  <path d="M460,98 L625,150" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.5" stroke-dasharray="4,3"/>
+
+  <!-- Arrows: pipeline flow (left to right, solid) -->
+  <path d="M180,174 L220,174" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.8"/>
+  <path d="M350,174 L390,174" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.8"/>
+  <path d="M520,174 L560,174" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.8"/>
+  <path d="M690,174 L730,174" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.8"/>
+
+  <!-- Arrows: cross-module (vertical, no crossing) -->
+  <!-- Planner → Catalog -->
+  <path d="M285,198 L285,240" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6" stroke-dasharray="4,3"/>
+  <!-- Execution → Function -->
+  <path d="M625,198 L625,240" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6" stroke-dasharray="4,3"/>
+  <!-- Parallel → Execution (reverse, horizontal) -->
+  <path d="M730,174 L690,174" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6" stroke-dasharray="4,3"/>
+  <!-- Storage → Catalog (horizontal) -->
+  <path d="M350,264 L390,264" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6" stroke-dasharray="4,3"/>
+
+  <!-- Arrows: modules → Common (foundation, vertical dashed) -->
+  <path d="M115,198 L115,350" stroke="#b388ff" stroke-width="1" opacity="0.3" stroke-dasharray="2,4"/>
+  <path d="M455,198 L455,350" stroke="#b388ff" stroke-width="1" opacity="0.3" stroke-dasharray="2,4"/>
+  <path d="M795,198 L795,350" stroke="#b388ff" stroke-width="1" opacity="0.3" stroke-dasharray="2,4"/>
+  <path d="M285,288 L285,350" stroke="#b388ff" stroke-width="1" opacity="0.3" stroke-dasharray="2,4"/>
+  <path d="M625,288 L625,350" stroke="#b388ff" stroke-width="1" opacity="0.3" stroke-dasharray="2,4"/>
+
+  <!-- Legend -->
+  <text x="50" y="425" font-size="10" fill="#9aa3c7">实线蓝箭头 = 查询流水线数据流</text>
+  <text x="280" y="425" font-size="10" fill="#9aa3c7">虚线灰箭头 = 模块间依赖/调用</text>
+  <text x="520" y="425" font-size="10" fill="#9aa3c7">点线紫箭头 = 依赖基础设施层</text>
+  <text x="50" y="445" font-size="10" fill="#9aa3c7">注：Planner 依赖 Function 查函数签名、Execution 通过 TableFunction 间接调用 Storage 读数据（见文字说明）</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="235" viewBox="0 0 900 235" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="235" fill="#0b0d14"/>
+  <text x="450" y="28" text-anchor="middle" font-size="16" fill="#e8ecf5" font-weight="bold">DuckDB 查询数据流</text>
+
+  <!-- Stage 1: SQL string -->
+  <rect x="30" y="60" width="110" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="85" y="84" text-anchor="middle" font-size="13" fill="#e8ecf5">SQL String</text>
+  <text x="85" y="102" text-anchor="middle" font-size="10" fill="#9aa3c7">用户输入</text>
+
+  <!-- Process labels above boxes (not in gaps, to avoid overlapping box borders) -->
+  <text x="155" y="52" text-anchor="middle" font-size="9" fill="#9aa3c7">Parser</text>
+  <text x="305" y="52" text-anchor="middle" font-size="9" fill="#9aa3c7">Binder</text>
+  <text x="455" y="52" text-anchor="middle" font-size="9" fill="#9aa3c7">Optimizer</text>
+  <text x="605" y="52" text-anchor="middle" font-size="9" fill="#9aa3c7">PlanGen</text>
+  <text x="755" y="52" text-anchor="middle" font-size="9" fill="#9aa3c7">Executor</text>
+
+  <!-- Arrow 1 -->
+  <path d="M140,88 L170,88" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: AST -->
+  <rect x="170" y="60" width="120" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="230" y="82" text-anchor="middle" font-size="12" fill="#e8ecf5">SQLStatement</text>
+  <text x="230" y="100" text-anchor="middle" font-size="10" fill="#9aa3c7">AST (27 类型)</text>
+
+  <!-- Arrow 2 -->
+  <path d="M290,88 L320,88" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: LogicalPlan -->
+  <rect x="320" y="60" width="120" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="380" y="82" text-anchor="middle" font-size="12" fill="#e8ecf5">LogicalOperator</text>
+  <text x="380" y="100" text-anchor="middle" font-size="10" fill="#9aa3c7">Bound 表达式树</text>
+
+  <!-- Arrow 3 -->
+  <path d="M440,88 L470,88" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: Optimized LogicalPlan -->
+  <rect x="470" y="60" width="120" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="530" y="82" text-anchor="middle" font-size="12" fill="#e8ecf5">优化后</text>
+  <text x="530" y="100" text-anchor="middle" font-size="10" fill="#9aa3c7">LogicalPlan</text>
+
+  <!-- Arrow 4 -->
+  <path d="M590,88 L620,88" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: PhysicalPlan -->
+  <rect x="620" y="60" width="120" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="680" y="82" text-anchor="middle" font-size="12" fill="#e8ecf5">PhysicalOperator</text>
+  <text x="680" y="100" text-anchor="middle" font-size="10" fill="#9aa3c7">Source/Op/Sink</text>
+
+  <!-- Arrow 5 -->
+  <path d="M740,88 L770,88" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 6: DataChunk -->
+  <rect x="770" y="60" width="110" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="825" y="82" text-anchor="middle" font-size="12" fill="#e8ecf5">DataChunk</text>
+  <text x="825" y="100" text-anchor="middle" font-size="10" fill="#9aa3c7">2048 行/批</text>
+
+  <!-- Downward arrow to result -->
+  <path d="M825,116 L825,145" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 7: QueryResult -->
+  <rect x="770" y="145" width="110" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="825" y="168" text-anchor="middle" font-size="12" fill="#e8ecf5">QueryResult</text>
+  <text x="825" y="186" text-anchor="middle" font-size="10" fill="#9aa3c7">Materialized / Stream</text>
+
+  <!-- Return to user (short label, no long dashed arrow) -->
+  <text x="825" y="215" text-anchor="middle" font-size="10" fill="#9aa3c7">↓ 返回用户</text>
+</svg>

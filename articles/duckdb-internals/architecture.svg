@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="456" viewBox="0 0 880 456" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="880" height="456" fill="#0b0d14"/>
+  <text x="440" y="28" text-anchor="middle" font-size="16" fill="#e8ecf5" font-weight="bold">DuckDB 分层架构</text>
+
+  <!-- L1 接口层 #4ecdc4 -->
+  <rect x="20" y="48" width="120" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="80" y="70" text-anchor="middle" font-size="12" fill="#4ecdc4" font-weight="bold">接口层</text>
+  <text x="80" y="86" text-anchor="middle" font-size="9" fill="#4ecdc4">Interface</text>
+  <rect x="150" y="48" width="228" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="264" y="72" text-anchor="middle" font-size="13" fill="#e8ecf5">C API (duckdb.h)</text>
+  <text x="264" y="90" text-anchor="middle" font-size="10" fill="#9aa3c7">嵌入式入口 · Connection</text>
+  <rect x="390" y="48" width="228" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="504" y="72" text-anchor="middle" font-size="13" fill="#e8ecf5">CLI Shell</text>
+  <text x="504" y="90" text-anchor="middle" font-size="10" fill="#9aa3c7">交互式终端</text>
+  <rect x="630" y="48" width="228" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="744" y="72" text-anchor="middle" font-size="13" fill="#e8ecf5">Python / R / Java / Wasm</text>
+  <text x="744" y="90" text-anchor="middle" font-size="10" fill="#9aa3c7">多语言客户端绑定</text>
+
+  <!-- L2 查询流水线 #6c8ef5 -->
+  <rect x="20" y="132" width="120" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="80" y="154" text-anchor="middle" font-size="12" fill="#6c8ef5" font-weight="bold">查询流水线</text>
+  <text x="80" y="170" text-anchor="middle" font-size="9" fill="#6c8ef5">Query Pipeline</text>
+  <rect x="150" y="132" width="168" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="234" y="156" text-anchor="middle" font-size="13" fill="#e8ecf5">Parser</text>
+  <text x="234" y="174" text-anchor="middle" font-size="10" fill="#9aa3c7">SQL → AST (libpg_query)</text>
+  <rect x="330" y="132" width="168" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="414" y="156" text-anchor="middle" font-size="13" fill="#e8ecf5">Planner / Binder</text>
+  <text x="414" y="174" text-anchor="middle" font-size="10" fill="#9aa3c7">AST → LogicalPlan</text>
+  <rect x="510" y="132" width="168" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="594" y="156" text-anchor="middle" font-size="13" fill="#e8ecf5">Optimizer</text>
+  <text x="594" y="174" text-anchor="middle" font-size="10" fill="#9aa3c7">27+ pass 规则优化</text>
+  <rect x="690" y="132" width="168" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="774" y="156" text-anchor="middle" font-size="13" fill="#e8ecf5">PhysicalPlanGen</text>
+  <text x="774" y="174" text-anchor="middle" font-size="10" fill="#9aa3c7">Logical → Physical</text>
+
+  <!-- L3 执行引擎 #6c8ef5 -->
+  <rect x="20" y="216" width="120" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="80" y="238" text-anchor="middle" font-size="12" fill="#6c8ef5" font-weight="bold">执行引擎</text>
+  <text x="80" y="254" text-anchor="middle" font-size="9" fill="#6c8ef5">Execution</text>
+  <rect x="150" y="216" width="168" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="234" y="240" text-anchor="middle" font-size="13" fill="#e8ecf5">PhysicalOperator</text>
+  <text x="234" y="258" text-anchor="middle" font-size="10" fill="#9aa3c7">Source / Operator / Sink</text>
+  <rect x="330" y="216" width="168" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="414" y="240" text-anchor="middle" font-size="13" fill="#e8ecf5">ExpressionExecutor</text>
+  <text x="414" y="258" text-anchor="middle" font-size="10" fill="#9aa3c7">向量化表达式求值</text>
+  <rect x="510" y="216" width="168" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="594" y="240" text-anchor="middle" font-size="13" fill="#e8ecf5">Pipeline / Executor</text>
+  <text x="594" y="258" text-anchor="middle" font-size="10" fill="#9aa3c7">Morsel-Driven 并行</text>
+  <rect x="690" y="216" width="168" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="774" y="240" text-anchor="middle" font-size="13" fill="#e8ecf5">TaskScheduler</text>
+  <text x="774" y="258" text-anchor="middle" font-size="10" fill="#9aa3c7">无锁队列 · 线程池</text>
+
+  <!-- L4 存储引擎 #f9ca24 -->
+  <rect x="20" y="300" width="120" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+  <text x="80" y="322" text-anchor="middle" font-size="12" fill="#f9ca24" font-weight="bold">存储引擎</text>
+  <text x="80" y="338" text-anchor="middle" font-size="9" fill="#f9ca24">Storage</text>
+  <rect x="150" y="300" width="168" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="234" y="324" text-anchor="middle" font-size="13" fill="#e8ecf5">BufferManager</text>
+  <text x="234" y="342" text-anchor="middle" font-size="10" fill="#9aa3c7">多级淘汰 · 内存管理</text>
+  <rect x="330" y="300" width="168" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="414" y="324" text-anchor="middle" font-size="13" fill="#e8ecf5">DataTable / ColumnData</text>
+  <text x="414" y="342" text-anchor="middle" font-size="10" fill="#9aa3c7">列式段存储 · 压缩</text>
+  <rect x="510" y="300" width="168" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="594" y="324" text-anchor="middle" font-size="13" fill="#e8ecf5">WAL</text>
+  <text x="594" y="342" text-anchor="middle" font-size="10" fill="#9aa3c7">Write-Ahead Log</text>
+  <rect x="690" y="300" width="168" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="774" y="324" text-anchor="middle" font-size="13" fill="#e8ecf5">TransactionManager</text>
+  <text x="774" y="342" text-anchor="middle" font-size="10" fill="#9aa3c7">MVCC · UndoBuffer</text>
+
+  <!-- L5 基础设施 #b388ff -->
+  <rect x="20" y="384" width="120" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="2"/>
+  <text x="80" y="406" text-anchor="middle" font-size="12" fill="#b388ff" font-weight="bold">基础设施</text>
+  <text x="80" y="422" text-anchor="middle" font-size="9" fill="#b388ff">Infrastructure</text>
+  <rect x="150" y="384" width="304" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="302" y="408" text-anchor="middle" font-size="13" fill="#e8ecf5">Common Types / Vector</text>
+  <text x="302" y="426" text-anchor="middle" font-size="10" fill="#9aa3c7">LogicalType · DataChunk · 5 种 Vector 布局</text>
+  <rect x="466" y="384" width="196" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="564" y="408" text-anchor="middle" font-size="13" fill="#e8ecf5">Catalog</text>
+  <text x="564" y="426" text-anchor="middle" font-size="10" fill="#9aa3c7">MVCC 元数据 · 依赖图</text>
+  <rect x="674" y="384" width="184" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="766" y="408" text-anchor="middle" font-size="13" fill="#e8ecf5">Function</text>
+  <text x="766" y="426" text-anchor="middle" font-size="10" fill="#9aa3c7">Scalar / Agg / Table</text>
+
+  <!-- 层间依赖箭头 -->
+  <path d="M440,100 L440,132" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6"/>
+  <path d="M440,184 L440,216" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6"/>
+  <path d="M440,268 L440,300" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6"/>
+  <path d="M440,352 L440,384" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6"/>
+</svg>

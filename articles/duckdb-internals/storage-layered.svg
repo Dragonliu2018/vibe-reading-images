@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="540" viewBox="0 0 880 540" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="880" height="540" fill="#0b0d14"/>
+  <text x="440" y="28" text-anchor="middle" font-size="16" fill="#e8ecf5" font-weight="bold">DuckDB 列式存储分层架构</text>
+
+  <!-- Left column: Storage hierarchy -->
+  <text x="280" y="58" text-anchor="middle" font-size="13" fill="#f9ca24" font-weight="bold">存储层次</text>
+
+  <rect x="80" y="70" width="400" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="280" y="90" text-anchor="middle" font-size="12" fill="#e8ecf5">StorageManager (SingleFileStorageManager)</text>
+  <text x="280" y="106" text-anchor="middle" font-size="10" fill="#9aa3c7">数据库文件 · WAL · Checkpoint</text>
+
+  <path d="M280,114 L280,124" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="80" y="124" width="400" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="280" y="144" text-anchor="middle" font-size="12" fill="#e8ecf5">BufferManager + BufferPool</text>
+  <text x="280" y="160" text-anchor="middle" font-size="10" fill="#9aa3c7">多级 EvictionQueue · 近似 LRU · 临时文件溢出</text>
+
+  <path d="M280,168 L280,178" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="80" y="178" width="400" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="280" y="198" text-anchor="middle" font-size="12" fill="#e8ecf5">DataTable</text>
+  <text x="280" y="214" text-anchor="middle" font-size="10" fill="#9aa3c7">RowGroupCollection (默认 122880 行/组)</text>
+
+  <path d="M280,222 L280,232" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="80" y="232" width="400" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="280" y="252" text-anchor="middle" font-size="12" fill="#e8ecf5">ColumnData (按 LogicalType 分派子类)</text>
+  <text x="280" y="268" text-anchor="middle" font-size="10" fill="#9aa3c7">Standard / Struct / List / Array / Variant</text>
+
+  <path d="M280,276 L280,286" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="80" y="286" width="400" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="280" y="306" text-anchor="middle" font-size="12" fill="#e8ecf5">ColumnSegment (压缩单元)</text>
+  <text x="280" y="322" text-anchor="middle" font-size="10" fill="#9aa3c7">TRANSIENT (内存) / PERSISTENT (磁盘) · 绑定 CompressionFunction</text>
+
+  <path d="M280,330 L280,340" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="80" y="340" width="400" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="280" y="360" text-anchor="middle" font-size="12" fill="#e8ecf5">BlockHandle → BlockMemory → FileBuffer</text>
+  <text x="280" y="376" text-anchor="middle" font-size="10" fill="#9aa3c7">256KB Block · read/write I/O · Checksum</text>
+
+  <!-- Right column: MVCC + WAL -->
+  <text x="690" y="58" text-anchor="middle" font-size="13" fill="#b388ff" font-weight="bold">事务与持久化</text>
+
+  <rect x="530" y="70" width="320" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="690" y="90" text-anchor="middle" font-size="12" fill="#e8ecf5">DuckTransactionManager</text>
+  <text x="690" y="106" text-anchor="middle" font-size="10" fill="#9aa3c7">MVCC · 事务隔离 · 有序清理</text>
+
+  <path d="M690,114 L690,124" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="530" y="124" width="320" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="690" y="144" text-anchor="middle" font-size="12" fill="#e8ecf5">DuckTransaction + UndoBuffer</text>
+  <text x="690" y="160" text-anchor="middle" font-size="10" fill="#9aa3c7">记录旧值 · Commit 正序 / Rollback 逆序</text>
+
+  <path d="M690,168 L690,178" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="530" y="178" width="320" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="690" y="198" text-anchor="middle" font-size="12" fill="#e8ecf5">WriteAheadLog (WAL)</text>
+  <text x="690" y="214" text-anchor="middle" font-size="10" fill="#9aa3c7">Insert/Delete/Update · 乐观写入</text>
+
+  <path d="M690,222 L690,232" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="530" y="232" width="320" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="690" y="252" text-anchor="middle" font-size="12" fill="#e8ecf5">CheckpointManager</text>
+  <text x="690" y="268" text-anchor="middle" font-size="10" fill="#9aa3c7">全量/增量 · 压缩落盘 · 截断 WAL</text>
+
+  <!-- Compression algorithms -->
+  <text x="440" y="415" text-anchor="middle" font-size="13" fill="#4ecdc4" font-weight="bold">CompressionFunction 策略模式（可插拔压缩算法）</text>
+
+  <rect x="50" y="430" width="100" height="36" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="100" y="453" text-anchor="middle" font-size="11" fill="#e8ecf5">Uncompressed</text>
+
+  <rect x="160" y="430" width="100" height="36" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="210" y="453" text-anchor="middle" font-size="11" fill="#e8ecf5">Dictionary</text>
+
+  <rect x="270" y="430" width="100" height="36" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="320" y="453" text-anchor="middle" font-size="11" fill="#e8ecf5">RLE</text>
+
+  <rect x="380" y="430" width="100" height="36" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="430" y="453" text-anchor="middle" font-size="11" fill="#e8ecf5">BitPacking</text>
+
+  <rect x="490" y="430" width="100" height="36" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="540" y="453" text-anchor="middle" font-size="11" fill="#e8ecf5">FSST</text>
+
+  <rect x="600" y="430" width="100" height="36" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="650" y="453" text-anchor="middle" font-size="11" fill="#e8ecf5">ALP / ALPRD</text>
+
+  <rect x="710" y="430" width="100" height="36" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="760" y="453" text-anchor="middle" font-size="11" fill="#e8ecf5">Chimp / Patas</text>
+
+  <text x="440" y="490" text-anchor="middle" font-size="10" fill="#9aa3c7">每个 ColumnSegment 绑定一个 CompressionFunction · 按段选择最优压缩</text>
+  <text x="440" y="506" text-anchor="middle" font-size="10" fill="#9aa3c7">新增压缩算法只需实现函数指针表（init_scan / scan_vector / append / finalize_analyze ...）</text>
+</svg>
