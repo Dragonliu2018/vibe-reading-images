@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="440" viewBox="0 0 780 440" font-family="system-ui, sans-serif">
+<rect width="780" height="440" fill="#0b0d14"/>
+<text x="390" y="26" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="600">xLLM 模块依赖关系</text>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="m_cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+  <marker id="m_blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+  <marker id="m_yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+  <marker id="m_lblue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+  <marker id="m_purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+  <marker id="m_pink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+</defs>
+
+<!-- Row 1: service + multimodal -->
+<rect x="165" y="52" width="150" height="40" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="240" y="76" text-anchor="middle" fill="#e8eaf6" font-size="13" font-weight="500">服务接口层</text>
+<rect x="510" y="52" width="140" height="40" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="580" y="76" text-anchor="middle" fill="#e8eaf6" font-size="13" font-weight="500">多模态/工具调用</text>
+
+<!-- Row 2: master -->
+<rect x="155" y="132" width="170" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="240" y="156" text-anchor="middle" fill="#e8eaf6" font-size="13" font-weight="500">分布式主从运行时</text>
+
+<!-- Row 3: scheduler + engine -->
+<rect x="50" y="212" width="140" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="120" y="236" text-anchor="middle" fill="#e8eaf6" font-size="13" font-weight="500">请求调度器</text>
+<rect x="290" y="212" width="140" height="40" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="360" y="236" text-anchor="middle" fill="#e8eaf6" font-size="13" font-weight="500">Engine</text>
+
+<!-- Row 4: framework + runtime -->
+<rect x="45" y="292" width="150" height="40" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="120" y="316" text-anchor="middle" fill="#e8eaf6" font-size="13" font-weight="500">框架核心</text>
+<rect x="290" y="292" width="140" height="40" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="360" y="316" text-anchor="middle" fill="#e8eaf6" font-size="13" font-weight="500">执行运行时</text>
+
+<!-- Row 5: kernels + layers + models -->
+<rect x="55" y="372" width="130" height="36" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="120" y="394" text-anchor="middle" fill="#e8eaf6" font-size="12" font-weight="500">算子内核 Kernels</text>
+<rect x="230" y="372" width="120" height="36" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="290" y="394" text-anchor="middle" fill="#e8eaf6" font-size="12" font-weight="500">模型层 Layers</text>
+<rect x="400" y="372" width="120" height="36" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="460" y="394" text-anchor="middle" fill="#e8eaf6" font-size="12" font-weight="500">模型定义</text>
+
+<!-- Edges (all orthogonal) -->
+<!-- 1. service → master (vertical) -->
+<path d="M240,92 L240,132" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#m_cyan)"/>
+<!-- 2. mm_fc → service (horizontal) -->
+<path d="M510,72 L315,72" stroke="#4ecdc4" stroke-width="1.5" fill="none" marker-end="url(#m_cyan)"/>
+<text x="412" y="64" text-anchor="middle" fill="#4ecdc4" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">preprocess</text>
+<!-- 3+4. master → scheduler & engine (fork: down then split) -->
+<path d="M240,172 L240,192 L120,192 L120,212" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#m_blue)"/>
+<path d="M240,192 L360,192 L360,212" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#m_blue)"/>
+<text x="330" y="184" text-anchor="middle" fill="#6c8ef5" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">holds</text>
+<!-- 5. scheduler → engine (horizontal) -->
+<path d="M190,232 L290,232" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#m_yellow)"/>
+<text x="240" y="224" text-anchor="middle" fill="#f9ca24" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">step(batch)</text>
+<!-- 6. engine → runtime (vertical) -->
+<path d="M360,252 L360,292" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#m_lblue)"/>
+<text x="375" y="275" fill="#80c7ff" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">step→worker</text>
+<!-- 7. scheduler → framework (vertical) -->
+<path d="M120,252 L120,292" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#m_purple)"/>
+<!-- 8. runtime → framework (horizontal left) -->
+<path d="M290,312 L195,312" stroke="#b388ff" stroke-width="1.5" fill="none" marker-end="url(#m_purple)"/>
+<!-- 9. runtime → models (down-right-down) -->
+<path d="M430,332 L430,352 L460,352 L460,372" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#m_lblue)"/>
+<!-- 10. models → layers (horizontal left) -->
+<path d="M400,390 L350,390" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#m_pink)"/>
+<!-- 11. layers → kernels (horizontal left) -->
+<path d="M230,390 L185,390" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#m_pink)"/>
+<text x="207" y="382" text-anchor="middle" fill="#ff6b9d" font-size="11" paint-order="stroke" stroke="#0b0d14" stroke-width="3">dispatch</text>
+
+<!-- legend -->
+<text x="560" y="394" fill="#7a86b3" font-size="11">颜色 = 所属架构层</text>
+<text x="560" y="412" fill="#7a86b3" font-size="11">箭头 = 依赖/调用方向</text>
+</svg>

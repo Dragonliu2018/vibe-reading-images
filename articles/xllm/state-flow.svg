@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="260" viewBox="0 0 800 260" font-family="system-ui, sans-serif">
+<rect width="800" height="260" fill="#0b0d14"/>
+<text x="400" y="26" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="600">xLLM 运行时状态流</text>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+  <marker id="m_blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+  <marker id="m_green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/></marker>
+  <marker id="m_red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e74c3c"/></marker>
+</defs>
+
+<!-- divider -->
+<line x1="400" y1="40" x2="400" y2="230" stroke="#2a2e48" stroke-width="1" stroke-dasharray="6,4"/>
+
+<!-- ===== Left: Sequence stage state machine ===== -->
+<text x="200" y="50" text-anchor="middle" fill="#9aa0c0" font-size="12" font-weight="600">Sequence 阶段状态机</text>
+<!-- PREFILL -->
+<rect x="40" y="64" width="90" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="85" y="84" text-anchor="middle" fill="#e8eaf6" font-size="11" font-weight="600">PREFILL</text>
+<text x="85" y="98" text-anchor="middle" fill="#9aa0c0" font-size="9">无 KV cache</text>
+<!-- CHUNKED_PREFILL -->
+<rect x="145" y="64" width="120" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="205" y="84" text-anchor="middle" fill="#e8eaf6" font-size="10" font-weight="600">CHUNKED_PREFILL</text>
+<text x="205" y="98" text-anchor="middle" fill="#9aa0c0" font-size="9">分块预填</text>
+<!-- DECODE -->
+<rect x="280" y="64" width="90" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="325" y="84" text-anchor="middle" fill="#e8eaf6" font-size="11" font-weight="600">DECODE</text>
+<text x="325" y="98" text-anchor="middle" fill="#9aa0c0" font-size="9">逐 token</text>
+<!-- arrows between states -->
+<path d="M130,86 L145,86" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M265,86 L280,86" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- DECODE self-loop (top) -->
+<path d="M370,75 C400,75 400,55 370,55" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="385" y="48" text-anchor="middle" fill="#7a86b3" font-size="9">每步</text>
+<!-- FINISH (below DECODE) -->
+<rect x="280" y="145" width="90" height="34" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+<text x="325" y="166" text-anchor="middle" fill="#7bed9f" font-size="11" font-weight="600">FINISH</text>
+<path d="M325,108 L325,145" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- ABORT (below PREFILL) -->
+<rect x="40" y="145" width="90" height="34" rx="8" fill="#13162a" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="85" y="166" text-anchor="middle" fill="#e74c3c" font-size="11" font-weight="600">ABORT/中断</text>
+<path d="M85,108 L85,145" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#m_red)"/>
+<!-- ABORT → PREFILL (dashed requeue, curve on the left, within bounds) -->
+<path d="M40,162 C15,162 15,86 40,86" stroke="#7a86b3" stroke-width="1.3" fill="none" marker-end="url(#arrow)" stroke-dasharray="4,3"/>
+<text x="22" y="124" text-anchor="middle" fill="#7a86b3" font-size="9" transform="rotate(-90, 22, 124)">重排队</text>
+
+<!-- ===== Right: Master status ===== -->
+<text x="600" y="50" text-anchor="middle" fill="#9aa0c0" font-size="12" font-weight="600">Master 状态</text>
+<!-- WAKEUP -->
+<rect x="440" y="64" width="100" height="44" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+<text x="490" y="84" text-anchor="middle" fill="#e8eaf6" font-size="11" font-weight="600">WAKEUP</text>
+<text x="490" y="98" text-anchor="middle" fill="#9aa0c0" font-size="9">正常运行</text>
+<!-- SLEEP -->
+<rect x="620" y="64" width="100" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="670" y="84" text-anchor="middle" fill="#e8eaf6" font-size="11" font-weight="600">SLEEP</text>
+<text x="670" y="98" text-anchor="middle" fill="#9aa0c0" font-size="9">休眠释放显存</text>
+<!-- bidirectional WAKEUP ↔ SLEEP -->
+<path d="M540,80 L620,80" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="580" y="72" text-anchor="middle" fill="#7a86b3" font-size="10">sleep()</text>
+<path d="M620,92 L540,92" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="580" y="106" text-anchor="middle" fill="#7a86b3" font-size="10">wakeup()</text>
+<!-- PAUSED (below, between) -->
+<rect x="540" y="145" width="100" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="590" y="160" text-anchor="middle" fill="#e8eaf6" font-size="11" font-weight="600">PAUSED</text>
+<text x="590" y="172" text-anchor="middle" fill="#9aa0c0" font-size="9">RL pause/resume</text>
+<!-- WAKEUP ↔ PAUSED (dashed) -->
+<path d="M490,108 L560,145" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#m_blue)" stroke-dasharray="4,3"/>
+<path d="M580,145 L510,108" stroke="#6c8ef5" stroke-width="1.5" fill="none" marker-end="url(#m_blue)" stroke-dasharray="4,3"/>
+
+<!-- legend -->
+<text x="24" y="244" fill="#7a86b3" font-size="11">实线 = 正常转换；虚线 = 异常/恢复路径</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="1032" viewBox="0 0 820 1032" font-family="system-ui, sans-serif">
+<rect width="820" height="1032" fill="#0b0d14"/>
+<text x="410.0" y="28" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="600">xLLM 请求处理数据流</text>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+</defs>
+<rect x="180.0" y="50" width="460" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="196.0" y="70" fill="#e8eaf6" font-size="13" font-weight="600">HTTP 请求</text>
+<text x="196.0" y="86" fill="#9aa0c0" font-size="11">OpenAI /v1/chat/completions</text>
+<text x="656.0" y="74" fill="#4ecdc4" font-size="11">服务层</text>
+<path d="M410.0,94 L410.0,120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="120" width="460" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="196.0" y="140" fill="#e8eaf6" font-size="13" font-weight="600">APIService.ChatCompletionsHttp</text>
+<text x="196.0" y="156" fill="#9aa0c0" font-size="11">解析请求 → RequestParams</text>
+<text x="656.0" y="144" fill="#4ecdc4" font-size="11">服务层</text>
+<path d="M410.0,164 L410.0,190" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="190" width="460" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="196.0" y="210" fill="#e8eaf6" font-size="13" font-weight="600">LLMMaster.handle_request</text>
+<text x="196.0" y="226" fill="#9aa0c0" font-size="11">threadpool 调度</text>
+<text x="656.0" y="214" fill="#6c8ef5" font-size="11">编排层</text>
+<path d="M410.0,234 L410.0,260" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="260" width="460" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="196.0" y="280" fill="#e8eaf6" font-size="13" font-weight="600">Tokenizer.encode</text>
+<text x="196.0" y="296" fill="#9aa0c0" font-size="11">prompt → token_ids</text>
+<text x="656.0" y="284" fill="#b388ff" font-size="11">框架核心</text>
+<path d="M410.0,304 L410.0,330" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="330" width="460" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="196.0" y="350" fill="#e8eaf6" font-size="13" font-weight="600">generate_request → Request</text>
+<text x="196.0" y="366" fill="#9aa0c0" font-size="11">组装 RequestState/Sequence</text>
+<text x="656.0" y="354" fill="#6c8ef5" font-size="11">编排层</text>
+<path d="M410.0,374 L410.0,400" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="400" width="460" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="196.0" y="420" fill="#e8eaf6" font-size="13" font-weight="600">Scheduler.add_request</text>
+<text x="196.0" y="436" fill="#9aa0c0" font-size="11">加入优先队列</text>
+<text x="656.0" y="424" fill="#f9ca24" font-size="11">调度层</text>
+<path d="M410.0,444 L410.0,470" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="470" width="460" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="196.0" y="490" fill="#e8eaf6" font-size="13" font-weight="600">Scheduler.schedule_request</text>
+<text x="196.0" y="506" fill="#9aa0c0" font-size="11">构建 Batch（prefill/decode 混合）</text>
+<text x="656.0" y="494" fill="#f9ca24" font-size="11">调度层</text>
+<path d="M410.0,514 L410.0,540" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="540" width="460" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="196.0" y="560" fill="#e8eaf6" font-size="13" font-weight="600">Engine.step(batch)</text>
+<text x="196.0" y="576" fill="#9aa0c0" font-size="11">prepare_inputs → ForwardInput</text>
+<text x="656.0" y="564" fill="#6c8ef5" font-size="11">编排层</text>
+<path d="M410.0,584 L410.0,610" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="610" width="460" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="196.0" y="630" fill="#e8eaf6" font-size="13" font-weight="600">Worker.step(ForwardInput)</text>
+<text x="196.0" y="646" fill="#9aa0c0" font-size="11">per-device 异步执行</text>
+<text x="656.0" y="634" fill="#80c7ff" font-size="11">执行层</text>
+<path d="M410.0,654 L410.0,680" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="680" width="460" height="44" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="196.0" y="700" fill="#e8eaf6" font-size="13" font-weight="600">Executor.forward</text>
+<text x="196.0" y="716" fill="#9aa0c0" font-size="11">tokens,positions → ModelOutput</text>
+<text x="656.0" y="704" fill="#80c7ff" font-size="11">执行层</text>
+<path d="M410.0,724 L410.0,750" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="750" width="460" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="196.0" y="770" fill="#e8eaf6" font-size="13" font-weight="600">CausalLM.forward</text>
+<text x="196.0" y="786" fill="#9aa0c0" font-size="11">layers_ 逐层前向 + KVCache</text>
+<text x="656.0" y="774" fill="#ff6b9d" font-size="11">模型/算子</text>
+<path d="M410.0,794 L410.0,820" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="820" width="460" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="196.0" y="840" fill="#e8eaf6" font-size="13" font-weight="600">Sampler.sample</text>
+<text x="196.0" y="856" fill="#9aa0c0" font-size="11">logits → token / embeddings</text>
+<text x="656.0" y="844" fill="#b388ff" font-size="11">框架核心</text>
+<path d="M410.0,864 L410.0,890" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="890" width="460" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="196.0" y="910" fill="#e8eaf6" font-size="13" font-weight="600">process_batch_output</text>
+<text x="196.0" y="926" fill="#9aa0c0" font-size="11">Batch.process_sample_output</text>
+<text x="656.0" y="914" fill="#f9ca24" font-size="11">调度层</text>
+<path d="M410.0,934 L410.0,960" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180.0" y="960" width="460" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="196.0" y="980" fill="#e8eaf6" font-size="13" font-weight="600">RequestOutput → HTTP 响应</text>
+<text x="196.0" y="996" fill="#9aa0c0" font-size="11">流式/非流式回调</text>
+<text x="656.0" y="984" fill="#4ecdc4" font-size="11">服务层</text>
+</svg>
