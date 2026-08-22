@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="860" height="500" viewBox="0 0 860 500" font-family="system-ui, sans-serif">
   <defs>
-    <marker id="arrow-fwd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <marker id="arrow-fwd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
     </marker>
-    <marker id="arrow-ret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <marker id="arrow-ret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
     </marker>
-    <marker id="arrow-async" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <marker id="arrow-async" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
     </marker>
   </defs>
@@ -15,76 +15,86 @@
 
   <text x="430" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">事务提交数据流（Commit Pipeline）</text>
 
-  <!-- Central column actors -->
-  <rect x="165" y="40" width="170" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.4"/>
-  <text x="250" y="60" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Client</text>
-  <text x="250" y="76" text-anchor="middle" fill="#9aa3c4" font-size="10">NativeAPI · Transaction::commit</text>
+  <!-- column header boxes (6 actors), box w=100, centers 80/220/360/500/640/780 -->
+  <g font-size="12" font-weight="600" fill="#e6e8f0">
+    <rect x="30" y="46" width="100" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.4"/>
+    <text x="80" y="64" text-anchor="middle">Client</text>
+    <text x="80" y="78" text-anchor="middle" fill="#9aa3c4" font-size="9" font-weight="400">NativeAPI</text>
+    <rect x="170" y="46" width="100" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
+    <text x="220" y="64" text-anchor="middle">CommitProxy</text>
+    <text x="220" y="78" text-anchor="middle" fill="#9aa3c4" font-size="9" font-weight="400">commitBatch</text>
+    <rect x="310" y="46" width="100" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
+    <text x="360" y="64" text-anchor="middle">Sequencer</text>
+    <text x="360" y="78" text-anchor="middle" fill="#9aa3c4" font-size="9" font-weight="400">getVersion</text>
+    <rect x="450" y="46" width="100" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
+    <text x="500" y="64" text-anchor="middle">Resolver</text>
+    <text x="500" y="78" text-anchor="middle" fill="#9aa3c4" font-size="9" font-weight="400">ConflictSet</text>
+    <rect x="590" y="46" width="100" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.4"/>
+    <text x="640" y="64" text-anchor="middle">TLog</text>
+    <text x="640" y="78" text-anchor="middle" fill="#9aa3c4" font-size="9" font-weight="400">fsync</text>
+    <rect x="730" y="46" width="100" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.4"/>
+    <text x="780" y="64" text-anchor="middle">StorageServer</text>
+    <text x="780" y="78" text-anchor="middle" fill="#9aa3c4" font-size="9" font-weight="400">apply MVCC</text>
+  </g>
 
-  <rect x="165" y="154" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
-  <text x="250" y="174" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">CommitProxy</text>
-  <text x="250" y="190" text-anchor="middle" fill="#9aa3c4" font-size="10">commitBatcher → commitBatch</text>
+  <!-- vertical lifelines (subtle) -->
+  <g stroke="#3a3f5c" stroke-width="0.8" stroke-dasharray="2 4">
+    <line x1="80" y1="86" x2="80" y2="440"/>
+    <line x1="220" y1="86" x2="220" y2="440"/>
+    <line x1="360" y1="86" x2="360" y2="440"/>
+    <line x1="500" y1="86" x2="500" y2="440"/>
+    <line x1="640" y1="86" x2="640" y2="440"/>
+    <line x1="780" y1="86" x2="780" y2="440"/>
+  </g>
 
-  <rect x="165" y="294" width="170" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.4"/>
-  <text x="250" y="314" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">TLog</text>
-  <text x="250" y="330" text-anchor="middle" fill="#9aa3c4" font-size="10">tLogCommit · 磁盘队列 fsync</text>
+  <!-- Step 1: Client -> CP  commit (forward blue) -->
+  <path d="M 130 110 L 168 110" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#arrow-fwd)" fill="none"/>
+  <text x="149" y="103" text-anchor="middle" fill="#6c8ef5" font-size="11" font-weight="600">① commit</text>
 
-  <rect x="165" y="404" width="170" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.4"/>
-  <text x="250" y="424" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">StorageServer</text>
-  <text x="250" y="440" text-anchor="middle" fill="#9aa3c4" font-size="10">peek → apply MVCC</text>
+  <!-- Step 2: CP -> Seq  getCommitVersion -->
+  <path d="M 270 145 L 308 145" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#arrow-fwd)" fill="none"/>
+  <text x="289" y="138" text-anchor="middle" fill="#6c8ef5" font-size="11" font-weight="600">② getCommitVersion</text>
 
-  <!-- Right column actors -->
-  <rect x="495" y="100" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
-  <text x="580" y="120" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Sequencer (Master)</text>
-  <text x="580" y="136" text-anchor="middle" fill="#9aa3c4" font-size="10">getVersion · 版本分配</text>
+  <!-- Step 3: Seq -> CP  version (return green, leftward) -->
+  <path d="M 310 180 L 272 180" stroke="#7bed9f" stroke-width="1.8" marker-end="url(#arrow-ret)" fill="none"/>
+  <text x="362" y="173" fill="#7bed9f" font-size="11" font-weight="600">③ commitVersion + prevVersion</text>
 
-  <rect x="495" y="210" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
-  <text x="580" y="230" text-anchor="middle" fill="#e6e8f0" font-size="13" font-weight="600">Resolver</text>
-  <text x="580" y="246" text-anchor="middle" fill="#9aa3c4" font-size="10">ConflictSet · OCC 检测</text>
+  <!-- Step 4: CP -> Resolver  resolveBatch (forward, spans Seq column empty space) -->
+  <path d="M 270 215 L 448 215" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#arrow-fwd)" fill="none"/>
+  <text x="359" y="208" text-anchor="middle" fill="#6c8ef5" font-size="11" font-weight="600">④ resolveBatch</text>
 
-  <!-- Forward arrows (blue) -->
-  <path d="M 250 86 L 250 154" stroke="#6c8ef5" stroke-width="1.6" marker-end="url(#arrow-fwd)" fill="none"/>
-  <text x="258" y="124" fill="#6c8ef5" font-size="11" font-weight="600">① commit</text>
-  <text x="258" y="138" fill="#9aa3c4" font-size="10">(mutations)</text>
+  <!-- Step 5: Resolver -> CP  committed[] (return, leftward) -->
+  <path d="M 450 250 L 272 250" stroke="#7bed9f" stroke-width="1.8" marker-end="url(#arrow-ret)" fill="none"/>
+  <text x="500" y="243" fill="#7bed9f" font-size="11" font-weight="600">⑤ committed[] (OCC)</text>
 
-  <path d="M 335 168 L 495 120" stroke="#6c8ef5" stroke-width="1.6" marker-end="url(#arrow-fwd)" fill="none"/>
-  <text x="360" y="138" fill="#6c8ef5" font-size="11" font-weight="600">② getCommitVersion</text>
+  <!-- Step 6: CP -> TLog  push (forward, spans Seq+Resolver) -->
+  <path d="M 270 285 L 588 285" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#arrow-fwd)" fill="none"/>
+  <text x="429" y="278" text-anchor="middle" fill="#6c8ef5" font-size="11" font-weight="600">⑥ push (tags + mutations)</text>
 
-  <path d="M 335 190 L 495 232" stroke="#6c8ef5" stroke-width="1.6" marker-end="url(#arrow-fwd)" fill="none"/>
-  <text x="355" y="222" fill="#6c8ef5" font-size="11" font-weight="600">④ resolveBatch</text>
+  <!-- Step 7: TLog -> CP  persisted (return) -->
+  <path d="M 590 320 L 272 320" stroke="#7bed9f" stroke-width="1.8" marker-end="url(#arrow-ret)" fill="none"/>
+  <text x="640" y="313" fill="#7bed9f" font-size="11" font-weight="600">⑦ persisted (quorum)</text>
 
-  <path d="M 250 200 L 250 294" stroke="#6c8ef5" stroke-width="1.6" marker-end="url(#arrow-fwd)" fill="none"/>
-  <text x="258" y="250" fill="#6c8ef5" font-size="11" font-weight="600">⑥ push</text>
-  <text x="258" y="264" fill="#9aa3c4" font-size="10">(tags + mutations)</text>
+  <!-- Step 8: CP -> Client  reply (return, leftward) -->
+  <path d="M 170 355 L 132 355" stroke="#7bed9f" stroke-width="1.8" marker-end="url(#arrow-ret)" fill="none"/>
+  <text x="220" y="348" fill="#7bed9f" font-size="11" font-weight="600">⑧ reply (Committed/Conflict)</text>
 
-  <!-- Return arrows (green) -->
-  <path d="M 495 136 L 335 184" stroke="#7bed9f" stroke-width="1.6" marker-end="url(#arrow-ret)" fill="none"/>
-  <text x="365" y="170" fill="#7bed9f" font-size="11" font-weight="600">③ commitVersion + prevVersion</text>
+  <!-- Step 9: TLog -> SS  peek (async dashed) -->
+  <path d="M 690 393 L 728 393" stroke="#7a86b3" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-async)" fill="none"/>
+  <text x="709" y="386" text-anchor="middle" fill="#7a86b3" font-size="11" font-weight="600">⑨ peek</text>
 
-  <path d="M 495 220 L 335 198" stroke="#7bed9f" stroke-width="1.6" marker-end="url(#arrow-ret)" fill="none"/>
-  <text x="370" y="208" fill="#7bed9f" font-size="11" font-weight="600">⑤ committed[]</text>
-
-  <path d="M 215 294 L 215 200" stroke="#7bed9f" stroke-width="1.6" marker-end="url(#arrow-ret)" fill="none"/>
-  <text x="207" y="250" text-anchor="end" fill="#7bed9f" font-size="11" font-weight="600">⑦ persisted</text>
-  <text x="207" y="264" text-anchor="end" fill="#9aa3c4" font-size="10">(quorum)</text>
-
-  <path d="M 215 154 L 215 86" stroke="#7bed9f" stroke-width="1.6" marker-end="url(#arrow-ret)" fill="none"/>
-  <text x="207" y="124" text-anchor="end" fill="#7bed9f" font-size="11" font-weight="600">⑧ reply</text>
-  <text x="207" y="138" text-anchor="end" fill="#9aa3c4" font-size="10">(Committed/Conflict)</text>
-
-  <!-- Async arrows (gray dashed) -->
-  <path d="M 250 340 L 250 404" stroke="#7a86b3" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-async)" fill="none"/>
-  <text x="258" y="374" fill="#7a86b3" font-size="11" font-weight="600">⑨ peek (async)</text>
-
-  <path d="M 215 404 L 215 340" stroke="#7a86b3" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-async)" fill="none"/>
-  <text x="207" y="374" text-anchor="end" fill="#7a86b3" font-size="11" font-weight="600">⑩ pop</text>
+  <!-- Step 10: SS -> TLog  pop (async dashed, leftward) -->
+  <path d="M 730 428 L 692 428" stroke="#7a86b3" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-async)" fill="none"/>
+  <text x="780" y="421" fill="#7a86b3" font-size="11" font-weight="600">⑩ pop</text>
 
   <!-- Legend -->
-  <rect x="560" y="350" width="270" height="64" rx="6" fill="none" stroke="#3a3f5c" stroke-width="1"/>
-  <text x="572" y="368" fill="#9aa3c4" font-size="10" font-weight="600">图例</text>
-  <line x1="572" y1="380" x2="600" y2="380" stroke="#6c8ef5" stroke-width="1.6" marker-end="url(#arrow-fwd)"/>
-  <text x="608" y="384" fill="#9aa3c4" font-size="10">请求/数据前向</text>
-  <line x1="572" y1="394" x2="600" y2="394" stroke="#7bed9f" stroke-width="1.6" marker-end="url(#arrow-ret)"/>
-  <text x="608" y="398" fill="#9aa3c4" font-size="10">回复</text>
-  <line x1="572" y1="408" x2="600" y2="408" stroke="#7a86b3" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-async)"/>
-  <text x="608" y="412" fill="#9aa3c4" font-size="10">异步（SS 消费）</text>
+  <rect x="30" y="455" width="800" height="32" rx="6" fill="none" stroke="#3a3f5c" stroke-width="1"/>
+  <text x="44" y="475" fill="#9aa3c4" font-size="10" font-weight="600">图例</text>
+  <line x1="100" y1="471" x2="135" y2="471" stroke="#6c8ef5" stroke-width="1.8" marker-end="url(#arrow-fwd)"/>
+  <text x="143" y="475" fill="#9aa3c4" font-size="10">请求/数据前向</text>
+  <line x1="245" y1="471" x2="280" y2="471" stroke="#7bed9f" stroke-width="1.8" marker-end="url(#arrow-ret)"/>
+  <text x="288" y="475" fill="#9aa3c4" font-size="10">回复</text>
+  <line x1="345" y1="471" x2="380" y2="471" stroke="#7a86b3" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-async)"/>
+  <text x="388" y="475" fill="#9aa3c4" font-size="10">异步（SS 消费）</text>
+  <text x="820" y="475" text-anchor="end" fill="#7a86b3" font-size="10">时间自上而下 ↓</text>
 </svg>
