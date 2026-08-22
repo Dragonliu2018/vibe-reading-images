@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="440" viewBox="0 0 820 440" font-family="system-ui, sans-serif">
+<rect width="820" height="440" fill="#0b0d14"/>
+<text x="410.0" y="28" text-anchor="middle" fill="#e8eaf6" font-size="16" font-weight="600">GPU Worker 执行流水线</text>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  <marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/>
+  </marker>
+</defs>
+<rect x="180" y="64" width="300" height="42" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" opacity="0.96"/>
+<text x="330.0" y="90" text-anchor="middle" fill="#cdd0e8" font-size="13">Worker.execute_model</text>
+<path d="M330,106 L330,124" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180" y="124" width="300" height="50" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" opacity="0.96"/>
+<text x="330.0" y="146" text-anchor="middle" fill="#cdd0e8" font-size="12">update reqs + prepare inputs</text>
+<text x="330.0" y="164" text-anchor="middle" fill="#cdd0e8" font-size="11">InputBatch · attn metadata</text>
+<path d="M330,174 L330,192" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180" y="192" width="300" height="42" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" opacity="0.96"/>
+<text x="330.0" y="218" text-anchor="middle" fill="#cdd0e8" font-size="13">model forward</text>
+<text x="570.0" y="156" text-anchor="middle" fill="#80c7ff" font-size="11">三选一（dispatch by batch_desc）</text>
+<rect x="540" y="170" width="240" height="36" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1" opacity="0.85"/>
+<text x="660.0" y="192" text-anchor="middle" fill="#cdd0e8" font-size="12">FULL · graph replay</text>
+<rect x="540" y="212" width="240" height="36" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1" opacity="0.85"/>
+<text x="660.0" y="234" text-anchor="middle" fill="#cdd0e8" font-size="12">PIECEWISE · torch.compile</text>
+<rect x="540" y="254" width="240" height="36" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1" opacity="0.85"/>
+<text x="660.0" y="276" text-anchor="middle" fill="#cdd0e8" font-size="12">NONE · eager</text>
+<path d="M480,213 L510,213" stroke="#80c7ff" stroke-width="1.5" fill="none"/>
+<path d="M510,188 L510,272" stroke="#80c7ff" stroke-width="1.5" fill="none"/>
+<path d="M510,188 L540,188" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrowb)"/>
+<path d="M510,230 L540,230" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrowb)"/>
+<path d="M510,272 L540,272" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrowb)"/>
+<path d="M330,234 L330,252" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180" y="252" width="300" height="42" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" opacity="0.96"/>
+<text x="330.0" y="278" text-anchor="middle" fill="#cdd0e8" font-size="13">store ExecuteModelState → sample_tokens</text>
+<path d="M330,294 L330,312" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180" y="312" width="300" height="42" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" opacity="0.96"/>
+<text x="330.0" y="338" text-anchor="middle" fill="#cdd0e8" font-size="13">sample（sampler + spec decode）</text>
+<path d="M330,354 L330,372" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="180" y="372" width="300" height="42" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" opacity="0.96"/>
+<text x="330.0" y="398" text-anchor="middle" fill="#cdd0e8" font-size="13">AsyncOutput（D2H 与 spec 重叠）</text>
+</svg>

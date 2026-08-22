@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" font-family="system-ui, sans-serif">
+<rect width="1000" height="540" fill="#0b0d14"/>
+<text x="500.0" y="28" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="600">vLLM 请求处理数据流（三进程）</text>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  <marker id="arrowipc" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+  </marker>
+</defs>
+<text x="140.0" y="60" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">API Server 进程</text>
+<text x="500.0" y="60" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">EngineCore 进程</text>
+<text x="860.0" y="60" text-anchor="middle" fill="#80c7ff" font-size="13" font-weight="600">Worker 进程</text>
+<rect x="25" y="88" width="230" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="140.0" y="108" text-anchor="middle" fill="#cdd0e8" font-size="12">ChatCompletionRequest</text>
+<text x="140.0" y="126" text-anchor="middle" fill="#cdd0e8" font-size="11">HTTP POST /v1/chat</text>
+<path d="M140,136 L140,164" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="25" y="164" width="230" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="140.0" y="193" text-anchor="middle" fill="#cdd0e8" font-size="12">render + SamplingParams</text>
+<path d="M140,212 L140,240" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="25" y="240" width="230" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="140.0" y="260" text-anchor="middle" fill="#cdd0e8" font-size="12">AsyncLLM.generate</text>
+<text x="140.0" y="278" text-anchor="middle" fill="#cdd0e8" font-size="11">InputProcessor → EngineCoreRequest</text>
+<rect x="385" y="240" width="230" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" opacity="0.96"/>
+<text x="500.0" y="260" text-anchor="middle" fill="#cdd0e8" font-size="12">add_request</text>
+<text x="500.0" y="278" text-anchor="middle" fill="#cdd0e8" font-size="11">→ waiting 队列</text>
+<path d="M255,264 L385,264" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowipc)"/>
+<text x="320.0" y="256" text-anchor="middle" fill="#4ecdc4" font-size="9" paint-order="stroke" stroke="#0b0d14" stroke-width="3">ZMQ·msgpack</text>
+<path d="M500,288 L500,316" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="385" y="316" width="230" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" opacity="0.96"/>
+<text x="500.0" y="336" text-anchor="middle" fill="#cdd0e8" font-size="12">scheduler.schedule()</text>
+<text x="500.0" y="354" text-anchor="middle" fill="#cdd0e8" font-size="11">→ SchedulerOutput</text>
+<rect x="745" y="316" width="230" height="48" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" opacity="0.96"/>
+<text x="860.0" y="336" text-anchor="middle" fill="#cdd0e8" font-size="12">execute_model</text>
+<text x="860.0" y="354" text-anchor="middle" fill="#cdd0e8" font-size="11">update reqs + prepare inputs</text>
+<path d="M615,340 L745,340" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowipc)"/>
+<text x="680.0" y="332" text-anchor="middle" fill="#4ecdc4" font-size="9" paint-order="stroke" stroke="#0b0d14" stroke-width="3">shm·SchedulerOutput</text>
+<path d="M860,364 L860,392" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="745" y="392" width="230" height="48" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" opacity="0.96"/>
+<text x="860.0" y="412" text-anchor="middle" fill="#cdd0e8" font-size="12">model forward + sample</text>
+<text x="860.0" y="430" text-anchor="middle" fill="#cdd0e8" font-size="11">→ ModelRunnerOutput</text>
+<rect x="385" y="392" width="230" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" opacity="0.96"/>
+<text x="500.0" y="412" text-anchor="middle" fill="#cdd0e8" font-size="12">update_from_output</text>
+<text x="500.0" y="430" text-anchor="middle" fill="#cdd0e8" font-size="11">→ EngineCoreOutputs</text>
+<path d="M745,416 L615,416" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowipc)"/>
+<text x="680.0" y="408" text-anchor="middle" fill="#4ecdc4" font-size="9" paint-order="stroke" stroke="#0b0d14" stroke-width="3">shm·ModelRunnerOutput</text>
+<rect x="25" y="392" width="230" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="140.0" y="412" text-anchor="middle" fill="#cdd0e8" font-size="12">OutputProcessor</text>
+<text x="140.0" y="430" text-anchor="middle" fill="#cdd0e8" font-size="11">detokenize → RequestOutput</text>
+<path d="M385,416 L255,416" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowipc)"/>
+<text x="320.0" y="424" text-anchor="middle" fill="#4ecdc4" font-size="9" paint-order="stroke" stroke="#0b0d14" stroke-width="3">ZMQ·EngineCoreOutputs</text>
+<path d="M140,440 L140,468" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="25" y="468" width="230" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="140.0" y="497" text-anchor="middle" fill="#cdd0e8" font-size="12">StreamingResponse（SSE）→ client</text>
+</svg>

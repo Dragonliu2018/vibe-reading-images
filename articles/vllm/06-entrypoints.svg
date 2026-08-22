@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="370" viewBox="0 0 820 370" font-family="system-ui, sans-serif">
+<rect width="820" height="370" fill="#0b0d14"/>
+<text x="410.0" y="28" text-anchor="middle" fill="#e8eaf6" font-size="16" font-weight="600">入口与 API 服务（启动 + 请求）</text>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+</defs>
+<text x="200.0" y="54" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">启动流程</text>
+<text x="620.0" y="54" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">请求处理</text>
+<rect x="40" y="70" width="320" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="200.0" y="97" text-anchor="middle" fill="#cdd0e8" font-size="12">vllm serve CLI（main → ServeSubcommand）</text>
+<path d="M200,114 L200,135" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="40" y="135" width="320" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="200.0" y="157" text-anchor="middle" fill="#cdd0e8" font-size="12">build_async_engine_client</text>
+<text x="200.0" y="174" text-anchor="middle" fill="#cdd0e8" font-size="11">→ AsyncLLM（fork EngineCore 子进程）</text>
+<path d="M200,185 L200,206" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="40" y="206" width="320" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="200.0" y="228" text-anchor="middle" fill="#cdd0e8" font-size="12">build_app + init_app_state</text>
+<text x="200.0" y="245" text-anchor="middle" fill="#cdd0e8" font-size="11">→ FastAPI 路由 + ServingChat handler</text>
+<path d="M200,256 L200,277" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="40" y="277" width="320" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="200.0" y="304" text-anchor="middle" fill="#cdd0e8" font-size="12">serve_http（uvicorn 启动）</text>
+<rect x="460" y="70" width="320" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="620.0" y="97" text-anchor="middle" fill="#cdd0e8" font-size="12">POST /v1/chat/completions</text>
+<path d="M620,114 L620,135" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="460" y="135" width="320" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="620.0" y="157" text-anchor="middle" fill="#cdd0e8" font-size="12">OpenAIServingChat._create_chat_completion</text>
+<text x="620.0" y="174" text-anchor="middle" fill="#cdd0e8" font-size="11">render + SamplingParams</text>
+<path d="M620,185 L620,206" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="460" y="206" width="320" height="50" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="620.0" y="228" text-anchor="middle" fill="#cdd0e8" font-size="12">engine_client.generate</text>
+<text x="620.0" y="245" text-anchor="middle" fill="#cdd0e8" font-size="11">（AsyncLLM · 适配器）</text>
+<path d="M620,256 L620,277" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="460" y="277" width="320" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" opacity="0.96"/>
+<text x="620.0" y="304" text-anchor="middle" fill="#cdd0e8" font-size="12">StreamingResponse（SSE）→ client</text>
+</svg>

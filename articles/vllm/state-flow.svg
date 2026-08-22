@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="280" viewBox="0 0 860 280" font-family="system-ui, sans-serif">
+<rect width="860" height="280" fill="#0b0d14"/>
+<text x="430.0" y="28" text-anchor="middle" fill="#e8eaf6" font-size="17" font-weight="600">vLLM 请求生命周期状态流</text>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+</defs>
+<circle cx="40" cy="100" r="6" fill="#f9ca24"/>
+<text x="40" y="86" text-anchor="middle" fill="#cdd0e8" font-size="11">新请求</text>
+<rect x="80" y="70" width="180" height="60" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" opacity="0.96"/>
+<text x="170.0" y="96" text-anchor="middle" fill="#f9ca24" font-size="14" font-weight="600">WAITING</text>
+<text x="170.0" y="116" text-anchor="middle" fill="#cdd0e8" font-size="11">waiting 队列 · 无 KV cache</text>
+<rect x="340" y="70" width="180" height="60" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" opacity="0.96"/>
+<text x="430.0" y="96" text-anchor="middle" fill="#6c8ef5" font-size="14" font-weight="600">RUNNING</text>
+<text x="430.0" y="116" text-anchor="middle" fill="#cdd0e8" font-size="11">已分配 KV block · 执行中</text>
+<rect x="600" y="70" width="180" height="60" rx="10" fill="#13162a" stroke="#7bed9f" stroke-width="1.5" opacity="0.96"/>
+<text x="690.0" y="96" text-anchor="middle" fill="#7bed9f" font-size="14" font-weight="600">FINISHED</text>
+<text x="690.0" y="116" text-anchor="middle" fill="#cdd0e8" font-size="11">token 生成完成</text>
+<rect x="340" y="200" width="180" height="60" rx="10" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" opacity="0.96"/>
+<text x="430.0" y="226" text-anchor="middle" fill="#ff6b9d" font-size="14" font-weight="600">ABORTED</text>
+<text x="430.0" y="246" text-anchor="middle" fill="#cdd0e8" font-size="11">客户端取消 / 错误</text>
+<path d="M46,100 L80,100" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M260,100 L340,100" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="300.0" y="92" text-anchor="middle" fill="#cdd0e8" font-size="10" paint-order="stroke" stroke="#0b0d14" stroke-width="3">分配 KV block</text>
+<path d="M340,118 Q300,158 260,118" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="300.0" y="170" text-anchor="middle" fill="#cdd0e8" font-size="10" paint-order="stroke" stroke="#0b0d14" stroke-width="3">preempt：释放 KV</text>
+<path d="M520,100 L600,100" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="560.0" y="92" text-anchor="middle" fill="#cdd0e8" font-size="10" paint-order="stroke" stroke="#0b0d14" stroke-width="3">生成完成</text>
+<path d="M430,130 L430,200" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="442" y="167" fill="#cdd0e8" font-size="10" paint-order="stroke" stroke="#0b0d14" stroke-width="3">abort</text>
+</svg>

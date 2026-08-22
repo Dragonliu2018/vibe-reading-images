@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="380" viewBox="0 0 820 380" font-family="system-ui, sans-serif">
+<rect width="820" height="380" fill="#0b0d14"/>
+<text x="410.0" y="28" text-anchor="middle" fill="#e8eaf6" font-size="16" font-weight="600">调度器与 KV Cache 分层管理</text>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+</defs>
+<rect x="260" y="64" width="300" height="42" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" opacity="0.96"/>
+<text x="410.0" y="90" text-anchor="middle" fill="#cdd0e8" font-size="13">Scheduler（连续批处理）</text>
+<path d="M410,106 L410,124" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="260" y="124" width="300" height="42" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" opacity="0.96"/>
+<text x="410.0" y="150" text-anchor="middle" fill="#cdd0e8" font-size="13">KVCacheManager</text>
+<path d="M410,166 L410,184" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="260" y="184" width="300" height="42" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" opacity="0.96"/>
+<text x="410.0" y="204" text-anchor="middle" fill="#cdd0e8" font-size="13">KVCacheCoordinator</text>
+<text x="410.0" y="220" text-anchor="middle" fill="#f9ca24" font-size="10">NoPrefixCache · Unitary · Hybrid</text>
+<path d="M410,226 L410,235 L185,235 L185,244" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M410,226 L410,244" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M410,226 L410,235 L635,235 L635,244" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<rect x="80" y="244" width="210" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1" opacity="0.85"/>
+<text x="185.0" y="270" text-anchor="middle" fill="#cdd0e8" font-size="12">FullAttentionManager</text>
+<rect x="305" y="244" width="210" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1" opacity="0.85"/>
+<text x="410.0" y="270" text-anchor="middle" fill="#cdd0e8" font-size="12">SlidingWindowManager</text>
+<rect x="530" y="244" width="210" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1" opacity="0.85"/>
+<text x="635.0" y="270" text-anchor="middle" fill="#cdd0e8" font-size="12">MambaManager</text>
+<path d="M185,286 L185,295 L410,295 L410,310" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<path d="M410,286 L410,310" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M635,286 L635,295 L410,295 L410,310" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<rect x="260" y="310" width="300" height="42" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" opacity="0.96"/>
+<text x="410.0" y="336" text-anchor="middle" fill="#cdd0e8" font-size="13">BlockPool（共享 · LRU · hash 缓存）</text>
+</svg>
