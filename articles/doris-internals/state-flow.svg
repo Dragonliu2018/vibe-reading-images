@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e74c3c"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="480" fill="#0b0d14"/>
+
+  <text x="450" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e6e8f0" font-weight="bold">核心状态机</text>
+
+  <!-- 左：LoadJob 状态机 -->
+  <text x="240" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="bold">LoadJob 状态机 (loadv2)</text>
+
+  <rect x="160" y="80" width="160" height="40" rx="20" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="240" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">PENDING</text>
+
+  <rect x="160" y="160" width="160" height="40" rx="20" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="240" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">LOADING</text>
+
+  <rect x="160" y="240" width="160" height="40" rx="20" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="240" y="265" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">COMMITTED</text>
+
+  <rect x="160" y="320" width="160" height="40" rx="20" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="240" y="345" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">FINISHED</text>
+
+  <rect x="380" y="160" width="140" height="40" rx="20" fill="#13162a" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="450" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">CANCELLED</text>
+
+  <path d="M240,120 L240,160" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="250" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">executeJob</text>
+  <path d="M240,200 L240,240" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="250" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">afterCommitted</text>
+  <path d="M240,280 L240,320" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="250" y="305" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">afterVisible</text>
+
+  <path d="M320,180 L380,180" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+  <text x="350" y="172" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#e74c3c">afterAborted</text>
+  <path d="M240,100 L360,100 L360,160 L380,160" stroke="#e74c3c" stroke-width="1.5" fill="none" marker-end="url(#arrowRed)"/>
+  <text x="340" y="92" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#e74c3c">cancel</text>
+  <path d="M240,260 L360,260 L360,200 L380,200" stroke="#e74c3c" stroke-width="1.5" fill="none" marker-end="url(#arrowRed)"/>
+
+  <!-- 右：PipelineTask 状态机 -->
+  <text x="700" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="bold">PipelineTask 状态机</text>
+
+  <rect x="600" y="80" width="160" height="40" rx="20" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="680" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">INITED</text>
+
+  <rect x="600" y="160" width="160" height="40" rx="20" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="680" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">RUNNABLE</text>
+
+  <rect x="600" y="240" width="160" height="40" rx="20" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="680" y="265" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">BLOCKED</text>
+
+  <rect x="600" y="320" width="160" height="40" rx="20" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="680" y="345" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">FINISHED</text>
+
+  <rect x="820" y="400" width="60" height="40" rx="20" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="850" y="425" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6e8f0">FINALIZED</text>
+
+  <path d="M680,120 L680,160" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="690" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">submit</text>
+  <path d="M680,200 L680,240" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="690" y="225" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">_is_blocked</text>
+  <path d="M600,260 L560,260 L560,200 L600,200" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="540" y="234" text-anchor="end" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">set_ready</text>
+  <path d="M680,280 L680,320" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="690" y="305" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">eos</text>
+  <path d="M760,340 L820,400 L820,420" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="790" y="380" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">close</text>
+
+  <!-- 说明 -->
+  <text x="60" y="430" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">LoadJob：事务回调驱动状态流转（afterCommitted/afterVisible）</text>
+  <text x="60" y="450" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">PipelineTask：时间片轮转 + Dependency 阻塞/唤醒（RUNNABLE↔BLOCKED 回环）</text>
+
+</svg>

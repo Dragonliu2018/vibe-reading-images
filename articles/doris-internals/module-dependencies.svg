@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="arrowYellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="560" fill="#0b0d14"/>
+
+  <text x="450" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e6e8f0" font-weight="bold">模块依赖关系</text>
+
+  <!-- 左列 FE 模块 -->
+  <rect x="40" y="70" width="220" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="150" y="95" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Nereids 优化器</text>
+
+  <rect x="40" y="150" width="220" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="150" y="175" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">查询协调 QE</text>
+
+  <rect x="40" y="230" width="220" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="150" y="255" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Catalog 元数据</text>
+
+  <rect x="40" y="310" width="220" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="150" y="335" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">数据导入 Load</text>
+
+  <rect x="40" y="390" width="220" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="150" y="415" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">联邦数据源 DataSource</text>
+
+  <!-- 右列 BE 模块 -->
+  <rect x="640" y="70" width="220" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="750" y="95" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Pipeline 执行引擎</text>
+
+  <rect x="640" y="150" width="220" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="750" y="175" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">表达式与函数</text>
+
+  <rect x="640" y="230" width="220" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="750" y="255" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">列存类型与运行时</text>
+
+  <rect x="640" y="310" width="220" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="750" y="335" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">存储引擎</text>
+
+  <rect x="640" y="390" width="220" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="750" y="415" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">文件格式与 IO</text>
+
+  <!-- FE 内部依赖（蓝色箭头） -->
+  <!-- QE → Nereids -->
+  <path d="M150,150 L150,110" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <!-- QE → Catalog -->
+  <path d="M150,190 L150,230" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Load → Catalog -->
+  <path d="M150,310 L150,270" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Nereids → Catalog (虚线绕左) -->
+  <path d="M40,90 L20,90 L20,250 L40,250" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- DataSource → Catalog -->
+  <path d="M150,390 L150,270" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- BE 内部依赖 -->
+  <!-- Pipeline → 存储引擎 -->
+  <path d="M750,110 L750,310" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <!-- Pipeline → 表达式 -->
+  <path d="M640,90 L640,150" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <!-- Pipeline → 列存运行时 -->
+  <path d="M860,90 L880,90 L880,250 L860,250" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- 存储引擎 → 文件IO -->
+  <path d="M750,350 L750,390" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <!-- 表达式 → 列存运行时 -->
+  <path d="M750,190 L750,230" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- 存储引擎 → 列存运行时 -->
+  <path d="M640,330 L620,330 L620,250 L640,250" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- FE ↔ BE 跨进程（黄色，QE→Pipeline, Load→存储引擎, DataSource→文件IO） -->
+  <path d="M260,170 L450,170 L450,90 L640,90" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+  <text x="380" y="162" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#f9ca24">exec_plan_fragment</text>
+
+  <path d="M260,330 L450,330 L450,330 L640,330" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+  <text x="355" y="322" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#f9ca24">streamLoadPut / 写入</text>
+
+  <path d="M260,410 L550,410 L550,410 L640,410" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowYellow)"/>
+  <text x="400" y="402" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#f9ca24">外部表 Scan</text>
+
+  <!-- 图例 -->
+  <rect x="40" y="470" width="820" height="70" rx="6" fill="#13162a" stroke="#2a2e48" stroke-width="1"/>
+  <text x="60" y="494" font-family="system-ui, sans-serif" font-size="12" fill="#6c8ef5" font-weight="bold">蓝色箭头</text>
+  <text x="135" y="494" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">= 同进程核心调用依赖</text>
+  <text x="60" y="516" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" font-weight="bold">灰色箭头</text>
+  <text x="135" y="516" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">= 元数据/数据载体依赖</text>
+  <text x="430" y="494" font-family="system-ui, sans-serif" font-size="12" fill="#f9ca24" font-weight="bold">黄色箭头</text>
+  <text x="505" y="494" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">= FE↔BE 跨进程 RPC</text>
+  <text x="430" y="516" font-family="system-ui, sans-serif" font-size="12" fill="#e6e8f0">Catalog 元数据为 FE 公共依赖，列存运行时为 BE 公共依赖</text>
+
+</svg>

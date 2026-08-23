@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="660" viewBox="0 0 880 660">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowPink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="880" height="660" fill="#0b0d14"/>
+
+  <!-- 标题 -->
+  <text x="440" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e6e8f0" font-weight="bold">Apache Doris 4.1.3 分层架构</text>
+
+  <!-- 层背景框（FE / BE） -->
+  <rect x="16" y="50" width="848" height="262" rx="10" fill="none" stroke="#2a2e48" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="28" y="66" font-family="system-ui, sans-serif" font-size="11" fill="#6c8ef5" font-weight="bold">FE (Java)</text>
+  <rect x="16" y="338" width="848" height="276" rx="10" fill="none" stroke="#2a2e48" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="28" y="354" font-family="system-ui, sans-serif" font-size="11" fill="#6c8ef5" font-weight="bold">BE (C++)</text>
+
+  <!-- L1 客户端 -->
+  <text x="44" y="86" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="bold">客户端</text>
+  <rect x="160" y="96" width="200" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="260" y="121" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">MySQL Client</text>
+  <rect x="380" y="96" width="200" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="480" y="121" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">JDBC / BI 工具</text>
+  <rect x="600" y="96" width="200" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="700" y="121" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">HTTP API</text>
+  <path d="M260,136 L260,150" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M480,136 L480,150" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M700,136 L700,150" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- L2 FE 接入协议层 -->
+  <text x="44" y="166" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="bold">接入协议层</text>
+  <rect x="160" y="152" width="200" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="260" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">MysqlServer</text>
+  <text x="260" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">Xnio NIO · 9030</text>
+  <rect x="380" y="152" width="200" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="480" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">HttpServer</text>
+  <text x="480" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">REST · Stream Load</text>
+  <rect x="600" y="152" width="200" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="700" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Arrow Flight SQL</text>
+  <text x="700" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">高性能列式</text>
+  <path d="M260,192 L260,206" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M480,192 L480,206" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M700,192 L700,206" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- L3 FE 查询引擎层 -->
+  <text x="44" y="222" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" font-weight="bold">查询引擎层</text>
+  <rect x="120" y="208" width="200" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="220" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Nereids 优化器</text>
+  <text x="220" y="243" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">ANTLR4 · Cascades CBO</text>
+  <rect x="340" y="208" width="200" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Coordinator 调度</text>
+  <text x="440" y="243" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">两阶段 · Fragment 分发</text>
+  <rect x="560" y="208" width="200" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="660" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">StmtExecutor 入口</text>
+  <text x="660" y="243" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">executeByNereids</text>
+
+  <!-- L4 FE 元数据与管控层 -->
+  <text x="44" y="278" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="bold">元数据与管控</text>
+  <rect x="96" y="264" width="180" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="186" y="282" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Env 服务定位器</text>
+  <text x="186" y="299" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">Catalog · 装配 80+ 子服务</text>
+  <rect x="292" y="264" width="180" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="382" y="282" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">EditLog / BDBJE</text>
+  <text x="382" y="299" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">WAL · Master-Follower HA</text>
+  <rect x="488" y="264" width="148" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="562" y="282" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Load 导入</text>
+  <text x="562" y="299" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">Stream · Routine · Broker</text>
+  <rect x="652" y="264" width="148" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="726" y="282" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">TabletScheduler</text>
+  <text x="726" y="299" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">副本调度 · Rebalancer</text>
+
+  <!-- RPC 边界 -->
+  <rect x="120" y="320" width="640" height="30" rx="6" fill="#1a1d2e" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="440" y="340" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#ff6b9d" font-weight="bold">FE ↔ BE  gRPC：exec_plan_fragment · fetch_data · cancel_plan_fragment</text>
+  <path d="M440,308 L440,320" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowPink)"/>
+  <path d="M440,350 L440,362" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowPink)"/>
+
+  <!-- L5 BE 服务接入层 -->
+  <text x="44" y="378" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="bold">服务接入层</text>
+  <rect x="260" y="364" width="200" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="360" y="382" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">InternalService</text>
+  <text x="360" y="397" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">brpc · FragmentMgr</text>
+  <rect x="480" y="364" width="200" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="580" y="382" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">BackendService</text>
+  <text x="580" y="397" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">Thrift · 心跳</text>
+  <path d="M360,404 L360,418" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M580,404 L580,418" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- L6 BE 执行引擎层 -->
+  <text x="44" y="434" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" font-weight="bold">执行引擎层</text>
+  <rect x="120" y="420" width="200" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="220" y="438" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Pipeline / Operator</text>
+  <text x="220" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">Pull 模型 DAG · 向量化</text>
+  <rect x="340" y="420" width="200" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="438" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">MLFQ Task 调度</text>
+  <text x="440" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">多核 Work Stealing</text>
+  <rect x="560" y="420" width="200" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="660" y="438" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">RuntimeFilter</text>
+  <text x="660" y="455" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">build→scan 下推</text>
+  <path d="M220,464 L220,478" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M440,464 L440,478" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M660,464 L660,478" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- L7 BE 表达式与运行时 -->
+  <text x="44" y="494" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="bold">表达式与运行时</text>
+  <rect x="120" y="480" width="200" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="220" y="498" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">VExpr / IFunction</text>
+  <text x="220" y="515" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">表达式树 · SIMD 向量化</text>
+  <rect x="340" y="480" width="200" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="440" y="498" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Block / Column (COW)</text>
+  <text x="440" y="515" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">列存载体 · 写时复制</text>
+  <rect x="560" y="480" width="200" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="660" y="498" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">ExecEnv / MemTracker</text>
+  <text x="660" y="515" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">服务定位器 · 内存分级</text>
+  <path d="M220,524 L220,538" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M440,524 L440,538" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M660,524 L660,538" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- L8 BE 存储与 IO 层 -->
+  <text x="44" y="554" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" font-weight="bold">存储与 IO 层</text>
+  <rect x="120" y="540" width="200" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="220" y="558" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Tablet / Rowset / Segment</text>
+  <text x="220" y="575" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">MergeTree 段存 · MVCC</text>
+  <rect x="340" y="540" width="200" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="558" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">Compaction / MemTable</text>
+  <text x="440" y="575" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">Cumu / Base · LSM 变体</text>
+  <rect x="560" y="540" width="200" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="660" y="558" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">FileSystem + Reader</text>
+  <text x="660" y="575" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">S3/HDFS/本地 · Parquet/ORC</text>
+  <path d="M220,584 L220,598" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowPink)"/>
+  <path d="M440,584 L440,598" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowPink)"/>
+  <path d="M660,584 L660,598" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowPink)"/>
+
+  <!-- L9 存储后端 -->
+  <text x="44" y="614" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d" font-weight="bold">存储后端</text>
+  <rect x="120" y="600" width="200" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="220" y="625" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">本地磁盘</text>
+  <rect x="340" y="600" width="200" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="440" y="625" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">S3 / HDFS 对象存储</text>
+  <rect x="560" y="600" width="200" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="660" y="625" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e8f0">数据湖 Hive / Iceberg</text>
+
+</svg>
