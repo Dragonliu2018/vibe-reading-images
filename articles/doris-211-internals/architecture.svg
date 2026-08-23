@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="510" viewBox="0 0 720 510" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="720" height="510" fill="#0b0d14"/>
+
+  <!-- title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e6e8f0" font-size="17" font-weight="600">Apache Doris 2.1.11 分层架构</text>
+
+  <!-- 接入层 -->
+  <rect x="20" y="50" width="680" height="64" rx="8" fill="none" stroke="#2a2e45" stroke-dasharray="4 4"/>
+  <text x="34" y="68" fill="#80c7ff" font-size="12">接入层</text>
+  <rect x="60" y="74" width="140" height="32" rx="6" fill="#13162a" stroke="#80c7ff"/>
+  <text x="130" y="94" text-anchor="middle" fill="#e6e8f0" font-size="13">MySQL / Arrow Flight</text>
+  <rect x="220" y="74" width="130" height="32" rx="6" fill="#13162a" stroke="#80c7ff"/>
+  <text x="285" y="94" text-anchor="middle" fill="#e6e8f0" font-size="13">HTTP REST (httpv2)</text>
+  <rect x="370" y="74" width="150" height="32" rx="6" fill="#13162a" stroke="#80c7ff"/>
+  <text x="445" y="94" text-anchor="middle" fill="#e6e8f0" font-size="13">Thrift RPC (FeServer)</text>
+  <rect x="540" y="74" width="140" height="32" rx="6" fill="#13162a" stroke="#80c7ff"/>
+  <text x="610" y="94" text-anchor="middle" fill="#e6e8f0" font-size="13">Stream/Broker Load</text>
+
+  <!-- FE 层 -->
+  <rect x="20" y="134" width="680" height="96" rx="8" fill="none" stroke="#2a2e45" stroke-dasharray="4 4"/>
+  <text x="34" y="152" fill="#6c8ef5" font-size="12">FE 层（Java 8）</text>
+  <rect x="34" y="160" width="150" height="60" rx="6" fill="#13162a" stroke="#6c8ef5"/>
+  <text x="109" y="183" text-anchor="middle" fill="#e6e8f0" font-size="13">Nereids 优化器</text>
+  <text x="109" y="201" text-anchor="middle" fill="#9aa3c2" font-size="11">Cascades CBO</text>
+  <rect x="194" y="160" width="118" height="60" rx="6" fill="#13162a" stroke="#b388ff" stroke-dasharray="5 3"/>
+  <text x="253" y="183" text-anchor="middle" fill="#e6e8f0" font-size="13">旧版优化器</text>
+  <text x="253" y="201" text-anchor="middle" fill="#9aa3c2" font-size="11">Analyzer+Planner</text>
+  <rect x="322" y="160" width="118" height="60" rx="6" fill="#13162a" stroke="#6c8ef5"/>
+  <text x="381" y="183" text-anchor="middle" fill="#e6e8f0" font-size="13">Catalog 元数据</text>
+  <text x="381" y="201" text-anchor="middle" fill="#9aa3c2" font-size="11">Env + BDBJE HA</text>
+  <rect x="450" y="160" width="118" height="60" rx="6" fill="#13162a" stroke="#6c8ef5"/>
+  <text x="509" y="183" text-anchor="middle" fill="#e6e8f0" font-size="13">Coordinator</text>
+  <text x="509" y="201" text-anchor="middle" fill="#9aa3c2" font-size="11">两阶段调度</text>
+  <rect x="578" y="160" width="110" height="60" rx="6" fill="#13162a" stroke="#ff6b9d"/>
+  <text x="633" y="183" text-anchor="middle" fill="#e6e8f0" font-size="13">导入 / 联邦</text>
+  <text x="633" y="201" text-anchor="middle" fill="#9aa3c2" font-size="11">Load / Datasource</text>
+
+  <!-- BE 层 -->
+  <rect x="20" y="250" width="680" height="96" rx="8" fill="none" stroke="#2a2e45" stroke-dasharray="4 4"/>
+  <text x="34" y="268" fill="#4ecdc4" font-size="12">BE 层（C++20）</text>
+  <rect x="34" y="276" width="156" height="60" rx="6" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="112" y="299" text-anchor="middle" fill="#e6e8f0" font-size="13">Pipeline 引擎</text>
+  <text x="112" y="317" text-anchor="middle" fill="#9aa3c2" font-size="11">Pull + MLFQ Work Stealing</text>
+  <rect x="200" y="276" width="156" height="60" rx="6" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="278" y="299" text-anchor="middle" fill="#e6e8f0" font-size="13">向量化与函数</text>
+  <text x="278" y="317" text-anchor="middle" fill="#9aa3c2" font-size="11">VExpr / IFunction CRTP</text>
+  <rect x="366" y="276" width="156" height="60" rx="6" fill="#13162a" stroke="#f9ca24"/>
+  <text x="444" y="299" text-anchor="middle" fill="#e6e8f0" font-size="13">运行时基础</text>
+  <text x="444" y="317" text-anchor="middle" fill="#9aa3c2" font-size="11">ExecEnv / MemTracker</text>
+  <rect x="532" y="276" width="156" height="60" rx="6" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="610" y="299" text-anchor="middle" fill="#e6e8f0" font-size="13">存储引擎 olap</text>
+  <text x="610" y="317" text-anchor="middle" fill="#9aa3c2" font-size="11">Tablet / Rowset / Compaction</text>
+
+  <!-- 存储层 -->
+  <rect x="20" y="366" width="680" height="64" rx="8" fill="none" stroke="#2a2e45" stroke-dasharray="4 4"/>
+  <text x="34" y="384" fill="#f9ca24" font-size="12">列式存储层</text>
+  <rect x="60" y="390" width="150" height="32" rx="6" fill="#13162a" stroke="#f9ca24"/>
+  <text x="135" y="410" text-anchor="middle" fill="#e6e8f0" font-size="13">Tablet</text>
+  <rect x="230" y="390" width="150" height="32" rx="6" fill="#13162a" stroke="#f9ca24"/>
+  <text x="305" y="410" text-anchor="middle" fill="#e6e8f0" font-size="13">Rowset (不可变)</text>
+  <rect x="400" y="390" width="150" height="32" rx="6" fill="#13162a" stroke="#f9ca24"/>
+  <text x="475" y="410" text-anchor="middle" fill="#e6e8f0" font-size="13">Segment / Page</text>
+  <rect x="570" y="390" width="120" height="32" rx="6" fill="#13162a" stroke="#f9ca24"/>
+  <text x="630" y="410" text-anchor="middle" fill="#e6e8f0" font-size="13">Delete Bitmap</text>
+
+  <!-- 层间箭头：接入→FE -->
+  <path d="M360,114 L360,134" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- FE→BE -->
+  <path d="M360,230 L360,250" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- BE→存储 -->
+  <path d="M360,346 L360,366" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- BE存储引擎→存储层 -->
+  <path d="M610,336 L610,390" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowy)"/>
+
+  <!-- 图例 -->
+  <rect x="20" y="440" width="680" height="56" rx="6" fill="#13162a" stroke="#2a2e45"/>
+  <text x="34" y="462" fill="#9aa3c2" font-size="12">图例</text>
+  <rect x="80" y="452" width="14" height="14" rx="3" fill="none" stroke="#6c8ef5"/><text x="100" y="463" fill="#9aa3c2" font-size="11">FE 核心逻辑</text>
+  <rect x="200" y="452" width="14" height="14" rx="3" fill="none" stroke="#4ecdc4"/><text x="220" y="463" fill="#9aa3c2" font-size="11">BE 执行/存储</text>
+  <rect x="320" y="452" width="14" height="14" rx="3" fill="none" stroke="#b388ff" stroke-dasharray="5 3"/><text x="340" y="463" fill="#9aa3c2" font-size="11">旧版路径（回退）</text>
+  <rect x="470" y="452" width="14" height="14" rx="3" fill="none" stroke="#f9ca24"/><text x="490" y="463" fill="#9aa3c2" font-size="11">存储/运行时</text>
+  <rect x="580" y="452" width="14" height="14" rx="3" fill="none" stroke="#ff6b9d"/><text x="600" y="463" fill="#9aa3c2" font-size="11">扩展/导入</text>
+  <text x="34" y="485" fill="#9aa3c2" font-size="11">FE/BE 分离架构：FE 负责元数据/优化/协调，BE 负责执行/存储，gRPC 通信。2.1 LTS 线为 Java 8 末代版本，无云原生存算分离（3.x 引入）。</text>
+</svg>
