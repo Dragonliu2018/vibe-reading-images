@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="486" viewBox="0 0 780 486" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrowg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="780" height="486" fill="#0b0d14"/>
+
+  <text x="390" y="34" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">修复：单次 flush + 溢出转换（ColumnString64）</text>
+
+  <rect x="210" y="60" width="360" height="74" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="390" y="86" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">累积：merge_ignore_overflow</text>
+  <text x="390" y="108" text-anchor="middle" fill="#a9b1d6" font-size="12">容许单列 String 超 4GB，不抛异常</text>
+
+  <path d="M390,134 L390,166" stroke="#7bed9f" stroke-width="1.5" fill="none" marker-end="url(#arrowg)"/>
+  <text x="404" y="155" fill="#7bed9f" font-size="12">仅 eos flush</text>
+
+  <rect x="210" y="168" width="360" height="74" rx="6" fill="#0f1f18" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="390" y="194" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">build_block = 全量（仅一次）</text>
+  <text x="390" y="216" text-anchor="middle" fill="#a9b1d6" font-size="12">无覆盖，哈希表 row_num 全部有效</text>
+
+  <path d="M390,242 L390,274" stroke="#7bed9f" stroke-width="1.5" fill="none" marker-end="url(#arrowg)"/>
+
+  <rect x="210" y="276" width="360" height="74" rx="6" fill="#0f1f18" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="390" y="302" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">_process_build_block</text>
+  <text x="390" y="324" text-anchor="middle" fill="#a9b1d6" font-size="12">convert_column_if_overflow → ColumnString64</text>
+
+  <path d="M390,350 L390,382" stroke="#7bed9f" stroke-width="1.5" fill="none" marker-end="url(#arrowg)"/>
+
+  <rect x="210" y="384" width="360" height="74" rx="6" fill="#0f1f18" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="390" y="410" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">Source：insert_indices_from(col, idx)</text>
+  <text x="390" y="432" text-anchor="middle" fill="#a9b1d6" font-size="12">支持 ColumnString64 源，按行号读取</text>
+</svg>

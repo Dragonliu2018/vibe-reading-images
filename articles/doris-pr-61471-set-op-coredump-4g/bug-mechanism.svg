@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="518" viewBox="0 0 780 518" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e74c3c"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="780" height="518" fill="#0b0d14"/>
+
+  <text x="390" y="34" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">Set 操作 build_block 覆盖 → 悬空 row_num（4GB 多段 flush）</text>
+
+  <rect x="30" y="54" width="720" height="50" rx="6" fill="#1a1430" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="390" y="76" text-anchor="middle" fill="#e6e8f0" font-size="13">根因：哈希表 Mapped 只存 uint32 row_num，无 block 指针</text>
+  <text x="390" y="94" text-anchor="middle" fill="#a9b1d6" font-size="12">hash_table_set_build.h → ctor(key, Mapped {k})</text>
+
+  <rect x="210" y="124" width="360" height="66" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="390" y="150" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">sink() 累积 _mutable_block</text>
+  <text x="390" y="172" text-anchor="middle" fill="#a9b1d6" font-size="12">flush 条件：eos || allocated_bytes ≥ 4GB</text>
+
+  <path d="M390,190 L390,222" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrowb)"/>
+
+  <rect x="210" y="224" width="360" height="66" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="390" y="250" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">flush #1：build_block = batch1</text>
+  <text x="390" y="272" text-anchor="middle" fill="#a9b1d6" font-size="12">哈希表存入 row_num 0..N1，clear() 后继续累积</text>
+
+  <path d="M390,290 L390,322" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrowb)"/>
+
+  <rect x="210" y="324" width="360" height="74" rx="6" fill="#2a1316" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="390" y="350" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">flush #2 (eos)：build_block = batch2</text>
+  <text x="390" y="372" text-anchor="middle" fill="#ff9aa0" font-size="12">batch1 销毁，旧 row_num 0..N1 变悬空引用</text>
+
+  <path d="M390,398 L390,430" stroke="#e74c3c" stroke-width="1.5" fill="none" marker-end="url(#arrowr)"/>
+
+  <rect x="210" y="432" width="360" height="74" rx="6" fill="#2a1316" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="390" y="458" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">Source：append_data_by_selector(col, row_num)</text>
+  <text x="390" y="480" text-anchor="middle" fill="#ff9aa0" font-size="12">X ≥ batch2.rows → offsets[X] 越界 → SIGSEGV</text>
+</svg>
