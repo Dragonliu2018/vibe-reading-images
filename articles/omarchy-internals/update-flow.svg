@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="632" viewBox="0 0 800 632" font-family="system-ui, sans-serif">
+  <rect width="800" height="632" fill="#0b0d14"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <text x="400" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="700">omarchy update 管线</text>
+
+  <rect x="210" y="54" width="380" height="54" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="400" y="78" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">bar SystemUpdate widget</text>
+  <text x="400" y="97" text-anchor="middle" fill="#7a86b3" font-size="12">omarchy-update-available（6h 检查）→ 点击</text>
+  <path d="M400,108 L400,126" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="126" width="380" height="54" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="400" y="150" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">omarchy-update</text>
+  <text x="400" y="169" text-anchor="middle" fill="#7a86b3" font-size="12">script(1) 录制 /tmp/omarchy-update.log</text>
+  <path d="M400,180 L400,198" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="198" width="380" height="54" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="400" y="222" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">update-lock + free-space + confirm</text>
+  <text x="400" y="241" text-anchor="middle" fill="#7a86b3" font-size="12">flock 锁 · 10G 阈值 · gum 确认</text>
+  <path d="M400,252 L400,270" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="270" width="380" height="54" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="400" y="294" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">snapshot + stay-awake</text>
+  <text x="400" y="313" text-anchor="middle" fill="#7a86b3" font-size="12">snapper 快照 · systemd-inhibit 抑制休眠</text>
+  <path d="M400,324 L400,342" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="342" width="380" height="54" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="400" y="366" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">update-dev + keyring + system-pkgs</text>
+  <text x="400" y="385" text-anchor="middle" fill="#7a86b3" font-size="12">OMARCHY_UPDATE_PACMAN=1 pacman -Syu</text>
+  <path d="M400,396 L400,414" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="414" width="380" height="54" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="438" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">omarchy-migrate + hook post-update</text>
+  <text x="400" y="457" text-anchor="middle" fill="#7a86b3" font-size="12">wait pacman → per-user 迁移 → 用户钩子</text>
+  <path d="M400,468 L400,486" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="486" width="380" height="54" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="400" y="510" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">aur + mise + orphan + analyze + status</text>
+  <text x="400" y="529" text-anchor="middle" fill="#7a86b3" font-size="12">IPC 刷新 shell 更新指示器</text>
+  <path d="M400,540 L400,558" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="558" width="380" height="54" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="400" y="582" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">stay-awake stop + update-restart</text>
+  <text x="400" y="601" text-anchor="middle" fill="#7a86b3" font-size="12">kernel/Hyprland→reboot · shell 无条件重启</text>
+</svg>

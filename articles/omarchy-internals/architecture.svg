@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="506" viewBox="0 0 800 506" font-family="system-ui, sans-serif">
+  <rect width="800" height="506" fill="#0b0d14"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <text x="400" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="700">Omarchy 分层架构</text>
+
+  <!-- 会话引导层 (青) -->
+  <rect x="20" y="50" width="760" height="90" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="34" y="74" fill="#4ecdc4" font-size="14" font-weight="700">会话引导层 · Session</text>
+  <rect x="30" y="88" width="170" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/><text x="115" y="113" text-anchor="middle" fill="#e6e8f0" font-size="13">SDDM 登录</text>
+  <rect x="220" y="88" width="170" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/><text x="305" y="113" text-anchor="middle" fill="#e6e8f0" font-size="13">uwsm 会话</text>
+  <rect x="410" y="88" width="170" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/><text x="495" y="113" text-anchor="middle" fill="#e6e8f0" font-size="13">env-bootstrap</text>
+  <rect x="600" y="88" width="170" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/><text x="685" y="113" text-anchor="middle" fill="#e6e8f0" font-size="13">Hyprland</text>
+
+  <!-- 桌面 Shell 层 (蓝) -->
+  <rect x="20" y="152" width="760" height="110" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="34" y="176" fill="#6c8ef5" font-size="14" font-weight="700">桌面 Shell 层 · Desktop Shell</text>
+  <rect x="30" y="194" width="170" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/><text x="115" y="219" text-anchor="middle" fill="#e6e8f0" font-size="13">shell.qml ShellRoot</text>
+  <rect x="220" y="194" width="170" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/><text x="305" y="219" text-anchor="middle" fill="#e6e8f0" font-size="13">Commons/Ui</text>
+  <rect x="410" y="194" width="170" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/><text x="495" y="219" text-anchor="middle" fill="#e6e8f0" font-size="13">services 注册表</text>
+  <rect x="600" y="194" width="170" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/><text x="685" y="219" text-anchor="middle" fill="#e6e8f0" font-size="13">plugins 插件</text>
+  <text x="34" y="252" fill="#7a86b3" font-size="12">Style/Color/Border 原语 + 33 组件 + PluginRegistry/BarWidgetRegistry/AppLibrary + bar/menu/panels/osd/lock</text>
+
+  <!-- 命令自动化层 (浅蓝) -->
+  <rect x="20" y="274" width="760" height="90" rx="10" fill="#13162a" stroke="#80c7ff" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="34" y="298" fill="#80c7ff" font-size="14" font-weight="700">命令自动化层 · CLI Automation</text>
+  <rect x="30" y="312" width="170" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/><text x="115" y="337" text-anchor="middle" fill="#e6e8f0" font-size="13">bin/omarchy 路由器</text>
+  <rect x="220" y="312" width="170" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/><text x="305" y="337" text-anchor="middle" fill="#e6e8f0" font-size="13">~425 omarchy-* 命令</text>
+  <rect x="410" y="312" width="170" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/><text x="495" y="337" text-anchor="middle" fill="#e6e8f0" font-size="13">helper facades</text>
+  <rect x="600" y="312" width="170" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/><text x="685" y="337" text-anchor="middle" fill="#e6e8f0" font-size="13">omarchy-shell IPC</text>
+
+  <!-- 装配维护层 (黄) -->
+  <rect x="20" y="376" width="760" height="110" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="34" y="400" fill="#f9ca24" font-size="14" font-weight="700">装配维护层 · Assembly &amp; Maintenance</text>
+  <rect x="30" y="418" width="170" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/><text x="115" y="443" text-anchor="middle" fill="#e6e8f0" font-size="13">install/ + default/</text>
+  <rect x="220" y="418" width="170" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/><text x="305" y="443" text-anchor="middle" fill="#e6e8f0" font-size="13">provision-user</text>
+  <rect x="410" y="418" width="170" height="40" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/><text x="495" y="443" text-anchor="middle" fill="#e6e8f0" font-size="13">themes/ 模板</text>
+  <rect x="600" y="418" width="170" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/><text x="685" y="443" text-anchor="middle" fill="#e6e8f0" font-size="13">migrate/update</text>
+  <text x="34" y="476" fill="#7a86b3" font-size="12">seed/finalize/resync 三层装配 + 硬件 quirks + 主题渲染 + per-user 迁移 + ALPM guard</text>
+
+  <!-- provisions 上行箭头 -->
+  <path d="M795 466 L795 145" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" opacity="0.7"/>
+  <text x="785" y="306" text-anchor="end" fill="#7a86b3" font-size="11" opacity="0.8">provisions</text>
+</svg>

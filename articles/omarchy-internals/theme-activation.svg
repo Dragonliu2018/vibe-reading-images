@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="488" viewBox="0 0 800 488" font-family="system-ui, sans-serif">
+  <rect width="800" height="488" fill="#0b0d14"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <text x="400" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="700">主题激活流程 · omarchy-theme-set</text>
+
+  <rect x="210" y="54" width="380" height="54" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="400" y="78" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">omarchy-theme-set &lt;name&gt;</text>
+  <text x="400" y="97" text-anchor="middle" fill="#7a86b3" font-size="12">入口</text>
+  <path d="M400,108 L400,126" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="126" width="380" height="54" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="400" y="150" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">staging dir（next-theme）</text>
+  <text x="400" y="169" text-anchor="middle" fill="#7a86b3" font-size="12">拷 themes/&lt;name&gt;/ · 叠加用户主题</text>
+  <path d="M400,180 L400,198" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="198" width="380" height="54" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="400" y="222" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">（可选）colors.toml 反生成</text>
+  <text x="400" y="241" text-anchor="middle" fill="#7a86b3" font-size="12">从 alacritty.toml 派生调色板</text>
+  <path d="M400,252 L400,270" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="270" width="380" height="54" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="400" y="294" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">omarchy-theme-set-templates</text>
+  <text x="400" y="313" text-anchor="middle" fill="#7a86b3" font-size="12">渲染 .tpl：{{ accent }} · {{ mix }} · {{ hypr_gradient }}</text>
+  <path d="M400,324 L400,342" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="342" width="380" height="54" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="400" y="366" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">移到 current/theme · 写 theme.name</text>
+  <text x="400" y="385" text-anchor="middle" fill="#7a86b3" font-size="12">手写文件不被模板覆盖</text>
+  <path d="M400,396 L400,414" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="210" y="414" width="380" height="54" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="400" y="438" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">通知 shell（applyTheme IPC）</text>
+  <text x="400" y="457" text-anchor="middle" fill="#7a86b3" font-size="12">Color / Style 单例热切换</text>
+</svg>

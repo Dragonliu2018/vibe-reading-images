@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+
+  <rect width="820" height="520" fill="#0b0d14"/>
+
+  <text x="410" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">core/ 模块内部架构</text>
+
+  <!-- runner.rs (entry, top) -->
+  <rect x="300" y="50" width="220" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="72" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">runner.rs</text>
+  <text x="410" y="90" text-anchor="middle" fill="#9aa3c2" font-size="11">run() 模板方法 · RunMode 四策略</text>
+
+  <!-- arrow to stream -->
+  <path d="M410 106 L410 134" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="420" y="124" fill="#9aa3c2" font-size="10">spawn</text>
+
+  <!-- stream.rs (center) -->
+  <rect x="270" y="134" width="280" height="76" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="158" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">stream.rs</text>
+  <text x="410" y="176" text-anchor="middle" fill="#e6e8f0" font-size="11">run_streaming · exec_capture</text>
+  <text x="410" y="194" text-anchor="middle" fill="#9aa3c2" font-size="11">StreamFilter/BlockHandler trait · ChildGuard · 10MiB cap</text>
+
+  <!-- filter paths (left and right of stream) -->
+  <!-- left: closure filter / StreamFilter (from cmds) -->
+  <rect x="40" y="150" width="200" height="48" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="140" y="170" text-anchor="middle" fill="#ff6b9d" font-size="12">命令过滤函数</text>
+  <text x="140" y="188" text-anchor="middle" fill="#9aa3c2" font-size="11">Fn(​&amp;​str​)→String / StreamFilter</text>
+  <path d="M240 174 L270 174" stroke="#7a86b3" stroke-width="1.3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- right: toml_filter (DSL path) -->
+  <rect x="580" y="150" width="200" height="48" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="680" y="170" text-anchor="middle" fill="#b388ff" font-size="12">toml_filter.rs</text>
+  <text x="680" y="188" text-anchor="middle" fill="#9aa3c2" font-size="11">CompiledFilter · 8 阶段管道</text>
+  <path d="M580 174 L550 174" stroke="#7a86b3" stroke-width="1.3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- arrow stream → guard -->
+  <path d="M410 210 L410 238" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="420" y="228" fill="#9aa3c2" font-size="10">filtered</text>
+
+  <!-- guard.rs -->
+  <rect x="300" y="238" width="220" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="258" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">guard.rs</text>
+  <text x="410" y="276" text-anchor="middle" fill="#9aa3c2" font-size="11">never_worse: filtered ≤ raw</text>
+
+  <!-- arrow guard → tee -->
+  <path d="M410 286 L410 314" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- tee.rs -->
+  <rect x="300" y="314" width="220" height="48" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.3"/>
+  <text x="410" y="334" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">tee.rs</text>
+  <text x="410" y="352" text-anchor="middle" fill="#9aa3c2" font-size="11">溢出写临时文件 + 恢复提示</text>
+
+  <!-- arrow tee → tracking -->
+  <path d="M410 362 L410 390" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="420" y="380" fill="#9aa3c2" font-size="10">print</text>
+
+  <!-- tracking.rs -->
+  <rect x="280" y="390" width="260" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="412" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">tracking.rs</text>
+  <text x="410" y="430" text-anchor="middle" fill="#e6e8f0" font-size="11">TimedExecution · Tracker · estimate_tokens</text>
+  <text x="410" y="446" text-anchor="middle" fill="#9aa3c2" font-size="11">SQLite WAL+0600 · 90 天清理</text>
+
+  <!-- infra row (bottom) -->
+  <rect x="40" y="390" width="120" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="100" y="408" text-anchor="middle" fill="#80c7ff" font-size="12">filter.rs</text>
+  <text x="100" y="424" text-anchor="middle" fill="#9aa3c2" font-size="10">FilterLevel</text>
+
+  <rect x="180" y="390" width="90" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="225" y="408" text-anchor="middle" fill="#80c7ff" font-size="12">truncate</text>
+  <text x="225" y="424" text-anchor="middle" fill="#9aa3c2" font-size="10">CAP_*</text>
+
+  <rect x="550" y="390" width="100" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="600" y="408" text-anchor="middle" fill="#80c7ff" font-size="12">config.rs</text>
+  <text x="600" y="424" text-anchor="middle" fill="#9aa3c2" font-size="10">TOML</text>
+
+  <rect x="670" y="390" width="110" height="40" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="725" y="408" text-anchor="middle" fill="#80c7ff" font-size="12">utils.rs</text>
+  <text x="725" y="424" text-anchor="middle" fill="#9aa3c2" font-size="10">resolved_cmd</text>
+
+  <!-- filter.rs feeds toml_filter? no — filter.rs is code stripping for read/smart -->
+  <text x="100" y="448" text-anchor="middle" fill="#9aa3c2" font-size="10">源码注释剥离</text>
+
+  <!-- legend -->
+  <text x="410" y="478" text-anchor="middle" fill="#9aa3c2" font-size="11">执行主干（蓝）：runner→stream→guard→tee→tracking　·　过滤来源（粉/紫）　·　基础设施（浅蓝）</text>
+</svg>

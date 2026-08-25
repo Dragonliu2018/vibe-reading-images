@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="484" viewBox="0 0 800 484" font-family="system-ui, sans-serif">
+  <rect width="800" height="484" fill="#0b0d14"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <text x="400" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="700">插件发现 / 加载 / 召唤生命周期</text>
+
+  <rect x="230" y="54" width="340" height="54" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="78" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">PluginRegistry.rescan()</text>
+  <text x="400" y="97" text-anchor="middle" fill="#7a86b3" font-size="12">bash 扫描 first-party + ~/.config/omarchy/plugins/</text>
+  <path d="M400,108 L400,126" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="230" y="126" width="340" height="54" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="150" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">validateManifest</text>
+  <text x="400" y="169" text-anchor="middle" fill="#7a86b3" font-size="12">schemaVersion · id 安全 · kinds · entryPoints 不逃逸</text>
+  <path d="M400,180 L400,198" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="230" y="198" width="340" height="54" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="222" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">installedPlugins</text>
+  <text x="400" y="241" text-anchor="middle" fill="#7a86b3" font-size="12">first-party 优先 · omarchy.* 命名空间保留</text>
+
+  <!-- fan out to 4 kind boxes -->
+  <path d="M400,252 L95,290" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <path d="M400,252 L305,290" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <path d="M400,252 L495,290" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <path d="M400,252 L685,290" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="20" y="290" width="150" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="95" y="314" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">bar</text>
+  <text x="95" y="334" text-anchor="middle" fill="#7a86b3" font-size="11">bar.id 选中即加载</text>
+  <text x="95" y="348" text-anchor="middle" fill="#7a86b3" font-size="11">全局唯一</text>
+
+  <rect x="230" y="290" width="150" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="305" y="314" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">bar-widget</text>
+  <text x="305" y="334" text-anchor="middle" fill="#7a86b3" font-size="11">BarWidgetRegistry</text>
+  <text x="305" y="348" text-anchor="middle" fill="#7a86b3" font-size="11">bar layout 实例化</text>
+
+  <rect x="420" y="290" width="150" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="495" y="314" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">panel/overlay/menu</text>
+  <text x="495" y="334" text-anchor="middle" fill="#7a86b3" font-size="11">Loader</text>
+  <text x="495" y="348" text-anchor="middle" fill="#7a86b3" font-size="11">keepLoaded ‖ summon</text>
+
+  <rect x="610" y="290" width="170" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="695" y="314" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">service</text>
+  <text x="695" y="334" text-anchor="middle" fill="#7a86b3" font-size="11">_syncServices</text>
+  <text x="695" y="348" text-anchor="middle" fill="#7a86b3" font-size="11">启动单例</text>
+
+  <!-- panel → summon lifecycle -->
+  <path d="M495,354 L460,400 L400,400" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="230" y="400" width="340" height="54" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="400" y="424" text-anchor="middle" fill="#e6e8f0" font-size="14" font-weight="600">summon(id,payload) → open() · hide() → close()</text>
+  <text x="400" y="443" text-anchor="middle" fill="#7a86b3" font-size="12">keepLoaded 常驻 · 否则隐藏即卸载</text>
+</svg>

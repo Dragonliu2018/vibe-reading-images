@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460" font-family="system-ui, sans-serif">
+  <rect width="800" height="460" fill="#0b0d14"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <text x="400" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="700">模块依赖关系</text>
+
+  <!-- Row 1 -->
+  <rect x="50" y="85" width="200" height="90" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="150" y="118" text-anchor="middle" fill="#f9ca24" font-size="14" font-weight="700">安装装配</text>
+  <text x="150" y="142" text-anchor="middle" fill="#7a86b3" font-size="12">install/ + default/</text>
+  <text x="150" y="160" text-anchor="middle" fill="#7a86b3" font-size="12">provision-user</text>
+
+  <rect x="300" y="85" width="200" height="90" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="400" y="118" text-anchor="middle" fill="#80c7ff" font-size="14" font-weight="700">CLI 命令</text>
+  <text x="400" y="142" text-anchor="middle" fill="#7a86b3" font-size="12">bin/omarchy 路由器</text>
+  <text x="400" y="160" text-anchor="middle" fill="#7a86b3" font-size="12">~425 omarchy-* 命令</text>
+
+  <rect x="550" y="85" width="200" height="90" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="650" y="118" text-anchor="middle" fill="#4ecdc4" font-size="14" font-weight="700">迁移更新</text>
+  <text x="650" y="142" text-anchor="middle" fill="#7a86b3" font-size="12">migrations/ + migrate</text>
+  <text x="650" y="160" text-anchor="middle" fill="#7a86b3" font-size="12">update + ALPM guard</text>
+
+  <!-- Row 2 -->
+  <rect x="50" y="295" width="200" height="90" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="150" y="328" text-anchor="middle" fill="#b388ff" font-size="14" font-weight="700">主题系统</text>
+  <text x="150" y="352" text-anchor="middle" fill="#7a86b3" font-size="12">themes/ + themed/</text>
+  <text x="150" y="370" text-anchor="middle" fill="#7a86b3" font-size="12">colors.toml → 模板</text>
+
+  <rect x="300" y="295" width="200" height="90" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="400" y="328" text-anchor="middle" fill="#ff6b9d" font-size="14" font-weight="700">插件系统</text>
+  <text x="400" y="352" text-anchor="middle" fill="#7a86b3" font-size="12">PluginRegistry + manifest</text>
+  <text x="400" y="370" text-anchor="middle" fill="#7a86b3" font-size="12">IPC + shell.json</text>
+
+  <rect x="550" y="295" width="200" height="90" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="650" y="328" text-anchor="middle" fill="#6c8ef5" font-size="14" font-weight="700">Shell 框架</text>
+  <text x="650" y="352" text-anchor="middle" fill="#7a86b3" font-size="12">shell.qml + Commons/Ui</text>
+  <text x="650" y="370" text-anchor="middle" fill="#7a86b3" font-size="12">Style/Color/Border</text>
+
+  <!-- Edges -->
+  <!-- 1 CLI→插件 (IPC) -->
+  <path d="M400,175 L400,295" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="412" y="240" fill="#7a86b3" font-size="12">IPC</text>
+  <!-- 2 CLI→安装 -->
+  <path d="M300,130 L250,130" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="275" y="122" text-anchor="middle" fill="#7a86b3" font-size="12">apply</text>
+  <!-- 3 CLI→迁移 -->
+  <path d="M500,130 L550,130" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="525" y="122" text-anchor="middle" fill="#7a86b3" font-size="12">migrate</text>
+  <!-- 4 CLI→主题 (diagonal) -->
+  <path d="M350,175 L210,295" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="248" y="232" text-anchor="end" fill="#7a86b3" font-size="12">theme-set</text>
+  <!-- 5 插件↔Shell (two arrows) -->
+  <path d="M500,335 L550,335" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <path d="M550,355 L500,355" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="525" y="328" text-anchor="middle" fill="#7a86b3" font-size="11">hosts/uses</text>
+  <!-- 6 迁移→Shell (restart) -->
+  <path d="M650,175 L650,295" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="662" y="240" fill="#7a86b3" font-size="12">restart-shell</text>
+  <!-- 7 安装→主题 -->
+  <path d="M150,175 L150,295" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="162" y="240" fill="#7a86b3" font-size="12">install/user</text>
+  <!-- 8 主题→Shell (U under) -->
+  <path d="M150,385 L150,415 L650,415 L650,385" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="400" y="410" text-anchor="middle" fill="#7a86b3" font-size="11">Color/Style tokens</text>
+</svg>

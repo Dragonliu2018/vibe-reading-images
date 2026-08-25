@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="620" viewBox="0 0 840 620" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+
+  <rect width="840" height="620" fill="#0b0d14"/>
+
+  <text x="420" y="26" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="600">命令改写流水线（discover/registry.rs）</text>
+
+  <!-- rewrite_command entry -->
+  <rect x="280" y="48" width="280" height="60" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="420" y="72" text-anchor="middle" fill="#b388ff" font-size="13" font-weight="600">rewrite_command()</text>
+  <text x="420" y="90" text-anchor="middle" fill="#9aa3c2" font-size="11">registry.rs:569 · 入口</text>
+  <text x="420" y="104" text-anchor="middle" fill="#9aa3c2" font-size="11">检查 heredoc/$(($ → None · collapse 行续行</text>
+
+  <path d="M420 108 L420 128" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- rewrite_single / rewrite_multiline -->
+  <rect x="280" y="128" width="280" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.3"/>
+  <text x="420" y="150" text-anchor="middle" fill="#b388ff" font-size="12">rewrite_single / rewrite_multiline_block</text>
+  <text x="420" y="168" text-anchor="middle" fill="#9aa3c2" font-size="11">已 rtk 前缀 → Some(原样) · 多行逐行改写</text>
+
+  <path d="M420 184 L420 204" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- rewrite_compound -->
+  <rect x="250" y="204" width="340" height="76" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="420" y="226" text-anchor="middle" fill="#b388ff" font-size="13" font-weight="600">rewrite_compound()</text>
+  <text x="420" y="244" text-anchor="middle" fill="#9aa3c2" font-size="11">registry.rs:1035 · tokenize 后按 operator 分割</text>
+  <text x="420" y="262" text-anchor="middle" fill="#e6e8f0" font-size="11">&amp;&amp;/||/; → 改写两侧 · | → 只改最后一段 · &amp; → 改写两侧</text>
+  <text x="420" y="276" text-anchor="middle" fill="#9aa3c2" font-size="10">analyze_pipeline + rewrite_pipeline_final_stage</text>
+
+  <path d="M420 280 L420 300" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- rewrite_segment_inner -->
+  <rect x="200" y="300" width="440" height="86" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="420" y="322" text-anchor="middle" fill="#b388ff" font-size="13" font-weight="600">rewrite_segment_inner()</text>
+  <text x="420" y="340" text-anchor="middle" fill="#9aa3c2" font-size="11">registry.rs:1287 · 递归深度 ≤10</text>
+  <text x="420" y="358" text-anchor="middle" fill="#e6e8f0" font-size="11">strip_disabled(RTK_DISABLED→None) · 剥 transparent 前缀</text>
+  <text x="420" y="376" text-anchor="middle" fill="#e6e8f0" font-size="11">strip_trailing_redirects · head/tail 短路 · classify</text>
+
+  <path d="M420 386 L420 406" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- classify_command -->
+  <rect x="200" y="406" width="440" height="90" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="420" y="428" text-anchor="middle" fill="#b388ff" font-size="13" font-weight="600">classify_command()</text>
+  <text x="420" y="446" text-anchor="middle" fill="#9aa3c2" font-size="11">registry.rs:107 · 三态分类</text>
+  <text x="420" y="464" text-anchor="middle" fill="#e6e8f0" font-size="11">IGNORED_EXACT/PREFIXES · ENV_PREFIX 剥 sudo/env</text>
+  <text x="420" y="480" text-anchor="middle" fill="#e6e8f0" font-size="11">strip 绝对路径/git 全局 opt/php 工具归一</text>
+  <text x="420" y="496" text-anchor="middle" fill="#e6e8f0" font-size="11">REGEX_SET.matches() → 取最具体匹配</text>
+
+  <!-- Three states result -->
+  <path d="M380 506 L200 530" stroke="#7a86b3" stroke-width="1.3" fill="none" marker-end="url(#arrow-cyan)"/>
+  <path d="M420 506 L420 530" stroke="#7a86b3" stroke-width="1.3" fill="none" marker-end="url(#arrow-yellow)"/>
+  <path d="M460 506 L640 530" stroke="#7a86b3" stroke-width="1.3" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="530" width="220" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.3"/>
+  <text x="170" y="552" text-anchor="middle" fill="#4ecdc4" font-size="12" font-weight="600">Supported</text>
+  <text x="170" y="570" text-anchor="middle" fill="#9aa3c2" font-size="10">→ rtk_equivalent + 改写</text>
+  <text x="170" y="582" text-anchor="middle" fill="#9aa3c2" font-size="10">status: Existing/Passthrough</text>
+
+  <rect x="310" y="530" width="220" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.3"/>
+  <text x="420" y="552" text-anchor="middle" fill="#f9ca24" font-size="12" font-weight="600">Unsupported</text>
+  <text x="420" y="570" text-anchor="middle" fill="#9aa3c2" font-size="10">已知命令 RTK 不支持</text>
+  <text x="420" y="582" text-anchor="middle" fill="#9aa3c2" font-size="10">→ 查 TOML filter，否则 None</text>
+
+  <rect x="560" y="530" width="220" height="56" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.3"/>
+  <text x="670" y="552" text-anchor="middle" fill="#7a86b3" font-size="12" font-weight="600">Ignored</text>
+  <text x="670" y="570" text-anchor="middle" fill="#9aa3c2" font-size="10">shell 内建/无输出</text>
+  <text x="670" y="582" text-anchor="middle" fill="#9aa3c2" font-size="10">cd/echo/true → None</text>
+
+  <!-- lexer sidecar (feeds rewrite_compound tokenize) -->
+  <rect x="640" y="204" width="160" height="56" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="720" y="226" text-anchor="middle" fill="#80c7ff" font-size="12" font-weight="600">lexer.rs</text>
+  <text x="720" y="244" text-anchor="middle" fill="#9aa3c2" font-size="10">tokenize()</text>
+  <text x="720" y="258" text-anchor="middle" fill="#9aa3c2" font-size="10">Arg/Operator/Pipe/Redirect</text>
+  <path d="M640 232 L590 232" stroke="#80c7ff" stroke-width="1.2" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
+
+  <!-- rules sidecar (feeds classify REGEX_SET) -->
+  <rect x="640" y="420" width="160" height="56" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="720" y="442" text-anchor="middle" fill="#80c7ff" font-size="12" font-weight="600">rules.rs</text>
+  <text x="720" y="460" text-anchor="middle" fill="#9aa3c2" font-size="10">RULES 60+ 正则</text>
+  <text x="720" y="474" text-anchor="middle" fill="#9aa3c2" font-size="10">LazyLock RegexSet</text>
+  <path d="M640 448 L590 448" stroke="#80c7ff" stroke-width="1.2" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
+</svg>
