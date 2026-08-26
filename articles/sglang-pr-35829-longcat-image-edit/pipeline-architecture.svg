@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="720" viewBox="0 0 740 720">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6c8ef5"/>
+    </marker>
+    <marker id="arrowg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+  <rect width="740" height="720" fill="#0b0d14"/>
+  <text x="370" y="30" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">LongCat-Image-Edit Pipeline 架构（7 阶段）</text>
+  <text x="370" y="56" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">条件图 + 编辑 prompt + seed</text>
+  <path d="M370 60 L370 87" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="200" y="89" width="340" height="54" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="370" y="111" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">InputValidationStage</text>
+  <text x="370" y="129" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · 加载条件图，缩放到 ~1MP（ceil /16）</text>
+  <path d="M370 143 L370 171" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="200" y="173" width="340" height="54" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" rx="6"/>
+  <text x="370" y="195" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">LongCatImageEditTextEncodingStage</text>
+  <text x="370" y="213" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">模型特定·新增 · Qwen2.5-VL 联合编码 text + image</text>
+  <path d="M540 200 L590 200" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="600" y="197" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="12">prompt_embeds</text>
+  <text x="600" y="211" fill="#606070" font-family="system-ui, sans-serif" font-size="10">含 VL image tokens</text>
+  <path d="M370 227 L370 255" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="200" y="257" width="340" height="54" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="370" y="279" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">ImageVAEEncodingStage</text>
+  <text x="370" y="297" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准·Edit 新增 · 参考图 VAE 编码 + pack</text>
+  <path d="M540 284 L590 284" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="600" y="281" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="12">image_latent</text>
+  <text x="600" y="295" fill="#606070" font-family="system-ui, sans-serif" font-size="10">参考图 packed</text>
+  <path d="M370 311 L370 339" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="200" y="341" width="340" height="54" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="370" y="363" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">LatentPreparationStage</text>
+  <text x="370" y="381" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · 噪声准备（bf16，T2I 用 fp32）</text>
+  <path d="M540 368 L590 368" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="600" y="365" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="12">noisy latents</text>
+  <text x="600" y="379" fill="#606070" font-family="system-ui, sans-serif" font-size="10">bf16</text>
+  <path d="M370 395 L370 423" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="200" y="425" width="340" height="54" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="370" y="447" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">TimestepPreparationStage</text>
+  <text x="370" y="465" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · sigma 调度 + mu（仅 noisy 计数）</text>
+  <path d="M370 479 L370 507" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="200" y="509" width="340" height="54" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="370" y="531" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">DenoisingStage</text>
+  <text x="370" y="549" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · 50 步去噪 · concat[noisy|ref] + slice</text>
+  <path d="M540 536 L590 536" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="600" y="533" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="12">denoised</text>
+  <text x="600" y="547" fill="#606070" font-family="system-ui, sans-serif" font-size="10">slice 丢弃 ref</text>
+  <path d="M370 563 L370 591" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="200" y="593" width="340" height="54" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="6"/>
+  <text x="370" y="615" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">DecodingStage</text>
+  <text x="370" y="633" text-anchor="middle" fill="#a0a0b0" font-family="system-ui, sans-serif" font-size="11">标准 · VAE 解码</text>
+  <path d="M540 620 L590 620" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowg)"/>
+  <text x="600" y="624" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="12">edited image</text>
+  <rect x="220" y="675" width="14" height="14" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" rx="3"/>
+  <text x="242" y="686" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12">模型特定（新增）</text>
+  <rect x="420" y="675" width="14" height="14" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" rx="3"/>
+  <text x="442" y="686" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="12">框架标准（复用）</text>
+</svg>
