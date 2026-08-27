@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" font-family="system-ui, sans-serif" text-rendering="geometricPrecision">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="380" fill="#0b0d14"/>
+
+  <text x="430" y="24" text-anchor="middle" fill="#e0e0e0" font-size="15" font-weight="700">cos / sin 缓存布局：compact vs full-width（LongCat）</text>
+
+  <!-- ============ LEFT: COMPACT ============ -->
+  <rect x="24" y="46" width="380" height="300" rx="8" fill="none" stroke="#7a86b3" stroke-dasharray="4 3"/>
+  <text x="214" y="66" text-anchor="middle" fill="#e0e0e0" font-size="13" font-weight="600">Compact 缓存</text>
+  <text x="214" y="82" text-anchor="middle" fill="#a0a0b0" font-size="11">cos / sin 各 rope_dim/2 · 一对共用一个 (cos, sin)</text>
+
+  <text x="44" y="122" text-anchor="start" fill="#a0a0b0" font-size="11">cos</text>
+  <rect x="80" y="108" width="40" height="24" rx="3" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="100" y="120" text-anchor="middle" fill="#e0e0e0" font-size="11">c₀</text>
+  <rect x="128" y="108" width="40" height="24" rx="3" fill="#13162a" stroke="#7a86b3"/>
+  <text x="148" y="120" text-anchor="middle" fill="#a0a0b0" font-size="11">c₁</text>
+  <text x="178" y="120" text-anchor="start" fill="#a0a0b0" font-size="11">···</text>
+  <text x="214" y="120" text-anchor="start" fill="#a0a0b0" font-size="11">rope_dim/2</text>
+
+  <text x="44" y="158" text-anchor="start" fill="#a0a0b0" font-size="11">sin</text>
+  <rect x="80" y="146" width="40" height="24" rx="3" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="100" y="158" text-anchor="middle" fill="#e0e0e0" font-size="11">s₀</text>
+  <rect x="128" y="146" width="40" height="24" rx="3" fill="#13162a" stroke="#7a86b3"/>
+  <text x="148" y="158" text-anchor="middle" fill="#a0a0b0" font-size="11">s₁</text>
+
+  <rect x="80" y="210" width="40" height="24" rx="3" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="100" y="222" text-anchor="middle" fill="#e0e0e0" font-size="11">x₀</text>
+  <rect x="128" y="210" width="40" height="24" rx="3" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="148" y="222" text-anchor="middle" fill="#e0e0e0" font-size="11">x₁</text>
+  <text x="184" y="222" text-anchor="start" fill="#a0a0b0" font-size="11">← 一对</text>
+
+  <!-- bracket + arrow: pair shares (c0,s0) -->
+  <path d="M100 204 L100 200 L148 200 L148 204" fill="none" stroke="#4ecdc4" stroke-width="1.2"/>
+  <path d="M124 200 L124 172" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="214" y="262" text-anchor="middle" fill="#a0a0b0" font-size="11">half_idx = (lane·elems + i) / 2</text>
+  <text x="214" y="280" text-anchor="middle" fill="#a0a0b0" font-size="11">x₀, x₁ 共用 (c₀, s₀)</text>
+  <rect x="50" y="300" width="328" height="34" rx="5" fill="#13162a" stroke="#f9ca24"/>
+  <text x="214" y="313" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="700">适用：rotary_dim &lt; head_dim</text>
+  <text x="214" y="327" text-anchor="middle" fill="#a0a0b0" font-size="11">flashinfer cos_sin_cache · 非 LongCat</text>
+
+  <!-- divider -->
+  <line x1="420" y1="60" x2="420" y2="334" stroke="#7a86b3" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+
+  <!-- ============ RIGHT: FULL-WIDTH ============ -->
+  <rect x="456" y="46" width="380" height="300" rx="8" fill="none" stroke="#7a86b3" stroke-dasharray="4 3"/>
+  <text x="646" y="66" text-anchor="middle" fill="#e0e0e0" font-size="13" font-weight="600">Full-width 缓存（LongCat）</text>
+  <text x="646" y="82" text-anchor="middle" fill="#a0a0b0" font-size="11">cos / sin 各 rope_dim · 每元素独立 · FP32</text>
+
+  <text x="476" y="122" text-anchor="start" fill="#a0a0b0" font-size="11">cos</text>
+  <rect x="512" y="108" width="40" height="24" rx="3" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="532" y="120" text-anchor="middle" fill="#e0e0e0" font-size="11">c₀</text>
+  <rect x="560" y="108" width="40" height="24" rx="3" fill="#13162a" stroke="#ff6b9d"/>
+  <text x="580" y="120" text-anchor="middle" fill="#e0e0e0" font-size="11">c₁</text>
+  <text x="610" y="120" text-anchor="start" fill="#a0a0b0" font-size="11">···</text>
+  <text x="646" y="120" text-anchor="start" fill="#a0a0b0" font-size="11">rope_dim (FP32)</text>
+
+  <text x="476" y="158" text-anchor="start" fill="#a0a0b0" font-size="11">sin</text>
+  <rect x="512" y="146" width="40" height="24" rx="3" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="532" y="158" text-anchor="middle" fill="#e0e0e0" font-size="11">s₀</text>
+  <rect x="560" y="146" width="40" height="24" rx="3" fill="#13162a" stroke="#ff6b9d"/>
+  <text x="580" y="158" text-anchor="middle" fill="#e0e0e0" font-size="11">s₁</text>
+
+  <rect x="512" y="210" width="40" height="24" rx="3" fill="#13162a" stroke="#4ecdc4"/>
+  <text x="532" y="222" text-anchor="middle" fill="#e0e0e0" font-size="11">x₀</text>
+  <rect x="560" y="210" width="40" height="24" rx="3" fill="#13162a" stroke="#ff6b9d"/>
+  <text x="580" y="222" text-anchor="middle" fill="#e0e0e0" font-size="11">x₁</text>
+
+  <path d="M532 210 L532 172" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M580 210 L580 172" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="646" y="262" text-anchor="middle" fill="#a0a0b0" font-size="11">cache_idx_0 = lane·elems + 2j</text>
+  <text x="646" y="280" text-anchor="middle" fill="#a0a0b0" font-size="11">cache_idx_1 = cache_idx_0 + 1</text>
+  <rect x="482" y="300" width="328" height="34" rx="5" fill="#13162a" stroke="#f9ca24"/>
+  <text x="646" y="313" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="700">适用：rotary_dim = head_dim 全旋转</text>
+  <text x="646" y="327" text-anchor="middle" fill="#a0a0b0" font-size="11">axes_dims_rope=[16,56,56] · FP32 对齐 diffusers</text>
+
+  <text x="430" y="364" text-anchor="middle" fill="#a0a0b0" font-size="11">同色 = 同索引：compact 一对共用一组 (青)，full-width 每元素各一组 (青/粉)</text>
+</svg>

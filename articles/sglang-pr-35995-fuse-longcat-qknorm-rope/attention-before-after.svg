@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" font-family="system-ui, sans-serif" text-rendering="geometricPrecision">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="400" fill="#0b0d14"/>
+
+  <text x="430" y="26" text-anchor="middle" fill="#e0e0e0" font-size="15" font-weight="700">LongCat-Image 双流注意力：QKNorm + RoPE 路径改动前/后</text>
+
+  <!-- ===== BEFORE ===== -->
+  <text x="40" y="52" text-anchor="start" fill="#a0a0b0" font-size="12" font-weight="700">改动前 · split 链</text>
+
+  <rect x="40" y="66" width="88" height="44" rx="6" fill="#13162a" stroke="#7a86b3"/>
+  <text x="84" y="80" text-anchor="middle" fill="#e0e0e0" font-size="12" font-weight="600">Q/K 投影</text>
+  <text x="84" y="96" text-anchor="middle" fill="#a0a0b0" font-size="11">ColumnParallel</text>
+
+  <rect x="160" y="66" width="104" height="44" rx="6" fill="#13162a" stroke="#7a86b3"/>
+  <text x="212" y="80" text-anchor="middle" fill="#e0e0e0" font-size="12" font-weight="600">apply_qk_norm</text>
+  <text x="212" y="96" text-anchor="middle" fill="#a0a0b0" font-size="11">融合 QKNorm</text>
+
+  <rect x="296" y="66" width="68" height="44" rx="6" fill="#13162a" stroke="#7a86b3"/>
+  <text x="330" y="80" text-anchor="middle" fill="#e0e0e0" font-size="12" font-weight="600">concat</text>
+  <text x="330" y="96" text-anchor="middle" fill="#a0a0b0" font-size="11">txt+img</text>
+
+  <rect x="396" y="60" width="220" height="56" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="506" y="76" text-anchor="middle" fill="#e0e0e0" font-size="12" font-weight="600">apply_rotary_emb</text>
+  <text x="506" y="92" text-anchor="middle" fill="#a0a0b0" font-size="11">diffusers · FP32 · 全宽旋转</text>
+  <text x="506" y="107" text-anchor="middle" fill="#ff6b9d" font-size="11" font-weight="700">≈ 54k 元素级 op</text>
+
+  <rect x="648" y="66" width="104" height="44" rx="6" fill="#13162a" stroke="#7a86b3"/>
+  <text x="700" y="80" text-anchor="middle" fill="#e0e0e0" font-size="12" font-weight="600">USPAttention</text>
+  <text x="700" y="96" text-anchor="middle" fill="#a0a0b0" font-size="11">FA3 / FA4</text>
+
+  <path d="M128 88 L158 88" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M264 88 L294 88" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M364 88 L394 88" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M616 88 L646 88" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="376" y="128" width="260" height="40" rx="5" fill="#13162a" stroke="#7a86b3" stroke-dasharray="3 2"/>
+  <text x="506" y="142" text-anchor="middle" fill="#a0a0b0" font-size="11">18k copy · 12k mul · 6k add · 12k cat · 6k neg</text>
+  <text x="506" y="157" text-anchor="middle" fill="#a0a0b0" font-size="11" font-weight="700">≈ 2.0 s 核时</text>
+  <path d="M506 116 L506 128" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <line x1="30" y1="188" x2="830" y2="188" stroke="#7a86b3" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+
+  <!-- ===== AFTER ===== -->
+  <text x="40" y="210" text-anchor="start" fill="#a0a0b0" font-size="12" font-weight="700">改动后 · fused</text>
+
+  <rect x="40" y="228" width="88" height="44" rx="6" fill="#13162a" stroke="#7a86b3"/>
+  <text x="84" y="242" text-anchor="middle" fill="#e0e0e0" font-size="12" font-weight="600">Q/K 投影</text>
+  <text x="84" y="258" text-anchor="middle" fill="#a0a0b0" font-size="11">ColumnParallel</text>
+
+  <rect x="160" y="220" width="220" height="60" rx="6" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="270" y="238" text-anchor="middle" fill="#e0e0e0" font-size="12" font-weight="600">_apply_longcat_qknorm_rope</text>
+  <text x="270" y="254" text-anchor="middle" fill="#a0a0b0" font-size="11">融合 QKNorm+RoPE · FP32 全宽交错</text>
+  <text x="270" y="269" text-anchor="middle" fill="#7bed9f" font-size="11" font-weight="700">round_norm_before_rope · JIT CUDA</text>
+
+  <rect x="416" y="228" width="68" height="44" rx="6" fill="#13162a" stroke="#7a86b3"/>
+  <text x="450" y="242" text-anchor="middle" fill="#e0e0e0" font-size="12" font-weight="600">concat</text>
+  <text x="450" y="258" text-anchor="middle" fill="#a0a0b0" font-size="11">txt+img</text>
+
+  <rect x="516" y="228" width="104" height="44" rx="6" fill="#13162a" stroke="#7a86b3"/>
+  <text x="568" y="242" text-anchor="middle" fill="#e0e0e0" font-size="12" font-weight="600">USPAttention</text>
+  <text x="568" y="258" text-anchor="middle" fill="#a0a0b0" font-size="11">FA3 / FA4</text>
+
+  <path d="M128 250 L158 250" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M380 250 L414 250" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M484 250 L514 250" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="160" y="296" width="220" height="40" rx="5" fill="#13162a" stroke="#7a86b3" stroke-dasharray="3 2"/>
+  <text x="270" y="310" text-anchor="middle" fill="#a0a0b0" font-size="11" font-weight="700">4k 融合核 ≈ 177 ms</text>
+  <text x="270" y="325" text-anchor="middle" fill="#a0a0b0" font-size="11">核级 13.6× · 端到端 17%</text>
+  <path d="M270 280 L270 296" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <!-- replace arrow: bad callout -> good box (L-routed to avoid label overlap) -->
+  <path d="M506 168 L506 202 L270 202 L270 218" fill="none" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow-y)"/>
+  <text x="388" y="198" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="700" paint-order="stroke" stroke="#0b0d14" stroke-width="3.5">替换</text>
+
+  <!-- legend -->
+  <rect x="120" y="354" width="18" height="13" rx="2" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="146" y="364" text-anchor="start" fill="#a0a0b0" font-size="11">浪费：RoPE 爆炸为元素级 op</text>
+  <rect x="430" y="354" width="18" height="13" rx="2" fill="#13162a" stroke="#7bed9f" stroke-width="1.2"/>
+  <text x="456" y="364" text-anchor="start" fill="#a0a0b0" font-size="11">优化：单次 JIT 融合核</text>
+</svg>
