@@ -1,111 +1,104 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 664" font-family="system-ui, -apple-system, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" font-family="system-ui, -apple-system, sans-serif">
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#5a5f7a"/>
     </marker>
   </defs>
 
-  <rect width="920" height="664" fill="#0b0d14"/>
+  <rect width="920" height="520" fill="#0b0d14"/>
 
   <!-- Title -->
-  <text x="460" y="24" text-anchor="middle" fill="#e6e8f0" font-size="16" font-weight="700">LongCat-AudioDiT 接入 multimodal_gen：Hybrid 三段式 + 框架 hooks</text>
+  <text x="460" y="24" text-anchor="middle" fill="#e6e8f0" font-size="15" font-weight="700">LongCat-AudioDiT 接入 multimodal_gen：三段式 + DenoisingStage 子类</text>
 
   <!-- Legend -->
-  <g font-size="10.5" fill="#9aa0b4">
-    <rect x="520" y="38" width="11" height="11" rx="2" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-    <text x="536" y="47">改动</text>
-    <rect x="576" y="38" width="11" height="11" rx="2" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-    <text x="592" y="47">新增</text>
-    <rect x="632" y="38" width="11" height="11" rx="2" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
-    <text x="648" y="47">外部</text>
-    <rect x="688" y="38" width="11" height="11" rx="2" fill="#13162a" stroke="#5a5f7a" stroke-width="1.5" stroke-dasharray="3,2"/>
-    <text x="704" y="47">绕过</text>
+  <g font-size="10" fill="#9aa0b4">
+    <rect x="540" y="36" width="10" height="10" rx="2" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+    <text x="555" y="45">改动</text>
+    <rect x="592" y="36" width="10" height="10" rx="2" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+    <text x="607" y="45">新增</text>
+    <rect x="644" y="36" width="10" height="10" rx="2" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+    <text x="659" y="45">外部</text>
+    <rect x="690" y="36" width="10" height="10" rx="2" fill="#13162a" stroke="#5a5f7a" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <text x="705" y="45">绕过</text>
   </g>
 
-  <!-- Layer 1: Entrypoints (4 boxes) -->
+  <!-- Layer 1: Entrypoints -->
   <g>
-    <rect x="80" y="64" width="180" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-    <text x="170" y="82" text-anchor="middle" fill="#e6e8f0" font-size="11.5" font-weight="600">CLI generate</text>
-    <text x="170" y="96" text-anchor="middle" fill="#9aa0b4" font-size="9.5">--prompt-audio --guidance-method</text>
+    <rect x="80" y="58" width="180" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+    <text x="170" y="74" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">CLI generate</text>
+    <text x="170" y="87" text-anchor="middle" fill="#9aa0b4" font-size="9">--prompt-audio --guidance-method</text>
 
-    <rect x="276" y="64" width="180" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-    <text x="366" y="82" text-anchor="middle" fill="#e6e8f0" font-size="11.5" font-weight="600">HTTP /generate</text>
-    <text x="366" y="96" text-anchor="middle" fill="#9aa0b4" font-size="9.5">audio 张量透传 save_outputs</text>
+    <rect x="276" y="58" width="180" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+    <text x="366" y="74" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">HTTP /generate</text>
+    <text x="366" y="87" text-anchor="middle" fill="#9aa0b4" font-size="9">audio 参数透传</text>
 
-    <rect x="472" y="64" width="180" height="42" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-    <text x="562" y="82" text-anchor="middle" fill="#e6e8f0" font-size="11.5" font-weight="600">OpenAI /v1/audio/speech</text>
-    <text x="562" y="96" text-anchor="middle" fill="#9aa0b4" font-size="9.5">TTS + 克隆 + CRUD（新增）</text>
+    <rect x="472" y="58" width="180" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+    <text x="562" y="74" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">OpenAI /v1/audio/speech</text>
+    <text x="562" y="87" text-anchor="middle" fill="#9aa0b4" font-size="9">TTS + 克隆 + CRUD</text>
 
-    <rect x="668" y="64" width="180" height="42" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-    <text x="758" y="82" text-anchor="middle" fill="#e6e8f0" font-size="11.5" font-weight="600">Python API</text>
-    <text x="758" y="96" text-anchor="middle" fill="#9aa0b4" font-size="9.5">DiffGenerator</text>
+    <rect x="668" y="58" width="180" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+    <text x="758" y="74" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">Python API</text>
+    <text x="758" y="87" text-anchor="middle" fill="#9aa0b4" font-size="9">DiffGenerator</text>
   </g>
 
-  <line x1="460" y1="106" x2="460" y2="124" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="460" y1="94" x2="460" y2="110" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- Layer 2: Registry (yellow) + SamplingParams (teal) -->
-  <rect x="80" y="126" width="500" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-  <text x="330" y="144" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">registry.py</text>
-  <text x="330" y="158" text-anchor="middle" fill="#9aa0b4" font-size="9.5">register_configs · 1B / 3.5B · ConfigInfo["longcat-audiodit"]</text>
+  <!-- Layer 2: Registry + SamplingParams -->
+  <rect x="80" y="112" width="500" height="34" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="330" y="128" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">registry.py</text>
+  <text x="330" y="141" text-anchor="middle" fill="#9aa0b4" font-size="9">1B / 3.5B · detector 收窄</text>
 
-  <rect x="600" y="126" width="248" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="724" y="144" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">LongCatAudioDiTSamplingParams</text>
-  <text x="724" y="158" text-anchor="middle" fill="#9aa0b4" font-size="9.5">DataType.AUDIO · steps=16 · cfg=4.0</text>
+  <rect x="600" y="112" width="248" height="34" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="724" y="128" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">LongCatAudioDiTSamplingParams</text>
+  <text x="724" y="141" text-anchor="middle" fill="#9aa0b4" font-size="9">DataType.AUDIO · steps=16</text>
 
-  <line x1="330" y1="166" x2="330" y2="184" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="330" y1="146" x2="330" y2="162" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- Layer 3: Pipeline (teal, full width) -->
-  <rect x="80" y="186" width="768" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="464" y="204" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">LongCatAudioDiTPipeline（Hybrid style）</text>
-  <text x="464" y="220" text-anchor="middle" fill="#9aa0b4" font-size="9.5">load_modules: from_pretrained · transformer→bf16 · vae.to_half() · AudioDiTFlowMatchScheduler · _sync_dit_config</text>
+  <!-- Layer 3: Pipeline -->
+  <rect x="80" y="164" width="768" height="36" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="464" y="180" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">LongCatAudioDiTPipeline</text>
+  <text x="464" y="193" text-anchor="middle" fill="#9aa0b4" font-size="9">from_pretrained · transformer→bf16 · vae→fp16</text>
 
-  <line x1="340" y1="230" x2="340" y2="248" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="340" y1="200" x2="340" y2="216" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- Layer 4: Stage 1 BeforeDenoising (teal) + upstream ref (blue) -->
-  <rect x="80" y="250" width="520" height="70" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="340" y="269" text-anchor="middle" fill="#e6e8f0" font-size="11.5" font-weight="600">① LongCatAudioDiTBeforeDenoisingStage（model-specific）</text>
-  <text x="340" y="285" text-anchor="middle" fill="#9aa0b4" font-size="9.5">UMT5 编码 · VAE 编码 prompt（仅一次）· 时长估计 · 噪声 y0</text>
-  <text x="340" y="300" text-anchor="middle" fill="#9aa0b4" font-size="9.5">scheduler.set_timesteps · AudioDiTCFGPolicy → Req batch（_audio_* 字段）</text>
-  <text x="340" y="314" text-anchor="middle" fill="#4ecdc4" font-size="9.5">prompt 噪声 / VAE 采样用独立同种子 generator（可复现）</text>
+  <!-- Layer 4: Stage 1 BeforeDenoising + upstream ref -->
+  <rect x="80" y="218" width="520" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="340" y="237" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">① BeforeDenoisingStage</text>
+  <text x="340" y="253" text-anchor="middle" fill="#9aa0b4" font-size="9">UMT5 编码 · VAE 编码 prompt（仅一次）· 噪声 y0 · scheduler.set_timesteps</text>
+  <text x="340" y="266" text-anchor="middle" fill="#4ecdc4" font-size="9">AudioDiTCFGPolicy → batch.extra["cfg_policy"] · _audio_* 字段</text>
 
-  <rect x="624" y="250" width="224" height="70" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
-  <text x="736" y="272" text-anchor="middle" fill="#e6e8f0" font-size="11.5" font-weight="600">上游参考</text>
-  <text x="736" y="289" text-anchor="middle" fill="#9aa0b4" font-size="9.5">LongCat-AudioDiT</text>
-  <text x="736" y="304" text-anchor="middle" fill="#9aa0b4" font-size="9.5">inference.py / model</text>
-  <text x="736" y="314" text-anchor="middle" fill="#9aa0b4" font-size="9.5">算法 1:1 移植</text>
+  <rect x="624" y="218" width="224" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="736" y="240" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">上游参考</text>
+  <text x="736" y="256" text-anchor="middle" fill="#9aa0b4" font-size="9">LongCat-AudioDiT inference.py</text>
+  <text x="736" y="268" text-anchor="middle" fill="#9aa0b4" font-size="9">算法 1:1 移植</text>
 
-  <line x1="340" y1="320" x2="340" y2="338" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="340" y1="274" x2="340" y2="290" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- Layer 5: Stage 2 standard DenoisingStage (yellow, modified, centerpiece) + bypassed 5D Decoding (grey dashed) -->
-  <rect x="80" y="340" width="520" height="156" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-  <text x="340" y="359" text-anchor="middle" fill="#e6e8f0" font-size="11.5" font-weight="600">② 标准 DenoisingStage（modified · 框架新增 3 个 hooks）</text>
-  <text x="340" y="376" text-anchor="middle" fill="#9aa0b4" font-size="9.5">ODE 循环 ×16 步 · AudioDiTFlowMatchScheduler（t: 0→1 升序, dt&gt;0）</text>
-  <text x="340" y="392" text-anchor="middle" fill="#f9ca24" font-size="9.5">hook1 prepare_step_latent: prompt 区域每步重写 prompt_noise·(1-t)+latent_cond·t</text>
-  <text x="340" y="408" text-anchor="middle" fill="#f9ca24" font-size="9.5">hook2 prepare_branch_latent: 无条件 CFG 分支清零 prompt 区域</text>
-  <text x="340" y="424" text-anchor="middle" fill="#f9ca24" font-size="9.5">hook3 get_cfg_policy: 每请求独立策略（并发请求不互斥）</text>
-  <text x="340" y="440" text-anchor="middle" fill="#9aa0b4" font-size="9.5">AudioDiTCFGPolicy.combine: CFG(复用父类) / APG(sample-space 正交投影+动量)</text>
-  <text x="340" y="460" text-anchor="middle" fill="#4ecdc4" font-size="9.5">transformer.forward = 单步速度场 v(x,t) · BaseDiT · FA/AITER/SAGE · USP · layerwise offload</text>
-  <text x="340" y="488" text-anchor="middle" fill="#7a7f96" font-size="9">（旧版单体 InferenceStage 的 inline Euler / CFG / VAE 解码全部拆解到此处）</text>
+  <!-- Layer 5: Stage 2 DenoisingStage subclass + bypassed 5D Decoding -->
+  <rect x="80" y="292" width="520" height="100" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="340" y="310" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">② LongCatAudioDiTDenoisingStage（子类化 DenoisingStage）</text>
+  <text x="340" y="326" text-anchor="middle" fill="#4ecdc4" font-size="9.5">_predict_noise → rewrite_prompt_region（prompt 每步重写）+ prepare_branch_latent（uncond 清零）</text>
+  <text x="340" y="342" text-anchor="middle" fill="#4ecdc4" font-size="9.5">_prepare_denoising_loop → resolve_cfg_policy（每请求 CFG/APG）</text>
+  <text x="340" y="358" text-anchor="middle" fill="#9aa0b4" font-size="9">父类 _run_denoising_step 原封不动 · AudioDiTFlowMatchScheduler（升序 t）</text>
+  <text x="340" y="374" text-anchor="middle" fill="#9aa0b4" font-size="9">transformer.forward = 单步 v(x,t) · FA/SDPA · single-GPU · layerwise offload</text>
 
-  <rect x="624" y="340" width="224" height="156" rx="6" fill="#13162a" stroke="#5a5f7a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <text x="736" y="372" text-anchor="middle" fill="#7a7f96" font-size="11.5" font-weight="600">标准 5D DecodingStage</text>
-  <text x="736" y="392" text-anchor="middle" fill="#5a5f7a" font-size="9.5">假设 5D 空间 VAE</text>
-  <text x="736" y="408" text-anchor="middle" fill="#5a5f7a" font-size="9.5">(image/2+0.5).clamp</text>
-  <text x="736" y="436" text-anchor="middle" fill="#5a5f7a" font-size="9.5">对 1D 音频无效</text>
-  <text x="736" y="468" text-anchor="middle" fill="#5a5f7a" font-size="10">→ 绕过（用 ③）</text>
+  <rect x="624" y="292" width="224" height="100" rx="6" fill="#13162a" stroke="#5a5f7a" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="736" y="322" text-anchor="middle" fill="#7a7f96" font-size="11" font-weight="600">标准 5D DecodingStage</text>
+  <text x="736" y="342" text-anchor="middle" fill="#5a5f7a" font-size="9">假设 5D 空间 VAE</text>
+  <text x="736" y="360" text-anchor="middle" fill="#5a5f7a" font-size="9">对 1D 音频无效</text>
+  <text x="736" y="380" text-anchor="middle" fill="#5a5f7a" font-size="9.5">→ 绕过（用 ③）</text>
 
-  <line x1="340" y1="496" x2="340" y2="514" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="340" y1="392" x2="340" y2="408" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- Layer 6: Stage 3 Decoding (teal, audio 1D) -->
-  <rect x="80" y="516" width="520" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="340" y="535" text-anchor="middle" fill="#e6e8f0" font-size="11.5" font-weight="600">③ LongCatAudioDiTDecodingStage（model-specific, 1D audio）</text>
-  <text x="340" y="551" text-anchor="middle" fill="#9aa0b4" font-size="9.5">post_denoising_loop 剥离 prompt 段 → WAV-VAE decode(latent) → waveform</text>
-  <text x="340" y="565" text-anchor="middle" fill="#9aa0b4" font-size="9.5">role_affinity = DECODER（支持 PD 分离部署）</text>
+  <!-- Layer 6: Stage 3 Decoding -->
+  <rect x="80" y="410" width="520" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="340" y="428" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">③ DecodingStage（1D audio）</text>
+  <text x="340" y="444" text-anchor="middle" fill="#9aa0b4" font-size="9">post_denoising_loop 切 prompt 段 → WAV-VAE decode → waveform</text>
 
-  <line x1="340" y1="572" x2="340" y2="590" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="340" y1="454" x2="340" y2="470" stroke="#5a5f7a" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- Layer 7: Output (yellow) -->
-  <rect x="80" y="592" width="768" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
-  <text x="464" y="610" text-anchor="middle" fill="#e6e8f0" font-size="12" font-weight="600">OutputBatch(audio, audio_sample_rate=24000) · T2A → DataType.AUDIO</text>
-  <text x="464" y="626" text-anchor="middle" fill="#9aa0b4" font-size="9.5">soundfile → .wav · OpenAI encode_speech_audio（wav / flac / pcm / mp3 / opus / aac）</text>
+  <!-- Layer 7: Output -->
+  <rect x="80" y="472" width="768" height="36" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="464" y="488" text-anchor="middle" fill="#e6e8f0" font-size="11" font-weight="600">OutputBatch · DataType.AUDIO</text>
+  <text x="464" y="501" text-anchor="middle" fill="#9aa0b4" font-size="9">soundfile → .wav · OpenAI encode_speech_audio</text>
 </svg>
