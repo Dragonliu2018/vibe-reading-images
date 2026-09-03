@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="672" viewBox="0 0 800 672">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="672" fill="#0b0d14"/>
+  <text x="400" y="28" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="15" font-weight="600">BE 导入写入路径与 check_tablet_version_count 的位置</text>
+
+  <!-- A: FE -->
+  <rect x="310" y="48" width="180" height="38" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="400" y="72" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">FE 导入事务</text>
+
+  <!-- B: LoadChannel -->
+  <rect x="280" y="126" width="240" height="38" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="400" y="150" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">LoadChannel · TabletsChannel</text>
+
+  <!-- C: DeltaWriter -->
+  <rect x="300" y="204" width="200" height="38" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="228" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">DeltaWriter::init()</text>
+
+  <!-- D: RowsetBuilder -->
+  <rect x="290" y="282" width="220" height="38" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="306" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">RowsetBuilder::init()</text>
+
+  <!-- E: check_tablet_version_count (PR highlight) -->
+  <rect x="265" y="360" width="270" height="46" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="2.5"/>
+  <text x="400" y="380" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13">check_tablet_version_count()</text>
+  <text x="400" y="397" text-anchor="middle" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="11">PR #55751 改动位置</text>
+
+  <!-- E-left: TOO_MANY_VERSION -->
+  <rect x="35" y="360" width="185" height="46" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="127" y="380" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="13">TOO_MANY_VERSION</text>
+  <text x="127" y="397" text-anchor="middle" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="11">拒绝本次导入</text>
+
+  <!-- E-right: compaction -->
+  <rect x="580" y="360" width="185" height="46" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="672" y="380" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13">触发 cumulative</text>
+  <text x="672" y="397" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13">compaction（后台）</text>
+
+  <!-- F: prepare_txn / MemTable -->
+  <rect x="290" y="466" width="220" height="38" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="400" y="490" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">prepare_txn → MemTable 写入</text>
+
+  <!-- G: flush -->
+  <rect x="285" y="544" width="230" height="38" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="400" y="568" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">flush 生成 Rowset（新 version）</text>
+
+  <!-- H: publish -->
+  <rect x="300" y="622" width="200" height="38" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="400" y="646" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">publish：version_count + 1</text>
+
+  <!-- arrows main chain -->
+  <path d="M400,86 L400,124" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M400,164 L400,202" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M400,242 L400,280" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M400,320 L400,358" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M400,406 L400,464" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M400,504 L400,542" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M400,582 L400,620" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- branch arrows -->
+  <path d="M265,383 L222,383" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+  <text x="243" y="374" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="11">超限</text>
+  <path d="M535,383 L578,383" stroke="#f9ca24" stroke-width="1.5" fill="none" stroke-dasharray="5 3" marker-end="url(#arrow-yellow)"/>
+  <text x="557" y="370" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="11">接近上限</text>
+</svg>

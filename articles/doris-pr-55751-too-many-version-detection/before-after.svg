@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="560" fill="#0b0d14"/>
+
+  <!-- panel headers -->
+  <text x="222" y="30" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="15" font-weight="600">改动前：错误被两条路径掩盖</text>
+  <text x="677" y="30" text-anchor="middle" fill="#7bed9f" font-family="system-ui, sans-serif" font-size="15" font-weight="600">改动后：错误检查无条件优先</text>
+  <line x1="445" y1="44" x2="445" y2="540" stroke="#2a2f45" stroke-width="1"/>
+
+  <!-- ================= LEFT PANEL (before): main chain x 185..415, outcomes x 22..157 ================= -->
+  <rect x="185" y="56" width="230" height="36" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="300" y="79" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">RowsetBuilder::init()</text>
+
+  <rect x="185" y="126" width="230" height="46" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="300" y="146" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">auto compaction 已关闭？</text>
+  <text x="300" y="163" text-anchor="middle" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="11">BE 配置或表属性开关</text>
+
+  <rect x="22" y="120" width="135" height="58" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="89" y="142" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="12">跳过整个检查</text>
+  <text x="89" y="159" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="12">版本数无上限增长</text>
+
+  <rect x="185" y="208" width="230" height="36" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="300" y="231" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">check_tablet_version_count()</text>
+
+  <rect x="185" y="280" width="230" height="46" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="300" y="300" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">version_count ≤ max−100</text>
+  <text x="300" y="317" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">或 内存超软限？</text>
+
+  <rect x="22" y="274" width="135" height="58" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="89" y="292" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="12">return OK</text>
+  <text x="89" y="309" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="12">TOO_MANY_VERSION</text>
+  <text x="89" y="326" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="12">被短路</text>
+
+  <rect x="185" y="362" width="230" height="36" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="300" y="385" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">触发 cumulative compaction</text>
+
+  <rect x="185" y="438" width="230" height="46" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="300" y="458" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">version_count &gt; max ？</text>
+  <text x="300" y="475" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">报 TOO_MANY_VERSION</text>
+
+  <!-- left arrows -->
+  <path d="M300,92 L300,124" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M185,149 L89,149 L89,118" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+  <text x="176" y="141" text-anchor="end" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="11">是</text>
+  <path d="M300,172 L300,206" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="309" y="194" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="11">否</text>
+  <path d="M300,244 L300,278" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M185,303 L89,303 L89,272" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+  <text x="176" y="295" text-anchor="end" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="11">是</text>
+  <path d="M300,326 L300,360" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="309" y="350" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="11">否</text>
+  <path d="M300,398 L300,436" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ================= RIGHT PANEL (after): main chain x 635..865, outcomes x 478..608 ================= -->
+  <rect x="635" y="56" width="230" height="36" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="750" y="79" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">RowsetBuilder::init()</text>
+
+  <rect x="635" y="126" width="230" height="46" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="2.5"/>
+  <text x="750" y="146" text-anchor="middle" fill="#7bed9f" font-family="system-ui, sans-serif" font-size="13">check_tablet_version_count()</text>
+  <text x="750" y="163" text-anchor="middle" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="11">无条件调用，不再看 compaction 开关</text>
+
+  <rect x="635" y="208" width="230" height="36" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="750" y="231" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">version_count &gt; max ？</text>
+
+  <rect x="478" y="120" width="130" height="48" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="543" y="140" text-anchor="middle" fill="#7bed9f" font-family="system-ui, sans-serif" font-size="12">TOO_MANY_VERSION</text>
+  <text x="543" y="157" text-anchor="middle" fill="#7bed9f" font-family="system-ui, sans-serif" font-size="12">无条件触发</text>
+
+  <rect x="635" y="286" width="230" height="64" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="750" y="306" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">auto compaction 开 &amp;&amp;</text>
+  <text x="750" y="323" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">version_count &gt; max−100 &amp;&amp;</text>
+  <text x="750" y="340" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">内存未超软限？</text>
+
+  <rect x="478" y="294" width="130" height="48" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="543" y="314" text-anchor="middle" fill="#7bed9f" font-family="system-ui, sans-serif" font-size="12">触发 cumulative</text>
+  <text x="543" y="331" text-anchor="middle" fill="#7bed9f" font-family="system-ui, sans-serif" font-size="12">compaction</text>
+
+  <rect x="635" y="398" width="230" height="36" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="750" y="421" text-anchor="middle" fill="#e8ecf8" font-family="system-ui, sans-serif" font-size="13">return OK</text>
+
+  <!-- right arrows -->
+  <path d="M750,92 L750,124" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M750,172 L750,206" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M635,226 L543,226 L543,118" stroke="#7bed9f" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+  <text x="626" y="218" text-anchor="end" fill="#7bed9f" font-family="system-ui, sans-serif" font-size="11">是</text>
+  <path d="M750,244 L750,284" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="759" y="270" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="11">否</text>
+  <path d="M635,318 L543,318 L543,292" stroke="#7bed9f" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+  <text x="626" y="310" text-anchor="end" fill="#7bed9f" font-family="system-ui, sans-serif" font-size="11">是</text>
+  <path d="M750,350 L750,396" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="759" y="378" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="11">否</text>
+
+  <!-- legend -->
+  <rect x="22" y="516" width="14" height="14" rx="3" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="44" y="527" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="12">红：错误被掩盖的路径</text>
+  <rect x="230" y="516" width="14" height="14" rx="3" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="252" y="527" fill="#9aa5c9" font-family="system-ui, sans-serif" font-size="12">绿：修复后的行为</text>
+</svg>
