@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" width="880" height="470" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+    <marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+  <rect width="880" height="470" fill="#0b0d14"/>
+  <text x="440" y="28" text-anchor="middle" fill="#e6e6e6" font-size="16" font-weight="600">改动前后：masterOnly 动态配置在主备切换后的命运</text>
+
+  <!-- ============ 改动前 ============ -->
+  <text x="440" y="66" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">改动前：applyToAll 被静默降级，仅 Master 生效</text>
+
+  <rect x="90" y="82" width="190" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.8"/>
+  <text x="185" y="106" text-anchor="middle" fill="#e6e6e6" font-size="13">Master FE</text>
+  <text x="185" y="128" text-anchor="middle" fill="#4ecdc4" font-size="12">disable_balance = true</text>
+
+  <rect x="345" y="82" width="190" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="106" text-anchor="middle" fill="#e6e6e6" font-size="13">Follower FE1</text>
+  <text x="440" y="128" text-anchor="middle" fill="#ff6b9d" font-size="12">false（未收到 SET）</text>
+
+  <rect x="600" y="82" width="190" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="695" y="106" text-anchor="middle" fill="#e6e6e6" font-size="13">Follower FE2</text>
+  <text x="695" y="128" text-anchor="middle" fill="#ff6b9d" font-size="12">false（未收到 SET）</text>
+
+  <!-- 宕机标记 -->
+  <line x1="105" y1="95" x2="265" y2="131" stroke="#ff6b9d" stroke-width="2"/>
+  <line x1="265" y1="95" x2="105" y2="131" stroke="#ff6b9d" stroke-width="2"/>
+  <text x="185" y="162" text-anchor="middle" fill="#ff6b9d" font-size="11">Master 宕机，FE1 当选新 Master</text>
+
+  <!-- 结果 -->
+  <line x1="440" y1="170" x2="440" y2="192" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrR)"/>
+  <rect x="170" y="196" width="540" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="440" y="221" text-anchor="middle" fill="#ff6b9d" font-size="12">新 Master 回到 fe.conf 默认值 false —— 动态修改丢失</text>
+
+  <!-- ============ 改动后 ============ -->
+  <text x="440" y="286" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">改动后：applyToAll 保留，扇出到全部 FE</text>
+
+  <rect x="90" y="302" width="190" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.8"/>
+  <text x="185" y="326" text-anchor="middle" fill="#e6e6e6" font-size="13">Master FE</text>
+  <text x="185" y="348" text-anchor="middle" fill="#4ecdc4" font-size="12">disable_balance = true</text>
+
+  <rect x="345" y="302" width="190" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="326" text-anchor="middle" fill="#e6e6e6" font-size="13">Follower FE1</text>
+  <text x="440" y="348" text-anchor="middle" fill="#4ecdc4" font-size="12">true（扇出生效）</text>
+
+  <rect x="600" y="302" width="190" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="695" y="326" text-anchor="middle" fill="#e6e6e6" font-size="13">Follower FE2</text>
+  <text x="695" y="348" text-anchor="middle" fill="#4ecdc4" font-size="12">true（扇出生效）</text>
+
+  <text x="440" y="382" text-anchor="middle" fill="#ff6b9d" font-size="11">Master 宕机，FE1 当选新 Master</text>
+  <line x1="440" y1="388" x2="440" y2="410" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrG)"/>
+  <rect x="170" y="414" width="540" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="440" y="439" text-anchor="middle" fill="#4ecdc4" font-size="12">新 Master 保留 true —— 主备切换后配置不丢</text>
+</svg>
