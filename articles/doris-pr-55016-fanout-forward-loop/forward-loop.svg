@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="756" viewBox="0 0 800 756">
+  <defs>
+    <marker id="arrowPink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="756" fill="#0b0d14"/>
+
+  <!-- ═══ Panel A：改动前 ═══ -->
+  <text x="40" y="48" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#ff6b9d">改动前：扇出语句降级丢失 ALL，目标 FE 撞防环保护</text>
+
+  <!-- A1 发起 FE -->
+  <rect x="260" y="68" width="280" height="72" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="400" y="98" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2">发起 FE（isProxy=false）</text>
+  <text x="400" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4c8">Env.setConfig 扇出循环</text>
+
+  <!-- A1 → A2 -->
+  <path d="M 400 140 L 400 178" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowPink)" fill="none"/>
+  <text x="560" y="152" font-family="system-ui, sans-serif" font-size="12" fill="#ff6b9d">① FEOpExecutor 转发降级语句</text>
+  <text x="560" y="170" font-family="system-ui, sans-serif" font-size="12" fill="#ff6b9d">ADMIN SET FRONTEND CONFIG</text>
+  <text x="560" y="188" font-family="system-ui, sans-serif" font-size="12" fill="#ff6b9d">（丢失 ALL）</text>
+
+  <!-- A2 目标 FE -->
+  <rect x="260" y="180" width="280" height="72" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="400" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2">目标 FE（isProxy=true）</text>
+  <text x="400" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4c8">masterOnly 特判 → FORWARD_NO_SYNC</text>
+
+  <!-- A2 → A3 -->
+  <path d="M 400 252 L 400 290" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowPink)" fill="none"/>
+  <text x="560" y="268" font-family="system-ui, sans-serif" font-size="12" fill="#ff6b9d">② 要求转发 Master</text>
+
+  <!-- A3 防环异常 -->
+  <rect x="260" y="292" width="280" height="72" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="400" y="322" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2">StmtExecutor 防环保护</text>
+  <text x="400" y="344" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#ff6b9d">❌ 抛异常，整条 SET ALL 失败</text>
+
+  <!-- 分隔线 -->
+  <line x1="40" y1="389" x2="760" y2="389" stroke="#7a86b3" stroke-width="1" opacity="0.3"/>
+
+  <!-- ═══ Panel B：改动后 ═══ -->
+  <text x="40" y="424" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#7bed9f">改动后：原样转发保留 ALL + isProxy 防二次扇出</text>
+
+  <!-- B1 发起 FE -->
+  <rect x="260" y="440" width="280" height="72" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="400" y="470" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2">发起 FE（isProxy=false）</text>
+  <text x="400" y="492" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7bed9f">Env.setConfig 扇出（!isProxy 守卫）</text>
+
+  <!-- B1 → B2 -->
+  <path d="M 400 512 L 400 550" stroke="#7bed9f" stroke-width="1.5" marker-end="url(#arrowGreen)" fill="none"/>
+  <text x="560" y="524" font-family="system-ui, sans-serif" font-size="12" fill="#7bed9f">① FEOpExecutor 原样转发</text>
+  <text x="560" y="542" font-family="system-ui, sans-serif" font-size="12" fill="#7bed9f">ADMIN SET ALL FRONTENDS CONFIG</text>
+  <text x="560" y="560" font-family="system-ui, sans-serif" font-size="12" fill="#7bed9f">（保留 ALL）</text>
+
+  <!-- B2 目标 FE -->
+  <rect x="260" y="552" width="280" height="72" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="400" y="582" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2">目标 FE（isProxy=true）</text>
+  <text x="400" y="604" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4c8">跳过特判 → NO_FORWARD 本地生效</text>
+
+  <!-- B2 → B3 -->
+  <path d="M 400 624 L 400 662" stroke="#7bed9f" stroke-width="1.5" marker-end="url(#arrowGreen)" fill="none"/>
+  <text x="560" y="640" font-family="system-ui, sans-serif" font-size="12" fill="#7bed9f">② isProxy=true → 不再扇出</text>
+
+  <!-- B3 终止 -->
+  <rect x="260" y="664" width="280" height="72" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="400" y="694" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2">扇出终止：每 FE 恰好收到一次</text>
+  <text x="400" y="716" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4c8">无回环，动态配置全集群生效</text>
+</svg>
