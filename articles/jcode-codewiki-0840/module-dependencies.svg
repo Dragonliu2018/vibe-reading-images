@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="620" viewBox="0 0 780 620" font-family="system-ui, sans-serif">
+<rect width="780" height="620" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  <marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+  </marker>
+  <marker id="arrowc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+  </marker>
+</defs>
+<text x="390" y="26" fill="#e0e6f0" font-size="15" text-anchor="middle">jcode v0.84.0 模块依赖关系（依赖方向自上而下）</text>
+<rect x="270" y="50" width="240" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="390" y="70" fill="#4ecdc4" font-size="14" font-weight="600" text-anchor="middle">CLI 入口与分发</text>
+<text x="390" y="87" fill="#a0aac0" font-size="10.5" text-anchor="middle">startup::run() 组合根 · dispatch · hot_exec</text>
+<rect x="60" y="150" width="200" height="46" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="160" y="170" fill="#b388ff" font-size="14" font-weight="600" text-anchor="middle">TUI 渲染引擎</text>
+<text x="160" y="187" fill="#a0aac0" font-size="10.5" text-anchor="middle">App · StreamBuffer · InfoWidget</text>
+<rect x="540" y="150" width="200" height="46" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="640" y="170" fill="#b388ff" font-size="14" font-weight="600" text-anchor="middle">harness-api 与 SDK</text>
+<text x="640" y="187" fill="#a0aac0" font-size="10.5" text-anchor="middle">NDJSON v1 · Rust/TS SDK · transport</text>
+<rect x="300" y="150" width="200" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="400" y="170" fill="#6c8ef5" font-size="14" font-weight="600" text-anchor="middle">Agent 运行时</text>
+<text x="400" y="187" fill="#a0aac0" font-size="10.5" text-anchor="middle">turn 循环 · soft interrupt · cache</text>
+<rect x="60" y="260" width="200" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="160" y="280" fill="#6c8ef5" font-size="14" font-weight="600" text-anchor="middle">Server 与 Swarm</text>
+<text x="160" y="297" fill="#a0aac0" font-size="10.5" text-anchor="middle">daemon · Plan DAG · 热重载</text>
+<rect x="540" y="260" width="200" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="640" y="280" fill="#6c8ef5" font-size="14" font-weight="600" text-anchor="middle">Tool 工具系统</text>
+<text x="640" y="297" fill="#a0aac0" font-size="10.5" text-anchor="middle">Registry · destructive gate · MCP</text>
+<rect x="300" y="370" width="200" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="400" y="390" fill="#6c8ef5" font-size="14" font-weight="600" text-anchor="middle">Provider 多模型</text>
+<text x="400" y="407" fill="#a0aac0" font-size="10.5" text-anchor="middle">MultiProvider · failover · 42 profile</text>
+<rect x="60" y="370" width="200" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="160" y="390" fill="#6c8ef5" font-size="14" font-weight="600" text-anchor="middle">Memory 记忆系统</text>
+<text x="160" y="407" fill="#a0aac0" font-size="10.5" text-anchor="middle">hybrid 检索 · LLM rerank · graph</text>
+<rect x="540" y="370" width="200" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="640" y="390" fill="#6c8ef5" font-size="14" font-weight="600" text-anchor="middle">Ambient 后台</text>
+<text x="640" y="407" fill="#a0aac0" font-size="10.5" text-anchor="middle">调度 · gardening · ScheduledItem</text>
+<rect x="270" y="480" width="240" height="46" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="390" y="500" fill="#f9ca24" font-size="14" font-weight="600" text-anchor="middle">Config 与基础设施</text>
+<text x="390" y="517" fill="#a0aac0" font-size="10.5" text-anchor="middle">config 热重载 · session journal · Bus · compaction</text>
+<rect x="60" y="560" width="150" height="40" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="135" y="578" fill="#ff6b9d" font-size="11.5" text-anchor="middle">jcode-embedding</text>
+<text x="135" y="592" fill="#8090a8" font-size="9.5" text-anchor="middle">本地 ONNX MiniLM</text>
+<rect x="570" y="560" width="150" height="40" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="645" y="578" fill="#ff6b9d" font-size="11.5" text-anchor="middle">provider runtimes</text>
+<text x="645" y="592" fill="#8090a8" font-size="9.5" text-anchor="middle">9 个叶子 crate</text>
+<path d="M350,96 L330,150" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowc)"/>
+<path d="M430,96 L450,150" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowc)"/>
+<path d="M390,96 L390,150" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowc)"/>
+<text x="305" y="128" fill="#7a86b3" font-size="10" text-anchor="end">spawn/attach</text>
+<path d="M390,196 L390,260" fill="none" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowb)"/>
+<text x="400" y="232" fill="#7a86b3" font-size="10" text-anchor="start">驱动 turn</text>
+<path d="M300,173 L260,260" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<text x="252" y="228" fill="#7a86b3" font-size="10" text-anchor="end">socket</text>
+<path d="M500,173 L540,260" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<text x="508" y="228" fill="#7a86b3" font-size="10" text-anchor="start">NDJSON</text>
+<path d="M540,283 L500,283" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="520" y="274" fill="#7a86b3" font-size="10" text-anchor="middle">execute</text>
+<path d="M160,306 L160,370" fill="none" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowb)"/>
+<text x="170" y="342" fill="#7a86b3" font-size="10" text-anchor="start">文件冲突通知</text>
+<path d="M540,393 L500,393" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="520" y="384" fill="#7a86b3" font-size="10" text-anchor="middle">sidecar</text>
+<path d="M400,416 L400,480" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="410" y="452" fill="#7a86b3" font-size="10" text-anchor="start">依赖</text>
+<path d="M260,306 L340,370" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="286" y="342" fill="#7a86b3" font-size="10" text-anchor="start">SwarmState</text>
+<path d="M640,306 L640,370" fill="none" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowb)"/>
+<text x="650" y="342" fill="#7a86b3" font-size="10" text-anchor="start">ambient 工具</text>
+<path d="M310,480 L200,416" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M160,416 L160,370" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="170" y="448" fill="#7a86b3" font-size="10" text-anchor="start">wait</text>
+<path d="M300,480 L240,560" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="230" y="530" fill="#7a86b3" font-size="10" text-anchor="end">Bus/config</text>
+<path d="M480,480 L600,560" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="610" y="530" fill="#7a86b3" font-size="10" text-anchor="start">工厂注册</text>
+<path d="M150,503 L160,416" fill="none" stroke="#7a86b3" stroke-width="0" />
+</svg>

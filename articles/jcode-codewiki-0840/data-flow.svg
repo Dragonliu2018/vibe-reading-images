@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560" font-family="system-ui, sans-serif">
+<rect width="800" height="560" fill="#0b0d14"/>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+  <marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+  </marker>
+  <marker id="arrowc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+  </marker>
+  <marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+  </marker>
+</defs>
+<text x="400" y="26" fill="#e0e6f0" font-size="15" text-anchor="middle">TUI 一次用户输入的端到端数据流（client/daemon 分离）</text>
+<rect x="60" y="60" width="300" height="130" rx="10" fill="#13162a" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="210" y="82" fill="#b388ff" font-size="13" font-weight="600" text-anchor="middle">TUI 客户端进程（jcode）</text>
+<rect x="85" y="96" width="250" height="34" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="210" y="118" fill="#e0e6f0" font-size="11.5" text-anchor="middle">App::run_remote() select! 主循环</text>
+<rect x="85" y="140" width="250" height="34" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="210" y="162" fill="#e0e6f0" font-size="11.5" text-anchor="middle">backend.rs send_request → JSON 行</text>
+<rect x="440" y="60" width="300" height="340" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="590" y="82" fill="#6c8ef5" font-size="13" font-weight="600" text-anchor="middle">daemon 进程（jcode serve）</text>
+<rect x="465" y="96" width="250" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="590" y="118" fill="#e0e6f0" font-size="11.5" text-anchor="middle">handle_client() 解码 Request::Message</text>
+<rect x="465" y="142" width="250" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="590" y="164" fill="#e0e6f0" font-size="11.5" text-anchor="middle">spawn process_message_streaming_mpsc</text>
+<rect x="465" y="188" width="250" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="590" y="207" fill="#e0e6f0" font-size="11.5" text-anchor="middle">agent.lock().await</text>
+<text x="590" y="224" fill="#a0aac0" font-size="10.5" text-anchor="middle">run_once_streaming_mpsc()</text>
+<rect x="465" y="246" width="250" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="590" y="268" fill="#e0e6f0" font-size="11.5" text-anchor="middle">provider.complete_split() → EventStream</text>
+<rect x="465" y="292" width="250" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="590" y="314" fill="#e0e6f0" font-size="11.5" text-anchor="middle">StreamEvent → ServerEvent 转译</text>
+<rect x="465" y="338" width="250" height="34" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="590" y="360" fill="#e0e6f0" font-size="11.5" text-anchor="middle">registry.execute() 工具轮 → 继续循环</text>
+<rect x="60" y="240" width="300" height="130" rx="10" fill="#13162a" stroke="#b388ff" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="210" y="262" fill="#b388ff" font-size="13" font-weight="600" text-anchor="middle">事件回程</text>
+<rect x="85" y="276" width="250" height="34" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="210" y="298" fill="#e0e6f0" font-size="11.5" text-anchor="middle">mpsc fanout → socket 写半区</text>
+<rect x="85" y="320" width="250" height="34" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="210" y="342" fill="#e0e6f0" font-size="11.5" text-anchor="middle">StreamBuffer 平滑 → ui::draw 渲染</text>
+<rect x="85" y="430" width="655" height="40" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="412" y="448" fill="#f9ca24" font-size="11.5" text-anchor="middle">Unix socket（jcode.sock）· newline-delimited JSON · Request{type:"message"} / ServerEvent{type:"text_delta"}</text>
+<text x="85" y="500" fill="#7a86b3" font-size="11" text-anchor="start">数据类型演变：String → Request::Message(JSON) → &amp;[Message] + &amp;[ToolDefinition]</text>
+<text x="85" y="520" fill="#7a86b3" font-size="11" text-anchor="start">→ EventStream&lt;StreamEvent&gt; → ServerEvent(JSON) → StreamBuffer ops → DisplayMessage → ratatui Buffer</text>
+<path d="M335,140 L465,113" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowc)"/>
+<text x="400" y="120" fill="#4ecdc4" font-size="10" text-anchor="middle">写 socket</text>
+<path d="M465,290 L335,290" fill="none" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowc)"/>
+<text x="400" y="281" fill="#b388ff" font-size="10" text-anchor="middle">读 socket</text>
+</svg>
