@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="910" height="534" viewBox="0 0 910 534">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="910" height="534" fill="#0b0d14"/>
+
+  <!-- 继承链 -->
+  <rect x="310" y="40" width="280" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="450" y="66" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#f9ca24">OrcaRuntimeService</text>
+  <text x="450" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">orca-runtime.ts · 空壳 + 命令面安装</text>
+
+  <rect x="310" y="140" width="280" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="450" y="166" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">OrcaRuntimeWithResolveWaiter</text>
+  <text x="450" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">层 1 · waiter / 权威窗口</text>
+
+  <rect x="310" y="240" width="280" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="450" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">…… 135 层能力 ……</text>
+  <text x="450" y="288" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">mobile tabs / worktree / pty 管道（一文件一层）</text>
+
+  <rect x="310" y="340" width="280" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="450" y="366" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">OrcaRuntimeWithStateFields</text>
+  <text x="450" y="388" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">层 127 · 全部状态 + 构造函数 + 8 命令面</text>
+
+  <rect x="310" y="440" width="280" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="450" y="466" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">OrcaRuntimeWithRuntimeId</text>
+  <text x="450" y="488" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">层 134 · 链底骨架</text>
+
+  <path d="M 450,104 L 450,138" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="458" y="126" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">extends</text>
+  <path d="M 450,204 L 450,238" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 450,304 L 450,338" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 450,404 L 450,438" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 右列：状态真源（state-fields 持有） -->
+  <rect x="650" y="40" width="230" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="765" y="66" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">OrchestrationDb</text>
+  <text x="765" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">75 组 attach* 方法挂载</text>
+
+  <rect x="650" y="140" width="230" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="765" y="166" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">AgentSessionRecordStore</text>
+  <text x="765" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">lease 账本（30s TTL）</text>
+
+  <rect x="650" y="240" width="230" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="765" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">coordinator</text>
+  <text x="765" y="288" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">2s tick 编排循环</text>
+
+  <rect x="650" y="340" width="230" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="765" y="366" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">RuntimeStore 契约</text>
+  <text x="765" y="388" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">persistence 投影</text>
+
+  <rect x="650" y="440" width="230" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="765" y="466" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">订阅注册表 / tail buffer</text>
+  <text x="765" y="488" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">按 connectionId 双向索引</text>
+
+  <!-- 扇出：state-fields → 右列 -->
+  <path d="M 590,372 L 620,372" stroke="#7a86b3" stroke-width="1.5" fill="none"/>
+  <path d="M 620,372 L 620,72 L 648,72" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 620,372 L 620,172 L 648,172" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 620,372 L 620,272 L 648,272" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 620,372 L 648,372" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 620,372 L 620,472 L 648,472" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 左列：惰性闭包注入 -->
+  <rect x="30" y="310" width="220" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="140" y="333" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">getLocalProvider()</text>
+  <text x="140" y="353" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">daemon 可替换</text>
+
+  <rect x="30" y="390" width="220" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="140" y="413" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">getSshProvider(connId)</text>
+  <text x="140" y="433" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">relay 重连后注册</text>
+
+  <path d="M 250,338 L 280,338 L 280,372 L 308,372" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 250,418 L 280,418 L 280,372" stroke="#7a86b3" stroke-width="1.5" fill="none"/>
+</svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="620" viewBox="0 0 880 620">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="880" height="620" fill="#0b0d14"/>
+
+  <!-- execution host 抽象 -->
+  <text x="60" y="36" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4">ExecutionHost 判别联合（单点解析）</text>
+  <rect x="60" y="52" width="760" height="88" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="90" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">local</text>
+  <text x="290" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">ssh:&lt;targetId&gt;</text>
+  <text x="560" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">runtime:&lt;environmentId&gt;</text>
+  <text x="90" y="108" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">本地 native（WSL 归 local + 平台探测）</text>
+  <text x="290" y="108" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">SSH provider / relay 连接</text>
+  <text x="560" y="108" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">ephemeral VM（内嵌 SSH target，本客户端不可独立拨）</text>
+  <text x="90" y="128" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">parseExecutionHostId() 唯一解析；targetId 走 encodeURIComponent（| 是分隔符）</text>
+
+  <!-- 连接链 -->
+  <text x="60" y="186" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5">连接与双 transport 回退</text>
+  <rect x="60" y="202" width="250" height="96" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="185" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">SshConnectionManager</text>
+  <text x="185" y="250" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">Map&lt;targetId, SshConnection&gt;</text>
+  <text x="185" y="270" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">connectingTargets 用 symbol 做</text>
+  <text x="185" y="288" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">attempt 身份防迟到清除</text>
+
+  <rect x="350" y="202" width="220" height="96" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="460" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">SshConnection.connect()</text>
+  <text x="460" y="250" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">凭据梯子：agent→私钥→</text>
+  <text x="460" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">passphrase→password→PAM</text>
+  <text x="460" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">connectGeneration 代数身份</text>
+
+  <rect x="610" y="202" width="210" height="96" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="715" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">transport 回退</text>
+  <text x="715" y="250" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">ssh2 库失败 / FIDO2 key</text>
+  <text x="715" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">→ system-ssh 二进制</text>
+  <text x="715" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">（GitHub restricted shell 特判）</text>
+
+  <path d="M 310,250 L 348,250" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 570,250 L 608,250" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 重连梯子 -->
+  <text x="60" y="346" font-family="system-ui, sans-serif" font-size="14" fill="#b388ff">SshReconnectLadder 双计数器</text>
+  <rect x="60" y="362" width="760" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="90" y="388" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">delayIndex：每次 scheduled retry 都推进（flap 也退避）</text>
+  <text x="90" y="410" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">consecutiveFailedAttempts：只在握手失败推进；flap 延迟封顶 FLAP_DELAY_CAP_MS（relay grace 期推导）</text>
+
+  <!-- verdict -->
+  <text x="60" y="472" font-family="system-ui, sans-serif" font-size="14" fill="#ff6b9d">进程存活判定词汇（无同义词）</text>
+  <rect x="60" y="488" width="760" height="102" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="90" y="514" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4">live</text>
+  <text x="290" y="514" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24">unverifiable</text>
+  <text x="560" y="514" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d">exited</text>
+  <text x="90" y="540" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">host 有证据</text>
+  <text x="290" y="540" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">无证据（"the host lost the child without a measurement"）</text>
+  <text x="560" y="540" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">host 确证</text>
+  <text x="90" y="566" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">SSH 断开只证明客户端失去联系——失联不判死；relay grace 期让重连 reattach PTY 而非杀掉</text>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="600" fill="#0b0d14"/>
+
+  <!-- 左：agent 黑盒产物 -->
+  <rect x="40" y="60" width="230" height="180" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="155" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d">agent 黑盒 CLI</text>
+  <rect x="60" y="105" width="190" height="52" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="155" y="127" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">会话文件</text>
+  <text x="155" y="145" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">~/.claude/projects JSONL</text>
+  <rect x="60" y="170" width="190" height="52" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="155" y="192" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">hook 脚本</text>
+  <text x="155" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">loopback POST（权威 transcriptPath）</text>
+
+  <!-- 中：两条汇聚管道 -->
+  <rect x="350" y="60" width="240" height="76" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="470" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">ai-vault 扫描</text>
+  <text x="470" y="108" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">parse cache 增量续读 · 8 并发</text>
+  <text x="470" y="126" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">scan coordinator 单飞 + 5s 抢占</text>
+
+  <rect x="350" y="164" width="240" height="76" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="470" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">hook server ingest</text>
+  <text x="470" y="212" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">normalize → 唯一 status store</text>
+  <text x="470" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">retired-surface 抑制</text>
+
+  <path d="M 250,131 L 348,98" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 250,196 L 348,202" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 右：汇聚 -->
+  <rect x="670" y="60" width="200" height="180" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="770" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24">AgentSessionJournal</text>
+  <text x="770" y="112" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">append-only</text>
+  <text x="770" y="132" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">epoch 隔离损坏前缀</text>
+  <text x="770" y="152" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">write-ahead submission</text>
+  <text x="770" y="172" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">幂等回执 receiptFor()</text>
+
+  <path d="M 590,98 L 668,98" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 590,202 L 620,202 L 620,160 L 668,160" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 下：消费 -->
+  <rect x="350" y="300" width="240" height="76" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="470" y="326" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">AgentSessionSubscribers</text>
+  <text x="470" y="348" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">每订阅者独立 cursor 增量推送</text>
+  <text x="470" y="366" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">"Nothing raw reaches a subscriber"</text>
+
+  <path d="M 770,240 L 770,338 L 592,338" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="350" y="440" width="240" height="64" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="470" y="466" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">Renderer / Mobile</text>
+  <text x="470" y="488" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">会话列表 + 实时流 + 状态行</text>
+  <path d="M 470,376 L 470,438" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 左下：三条铁律 -->
+  <rect x="40" y="300" width="250" height="204" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="165" y="328" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#6c8ef5">三条铁律</text>
+  <text x="165" y="354" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">不可读版本 = UNREADABLE</text>
+  <text x="165" y="372" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">（降级 read-only，不是跳过）</text>
+  <text x="165" y="400" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">先落盘再 dispatch</text>
+  <text x="165" y="418" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">（崩溃后凭回执回答"发出没"）</text>
+  <text x="165" y="446" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">损坏前缀开新 epoch</text>
+  <text x="165" y="464" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">（不改历史行）</text>
+</svg>

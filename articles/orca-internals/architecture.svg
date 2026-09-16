@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="890" height="730" viewBox="0 0 890 730">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="890" height="730" fill="#0b0d14"/>
+
+  <!-- L1 客户端层 -->
+  <rect x="30" y="30" width="540" height="110" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="45" y="52" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4">客户端层</text>
+  <rect x="45" y="70" width="160" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="125" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">Desktop Renderer</text>
+  <rect x="220" y="70" width="160" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="300" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">Orca CLI</text>
+  <rect x="395" y="70" width="160" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="475" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">Mobile App (Expo)</text>
+
+  <!-- L2 接入层 -->
+  <rect x="30" y="170" width="540" height="110" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="45" y="192" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5">接入层</text>
+  <rect x="45" y="210" width="250" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="170" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">preload contextBridge</text>
+  <text x="170" y="246" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">814 个 IPC handler</text>
+  <rect x="305" y="210" width="250" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="430" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">统一 RpcDispatcher</text>
+  <text x="430" y="246" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">590 方法 · E2EE WebSocket</text>
+
+  <!-- L3 运行时层 -->
+  <rect x="30" y="310" width="540" height="110" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="45" y="332" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24">运行时层</text>
+  <rect x="45" y="350" width="160" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="125" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">OrcaRuntimeService</text>
+  <text x="125" y="386" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">135 层 mixin 链</text>
+  <rect x="220" y="350" width="160" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="300" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">OrchestrationDb</text>
+  <text x="300" y="386" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">SQLite WAL</text>
+  <rect x="395" y="350" width="160" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="475" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">AgentSession</text>
+  <text x="475" y="386" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">RecordStore (lease)</text>
+
+  <!-- L4 执行主机层 -->
+  <rect x="30" y="450" width="540" height="110" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="45" y="472" font-family="system-ui, sans-serif" font-size="14" fill="#80c7ff">执行主机层</text>
+  <rect x="45" y="490" width="160" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="125" y="508" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">orcad 终端守护</text>
+  <text x="125" y="526" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">node-pty + headless</text>
+  <rect x="220" y="490" width="160" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="300" y="508" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">Local / WSL / SSH</text>
+  <text x="300" y="526" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">PtyProvider</text>
+  <rect x="395" y="490" width="160" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="475" y="508" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">ExecutionHost</text>
+  <text x="475" y="526" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">Git 能力隔离</text>
+
+  <!-- L5 数据与状态层 -->
+  <rect x="30" y="590" width="540" height="110" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="45" y="612" font-family="system-ui, sans-serif" font-size="14" fill="#b388ff">数据与状态层</text>
+  <rect x="45" y="630" width="120" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="105" y="648" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">agent 会话文件</text>
+  <text x="105" y="666" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">JSONL / SQLite</text>
+  <rect x="175" y="630" width="120" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="235" y="648" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">agent-hooks</text>
+  <text x="235" y="666" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">loopback HTTP</text>
+  <rect x="305" y="630" width="120" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="365" y="648" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">Store 持久化</text>
+  <text x="365" y="666" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">electron-store</text>
+  <rect x="435" y="630" width="120" height="44" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="495" y="648" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">terminal-history</text>
+  <text x="495" y="666" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">scrollback 检查点</text>
+
+  <!-- 云端 -->
+  <rect x="660" y="140" width="200" height="280" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="675" y="165" font-family="system-ui, sans-serif" font-size="14" fill="#ff6b9d">云端</text>
+  <rect x="670" y="180" width="180" height="70" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="760" y="208" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">relay director / cell</text>
+  <text x="760" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">WebSocket splice 中继</text>
+  <rect x="670" y="290" width="180" height="70" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="760" y="318" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">push gateway</text>
+  <text x="760" y="338" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">APNs / FCM 推送</text>
+
+  <!-- 层间箭头 -->
+  <path d="M 310,140 L 310,168" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="320" y="160" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">window.api / RPC</text>
+  <path d="M 310,280 L 310,308" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="320" y="300" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">dispatcher</text>
+  <path d="M 310,420 L 310,448" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="320" y="440" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">惰性闭包注入</text>
+  <path d="M 310,560 L 310,588" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="320" y="580" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">磁盘 / HTTP</text>
+
+  <!-- Mobile → relay 配对 -->
+  <path d="M 555,92 L 750,92 L 750,178" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="650" y="84" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">配对 / 中继</text>
+
+  <!-- relay → 接入层 E2EE -->
+  <path d="M 670,222 L 572,222" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="621" y="200" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">E2EE</text>
+  <text x="621" y="212" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">WebSocket</text>
+
+  <!-- 运行时层 → push gateway -->
+  <path d="M 572,325 L 668,325" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="620" y="315" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">OS banner</text>
+</svg>

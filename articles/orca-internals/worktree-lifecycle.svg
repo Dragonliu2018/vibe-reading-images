@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="560" fill="#0b0d14"/>
+
+  <!-- 预热阶段 -->
+  <text x="60" y="36" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4">预热（用户还在 base picker 打字）</text>
+  <rect x="60" y="50" width="340" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="230" y="76" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">prepareWorktreeCreateForRepo()</text>
+  <text x="230" y="98" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">TTL 5 分钟 · 磁盘上限 3 棵</text>
+
+  <rect x="470" y="50" width="370" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="655" y="76" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">git worktree add --detach --no-checkout</text>
+  <text x="655" y="98" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">+ reset --hard（绕过 hook）+ worktree lock（防 prune）</text>
+
+  <path d="M 400,82 L 468,82" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 提交阶段 -->
+  <text x="60" y="166" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5">提交创建</text>
+  <rect x="60" y="180" width="340" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="230" y="206" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">consumePreparedWorktreeCreate()</text>
+  <text x="230" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">claim → takePreparation（同步摘除防双 claim）</text>
+
+  <rect x="470" y="180" width="170" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="555" y="206" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#f9ca24">hit</text>
+  <text x="555" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">worktree move（重命名级）</text>
+
+  <rect x="670" y="180" width="170" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="755" y="206" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#ff6b9d">miss</text>
+  <text x="755" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">addWorktree() 直接创建</text>
+
+  <path d="M 400,212 L 468,212" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 640,212 L 668,212" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 名字退休 -->
+  <text x="60" y="296" font-family="system-ui, sans-serif" font-size="14" fill="#b388ff">名字退休（GC 式回收）</text>
+  <rect x="60" y="310" width="780" height="60" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="450" y="336" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">552 个海洋生物名（tier 化：nautilus → nautilus-2 …）</text>
+  <text x="450" y="356" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">创建成功即 retire · 一次性 backfill 扫描历史已用名 · 宁可过度退休不漏（漏 = 泄漏对话历史）</text>
+
+  <!-- 删除 fence -->
+  <text x="60" y="424" font-family="system-ui, sans-serif" font-size="14" fill="#ff6b9d">删除安全 fence（五重）</text>
+  <rect x="60" y="438" width="780" height="92" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="90" y="464" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">① 注册表核验（listWorktreesStrict）</text>
+  <text x="490" y="464" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">② 路径形状（拒绝 repo 根 / 文件系统根 / $HOME）</text>
+  <text x="90" y="492" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">③ 嵌套 worktree fence（git 自身语义不安全）</text>
+  <text x="490" y="492" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">④ clean 断言（force 例外）</text>
+  <text x="490" y="518" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">⑤ 进回收站（moveWorktreeDirectoryToTrash）</text>
+</svg>

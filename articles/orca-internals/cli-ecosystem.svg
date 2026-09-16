@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="620" viewBox="0 0 880 620">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="880" height="620" fill="#0b0d14"/>
+
+  <!-- CLI 连接 -->
+  <text x="60" y="36" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4">orca CLI → 运行中的 Orca</text>
+  <rect x="60" y="52" width="200" height="90" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="160" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">main() 解析</text>
+  <text x="160" y="100" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">parseArgs → validate</text>
+  <text x="160" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">懒加载 RuntimeClient</text>
+
+  <rect x="320" y="52" width="220" height="90" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">orca-runtime.json</text>
+  <text x="430" y="100" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">userData 发现文件</text>
+  <text x="430" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">端点 + authToken</text>
+
+  <rect x="600" y="52" width="220" height="90" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="710" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">Unix socket 请求</text>
+  <text x="710" y="100" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">一请求一连接 + keepalive 帧</text>
+  <text x="710" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">校验响应 id 与 runtimeId</text>
+
+  <path d="M 260,97 L 318,97" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 540,97 L 598,97" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 懒加载路由 -->
+  <rect x="60" y="180" width="760" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="206" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">Handler-group manifest：24 组 · 160+ 命令 key</text>
+  <text x="440" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">keys 急切声明（建路由表零加载）→ dispatch 只加载命中组 → CI 对账 keys 与真实导出</text>
+
+  <!-- Skills -->
+  <text x="60" y="302" font-family="system-ui, sans-serif" font-size="14" fill="#b388ff">Skills：发现 → 打包 → 安装</text>
+  <rect x="60" y="318" width="230" height="80" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="175" y="344" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">发现</text>
+  <text x="175" y="366" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">17 个固定 home roots</text>
+  <text x="175" y="386" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">+ 每 repo 7 个 + plugin cache</text>
+
+  <rect x="330" y="318" width="230" height="80" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="445" y="344" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">打包</text>
+  <text x="445" y="366" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">双 manifest + 逐文件 sha256</text>
+  <text x="445" y="386" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">写后自解压验证再 rename</text>
+
+  <rect x="600" y="318" width="220" height="80" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="710" y="344" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">安装</text>
+  <text x="710" y="366" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">canonical: ~/.agents/skills</text>
+  <text x="710" y="386" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">placement 副本只给存在的 provider</text>
+
+  <path d="M 290,358 L 328,358" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 560,358 L 598,358" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 分享链接 -->
+  <rect x="60" y="430" width="340" height="60" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="230" y="454" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">分享：orca://skill-share/&lt;id&gt;</text>
+  <text x="230" y="474" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">deep link → 领取 grant → 冲突决策</text>
+
+  <!-- computer sidecar -->
+  <rect x="440" y="430" width="380" height="60" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="630" y="454" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">computer sidecar（独立进程）</text>
+  <text x="630" y="474" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">ELECTRON_RUN_AS_NODE fork · UI 自动化挂死唯一回收 = 杀进程</text>
+
+  <!-- 三条 why -->
+  <rect x="60" y="520" width="760" height="72" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="90" y="546" font-family="system-ui, sans-serif" font-size="11" fill="#e6ebf5">为什么 agent 反向驱动：flag 集合同时服务校验与 agent 自省，`orca computer click` 让 agent 自己开 worktree / 截图 / 填表单</text>
+  <text x="90" y="568" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">为什么 sidecar：Windows 每次 click spawn powershell 会被 Defender 标记；macOS native helper 经 LaunchServices 启动让 TCC 正确评估辅助功能授权</text>
+</svg>

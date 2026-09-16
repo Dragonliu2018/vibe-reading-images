@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="590" viewBox="0 0 860 590">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="860" height="590" fill="#0b0d14"/>
+
+  <!-- 主链 -->
+  <rect x="300" y="40" width="280" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="440" y="66" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">runMainProcessPreflight()</text>
+  <text x="440" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">单实例锁 · setter 注入 · Crashpad</text>
+
+  <rect x="300" y="140" width="280" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="166" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">registerMainProcessIpcHandlers()</text>
+  <text x="440" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">第一波 IPC（启动 barrier）</text>
+
+  <rect x="300" y="240" width="280" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">initializeReadyFoundation()</text>
+  <text x="440" y="288" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">Store · 代理 · SSH host key</text>
+
+  <rect x="300" y="340" width="280" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="440" y="366" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">initializeReadyRuntimeServices()</text>
+  <text x="440" y="388" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">new OrcaRuntimeService(...)</text>
+
+  <rect x="300" y="440" width="280" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="440" y="466" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">initializeMainProcessRuntimeLaunch()</text>
+  <text x="440" y="488" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">installRuntimeRpc · 模式分叉</text>
+
+  <rect x="300" y="540" width="280" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="440" y="566" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">openMainWindow()</text>
+
+  <path d="M 440,104 L 440,138" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 440,204 L 440,238" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 440,304 L 440,338" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 440,404 L 440,438" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 440,504 L 440,538" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- serve 分叉 -->
+  <rect x="30" y="440" width="220" height="64" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="140" y="466" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">launchServeMode()</text>
+  <text x="140" y="488" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">headless · 永不建窗口</text>
+  <path d="M 300,472 L 252,472" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="276" y="462" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">serve</text>
+
+  <!-- 深链缓冲 -->
+  <rect x="630" y="140" width="200" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="730" y="166" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">深链缓冲</text>
+  <text x="730" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">capture → consume 握手</text>
+  <path d="M 580,172 L 628,172" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 窗口装配细节 -->
+  <rect x="630" y="500" width="200" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="730" y="526" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">第二波 IPC</text>
+  <text x="730" y="548" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">窗口创建时注册</text>
+  <path d="M 580,562 L 628,562" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+</svg>

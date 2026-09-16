@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="530" viewBox="0 0 960 530">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="530" fill="#0b0d14"/>
+
+  <!-- Row 1 -->
+  <rect x="60" y="60" width="200" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="160" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">reserved</text>
+  <text x="160" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">预约写入 fence+1</text>
+
+  <rect x="340" y="60" width="220" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="450" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">new-owner-proving</text>
+  <text x="450" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">spawn token 回显</text>
+
+  <rect x="640" y="60" width="160" height="64" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="720" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4">live</text>
+  <text x="720" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">claimStatus · 30s TTL</text>
+
+  <!-- renew 自环 -->
+  <path d="M 665,60 L 665,34 L 775,34 L 775,58" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="720" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">renew ×10s</text>
+
+  <!-- Row 2 -->
+  <rect x="60" y="250" width="200" height="64" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="160" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">old-owner-stopped</text>
+  <text x="160" y="296" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">handoff 阶段</text>
+
+  <rect x="340" y="250" width="220" height="64" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="450" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">handoff: preparing</text>
+  <text x="450" y="296" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">TUI 接管准备</text>
+
+  <rect x="640" y="250" width="160" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="720" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d">evicted（终态）</text>
+  <text x="720" y="296" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">deathEvidence</text>
+
+  <!-- Row 3 -->
+  <rect x="60" y="440" width="200" height="64" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="160" y="466" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">进程重启</text>
+  <text x="160" y="486" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">lease 全部失效</text>
+
+  <rect x="640" y="440" width="160" height="64" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="720" y="466" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">unreconciled</text>
+  <text x="720" y="486" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">重启后待对账</text>
+
+  <!-- 边 -->
+  <path d="M 260,92 L 338,92" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="299" y="84" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">spawn 回显</text>
+
+  <path d="M 560,92 L 638,92" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="599" y="84" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">prove handle</text>
+
+  <path d="M 720,124 L 720,248" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="728" y="190" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">deathEvidence</text>
+
+  <path d="M 700,124 L 700,170 L 450,170 L 450,248" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="575" y="162" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">TUI 接管</text>
+
+  <path d="M 340,282 L 262,282" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="301" y="274" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">stop 旧 owner</text>
+
+  <path d="M 160,250 L 160,150 L 470,150 L 470,126" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="300" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">新 owner reserve</text>
+
+  <path d="M 260,472 L 638,472" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <path d="M 720,440 L 720,316" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="728" y="384" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">探测失败</text>
+
+  <path d="M 800,472 L 860,472 L 860,92 L 802,92" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="868" y="284" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">reconcile 通过</text>
+</svg>

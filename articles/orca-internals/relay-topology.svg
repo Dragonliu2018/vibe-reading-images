@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="600" fill="#0b0d14"/>
+
+  <!-- 手机 -->
+  <rect x="60" y="60" width="200" height="90" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="160" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">手机 app</text>
+  <text x="160" y="110" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">出站 WebSocket 连 cell</text>
+  <text x="160" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">首帧必须 relay-auth</text>
+
+  <!-- 桌面 -->
+  <rect x="640" y="60" width="220" height="90" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="750" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6ebf5">桌面主机</text>
+  <text x="750" y="110" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">出站 control + data socket</text>
+  <text x="750" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">Bearer JWT + 能力头</text>
+
+  <!-- 云端 -->
+  <rect x="330" y="40" width="270" height="330" rx="10" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="465" y="66" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d">云端</text>
+
+  <rect x="350" y="80" width="230" height="80" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="465" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">director</text>
+  <text x="465" y="126" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">invite → cell 分配 / 迁移</text>
+  <text x="465" y="146" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">assignmentEpoch 幂等</text>
+
+  <rect x="350" y="180" width="230" height="80" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="465" y="204" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">cell</text>
+  <text x="465" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">wireSplice 纯帧转接</text>
+  <text x="465" y="246" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">排队字节预算防内存打爆</text>
+
+  <rect x="350" y="280" width="230" height="70" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="465" y="304" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">push gateway</text>
+  <text x="465" y="326" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">PostgreSQL 持久队列</text>
+  <text x="465" y="344" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">APNs / FCM → OS banner</text>
+
+  <!-- 手机 → 云端 -->
+  <path d="M 260,105 L 348,120" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="304" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">配对</text>
+
+  <!-- 桌面 → 云端 -->
+  <path d="M 640,105 L 582,200" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="626" y="150" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">E2EE 帧流</text>
+
+  <!-- 桌面 → push -->
+  <path d="M 640,130 L 582,315" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="640" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c5">OS banner</text>
+
+  <!-- splice 双向 -->
+  <path d="M 380,120 L 350,120" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0"/>
+
+  <!-- 下方：桌面侧 relay daemon -->
+  <text x="60" y="416" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4">执行主机侧（桌面或远端 SSH host）</text>
+  <rect x="60" y="432" width="380" height="140" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="90" y="458" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">RelayAgentHookServer（loopback only）</text>
+  <text x="90" y="480" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">agent CLI 的 hook POST → 唯一 status store</text>
+  <text x="90" y="502" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">fail-open：任何错误回 204</text>
+  <text x="90" y="524" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">断线时 POST 进 spool 文件，重启 drain</text>
+  <text x="90" y="546" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">retired pane 抑制幽灵事件</text>
+
+  <rect x="480" y="432" width="380" height="140" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="510" y="458" font-family="system-ui, sans-serif" font-size="12" fill="#e6ebf5">信封发布与移动订阅</text>
+  <text x="510" y="480" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">publishAgentHookEnvelope：超帧先 shed 大字段</text>
+  <text x="510" y="502" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">（interactivePrompt 最后 shed）+ 250ms×40 重投</text>
+  <text x="510" y="524" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">MobileSocketWiring：E2EEChannel + DeviceRegistry</text>
+  <text x="510" y="546" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c5">request-driven replay：客户端重连后主动拉</text>
+</svg>
