@@ -1,0 +1,54 @@
+<svg width="740" height="450" viewBox="0 0 740 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="740" height="450" fill="#0b0d14"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <text x="370" y="30" text-anchor="middle" fill="#e8e8f0" font-size="17" font-weight="bold" font-family="system-ui, sans-serif">Paseo 包依赖（npm workspaces）</text>
+
+  <!-- Row 1: clients -->
+  <rect x="40" y="70" width="180" height="48" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="130" y="92" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">app</text>
+  <text x="130" y="109" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">Expo 三端客户端</text>
+  <rect x="280" y="70" width="180" height="48" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="370" y="92" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">cli</text>
+  <text x="370" y="109" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">Docker 风格命令面</text>
+  <rect x="520" y="70" width="180" height="48" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="610" y="92" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">desktop</text>
+  <text x="610" y="109" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">Electron 壳</text>
+
+  <!-- Row 2 -->
+  <rect x="40" y="180" width="180" height="48" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="130" y="202" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">client</text>
+  <text x="130" y="219" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">共享 SDK 引擎</text>
+  <rect x="280" y="180" width="180" height="48" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="370" y="202" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">server</text>
+  <text x="370" y="219" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">daemon 核心</text>
+
+  <!-- Row 3 -->
+  <rect x="280" y="290" width="180" height="48" rx="5" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="370" y="312" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">relay</text>
+  <text x="370" y="329" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">E2EE 协议库</text>
+
+  <!-- Row 4: protocol bar -->
+  <rect x="40" y="385" width="660" height="42" rx="5" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="370" y="403" text-anchor="middle" fill="#e8e8f0" font-size="13" font-family="system-ui, sans-serif">protocol — zod schema 单一真源</text>
+  <text x="370" y="419" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">app / cli / server / plugin / desktop 亦直接依赖（箭头略）</text>
+
+  <!-- arrows -->
+  <path d="M130,118 L130,180" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="140" y="153" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">internal/daemon-client</text>
+  <path d="M300,118 L190,180" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M370,118 L370,180" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="382" y="153" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">结构化输出</text>
+  <path d="M520,94 L460,94" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="452" y="86" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif" text-anchor="end" paint-order="stroke" stroke="#0b0d14" stroke-width="3">捆绑 bin/paseo</text>
+  <path d="M610,118 L450,180" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M280,204 L220,204" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M370,228 L370,290" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M220,228 L300,290" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M130,228 L130,385" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M370,338 L370,385" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+</svg>

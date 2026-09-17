@@ -1,0 +1,85 @@
+<svg width="840" height="560" viewBox="0 0 840 560" xmlns="http://www.w3.org/2000/svg">
+  <rect width="840" height="560" fill="#0b0d14"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <text x="420" y="30" text-anchor="middle" fill="#e8e8f0" font-size="17" font-weight="bold" font-family="system-ui, sans-serif">一次 paseo run 的端到端数据流</text>
+  <text x="225" y="56" text-anchor="middle" fill="#4ecdc4" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">请求路径（下行）</text>
+  <text x="615" y="56" text-anchor="middle" fill="#f9ca24" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">流式回传（上行）</text>
+
+  <!-- Left column: request path -->
+  <rect x="60" y="70" width="330" height="52" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="225" y="92" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">paseo run / App composer</text>
+  <text x="225" y="110" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">客户端发起（runRunCommand）</text>
+
+  <rect x="60" y="152" width="330" height="52" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="225" y="174" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">DaemonClient.createAgent()</text>
+  <text x="225" y="192" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">SDK 关联等待（waiters）</text>
+
+  <rect x="60" y="234" width="330" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="225" y="256" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">hello 握手 → Session</text>
+  <text x="225" y="274" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">server_info 能力协商</text>
+
+  <rect x="60" y="316" width="330" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="225" y="338" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">create_agent_request</text>
+  <text x="225" y="356" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">Session 责任链分发</text>
+
+  <rect x="60" y="398" width="330" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="225" y="420" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">AgentManager.createAgent()</text>
+  <text x="225" y="438" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">建档 initializing</text>
+
+  <rect x="60" y="480" width="330" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="225" y="502" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">provider session spawn</text>
+  <text x="225" y="520" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">startTurn() 注入 prompt</text>
+
+  <!-- Right column: stream path -->
+  <rect x="450" y="480" width="330" height="52" rx="5" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="615" y="502" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">SDK 消息 / ACP sessionUpdate</text>
+  <text x="615" y="520" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">AsyncGenerator 泵</text>
+
+  <rect x="450" y="398" width="330" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="615" y="420" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">AgentStreamEvent</text>
+  <text x="615" y="438" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">60ms coalescer 合批</text>
+
+  <rect x="450" y="316" width="330" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="615" y="338" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">timeline append</text>
+  <text x="615" y="356" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">epoch / seq 游标</text>
+
+  <rect x="450" y="234" width="330" height="52" rx="5" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="615" y="256" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">agent_stream 广播</text>
+  <text x="615" y="274" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">WebSocket JSON 帧</text>
+
+  <rect x="450" y="152" width="330" height="52" rx="5" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="615" y="174" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">DaemonClient 三级分发</text>
+  <text x="615" y="192" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">waiters + on(type)</text>
+
+  <rect x="450" y="70" width="330" height="52" rx="5" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="615" y="92" text-anchor="middle" fill="#e8e8f0" font-size="12.5" font-family="system-ui, sans-serif">App 渲染管线</text>
+  <text x="615" y="110" text-anchor="middle" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif">rAF 攒批 + paced reveal</text>
+
+  <!-- Left column arrows (downward) -->
+  <path d="M225,122 L225,152" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M225,204 L225,234" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="237" y="224" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">WebSocket</text>
+  <path d="M225,286 L225,316" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="237" y="306" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">zod 校验</text>
+  <path d="M225,368 L225,398" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="237" y="388" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">域分发</text>
+  <path d="M225,450 L225,480" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="237" y="470" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">spawn 子进程</text>
+
+  <!-- Connector: provider -> stream -->
+  <path d="M390,506 L450,506" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Right column arrows (upward) -->
+  <path d="M615,480 L615,450" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M615,398 L615,368" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="627" y="388" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">coalesce 60ms</text>
+  <path d="M615,316 L615,286" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M615,234 L615,204" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M615,152 L615,122" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="627" y="142" fill="#8b93b8" font-size="10" font-family="system-ui, sans-serif" paint-order="stroke" stroke="#0b0d14" stroke-width="3">reducer 队列</text>
+</svg>
