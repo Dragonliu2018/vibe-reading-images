@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="410" viewBox="0 0 760 410">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="760" height="410" fill="#0b0d14"/>
+  <rect x="60" y="40" width="400" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="260.0" y="67.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">herdr --remote &lt;target&gt;</text>
+  <text x="260.0" y="83.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">remote/args.rs · 剥参数回写 reattach 命令</text>
+  <rect x="60" y="114" width="400" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="260.0" y="141.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">prepare_remote_herdr</text>
+  <text x="260.0" y="157.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">attach.rs:1080 · 探测远端 / 交互确认安装</text>
+  <rect x="60" y="188" width="400" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="260.0" y="215.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">ensure_remote_server_ready</text>
+  <text x="260.0" y="231.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">attach.rs:1688 · restart_policy 判定</text>
+  <rect x="60" y="262" width="400" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="260.0" y="289.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">SshStdioBridge</text>
+  <text x="260.0" y="305.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">attach.rs:2447 · 本地 socket ↔ ssh stdio 双线程</text>
+  <rect x="60" y="336" width="400" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="260.0" y="363.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">本地 client 经桥附加</text>
+  <text x="260.0" y="379.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">HERDR_REATTACH_COMMAND 注入</text>
+  <rect x="520" y="200" width="210" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="625.0" y="225.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">EndpointSupervisors</text>
+  <text x="625.0" y="241.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">client/endpoint/supervisor.rs</text>
+  <text x="625.0" y="255.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">保存机器指数退避重连</text>
+  <path d="M260,94 L260,114" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M260,168 L260,188" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M260,242 L260,262" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M260,316 L260,336" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M520,240 L460,289" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

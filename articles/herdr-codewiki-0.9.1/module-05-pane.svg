@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="380" viewBox="0 0 700 380">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="700" height="380" fill="#0b0d14"/>
+  <rect x="130" y="40" width="440" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="350.0" y="67.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">spawn 请求</text>
+  <text x="350.0" y="83.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">app/creation.rs · Workspace::new_with_extra_env</text>
+  <rect x="130" y="114" width="440" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="350.0" y="139.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">spawn_command_builder 五步组装</text>
+  <text x="350.0" y="155.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">ghostty Terminal → 压缩任务 → portable-pty 起进程</text>
+  <text x="350.0" y="169.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">→ PtyIoActor → 检测任务</text>
+  <rect x="130" y="210" width="440" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="350.0" y="237.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">PaneRuntime</text>
+  <text x="350.0" y="253.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">pane.rs:1251 · 仿真核心 + PTY 句柄 + 检测 + 压缩</text>
+  <rect x="30" y="300" width="200" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="130.0" y="327.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">PaneRuntimeIo</text>
+  <text x="130.0" y="343.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">Actor（生产）/ TestChannel（测试）</text>
+  <rect x="250" y="300" width="200" height="54" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="350.0" y="327.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">检测任务</text>
+  <text x="350.0" y="343.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">300ms tick · 进程 + 屏幕 + OSC</text>
+  <rect x="470" y="300" width="200" height="54" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="570.0" y="327.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">TerminalCompressionTask</text>
+  <text x="570.0" y="343.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">空闲 250ms · 全局 4 许可</text>
+  <path d="M350,94 L350,114" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M350,178 L350,210" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M130,264 L130,300" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M350,264 L350,300" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M570,264 L570,300" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

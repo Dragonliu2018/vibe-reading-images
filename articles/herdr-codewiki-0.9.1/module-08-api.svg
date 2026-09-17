@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="370" viewBox="0 0 800 370">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="370" fill="#0b0d14"/>
+  <rect x="40" y="40" width="300" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="190.0" y="67.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">CLI / Agent / 插件调用方</text>
+  <text x="190.0" y="83.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">NDJSON 单行请求</text>
+  <rect x="40" y="114" width="300" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="190.0" y="141.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">线程-per-connection</text>
+  <text x="190.0" y="157.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">api/server.rs · handle_connection_with_stop_control</text>
+  <rect x="40" y="188" width="300" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="190.0" y="215.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">dispatch_to_app → api_rx</text>
+  <text x="190.0" y="231.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">阻塞等待 respond_to（5s 超时）</text>
+  <rect x="40" y="262" width="300" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="190.0" y="289.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">App 事件循环处理</text>
+  <text x="190.0" y="305.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">app/api.rs · 104 Method match</text>
+  <rect x="440" y="100" width="300" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="590.0" y="127.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">EventHub</text>
+  <text x="590.0" y="143.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">api/event_hub.rs · 512 条环形日志</text>
+  <rect x="440" y="195" width="300" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="590.0" y="222.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">subscriptions 100ms 轮询</text>
+  <text x="590.0" y="238.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">事件增量 + 快照 diff 两类订阅</text>
+  <rect x="440" y="290" width="300" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="590.0" y="317.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">wait.rs 混合等待</text>
+  <text x="590.0" y="333.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">事件优先 + agent.get 探测兜底</text>
+  <path d="M190,94 L190,114" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M190,168 L190,188" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M190,242 L190,262" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M340,289 L440,127" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M590,195 L590,154" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M740,317 L775,317 L775,127 L740,127" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M40,289 L20,289 L20,141 L40,141" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="115" y="106" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">respond_to JSON 回写</text>
+</svg>

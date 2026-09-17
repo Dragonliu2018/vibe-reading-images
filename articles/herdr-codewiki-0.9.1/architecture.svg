@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="616" viewBox="0 0 820 616">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="616" fill="#0b0d14"/>
+
+  <!-- 接入层 -->
+  <rect x="20" y="16" width="668" height="106" rx="8" fill="none" stroke="#4ecdc4" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.8"/>
+  <text x="36" y="40" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="14" font-weight="600">接入层 · 用户与 Agent 的入口</text>
+  <rect x="40" y="54" width="150" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="115" y="76" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">TUI 瘦客户端</text>
+  <text x="115" y="95" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">client/</text>
+  <rect x="202" y="54" width="150" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="277" y="76" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">CLI 子命令</text>
+  <text x="277" y="95" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">cli/ · ipc.rs</text>
+  <rect x="364" y="54" width="150" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="439" y="76" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">Agent 与插件</text>
+  <text x="439" y="95" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">Socket API 调用方</text>
+  <rect x="526" y="54" width="150" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="601" y="76" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">SSH 远程客户端</text>
+  <text x="601" y="95" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">remote/ · endpoint/</text>
+
+  <!-- 协议层 -->
+  <rect x="20" y="140" width="668" height="106" rx="8" fill="none" stroke="#6c8ef5" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.8"/>
+  <text x="36" y="164" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="14" font-weight="600">协议层 · 两条通信栈</text>
+  <rect x="40" y="178" width="308" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="194" y="200" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">客户端 wire 协议 + surface delta</text>
+  <text x="194" y="219" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">protocol/（herdr-client.sock）</text>
+  <rect x="368" y="178" width="308" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="522" y="200" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">JSON Socket API（schema 驱动）</text>
+  <text x="522" y="219" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">api/（herdr.sock）</text>
+
+  <!-- 应用编排层 -->
+  <rect x="20" y="264" width="668" height="106" rx="8" fill="none" stroke="#f9ca24" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.8"/>
+  <text x="36" y="288" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="14" font-weight="600">应用编排层 · headless server 进程</text>
+  <rect x="40" y="302" width="200" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="140" y="324" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">HeadlessServer</text>
+  <text x="140" y="343" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">server/</text>
+  <rect x="256" y="302" width="200" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="356" y="324" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">App 状态机</text>
+  <text x="356" y="343" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">app/ · update.rs</text>
+  <rect x="472" y="302" width="200" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="572" y="324" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">工作区与布局</text>
+  <text x="572" y="343" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">workspace/ · layout.rs</text>
+
+  <!-- 终端运行时层 -->
+  <rect x="20" y="388" width="668" height="106" rx="8" fill="none" stroke="#ff6b9d" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.8"/>
+  <text x="36" y="412" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="14" font-weight="600">终端运行时层 · 每个 pane 一份</text>
+  <rect x="40" y="426" width="200" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="140" y="448" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">Pane 运行时</text>
+  <text x="140" y="467" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">pane.rs · pane/</text>
+  <rect x="256" y="426" width="200" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="356" y="448" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">终端仿真</text>
+  <text x="356" y="467" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">ghostty/ + libghostty-vt</text>
+  <rect x="472" y="426" width="200" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="572" y="448" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">PTY Actor</text>
+  <text x="572" y="467" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">pty/（专用线程）</text>
+
+  <!-- 支撑层 -->
+  <rect x="20" y="512" width="668" height="86" rx="8" fill="none" stroke="#b388ff" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.8"/>
+  <text x="36" y="534" fill="#b388ff" font-family="system-ui, sans-serif" font-size="14" font-weight="600">支撑层</text>
+  <rect x="40" y="544" width="150" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="115" y="562" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="12.5" text-anchor="middle">Agent 检测与集成</text>
+  <text x="115" y="579" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">detect/ · integration/</text>
+  <rect x="202" y="544" width="150" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="277" y="562" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="12.5" text-anchor="middle">会话持久化</text>
+  <text x="277" y="579" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">persist/ · session.rs</text>
+  <rect x="364" y="544" width="150" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="439" y="562" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="12.5" text-anchor="middle">输入解码</text>
+  <text x="439" y="579" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">input/ · raw_input.rs</text>
+  <rect x="526" y="544" width="150" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="601" y="562" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="12.5" text-anchor="middle">配置与平台</text>
+  <text x="601" y="579" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">config/ · platform/</text>
+
+  <!-- 依赖方向箭头（右侧空白区） -->
+  <text x="760" y="40" fill="#8892b0" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle">依赖方向</text>
+  <text x="760" y="57" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">上层依赖下层</text>
+  <path d="M760,72 L760,560" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+</svg>

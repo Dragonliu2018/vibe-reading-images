@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="370" viewBox="0 0 700 370">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="700" height="370" fill="#0b0d14"/>
+  <rect x="180" y="40" width="340" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="350.0" y="67.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">client socket 监听（nonblocking accept）</text>
+  <text x="350.0" y="83.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">server/client_accept.rs</text>
+  <rect x="180" y="114" width="340" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="350.0" y="141.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">每连接一线程：握手 + 读循环</text>
+  <text x="350.0" y="157.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">server/client_transport.rs</text>
+  <rect x="30" y="188" width="640" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="350.0" y="215.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">HeadlessServer::run 主循环</text>
+  <text x="350.0" y="231.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">server/headless.rs:394 · tokio::select! 五路复用 · 单线程独占 App</text>
+  <rect x="30" y="282" width="200" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="130.0" y="314.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">渲染流</text>
+  <text x="130.0" y="330.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">server/render_stream.rs</text>
+  <rect x="250" y="282" width="200" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="350.0" y="314.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">输入注入</text>
+  <text x="350.0" y="330.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">server/pane_input.rs</text>
+  <rect x="470" y="282" width="200" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="570.0" y="314.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">live handoff</text>
+  <text x="570.0" y="330.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">server/handoff.rs</text>
+  <path d="M350,94 L350,114" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="358" y="108" fill="#8892b0" font-family="system-ui, sans-serif" font-size="11" text-anchor="start">ServerEvent</text>
+  <path d="M350,168 L350,188" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M130,242 L130,282" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M350,242 L350,282" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M570,242 L570,282" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

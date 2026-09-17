@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="390" viewBox="0 0 720 390">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="720" height="390" fill="#0b0d14"/>
+  <rect x="30" y="40" width="300" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="180.0" y="72.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">API 请求（104 个 Method）</text>
+  <text x="180.0" y="88.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">app/api.rs · api_rx（unbounded）</text>
+  <rect x="390" y="40" width="300" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="540.0" y="72.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">AppEvent 后台事件</text>
+  <text x="540.0" y="88.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">events.rs · event_rx（有界 256）</text>
+  <rect x="110" y="152" width="500" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="360.0" y="184.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">reducer：handle_api_request / handle_app_event</text>
+  <text x="360.0" y="200.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">app/actions.rs · 纯函数状态变更</text>
+  <rect x="110" y="252" width="500" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="360.0" y="279.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">AppState（纯数据，可 Clone/PartialEq）</text>
+  <text x="360.0" y="295.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">app/state.rs · 无 channel 无 async</text>
+  <rect x="30" y="346" width="200" height="40" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="130.0" y="366.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">TerminalRuntimeRegistry</text>
+  <text x="130.0" y="382.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">活 PTY 运行时</text>
+  <rect x="260" y="346" width="200" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="360.0" y="366.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">EventHub</text>
+  <text x="360.0" y="382.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">512 条事件环形日志</text>
+  <rect x="490" y="346" width="200" height="40" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="590.0" y="366.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">RenderSignal + Notify</text>
+  <text x="590.0" y="382.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">脏源合并与渲染唤醒</text>
+  <path d="M180,104 L180,152" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M540,104 L540,152" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M360,216 L360,252" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M130,306 L130,346" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M360,306 L360,346" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M590,306 L590,346" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="350" viewBox="0 0 760 350">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="760" height="350" fill="#0b0d14"/>
+  <text x="200" y="40" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">私有 wire 协议（同安装）</text>
+  <text x="560" y="40" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">稳定 endpoint 协议（跨版本）</text>
+  <rect x="30" y="54" width="340" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="200.0" y="81.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">ClientMessage / ServerMessage</text>
+  <text x="200.0" y="97.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">protocol/wire.rs · bincode · PROTOCOL_VERSION 22</text>
+  <rect x="430" y="54" width="300" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="580.0" y="81.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">EndpointClientHello / Welcome</text>
+  <text x="580.0" y="97.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">protocol/endpoint.rs · JSON · generation 1</text>
+  <rect x="30" y="150" width="340" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="200.0" y="177.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">variant tag 冻结（只能 append）</text>
+  <text x="200.0" y="193.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">SHA256 fixture 测试守护</text>
+  <rect x="430" y="150" width="300" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="580.0" y="177.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">EndpointControl{kind, data}</text>
+  <text x="580.0" y="193.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">append-only 扩展通道 · 旧 client 忽略未知 kind</text>
+  <rect x="30" y="260" width="200" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="130.0" y="280.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">surface delta</text>
+  <text x="130.0" y="296.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">行级 CellSpan patch</text>
+  <text x="130.0" y="310.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">最多 4096 span</text>
+  <rect x="255" y="260" width="200" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="355.0" y="280.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">surface reuse</text>
+  <text x="355.0" y="296.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">零 cell 传输</text>
+  <text x="355.0" y="310.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">只发 revision</text>
+  <rect x="480" y="260" width="250" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="605.0" y="280.0" fill="#e6e9f5" font-family="system-ui, sans-serif" font-size="13" text-anchor="middle">render_ansi BlitEncoder</text>
+  <text x="605.0" y="296.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">cell → ANSI 视觉差分</text>
+  <text x="605.0" y="310.0" fill="#8892b0" font-family="system-ui, sans-serif" font-size="10.5" text-anchor="middle">server 与 client 复用</text>
+  <path d="M200,108 L200,150" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M580,108 L580,150" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M130,260 L500,204" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M355,260 L600,204" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>
