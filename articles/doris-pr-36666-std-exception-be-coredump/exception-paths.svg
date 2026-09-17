@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="580" viewBox="0 0 800 580">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e74c3c"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="580" fill="#0b0d14"/>
+
+  <text x="400" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e8eaf0">同一处 throw，两条出口：coredump vs 转错误</text>
+
+  <!-- 主链路 -->
+  <rect x="230" y="52" width="340" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="79" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf0">Pipeline 工作线程</text>
+
+  <path d="M400,96 L400,126" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="210" y="132" width="380" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="400" y="159" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf0">算子执行（sort / scan / 聚合 / UDF）</text>
+
+  <path d="M400,176 L400,206" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 异常抛出点 -->
+  <rect x="170" y="212" width="460" height="88" rx="8" fill="#13162a" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="400" y="236" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#ff6b9d">三处异常抛出点</text>
+  <text x="400" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#a8b0c8">throw std::runtime_error / std::length_error / std::exception</text>
+  <text x="400" y="282" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#a8b0c8">sort_cursor.h · bitmap_value.h · once.h</text>
+
+  <!-- 列标签 -->
+  <text x="60" y="326" text-anchor="start" font-family="system-ui, sans-serif" font-size="14" fill="#ff6b9d">改动前（std 异常）</text>
+  <text x="740" y="326" text-anchor="end" font-family="system-ui, sans-serif" font-size="14" fill="#7bed9f">改动后（doris::Exception）</text>
+
+  <!-- 分支箭头 -->
+  <path d="M225,300 L225,338" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+  <path d="M575,300 L575,338" stroke="#7bed9f" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- 左列：改动前 -->
+  <rect x="75" y="342" width="300" height="48" rx="8" fill="#13162a" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="225" y="369" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf0">catch (const doris::Exception&amp;) 不匹配</text>
+
+  <path d="M225,390 L225,418" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+
+  <rect x="75" y="422" width="300" height="48" rx="8" fill="#13162a" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="225" y="449" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf0">逃逸线程函数 → std::terminate</text>
+
+  <path d="M225,470 L225,498" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+
+  <rect x="75" y="502" width="300" height="52" rx="8" fill="#13162a" stroke="#e74c3c" stroke-width="2.5"/>
+  <text x="225" y="524" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d">整个 BE 进程崩溃（coredump）</text>
+  <text x="225" y="544" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#a8b0c8">所有在跑查询被杀</text>
+
+  <!-- 右列：改动后 -->
+  <rect x="425" y="342" width="300" height="48" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="575" y="369" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf0">RETURN_IF_CATCH_EXCEPTION 捕获</text>
+
+  <path d="M575,390 L575,418" stroke="#7bed9f" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <rect x="425" y="422" width="300" height="48" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="1.5"/>
+  <text x="575" y="449" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf0">转为 Status(INTERNAL_ERROR)</text>
+
+  <path d="M575,470 L575,498" stroke="#7bed9f" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <rect x="425" y="502" width="300" height="52" rx="8" fill="#13162a" stroke="#7bed9f" stroke-width="2.5"/>
+  <text x="575" y="524" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f">仅当前查询失败</text>
+  <text x="575" y="544" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#a8b0c8">错误信息返回 FE</text>
+</svg>
