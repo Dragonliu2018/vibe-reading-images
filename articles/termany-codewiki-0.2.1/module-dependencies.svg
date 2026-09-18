@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="625" viewBox="0 0 820 625" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="625" fill="#0b0d14"/>
+  <text x="30" y="24" font-size="16" font-weight="600" fill="#e6e9f5">模块依赖关系（import / 派发方向）</text>
+
+  <!-- Tauri 桌面壳 -->
+  <rect x="310" y="36" width="200" height="48" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="410" y="58" font-size="14" font-weight="600" fill="#80c7ff" text-anchor="middle">Tauri 桌面壳</text>
+  <text x="410" y="76" font-size="11" fill="#a8b2cf" text-anchor="middle">apps/desktop · Rust</text>
+
+  <!-- apps/web 组 -->
+  <rect x="20" y="120" width="230" height="399" rx="10" fill="none" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.7"/>
+  <text x="135" y="142" font-size="13" font-weight="600" fill="#6c8ef5" text-anchor="middle">apps/web · React UI</text>
+  <rect x="35" y="155" width="200" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="135" y="181" font-size="12" fill="#e6e9f5" text-anchor="middle">状态与布局</text>
+  <text x="135" y="200" font-size="11" fill="#a8b2cf" text-anchor="middle">state/store.ts · SplitView</text>
+  <rect x="35" y="249" width="200" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="135" y="275" font-size="12" fill="#e6e9f5" text-anchor="middle">终端引擎</text>
+  <text x="135" y="294" font-size="11" fill="#a8b2cf" text-anchor="middle">terminal/manager.ts</text>
+  <rect x="35" y="343" width="200" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="135" y="369" font-size="12" fill="#e6e9f5" text-anchor="middle">Agent 聊天前端</text>
+  <text x="135" y="388" font-size="11" fill="#a8b2cf" text-anchor="middle">AgentPane + agent*.ts</text>
+  <rect x="35" y="437" width="200" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1" opacity="0.85"/>
+  <text x="135" y="463" font-size="12" fill="#e6e9f5" text-anchor="middle">主题与组件</text>
+  <text x="135" y="482" font-size="11" fill="#a8b2cf" text-anchor="middle">themes · i18n · components</text>
+
+  <!-- packages/core -->
+  <rect x="340" y="270" width="160" height="100" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="298" font-size="13" font-weight="600" fill="#f9ca24" text-anchor="middle">packages/core</text>
+  <text x="410" y="322" font-size="11" fill="#e6e9f5" text-anchor="middle">ITerminalBackend</text>
+  <text x="410" y="344" font-size="11" fill="#a8b2cf" text-anchor="middle">唯一接缝 · 零依赖</text>
+
+  <!-- apps/server 组 -->
+  <rect x="560" y="120" width="250" height="350" rx="10" fill="none" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.7"/>
+  <text x="685" y="142" font-size="13" font-weight="600" fill="#4ecdc4" text-anchor="middle">apps/server · Node</text>
+  <rect x="575" y="155" width="220" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1" opacity="0.85"/>
+  <text x="685" y="181" font-size="12" fill="#e6e9f5" text-anchor="middle">PTY 服务</text>
+  <text x="685" y="200" font-size="11" fill="#a8b2cf" text-anchor="middle">index.ts · wireSession + 路由</text>
+  <rect x="575" y="251" width="105" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1" opacity="0.85"/>
+  <text x="627" y="277" font-size="12" fill="#e6e9f5" text-anchor="middle">ACP 运行时</text>
+  <text x="627" y="296" font-size="10" fill="#a8b2cf" text-anchor="middle">acpRuntime.ts</text>
+  <rect x="690" y="251" width="105" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1" opacity="0.85"/>
+  <text x="742" y="277" font-size="12" fill="#e6e9f5" text-anchor="middle">活动与会话</text>
+  <text x="742" y="296" font-size="10" fill="#a8b2cf" text-anchor="middle">agent*.ts</text>
+  <rect x="575" y="347" width="220" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1" opacity="0.85"/>
+  <text x="685" y="373" font-size="12" fill="#e6e9f5" text-anchor="middle">Git 与 SSH</text>
+  <text x="685" y="392" font-size="11" fill="#a8b2cf" text-anchor="middle">git.ts · ssh*.ts</text>
+  <text x="685" y="445" font-size="11" fill="#8b93b8" text-anchor="middle">index.ts 统一路由 ~40 REST 端点</text>
+
+  <!-- ① 桌面壳 → web -->
+  <path d="M 350 84 L 350 102 L 135 102 L 135 120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- ② 桌面壳 → server -->
+  <path d="M 470 84 L 470 102 L 685 102 L 685 120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- ③ 终端引擎 → core -->
+  <path d="M 235 281 L 287 281 L 287 310 L 340 310" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- ④ Agent 聊天前端 → core -->
+  <path d="M 235 375 L 262 375 L 262 345 L 340 345" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- ⑤ ACP 运行时 → core -->
+  <path d="M 575 283 L 545 283 L 545 320 L 500 320" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- ⑥⑦⑧ PTY → ACP / 活动 / Git -->
+  <path d="M 610 219 L 610 251" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 760 219 L 760 251" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 685 219 L 685 347" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <!-- ⑨ 状态与布局 → 终端引擎 -->
+  <path d="M 135 219 L 135 249" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- 边编号 -->
+  <circle cx="245" cy="102" r="9" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="245" y="106" font-size="11" fill="#e6e9f5" text-anchor="middle">1</text>
+  <circle cx="575" cy="102" r="9" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="575" y="106" font-size="11" fill="#e6e9f5" text-anchor="middle">2</text>
+  <circle cx="287" cy="250" r="9" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="287" y="254" font-size="11" fill="#e6e9f5" text-anchor="middle">3</text>
+  <circle cx="262" cy="361" r="9" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="262" y="365" font-size="11" fill="#e6e9f5" text-anchor="middle">4</text>
+  <circle cx="545" cy="302" r="9" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="545" y="306" font-size="11" fill="#e6e9f5" text-anchor="middle">5</text>
+  <circle cx="628" cy="235" r="9" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="628" y="239" font-size="11" fill="#e6e9f5" text-anchor="middle">6</text>
+  <circle cx="778" cy="235" r="9" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="778" y="239" font-size="11" fill="#e6e9f5" text-anchor="middle">7</text>
+  <circle cx="685" cy="240" r="9" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="685" y="244" font-size="11" fill="#e6e9f5" text-anchor="middle">8</text>
+  <circle cx="158" cy="234" r="9" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="158" y="238" font-size="11" fill="#e6e9f5" text-anchor="middle">9</text>
+
+  <!-- 图例 -->
+  <text x="30" y="565" font-size="11" fill="#a8b2cf">① webview 载入 web/dist　　② spawn 并看护 Node server　　③ WebSocketBackend（唯一接缝的实现）</text>
+  <text x="30" y="590" font-size="11" fill="#a8b2cf">④ defaultAgentRuntime 预设　　⑤ AgentRuntimeConfig　　⑥⑦⑧ index.ts 统一路由 REST 端点　　⑨ pane id 会话路由</text>
+</svg>

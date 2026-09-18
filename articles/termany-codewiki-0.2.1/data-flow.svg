@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="734" viewBox="0 0 820 734" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="734" fill="#0b0d14"/>
+  <text x="30" y="24" font-size="16" font-weight="600" fill="#e6e9f5">Termany v0.2.1 两条端到端数据流</text>
+  <rect x="586" y="14" width="10" height="10" fill="#6c8ef5"/>
+  <text x="601" y="23" font-size="11" fill="#a8b2cf">web</text>
+  <rect x="634" y="14" width="10" height="10" fill="#f9ca24"/>
+  <text x="649" y="23" font-size="11" fill="#a8b2cf">core</text>
+  <rect x="682" y="14" width="10" height="10" fill="#4ecdc4"/>
+  <text x="697" y="23" font-size="11" fill="#a8b2cf">server</text>
+  <rect x="730" y="14" width="10" height="10" fill="#b388ff"/>
+  <text x="745" y="23" font-size="11" fill="#a8b2cf">外部</text>
+  <rect x="778" y="14" width="10" height="10" fill="none" stroke="#7a86b3" stroke-dasharray="3 2"/>
+  <text x="793" y="23" font-size="11" fill="#a8b2cf">传输</text>
+
+  <!-- 泳道分隔线 -->
+  <line x1="415" y1="40" x2="415" y2="700" stroke="#7a86b3" stroke-width="1" stroke-dasharray="4 4" opacity="0.4"/>
+
+  <!-- 链路 A -->
+  <text x="45" y="46" font-size="13" font-weight="600" fill="#e6e9f5">链路 A · 终端按键 → shell 输出（PTY 往返）</text>
+  <rect x="55" y="64" width="260" height="30" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="185" y="84" font-size="12" fill="#e6e9f5" text-anchor="middle">TerminalPane · term.onData</text>
+  <path d="M 185 94 L 185 120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="55" y="120" width="260" height="30" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="185" y="140" font-size="12" fill="#e6e9f5" text-anchor="middle">writeTerminalInput()</text>
+  <path d="M 185 150 L 185 176" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="55" y="176" width="260" height="30" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="185" y="196" font-size="12" fill="#e6e9f5" text-anchor="middle">WebSocketBackend.write()</text>
+  <path d="M 185 206 L 185 232" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="55" y="232" width="260" height="30" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="185" y="252" font-size="12" fill="#a8b2cf" text-anchor="middle">WS 文本帧 {type:"input"}</text>
+  <path d="M 185 262 L 185 288" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="55" y="288" width="260" height="30" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="185" y="308" font-size="12" fill="#e6e9f5" text-anchor="middle">applyClientMessage() → pty.write</text>
+  <path d="M 185 318 L 185 344" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="55" y="344" width="260" height="30" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="185" y="364" font-size="12" fill="#e6e9f5" text-anchor="middle">login shell / ssh（PTY 子进程）</text>
+
+  <text x="220" y="396" font-size="11" fill="#7a86b3" text-anchor="middle">── 输出反向流 ──</text>
+
+  <rect x="55" y="404" width="260" height="30" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="185" y="424" font-size="12" fill="#e6e9f5" text-anchor="middle">emit()：ws.send + ring + 活动追踪</text>
+  <path d="M 185 434 L 185 460" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="55" y="460" width="260" height="30" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="185" y="480" font-size="12" fill="#a8b2cf" text-anchor="middle">WS 原始文本帧（无包装）</text>
+  <path d="M 185 490 L 185 516" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="55" y="516" width="260" height="30" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="185" y="536" font-size="12" fill="#e6e9f5" text-anchor="middle">writeSessionData() → term.write</text>
+  <path d="M 185 546 L 185 572" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="55" y="572" width="260" height="30" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="185" y="592" font-size="12" fill="#e6e9f5" text-anchor="middle">xterm.js 解析 ANSI · WebGL 渲染</text>
+
+  <!-- 链路 A 退出旁路 -->
+  <path d="M 315 359 L 370 359 L 370 634 L 92 634 L 92 664" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)" fill="none" opacity="0.85"/>
+  <text x="231" y="628" font-size="11" fill="#a8b2cf" text-anchor="middle" paint-order="stroke" stroke="#0b0d14" stroke-width="3">shell 退出旁路</text>
+  <rect x="45" y="664" width="95" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="92" y="689" font-size="12" fill="#e6e9f5" text-anchor="middle">pty.onExit()</text>
+  <path d="M 140 684 L 165 684" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="165" y="664" width="110" height="40" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="220" y="689" font-size="12" fill="#a8b2cf" text-anchor="middle">CLOSE 4000 帧</text>
+  <path d="M 275 684 L 300 684" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="300" y="664" width="100" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="350" y="681" font-size="11" fill="#e6e9f5" text-anchor="middle">restart ≤5</text>
+  <text x="350" y="697" font-size="11" fill="#e6e9f5" text-anchor="middle">close pane</text>
+
+  <!-- 链路 B -->
+  <text x="445" y="46" font-size="13" font-weight="600" fill="#e6e9f5">链路 B · agent 聊天一轮（ACP 流式）</text>
+  <rect x="455" y="64" width="260" height="30" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="585" y="84" font-size="12" fill="#e6e9f5" text-anchor="middle">AgentPane.submit() → fetch</text>
+  <path d="M 585 94 L 585 120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="455" y="120" width="260" height="30" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="585" y="140" font-size="12" fill="#a8b2cf" text-anchor="middle">POST /api/agent/acp/chat（NDJSON）</text>
+  <path d="M 585 150 L 585 176" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="455" y="176" width="260" height="30" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="585" y="196" font-size="12" fill="#e6e9f5" text-anchor="middle">promptAcpRuntime → acquire()</text>
+  <path d="M 585 206 L 585 232" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="455" y="232" width="260" height="30" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="585" y="252" font-size="12" fill="#e6e9f5" text-anchor="middle">Runtime.prompt()（防重入）</text>
+  <path d="M 585 262 L 585 288" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="455" y="288" width="260" height="30" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="585" y="308" font-size="12" fill="#a8b2cf" text-anchor="middle">session/prompt · stdio JSON-RPC</text>
+  <path d="M 585 318 L 585 344" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="455" y="344" width="260" height="30" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="585" y="364" font-size="12" fill="#e6e9f5" text-anchor="middle">agent CLI / ACP bridge 子进程</text>
+
+  <text x="630" y="396" font-size="11" fill="#7a86b3" text-anchor="middle">── 流式回复 ──</text>
+
+  <rect x="455" y="404" width="260" height="30" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="585" y="424" font-size="12" fill="#a8b2cf" text-anchor="middle">session/update 通知流</text>
+  <path d="M 585 434 L 585 460" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="455" y="460" width="260" height="30" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="585" y="480" font-size="12" fill="#e6e9f5" text-anchor="middle">emit → res.write（NDJSON 行）</text>
+  <path d="M 585 490 L 585 516" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="455" y="516" width="260" height="30" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="585" y="536" font-size="12" fill="#e6e9f5" text-anchor="middle">reply() 增量组装 AgentMessage</text>
+  <path d="M 585 546 L 585 572" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="455" y="572" width="260" height="30" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="585" y="592" font-size="12" fill="#e6e9f5" text-anchor="middle">store 持久化 + Markdown 渲染</text>
+
+  <!-- 链路 B 权限应答回路 -->
+  <path d="M 715 247 L 775 247 L 775 634 L 502 634 L 502 664" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)" fill="none" opacity="0.85"/>
+  <text x="638" y="628" font-size="11" fill="#a8b2cf" text-anchor="middle" paint-order="stroke" stroke="#0b0d14" stroke-width="3">权限应答回路</text>
+  <rect x="455" y="664" width="95" height="40" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="502" y="689" font-size="12" fill="#e6e9f5" text-anchor="middle">权限请求</text>
+  <path d="M 550 684 L 575 684" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="575" y="664" width="110" height="40" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="630" y="689" font-size="11" fill="#a8b2cf" text-anchor="middle">permission 事件</text>
+  <path d="M 685 684 L 710 684" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+  <rect x="710" y="664" width="90" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="755" y="689" font-size="11" fill="#e6e9f5" text-anchor="middle">resolve 回写</text>
+</svg>
