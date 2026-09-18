@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="780" viewBox="0 0 860 780">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="780" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="16" font-weight="600">一次对话的端到端数据流</text>
+
+  <!-- Stage 1 -->
+  <rect x="60" y="60" width="740" height="90" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="80" y="86" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">① 前端提交 · packages/tui</text>
+  <text x="80" y="108" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11.5">TuiChatController.submit() → TuiRuntimeAdapter.sendMessage()</text>
+  <text x="80" y="128" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">返回 AsyncGenerator&lt;TuiStreamEvent&gt;；headless / ACP 走同一 adapter</text>
+
+  <line x1="430" y1="150" x2="430" y2="180" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="445" y="170" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">ConversationSendMessageRequest</text>
+
+  <!-- Stage 2 -->
+  <rect x="60" y="180" width="740" height="90" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="80" y="206" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="600">② 应用编排 · local-runtime-v2 local/ + application/</text>
+  <text x="80" y="228" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11.5">CliService.sendMessage() → ConversationApplication → DirectSendDeliveryService.open()</text>
+  <text x="80" y="248" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">预留 SessionFrame 流；steering（运行中插话）在此分流</text>
+
+  <line x1="430" y1="270" x2="430" y2="300" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="445" y="290" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">SubmitTurnSubmission</text>
+
+  <!-- Stage 3 -->
+  <rect x="60" y="300" width="740" height="104" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="80" y="326" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">③ Turn 准入 · turn-system</text>
+  <text x="80" y="348" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11.5">TurnSubmissionService.submit() → queue.enqueue（SQLite 持久队列）→ dispatcher.drain</text>
+  <text x="80" y="368" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11.5">→ repository.admit（sessionLocks 租约 + turnIngress 幂等收据）→ controller.register</text>
+  <text x="80" y="388" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">每 session 单 drain 协程；claim + receipt 是崩溃恢复后的唯一去重防线</text>
+
+  <line x1="430" y1="404" x2="430" y2="434" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="445" y="424" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">AcceptedTurnLease</text>
+
+  <!-- Stage 4 -->
+  <rect x="60" y="434" width="740" height="90" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="80" y="460" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">④ Agent Host · turn-system/agent-host</text>
+  <text x="80" y="482" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11.5">LocalAgentHost.run() → TurnPreflight.prepare() → assembleTurn() → executor.execute()</text>
+  <text x="80" y="502" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">组装 LocalTurnExecutionInput（agent 快照 / 历史 / 工具表 / steering 通道）</text>
+
+  <line x1="430" y1="524" x2="430" y2="554" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="445" y="544" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">RunTurnInput</text>
+
+  <!-- Stage 5 -->
+  <rect x="60" y="554" width="740" height="104" rx="10" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="80" y="580" fill="#b388ff" font-family="system-ui, sans-serif" font-size="13" font-weight="600">⑤ Pi 执行 · agent-core + third_party/pi-mono</text>
+  <text x="80" y="602" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11.5">LocalAgentTurnRunner → PiTurnRunner.runTurn() → Agent.prompt() → runAgentLoop()</text>
+  <text x="80" y="622" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11.5">→ streamSimple()（9 种 provider API）→ 流式 AgentEvent</text>
+  <text x="80" y="642" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">工具调用循环：权限检查 → 工具执行（本地 / cloud / 沙箱）→ 结果回填历史，loop 继续</text>
+
+  <line x1="430" y1="658" x2="430" y2="688" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="445" y="678" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">AgentEvent → RuntimeEvent</text>
+
+  <!-- Stage 6 -->
+  <rect x="60" y="688" width="740" height="72" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="80" y="712" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">⑥ 事件回流与渲染</text>
+  <text x="80" y="734" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11.5">EventBridge → 串行事件队列 → TurnCommitPipeline → 四 projector → SessionFrame → TUI 流式渲染</text>
+  <text x="80" y="752" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">canonical history 同步落盘 JSONL；turn 终态经 coordinator.settleAndRelease 唤醒队列下一条</text>
+</svg>

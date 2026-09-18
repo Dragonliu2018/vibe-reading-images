@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="720" viewBox="0 0 860 720">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="720" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="16" font-weight="600">状态流：Turn · 沙箱/MiniApp 进程 · 认证</text>
+
+  <!-- ===== Partition 1: Turn lifecycle ===== -->
+  <text x="40" y="72" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">Turn 生命周期：queue → 执行 → 结算</text>
+
+  <rect x="40" y="90" width="100" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="90" y="119" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">queued</text>
+
+  <rect x="180" y="90" width="100" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="230" y="119" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">claimed</text>
+
+  <rect x="320" y="90" width="130" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.4"/>
+  <text x="385" y="119" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">running</text>
+
+  <rect x="490" y="90" width="100" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="540" y="119" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">closing</text>
+
+  <rect x="640" y="78" width="220" height="160" rx="10" fill="none" stroke="#7a86b3" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="750" y="98" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">durable 终态（repository.settle）</text>
+  <rect x="660" y="106" width="180" height="34" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="750" y="128" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12">completed</text>
+  <rect x="660" y="148" width="180" height="34" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="750" y="170" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12">failed</text>
+  <rect x="660" y="190" width="180" height="34" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="750" y="212" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12">aborted</text>
+
+  <line x1="140" y1="114" x2="180" y2="114" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="280" y1="114" x2="320" y2="114" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="450" y1="114" x2="490" y2="114" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="590" y1="114" x2="640" y2="114" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <path d="M350,90 C350,62 450,62 450,90" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="400" y="52" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">steering 注入（插话）</text>
+
+  <path d="M540,138 V200 H90 V138" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="300" y="190" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">未消费用户 steering → requeue</text>
+
+  <path d="M430,138 V160 H640" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8" marker-end="url(#arrow)"/>
+  <text x="540" y="152" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">settle</text>
+
+  <text x="40" y="222" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">claimNext · admission（sessionLocks 租约 30min，10s 续期）· tryBeginClose · settleAndRelease 唤醒下一条</text>
+
+  <line x1="40" y1="262" x2="820" y2="262" stroke="#2a2f45" stroke-width="1"/>
+
+  <!-- ===== Partition 2: sandbox/miniapp ===== -->
+  <text x="40" y="290" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">沙箱 / MiniApp 进程生命周期</text>
+
+  <rect x="40" y="310" width="110" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="95" y="337" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">disabled</text>
+
+  <rect x="190" y="310" width="120" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="250" y="337" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">initializing</text>
+
+  <rect x="350" y="310" width="100" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.4"/>
+  <text x="400" y="337" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">ready</text>
+
+  <rect x="490" y="310" width="100" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="540" y="337" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">closing</text>
+
+  <rect x="630" y="310" width="90" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="675" y="337" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">closed</text>
+
+  <rect x="190" y="390" width="120" height="40" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="250" y="415" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">failed</text>
+
+  <line x1="150" y1="332" x2="190" y2="332" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="310" y1="332" x2="350" y2="332" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="450" y1="332" x2="490" y2="332" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="590" y1="332" x2="630" y2="332" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="470" y="300" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">idle 30s 停进程</text>
+  <line x1="250" y1="354" x2="250" y2="390" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="262" y="378" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">初始化失败</text>
+
+  <line x1="40" y1="455" x2="820" y2="455" stroke="#2a2f45" stroke-width="1"/>
+
+  <!-- ===== Partition 3: auth ===== -->
+  <text x="40" y="482" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">认证状态机（MCodeOAuthCore · AuthStatus）</text>
+
+  <rect x="40" y="500" width="130" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="105" y="527" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">anonymous</text>
+
+  <rect x="230" y="500" width="130" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="295" y="527" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">authorizing</text>
+
+  <rect x="420" y="500" width="140" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.4"/>
+  <text x="490" y="527" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">authenticated</text>
+
+  <rect x="620" y="500" width="130" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="685" y="527" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">refreshing</text>
+
+  <rect x="420" y="590" width="140" height="40" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="490" y="615" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">logging_out</text>
+
+  <line x1="170" y1="522" x2="230" y2="522" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200" y="512" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">设备码流</text>
+  <line x1="360" y1="522" x2="420" y2="522" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="390" y="512" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">commitLogin</text>
+  <line x1="560" y1="514" x2="620" y2="514" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="620" y1="530" x2="560" y2="530" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="590" y="506" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">token 不足</text>
+
+  <line x1="490" y1="544" x2="490" y2="590" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="500" y="572" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">logout（revoke）</text>
+
+  <path d="M420,610 H150 V544" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <path d="M685,544 V655 H120 V544" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8" marker-end="url(#arrow)"/>
+  <text x="400" y="648" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">invalid_grant → 匿名</text>
+
+  <text x="40" y="695" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">其余态：scope_upgrade_required · logout_pending · expired · error —— scope 升级 / 异常路径（oauth-core/src/state-store.ts）</text>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="620" viewBox="0 0 880 620">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="880" height="620" fill="#0b0d14"/>
+  <text x="440" y="34" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="16" font-weight="600">Turn 执行链路：submit → 队列 → admission → Host → 结算</text>
+
+  <!-- submit -->
+  <rect x="40" y="70" width="190" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="135" y="98" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">submit</text>
+  <text x="135" y="120" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">TurnSubmissionService</text>
+  <text x="135" y="138" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">immediate / queued 二分</text>
+
+  <line x1="230" y1="108" x2="290" y2="108" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="260" y="98" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10">immediate</text>
+
+  <rect x="294" y="70" width="200" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="394" y="98" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">队列（SQLite 持久）</text>
+  <text x="394" y="120" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">queue.enqueue → dispatcher.drain</text>
+  <text x="394" y="138" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">每 session 单 drain 协程 · FIFO 让位</text>
+
+  <line x1="494" y1="108" x2="554" y2="108" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="524" y="98" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10">claimNext</text>
+
+  <rect x="558" y="70" width="280" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="698" y="98" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">admission（事务）</text>
+  <text x="698" y="120" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">repository.admit：sessionLocks 租约</text>
+  <text x="698" y="138" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">+ turnIngress 收据（inputDigest 幂等）+ 优先级栅栏</text>
+
+  <line x1="698" y1="146" x2="698" y2="182" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="710" y="170" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10">controller.register</text>
+
+  <!-- host row -->
+  <rect x="558" y="186" width="280" height="96" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.4"/>
+  <text x="698" y="212" text-anchor="middle" fill="#b388ff" font-family="system-ui, sans-serif" font-size="13" font-weight="600">LocalAgentHost.run（agent-host）</text>
+  <text x="698" y="234" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">TurnPreflight.prepare → assembleTurn</text>
+  <text x="698" y="252" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">→ executor.execute（LocalTurnExecutionInput）</text>
+  <text x="698" y="270" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">租约冻结校验 · capabilities.acquire</text>
+
+  <!-- steering box -->
+  <rect x="40" y="186" width="200" height="96" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="140" y="212" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">steering（插话）</text>
+  <text x="140" y="234" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">SteerSessionService.deliver</text>
+  <text x="140" y="252" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">幂等收据去重 → controller.steer</text>
+  <text x="140" y="270" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">runner.drainSteering() 消费</text>
+
+  <line x1="240" y1="234" x2="558" y2="234" stroke="#4ecdc4" stroke-width="1.5" opacity="0.8" marker-end="url(#arrow)"/>
+  <text x="400" y="226" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">注入活跃 Turn</text>
+
+  <!-- compaction box -->
+  <rect x="290" y="320" width="260" height="90" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="420" y="346" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="13" font-weight="600">compaction（上下文压缩）</text>
+  <text x="420" y="368" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">PiBeforeLlmCallHook · 每次 LLM 调用前探测</text>
+  <text x="420" y="386" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">tool_archive（默认）→ llm_checkpoint</text>
+  <text x="420" y="402" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">Plugin PreCompact 钩子可 abort / defer</text>
+
+  <line x1="558" y1="282" x2="500" y2="330" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8" marker-end="url(#arrow)"/>
+
+  <!-- runaway guard -->
+  <rect x="590" y="320" width="248" height="90" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="714" y="346" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="13" font-weight="600">runaway-guard（防死循环）</text>
+  <text x="714" y="368" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">工具循环检测 · 白名单策略</text>
+  <text x="714" y="386" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">bash/grep 无匹配 exit 1 不误报</text>
+  <text x="714" y="402" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">命中注入 reminder + fail-open 上报</text>
+
+  <line x1="714" y1="282" x2="714" y2="320" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8" marker-end="url(#arrow)"/>
+
+  <!-- settlement -->
+  <line x1="698" y1="282" x2="698" y2="282" stroke="#7a86b3" stroke-width="0"/>
+  <path d="M558,250 H520 V470 H440" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="490" y="462" text-anchor="end" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">settleAndRelease</text>
+
+  <rect x="40" y="440" width="390" height="92" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.4"/>
+  <text x="235" y="466" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">结算（ExecutionCoordinator）</text>
+  <text x="235" y="488" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">history 结算 → repository.settle（失败重试一次）</text>
+  <text x="235" y="506" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">→ controller.complete 释放槽位 → released.publish</text>
+  <text x="235" y="524" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">唤醒队列派发下一条；重试仅限 4 个可重试错误码</text>
+
+  <!-- persistence -->
+  <rect x="470" y="440" width="370" height="92" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="655" y="466" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">持久层</text>
+  <text x="655" y="488" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">turnIngress / sessionLocks（SQLite · AppDb）</text>
+  <text x="655" y="506" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="11">canonical history（JSONL 脱敏落盘）</text>
+  <text x="655" y="524" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">崩溃恢复：turn-lease-recovery（过期租约 / 死属主）</text>
+
+  <line x1="430" y1="486" x2="470" y2="486" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="40" y="572" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">退出边界：未消费的用户 steering 交给 requeue lane 变新查询；机器 steering（cron/task）扣住 close 等下一轮</text>
+  <text x="40" y="594" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">单写者边界：AgentHost 独占运行时 history / stream 投影，SessionSystem 只管持久事实</text>
+</svg>

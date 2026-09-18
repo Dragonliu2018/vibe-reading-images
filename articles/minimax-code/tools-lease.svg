@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="640" viewBox="0 0 860 640">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="640" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="16" font-weight="600">lease broker 与沙箱 bash 执行</text>
+
+  <!-- host side -->
+  <rect x="40" y="70" width="360" height="100" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="220" y="96" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">宿主进程（唯一 Refresh Token 持有者）</text>
+  <text x="220" y="118" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">MCodeOAuthCore → accessToken 投影 local-runtime.auth.json</text>
+  <text x="220" y="136" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">startMcodeToolsAuthLeaseBroker()</text>
+  <text x="220" y="154" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">43 字符 capability 原子写 0600 · unix socket 监听</text>
+
+  <!-- tool subprocess side -->
+  <rect x="460" y="70" width="360" height="100" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="640" y="96" text-anchor="middle" fill="#ff6b9d" font-family="system-ui, sans-serif" font-size="13" font-weight="600">mcode-tools 子进程（integrity 校验 bundle）</text>
+  <text x="640" y="118" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">launcher unset 全部继承的 auth / 沙箱 env</text>
+  <text x="640" y="136" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">仅注入 broker endpoint + capability 路径</text>
+  <text x="640" y="154" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">拒符号链接 · manifest 逐文件 SHA-256</text>
+
+  <!-- lease exchange -->
+  <line x1="460" y1="120" x2="400" y2="120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="400" y1="146" x2="460" y2="146" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="430" y="110" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10">lease</text>
+  <text x="430" y="166" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10">短效 accessToken</text>
+
+  <text x="40" y="200" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">protocol v1（oauth-lease-protocol）：status | lease | unauthorized · 4 字节长度前缀 JSON 帧（≤64KB）· timingSafeEqual 校验</text>
+  <text x="40" y="220" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">generation 单调递增 + epoch：宿主登出 / 刷新即全网失效（旧 lease 全部 AUTH_REQUIRED）· single-flight 去重并发请求</text>
+
+  <line x1="430" y1="236" x2="430" y2="264" stroke="#2a2f45" stroke-width="1"/>
+
+  <!-- sandbox bash -->
+  <text x="40" y="268" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">沙箱 bash：LocalBashTool → SRT wrap</text>
+
+  <rect x="40" y="286" width="250" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="165" y="312" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12">LocalBashTool.execute()</text>
+  <text x="165" y="334" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">agent-tools/desktop/local-pi-tools.ts</text>
+  <text x="165" y="352" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">包装 pi createBashTool</text>
+
+  <line x1="290" y1="324" x2="350" y2="324" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="354" y="286" width="250" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="479" y="312" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12">SandboxBashOperationsFactory</text>
+  <text x="479" y="334" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">deferred-port.ts · V1 工具图先建后 bind</text>
+  <text x="479" y="352" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">每次 spawn 前 beginInvocation()</text>
+
+  <line x1="604" y1="324" x2="664" y2="324" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="668" y="286" width="152" height="76" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="744" y="312" text-anchor="middle" fill="#80c7ff" font-family="system-ui, sans-serif" font-size="12">sandbox-runtime</text>
+  <text x="744" y="334" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">seatbelt / SRT</text>
+  <text x="744" y="352" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">v0.0.74-mcode.2</text>
+
+  <text x="40" y="392" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">#admitInvocation：backend capability 查询 → srtCommandId → 调用上下文（session 临时目录 · git safeDirectories · fs 规则）</text>
+  <text x="40" y="412" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">SandboxManager.wrapWithSandbox：seatbelt profile 重写命令 + 注入 GIT_TEMPLATE_DIR / MAVIS_TRASH_FORCE_MV · lease.finish() 释放引用计数</text>
+
+  <line x1="430" y1="428" x2="430" y2="456" stroke="#2a2f45" stroke-width="1"/>
+
+  <!-- cloud tool -->
+  <text x="40" y="460" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">cloud 工具（Matrix）：上传 → 网关 → 下载三段式</text>
+
+  <rect x="40" y="478" width="240" height="88" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="160" y="504" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12">① uploadInputFiles</text>
+  <text x="160" y="526" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">workspace 文件 PUT 到 OSS</text>
+  <text x="160" y="544" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">得到 input_urls</text>
+
+  <line x1="280" y1="522" x2="340" y2="522" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="344" y="478" width="240" height="88" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="464" y="504" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12">② callMatrixToolRaw</text>
+  <text x="464" y="526" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">DesktopMatrixClient.postGatewayJson</text>
+  <text x="464" y="544" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">Bearer（managed / lease token）</text>
+
+  <line x1="584" y1="522" x2="644" y2="522" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="648" y="478" width="172" height="88" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="734" y="504" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12">③ downloadOutput</text>
+  <text x="734" y="526" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">path-guard 边界校验</text>
+  <text x="734" y="544" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">落盘 + 水印注册</text>
+
+  <text x="40" y="596" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">browser 工具：CDPHelper 三源合并快照（DOMSnapshot + DOM.getDocument + Accessibility AXTree，遵循 browser-use 设计）</text>
+  <text x="40" y="616" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">snapshot ref → ElementMapManager → backendNodeId 锚定输入派发 · isDirty 去抖 · waitForDOMStable</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="560" viewBox="0 0 860 560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="560" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="16" font-weight="600">mcode login：RFC 8628 设备码流</text>
+
+  <rect x="40" y="70" width="780" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="430" y="94" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">mcode login [--region global] → McodeAuthApplication → MCodeOAuthCore.runLogin()</text>
+  <text x="430" y="114" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">CrossProcessAuthLock（proper-lockfile 30s stale）下竞选 authorizing lease（10 分钟）</text>
+
+  <line x1="430" y1="130" x2="430" y2="158" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="162" width="380" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="230" y="188" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">owner 进程</text>
+  <text x="230" y="210" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">startDeviceAuthorization（PKCE：32 字节 verifier + S256）</text>
+  <text x="230" y="228" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">pollDeviceToken（MiniMax 变体：pending / slow_down / 毫秒 expired_in）</text>
+
+  <rect x="440" y="162" width="380" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="630" y="188" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">非 owner 进程</text>
+  <text x="630" y="210" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">waitForAuthorization 轮询 state 文件</text>
+  <text x="630" y="228" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">共享 userCode 展示</text>
+
+  <line x1="230" y1="238" x2="230" y2="268" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="245" y="260" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">commitLogin（两步均持锁）</text>
+
+  <rect x="40" y="272" width="780" height="84" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="430" y="298" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">双文件存储（0600 原子写 · 非 keychain）</text>
+  <text x="430" y="320" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">auth-state.json（非敏感 · 可 watch · assertNoSensitiveKeys 禁 token 字段入 state）</text>
+  <text x="430" y="340" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">auth.json（secret）：dataDir/auth/{buildEnv}/{region}/mcode-public/ · 恢复中断的中间态提交</text>
+
+  <line x1="430" y1="356" x2="430" y2="384" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="445" y="376" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">region 命名空间：cn → account.minimax.cn · global → account.minimax.io</text>
+
+  <rect x="40" y="388" width="780" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="430" y="412" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">token 进入模型调用</text>
+  <text x="430" y="434" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">accessToken 投影 dataDir/local-runtime.auth.json → resolveLocalProviderCredentials 读取 → managed-login 注入 Bearer</text>
+
+  <text x="40" y="490" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">刷新：乐观读 + 锁内复查 → generation+1（loginEpoch 刷新稳定 / 交互登录更换）· invalid_grant 先写 anonymous 再删 secret</text>
+  <text x="40" y="510" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">scope 升级：assertCredentialContract 对旧凭据抛 AuthScopeUpgradeRequiredError，显式要求重新授权而非静默失效</text>
+  <text x="40" y="530" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">config：非 prod 环境 URL 一律 .example.invalid（RFC 2606 保留域）防内部环境泄漏 · MCODE_OAUTH_*_ENDPOINT 三个必须全配或全不配</text>
+</svg>

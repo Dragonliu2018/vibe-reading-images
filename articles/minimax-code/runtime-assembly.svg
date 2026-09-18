@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="700" viewBox="0 0 860 700">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="700" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="16" font-weight="600">runtime 装配链：createLocalRuntimeHostV2</text>
+
+  <rect x="40" y="64" width="780" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="430" y="88" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">layout 迁移 → DatabaseClient + initializeDatabase（备份 + 三段式迁移）</text>
+  <text x="430" y="108" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">runtime.ts:183-192</text>
+
+  <line x1="430" y1="124" x2="430" y2="152" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="156" width="780" height="60" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="430" y="180" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">createRuntimeAgentComposition → agentRuntimePort.bindResolver（晚期绑定）</text>
+  <text x="430" y="200" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">runtime.ts:208-228</text>
+
+  <line x1="430" y1="216" x2="430" y2="244" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="248" width="780" height="60" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="430" y="272" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">createLocalRuntimeHostV1(configuredOptions) —— V1 宿主作为进程外壳</text>
+  <text x="430" y="292" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">runtime.ts:254 · compat/v1 绞杀者适配 · deferChannelStartup</text>
+
+  <line x1="430" y1="308" x2="430" y2="336" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="340" width="780" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="430" y="364" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">createBackgroundRuntime → createRuntimeServices（services.ts:395 组合根）</text>
+  <text x="430" y="384" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">session → plugin → miniApp → plan → turnSystem → initializeApplications → cron</text>
+
+  <line x1="430" y1="400" x2="430" y2="428" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="432" width="370" height="72" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="225" y="458" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">RuntimeApplications（七个命名 Application）</text>
+  <text x="225" y="480" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">session{query,content,lifecycle,root,diff,</text>
+  <text x="225" y="496" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">conversationMutation} + queue</text>
+
+  <rect x="450" y="432" width="370" height="72" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="635" y="458" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">LocalRuntimeApplication（可选拼装能力目录）</text>
+  <text x="635" y="480" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">events / usage / skills / plugins / miniApps / goals / mcp /</text>
+  <text x="635" y="496" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">questionnaires / permissions / workspace / models / …全 optional</text>
+
+  <line x1="430" y1="536" x2="430" y2="564" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="225" y1="504" x2="430" y2="536" stroke="#7a86b3" stroke-width="0"/>
+
+  <rect x="230" y="568" width="400" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
+  <text x="430" y="594" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="600">CliService（local/cli-service.ts:107）</text>
+  <text x="430" y="616" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">~90 个一方法一用例 · requireCapability 延迟判空</text>
+
+  <text x="40" y="668" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">TUI 侧装配：createEmbeddedRuntimeHost（runtimeOwnerKind:'tui' · capabilityProfile:'cli' · 禁 legacy 回退）→ new TuiRuntimeAdapter(cliService)</text>
+</svg>

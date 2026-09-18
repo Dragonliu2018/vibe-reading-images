@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="580" viewBox="0 0 860 580">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="580" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="16" font-weight="600">channels：IM 入站链路（handleInbound）</text>
+
+  <rect x="40" y="70" width="780" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="430" y="94" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">IM 平台入站（Feishu / Telegram / WeChat）</text>
+  <text x="430" y="114" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">LocalChannelContext：platform / chatId / senderId / threadId / sourceMessageId</text>
+
+  <line x1="430" y1="130" x2="430" y2="158" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="162" width="380" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="230" y="188" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">斜杠命令解析</text>
+  <text x="230" y="210" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">/new · /compact … → control lane</text>
+  <text x="230" y="228" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">普通消息 → interactive lane</text>
+
+  <rect x="440" y="162" width="380" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="630" y="188" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">访问控制（lane 队列之前）</text>
+  <text x="630" y="210" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">重放不占队列槽 · 群消息不饿死 DM</text>
+  <text x="630" y="228" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">preflightInbound 一次性 token（WeakSet）</text>
+
+  <line x1="430" y1="238" x2="430" y2="266" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="270" width="780" height="76" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="430" y="296" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">routeResolver.resolve(platform, chatId)</text>
+  <text x="430" y="318" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">解析为 (agentName, sessionId)；binding 被删时走 im-guard 收据回人类可读回执（非 HTTP 500 黑洞）</text>
+  <text x="430" y="336" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">解析失败 → LocalChannelBindingStore（Durable YAML）绑定关系维护</text>
+
+  <line x1="430" y1="346" x2="430" y2="374" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="445" y="366" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">enqueueMessage</text>
+
+  <rect x="230" y="378" width="400" height="64" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.4"/>
+  <text x="430" y="404" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="600">conversation.ingress.submit / steer</text>
+  <text x="430" y="426" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">汇入 V2 Turn 系统 —— v1 不拥有 turn 执行</text>
+
+  <line x1="430" y1="442" x2="430" y2="470" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="445" y="462" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">committed 回复</text>
+
+  <rect x="230" y="474" width="400" height="64" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="430" y="500" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">出站：LocalChannelRunner collector</text>
+  <text x="430" y="522" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">committed messages 聚合 → FeishuSender / WeChatRuntimeSdk 投回原 thread</text>
+
+  <text x="40" y="564" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">出站落盘重试（outboundStore）· laneQueue 串行化 · eventDedupCache 去重 —— cron / channel 能力仅 Electron 形态启用</text>
+</svg>

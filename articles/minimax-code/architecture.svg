@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="780" viewBox="0 0 860 780">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+  <rect width="860" height="780" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="16" font-weight="600">MiniMax Code（mcode）分层架构</text>
+
+  <!-- 前端层 -->
+  <rect x="40" y="60" width="780" height="108" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="430" y="84" text-anchor="middle" fill="#4ecdc4" font-family="system-ui, sans-serif" font-size="13" font-weight="600">前端层 packages/tui</text>
+  <rect x="64" y="98" width="220" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="174" y="119" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13">交互 TUI</text>
+  <text x="174" y="138" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">launcher · TuiChatController</text>
+  <rect x="320" y="98" width="220" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="430" y="119" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13">headless exec</text>
+  <text x="430" y="138" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">runTuiExecCommand</text>
+  <rect x="576" y="98" width="220" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="686" y="119" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13">ACP</text>
+  <text x="686" y="138" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">createTuiAcpAgent</text>
+
+  <line x1="430" y1="168" x2="430" y2="200" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="590" y="190" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">TuiRuntimeAdapter · AsyncGenerator 流</text>
+
+  <!-- local 门面层 -->
+  <rect x="40" y="204" width="780" height="88" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="430" y="228" text-anchor="middle" fill="#6c8ef5" font-family="system-ui, sans-serif" font-size="13" font-weight="600">进程内门面 local-runtime-v2/src/local + application</text>
+  <rect x="180" y="240" width="500" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="430" y="266" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13">CliService → RuntimeApplications（session / conversation / queue）</text>
+
+  <line x1="430" y1="292" x2="430" y2="324" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- service 层 -->
+  <rect x="40" y="328" width="780" height="150" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="430" y="352" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="13" font-weight="600">领域服务层 service/（V2 拥有执行与持久化）</text>
+  <rect x="56" y="366" width="180" height="94" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1"/>
+  <text x="146" y="390" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">turn-system</text>
+  <text x="146" y="409" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">turn 提交·队列·租约</text>
+  <text x="146" y="426" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">compaction·runaway-guard</text>
+  <rect x="248" y="366" width="180" height="94" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1"/>
+  <text x="338" y="390" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">session-system</text>
+  <text x="338" y="409" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">SessionRepository</text>
+  <text x="338" y="426" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">canonical history</text>
+  <rect x="440" y="366" width="180" height="94" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1"/>
+  <text x="530" y="390" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">agent + model-system</text>
+  <text x="530" y="409" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">LocalAgentService</text>
+  <text x="530" y="426" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">LocalModelResolver</text>
+  <rect x="632" y="366" width="172" height="94" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1"/>
+  <text x="718" y="390" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">plugin + miniapp</text>
+  <text x="718" y="409" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">PluginSnapshot</text>
+  <text x="718" y="426" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">MiniAppSupervisor</text>
+  <text x="470" y="466" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">mcp · cron · plan · workspace · sandbox · channel-system · …</text>
+
+  <line x1="430" y1="478" x2="430" y2="510" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- agent 基础设施层 -->
+  <rect x="40" y="514" width="780" height="96" rx="10" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="430" y="538" text-anchor="middle" fill="#b388ff" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Agent 基础设施 agent-core / agent-runtime / agent-extension</text>
+  <text x="430" y="562" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">PiTurnRunner（零 IO 适配层） · EventBridge（AgentEvent → RuntimeEvent）</text>
+  <text x="430" y="584" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">turn-system/agent-host 是 service 层与 pi Agent loop 的衔接点</text>
+
+  <line x1="430" y1="610" x2="430" y2="642" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- third_party 层 -->
+  <rect x="40" y="646" width="780" height="108" rx="10" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="430" y="670" text-anchor="middle" fill="#80c7ff" font-family="system-ui, sans-serif" font-size="13" font-weight="600">第三方与 v1 设施 third_party/ + packages/local-runtime</text>
+  <rect x="64" y="684" width="230" height="52" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1"/>
+  <text x="179" y="705" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">pi-mono v0.79.1</text>
+  <text x="179" y="723" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">Agent loop · 9 种 API provider</text>
+  <rect x="316" y="684" width="230" height="52" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1"/>
+  <text x="431" y="705" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">sandbox-runtime v0.0.74</text>
+  <text x="431" y="723" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">seatbelt / SRT 沙箱执行</text>
+  <rect x="568" y="684" width="230" height="52" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1"/>
+  <text x="683" y="705" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">local-runtime（v1 设施）</text>
+  <text x="683" y="723" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">channels · file · 权限引擎 · legacy reader</text>
+
+  <line x1="430" y1="60" x2="430" y2="60" stroke="#7a86b3" stroke-width="0"/>
+</svg>

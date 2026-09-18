@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" fill="#0b0d14"/>
+  <text x="480" y="34" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="16" font-weight="600">模块依赖关系（箭头 = import / 调用方向）</text>
+
+  <!-- tui -->
+  <rect x="60" y="70" width="180" height="84" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+  <text x="150" y="102" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13.5">TUI 终端前端</text>
+  <text x="150" y="124" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">三入口 · TuiRuntimeAdapter</text>
+  <text x="150" y="140" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">packages/tui</text>
+
+  <!-- 编排 -->
+  <rect x="290" y="70" width="210" height="84" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+  <text x="395" y="102" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13.5">应用编排</text>
+  <text x="395" y="124" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">local/ · application/</text>
+  <text x="395" y="140" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">CliService · RuntimeApplications</text>
+
+  <!-- container -->
+  <rect x="560" y="60" width="360" height="422" rx="10" fill="none" stroke="#f9ca24" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="740" y="84" text-anchor="middle" fill="#f9ca24" font-family="system-ui, sans-serif" font-size="12.5" font-weight="600">local-runtime-v2 service/ + agent-modules</text>
+
+  <rect x="580" y="96" width="320" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1"/>
+  <text x="740" y="118" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">Turn 执行系统</text>
+  <text x="740" y="137" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">提交 · 队列 · 租约 · compaction · runaway-guard</text>
+
+  <rect x="580" y="174" width="320" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1"/>
+  <text x="740" y="196" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">会话与持久化</text>
+  <text x="740" y="215" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">SessionRepository · TranscriptStore · AppDb · infra</text>
+
+  <rect x="580" y="252" width="320" height="52" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1"/>
+  <text x="740" y="274" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">模型与 Agent 服务</text>
+  <text x="740" y="293" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">LocalModelResolver · LocalAgentService · prompt-config</text>
+
+  <rect x="580" y="330" width="320" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="740" y="352" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">插件与 MiniApp</text>
+  <text x="740" y="371" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">PluginSnapshot · MiniAppSupervisor · plugin-hooks</text>
+
+  <rect x="580" y="408" width="320" height="52" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="740" y="430" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">技能 · 权限 · 上下文横切</text>
+  <text x="740" y="449" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">skills · permission · context-manager · mcp · cron · goal</text>
+
+  <!-- agent-core -->
+  <rect x="290" y="200" width="200" height="64" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+  <text x="390" y="224" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13">agent-core 适配层</text>
+  <text x="390" y="246" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">PiTurnRunner · EventBridge</text>
+
+  <!-- third_party -->
+  <rect x="290" y="312" width="200" height="64" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="390" y="334" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="12.5">pi-mono + sandbox-runtime</text>
+  <text x="390" y="352" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">Agent loop · 9 种 provider API</text>
+  <text x="390" y="367" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">seatbelt 沙箱执行</text>
+
+  <!-- v1 -->
+  <rect x="80" y="200" width="180" height="64" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+  <text x="170" y="224" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13">v1 主机设施</text>
+  <text x="170" y="246" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">local-runtime · channels · 权限</text>
+
+  <!-- 工具体系 -->
+  <rect x="80" y="312" width="180" height="64" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+  <text x="170" y="334" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13">工具体系</text>
+  <text x="170" y="352" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">agent-tools · browser-core</text>
+  <text x="170" y="367" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">mcode-tools-host · sandbox</text>
+
+  <!-- 认证 -->
+  <rect x="80" y="424" width="180" height="64" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+  <text x="170" y="448" text-anchor="middle" fill="#e8eaf2" font-family="system-ui, sans-serif" font-size="13">认证与共享协议</text>
+  <text x="170" y="470" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="10.5">oauth-core · protocol · config · shared</text>
+
+  <!-- arrows -->
+  <line x1="240" y1="112" x2="290" y2="112" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="500" y1="112" x2="560" y2="112" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <line x1="740" y1="148" x2="740" y2="174" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <line x1="390" y1="154" x2="390" y2="200" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="400" y="182" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">agent 服务装配</text>
+
+  <line x1="390" y1="264" x2="390" y2="312" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="400" y="294" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">runTurn → Agent loop</text>
+
+  <path d="M580,124 H530 V232 H490" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="545" y="168" text-anchor="end" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">agent-host → PiTurnRunner</text>
+
+  <path d="M290,132 H272 V232 H260" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="240" y="178" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">compat/v1 绞杀者适配</text>
+
+  <path d="M260,246 H276 V288 H540 V434 H580" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="350" y="281" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">permission / skills 供给</text>
+
+  <line x1="260" y1="344" x2="290" y2="344" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="400" y="398" text-anchor="middle" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">agent-tools 包装 pi 本地工具</text>
+
+  <line x1="170" y1="376" x2="170" y2="424" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="180" y="404" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">lease token</text>
+
+  <path d="M60,112 H44 V456 H80" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8" marker-end="url(#arrow)"/>
+  <text x="56" y="252" text-anchor="end" fill="#8b93b8" font-family="system-ui, sans-serif" font-size="11">auth 直连</text>
+</svg>
