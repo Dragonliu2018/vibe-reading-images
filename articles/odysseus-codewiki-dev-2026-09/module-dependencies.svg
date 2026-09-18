@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="634" viewBox="0 0 820 634">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="634" fill="#0b0d14"/>
+  <text x="410" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e8eaf6" font-weight="600">Odysseus 模块依赖图（箭头 = 调用 / 依赖方向）</text>
+
+  <!-- 前端 UI -->
+  <rect x="330" y="50" width="160" height="44" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="410" y="76" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">前端 UI（static/js）</text>
+
+  <line x1="410" y1="94" x2="410" y2="116" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="418" y="108" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">HTTP / SSE</text>
+
+  <!-- Web 服务与路由层 -->
+  <rect x="230" y="118" width="360" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="144" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">Web 服务与路由层（app.py + routes/）</text>
+
+  <!-- Web -> Agent 引擎 -->
+  <path d="M330,162 V200 H410 V238" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Web -> 邮件 -->
+  <path d="M560,162 V380 H612.5 V398" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Web -> Cookbook -->
+  <path d="M410,162 V186 H795 V380 H747.5 V398" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Row3: LLM / Agent / 工具 -->
+  <rect x="40" y="240" width="200" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="140" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">LLM 接入与模型能力</text>
+  <rect x="310" y="240" width="200" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">Agent 执行引擎</text>
+  <rect x="580" y="240" width="200" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="680" y="266" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">工具系统</text>
+
+  <!-- Agent -> LLM -->
+  <line x1="310" y1="262" x2="242" y2="262" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="276" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">llm 调用</text>
+  <!-- Agent -> 工具 -->
+  <line x1="510" y1="262" x2="578" y2="262" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="544" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">工具执行</text>
+
+  <!-- Agent -> MCP -->
+  <path d="M410,284 V325 H450 V398" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- 工具 -> MCP -->
+  <path d="M680,284 V345 H505 V398" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Row4 -->
+  <rect x="20" y="400" width="105" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="72.5" y="426" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">深度研究</text>
+  <rect x="155" y="400" width="105" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="207.5" y="426" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">任务调度</text>
+  <rect x="290" y="400" width="105" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="342.5" y="426" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">记忆 / RAG</text>
+  <rect x="425" y="400" width="105" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="477.5" y="426" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">MCP 生态</text>
+  <rect x="560" y="400" width="105" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="612.5" y="426" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">邮件系统</text>
+  <rect x="695" y="400" width="105" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="747.5" y="426" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">Cookbook</text>
+
+  <!-- 深度研究 -> LLM -->
+  <line x1="72.5" y1="398" x2="72.5" y2="286" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- 任务调度 -> Agent -->
+  <path d="M207.5,398 V345 H360 V286" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- MCP -> 邮件（拉起 email_server） -->
+  <line x1="530" y1="422" x2="558" y2="422" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="544" y="412" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#8891b8">server</text>
+
+  <!-- Row5 数据基座 -->
+  <rect x="20" y="560" width="780" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="586" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">数据与安全基座（core/：SQLite · auth · owner 隔离）</text>
+
+  <line x1="207.5" y1="444" x2="207.5" y2="558" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="342.5" y1="444" x2="342.5" y2="558" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="612.5" y1="444" x2="612.5" y2="558" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="352" y="520" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">全模块 → core/database（fan-in 37，含 ChromaDB 向量侧）</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="610" viewBox="0 0 820 610">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="610" fill="#0b0d14"/>
+  <text x="410" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e8eaf6" font-weight="600">工具调用管线：从模型输出到审批与执行</text>
+
+  <!-- 主链 -->
+  <rect x="60" y="50" width="270" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="195" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">模型输出</text>
+  <text x="195" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">fenced block · native tool_calls · DSML 泄漏</text>
+
+  <line x1="195" y1="102" x2="195" y2="132" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="134" width="270" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="195" y="154" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">parse_tool_blocks() 多方言解析</text>
+  <text x="195" y="172" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">fenced / XML / 裸 JSON / StepFun / Gemma</text>
+
+  <line x1="195" y1="186" x2="195" y2="218" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="220" width="270" height="36" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="2"/>
+  <text x="195" y="242" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">ToolBlock（tool_type, content）</text>
+
+  <line x1="195" y1="256" x2="195" y2="290" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="292" width="270" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="195" y="312" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">能力门控 decision_for()</text>
+  <text x="195" y="330" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">ToolEffect × ResultIntegrity 矩阵</text>
+
+  <line x1="195" y1="344" x2="195" y2="376" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="205" y="366" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">通过</text>
+
+  <rect x="60" y="378" width="270" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="195" y="398" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">_execute_tool_block_impl() 四道闸</text>
+  <text x="195" y="416" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">disabled · policy · admin · public</text>
+
+  <line x1="195" y1="430" x2="195" y2="462" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="464" width="270" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="195" y="482" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">分派执行</text>
+  <text x="195" y="499" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">TOOL_HANDLERS · do_* · mcp__ 前缀</text>
+
+  <line x1="195" y1="510" x2="195" y2="540" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="542" width="270" height="38" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="195" y="565" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">format_tool_result() 回填下一轮</text>
+
+  <!-- 审批旁路 -->
+  <line x1="332" y1="318" x2="438" y2="318" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="385" y="310" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">未通过</text>
+
+  <rect x="440" y="292" width="300" height="52" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="590" y="312" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">tool_approval_store.create()</text>
+  <text x="590" y="330" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">PendingToolApproval（digest 封印 content）</text>
+
+  <line x1="590" y1="344" x2="590" y2="396" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="440" y="398" width="300" height="44" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="590" y="424" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">ask_user 审批卡片（前端 peek / consume）</text>
+
+  <line x1="590" y1="442" x2="590" y2="480" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="440" y="482" width="300" height="52" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="590" y="502" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">ExactToolApproval 重入 run_agent</text>
+  <text x="590" y="520" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">round 0 直接回放已批准动作</text>
+
+  <!-- 批准后进入执行 -->
+  <path d="M438,510 H390 V488 H332" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="396" y="482" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">批准</text>
+</svg>

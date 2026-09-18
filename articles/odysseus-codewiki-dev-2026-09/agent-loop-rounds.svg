@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="572" viewBox="0 0 820 572">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="572" fill="#0b0d14"/>
+  <text x="410" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e8eaf6" font-weight="600">stream_agent_loop() 轮次循环</text>
+
+  <!-- 主链 -->
+  <rect x="60" y="50" width="260" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="190" y="68" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">请求分级 _classify_agent_request()</text>
+  <text x="190" y="85" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">低信号 / 续答 / 域分类</text>
+
+  <line x1="190" y1="94" x2="190" y2="120" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="122" width="260" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="190" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">工具选择三级瀑布</text>
+  <text x="190" y="157" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">RAG 检索 → 关键词 → 域种子</text>
+
+  <line x1="190" y1="166" x2="190" y2="192" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="194" width="260" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="190" y="214" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">上下文整备</text>
+  <text x="190" y="231" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">maybe_compact()（85% 阈值）· system prompt</text>
+
+  <line x1="190" y1="246" x2="190" y2="272" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="274" width="260" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="190" y="294" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">LLM 流式输出</text>
+  <text x="190" y="311" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">stream_llm_with_fallback()（round 1..50）</text>
+
+  <line x1="190" y1="326" x2="190" y2="356" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="358" width="260" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="190" y="376" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">工具块解析 _resolve_tool_blocks()</text>
+  <text x="190" y="393" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">fenced / native tool_calls 归一化为 ToolBlock</text>
+
+  <line x1="190" y1="402" x2="190" y2="430" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200" y="421" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">有 ToolBlock</text>
+
+  <rect x="60" y="432" width="260" height="46" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="190" y="450" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">execute_tool_block()</text>
+  <text x="190" y="467" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">asyncio.create_task + Queue 进度</text>
+
+  <line x1="190" y1="478" x2="190" y2="504" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="506" width="260" height="36" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="190" y="528" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">_append_tool_results() 回写</text>
+
+  <!-- 回环 -->
+  <path d="M58,524 H22 V300 H59" fill="none" stroke="#7a86b3" stroke-width="1.5" opacity="0.8" marker-end="url(#arrow)"/>
+  <text x="26" y="421" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">下一轮</text>
+
+  <!-- 低信号旁路 -->
+  <rect x="470" y="50" width="290" height="44" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="615" y="76" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">低信号直答 stream_llm_with_fallback()</text>
+  <line x1="322" y1="72" x2="466" y2="72" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="394" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">低信号</text>
+
+  <!-- 无 ToolBlock 出口 -->
+  <line x1="322" y1="380" x2="466" y2="380" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="394" y="372" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">无 ToolBlock</text>
+
+  <rect x="470" y="358" width="290" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="615" y="378" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">循环出口</text>
+  <text x="615" y="396" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">完成 · _awaiting_user · budget · 轮数耗尽</text>
+
+  <line x1="615" y1="410" x2="615" y2="446" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="470" y="448" width="290" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="615" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">收尾 _compute_final_metrics()</text>
+  <text x="615" y="486" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">run_teacher_inline() → data: [DONE]</text>
+
+  <!-- 低信号直答 -> 收尾 -->
+  <path d="M615,94 V120 H788 V426 H615 V446" fill="none" stroke="#7a86b3" stroke-width="1.5" opacity="0.8" marker-end="url(#arrow)"/>
+</svg>

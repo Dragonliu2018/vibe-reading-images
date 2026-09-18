@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="640" viewBox="0 0 820 640">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="640" fill="#0b0d14"/>
+  <text x="410" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e8eaf6" font-weight="600">Odysseus 分层架构</text>
+
+  <!-- L1 前端 UI 层 -->
+  <rect x="30" y="52" width="760" height="96" rx="10" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="46" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#b388ff" font-weight="600">前端 UI 层　static/js（~165k 行）</text>
+  <rect x="46" y="90" width="118" height="26" rx="6" fill="#1a1d35" stroke="#b388ff" stroke-width="1"/>
+  <text x="105" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">chat / 流式渲染</text>
+  <rect x="174" y="90" width="106" height="26" rx="6" fill="#1a1d35" stroke="#b388ff" stroke-width="1"/>
+  <text x="227" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">email / 日历</text>
+  <rect x="290" y="90" width="106" height="26" rx="6" fill="#1a1d35" stroke="#b388ff" stroke-width="1"/>
+  <text x="343" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">cookbook</text>
+  <rect x="406" y="90" width="106" height="26" rx="6" fill="#1a1d35" stroke="#b388ff" stroke-width="1"/>
+  <text x="459" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">文档 / 编辑器</text>
+  <rect x="522" y="90" width="126" height="26" rx="6" fill="#1a1d35" stroke="#b388ff" stroke-width="1"/>
+  <text x="585" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">无构建 ES modules</text>
+  <rect x="658" y="90" width="118" height="26" rx="6" fill="#1a1d35" stroke="#b388ff" stroke-width="1"/>
+  <text x="717" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">sw.js PWA</text>
+
+  <line x1="410" y1="148" x2="410" y2="176" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="420" y="167" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">HTTP / SSE（cookie 会话）</text>
+
+  <!-- L2 Web 服务与路由层 -->
+  <rect x="30" y="178" width="760" height="96" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="46" y="202" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">Web 服务与路由层　app.py + routes/（~50k 行）</text>
+  <rect x="46" y="216" width="112" height="26" rx="6" fill="#1a1d35" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="102" y="233" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">chat_routes</text>
+  <rect x="168" y="216" width="112" height="26" rx="6" fill="#1a1d35" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="224" y="233" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">email_routes</text>
+  <rect x="290" y="216" width="112" height="26" rx="6" fill="#1a1d35" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="346" y="233" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">cookbook_routes</text>
+  <rect x="412" y="216" width="112" height="26" rx="6" fill="#1a1d35" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="468" y="233" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">task / note / …</text>
+  <rect x="534" y="216" width="118" height="26" rx="6" fill="#1a1d35" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="593" y="233" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">AuthMiddleware</text>
+  <rect x="662" y="216" width="114" height="26" rx="6" fill="#1a1d35" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="719" y="233" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">SSE detach</text>
+
+  <line x1="410" y1="274" x2="410" y2="302" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="420" y="293" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">工厂注入 manager 单例</text>
+
+  <!-- L3 智能体执行层 -->
+  <rect x="30" y="304" width="760" height="96" rx="10" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="46" y="328" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5" font-weight="600">智能体执行层　src/（agent_loop 6.4k 行 …）</text>
+  <rect x="46" y="342" width="118" height="26" rx="6" fill="#1a1d35" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="105" y="359" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">agent_loop 循环</text>
+  <rect x="174" y="342" width="118" height="26" rx="6" fill="#1a1d35" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="233" y="359" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">工具系统 / 审批</text>
+  <rect x="302" y="342" width="106" height="26" rx="6" fill="#1a1d35" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="355" y="359" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">llm_core</text>
+  <rect x="418" y="342" width="106" height="26" rx="6" fill="#1a1d35" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="471" y="359" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">deep_research</text>
+  <rect x="534" y="342" width="106" height="26" rx="6" fill="#1a1d35" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="587" y="359" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">task_scheduler</text>
+  <rect x="650" y="342" width="126" height="26" rx="6" fill="#1a1d35" stroke="#6c8ef5" stroke-width="1"/>
+  <text x="713" y="359" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">memory / RAG / MCP</text>
+
+  <line x1="410" y1="400" x2="410" y2="428" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- L4 领域服务层 -->
+  <rect x="30" y="430" width="760" height="90" rx="10" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="46" y="454" font-family="system-ui, sans-serif" font-size="14" fill="#ff6b9d" font-weight="600">领域服务层　services/ + mcp_servers/（~14k 行）</text>
+  <rect x="46" y="468" width="112" height="26" rx="6" fill="#1a1d35" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="102" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">hwfit 硬件适配</text>
+  <rect x="168" y="468" width="106" height="26" rx="6" fill="#1a1d35" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="221" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">search 提供链</text>
+  <rect x="284" y="468" width="106" height="26" rx="6" fill="#1a1d35" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="337" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">memory 提取</text>
+  <rect x="400" y="468" width="118" height="26" rx="6" fill="#1a1d35" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="459" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">email MCP server</text>
+  <rect x="528" y="468" width="118" height="26" rx="6" fill="#1a1d35" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="587" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">memory / rag server</text>
+  <rect x="656" y="468" width="120" height="26" rx="6" fill="#1a1d35" stroke="#ff6b9d" stroke-width="1"/>
+  <text x="716" y="485" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">tts / stt / youtube</text>
+
+  <line x1="410" y1="520" x2="410" y2="548" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- L5 数据与基础设施层 -->
+  <rect x="30" y="550" width="760" height="72" rx="10" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="46" y="574" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">数据与安全基座　core/（database 2.7k 行 · auth · 原子 IO）</text>
+  <rect x="46" y="586" width="128" height="26" rx="6" fill="#1a1d35" stroke="#f9ca24" stroke-width="1"/>
+  <text x="110" y="603" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">SQLite 25 张表</text>
+  <rect x="184" y="586" width="128" height="26" rx="6" fill="#1a1d35" stroke="#f9ca24" stroke-width="1"/>
+  <text x="248" y="603" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">owner 多租户隔离</text>
+  <rect x="322" y="586" width="108" height="26" rx="6" fill="#1a1d35" stroke="#f9ca24" stroke-width="1"/>
+  <text x="376" y="603" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">ChromaDB</text>
+  <rect x="440" y="586" width="108" height="26" rx="6" fill="#1a1d35" stroke="#f9ca24" stroke-width="1"/>
+  <text x="494" y="603" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">SearXNG</text>
+  <rect x="558" y="586" width="108" height="26" rx="6" fill="#1a1d35" stroke="#f9ca24" stroke-width="1"/>
+  <text x="612" y="603" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">ntfy 推送</text>
+  <rect x="676" y="586" width="100" height="26" rx="6" fill="#1a1d35" stroke="#f9ca24" stroke-width="1"/>
+  <text x="726" y="603" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">tmux / ssh</text>
+</svg>

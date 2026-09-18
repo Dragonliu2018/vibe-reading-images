@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="470" fill="#0b0d14"/>
+  <text x="410" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e8eaf6" font-weight="600">运行时状态流：TaskRun 状态机 · 工具审批生命周期</text>
+
+  <!-- 左分区：TaskRun -->
+  <rect x="20" y="44" width="470" height="352" rx="10" fill="none" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="6 4"/>
+  <text x="255" y="68" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4">TaskRun 状态机（core/database.py:810）</text>
+
+  <rect x="60" y="92" width="130" height="34" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="125" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">queued</text>
+
+  <line x1="125" y1="126" x2="125" y2="186" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="133" y="160" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">获 Semaphore(1)</text>
+
+  <rect x="60" y="190" width="130" height="36" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="125" y="212" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">running</text>
+
+  <!-- 扇出 -->
+  <path d="M125,226 V262" fill="none" stroke="#7a86b3" stroke-width="1.5"/>
+  <line x1="83" y1="262" x2="425" y2="262" stroke="#7a86b3" stroke-width="1.5"/>
+  <line x1="83" y1="262" x2="83" y2="306" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="197" y1="262" x2="197" y2="306" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="311" y1="262" x2="311" y2="306" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="425" y1="262" x2="425" y2="306" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="77" y="292" text-anchor="end" font-family="system-ui, sans-serif" font-size="10" fill="#8891b8">正常完成</text>
+  <text x="191" y="292" text-anchor="end" font-family="system-ui, sans-serif" font-size="10" fill="#8891b8">异常</text>
+  <text x="305" y="292" text-anchor="end" font-family="system-ui, sans-serif" font-size="10" fill="#8891b8">无输出 · 过期</text>
+  <text x="419" y="292" text-anchor="end" font-family="system-ui, sans-serif" font-size="10" fill="#8891b8">停止 · 抢占 · 僵尸</text>
+
+  <rect x="32" y="308" width="102" height="34" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="83" y="329" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">success</text>
+  <rect x="146" y="308" width="102" height="34" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="197" y="329" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">error</text>
+  <rect x="260" y="308" width="102" height="34" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="311" y="329" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">skipped</text>
+  <rect x="374" y="308" width="102" height="34" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="425" y="329" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">aborted</text>
+
+  <text x="255" y="378" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">先落库 queued 再等信号量（task_scheduler.py:738）</text>
+
+  <!-- 右分区：审批生命周期 -->
+  <rect x="500" y="44" width="300" height="384" rx="10" fill="none" stroke="#ff6b9d" stroke-width="1" stroke-dasharray="6 4"/>
+  <text x="650" y="68" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d">工具审批生命周期（tool_approvals.py）</text>
+
+  <rect x="540" y="92" width="220" height="36" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="650" y="114" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">PendingToolApproval</text>
+
+  <line x1="650" y1="128" x2="650" y2="206" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="658" y="172" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">用户批准</text>
+
+  <rect x="540" y="208" width="220" height="36" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="650" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">consume()（digest 一次性）</text>
+
+  <path d="M760,110 H782 V318 H762" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="774" y="280" text-anchor="end" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">会话结束</text>
+
+  <rect x="540" y="300" width="220" height="36" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="650" y="322" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">retire_for_session()</text>
+
+  <rect x="540" y="366" width="220" height="74" rx="8" fill="none" stroke="#8891b8" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="650" y="390" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8891b8">审批范围 scope 三档</text>
+  <text x="650" y="410" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">SINGLE_ACTION · TASK · CHAT_SESSION</text>
+  <text x="650" y="428" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">（CHAT_SESSION 走 HMAC 签名 grant）</text>
+</svg>

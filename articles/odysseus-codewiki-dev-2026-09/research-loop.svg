@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="760" viewBox="0 0 820 760">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="760" fill="#0b0d14"/>
+  <text x="410" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e8eaf6" font-weight="600">Deep Research 迭代研究循环</text>
+
+  <!-- 主链 -->
+  <rect x="60" y="50" width="280" height="36" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">查询合成 synthesize_query()</text>
+
+  <line x1="200" y1="86" x2="200" y2="108" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="110" width="280" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">端点解析 + 探测</text>
+  <text x="200" y="148" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">_resolve_research_endpoint() · _probe_endpoint()</text>
+
+  <line x1="200" y1="162" x2="200" y2="184" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="186" width="280" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="206" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">start_research() 后台任务</text>
+  <text x="200" y="224" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">asyncio.wait_for（hard timeout）</text>
+
+  <line x1="200" y1="238" x2="200" y2="260" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="262" width="280" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="200" y="282" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">研究主循环 research()</text>
+  <text x="200" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">max_rounds=8（handler 上限 20）</text>
+
+  <line x1="200" y1="314" x2="200" y2="334" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="336" width="280" height="36" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="358" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">_create_plan() · _classify_category()</text>
+
+  <line x1="200" y1="372" x2="200" y2="392" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="394" width="280" height="36" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="416" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">_generate_queries()（4 宽 → 3 补漏）</text>
+
+  <line x1="200" y1="430" x2="200" y2="450" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="452" width="280" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="472" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">_search_and_extract()</text>
+  <text x="200" y="490" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">provider 链 + Semaphore 限流抓取</text>
+
+  <line x1="200" y1="504" x2="200" y2="524" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="526" width="280" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="544" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">_synthesize() 滑动窗口</text>
+  <text x="200" y="561" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">演化报告 evolving_report</text>
+
+  <!-- 回环 -->
+  <path d="M58,548 H28 V354 H59" fill="none" stroke="#7a86b3" stroke-width="1.5" opacity="0.8" marker-end="url(#arrow)"/>
+  <text x="32" y="445" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">下一轮</text>
+
+  <line x1="200" y1="570" x2="200" y2="596" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="598" width="280" height="44" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="616" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">决策 _should_stop() LLM 判定</text>
+  <text x="200" y="634" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">连续空轮 2 → 视为搜索失效</text>
+
+  <!-- 降级链 -->
+  <rect x="460" y="262" width="300" height="52" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="610" y="282" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">降级链 _fallback_research()</text>
+  <text x="610" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">legacy ResearchOrchestrator → 综合搜索</text>
+  <line x1="342" y1="288" x2="456" y2="288" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="400" y="280" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">失败 / 超时</text>
+
+  <!-- 出口链 -->
+  <line x1="342" y1="620" x2="456" y2="620" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="400" y="612" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">= YES</text>
+
+  <rect x="460" y="598" width="300" height="44" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="610" y="624" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">_final_report() · 格式化</text>
+
+  <line x1="610" y1="642" x2="610" y2="668" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="460" y="670" width="300" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="610" y="690" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">_save_result() + research_completed</text>
+  <text x="610" y="708" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">visual_report 渲染 · 会话 spinoff</text>
+</svg>

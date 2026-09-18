@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="516" viewBox="0 0 820 516">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="516" fill="#0b0d14"/>
+  <text x="410" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e8eaf6" font-weight="600">聊天主链路：一次 agent 消息的端到端数据流</text>
+
+  <!-- 主链 -->
+  <rect x="60" y="50" width="250" height="48" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="185" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">前端 chat.js</text>
+  <text x="185" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">handleChatSubmit() · FormData</text>
+
+  <line x1="185" y1="98" x2="185" y2="124" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="126" width="250" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="185" y="146" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">chat_routes.chat_stream()</text>
+  <text x="185" y="164" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">鉴权 · _classify_tool_intent() 升级 agent</text>
+
+  <line x1="185" y1="174" x2="185" y2="200" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="202" width="250" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="185" y="222" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">build_chat_context()</text>
+  <text x="185" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">记忆 / RAG / 搜索前奏注入</text>
+
+  <line x1="185" y1="250" x2="185" y2="276" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="278" width="250" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="2"/>
+  <text x="185" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">stream_agent_loop()</text>
+  <text x="185" y="318" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">多轮工具循环（AsyncGenerator）</text>
+
+  <line x1="185" y1="334" x2="185" y2="360" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="362" width="250" height="48" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="185" y="382" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">agent_runs.start() · subscribe()</text>
+  <text x="185" y="400" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">detached run + StreamingResponse</text>
+
+  <line x1="185" y1="410" x2="185" y2="436" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="438" width="250" height="48" rx="8" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="185" y="458" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">前端 streamingRenderer</text>
+  <text x="185" y="476" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">冻结块 + 活跃尾块增量渲染</text>
+
+  <!-- 每轮容器 -->
+  <rect x="390" y="250" width="390" height="180" rx="10" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="585" y="264" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#4ecdc4">每轮循环（round 1..50）</text>
+
+  <rect x="410" y="270" width="350" height="46" rx="6" fill="#1a1d35" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="585" y="289" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">stream_llm_with_fallback()</text>
+  <text x="585" y="306" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">→ _stream_llm_inner() → 模型端点</text>
+
+  <line x1="585" y1="316" x2="585" y2="326" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="410" y="328" width="350" height="34" rx="6" fill="#1a1d35" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="585" y="349" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">_resolve_tool_blocks() → ToolBlock</text>
+
+  <line x1="585" y1="362" x2="585" y2="372" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="410" y="374" width="350" height="46" rx="6" fill="#1a1d35" stroke="#4ecdc4" stroke-width="1"/>
+  <text x="585" y="393" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">execute_tool_block()</text>
+  <text x="585" y="410" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">审批门控 → handler / MCP</text>
+
+  <!-- D -> 容器 -->
+  <line x1="312" y1="290" x2="386" y2="290" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="350" y="282" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">每轮请求</text>
+
+  <!-- 容器 -> D（回填） -->
+  <path d="M388,380 H345 V326 H314" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="348" y="372" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8891b8">回填下一轮</text>
+</svg>
