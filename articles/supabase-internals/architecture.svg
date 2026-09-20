@@ -1,0 +1,122 @@
+<svg width="860" height="720" viewBox="0 0 860 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="720" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e2e8f0" font-weight="600">Supabase monorepo 分层架构 · self-hosted/v0.8.0</text>
+
+  <!-- L1 应用层 -->
+  <rect x="30" y="56" width="800" height="112" rx="10" fill="none" stroke="#6c8ef5" stroke-opacity="0.45" stroke-dasharray="6 4"/>
+  <text x="44" y="80" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5" font-weight="600">应用层 apps/* · 7 个可部署站点</text>
+  <rect x="50" y="96" width="158" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="129" y="117" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">studio</text>
+  <text x="129" y="136" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">Dashboard · ~587k 行</text>
+  <rect x="220" y="96" width="110" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="275" y="117" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">www</text>
+  <text x="275" y="136" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">官网 · ~128k 行</text>
+  <rect x="342" y="96" width="100" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="392" y="117" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">docs</text>
+  <text x="392" y="136" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">文档站 · ~46k 行</text>
+  <rect x="454" y="96" width="128" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="518" y="117" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">design-system</text>
+  <text x="518" y="136" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">设计系统文档站</text>
+  <rect x="594" y="96" width="110" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="649" y="117" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">ui-library</text>
+  <text x="649" y="136" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">对外组件 registry</text>
+  <rect x="716" y="96" width="100" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="766" y="117" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">learn</text>
+  <text x="766" y="136" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">lite-studio</text>
+
+  <!-- L1 → L2 箭头 -->
+  <path d="M 200 168 L 200 202" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 430 168 L 430 202" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 660 168 L 660 202" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="445" y="192" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">workspace:* 依赖</text>
+
+  <!-- L2 共享包层 -->
+  <rect x="30" y="206" width="800" height="110" rx="10" fill="none" stroke="#4ecdc4" stroke-opacity="0.45" stroke-dasharray="6 4"/>
+  <text x="44" y="230" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">共享包层 packages/* · 15 个共享库（图示 8 个核心）</text>
+  <rect x="34" y="246" width="92" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="80" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">ui</text>
+  <text x="80" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">UI 原语·主题</text>
+  <rect x="134" y="246" width="92" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="180" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">ui-patterns</text>
+  <text x="180" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">业务组件</text>
+  <rect x="234" y="246" width="92" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="280" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">common</text>
+  <text x="280" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">flags·遥测</text>
+  <rect x="334" y="246" width="92" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="380" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">pg-meta</text>
+  <text x="380" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">SQL 生成引擎</text>
+  <rect x="434" y="246" width="92" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="480" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">api-types</text>
+  <text x="480" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">OpenAPI 类型</text>
+  <rect x="534" y="246" width="92" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="580" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">shared-data</text>
+  <text x="580" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">定价真源</text>
+  <rect x="634" y="246" width="92" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="680" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">marketing</text>
+  <text x="680" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">落地页渲染</text>
+  <rect x="734" y="246" width="92" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="780" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">icons</text>
+  <text x="780" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">图标</text>
+
+  <!-- L3 工程化基建 -->
+  <rect x="30" y="352" width="800" height="100" rx="10" fill="none" stroke="#b388ff" stroke-opacity="0.45" stroke-dasharray="6 4"/>
+  <text x="44" y="376" font-family="system-ui, sans-serif" font-size="14" fill="#b388ff" font-weight="600">工程化基建（monorepo 根）</text>
+  <rect x="42" y="392" width="186" height="48" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="135" y="411" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">pnpm catalog 版本真源</text>
+  <text x="135" y="429" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">3 天供应链发布冷却</text>
+  <rect x="240" y="392" width="186" height="48" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="333" y="411" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">turbo 任务图</text>
+  <text x="333" y="429" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">build/typecheck 拓扑</text>
+  <rect x="438" y="392" width="186" height="48" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="531" y="411" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">44 个 CI workflows</text>
+  <text x="531" y="429" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">ESLint ratchet 棘轮</text>
+  <rect x="636" y="392" width="186" height="48" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="729" y="411" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">Playwright e2e</text>
+  <text x="729" y="429" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">next/tanstack 双轨 matrix</text>
+
+  <!-- L4 自托管部署栈 -->
+  <rect x="30" y="488" width="800" height="200" rx="10" fill="none" stroke="#f9ca24" stroke-opacity="0.45" stroke-dasharray="6 4"/>
+  <text x="44" y="512" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">自托管部署栈 docker/ · 12 服务 docker-compose + setup/update 生命周期</text>
+  <rect x="50" y="526" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="135" y="545" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">supabase/studio 镜像</text>
+  <text x="135" y="562" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">由 apps/studio 构建</text>
+  <rect x="240" y="526" width="170" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="325" y="545" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">envoy api-gw :8000</text>
+  <text x="325" y="562" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">默认 API 网关</text>
+  <rect x="430" y="526" width="180" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="520" y="545" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">postgres 17</text>
+  <text x="520" y="562" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">supabase/postgres 镜像</text>
+  <rect x="640" y="526" width="170" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="725" y="545" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">db-config 等</text>
+  <text x="725" y="562" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">辅助容器</text>
+  <rect x="42" y="590" width="90" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="87" y="609" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="600">gotrue</text>
+  <text x="87" y="626" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c4">认证 :9999</text>
+  <rect x="140" y="590" width="90" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="185" y="609" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="600">postgrest</text>
+  <text x="185" y="626" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c4">REST :3000</text>
+  <rect x="238" y="590" width="90" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="283" y="609" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="600">realtime</text>
+  <text x="283" y="626" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c4">WS :4000</text>
+  <rect x="336" y="590" width="90" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="381" y="609" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="600">storage</text>
+  <text x="381" y="626" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c4">文件 :5000</text>
+  <rect x="434" y="590" width="90" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="479" y="609" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="600">imgproxy</text>
+  <text x="479" y="626" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c4">图像 :5001</text>
+  <rect x="532" y="590" width="100" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="582" y="609" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="600">postgres-meta</text>
+  <text x="582" y="626" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c4">元数据 :8080</text>
+  <rect x="640" y="590" width="90" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="685" y="609" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="600">supavisor</text>
+  <text x="685" y="626" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c4">池化 :6543</text>
+  <rect x="738" y="590" width="90" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="783" y="609" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="600">edge-runtime</text>
+  <text x="783" y="626" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa5c4">Deno :9000</text>
+  <text x="430" y="668" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">后端服务均为外部独立仓库（gotrue / postgrest / realtime / storage / supavisor …），本仓库以镜像引用 + 环境变量接线</text>
+</svg>

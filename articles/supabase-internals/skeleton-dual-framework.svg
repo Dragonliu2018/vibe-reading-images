@@ -1,0 +1,56 @@
+<svg width="860" height="570" viewBox="0 0 860 570" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <rect width="860" height="570" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e2e8f0" font-weight="600">Studio 双框架并行（Next.js → TanStack Start 迁移期）</text>
+
+  <!-- 入口 -->
+  <rect x="330" y="56" width="200" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="430" y="79" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">pnpm dev / build / start</text>
+  <text x="430" y="99" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">scripts/dispatch.js</text>
+  <path d="M 430 112 L 430 135 L 205 135 L 205 160" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 430 112 L 430 135 L 655 135 L 655 160" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="330" y="128" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">STUDIO_FRAMEWORK 环境变量分流</text>
+
+  <!-- 双运行时 -->
+  <rect x="90" y="160" width="230" height="80" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="205" y="186" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">Next.js 运行时（默认）</text>
+  <text x="205" y="208" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">dev:next / build:next</text>
+  <text x="205" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">保留作回退基线，可 bisect 回归</text>
+  <rect x="540" y="160" width="230" height="80" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="655" y="186" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">TanStack Start 运行时</text>
+  <text x="655" y="208" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">dev:tanstack（vite）</text>
+  <text x="655" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">scripts/serve.js 独立 HTTP 服务</text>
+
+  <!-- compat 层 -->
+  <rect x="540" y="300" width="230" height="80" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="655" y="326" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">compat/next 兼容 shim 层</text>
+  <text x="655" y="348" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">vite alias：next/router → shim</text>
+  <text x="655" y="366" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">未注册 next/* import 构建警告</text>
+
+  <!-- 底层页面 -->
+  <rect x="90" y="440" width="230" height="80" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="205" y="466" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">pages/** Next 旧页面</text>
+  <text x="205" y="488" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">迁移期禁止删除（双运行时共享）</text>
+  <text x="205" y="506" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">withAuth / getLayout 在此生效</text>
+  <rect x="540" y="440" width="230" height="80" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="655" y="466" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">routes/** TanStack 路由树</text>
+  <text x="655" y="488" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">routeTree.gen.ts 由插件生成</text>
+  <text x="655" y="506" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">beforeLoad 承担重定向</text>
+
+  <!-- 箭头 -->
+  <path d="M 205 240 L 205 436" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="218" y="340" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">直接渲染</text>
+  <path d="M 655 240 L 655 296" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 655 440 L 655 384" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="670" y="415" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">经 vite alias 消费 shim</text>
+  <path d="M 540 480 L 324 480" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrowP)"/>
+  <text x="432" y="470" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#ff6b9d">re-export 默认导出（Path A）</text>
+  <text x="205" y="550" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">全局状态：valtio（state/）· URL 状态：nuqs · 表单：react-hook-form + zod</text>
+</svg>

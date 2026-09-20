@@ -1,0 +1,61 @@
+<svg width="760" height="480" viewBox="0 0 760 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/>
+    </marker>
+  </defs>
+  <rect width="760" height="480" fill="#0b0d14"/>
+  <text x="380" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e2e8f0" font-weight="600">Table Editor 查询数据流（打开一张表）</text>
+
+  <!-- 列 1：三个并行 query -->
+  <rect x="40" y="80" width="180" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="130" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">useTableEditorQuery</text>
+  <text x="130" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">表结构 · pg_catalog 内省</text>
+  <rect x="40" y="152" width="180" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="130" y="174" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">useTableRowsQuery</text>
+  <text x="130" y="192" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">行数据 · 分页/过滤/排序</text>
+  <rect x="40" y="224" width="180" height="52" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="130" y="246" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e2e8f0" font-weight="600">useTableRowsCountQuery</text>
+  <text x="130" y="264" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">行数 · 估算/精确</text>
+  <text x="130" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">react-query 三兄弟并行挂载</text>
+
+  <!-- 列 2：executeSql -->
+  <rect x="280" y="152" width="180" height="96" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="370" y="176" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">executeSql</text>
+  <text x="370" y="196" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">SafeSqlFragment 强制类型</text>
+  <text x="370" y="214" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">EXPLAIN preflight ≥200k 拒绝</text>
+  <text x="370" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">1MB 大小上限 · 角色扮演包裹</text>
+
+  <!-- 列 3：pg-meta 服务 -->
+  <rect x="520" y="152" width="200" height="96" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="620" y="176" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">pg-meta 执行服务</text>
+  <text x="620" y="196" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">POST /platform/pg-meta/{ref}/query</text>
+  <text x="620" y="214" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">解密 x-connection-encrypted 头</text>
+  <text x="620" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">直连目标项目库</text>
+
+  <!-- Postgres -->
+  <rect x="520" y="320" width="200" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="620" y="346" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">Postgres</text>
+  <text x="620" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">执行 SQL · 返回行 JSON</text>
+
+  <!-- 汇聚箭头 -->
+  <path d="M 220 106 L 250 106 L 250 172 L 276 172" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 220 178 L 276 178" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 220 250 L 250 250 L 250 226 L 276 226" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="250" y="140" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4" text-anchor="end">pg-meta 生成 SQL</text>
+
+  <!-- executeSql → pg-meta 服务 -->
+  <path d="M 460 200 L 516 200" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="488" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">typed fetch</text>
+
+  <!-- pg-meta 服务 → Postgres -->
+  <path d="M 620 248 L 620 316" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="634" y="288" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">SQL</text>
+
+  <!-- 结果回流 -->
+  <path d="M 560 248 L 560 440 L 130 440 L 130 280" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrowR)" stroke-dasharray="7 5" opacity="0.85"/>
+  <text x="345" y="432" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#80c7ff">结果行 JSON → react-query 缓存 → formatGridDataWithOperationValues → Grid 渲染</text>
+</svg>

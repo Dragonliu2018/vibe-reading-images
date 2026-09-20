@@ -1,0 +1,32 @@
+<svg width="620" height="500" viewBox="0 0 620 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="620" height="500" fill="#0b0d14"/>
+  <text x="310" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="#e2e8f0" font-weight="600">getTableRowsSql 两段式查询生成</text>
+
+  <rect x="130" y="60" width="360" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="310" y="83" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">Query builder 四层链</text>
+  <text x="310" y="103" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">from → select → filter / order → range</text>
+
+  <rect x="130" y="170" width="360" height="64" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="310" y="193" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">with _base_query as ( ... )</text>
+  <text x="310" y="213" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">先收敛行集：过滤 + 排序 + 分页</text>
+
+  <rect x="130" y="280" width="360" height="76" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="310" y="303" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">外层仅对当页数据逐列截断</text>
+  <text x="310" y="323" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">octet_length &gt; 10240 → left(col, 10240) || '...'</text>
+  <text x="310" y="341" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">数组列截 50 元素 + truncated 标记</text>
+
+  <rect x="130" y="400" width="360" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="310" y="423" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">wrapWithRoleImpersonation → executeSql</text>
+  <text x="310" y="443" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">客户端包装 · 前缀 11 行（错误行号回偏移 -11）</text>
+
+  <path d="M 310 124 L 310 166" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 310 234 L 310 276" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 310 356 L 310 396" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="324" y="155" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">空值/类型适配 · 大表跳过默认排序</text>
+  <text x="324" y="385" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">role impersonation</text>
+</svg>

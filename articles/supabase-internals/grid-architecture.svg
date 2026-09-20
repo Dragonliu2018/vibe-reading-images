@@ -1,0 +1,55 @@
+<svg width="860" height="520" viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="520" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e2e8f0" font-weight="600">Table Editor 与 SupabaseGrid 分层</text>
+
+  <!-- 组装层 -->
+  <rect x="280" y="60" width="300" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="430" y="83" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">TableGridEditor（组装层）</text>
+  <text x="430" y="103" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">权限判定 + SidePanelEditor + DeleteDialogs</text>
+
+  <!-- SupabaseGrid -->
+  <rect x="280" y="160" width="300" height="60" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="183" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">SupabaseGrid（编排器）</text>
+  <text x="430" y="203" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">useTableRowsQuery + 乐观叠加</text>
+  <path d="M 430 116 L 430 156" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 三段 -->
+  <rect x="100" y="270" width="200" height="60" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="200" y="293" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">Header</text>
+  <text x="200" y="313" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">工具栏 · 过滤 · 导入</text>
+  <rect x="340" y="270" width="200" height="60" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="440" y="293" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">Grid</text>
+  <text x="440" y="313" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">react-data-grid · 虚拟滚动</text>
+  <rect x="580" y="270" width="200" height="60" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="680" y="293" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">Footer</text>
+  <text x="680" y="313" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">分页 · 行数统计</text>
+  <path d="M 360 220 L 200 266" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 430 220 L 430 266" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 500 220 L 680 266" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 底层 -->
+  <rect x="40" y="380" width="240" height="90" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="160" y="404" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">operationQueue（跨表全局）</text>
+  <text x="160" y="424" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">add / edit_cell / delete 队列模式</text>
+  <text x="160" y="442" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">冲突解决 · undo · 单事务批量提交</text>
+  <text x="160" y="458" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">vs 直写模式（无队列）</text>
+  <rect x="340" y="380" width="200" height="90" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="440" y="404" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">编辑器/格式化器策略表</text>
+  <text x="440" y="424" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">14 种 ColumnType</text>
+  <text x="440" y="442" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">getCellEditor / getCellRenderer</text>
+  <text x="440" y="458" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">外键 lookup / JSON / 数组</text>
+  <rect x="660" y="380" width="180" height="90" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="750" y="404" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">单表 store</text>
+  <text x="750" y="424" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">列宽/顺序/选中/页码</text>
+  <text x="750" y="442" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">URL 为 filter/sort 真源</text>
+  <text x="750" y="458" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">localStorage 持久化</text>
+  <path d="M 360 330 L 360 352 L 160 352 L 160 376" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 440 330 L 440 376" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 580 88 L 845 88 L 845 425 L 840 425" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.65"/>
+  <text x="716" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">切表即重建（key=table id）</text>
+</svg>

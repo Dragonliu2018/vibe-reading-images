@@ -1,0 +1,51 @@
+<svg width="860" height="510" viewBox="0 0 860 510" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="510" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e2e8f0" font-weight="600">共享组件层：ui / ui-patterns / registry 链</text>
+
+  <!-- 消费行 -->
+  <rect x="40" y="70" width="140" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="110" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">studio</text>
+  <text x="110" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">858 文件引用</text>
+  <rect x="200" y="70" width="140" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="270" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">www</text>
+  <text x="270" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">84 文件引用</text>
+  <rect x="360" y="70" width="140" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">docs</text>
+  <text x="430" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">40 文件引用</text>
+
+  <!-- ui-patterns / ui -->
+  <rect x="40" y="180" width="380" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="230" y="204" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">packages/ui-patterns（~24k 行）</text>
+  <text x="230" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">业务模式层：FormItemLayout · Chart · Markdown · 1784 处 import</text>
+  <rect x="40" y="290" width="380" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="230" y="314" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">packages/ui（~10k 行）</text>
+  <text x="230" y="336" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">UI 原语层：Radix + shadcn 组件 + 主题 token</text>
+  <path d="M 110 126 L 110 176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 270 126 L 270 176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 430 126 L 430 176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 230 244 L 230 286" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="244" y="272" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">组合原语</text>
+
+  <!-- registry 链 -->
+  <rect x="520" y="180" width="300" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="670" y="204" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">apps/design-system</text>
+  <text x="670" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">对内文档站 · ts-morph 索引指向源码</text>
+  <rect x="520" y="290" width="300" height="64" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="670" y="314" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">apps/ui-library</text>
+  <text x="670" y="336" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">对外 registry · registry-item.json 标准</text>
+  <rect x="520" y="400" width="300" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="670" y="424" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">npx shadcn add @supabase/xxx</text>
+  <text x="670" y="446" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">第三方一条命令安装功能块</text>
+  <path d="M 420 212 L 516 212" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 420 322 L 516 322" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 670 354 L 670 396" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="40" y="400" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">OKLCH 派生 token：--hue / --chroma / --surface / --contrast 四输入变量</text>
+  <text x="40" y="420" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">经 CSS calc 派生全部语义色；theme 文件只覆盖输入集合</text>
+  <text x="40" y="448" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">registryItemAppend()：block × 4 种 client 框架自动展开变体，</text>
+  <text x="40" y="466" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">合并去重 registryDependencies / dependencies / files</text>
+</svg>

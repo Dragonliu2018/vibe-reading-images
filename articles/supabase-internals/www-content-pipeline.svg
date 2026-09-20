@@ -1,0 +1,70 @@
+<svg width="860" height="560" viewBox="0 0 860 560" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/>
+    </marker>
+  </defs>
+  <rect width="860" height="560" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e2e8f0" font-weight="600">www 官网内容流水线（构建期 + LLM 分发）</text>
+
+  <!-- 内容源 -->
+  <rect x="40" y="64" width="150" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="115" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">_blog</text>
+  <text x="115" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">421 篇 MDX</text>
+  <rect x="202" y="64" width="150" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="277" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">_customers</text>
+  <text x="277" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">客户案例</text>
+  <rect x="364" y="64" width="150" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="439" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">_events</text>
+  <text x="439" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">活动（+Notion）</text>
+  <rect x="526" y="64" width="150" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="601" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">_alternatives</text>
+  <text x="601" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">竞品对比 SEO</text>
+  <rect x="688" y="64" width="150" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="763" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">_go</text>
+  <text x="763" y="107" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">落地页注册表</text>
+
+  <!-- 构建脚本 -->
+  <rect x="40" y="180" width="240" height="70" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="160" y="204" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">generateStaticContent.mjs</text>
+  <text x="160" y="224" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">stars / 职位数 / changelog RSS</text>
+  <text x="160" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">（GitHub App 拉私有 changelog 仓）</text>
+  <rect x="310" y="180" width="240" height="70" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="430" y="204" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">generateMdContent.mjs</text>
+  <text x="430" y="224" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">mdx → markdown</text>
+  <text x="430" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">slug 冲突 / 保留字构建期校验</text>
+  <rect x="580" y="180" width="240" height="70" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="700" y="204" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">fetchAgentSkills.mjs</text>
+  <text x="700" y="224" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">拉 agent-skills Release</text>
+  <text x="700" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">→ .well-known/agent-skills</text>
+  <path d="M 115 120 L 115 176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 277 120 L 380 176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 439 120 L 430 176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 601 120 L 700 176" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 产物 -->
+  <rect x="310" y="310" width="240" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="430" y="334" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">content.generated.ts</text>
+  <text x="430" y="354" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">MD_CONTENT Map（静态 import）</text>
+  <path d="M 430 250 L 430 306" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 双消费者 -->
+  <rect x="40" y="430" width="300" height="70" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="190" y="454" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">Next.js 双 Router 渲染</text>
+  <text x="190" y="474" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">App Router 新内容 + Pages Router 旧页</text>
+  <text x="190" y="490" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">multi-zone 反代 /docs /dashboard</text>
+  <rect x="380" y="430" width="220" height="70" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="490" y="454" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">middleware 协商</text>
+  <text x="490" y="474" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">Accept: text/markdown / .md 后缀</text>
+  <text x="490" y="490" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">→ /api-v2/md/[...slug]</text>
+  <rect x="640" y="430" width="180" height="70" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="730" y="454" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">llms.txt 系列</text>
+  <text x="730" y="474" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">读 docs 构建产物</text>
+  <text x="730" y="490" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">全量 LLM 文档出口</text>
+  <path d="M 350 374 L 350 400 L 190 400 L 190 426" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 430 374 L 430 426" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrowB)"/>
+  <path d="M 510 374 L 510 400 L 730 400 L 730 426" stroke="#80c7ff" stroke-width="1.5" fill="none" marker-end="url(#arrowB)"/>
+</svg>

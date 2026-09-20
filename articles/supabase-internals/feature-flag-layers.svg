@@ -1,0 +1,36 @@
+<svg width="860" height="450" viewBox="0 0 860 450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="860" height="450" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e2e8f0" font-weight="600">三层 feature flag 体系（packages/common）</text>
+
+  <rect x="40" y="80" width="220" height="90" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="150" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">ConfigCat 动态 flag</text>
+  <text x="150" y="124" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">AutoPoll 7 分钟轮询</text>
+  <text x="150" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">可自建代理 · is_staff 定向</text>
+  <text x="150" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">useFlag() 读取</text>
+  <rect x="320" y="80" width="220" height="90" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="430" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">PostHog 实验 flag</text>
+  <text x="430" y="124" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">A/B 实验 · 渐进发布</text>
+  <text x="430" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">服务端评估 /telemetry/feature-flags</text>
+  <text x="430" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">实验曝光自动去重上报</text>
+  <rect x="600" y="80" width="220" height="90" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="710" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">静态 enabled-features</text>
+  <text x="710" y="124" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">构建期 JSON ~130 key</text>
+  <text x="710" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">self-hosted 裁剪 UI</text>
+  <text x="710" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">+ env / profile 两层覆盖</text>
+
+  <path d="M 150 170 L 150 296" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 430 170 L 430 296" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 710 170 L 710 296" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="240" y="300" width="380" height="70" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="430" y="324" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">useIsFeatureEnabled（studio）</text>
+  <text x="430" y="344" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">静态基线 + profile.disabled_features + env 覆盖</text>
+  <text x="430" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">150 文件扇入</text>
+
+  <text x="430" y="416" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#f9ca24">共同纪律：加载前返回 false（fail-closed）· 拼错 key 编译期报错</text>
+</svg>

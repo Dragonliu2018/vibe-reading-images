@@ -1,0 +1,61 @@
+<svg width="860" height="430" viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/>
+    </marker>
+  </defs>
+  <rect width="860" height="430" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e2e8f0" font-weight="600">SafeSqlFragment 信任分级与准入函数（pg-format）</text>
+
+  <!-- 信任链 -->
+  <rect x="40" y="90" width="200" height="70" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="140" y="114" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">UntrustedSqlFragment</text>
+  <text x="140" y="134" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">URL 参数 / AI 输出 · 仅展示</text>
+  <rect x="300" y="90" width="220" height="70" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="410" y="114" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">acceptUntrustedSql()</text>
+  <text x="410" y="134" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">唯一提升通道 · 必须在用户手势内</text>
+  <rect x="580" y="90" width="220" height="70" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="690" y="114" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">SafeSqlFragment</text>
+  <text x="690" y="134" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">string &amp; { __safeSqlFragmentBrand }</text>
+  <path d="M 240 125 L 296 125" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 520 125 L 576 125" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 产物总线 -->
+  <rect x="40" y="220" width="140" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="110" y="244" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">ident()</text>
+  <text x="110" y="264" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">标识符转义</text>
+  <rect x="190" y="220" width="140" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="260" y="244" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">literal()</text>
+  <text x="260" y="264" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">字面量转义</text>
+  <rect x="340" y="220" width="140" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="244" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">keyword()</text>
+  <text x="410" y="264" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">白名单控制短语</text>
+  <rect x="490" y="220" width="140" height="64" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="560" y="244" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">rawSql()</text>
+  <text x="560" y="264" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">用户手写 SQL 准入</text>
+  <rect x="640" y="220" width="140" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="710" y="244" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">safeSql``</text>
+  <text x="710" y="264" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">模板标签 · 只收碎片</text>
+
+  <path d="M 110 220 L 110 190" stroke="#7a86b3" stroke-width="1.5" fill="none"/>
+  <path d="M 260 220 L 260 190" stroke="#7a86b3" stroke-width="1.5" fill="none"/>
+  <path d="M 410 220 L 410 190" stroke="#7a86b3" stroke-width="1.5" fill="none"/>
+  <path d="M 560 220 L 560 190" stroke="#7a86b3" stroke-width="1.5" fill="none"/>
+  <path d="M 710 220 L 710 190" stroke="#7a86b3" stroke-width="1.5" fill="none"/>
+  <path d="M 110 190 L 710 190" stroke="#7a86b3" stroke-width="1.5" fill="none"/>
+  <path d="M 670 190 L 670 164" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="390" y="182" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">产物总线：四个准入函数 + 模板标签均只产出 SafeSqlFragment</text>
+
+  <!-- executeSql 强制 -->
+  <rect x="580" y="330" width="220" height="70" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="690" y="354" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">executeSql(sql)</text>
+  <text x="690" y="374" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">参数类型强制 SafeSqlFragment</text>
+  <text x="690" y="390" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">普通 string 编译期报错</text>
+  <path d="M 800 125 L 845 125 L 845 365 L 804 365" stroke="#ff6b9d" stroke-width="1.5" fill="none" marker-end="url(#arrowG)" opacity="0.85"/>
+  <text x="838" y="245" font-family="system-ui, sans-serif" font-size="11" fill="#ff6b9d" text-anchor="end" transform="translate(0,0)"></text>
+  <text x="40" y="354" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">joinSqlFragments()：分隔符为 15 种字面量联合类型，组合亦不可注入</text>
+  <text x="40" y="378" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">运行时零开销（reduce 拼串），安全性由 TS 编译器保证</text>
+</svg>

@@ -1,0 +1,59 @@
+<svg width="860" height="470" viewBox="0 0 860 470" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowY" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect width="860" height="470" fill="#0b0d14"/>
+  <text x="430" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e2e8f0" font-weight="600">SQL Editor snippet 保存链（Scheduler / Mechanism 双层）</text>
+
+  <!-- 行 1：编辑入口 -->
+  <rect x="40" y="70" width="150" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="115" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">Monaco onChange</text>
+  <text x="115" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">useSnippetEditor</text>
+  <rect x="240" y="70" width="160" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="320" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">setSql()</text>
+  <text x="320" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">untrustedSql() 打标 · unsaved</text>
+  <rect x="440" y="70" width="160" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="520" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">needsSaving</text>
+  <text x="520" y="113" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">proxyMap 脏队列</text>
+  <path d="M 190 98 L 236 98" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 400 98 L 436 98" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 行 2：调度/机制 -->
+  <rect x="40" y="200" width="150" height="70" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="115" y="224" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">Cmd+S</text>
+  <text x="115" y="244" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">requestSave(id)</text>
+  <text x="115" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">手动保存模式</text>
+  <rect x="240" y="200" width="160" height="70" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="320" y="224" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">SaveScheduler</text>
+  <text x="320" y="244" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">WHEN：订阅脏队列排空</text>
+  <text x="320" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">区分 auto / manual</text>
+  <rect x="440" y="200" width="160" height="70" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="520" y="224" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">SaveMechanism</text>
+  <text x="520" y="244" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">HOW：1s debounce → upsert</text>
+  <text x="520" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">状态转移 + 失败回滚</text>
+  <rect x="640" y="200" width="170" height="70" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="725" y="224" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">PUT /platform/content</text>
+  <text x="725" y="244" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">buildUpsertPayload</text>
+  <text x="725" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">共享 snippet 校验</text>
+  <path d="M 520 126 L 520 196" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 115 270 L 115 320 L 320 320 L 320 274" stroke="#f9ca24" stroke-width="1.5" fill="none" marker-end="url(#arrowY)"/>
+  <text x="330" y="334" font-family="system-ui, sans-serif" font-size="11" fill="#f9ca24">扣住队列直到手动触发</text>
+  <path d="M 400 235 L 436 235" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 600 235 L 636 235" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 行 3：状态机与失效 -->
+  <rect x="40" y="370" width="340" height="70" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="210" y="394" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">SnippetStatus 状态机（纯函数转换）</text>
+  <text x="210" y="414" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">new / new_saving / new_save_failed / saved</text>
+  <text x="210" y="430" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">unsaved / saving / save_failed</text>
+  <rect x="640" y="370" width="170" height="70" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="725" y="394" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" font-weight="600">react-query</text>
+  <text x="725" y="414" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">invalidate(contentKeys)</text>
+  <text x="725" y="430" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa5c4">Valtio 管编辑态 · RQ 管服务端态</text>
+  <path d="M 725 270 L 725 366" stroke="#7a86b3" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+</svg>
