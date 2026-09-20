@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="660" viewBox="0 0 800 660">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+<marker id="arrowt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+<marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+<marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+<marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+<marker id="arrowk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+<marker id="arrowl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<rect width="800" height="660" fill="#0b0d14"/>
+<text x="400.0" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e6e9f5">事务生命周期（左）与悲观锁获取链（右）</text>
+<rect x="40" y="56" width="270" height="54" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="175.0" y="72.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">txnClient.New</text>
+<text x="175.0" y="90.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">HLC snapshot · maxActiveTxn</text>
+<text x="175.0" y="106.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">FIFO 排队</text>
+<rect x="40" y="126" width="270" height="54" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="175.0" y="142.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">TxnOperator</text>
+<text x="175.0" y="160.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Read / Write 经 workspace</text>
+<text x="175.0" y="176.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">maybeCacheWrites 读己之写</text>
+<rect x="40" y="196" width="270" height="54" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="175.0" y="212.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">Commit</text>
+<text x="175.0" y="230.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">workspace.Commit 打包</text>
+<text x="175.0" y="246.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">genWriteReqs → TxnRequest</text>
+<rect x="40" y="266" width="270" height="54" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="175.0" y="290.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">TN service.Commit</text>
+<text x="175.0" y="308.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">allocator.Valid 锁表校验</text>
+<rect x="40" y="336" width="270" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="175.0" y="352.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">1PC 快路径</text>
+<text x="175.0" y="370.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">单 TNShard 直接</text>
+<text x="175.0" y="386.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">storage.Commit</text>
+<rect x="40" y="406" width="270" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="175.0" y="422.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">2PC 协调</text>
+<text x="175.0" y="440.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">并行 Prepare 全 shard</text>
+<text x="175.0" y="456.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">→ 异步 CommitTNShard</text>
+<rect x="40" y="476" width="270" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="175.0" y="492.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">响应 → unlock</text>
+<text x="175.0" y="510.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">RC 下等 logtail 应用</text>
+<text x="175.0" y="526.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">再释放悲观锁</text>
+<line x1="175.0" y1="110" x2="175.0" y2="126" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="175.0" y1="180" x2="175.0" y2="196" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="175.0" y1="250" x2="175.0" y2="266" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="175.0" y1="320" x2="175.0" y2="336" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="175.0" y1="390" x2="175.0" y2="406" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="175.0" y1="460" x2="175.0" y2="476" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="318" y="322" text-anchor="end" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">单 shard</text>
+<text x="318" y="392" text-anchor="end" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">多 shard</text>
+<rect x="460" y="56" width="300" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="610.0" y="80.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">lockservice.Lock</text>
+<text x="610.0" y="98.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">service.go · CN 侧入口</text>
+<rect x="460" y="126" width="300" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="610.0" y="142.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">getLockTableWithCreate</text>
+<text x="610.0" y="160.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">无 bind → allocator 申请</text>
+<text x="610.0" y="176.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">ByRow crc64 分桶</text>
+<rect x="460" y="196" width="300" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="610.0" y="212.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">本地 / 远程锁表</text>
+<text x="610.0" y="230.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">localLockTable /</text>
+<text x="610.0" y="246.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">remoteLockTable 转发</text>
+<rect x="460" y="266" width="300" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="610.0" y="282.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">冲突 → waiter FIFO</text>
+<text x="610.0" y="300.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">waiterEvents 异步触发</text>
+<text x="610.0" y="316.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">死锁检测</text>
+<rect x="460" y="336" width="300" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="610.0" y="352.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">deadlock detector</text>
+<text x="610.0" y="370.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">4 goroutine 拼等待图</text>
+<text x="610.0" y="386.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">跨 CN GetWaitingList</text>
+<rect x="460" y="406" width="300" height="54" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="610.0" y="438.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">成环 → abort youngest</text>
+<line x1="610.0" y1="110" x2="610.0" y2="126" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="610.0" y1="180" x2="610.0" y2="196" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="610.0" y1="250" x2="610.0" y2="266" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="610.0" y1="320" x2="610.0" y2="336" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="610.0" y1="390" x2="610.0" y2="406" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="460" y="480" width="300" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="610.0" y="496.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">LockTableAllocator（TN）</text>
+<text x="610.0" y="514.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">bind {Table→Service, Version++}</text>
+<text x="610.0" y="530.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">超时重绑迁移 · commit 复核</text>
+<line x1="610" y1="460" x2="610" y2="480" stroke="#6c8ef5" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrowb)"/>
+<text x="622" y="476" text-anchor="start" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">bind 来源</text>
+<text x="400" y="648" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8b93b8">SI + HLC：commit TS = max(各 shard PreparedTS)；时钟偏移由 maxOffset 与跳变监控兜底</text>
+</svg>

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="660" viewBox="0 0 800 660">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+<marker id="arrowt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+<marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+<marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+<marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+<marker id="arrowk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+<marker id="arrowl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<rect width="800" height="660" fill="#0b0d14"/>
+<text x="400.0" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e6e9f5">模块依赖关系（箭头 = 依赖 / 调用方向）</text>
+<rect x="310" y="60" width="180" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="400.0" y="85.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">frontend</text>
+<text x="400.0" y="103.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">协议 · 会话 · 语句分发</text>
+<rect x="60" y="176" width="170" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="145.0" y="201.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">plan</text>
+<text x="145.0" y="219.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">bind + 改写优化</text>
+<rect x="290" y="176" width="200" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="390.0" y="201.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">compile / colexec</text>
+<text x="390.0" y="219.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Scope · 向量化算子</text>
+<rect x="560" y="176" width="190" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="655.0" y="201.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">publication</text>
+<text x="655.0" y="219.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Git for Data · CCPR</text>
+<rect x="60" y="310" width="170" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="145.0" y="335.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">parsers</text>
+<text x="145.0" y="353.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">AST</text>
+<rect x="290" y="310" width="200" height="56" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="390.0" y="335.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">AI 检索</text>
+<text x="390.0" y="353.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">vectorindex · fulltext · iscp</text>
+<rect x="560" y="310" width="190" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="655.0" y="335.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">disttae</text>
+<text x="655.0" y="353.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">workspace + logtail 缓存</text>
+<rect x="60" y="444" width="170" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="145.0" y="469.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">txn / lockservice</text>
+<text x="145.0" y="487.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">SI · 分布式锁</text>
+<rect x="290" y="444" width="200" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="390.0" y="469.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">LogService + HAKeeper</text>
+<text x="390.0" y="487.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">raft WAL · 调度</text>
+<rect x="560" y="444" width="190" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="655.0" y="469.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">fileservice + objectio</text>
+<text x="655.0" y="487.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">S3 · 缓存</text>
+<rect x="290" y="562" width="200" height="50" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="390.0" y="584.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">TAE（TN 引擎）</text>
+<text x="390.0" y="602.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">MVCC · logtail · CKP</text>
+<path d="M350,116 L145,176" fill="none" stroke="None" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="390" y1="116" x2="390" y2="176" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M450,116 L640,176" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowy)"/>
+<path d="M310,88 L45,88 L45,472 L60,472" fill="none" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+<line x1="145" y1="232" x2="145" y2="310" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M215,232 L340,310" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowk)"/>
+<line x1="390" y1="232" x2="390" y2="310" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M450,232 L620,310" fill="none" stroke="None" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M290,204 L260,204 L260,472 L230,472" fill="none" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+<line x1="700" y1="366" x2="700" y2="444" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M600,366 L600,400 L145,400 L145,444" fill="none" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+<path d="M655,366 L655,410 L530,410 L530,545 L470,562" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowy)"/>
+<path d="M750,204 L775,204 L775,472 L750,472" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowy)"/>
+<path d="M655,232 L655,268 L505,268 L505,540 L430,562" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowy)"/>
+<path d="M200,500 L330,562" fill="none" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+<line x1="390" y1="562" x2="390" y2="500" stroke="#b388ff" stroke-width="1.5" marker-end="url(#arrowp)"/>
+<text x="228" y="152" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">BuildPlan</text>
+<text x="430" y="152" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">编译执行</text>
+<text x="560" y="152" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">分支/发布命令</text>
+<text x="46" y="300" text-anchor="start" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">开事务</text>
+<text x="300" y="285" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">indexplugin</text>
+<text x="505" y="285" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">Reader</text>
+<text x="228" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">TxnOperator</text>
+<text x="370" y="390" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">commit / Read</text>
+<text x="560" y="390" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">对象读写</text>
+<text x="556" y="528" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">logtail 订阅</text>
+<text x="500" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">快照 · GC 保护</text>
+<text x="735" y="340" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">对象复制</text>
+<text x="250" y="540" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">TxnStorage</text>
+<text x="352" y="528" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">WAL</text>
+<text x="400" y="648" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8b93b8">横切依赖（几乎所有模块）：container / mpool · pb · logutil（图中省略）</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="680" viewBox="0 0 800 680">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+<marker id="arrowt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+<marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+<marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+<marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+<marker id="arrowk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+<marker id="arrowl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<rect width="800" height="680" fill="#0b0d14"/>
+<text x="400.0" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e6e9f5">Publication（CCPR）：iteration 差量复制流水线</text>
+<rect x="40" y="56" width="340" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="210.0" y="73.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">CREATE PUBLICATION / SUBSCRIBE</text>
+<text x="210.0" y="91.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">frontend/publication_subscription.go</text>
+<text x="210.0" y="107.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">写 mo_ccpr_log（LSN 状态机）</text>
+<rect x="420" y="56" width="340" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="590.0" y="73.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">PublicationTaskExecutor</text>
+<text x="590.0" y="91.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">cnservice 注册 taskservice</text>
+<text x="590.0" y="107.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">双 ticker · 包级 CAS 单飞</text>
+<line x1="380" y1="84" x2="420" y2="84" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="230" y="160" width="340" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="400.0" y="176.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">RequestUpstreamSnapshot</text>
+<text x="400.0" y="194.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">ccpr_&lt;taskID&gt;_&lt;lsn&gt; 快照</text>
+<text x="400.0" y="210.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">滚动保留最近 2 个</text>
+<rect x="230" y="230" width="340" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="400.0" y="246.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">ProcessDDLChanges</text>
+<text x="400.0" y="264.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">表级 DDL diff</text>
+<text x="400.0" y="280.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">生成 ALTER 增量</text>
+<rect x="230" y="300" width="340" height="54" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="400.0" y="316.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">GetObjectListMap</text>
+<text x="400.0" y="334.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">两快照 OBJECTLIST 差量</text>
+<text x="400.0" y="350.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">未变对象零拷贝</text>
+<rect x="230" y="370" width="340" height="54" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="400.0" y="386.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">RegisterSyncProtection</text>
+<text x="400.0" y="404.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">bloom filter 注册上游</text>
+<text x="400.0" y="420.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">TN DiskCleaner GC 保护</text>
+<rect x="230" y="440" width="340" height="54" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="400.0" y="456.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">ApplyObjects（两阶段）</text>
+<text x="400.0" y="474.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">先 DATA 后 TOMBSTONE</text>
+<text x="400.0" y="490.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">FilterObject：过滤行 · 重写 rowid</text>
+<rect x="230" y="510" width="340" height="54" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="400.0" y="526.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">UpdateIterationState</text>
+<text x="400.0" y="544.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">成功推 LSN+1 落盘</text>
+<text x="400.0" y="560.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">失败幂等重试</text>
+<line x1="400.0" y1="214" x2="400.0" y2="230" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="400.0" y1="284" x2="400.0" y2="300" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="400.0" y1="354" x2="400.0" y2="370" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="400.0" y1="424" x2="400.0" y2="440" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="400.0" y1="494" x2="400.0" y2="510" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M490,112 L400,160" fill="none" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowy)"/>
+<rect x="610" y="160" width="150" height="62" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="685.0" y="180.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">data branch</text>
+<text x="685.0" y="198.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">CREATE / DIFF /</text>
+<text x="685.0" y="214.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">MERGE / PICK BRANCH</text>
+<rect x="610" y="260" width="150" height="62" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="685.0" y="280.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">DataBranchDAG</text>
+<text x="685.0" y="298.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">LCA + 深度上界</text>
+<text x="685.0" y="314.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">databranchutils</text>
+<rect x="610" y="360" width="150" height="62" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="685.0" y="380.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">BranchHashmap</text>
+<text x="685.0" y="398.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">分片可 spill</text>
+<text x="685.0" y="414.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">哈希对比 / 合并</text>
+<line x1="685" y1="222" x2="685" y2="260" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowk)"/>
+<line x1="685" y1="322" x2="685" y2="360" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowk)"/>
+<text x="685" y="448" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">分支侧独立于 CCPR：</text>
+<text x="685" y="464" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">基于表克隆 + 保护快照</text>
+<text x="400" y="668" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8b93b8">对象级差量：代价 O(对象元数据)；aobj 例外按 commitTS 过滤行并重写 rowid（AObjectMap）</text>
+</svg>

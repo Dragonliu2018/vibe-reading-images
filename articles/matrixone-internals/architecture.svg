@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="770" viewBox="0 0 800 770">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+<marker id="arrowt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+<marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+<marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+<marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+<marker id="arrowk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+<marker id="arrowl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<rect width="800" height="770" fill="#0b0d14"/>
+<text x="400.0" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e6e9f5">MatrixOne v4.1.4 分层架构（CN / TN / Log 三服务）</text>
+<rect x="30" y="58" width="740" height="92" rx="10" fill="#0e1122" stroke="#232848" stroke-width="1"/>
+<text x="48" y="80" text-anchor="start" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4">接入层</text>
+<rect x="70" y="92" width="300" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="220.0" y="104.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">frontend</text>
+<text x="220.0" y="122.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">MySQL 协议 · 会话 · 鉴权</text>
+<text x="220.0" y="138.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">语句分发 · 事务骨架</text>
+<rect x="430" y="92" width="300" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="580.0" y="104.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">proxy</text>
+<text x="580.0" y="122.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">SQL 代理 · 路由</text>
+<text x="580.0" y="138.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">连接迁移 · 熔断</text>
+<rect x="30" y="176" width="740" height="92" rx="10" fill="#0e1122" stroke="#232848" stroke-width="1"/>
+<text x="48" y="198" text-anchor="start" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5">SQL 层</text>
+<rect x="70" y="210" width="300" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="220.0" y="222.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">parsers</text>
+<text x="220.0" y="240.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">词法/语法（goyacc）</text>
+<text x="220.0" y="256.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">AST tree.Statement</text>
+<rect x="430" y="210" width="300" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="580.0" y="222.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">plan</text>
+<text x="580.0" y="240.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">bind + 定向改写优化</text>
+<text x="580.0" y="256.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">pb Plan · 索引改写</text>
+<rect x="30" y="294" width="740" height="92" rx="10" fill="#0e1122" stroke="#232848" stroke-width="1"/>
+<text x="48" y="316" text-anchor="start" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5">执行层</text>
+<rect x="70" y="328" width="300" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="220.0" y="340.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">compile</text>
+<text x="220.0" y="358.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Plan → Scope 树</text>
+<text x="220.0" y="374.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">分布式 shuffle · ants 并行</text>
+<rect x="430" y="328" width="300" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="580.0" y="340.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">colexec + vm</text>
+<text x="580.0" y="358.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">60+ 向量化算子（push）</text>
+<text x="580.0" y="374.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">remoterun 跨 CN</text>
+<rect x="30" y="412" width="740" height="92" rx="10" fill="#0e1122" stroke="#232848" stroke-width="1"/>
+<text x="48" y="434" text-anchor="start" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24">CN 数据面</text>
+<rect x="48" y="446" width="232" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="164.0" y="458.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">disttae</text>
+<text x="164.0" y="476.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">workspace · logtail 缓存</text>
+<text x="164.0" y="492.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Reader 三路合并</text>
+<rect x="292" y="446" width="232" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="408.0" y="458.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">vectorindex / fulltext</text>
+<text x="408.0" y="476.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">IVF/HNSW/GPU 检索</text>
+<text x="408.0" y="492.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">jieba + BM25 全文</text>
+<rect x="536" y="446" width="232" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="652.0" y="458.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">publication</text>
+<text x="652.0" y="476.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Git for Data</text>
+<text x="652.0" y="492.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">对象级差量复制</text>
+<rect x="30" y="530" width="740" height="92" rx="10" fill="#0e1122" stroke="#232848" stroke-width="1"/>
+<text x="48" y="552" text-anchor="start" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff">事务与一致性层</text>
+<rect x="70" y="564" width="300" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="220.0" y="576.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">txn client / service</text>
+<text x="220.0" y="594.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">SI + HLC · 1PC/2PC</text>
+<text x="220.0" y="610.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Clock-SI 提交排序</text>
+<rect x="430" y="564" width="300" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="580.0" y="576.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">lockservice</text>
+<text x="580.0" y="594.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">分片锁表 allocator</text>
+<text x="580.0" y="610.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">悲观锁 · 死锁检测</text>
+<rect x="30" y="648" width="740" height="92" rx="10" fill="#0e1122" stroke="#232848" stroke-width="1"/>
+<text x="48" y="670" text-anchor="start" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24">存储与日志层</text>
+<rect x="48" y="682" width="232" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="164.0" y="694.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">TAE（TN）</text>
+<text x="164.0" y="712.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">MVCC · logtail 服务</text>
+<text x="164.0" y="728.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">checkpoint · merge</text>
+<rect x="292" y="682" width="232" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="408.0" y="694.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">LogService + HAKeeper</text>
+<text x="408.0" y="712.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">multi-raft 共享 WAL</text>
+<text x="408.0" y="728.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">集群调度 · 选主</text>
+<rect x="536" y="682" width="232" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="652.0" y="694.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">fileservice + objectio</text>
+<text x="652.0" y="712.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">IOVector · 多级缓存</text>
+<text x="652.0" y="728.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">S3 对象格式</text>
+<line x1="220" y1="150" x2="220" y2="176" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="580" y1="150" x2="580" y2="176" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="220" y1="268" x2="220" y2="294" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="580" y1="268" x2="580" y2="294" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="180" y1="386" x2="180" y2="412" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="330" y1="386" x2="330" y2="412" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="630" y1="386" x2="630" y2="412" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="164" y1="504" x2="164" y2="530" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="650" y1="504" x2="650" y2="530" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="180" y1="622" x2="180" y2="648" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="630" y1="622" x2="630" y2="648" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="400" y="756" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8b93b8">全库横切：container（Vector / Batch）+ mpool 内存记账 + pb protobuf 定义</text>
+</svg>

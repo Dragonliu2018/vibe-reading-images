@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+<marker id="arrowt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+<marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+<marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+<marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+<marker id="arrowk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+<marker id="arrowl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<rect width="800" height="620" fill="#0b0d14"/>
+<text x="400.0" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e6e9f5">SQL 文本 → AST → 逻辑计划：bind 与改写序列</text>
+<rect x="40" y="60" width="250" height="62" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="165.0" y="88.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">SQL 文本</text>
+<text x="165.0" y="106.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">SELECT …</text>
+<rect x="40" y="144" width="250" height="62" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="165.0" y="164.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">parsers.Parse</text>
+<text x="165.0" y="182.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">goyacc 文法（14.5k 行 .y）</text>
+<text x="165.0" y="198.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">AST tree.Statement</text>
+<rect x="40" y="228" width="250" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="165.0" y="248.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">BuildPlan</text>
+<text x="165.0" y="266.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">build.go · ~80 种语句</text>
+<text x="165.0" y="282.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">type-switch 分发</text>
+<rect x="40" y="312" width="250" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="165.0" y="332.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">QueryBuilder.bindSelect</text>
+<text x="165.0" y="350.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">bind 阶段：binder 家族</text>
+<text x="165.0" y="366.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">经 TxnCompilerContext 解析表/列</text>
+<line x1="165.0" y1="122" x2="165.0" y2="144" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="165.0" y1="206" x2="165.0" y2="228" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="165.0" y1="290" x2="165.0" y2="312" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="330" y="60" width="230" height="440" rx="10" fill="#0e1122" stroke="#232848" stroke-width="1"/>
+<text x="348" y="82" text-anchor="start" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5">createQuery 改写序列（有序）</text>
+<rect x="348" y="92" width="194" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="114.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">optimizeFilters</text>
+<rect x="348" y="136" width="194" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="158.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">determineJoinOrder</text>
+<rect x="348" y="180" width="194" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="202.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">aggPushDown / aggPullup</text>
+<rect x="348" y="224" width="194" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="246.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">applyAssociativeLaw</text>
+<rect x="348" y="268" width="194" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="290.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">pushdownSemiAntiJoins</text>
+<rect x="348" y="312" width="194" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="334.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">determineShuffleMethod</text>
+<rect x="348" y="356" width="194" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="378.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">applyIndices（插件分发）</text>
+<rect x="348" y="400" width="194" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="422.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">generateRuntimeFilters</text>
+<rect x="348" y="444" width="194" height="34" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="466.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">remapAllColRefs</text>
+<line x1="290" y1="343" x2="330" y2="343" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="600" y="110" width="170" height="62" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="685.0" y="130.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">pb Plan</text>
+<text x="685.0" y="148.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">pkg/pb/plan protobuf</text>
+<text x="685.0" y="164.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">跨 CN 传输 · plan cache</text>
+<rect x="600" y="260" width="170" height="62" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="685.0" y="280.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">indexplugin</text>
+<text x="685.0" y="298.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">ApplyForSort：向量/全文</text>
+<text x="685.0" y="314.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">ANN 改写（IVF/HNSW/…）</text>
+<rect x="600" y="410" width="170" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="685.0" y="430.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">BaseOptimizer</text>
+<text x="685.0" y="448.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Rule 接口 + 节点级 rule</text>
+<text x="685.0" y="464.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">（常量折叠）</text>
+<line x1="560" y1="344" x2="600" y2="141" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M560,330 L600,291" fill="none" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowk)"/>
+<line x1="685" y1="172" x2="685" y2="260" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="400" y="606" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8b93b8">shuffle、join order 在 plan 期基于 stats 定死；stats 依赖前序改写结果（ReCalcNodeStats 穿插）</text>
+</svg>

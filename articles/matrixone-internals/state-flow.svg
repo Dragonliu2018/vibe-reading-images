@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+<marker id="arrowt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+<marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+<marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+<marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+<marker id="arrowk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+<marker id="arrowl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<rect width="800" height="400" fill="#0b0d14"/>
+<text x="400.0" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e6e9f5">运行时状态机：logtail 表订阅（左）与 CCPR iteration（右）</text>
+<text x="240" y="66" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">logtail 表订阅状态机（PushClient）</text>
+<rect x="60" y="90" width="100" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="110.0" y="117.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6e9f5" font-weight="600">Unsubscribed</text>
+<rect x="185" y="90" width="100" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="235.0" y="117.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6e9f5" font-weight="600">Subscribing</text>
+<rect x="315" y="90" width="100" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="365.0" y="117.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6e9f5" font-weight="600">SubRspReceived</text>
+<rect x="445" y="90" width="100" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="495.0" y="117.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6e9f5" font-weight="600">Subscribed</text>
+<line x1="160" y1="112" x2="185" y2="112" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="285" y1="112" x2="315" y2="112" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="415" y1="112" x2="445" y2="112" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="110" y="162" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">表首次被读</text>
+<text x="235" y="162" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Subscribe RPC</text>
+<text x="365" y="162" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">回放 checkpoint</text>
+<path d="M475,134 L475,158 L515,158 L515,134" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowt)"/>
+<text x="495" y="176" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">常驻 goroutine 消费增量</text>
+<path d="M445,100 L110,40 L110,90" fill="none" stroke="None" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<text x="250" y="52" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">长时间未使用 GC</text>
+<text x="240" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8b93b8">PartitionState 为 CoW 不可变快照：事务读取不加锁，</text>
+<text x="240" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8b93b8">logtail 后台应用在新版本上（logtailreplay/partition.go）</text>
+<text x="645" y="66" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">CCPR iteration 状态（mo_ccpr_log）</text>
+<rect x="548" y="90" width="84" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="590.0" y="117.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">pending</text>
+<rect x="648" y="90" width="84" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="690.0" y="117.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">running</text>
+<rect x="748" y="90" width="84" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="790.0" y="117.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">complete</text>
+<line x1="632" y1="112" x2="648" y2="112" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="732" y1="112" x2="748" y2="112" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="648" y="210" width="84" height="44" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="690.0" y="237.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6e9f5" font-weight="600">error</text>
+<line x1="690" y1="134" x2="690" y2="210" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowk)"/>
+<text x="648" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">失败轮不推 LSN（幂等重试）；</text>
+<text x="648" y="294" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">成功推进 LSN+1，快照滚动保留 2 个</text>
+<path d="M790,134 L790,170 L590,170 L590,134" fill="none" stroke="None" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<text x="645" y="186" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8" paint-order="stroke" stroke="#0b0d14" stroke-width="4">下一轮 iteration</text>
+</svg>

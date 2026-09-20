@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker>
+<marker id="arrowt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/></marker>
+<marker id="arrowb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/></marker>
+<marker id="arrowy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/></marker>
+<marker id="arrowp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b388ff"/></marker>
+<marker id="arrowk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff6b9d"/></marker>
+<marker id="arrowl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#80c7ff"/></marker>
+</defs>
+<rect width="800" height="620" fill="#0b0d14"/>
+<text x="400.0" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e6e9f5">compile → Scope 树 → pipeline → push 算子</text>
+<rect x="40" y="60" width="300" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="190.0" y="96.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">pb Plan</text>
+<rect x="40" y="144" width="300" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="190.0" y="164.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">compileQuery / compilePlanScope</text>
+<text x="190.0" y="182.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">compile.go · constructXxx 工厂</text>
+<text x="190.0" y="198.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">多 CN 拼 Shuffle/Merge Scope</text>
+<rect x="40" y="228" width="300" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="190.0" y="248.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">Scope 树</text>
+<text x="190.0" y="266.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Magic: Normal/Merge/Remote</text>
+<text x="190.0" y="282.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">NodeInfo: 目标 CN + Mcpu</text>
+<rect x="40" y="312" width="300" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="190.0" y="332.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">run / MergeRun / ParallelRun</text>
+<text x="190.0" y="350.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">ants 并行 PreScopes</text>
+<text x="190.0" y="366.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">ParallelRun 复制算子树 Mcpu 份</text>
+<rect x="40" y="396" width="300" height="62" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="190.0" y="416.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">pipeline.Run</text>
+<text x="190.0" y="434.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">vm.Prepare + 循环 vm.Exec</text>
+<text x="190.0" y="450.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">CancelCheck · analyzer 计时</text>
+<rect x="40" y="480" width="300" height="62" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="190.0" y="500.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">operator.Call</text>
+<text x="190.0" y="518.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">push 模型 · 每次吐一个</text>
+<text x="190.0" y="534.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">batch.Batch（proc.Mp() 分配）</text>
+<line x1="190.0" y1="122" x2="190.0" y2="144" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="190.0" y1="206" x2="190.0" y2="228" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="190.0" y1="290" x2="190.0" y2="312" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="190.0" y1="374" x2="190.0" y2="396" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="190.0" y1="458" x2="190.0" y2="480" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="420" y="228" width="180" height="62" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="510.0" y="248.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">RemoteRun（跨 CN）</text>
+<text x="510.0" y="266.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">Scope 树 proto 化发往</text>
+<text x="510.0" y="282.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">远端 CN 重建执行</text>
+<rect x="420" y="312" width="180" height="62" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="510.0" y="332.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">MessageBoard</text>
+<text x="510.0" y="350.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">JoinMap / RuntimeFilter</text>
+<text x="510.0" y="366.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">/ TopValue 跨算子消息</text>
+<rect x="420" y="480" width="180" height="62" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="510.0" y="500.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#e6e9f5" font-weight="600">output → fill 回调</text>
+<text x="510.0" y="518.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">getDataFromPipeline</text>
+<text x="510.0" y="534.0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">边算边发结果集</text>
+<line x1="340" y1="259" x2="420" y2="259" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowy)"/>
+<line x1="340" y1="343" x2="420" y2="343" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arrowk)"/>
+<line x1="340" y1="511" x2="420" y2="511" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowt)"/>
+<text x="400" y="606" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8b93b8">数据走 WaitRegister.Ch2 channel / dispatch morpc；控制与小数据走 message（pkg/vm/message）</text>
+</svg>
