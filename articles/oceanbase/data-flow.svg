@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowYellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect width="800" height="600" fill="#0b0d14"/>
+  <text x="400" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e6e9f5">一次 SQL 请求的端到端数据流</text>
+  <text x="205" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#4ecdc4">SELECT 读链路</text>
+  <text x="595" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#f9ca24">UPDATE 写链路</text>
+
+  <!-- SELECT column -->
+  <rect x="50" y="70" width="310" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="205" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">客户端 MySQL 协议包</text>
+  <rect x="50" y="134" width="310" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="205" y="152" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">easy IO 线程 decode</text>
+  <text x="205" y="169" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">ObSrvDeliver → 租户请求队列</text>
+  <rect x="50" y="198" width="310" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="205" y="216" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">ObThWorker → ObMPQuery::process</text>
+  <text x="205" y="233" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">会话 · 限流 · kill 安全检查</text>
+  <rect x="50" y="262" width="310" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="205" y="280" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">plan cache 软解析（fast parser）</text>
+  <text x="205" y="297" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">未命中：parse→resolve→rewrite→optimize→CG</text>
+  <rect x="50" y="326" width="310" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="205" y="344" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">算子树执行 open / get_next</text>
+  <text x="205" y="361" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">向量化 ObBatchRows</text>
+  <rect x="50" y="390" width="310" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="205" y="408" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">DAS：本地直执 / 远程 RPC</text>
+  <text x="205" y="425" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">ObDataAccessService</text>
+  <rect x="50" y="454" width="310" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="205" y="472" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">ObMultipleScanMerge 行融合</text>
+  <text x="205" y="489" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">memtable MVCC + SSTable 多版本</text>
+  <rect x="50" y="518" width="310" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="205" y="544" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">OMPKRow → MySQL 协议回包</text>
+
+  <line x1="205" y1="114" x2="205" y2="134" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowTeal)"/>
+  <line x1="205" y1="178" x2="205" y2="198" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowTeal)"/>
+  <line x1="205" y1="242" x2="205" y2="262" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowTeal)"/>
+  <line x1="205" y1="306" x2="205" y2="326" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowTeal)"/>
+  <line x1="205" y1="370" x2="205" y2="390" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowTeal)"/>
+  <line x1="205" y1="434" x2="205" y2="454" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowTeal)"/>
+  <line x1="205" y1="498" x2="205" y2="518" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowTeal)"/>
+
+  <!-- UPDATE column -->
+  <rect x="440" y="70" width="310" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="595" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">ObTableUpdateOp → ObDMLService</text>
+  <text x="595" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">old/new 行进 DAS 写缓冲</text>
+  <rect x="440" y="134" width="310" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="595" y="152" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">ObMemtable::set → mvcc_write</text>
+  <text x="595" y="169" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">行锁 · 写写冲突 · TSC 检查</text>
+  <rect x="440" y="198" width="310" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="595" y="216" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">ObPartTransCtx 提交</text>
+  <text x="595" y="233" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">单参与者一阶段 / 分布式 2PC</text>
+  <rect x="440" y="262" width="310" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="595" y="280" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">ObLogHandler::append → Palf</text>
+  <text x="595" y="297" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">LogSlidingWindow 分配 LSN / SCN</text>
+  <rect x="440" y="326" width="310" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="595" y="344" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">Paxos 多数派复制 · 落盘</text>
+  <text x="595" y="361" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">follower receive_log 回 ACK</text>
+  <rect x="440" y="390" width="310" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="595" y="408" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">apply 回调 ObTxLogCb::on_success</text>
+  <text x="595" y="425" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">trans_commit 回填提交版本</text>
+  <rect x="440" y="454" width="310" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="595" y="480" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12.5" fill="#e6e9f5">ObSqlEndTransCb 异步回 OK 包</text>
+  <text x="595" y="497" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">回包线程 ≠ 执行线程</text>
+
+  <line x1="595" y1="114" x2="595" y2="134" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+  <line x1="595" y1="178" x2="595" y2="198" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+  <line x1="595" y1="242" x2="595" y2="262" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+  <line x1="595" y1="306" x2="595" y2="326" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+  <line x1="595" y1="370" x2="595" y2="390" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+  <line x1="595" y1="434" x2="595" y2="454" stroke="#f9ca24" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+
+  <text x="400" y="585" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">读链路与写链路共享 observer 接入、SQL 编译与 DAS 段；写链路的提交回包在多数派日志达成后由回调线程异步发出</text>
+</svg>

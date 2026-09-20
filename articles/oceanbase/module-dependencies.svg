@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#0b0d14"/>
+  <text x="400" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="600" fill="#e6e9f5">OceanBase 模块依赖关系</text>
+
+  <!-- Row 1 -->
+  <rect x="90" y="50" width="170" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="175" y="69" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">observer</text>
+  <text x="175" y="85" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">进程入口 · 多租户</text>
+  <rect x="325" y="50" width="170" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="410" y="69" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">rootserver（RS）</text>
+  <text x="410" y="85" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">集群总控</text>
+  <rect x="560" y="50" width="170" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="645" y="69" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">HA · 备份恢复 · CDC</text>
+  <text x="645" y="85" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">迁移 · 归档 · libobcdc</text>
+
+  <!-- Row 2 -->
+  <rect x="90" y="170" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="175" y="189" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">SQL 编译前端</text>
+  <text x="175" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">parser → optimizer</text>
+  <rect x="325" y="170" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="410" y="189" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">SQL 执行引擎</text>
+  <text x="410" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">算子 · DAS · PX</text>
+  <rect x="560" y="170" width="170" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="645" y="189" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">PL/SQL 引擎</text>
+  <text x="645" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">objit（LLVM JIT）</text>
+
+  <!-- Row 3 -->
+  <rect x="90" y="290" width="170" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="175" y="309" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">storage</text>
+  <text x="175" y="325" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">tablet · LSM-Tree</text>
+  <rect x="325" y="290" width="170" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="410" y="309" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">logservice</text>
+  <text x="410" y="325" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">Palf · LS · 回放</text>
+  <rect x="560" y="290" width="170" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="645" y="309" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">tx</text>
+  <text x="645" y="325" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">2PC · MVCC</text>
+
+  <!-- Row 4 -->
+  <rect x="90" y="410" width="340" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="260" y="429" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">share 共享服务</text>
+  <text x="260" y="445" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">schema · location · IO · 统计</text>
+  <rect x="560" y="410" width="170" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="645" y="429" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e6e9f5">oblib</text>
+  <text x="645" y="445" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" fill="#8b93b8">内存 · 锁 · RPC（含 easy）</text>
+
+  <!-- arrows -->
+  <line x1="325" y1="73" x2="260" y2="73" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="292" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">内嵌</text>
+  <line x1="560" y1="73" x2="495" y2="73" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="527" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">DR 任务</text>
+
+  <line x1="175" y1="96" x2="175" y2="170" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 200,96 L 200,133 L 410,133 L 410,170" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <line x1="560" y1="193" x2="495" y2="193" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="527" y="184" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">SPI</text>
+
+  <path d="M 350,216 L 350,253 L 230,253 L 230,290" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="290" y="245" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">DAS</text>
+
+  <path d="M 600,96 L 600,133 L 533,133 L 533,240 L 410,240 L 410,290" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="471" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">CDC 拉日志 · 归档</text>
+
+  <line x1="325" y1="313" x2="260" y2="313" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="292" y="304" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">replay</text>
+  <line x1="560" y1="313" x2="495" y2="313" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="527" y="304" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">redo · 2PC</text>
+
+  <path d="M 600,336 L 600,367 L 230,367 L 230,336" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="415" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">MVCC 行级写入</text>
+
+  <line x1="175" y1="336" x2="175" y2="410" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="645" y1="336" x2="645" y2="410" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="430" y1="433" x2="560" y2="433" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="400" y="482" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8b93b8">箭头 = 依赖方向（指向被依赖模块）；SQL 编译前端 / rootserver / HA 等对 share 的依赖与 storage 同路，未全部画出</text>
+</svg>
