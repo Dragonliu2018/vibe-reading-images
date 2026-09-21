@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="430" viewBox="0 0 820 430">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="820" height="430" fill="#0b0d14"/>
+
+  <text x="410" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e8eaf2" text-anchor="middle">laya/ 包内部 import 依赖关系</text>
+
+  <!-- left: entry -->
+  <rect x="40" y="180" width="160" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="120" y="206" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2" text-anchor="middle">__init__.py</text>
+  <text x="120" y="226" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" text-anchor="middle">公共 API 汇出</text>
+
+  <!-- middle column -->
+  <rect x="300" y="60" width="160" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="380" y="84" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2" text-anchor="middle">router.py</text>
+  <text x="380" y="104" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" text-anchor="middle">Router / RouteDecision</text>
+
+  <rect x="300" y="182" width="160" height="56" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="380" y="206" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2" text-anchor="middle">agent.py</text>
+  <text x="380" y="226" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" text-anchor="middle">Agent / load</text>
+
+  <rect x="300" y="304" width="160" height="56" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="380" y="328" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2" text-anchor="middle">presets.py / email.py</text>
+  <text x="380" y="348" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" text-anchor="middle">纯模板 · 无内部依赖</text>
+
+  <!-- right column -->
+  <rect x="600" y="60" width="160" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="680" y="84" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2" text-anchor="middle">lang.py</text>
+  <text x="680" y="104" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" text-anchor="middle">analyse / detect_script</text>
+
+  <rect x="600" y="182" width="160" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="680" y="206" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf2" text-anchor="middle">common.py</text>
+  <text x="680" y="226" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" text-anchor="middle">DecisionModel 等</text>
+
+  <!-- edges -->
+  <!-- __init__ -> router -->
+  <line x1="200" y1="196" x2="296" y2="96" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+  <text x="240" y="130" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">re-export</text>
+  <!-- __init__ -> agent -->
+  <line x1="200" y1="210" x2="296" y2="210" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+  <!-- __init__ -> presets -->
+  <line x1="200" y1="224" x2="296" y2="322" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+  <text x="240" y="292" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">re-export</text>
+
+  <!-- router -> lang -->
+  <line x1="460" y1="88" x2="596" y2="88" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="528" y="80" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" text-anchor="middle">analyse</text>
+
+  <!-- router -> agent (lazy) -->
+  <line x1="380" y1="116" x2="380" y2="178" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <text x="392" y="152" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">load() 内延迟 import</text>
+
+  <!-- agent -> common -->
+  <line x1="460" y1="210" x2="596" y2="210" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="528" y="202" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" text-anchor="middle">build_sequence 等</text>
+</svg>

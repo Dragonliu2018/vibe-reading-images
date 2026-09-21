@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="640" viewBox="0 0 800 640">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="800" height="640" fill="#0b0d14"/>
+
+  <text x="400" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e8eaf2" text-anchor="middle">Router.route 路由优先级（router.py）</text>
+
+  <!-- entry -->
+  <rect x="60" y="52" width="340" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="230" y="82" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">route(state, questions, model, task, lang)</text>
+
+  <!-- decision 1 -->
+  <rect x="60" y="140" width="340" height="48" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="230" y="170" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">显式 model= 指定？</text>
+  <rect x="480" y="140" width="250" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="605" y="170" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">normalise_name → 指定模型</text>
+  <line x1="400" y1="164" x2="476" y2="164" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="438" y="156" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">是</text>
+  <line x1="230" y1="188" x2="230" y2="218" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="244" y="208" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">否</text>
+
+  <!-- decision 2 -->
+  <rect x="60" y="220" width="340" height="48" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="230" y="250" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">显式 task= 指定？</text>
+  <rect x="480" y="220" width="250" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="605" y="250" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">typed-decisions 等指定模型</text>
+  <line x1="400" y1="244" x2="476" y2="244" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="438" y="236" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">是</text>
+  <line x1="230" y1="268" x2="230" y2="298" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="244" y="288" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">否</text>
+
+  <!-- decision 3 -->
+  <rect x="60" y="300" width="340" height="48" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="230" y="324" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">问题 id 精确匹配 workflow</text>
+  <text x="230" y="340" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">且 auto_task_detection=True？</text>
+  <rect x="480" y="300" width="250" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="605" y="324" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">typed-decisions</text>
+  <text x="605" y="340" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">（对应 workflow 名）</text>
+  <line x1="400" y1="324" x2="476" y2="324" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="438" y="316" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">是</text>
+  <line x1="230" y1="348" x2="230" y2="378" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="244" y="368" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">否</text>
+
+  <!-- decision 4 -->
+  <rect x="60" y="380" width="340" height="48" rx="8" fill="#13162a" stroke="#7a86b3" stroke-width="1.5"/>
+  <text x="230" y="410" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">显式 lang= 指定？</text>
+  <rect x="480" y="380" width="250" height="48" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="605" y="404" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">en/eng/english → english</text>
+  <text x="605" y="420" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">其余 → multilingual</text>
+  <line x1="400" y1="404" x2="476" y2="404" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="438" y="396" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">是</text>
+  <line x1="230" y1="428" x2="230" y2="458" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="244" y="448" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3">否</text>
+
+  <!-- analyse -->
+  <rect x="60" y="460" width="340" height="48" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="230" y="484" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">analyse(state)（lang.py）</text>
+  <text x="230" y="500" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">script 检测 + 拉丁语系停用词启发式</text>
+
+  <!-- analyse outcomes -->
+  <rect x="480" y="440" width="250" height="34" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="605" y="462" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">unknown（无字母）→ default</text>
+  <rect x="480" y="482" width="250" height="34" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="605" y="504" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">非拉丁 script → multilingual</text>
+  <rect x="480" y="524" width="250" height="34" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="605" y="546" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">拉丁但非英语 → multilingual</text>
+  <rect x="480" y="566" width="250" height="34" rx="6" fill="#13162a" stroke="#7a86b3" stroke-width="1"/>
+  <text x="605" y="588" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">拉丁且英语 → english</text>
+
+  <path d="M400,484 L440,484 L440,457 L476,457" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M400,484 L440,484 L440,499 L476,499" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M400,484 L440,484 L440,541 L476,541" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M400,484 L440,484 L440,583 L476,583" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="60" y="620" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">RouteDecision 携带 model / repo / reason / detection / workflow；predict 后作为结果中的 routing 键原样返回</text>
+</svg>

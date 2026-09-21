@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="330" viewBox="0 0 960 330">
+  <defs>
+    <marker id="arrowDown" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+  <rect width="960" height="330" fill="#0b0d14"/>
+
+  <text x="480" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e8eaf2" text-anchor="middle">build_sequence 的 token 序列布局（common.py）</text>
+
+  <!-- marker_pos arrows -->
+  <text x="150" y="66" font-family="system-ui, sans-serif" font-size="12" fill="#4ecdc4" text-anchor="middle">marker_pos（每个选项一个 MASK 位）</text>
+  <line x1="150" y1="72" x2="346" y2="112" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <line x1="150" y1="72" x2="522" y2="112" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- token segments, y=120 h=48 -->
+  <rect x="40" y="120" width="56" height="48" rx="4" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="68" y="149" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">[CLS]</text>
+
+  <rect x="100" y="120" width="170" height="48" rx="4" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="185" y="141" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">choice question:</text>
+  <text x="185" y="159" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">instructions 文本</text>
+
+  <rect x="274" y="120" width="50" height="48" rx="4" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="299" y="149" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">[SEP]</text>
+
+  <rect x="328" y="120" width="56" height="48" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="356" y="149" font-family="system-ui, sans-serif" font-size="12" fill="#4ecdc4" text-anchor="middle">MASK</text>
+
+  <rect x="388" y="120" width="128" height="48" rx="4" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="452" y="141" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">opt0 文本</text>
+  <text x="452" y="159" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">≤48 token</text>
+
+  <rect x="520" y="120" width="56" height="48" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="548" y="149" font-family="system-ui, sans-serif" font-size="12" fill="#4ecdc4" text-anchor="middle">MASK</text>
+
+  <rect x="580" y="120" width="128" height="48" rx="4" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="644" y="141" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">opt1 文本 …</text>
+  <text x="644" y="159" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">每选项同构</text>
+
+  <rect x="712" y="120" width="50" height="48" rx="4" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="737" y="149" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">[SEP]</text>
+
+  <rect x="766" y="120" width="110" height="48" rx="4" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="821" y="141" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">state 文本</text>
+  <text x="821" y="159" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">JSON 序列化</text>
+
+  <rect x="880" y="120" width="50" height="48" rx="4" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="905" y="149" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">[SEP]</text>
+
+  <!-- budget brackets -->
+  <path d="M40,190 L40,200 L762,200 L762,190" fill="none" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="400" y="224" font-family="system-ui, sans-serif" font-size="12" fill="#ff6b9d" text-anchor="middle">head_max_len 头部预算（english 192 / multilingual 256 token）— 超出时优先截 instructions（保底 ≥8 token）再均摊截断各选项</text>
+
+  <path d="M766,190 L766,200 L930,200 L930,190" fill="none" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="848" y="256" font-family="system-ui, sans-serif" font-size="12" fill="#b388ff" text-anchor="middle">state 预算 = max_len − 头部</text>
+
+  <text x="40" y="292" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">markers 只记录落在 max_len 内的 MASK 位；选项溢出头部预算会在 system_one 中直接抛 ValueError（agent.py）</text>
+  <text x="40" y="312" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3">state 默认截右侧（truncate_left=False，保留开头），mask_token 出现在文本中会被替换为空格防注入</text>
+</svg>

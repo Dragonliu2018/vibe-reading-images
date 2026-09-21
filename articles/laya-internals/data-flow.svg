@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect width="960" height="500" fill="#0b0d14"/>
+
+  <text x="480" y="32" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#e8eaf2" text-anchor="middle">Router.predict 端到端数据流（路由阶段 + 单次前向推理阶段）</text>
+
+  <!-- Row 1: routing -->
+  <text x="60" y="72" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#4ecdc4">路由阶段</text>
+  <rect x="60" y="84" width="150" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="135" y="106" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">Router.predict</text>
+  <text x="135" y="124" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">state + questions</text>
+
+  <rect x="260" y="84" width="150" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="335" y="106" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">route() 优先级判定</text>
+  <text x="335" y="124" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">model&gt;task&gt;workflow&gt;lang&gt;script</text>
+
+  <rect x="460" y="84" width="150" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="535" y="106" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">RouteDecision</text>
+  <text x="535" y="124" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">model / reason / detection</text>
+
+  <rect x="660" y="84" width="120" height="52" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="720" y="106" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">load()</text>
+  <text x="720" y="124" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">LRU · 按需下载</text>
+
+  <rect x="820" y="84" width="110" height="52" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="875" y="106" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">system_one</text>
+  <text x="875" y="124" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">@no_grad</text>
+
+  <line x1="210" y1="110" x2="256" y2="110" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="410" y1="110" x2="456" y2="110" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="610" y1="110" x2="656" y2="110" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="780" y1="110" x2="816" y2="110" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- lang.analyse helper below route() -->
+  <rect x="260" y="170" width="150" height="46" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="5,4"/>
+  <text x="335" y="190" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">lang.analyse(state)</text>
+  <text x="335" y="206" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">script + 语言启发式</text>
+  <line x1="335" y1="168" x2="335" y2="140" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- connector row1 -> row2 -->
+  <path d="M875,136 L875,164 L60,164 L60,246" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="470" y="158" font-family="system-ui, sans-serif" font-size="12" fill="#7a86b3" text-anchor="middle" paint-order="stroke" stroke="#0b0d14" stroke-width="3">选中 Agent 后进入推理</text>
+
+  <!-- Row 2: inference -->
+  <text x="60" y="278" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#80c7ff">单次前向推理阶段（agent.py + common.py）</text>
+  <rect x="60" y="290" width="130" height="52" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="125" y="312" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">_to_internal</text>
+  <text x="125" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">问题字典规范化</text>
+
+  <rect x="230" y="290" width="140" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="300" y="312" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">build_sequence</text>
+  <text x="300" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">ids + markers 列表</text>
+
+  <rect x="410" y="290" width="130" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="475" y="312" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">collate_items</text>
+  <text x="475" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">批张量 + padding</text>
+
+  <rect x="580" y="290" width="150" height="52" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="655" y="312" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">DecisionModel.forward</text>
+  <text x="655" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">logits[N,k] + act</text>
+
+  <rect x="770" y="290" width="140" height="52" rx="8" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="840" y="312" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">温度 softmax</text>
+  <text x="840" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">temp_bucket 分桶</text>
+
+  <line x1="190" y1="316" x2="226" y2="316" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="370" y1="316" x2="406" y2="316" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="540" y1="316" x2="576" y2="316" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="730" y1="316" x2="766" y2="316" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Row 3: output -->
+  <path d="M840,342 L840,372 L125,372 L125,398" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="60" y="400" width="680" height="56" rx="8" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="400" y="424" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">answers：choice / score / noul + probabilities + confidence + act_probability</text>
+  <text x="400" y="444" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">外加 usage（input_tokens，output_tokens=0）与 routing 决策元数据</text>
+
+  <rect x="770" y="400" width="120" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="830" y="424" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf2" text-anchor="middle">confidence</text>
+  <text x="830" y="444" font-family="system-ui, sans-serif" font-size="11" fill="#7a86b3" text-anchor="middle">1 − H(p)/log k</text>
+</svg>
