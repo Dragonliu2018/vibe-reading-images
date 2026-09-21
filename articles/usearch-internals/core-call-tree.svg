@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="500" viewBox="0 0 820 500">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="500" fill="#0b0d14"/>
+
+  <!-- ============ 左：add 调用树 ============ -->
+  <text x="40" y="34" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">add() 调用树（插入）</text>
+
+  <rect x="40" y="48" width="330" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="205" y="73" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">add(key, value, metric)</text>
+
+  <path d="M 205 88 L 205 108" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="108" width="330" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="205" y="133" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">choose_random_level_ · node_make_</text>
+
+  <path d="M 205 148 L 205 168" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="168" width="330" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="205" y="193" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">search_for_one_（自顶向下逐层贪心）</text>
+
+  <path d="M 205 208 L 205 228" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="228" width="330" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="205" y="253" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">search_to_insert_（逐层 beam search，锁候选节点）</text>
+
+  <rect x="40" y="288" width="155" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="117" y="311" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">form_links_to_closest_</text>
+  <text x="117" y="331" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">正向出边</text>
+
+  <rect x="215" y="288" width="155" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="292" y="311" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">form_reverse_links_</text>
+  <text x="292" y="331" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">反向连边（满则重建）</text>
+
+  <path d="M 205 268 L 205 278 L 117 278 L 117 288" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 205 278 L 292 278 L 292 288" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <path d="M 117 344 L 117 364" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 292 344 L 292 364" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="364" width="155" height="40" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.7"/>
+  <text x="117" y="389" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">refine_ 启发式</text>
+  <rect x="215" y="364" width="155" height="40" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.7"/>
+  <text x="292" y="389" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">refine_（override）</text>
+
+  <path d="M 205 404 L 205 424" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="424" width="330" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="205" y="449" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">新层高于 max_level_ → 更新 entry_slot_</text>
+
+  <!-- ============ 右：search 调用树 ============ -->
+  <text x="450" y="34" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">search() 调用树（查询）</text>
+
+  <rect x="450" y="48" width="330" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="615" y="73" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">search(query, wanted, metric, predicate)</text>
+
+  <rect x="450" y="108" width="155" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="527" y="131" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">search_for_one_</text>
+  <text x="527" y="151" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">entry→0 层贪心</text>
+
+  <rect x="625" y="108" width="155" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.7"/>
+  <text x="702" y="131" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">search_exact_</text>
+  <text x="702" y="151" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">exact=True 全量扫</text>
+
+  <path d="M 615 88 L 615 98 L 527 98 L 527 108" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 615 98 L 702 98 L 702 108" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <path d="M 527 164 L 527 192" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="450" y="192" width="330" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="615" y="215" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">search_to_find_in_base_（0 层 beam search）</text>
+  <text x="615" y="237" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">无锁读 · visits 哈希集去重 · 谓词只挡结果不挡遍历</text>
+
+  <path d="M 615 248 L 615 276" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="450" y="276" width="330" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="615" y="299" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">top.shrink(wanted)</text>
+  <text x="615" y="321" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">sorted_buffer_gt 天然有序 · 结果引用 context 缓冲（复用零拷贝）</text>
+
+  <!-- 右下：update 差异说明 -->
+  <rect x="450" y="364" width="330" height="100" rx="6" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.5" stroke-dasharray="5 4"/>
+  <text x="464" y="388" font-family="system-ui, sans-serif" font-size="12" fill="#80c7ff">update() 与 add() 的差异</text>
+  <text x="464" y="410" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">不分配新 slot，复用原节点重连边</text>
+  <text x="464" y="430" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">search_to_update_ 用 try-lock 跳过抢不到的节点</text>
+  <text x="464" y="450" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">（防更新风暴下的死锁，跳过的边由对方补回）</text>
+</svg>

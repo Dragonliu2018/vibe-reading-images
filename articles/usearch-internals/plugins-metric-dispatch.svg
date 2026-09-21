@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowNo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e74c3c"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="560" fill="#0b0d14"/>
+
+  <!-- 工厂入口 -->
+  <rect x="250" y="20" width="300" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="400" y="49" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">metric_punned_t::builtin(dim, kind, scalar)</text>
+
+  <path d="M 400 66 L 400 92" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 决策 -->
+  <rect x="270" y="92" width="260" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="400" y="121" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">NumKong 有该内核？</text>
+
+  <!-- 是 → NumKong 路线（左） -->
+  <path d="M 270 115 L 180 115 L 180 178" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="216" y="108" font-family="system-ui, sans-serif" font-size="12" fill="#7bed9f">是</text>
+
+  <rect x="60" y="178" width="240" height="60" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="180" y="202" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">nk_find_kernel_punned</text>
+  <text x="180" y="224" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">按当前 CPU 能力选 AVX-512 / NEON / SVE 内核</text>
+
+  <path d="M 180 238 L 180 264" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="60" y="264" width="240" height="60" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="180" y="288" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">metric_routed_ = invoke_numkong&lt;acc, reverse&gt;</text>
+  <text x="180" y="310" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">累加器类型按输出 dtype 烘焙 · IP 做 1−x 反转</text>
+
+  <!-- 否 → autovec 路线（右） -->
+  <path d="M 530 115 L 620 115 L 620 178" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="576" y="108" font-family="system-ui, sans-serif" font-size="12" fill="#e74c3c">否（退回）</text>
+
+  <rect x="500" y="178" width="240" height="60" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.7"/>
+  <text x="620" y="202" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">configure_with_autovec</text>
+  <text x="620" y="224" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">metric_kind × scalar_kind 双重 switch</text>
+
+  <path d="M 620 238 L 620 264" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="500" y="264" width="240" height="60" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.7"/>
+  <text x="620" y="288" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">equidimensional_&lt;metric_xxx_gt&gt;</text>
+  <text x="620" y="310" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">编译期全实例化 + omp simd / ivdep 向量化 pragma</text>
+
+  <!-- 用户自定义路线 -->
+  <rect x="60" y="360" width="240" height="60" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.7"/>
+  <text x="180" y="384" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">stateless / stateful（用户 C 函数）</text>
+  <text x="180" y="406" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">Numba cfunc / Rust 回调 / 有状态闭包</text>
+
+  <path d="M 300 390 L 355 390" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 统一调用点 -->
+  <rect x="355" y="360" width="385" height="60" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.85"/>
+  <text x="547" y="384" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">operator()(a, b) → (this-&gt;*metric_routed_)(a, b)</text>
+  <text x="547" y="406" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">全库唯一热路径分发点 · 成员函数指针零分支 · 无 std::function 堆分配</text>
+
+  <!-- 汇合箭头 -->
+  <path d="M 180 324 L 180 342 L 400 342 L 400 360" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 620 324 L 620 342 L 560 342 L 560 360" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 底部说明 -->
+  <rect x="60" y="450" width="680" height="80" rx="8" fill="#13162a"/>
+  <text x="76" y="476" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">metric_third_arg_ 一字段三用：维度数（builtin）/ b1x8 的字数或位数（NumKong 二进制内核） / 用户状态指针（stateful）</text>
+  <text x="76" y="500" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">构造期一次决策烘焙进对象 → 查询路径零间接分支；isa_name() 报告实际启用的指令集（sapphire / neon / sve …）</text>
+</svg>

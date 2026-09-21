@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="440" fill="#0b0d14"/>
+
+  <!-- 左侧：HNSW 多层图 -->
+  <text x="30" y="34" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5" font-weight="600">HNSW 多层邻近图</text>
+
+  <!-- entry 指针 -->
+  <path d="M 200 48 L 200 66" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="212" y="60" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">entry_slot_</text>
+
+  <!-- Level 2 -->
+  <text x="36" y="96" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab">L2</text>
+  <circle cx="200" cy="90" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+
+  <!-- L2-L1 边 -->
+  <line x1="200" y1="105" x2="100" y2="158" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+  <line x1="200" y1="105" x2="200" y2="158" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+  <line x1="200" y1="105" x2="300" y2="158" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+
+  <!-- Level 1 -->
+  <text x="36" y="186" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab">L1</text>
+  <circle cx="100" cy="172" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <circle cx="200" cy="172" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <circle cx="300" cy="172" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+
+  <!-- L1 内部边 -->
+  <line x1="115" y1="172" x2="185" y2="172" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+  <line x1="215" y1="172" x2="285" y2="172" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+
+  <!-- L1-L0 边 -->
+  <line x1="100" y1="187" x2="80" y2="270" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.6"/>
+  <line x1="100" y1="187" x2="170" y2="270" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.6"/>
+  <line x1="200" y1="187" x2="170" y2="270" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.6"/>
+  <line x1="200" y1="187" x2="250" y2="270" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.6"/>
+  <line x1="300" y1="187" x2="250" y2="270" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.6"/>
+  <line x1="300" y1="187" x2="330" y2="270" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.6"/>
+
+  <!-- Level 0 -->
+  <text x="36" y="298" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab">L0</text>
+  <circle cx="80" cy="284" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <circle cx="170" cy="284" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <circle cx="250" cy="284" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <circle cx="330" cy="284" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <circle cx="30" cy="284" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <circle cx="120" cy="284" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <circle cx="210" cy="284" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+  <circle cx="290" cy="284" r="15" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9" stroke-width="1.5"/>
+
+  <!-- L0 内部边 -->
+  <line x1="95" y1="284" x2="105" y2="284" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+  <line x1="135" y1="284" x2="155" y2="284" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+  <line x1="185" y1="284" x2="195" y2="284" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+  <line x1="225" y1="284" x2="235" y2="284" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+  <line x1="265" y1="284" x2="275" y2="284" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+  <line x1="305" y1="284" x2="315" y2="284" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+  <line x1="45" y1="284" x2="65" y2="284" stroke="#7a86b3" stroke-width="1.2" stroke-opacity="0.8"/>
+
+  <text x="30" y="340" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">节点随机选层（指数分布），上层更稀疏；</text>
+  <text x="30" y="360" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">搜索自顶向下 zoom-in，底层 beam search 扩展</text>
+
+  <!-- 右侧：node tape 布局 -->
+  <text x="450" y="34" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">node_t 单 tape 布局（一次分配）</text>
+
+  <rect x="450" y="50" width="330" height="40" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="615" y="75" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">key: vector_key_t</text>
+
+  <rect x="450" y="96" width="330" height="34" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="615" y="118" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">level: level_t</text>
+
+  <rect x="450" y="138" width="330" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <text x="615" y="160" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">0 层邻接表</text>
+  <text x="615" y="180" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">count + connectivity_base 个 slot（默认 32）</text>
+
+  <rect x="450" y="198" width="330" height="52" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <text x="615" y="220" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">1 层邻接表</text>
+  <text x="615" y="240" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">count + connectivity 个 slot（默认 16）</text>
+
+  <rect x="450" y="258" width="330" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.45" stroke-dasharray="5 4"/>
+  <text x="615" y="283" font-family="system-ui, sans-serif" font-size="13" fill="#c9cfdf" text-anchor="middle">更高层（每层 connectivity 个 slot）…</text>
+
+  <text x="450" y="330" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">所有层的邻接表连续拼接 → 节点一次 cache miss 拿全</text>
+  <text x="450" y="350" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">序列化 = 逐节点 memcpy；view 模式 node_t 直接指向 mmap</text>
+  <text x="450" y="370" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">packed 布局无对齐保证 → 全库 misaligned_load/store</text>
+</svg>

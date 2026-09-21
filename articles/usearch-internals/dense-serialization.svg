@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="400" viewBox="0 0 820 400">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="400" fill="#0b0d14"/>
+
+  <text x="30" y="34" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">.usearch 文件三段式布局（index_dense_gt::save_to_stream）</text>
+
+  <!-- 段 1：矩阵头 -->
+  <rect x="30" y="70" width="80" height="90" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="70" y="105" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">rows · cols</text>
+  <text x="70" y="125" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">u32 或 u64</text>
+  <text x="70" y="145" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">8 / 16 B</text>
+
+  <!-- 段 2：向量矩阵 -->
+  <rect x="120" y="70" width="280" height="90" rx="4" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="260" y="98" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">向量矩阵（.bbin 段）</text>
+  <text x="260" y="120" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">rows × cols 逐行 dump（cols = 每向量字节数）</text>
+  <text x="260" y="140" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">view 模式：vectors_lookup_[slot] 直接指向此处</text>
+
+  <!-- 段 3：head -->
+  <rect x="410" y="70" width="180" height="90" rx="4" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.85"/>
+  <text x="500" y="94" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">64B head</text>
+  <text x="500" y="114" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">"usearch" magic + 版本</text>
+  <text x="500" y="132" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">metric / scalar / key kind</text>
+  <text x="500" y="150" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">present / deleted / dims / multi</text>
+
+  <!-- 段 4：图 -->
+  <rect x="600" y="70" width="190" height="90" rx="4" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="695" y="94" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">HNSW 图段</text>
+  <text x="695" y="114" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">5×u64 序列化头</text>
+  <text x="695" y="132" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">level_t 层数数组（两遍式）</text>
+  <text x="695" y="150" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">变长 node tape 数组</text>
+
+  <!-- 段间连接 -->
+  <path d="M 110 115 L 120 115" stroke="#7a86b3" stroke-width="1.5"/>
+  <path d="M 400 115 L 410 115" stroke="#7a86b3" stroke-width="1.5"/>
+  <path d="M 590 115 L 600 115" stroke="#7a86b3" stroke-width="1.5"/>
+
+  <!-- 字节布局 -->
+  <text x="30" y="200" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff">head 的 42 字节实际布局（尾部 22B 保留扩展）</text>
+  <rect x="30" y="212" width="70" height="34" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="65" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#e8eaf6" text-anchor="middle">magic 7B</text>
+  <rect x="100" y="212" width="72" height="34" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="136" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#e8eaf6" text-anchor="middle">版本 3×u16</text>
+  <rect x="172" y="212" width="86" height="34" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="215" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#e8eaf6" text-anchor="middle">4 个 kind 枚举</text>
+  <rect x="258" y="212" width="150" height="34" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="333" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#e8eaf6" text-anchor="middle">present / deleted / dims（3×u64）</text>
+  <rect x="408" y="212" width="46" height="34" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="431" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#e8eaf6" text-anchor="middle">multi</text>
+  <rect x="454" y="212" width="118" height="34" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.35" stroke-dasharray="4 3"/>
+  <text x="513" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">padding 22B</text>
+
+  <!-- view 流程 -->
+  <text x="30" y="290" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="600">view() 零拷贝路径</text>
+
+  <rect x="30" y="302" width="220" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="140" y="329" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">mmap 整个文件（PROT_READ）</text>
+
+  <path d="M 250 324 L 286 324" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="286" y="302" width="250" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="411" y="329" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">vectors_lookup_ 只存指针算术（不拷向量）</text>
+
+  <path d="M 536 324 L 572 324" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="572" y="302" width="218" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8"/>
+  <text x="681" y="329" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">node_t 直接指向图段 · is_immutable 只读</text>
+</svg>

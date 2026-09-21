@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="470" fill="#0b0d14"/>
+
+  <!-- 纯 Python 层 -->
+  <rect x="40" y="30" width="700" height="120" rx="8" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6" stroke-dasharray="6 4"/>
+  <text x="56" y="54" font-family="system-ui, sans-serif" font-size="14" fill="#b388ff" font-weight="600">纯 Python 层（usearch 包）</text>
+
+  <rect x="56" y="66" width="200" height="60" rx="6" fill="#1a1d33" stroke="#b388ff" stroke-opacity="0.6"/>
+  <text x="156" y="90" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">index.py</text>
+  <text x="156" y="110" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">Index / Matches / Clustering</text>
+
+  <rect x="272" y="66" width="140" height="60" rx="6" fill="#1a1d33" stroke="#b388ff" stroke-opacity="0.6"/>
+  <text x="342" y="90" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">numba.py</text>
+  <text x="342" y="110" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">cfunc JIT 度量</text>
+
+  <rect x="428" y="66" width="140" height="60" rx="6" fill="#1a1d33" stroke="#b388ff" stroke-opacity="0.6"/>
+  <text x="498" y="90" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">server.py</text>
+  <text x="498" y="110" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">ucall RPC</text>
+
+  <rect x="584" y="66" width="140" height="60" rx="6" fill="#1a1d33" stroke="#b388ff" stroke-opacity="0.6"/>
+  <text x="654" y="90" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">io.py / eval.py</text>
+  <text x="654" y="110" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">矩阵 IO / 基准评估</text>
+
+  <!-- 箭头 down -->
+  <path d="M 400 150 L 400 190" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- pybind11 层 -->
+  <rect x="40" y="190" width="700" height="110" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="56" y="214" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">pybind11 原生层（usearch.compiled，python/lib.cpp）</text>
+
+  <rect x="56" y="226" width="200" height="56" rx="6" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.5"/>
+  <text x="156" y="249" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">dense_index_py_t</text>
+  <text x="156" y="268" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">继承 index_dense_t + per-index mutex</text>
+
+  <rect x="272" y="226" width="200" height="56" rx="6" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.5"/>
+  <text x="372" y="249" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">GIL 释放模式</text>
+  <text x="372" y="268" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">release → mutex → executor → 收口抛错</text>
+
+  <rect x="488" y="226" width="236" height="56" rx="6" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.5"/>
+  <text x="606" y="249" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">dense_indexes_py_t</text>
+  <text x="606" y="268" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">分片 facade：merge_paths 并行 mmap 多文件</text>
+
+  <!-- 箭头 down -->
+  <path d="M 400 300 L 400 340" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- C++ 层 -->
+  <rect x="40" y="340" width="700" height="60" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="56" y="365" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">C++ 单头库（include/usearch/index_dense.hpp）</text>
+  <text x="56" y="387" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">NumKong 由 __init__.py 用 ctypes RTLD_GLOBAL 预加载，符号运行时解析（macOS 免静态链接）</text>
+
+  <!-- 侧注 -->
+  <rect x="40" y="420" width="700" height="36" rx="8" fill="#13162a"/>
+  <text x="56" y="443" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">numba.py 的 CompiledMetric 挂到 metric_t::stateless；42 个 wheel（7 平台 × 6 Python 版本，含 free-threaded 3.14t）</text>
+</svg>

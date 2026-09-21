@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="730" viewBox="0 0 800 730">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="730" fill="#0b0d14"/>
+
+  <!-- 步骤 1：Python 层 -->
+  <rect x="160" y="20" width="610" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="20" width="6" height="56" rx="3" fill="#b388ff"/>
+  <text x="180" y="43" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">Index.add(keys, vectors)</text>
+  <text x="180" y="65" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">keys 归一化 · 向量 reshape · tqdm 进度包装（python/usearch/index.py）</text>
+
+  <path d="M 465 76 L 465 96" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 2：pybind11 -->
+  <rect x="160" y="96" width="610" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <rect x="160" y="96" width="6" height="56" rx="3" fill="#4ecdc4"/>
+  <text x="180" y="119" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">add_many — 释放 GIL · per-index mutex · try_reserve(ceil2) 扩容</text>
+  <text x="180" y="141" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">numpy buffer 协议零拷贝取裸指针（python/lib.cpp）</text>
+
+  <path d="M 465 152 L 465 172" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 3：executor -->
+  <rect x="160" y="172" width="610" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <rect x="160" y="172" width="6" height="56" rx="3" fill="#4ecdc4"/>
+  <text x="180" y="195" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">executor.dynamic — 按线程切分向量任务</text>
+  <text x="180" y="217" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">thread_idx 同时是 cast_buffer_ / contexts_ 的槽位下标</text>
+
+  <path d="M 465 228 L 465 248" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 4：稠密索引 cast -->
+  <rect x="160" y="248" width="610" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <rect x="160" y="248" width="6" height="56" rx="3" fill="#f9ca24"/>
+  <text x="180" y="271" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">add_ — 输入精度 cast 到索引精度</text>
+  <text x="180" y="293" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">cast_buffer_ 每线程切片（index_dense.hpp）· cast 后强制拷贝向量</text>
+
+  <path d="M 465 304 L 465 324" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 5：slot 管理 -->
+  <rect x="160" y="324" width="610" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <rect x="160" y="324" width="6" height="56" rx="3" fill="#f9ca24"/>
+  <text x="180" y="347" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">key 查重 · slot_lookup_.try_emplace · free slot 复用判定</text>
+  <text x="180" y="369" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">复用已删 slot 走 update() 重连边，否则走 add()（index_dense.hpp）</text>
+
+  <path d="M 465 380 L 465 400" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 6：选层建节点 -->
+  <rect x="160" y="400" width="610" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="400" width="6" height="56" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="423" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">typed_-&gt;add() — choose_random_level_ 指数选层 · node_make_ 建 tape</text>
+  <text x="180" y="445" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">global_mutex_ 下占坑；层不超 max_level_ 则提前解锁（index.hpp）</text>
+
+  <path d="M 465 456 L 465 476" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 7：搜索插入点 -->
+  <rect x="160" y="476" width="610" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="476" width="6" height="56" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="499" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">search_for_one_ 逐层贪心 → search_to_insert_ beam search</text>
+  <text x="180" y="521" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">max_heap 存 {-dist, slot} 当 min-heap 弹最近待扩展（index.hpp）</text>
+
+  <path d="M 465 532 L 465 552" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 8：启发式连边 -->
+  <rect x="160" y="552" width="610" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="552" width="6" height="56" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="575" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">refine_ 启发式选边 · form_links_to_closest_ + form_reverse_links_</text>
+  <text x="180" y="597" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">邻居表满则 refine_ 重建（override 新向量距离）（index.hpp）</text>
+
+  <path d="M 465 608 L 465 628" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 9：入口更新 -->
+  <rect x="160" y="628" width="610" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="628" width="6" height="56" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="651" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">新层高于 max_level_ → 更新 entry_slot_ / max_level_</text>
+  <text x="180" y="673" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">只在可能刷新入口点时全程持有 global_mutex_</text>
+
+  <!-- 左侧层标签 -->
+  <text x="80" y="50" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" text-anchor="middle" font-weight="600">Python</text>
+  <text x="80" y="68" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab" text-anchor="middle">index.py</text>
+  <text x="80" y="126" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" text-anchor="middle" font-weight="600">pybind11</text>
+  <text x="80" y="144" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab" text-anchor="middle">lib.cpp</text>
+  <text x="80" y="278" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">稠密索引</text>
+  <text x="80" y="296" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab" text-anchor="middle">index_dense</text>
+  <text x="80" y="530" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="600">核心图引擎</text>
+  <text x="80" y="548" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab" text-anchor="middle">index_gt</text>
+</svg>

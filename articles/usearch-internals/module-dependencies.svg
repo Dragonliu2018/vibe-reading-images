@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="570" viewBox="0 0 820 570">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="570" fill="#0b0d14"/>
+
+  <!-- 行 1：消费方 -->
+  <rect x="260" y="30" width="170" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.7"/>
+  <text x="345" y="58" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">Python 生态</text>
+
+  <rect x="560" y="30" width="170" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.7"/>
+  <text x="645" y="58" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">多语言绑定</text>
+
+  <!-- 行 2：接口与核心 -->
+  <rect x="30" y="140" width="170" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="115" y="168" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">C ABI 层</text>
+
+  <rect x="260" y="140" width="220" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="370" y="168" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">稠密索引 index_dense</text>
+
+  <rect x="560" y="140" width="230" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="675" y="168" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">核心图引擎 index_gt</text>
+
+  <!-- 行 3：基础设施 -->
+  <rect x="260" y="310" width="220" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7"/>
+  <text x="370" y="338" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">基础设施 plugins</text>
+
+  <!-- 行 4：外部子模块 -->
+  <rect x="260" y="400" width="220" height="70" rx="6" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.45" stroke-dasharray="5 4"/>
+  <text x="272" y="420" font-family="system-ui, sans-serif" font-size="12" fill="#80c7ff">外部 git 子模块</text>
+  <rect x="275" y="428" width="90" height="32" rx="5" fill="#1a1d33" stroke="#80c7ff" stroke-opacity="0.5"/>
+  <text x="320" y="449" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">NumKong</text>
+  <rect x="375" y="428" width="90" height="32" rx="5" fill="#1a1d33" stroke="#80c7ff" stroke-opacity="0.5"/>
+  <text x="420" y="449" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">StringZilla</text>
+
+  <!-- Python → 稠密索引 -->
+  <path d="M 345 76 L 345 140" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- 多语言绑定 → 稠密索引（C++ 直连） -->
+  <path d="M 600 76 L 600 108 L 450 108 L 450 140" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="455" y="100" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">CXX / N-API / JNI 直连</text>
+  <!-- 多语言绑定 → C ABI -->
+  <path d="M 645 30 L 645 15 L 230 15 L 230 163 L 200 163" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="635" y="26" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5" text-anchor="end">Go / Swift / C# / WASM 走 C ABI</text>
+  <!-- C ABI → 稠密索引 -->
+  <path d="M 200 170 L 260 170" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="230" y="184" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5" text-anchor="middle">转译</text>
+  <!-- 稠密索引 → 核心图引擎 -->
+  <path d="M 480 163 L 560 163" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="520" y="155" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5" text-anchor="middle">typed_</text>
+  <!-- 稠密索引 → 基础设施 -->
+  <path d="M 370 186 L 370 310" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="378" y="252" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">metric / cast / 分配器</text>
+  <!-- 基础设施 → 核心图引擎（反向 include） -->
+  <path d="M 480 330 L 675 330 L 675 186" fill="none" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="490" y="322" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">include（expected_gt / 宏）</text>
+  <!-- 基础设施 → NumKong -->
+  <path d="M 370 356 L 370 400" fill="none" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="378" y="382" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">SIMD 内核</text>
+
+  <!-- 图例 -->
+  <rect x="30" y="500" width="760" height="56" rx="8" fill="#13162a"/>
+  <path d="M 46 528 L 96 528" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="104" y="532" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">使用 / 实例化（依赖方向）</text>
+  <path d="M 280 528 L 330 528" stroke="#7a86b3" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="338" y="532" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">反向 include / 可选依赖</text>
+  <rect x="540" y="517" width="28" height="22" rx="4" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.45" stroke-dasharray="5 4"/>
+  <text x="576" y="532" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">git 子模块</text>
+</svg>

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="680" viewBox="0 0 800 680">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="680" fill="#0b0d14"/>
+
+  <!-- 步骤 1：Python 层 -->
+  <rect x="160" y="20" width="610" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="20" width="6" height="56" rx="3" fill="#b388ff"/>
+  <text x="180" y="43" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">Index.search(vectors, count)</text>
+  <text x="180" y="65" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">1-D 查询 reshape 成 (1, ndim)（python/usearch/index.py）</text>
+
+  <path d="M 465 76 L 465 96" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 2：pybind11 -->
+  <rect x="160" y="96" width="610" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <rect x="160" y="96" width="6" height="56" rx="3" fill="#4ecdc4"/>
+  <text x="180" y="119" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">search_many — 预分配 keys / distances / counts 数组 · 释放 GIL</text>
+  <text x="180" y="141" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">mutable_unchecked 裸代理让 worker 线程无 GIL 直写（python/lib.cpp）</text>
+
+  <path d="M 465 152 L 465 172" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 3：executor -->
+  <rect x="160" y="172" width="610" height="56" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <rect x="160" y="172" width="6" height="56" rx="3" fill="#4ecdc4"/>
+  <text x="180" y="195" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">executor.dynamic — 每线程一批查询任务</text>
+  <text x="180" y="217" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">thread_idx 定位 context_t / cast_buffer_ 槽位</text>
+
+  <path d="M 465 228 L 465 248" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 4：稠密索引 -->
+  <rect x="160" y="248" width="610" height="56" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <rect x="160" y="248" width="6" height="56" rx="3" fill="#f9ca24"/>
+  <text x="180" y="271" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">search_ — cast 查询向量 · 谓词过滤 free_key_</text>
+  <text x="180" y="293" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">惰性删除的节点不进 top（index_dense.hpp）· 结果携带 thread_lock_ 保活</text>
+
+  <path d="M 465 304 L 465 324" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 5：核心图引擎 贪心下降 -->
+  <rect x="160" y="324" width="610" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="324" width="6" height="56" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="347" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">typed_-&gt;search() — search_for_one_ 从 entry 逐层贪心到 0 层</text>
+  <text x="180" y="369" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">每层 do-while 取更近邻居直到无改进（index.hpp）· exact=True 则 search_exact_ 全量扫</text>
+
+  <path d="M 465 380 L 465 400" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 6：beam search -->
+  <rect x="160" y="400" width="610" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="400" width="6" height="56" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="423" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">search_to_find_in_base_ — 0 层 beam search（无锁读）</text>
+  <text x="180" y="445" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">visits 哈希集去重 · 谓词不满足的点仍会被扩展（保证召回）</text>
+
+  <path d="M 465 456 L 465 476" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 7：截断 -->
+  <rect x="160" y="476" width="610" height="56" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="476" width="6" height="56" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="499" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">top.shrink(wanted) — 截断 top-k</text>
+  <text x="180" y="521" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">sorted_buffer_gt 天然有序，sort_ascending 为 no-op · 结果引用 context 缓冲</text>
+
+  <path d="M 465 532 L 465 552" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 步骤 8：返回 -->
+  <rect x="160" y="552" width="610" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="552" width="6" height="56" rx="3" fill="#b388ff"/>
+  <text x="180" y="575" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">dump_to 写回 numpy 数组 → BatchMatches 惰性视图</text>
+  <text x="180" y="597" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">单查询蒸馏为 Matches（to_list 才物化 Python 对象）</text>
+
+  <!-- 左侧层标签 -->
+  <text x="80" y="50" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" text-anchor="middle" font-weight="600">Python</text>
+  <text x="80" y="68" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab" text-anchor="middle">index.py</text>
+  <text x="80" y="126" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" text-anchor="middle" font-weight="600">pybind11</text>
+  <text x="80" y="144" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab" text-anchor="middle">lib.cpp</text>
+  <text x="80" y="278" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">稠密索引</text>
+  <text x="80" y="296" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab" text-anchor="middle">index_dense</text>
+  <text x="80" y="440" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="600">核心图引擎</text>
+  <text x="80" y="458" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab" text-anchor="middle">index_gt</text>
+  <text x="80" y="576" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" text-anchor="middle" font-weight="600">Python</text>
+  <text x="80" y="594" font-family="system-ui, sans-serif" font-size="12" fill="#7d85ab" text-anchor="middle">index.py</text>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470">
+  <defs>
+    <marker id="arrowC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ecdc4"/>
+    </marker>
+    <marker id="arrowCpp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6c8ef5"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="470" fill="#0b0d14"/>
+
+  <!-- 顶行：语言 -->
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="13" fill="#7d85ab">绑定语言（按桥技术分列）</text>
+
+  <!-- 左列（走 C ABI） -->
+  <rect x="40" y="46" width="160" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="120" y="71" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">Go（cgo）</text>
+  <rect x="40" y="94" width="160" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="120" y="119" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">Swift（modulemap）</text>
+  <rect x="40" y="142" width="160" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="120" y="167" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">C#（P/Invoke）</text>
+  <rect x="40" y="190" width="160" height="40" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="120" y="215" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">WASM（Emscripten）</text>
+
+  <!-- 右列（C++ 直连） -->
+  <rect x="500" y="46" width="280" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <text x="640" y="71" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">Python（pybind11，含 GIL 管理）</text>
+  <rect x="500" y="94" width="280" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <text x="640" y="119" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">Rust（rust/cxx 静态桥）</text>
+  <rect x="500" y="142" width="280" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <text x="640" y="167" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">JavaScript（N-API）· Java（JNI）</text>
+  <rect x="500" y="190" width="280" height="40" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <text x="640" y="215" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">Objective-C++ · SQLite extension · Wolfram</text>
+
+  <!-- 中间：两个汇合目标 -->
+  <rect x="250" y="300" width="150" height="56" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.9"/>
+  <text x="325" y="324" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" text-anchor="middle" font-weight="600">C ABI</text>
+  <text x="325" y="344" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">c/usearch.h + lib.cpp</text>
+
+  <rect x="440" y="300" width="150" height="56" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.9"/>
+  <text x="515" y="324" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5" text-anchor="middle" font-weight="600">C++ 直连</text>
+  <text x="515" y="344" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">index_dense.hpp</text>
+
+  <!-- 左列 → C ABI -->
+  <path d="M 120 230 L 120 328 L 250 328" fill="none" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arrowC)"/>
+  <!-- 右列 → C++ 直连 -->
+  <path d="M 640 230 L 640 328 L 590 328" fill="none" stroke="#6c8ef5" stroke-width="1.5" marker-end="url(#arrowCpp)"/>
+
+  <!-- C ABI → C++ -->
+  <path d="M 400 328 L 440 328" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrowCpp)"/>
+  <text x="420" y="318" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">转译</text>
+
+  <!-- 汇合到引擎 -->
+  <rect x="250" y="400" width="340" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="420" y="430" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" text-anchor="middle" font-weight="600">index_dense_t（单头 C++ 库）</text>
+
+  <path d="M 325 356 L 325 400" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrowCpp)"/>
+  <path d="M 515 356 L 515 400" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrowCpp)"/>
+
+  <!-- 说明 -->
+  <rect x="40" y="400" width="180" height="64" rx="8" fill="#13162a"/>
+  <text x="52" y="422" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">FFI 只认 C 符号的语言</text>
+  <text x="52" y="440" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">走 C ABI；扩展机制天然</text>
+  <text x="52" y="456" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">是 C++ 的走直连</text>
+</svg>

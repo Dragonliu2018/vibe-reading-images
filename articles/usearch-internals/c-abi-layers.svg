@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="380" fill="#0b0d14"/>
+
+  <!-- C 调用方 -->
+  <rect x="40" y="130" width="180" height="80" rx="8" fill="#13162a" stroke="#b388ff" stroke-opacity="0.7"/>
+  <text x="130" y="162" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">C / Go / Swift / C# 调用方</text>
+  <text x="130" y="186" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">cgo / modulemap / DllImport</text>
+
+  <!-- C ABI 层 -->
+  <rect x="280" y="30" width="240" height="280" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="400" y="58" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600" text-anchor="middle">c/usearch.h（C99）</text>
+
+  <rect x="300" y="74" width="200" height="34" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.5"/>
+  <text x="400" y="96" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">usearch_init / usearch_free</text>
+  <rect x="300" y="116" width="200" height="34" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.5"/>
+  <text x="400" y="138" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">add / search / filtered_search</text>
+  <rect x="300" y="158" width="200" height="34" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.5"/>
+  <text x="400" y="180" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">save / load / view / metadata</text>
+  <rect x="300" y="200" width="200" height="34" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.5"/>
+  <text x="400" y="222" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">remove / rename / reserve</text>
+  <rect x="300" y="242" width="200" height="34" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.5"/>
+  <text x="400" y="264" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">usearch_error_t* 输出参数</text>
+
+  <path d="M 220 170 L 280 170" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- lib.cpp 转译 -->
+  <rect x="580" y="130" width="190" height="80" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="675" y="162" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">c/lib.cpp</text>
+  <text x="675" y="186" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">reinterpret_cast 直转 · 枚举 switch 映射</text>
+
+  <path d="M 520 170 L 580 170" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- C++ 索引 -->
+  <rect x="580" y="240" width="190" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="675" y="270" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6" text-anchor="middle">index_dense_t</text>
+  <text x="675" y="292" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">C++ 类（含模板）</text>
+
+  <path d="M 675 210 L 675 240" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 关键约定 -->
+  <rect x="40" y="240" width="180" height="70" rx="8" fill="#13162a"/>
+  <text x="52" y="262" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">不透明句柄 usearch_index_t</text>
+  <text x="52" y="280" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">错误串无需释放</text>
+  <text x="52" y="298" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">结果写调用方数组</text>
+</svg>
