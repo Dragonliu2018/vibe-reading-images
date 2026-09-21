@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e74c3c"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="470" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#7bed9f" font-weight="600">CustomScan 的三种形态与下推边界</text>
+
+  <!-- 普通 query plan -->
+  <rect x="40" y="56" width="740" height="120" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <text x="56" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" font-weight="600">不命中（fallback 普通 Postgres 计划）</text>
+  <text x="56" y="104" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">无 @@ 操作符 / 无 ORDER BY score / planner 判定不划算 → 普通 IndexScan 或 SeqScan</text>
+  <text x="56" y="126" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">search() @@ term() 作为普通表达式逐行求值（慢路径，保证语义正确）</text>
+  <text x="56" y="150" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">Basescan 在无 custom path 时也提供 generate/scan 后备执行</text>
+
+  <!-- 三类 scan -->
+  <rect x="40" y="196" width="236" height="150" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.75"/>
+  <text x="158" y="220" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">basescan</text>
+  <text x="158" y="244" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">普通 BM25 扫描</text>
+  <text x="158" y="264" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">@@ + 可下推过滤</text>
+  <text x="158" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">ORDER BY score + LIMIT</text>
+  <text x="158" y="304" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">→ SegmentedTopK</text>
+  <text x="158" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">projections（window agg）</text>
+
+  <rect x="292" y="196" width="236" height="150" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.75"/>
+  <text x="410" y="220" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">aggregatescan</text>
+  <text x="410" y="244" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">聚合下推</text>
+  <text x="410" y="264" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">GROUP BY / ORDER BY / LIMIT</text>
+  <text x="410" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">min/max/avg/count 在 fast field</text>
+  <text x="410" y="304" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">上直接算（aggregate/）</text>
+  <text x="410" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">targetlist 改写（json_rewrite）</text>
+
+  <rect x="544" y="196" width="236" height="150" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.75"/>
+  <text x="662" y="220" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">joinscan</text>
+  <text x="662" y="244" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">join 下推</text>
+  <text x="662" y="264" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">两个 BM25 索引表的 join</text>
+  <text x="662" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">join_targetlist 改写</text>
+  <text x="662" y="304" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">FilterQuery 联合下推</text>
+  <text x="662" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">（两个索引同时约束）</text>
+
+  <!-- 并行 -->
+  <rect x="40" y="366" width="740" height="86" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.5"/>
+  <text x="56" y="390" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff" font-weight="600">并行与下推边界</text>
+  <text x="56" y="412" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">parallel query：dsm.rs（动态共享内存）协调 worker · segment 粒度分工 · MPP（mpp/）多进程扩展</text>
+  <text x="56" y="434" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">不能下推的表达式：pullup 后由 Postgres 上层求值（qual_inspect 的判定 + solve_expr 的安全求解）</text>
+</svg>

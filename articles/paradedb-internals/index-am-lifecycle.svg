@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="440" viewBox="0 0 820 440">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="440" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">BM25 索引的生命周期（Postgres Access Method 回调面）</text>
+
+  <!-- CREATE INDEX -->
+  <rect x="40" y="60" width="350" height="110" rx="8" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.7"/>
+  <text x="56" y="84" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f" font-weight="600">CREATE INDEX … USING bm25</text>
+  <text x="56" y="108" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">ambuild（postgres/index.rs）：全表扫描 → schema 解析（SearchIndexSchema）</text>
+  <text x="56" y="128" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">→ build_parallel.rs 多 segment 并行构建 → merge_policy 初始合并</text>
+  <text x="56" y="148" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">字段映射：text→tantivy text · numeric→fast field · jsonb→json field · ctid→key field</text>
+
+  <path d="M 390 115 L 430 115" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 增删 -->
+  <rect x="430" y="60" width="350" height="110" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.6"/>
+  <text x="446" y="84" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d" font-weight="600">DML 运行期</text>
+  <text x="446" y="108" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">INSERT：aminsert → doc 写入 segment writer（ctid 记 key field）</text>
+  <text x="446" y="128" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">UPDATE = delete + insert · DELETE：ambulkdelete 标记删除（delete.rs）</text>
+  <text x="446" y="148" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">MVCC 约束：删除在"没有更老快照可能看到它"之前只能标记（fake_aminsertcleanup）</text>
+
+  <!-- 维护 -->
+  <rect x="40" y="192" width="350" height="110" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.6"/>
+  <text x="56" y="216" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">维护（merge / vacuum）</text>
+  <text x="56" y="240" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">merge.rs：segment 合并（merge_policy 的阈值：数量/大小/删除比例）</text>
+  <text x="56" y="260" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">vacuum.rs + amvacuumcleanup：安全窗口后物理清（storage/fsm.rs 回收空间）</text>
+  <text x="56" y="280" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">admin API：索引统计/segment 列表/amcheck 式验证（api/admin.rs）</text>
+
+  <!-- 查询 -->
+  <rect x="430" y="192" width="350" height="110" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.7"/>
+  <text x="446" y="216" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" font-weight="600">查询（另见 CustomScan 数据流）</text>
+  <text x="446" y="240" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">reader/index.rs 打开 segment · fast field / posting list 读取</text>
+  <text x="446" y="260" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">评分：tantivy BM25（k1/b 参数可经 GUC 调）</text>
+  <text x="446" y="280" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">highlight/snippet：marker 在原始 text 上重算</text>
+
+  <!-- 底注 -->
+  <rect x="40" y="322" width="740" height="100" rx="8" fill="#13162a"/>
+  <text x="56" y="346" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" font-weight="600">与 Postgres 生态的一致性收益：</text>
+  <text x="56" y="368" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">索引数据经 WAL → 流复制/物理备份自动带上 BM25 索引（对比外部 ES：需要双写与同步管道）</text>
+  <text x="56" y="388" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">事务可见性天然一致：heap 的 MVCC 快照与索引的删除标记用同一时间线</text>
+  <text x="56" y="408" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">代价：索引膨胀管理自主（无 Postgres GIN 那样的成熟 vacuum 语义可复用，全部自建）</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="640" viewBox="0 0 820 640">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="640" fill="#0b0d14"/>
+
+  <!-- SQL 层 -->
+  <rect x="30" y="16" width="760" height="72" rx="8" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <text x="46" y="40" font-family="system-ui, sans-serif" font-size="14" fill="#b388ff" font-weight="600">SQL 层（用户可见的 API）</text>
+  <text x="46" y="62" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">paradedb.search(field) @@ paradedb.term('keyboard') · paradedb.score(field) · snippet/highlight</text>
+  <text x="46" y="80" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">operator 构建器 DSL（api/operator.rs + api/builder_fns/）：term/phrase/range/fuzzy/boost 组合</text>
+
+  <path d="M 410 88 L 410 112" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Postgres 层 -->
+  <rect x="30" y="114" width="760" height="150" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="46" y="138" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">Postgres 层（src/postgres/，~69K 行——AM 回调 + Planner Hook + CustomScan）</text>
+  <text x="46" y="162" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">索引 Access Method：ambuild / aminsert / ambulkdelete / amvacuumcleanup（index.rs 67K）</text>
+  <text x="46" y="182" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">heap tuple → ctid 管理（heap.rs）· MVCC 安全删除（delete.rs/vacuum.rs）· 自建 page 管理（storage/）</text>
+  <text x="46" y="206" font-family="system-ui, sans-serif" font-size="12" fill="#7bed9f">CustomScan 体系（customscan/，性能核心）：planner hook（hook.rs）拦截查询 →</text>
+  <text x="46" y="226" font-family="system-ui, sans-serif" font-size="12" fill="#7bed9f">qual_inspect 抽取表达式 → cost 估算（cost.rs）→ CustomPath（path.rs）→ 三类 scan（base/aggregate/join）</text>
+  <text x="46" y="248" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">并行：parallel.rs + dsm.rs（动态共享内存）+ parallel_worker/ · MPP（mpp/）</text>
+
+  <path d="M 410 264 L 410 288" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- DataFusion 层 -->
+  <rect x="30" y="290" width="760" height="120" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="46" y="314" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">DataFusion 中间层（customscan/datafusion/ + scan/ 的物理算子）</text>
+  <text x="46" y="338" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">translator.rs：Postgres 计划 → DataFusion LogicalPlan（BM25 索引注册为 TableProvider）</text>
+  <text x="46" y="358" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">优化规则：segmented_topk_rule（ORDER BY score LIMIT N → 分段 top-k）· late materialization 规则</text>
+  <text x="46" y="378" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">物理算子：SegmentedTopKExec（97K）· LateMaterializationExec · PreFilter · TantivyLookupExec</text>
+  <text x="46" y="398" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">内存：DataFusion memory pool ↔ Postgres 内存上下文对接（memory.rs）</text>
+
+  <path d="M 410 410 L 410 434" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Tantivy 层 -->
+  <rect x="30" y="436" width="760" height="110" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8"/>
+  <text x="46" y="460" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5" font-weight="600">Tantivy 层（index/，paradedb/tantivy fork rev pin）</text>
+  <text x="46" y="484" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">PDBQuery（scan/pdb_query.rs 83K）→ tantivy Query · BM25 scorer · fast field 读取（fast_fields_helper.rs）</text>
+  <text x="46" y="504" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">segment writer 并行构建（build_parallel.rs）· merge 策略（merge_policy.rs）· reader（reader/index.rs）</text>
+  <text x="46" y="524" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">Directory trait 的 Postgres 实现（directory/mvcc.rs 42K）——索引数据存 Postgres 内部</text>
+
+  <!-- 底注 -->
+  <rect x="30" y="566" width="760" height="58" rx="8" fill="#13162a"/>
+  <text x="46" y="590" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" font-weight="600">为什么这样分层：</text>
+  <text x="46" y="610" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">CustomScan 劫持整条查询 → DataFusion 做算子编排（late materialization/top-k 下推）→ tantivy 只当 BM25 引擎</text>
+  <text x="46" y="628" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">→ 索引数据存 Postgres 内部（备份/复制/事务免费）——四个关注点各归其层</text>
+</svg>

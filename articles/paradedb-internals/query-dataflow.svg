@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="720" viewBox="0 0 820 720">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="720" fill="#0b0d14"/>
+
+  <!-- SQL -->
+  <rect x="160" y="14" width="610" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="14" width="6" height="56" rx="3" fill="#b388ff"/>
+  <text x="180" y="37" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">SELECT * FROM items WHERE paradedb.search(desc) @@ paradedb.term('keyboard')</text>
+  <text x="180" y="57" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">ORDER BY paradedb.score(desc) DESC LIMIT 10;</text>
+
+  <path d="M 465 70 L 465 92" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Operator 求值 -->
+  <rect x="160" y="94" width="610" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="94" width="6" height="64" rx="3" fill="#b388ff"/>
+  <text x="180" y="117" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">operator 求值（api/operator.rs + builder_fns）</text>
+  <text x="180" y="139" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">search(field) @@ term('keyboard') → PDBQuery 的构造（JSON/DOM）· score(field) 记录排序依赖</text>
+
+  <path d="M 465 158 L 465 180" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Planner -->
+  <rect x="160" y="182" width="610" height="90" rx="6" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.7"/>
+  <rect x="160" y="182" width="6" height="90" rx="3" fill="#7bed9f"/>
+  <text x="180" y="205" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">Planner 拦截（customscan/hook.rs 的 planner hook）</text>
+  <text x="180" y="227" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">qual_inspect 抽取 @@ 表达式（能下推的/不能的分流）· pushdown vs pullup 的取舍</text>
+  <text x="180" y="247" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">cost.rs 估算 BM25 scan 代价 → 创建 CustomPath（ORDER BY + LIMIT 的 top-k 兼容性校验 orderby.rs）</text>
+  <text x="180" y="265" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">命中则整条查询交给 customscan；不命中 fallback 普通 plan</text>
+
+  <path d="M 465 272 L 465 294" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- DataFusion 翻译 -->
+  <rect x="160" y="296" width="610" height="90" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.75"/>
+  <rect x="160" y="296" width="6" height="90" rx="3" fill="#f9ca24"/>
+  <text x="180" y="319" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">DataFusion 计划翻译与优化（datafusion/translator.rs）</text>
+  <text x="180" y="341" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">Postgres qual → LogicalPlan（BM25 索引注册为 TableProvider：scan/table_provider.rs）</text>
+  <text x="180" y="361" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">优化规则：ORDER BY score LIMIT N → SegmentedTopK（segmented_topk_rule）</text>
+  <text x="180" y="379" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">· late materialization 规则（延迟 heap 回表）· prefilter 下推（过滤转 tantivy 查询）</text>
+
+  <path d="M 465 386 L 465 408" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Tantivy 执行 -->
+  <rect x="160" y="410" width="610" height="100" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8"/>
+  <rect x="160" y="410" width="6" height="100" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="433" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">Tantivy 查询执行（segmented_topk_exec + tantivy_lookup_exec）</text>
+  <text x="180" y="455" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">PDBQuery → tantivy Query（BooleanQuery/TermQuery/RangeQuery/PhraseQuery…）</text>
+  <text x="180" y="475" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">逐 segment 并行：BM25 scorer 打分 → 每段 top-k 堆 → 段间归并（SegmentedTopKExec 的核心算法）</text>
+  <text x="180" y="495" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">fast field 读 score/key field · ctid 从 key field 取（不回表）</text>
+
+  <path d="M 465 510 L 465 532" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Late Materialization -->
+  <rect x="160" y="534" width="610" height="74" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <rect x="160" y="534" width="6" height="74" rx="3" fill="#4ecdc4"/>
+  <text x="180" y="557" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">Late Materialization（scan/late_materialization.rs）</text>
+  <text x="180" y="579" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">只对 top-k 的 ctid 批量回 heap 取原始行（visibility check + heap_fetch）</text>
+  <text x="180" y="599" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">非 top-k 的行永不回表——排序在索引上完成，heap 访问被压到最少</text>
+
+  <path d="M 465 608 L 465 630" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 返回 -->
+  <rect x="160" y="632" width="610" height="64" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="632" width="6" height="64" rx="3" fill="#b388ff"/>
+  <text x="180" y="655" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">Arrow/Datum 转换（physical_codec.rs / codec.rs）→ 返回 Postgres tuple</text>
+  <text x="180" y="677" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">score 经 paradedb.score() 从 fast field 取回 · highlight 在 marker 上重算</text>
+
+  <!-- 左侧标签 -->
+  <text x="85" y="122" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" text-anchor="middle" font-weight="600">SQL/API</text>
+  <text x="85" y="227" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f" text-anchor="middle" font-weight="600">Planner</text>
+  <text x="85" y="341" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">DataFusion</text>
+  <text x="85" y="460" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="600">Tantivy</text>
+  <text x="85" y="571" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" text-anchor="middle" font-weight="600">回表</text>
+</svg>

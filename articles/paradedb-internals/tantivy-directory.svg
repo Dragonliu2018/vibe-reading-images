@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="500" viewBox="0 0 820 500">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="500" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5" font-weight="600">Tantivy 索引的 Postgres 存储：Directory trait 的内部实现</text>
+
+  <!-- 逻辑层 -->
+  <rect x="40" y="56" width="740" height="80" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="56" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">Tantivy 视角（逻辑文件）</text>
+  <text x="56" y="104" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">segment 文件（.term / .idx / .fieldnorm / .pos / .fast / .store…）· meta.json</text>
+  <text x="56" y="124" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">tantivy 的 Directory trait：open_read/write/delete/atomic_write · IndexReader/Writer 全部经它</text>
+
+  <path d="M 410 136 L 410 160" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="428" y="153" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">directory/mvcc.rs（42.8K）</text>
+
+  <!-- 实现层 -->
+  <rect x="40" y="162" width="740" height="130" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8"/>
+  <text x="56" y="186" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" font-weight="600">Postgres 实现（存进数据库内部）</text>
+  <text x="56" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">逻辑文件 → Postgres 内部结构的映射（blob/page 级读写，不落文件系统）</text>
+  <text x="56" y="232" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">MVCC 版本管理：并发 reader 看到一致快照 · writer 的 segment 替换原子化</text>
+  <text x="56" y="254" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">storage/ 自建页管理：block.rs / fsm.rs（free space map）/ avl.rs / buffer.rs</text>
+  <text x="56" y="276" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">为什么自建：绕过 Postgres SMGR 的限制（大 blob 的随机访问 + 空间回收自管）</text>
+
+  <path d="M 410 292 L 410 316" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 生命周期 -->
+  <rect x="40" y="318" width="356" height="120" rx="8" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.6"/>
+  <text x="56" y="342" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f" font-weight="600">写路径</text>
+  <text x="56" y="366" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">aminsert → heap tuple 的 ctid 为 key 写 doc</text>
+  <text x="56" y="386" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">build_parallel.rs：多 segment 并行构建</text>
+  <text x="56" y="406" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">merge_policy.rs：segment 数/大小阈值触发合并</text>
+  <text x="56" y="426" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">amvacuumcleanup：MVCC 安全窗口后物理删</text>
+
+  <rect x="424" y="318" width="356" height="120" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <text x="440" y="342" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="600">读路径</text>
+  <text x="440" y="366" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">reader/index.rs：segment Component 的缓存加载</text>
+  <text x="440" y="386" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">fast_fields_helper.rs（28K）：fast field 的批量读取</text>
+  <text x="440" y="406" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">scorer.rs：BM25 评分的包装</text>
+  <text x="440" y="426" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">reader 生命周期与 Postgres 快照对齐</text>
+
+  <!-- 底注 -->
+  <rect x="40" y="452" width="740" height="36" rx="8" fill="#13162a"/>
+  <text x="56" y="475" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">为什么存 Postgres 内部而非文件系统：备份/流复制/WAL 一致性免费获得——代价是自建页管理与 buffer 旁路</text>
+</svg>
