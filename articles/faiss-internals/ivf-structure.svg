@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="560" viewBox="0 0 820 560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="560" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">IndexIVF 的三层结构（倒排文件 = 粗量化器 + 倒排表 + 编码器）</text>
+
+  <!-- 查询向量 -->
+  <rect x="40" y="70" width="130" height="44" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.7"/>
+  <text x="105" y="97" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">query 向量</text>
+
+  <!-- 粗量化器 -->
+  <path d="M 170 92 L 220 92" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="220" y="56" width="200" height="72" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="320" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" text-anchor="middle" font-weight="600">quantizer（也是 Index）</text>
+  <text x="320" y="100" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">IndexFlat / IndexHNSW…</text>
+  <text x="320" y="118" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">找 nprobe 个最近质心</text>
+
+  <path d="M 420 92 L 470 92" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="445" y="82" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">list_no</text>
+
+  <!-- 倒排表 -->
+  <rect x="470" y="50" width="320" height="120" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="486" y="74" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">InvertedLists（存储抽象）</text>
+  <rect x="486" y="84" width="140" height="36" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="556" y="107" font-family="system-ui, sans-serif" font-size="11" fill="#e8eaf6" text-anchor="middle">ArrayInvertedLists</text>
+  <rect x="636" y="84" width="140" height="36" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="706" y="107" font-family="system-ui, sans-serif" font-size="11" fill="#e8eaf6" text-anchor="middle">OnDiskInvertedLists</text>
+  <rect x="486" y="126" width="140" height="32" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="556" y="147" font-family="system-ui, sans-serif" font-size="11" fill="#e8eaf6" text-anchor="middle">BlockInvertedLists</text>
+  <rect x="636" y="126" width="140" height="32" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="706" y="147" font-family="system-ui, sans-serif" font-size="11" fill="#e8eaf6" text-anchor="middle">Panorama 布局</text>
+
+  <!-- add 流程（左下） -->
+  <text x="40" y="210" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f" font-weight="600">add(n, x) 流程</text>
+  <rect x="40" y="224" width="700" height="56" rx="6" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.4"/>
+  <text x="56" y="246" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">quantizer-&gt;assign（选最近的 list）→ 残差 = x − centroid（by_residual）→ sa_encode（PQ/SQ 编码）→ invlists-&gt;add_entries(list_no, ids, codes)</text>
+  <text x="56" y="268" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">并行为 parallel_mode：0 按 add 批次切、1 按 list 切（不同 list 可并发写，只锁同 list）</text>
+
+  <!-- search 流程（下中） -->
+  <text x="40" y="320" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="600">search(nq, x, k) 流程</text>
+  <rect x="40" y="334" width="700" height="70" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.4"/>
+  <text x="56" y="358" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">① quantizer-&gt;search 取 nprobe 个最近 list → ② get_InvertedListScanner（按编码格式返回 IVFFlat/IVFPQ/FastScan scanner）→ ③ set_query（预计算 LUT）</text>
+  <text x="56" y="378" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">→ ④ set_list + scan_codes 逐 list 扫码 → ⑤ ResultHandler 收 top-k　　parallel_mode 0 按查询切 / 1 按 list 切 / 2 双层 / 3 细粒度</text>
+  <text x="56" y="396" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">nprobe 是召回率与延迟的主旋钮：nprobe = nlist 时退化为全扫描</text>
+
+  <!-- DirectMap -->
+  <rect x="40" y="440" width="340" height="90" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.6"/>
+  <text x="56" y="464" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff" font-weight="600">DirectMap（可选：id → (list, offset)）</text>
+  <text x="56" y="486" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">Array / Hashtable / Concurrent 三种</text>
+  <text x="56" y="504" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">为 reconstruct / remove_ids 提供反向定位</text>
+  <text x="56" y="522" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">不启用则这些操作不可用（省内存）</text>
+
+  <!-- IVF 家族变体 -->
+  <rect x="410" y="440" width="370" height="90" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.5"/>
+  <text x="426" y="464" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">IndexIVF 子类 = 换编码器</text>
+  <text x="426" y="486" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">IndexIVFFlat（原始残差）· IndexIVFPQ（PQ 编码）· IndexIVFPQR（+RQ 精化）</text>
+  <text x="426" y="504" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">IndexIVFFastScan（4-bit SIMD）· IndexIVFAdditiveQuantizer（RQ/LSQ/OPQ）</text>
+  <text x="426" y="522" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">IndexIVFSpectralHash · IndexIVFRaBitQ · IndexIVFIndependentQuantizer…</text>
+</svg>

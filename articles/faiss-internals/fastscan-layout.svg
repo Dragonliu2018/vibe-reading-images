@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="520" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">FastScan：4-bit 码 + 32 路交织块的 SIMD 批扫布局</text>
+
+  <!-- 行主序布局（左） -->
+  <text x="60" y="70" font-family="system-ui, sans-serif" font-size="13" fill="#e74c3c">普通布局（行主序）</text>
+  <rect x="60" y="82" width="280" height="40" rx="4" fill="#13162a" stroke="#e74c3c" stroke-opacity="0.5"/>
+  <text x="200" y="107" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">vec0: c0 c1 c2 … c(M-1)</text>
+  <rect x="60" y="126" width="280" height="40" rx="4" fill="#13162a" stroke="#e74c3c" stroke-opacity="0.5"/>
+  <text x="200" y="151" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">vec1: c0 c1 c2 … c(M-1)</text>
+  <rect x="60" y="170" width="280" height="40" rx="4" fill="#13162a" stroke="#e74c3c" stroke-opacity="0.5"/>
+  <text x="200" y="195" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">vec2: c0 c1 c2 … c(M-1)</text>
+  <text x="200" y="240" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">一次只处理 1 个向量的 1 个子码</text>
+  <text x="200" y="258" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">SIMD 寄存器利用率极低</text>
+
+  <!-- 转换箭头 -->
+  <path d="M 360 145 L 440 145" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="400" y="135" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">CodePacker</text>
+  <text x="400" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">add 时打包</text>
+
+  <!-- FastScan 块布局（右） -->
+  <text x="460" y="70" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f">FastScan 布局（bbs=32 交织块）</text>
+  <rect x="460" y="82" width="330" height="128" rx="6" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.7"/>
+  <text x="476" y="106" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">块内布局（概念）：</text>
+  <rect x="476" y="114" width="90" height="26" rx="3" fill="#1a1d33" stroke="#7bed9f" stroke-opacity="0.4"/>
+  <text x="521" y="131" font-family="system-ui, sans-serif" font-size="10" fill="#e8eaf6" text-anchor="middle">子码组 m=0</text>
+  <rect x="572" y="114" width="90" height="26" rx="3" fill="#1a1d33" stroke="#7bed9f" stroke-opacity="0.4"/>
+  <text x="617" y="131" font-family="system-ui, sans-serif" font-size="10" fill="#e8eaf6" text-anchor="middle">子码组 m=1</text>
+  <rect x="668" y="114" width="106" height="26" rx="3" fill="#1a1d33" stroke="#7bed9f" stroke-opacity="0.4"/>
+  <text x="721" y="131" font-family="system-ui, sans-serif" font-size="10" fill="#e8eaf6" text-anchor="middle">… m=M2-1</text>
+  <text x="476" y="158" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">每组横向排 32 个向量的同位子码（4-bit）</text>
+  <text x="476" y="178" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">AVX2 _mm256_shuffle_epi8 一次查 16 路 LUT</text>
+  <text x="476" y="198" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">一条指令同时累加 32 个向量的距离</text>
+
+  <!-- LUT -->
+  <rect x="40" y="290" width="370" height="110" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <text x="56" y="314" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" font-weight="600">查询侧：LUT 预计算</text>
+  <text x="56" y="338" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">LookupTableScaler：LUT 值缩放到 fp16/uint8 域</text>
+  <text x="56" y="358" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">M2 × 16 项的 4-bit 查表（每子码组 16 个质心）</text>
+  <text x="56" y="378" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">accumulate_loops_512：AVX-512 的 16×16 累加网络</text>
+  <text x="56" y="394" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">decompose_qbs：qbs 分解为宏块序列</text>
+
+  <!-- 家族 -->
+  <rect x="440" y="290" width="350" height="110" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.6"/>
+  <text x="456" y="314" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">FastScan 家族（4-bit 才有）</text>
+  <text x="456" y="338" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">IndexIVFPQFastScan（PQ4）· IndexIVFSQFastScan（SQ4）</text>
+  <text x="456" y="358" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">IndexPQFastScan / IndexSQFastScan（无 IVF 的 Flat 版）</text>
+  <text x="456" y="378" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">IndexRaBitQFastScan（1-bit 符号按 4 维打包伪装成 4-bit）</text>
+  <text x="456" y="394" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">8-bit 无 FastScan：16 个候选塞不进一个 SIMD 比较域</text>
+
+  <!-- 取舍 -->
+  <rect x="40" y="424" width="750" height="76" rx="8" fill="#13162a"/>
+  <text x="56" y="448" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" font-weight="600">取舍：add 变慢（每条向量要 pack 进交织布局）换 search 提速数倍</text>
+  <text x="56" y="470" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">IndexIVFFastScan 自带 search_implem_1/2/10/12/14 五条实现（编号即注释里的策略编号），越过 InvertedListScanner 逐码虚接口直接消费块</text>
+  <text x="56" y="490" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">BlockInvertedLists 的 code_size = INVALID_CODE_SIZE（非定长语义，布局由 CodePacker 解释）；implem 0/1 是未打包 invlists 的回退路径</text>
+</svg>

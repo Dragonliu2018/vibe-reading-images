@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="600" viewBox="0 0 820 600">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+    </marker>
+    <marker id="arrowY" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ca24"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="600" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5" font-weight="600">HNSW 图布局 + v1.15 确定性无锁构建（唯一路径）</text>
+
+  <!-- 图布局 -->
+  <text x="40" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#c9cfdf">紧凑扁平数组布局（容量前缀定死）</text>
+  <rect x="40" y="74" width="360" height="150" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.7"/>
+  <rect x="56" y="92" width="328" height="36" rx="5" fill="#1a1d33" stroke="#6c8ef5" stroke-opacity="0.5"/>
+  <text x="220" y="114" font-family="system-ui, sans-serif" font-size="11" fill="#e8eaf6" text-anchor="middle">offsets[i]：节点 i 的邻居起点（前缀和）</text>
+  <rect x="56" y="136" width="328" height="36" rx="5" fill="#1a1d33" stroke="#6c8ef5" stroke-opacity="0.5"/>
+  <text x="220" y="158" font-family="system-ui, sans-serif" font-size="11" fill="#e8eaf6" text-anchor="middle">neighbors：单一扁平 int32 数组（-1 哨兵）</text>
+  <text x="56" y="192" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">cum_nneighbor_per_level：L0 容量 = 2M，上层 = M</text>
+  <text x="56" y="212" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">prepare_level_tab 插入前定容量，之后不可扩（与 USearch 变长 tape 的差异）</text>
+
+  <!-- 确定性构建 -->
+  <text x="440" y="62" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f">hnsw_add_vertices_deterministic（ParlayANN 启发）</text>
+  <rect x="440" y="74" width="340" height="150" rx="8" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.6"/>
+  <text x="456" y="98" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">1. 按层桶排序 + 固定种子置换（rng(789)）消数据序偏置</text>
+  <text x="456" y="118" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">2. 前缀倍增批：批大小 1,1,2,4,8… 上限 2%·ntotal</text>
+  <text x="456" y="142" font-family="system-ui, sans-serif" font-size="11" fill="#7bed9f">Phase A（并发无锁）：各点只写自己的邻居槽</text>
+  <text x="456" y="160" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">——"pt_id 还不可达，快照对批内其他点不可变"</text>
+  <text x="456" y="180" font-family="system-ui, sans-serif" font-size="11" fill="#7bed9f">Phase B（并发）：反向边按目的地点分 256 桶</text>
+  <text x="456" y="198" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">——每节点恰被一个线程合并，(距离, id) 全序剪枝</text>
+  <text x="456" y="218" font-family="system-ui, sans-serif" font-size="11" fill="#f9ca24">结果与线程数无关：固定种子 + 快照不变式 + 全序合并</text>
+
+  <!-- 搜索两层 -->
+  <text x="40" y="258" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4">搜索的两层结构</text>
+
+  <rect x="40" y="272" width="360" height="76" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <text x="56" y="296" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">上层（level ≥ 1）：贪心下降</text>
+  <text x="56" y="316" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">greedy_update_nearest：4 邻居一批算距离</text>
+  <text x="56" y="336" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">有更近就跳，无改进即停</text>
+
+  <rect x="420" y="272" width="360" height="76" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <text x="436" y="296" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6">底层（level 0）：efSearch beam</text>
+  <text x="436" y="316" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">search_from_candidates_fixVT：MinimaxHeap 候选堆</text>
+  <text x="436" y="336" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">check_relative_distance：已有 ef 个更近则提前终止</text>
+
+  <!-- MinimaxHeap -->
+  <rect x="40" y="368" width="740" height="90" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.5"/>
+  <text x="56" y="392" font-family="system-ui, sans-serif" font-size="12" fill="#80c7ff">MinimaxHeap 的反直觉设计：max-heap 数组 + O(n) 线性 pop_min（SIMD 加速）</text>
+  <text x="56" y="414" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">push 是堆操作 O(log n)（高频）；pop_min 是 SIMD 扫描 O(n/8)（低频）——堆大小 = efSearch（几十）时线性扫描比双端堆更快更简单</text>
+  <text x="56" y="434" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">impl/hnsw/avx2.cpp / avx512.cpp：8/16 路找最优+下标（blendv 掩码、平局取右保证确定性）——hnsw 加速层的全部内容</text>
+
+  <!-- 双比较器 -->
+  <rect x="40" y="476" width="740" height="104" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.5"/>
+  <text x="56" y="500" font-family="system-ui, sans-serif" font-size="12" fill="#f9ca24">C_distance / C_similarity 双比较器模板</text>
+  <text x="56" y="522" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">所有核心算法（build/search/prune）写一份 template &lt;class C&gt;，CMax（距离小优）与 CMin（相似度大优）双实例化</text>
+  <text x="56" y="542" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">is_similarity 运行时选择，内积类度量不再取负转距离（NSG/NNDescent 仍是老的 NegativeDistanceComputer 取负法）</text>
+  <text x="56" y="562" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">对比：图与存储彻底分离（storage 是完整 Index 对象，图只存 int32 id）——IndexHNSWSQ/Flat/PQ/RaBitQ 变体只是换 storage</text>
+</svg>

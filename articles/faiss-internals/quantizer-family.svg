@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="540" viewBox="0 0 820 540">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="540" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">量化器家族：向量 → 短码的四种策略</text>
+
+  <!-- PQ -->
+  <rect x="40" y="52" width="180" height="190" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8"/>
+  <text x="130" y="76" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="600">ProductQuantizer</text>
+  <text x="130" y="98" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">子空间独立量化（招牌）</text>
+  <text x="56" y="122" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• d 切 M 段，每段 ksub 个质心</text>
+  <text x="56" y="142" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• 每段独立 k-means</text>
+  <text x="56" y="162" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• 码 = M 个质心 id 拼接</text>
+  <text x="56" y="182" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• 距离 = 逐段查表累加（LUT）</text>
+  <text x="56" y="202" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• 4-bit + SIMD → FastScan</text>
+  <text x="56" y="226" font-family="system-ui, sans-serif" font-size="11" fill="#80c7ff">内存：M×nbits bit/向量</text>
+
+  <!-- SQ -->
+  <rect x="240" y="52" width="180" height="190" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="330" y="76" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" text-anchor="middle" font-weight="600">ScalarQuantizer</text>
+  <text x="330" y="98" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">逐维标量量化</text>
+  <text x="256" y="122" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• Qtype：8bit/4bit/6bit/</text>
+  <text x="256" y="142" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">  fp16/bf16/8bit_direct…</text>
+  <text x="256" y="162" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• 每维训练范围 [vmin, vmax]</text>
+  <text x="256" y="182" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• 无需训练（direct 模式）</text>
+  <text x="256" y="202" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• 距离含缩放因子</text>
+  <text x="256" y="226" font-family="system-ui, sans-serif" font-size="11" fill="#80c7ff">内存：d×nbits/8/向量</text>
+
+  <!-- AQ -->
+  <rect x="440" y="52" width="180" height="190" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.75"/>
+  <text x="530" y="76" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d" text-anchor="middle" font-weight="600">加性量化族</text>
+  <text x="530" y="98" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">AdditiveQuantizer 统一</text>
+  <text x="456" y="122" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• RQ：残差链式码本</text>
+  <text x="456" y="142" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• LSQ：局部搜索训练</text>
+  <text x="456" y="162" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• OPQ：正交旋转预处理</text>
+  <text x="456" y="182" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• beam search 编码</text>
+  <text x="456" y="202" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">• 精度 &gt; 同码长 PQ</text>
+  <text x="456" y="226" font-family="system-ui, sans-serif" font-size="11" fill="#80c7ff">训练重（分钟~小时级）</text>
+
+  <!-- RaBitQ/EDEN -->
+  <rect x="640" y="52" width="140" height="190" rx="8" fill="#13162a" stroke="#b388ff" stroke-opacity="0.75"/>
+  <text x="710" y="76" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" text-anchor="middle" font-weight="600">新锐</text>
+  <text x="710" y="100" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">RaBitQ</text>
+  <text x="710" y="120" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">每向量 1 比特</text>
+  <text x="710" y="138" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">+ 数据相关缩放</text>
+  <text x="710" y="156" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">理论误差界</text>
+  <text x="710" y="182" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">EDEN</text>
+  <text x="710" y="202" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">熵驱动的</text>
+  <text x="710" y="220" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">维度分组量化</text>
+
+  <!-- 训练底座 -->
+  <path d="M 130 242 L 130 276" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 330 242 L 330 276" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 530 242 L 530 276" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="278" width="740" height="92" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="56" y="302" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">训练底座（Clustering.cpp / SuperKMeans.cpp）</text>
+  <text x="56" y="324" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">Clustering：Lloyd k-means + k-means++ 初始化（niter=25, nredo=1, seed=1234）；spherical 球面模式；每次迭代统计 qerr 供 early stop</text>
+  <text x="56" y="344" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">SuperKMeans：v1.15 新增超球面 SuperKMeans；kmeans1d：一维 O(n log n) 特例；lattice_Zn：Zn 格点量化（1 字节码的经典替代）</text>
+  <text x="56" y="364" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">k-means++ 的 D² seeding 更新已并行化（CHANGELOG #5457）；训练子采样 fvecs_maybe_subsample 控制训练集规模</text>
+
+  <!-- 精度/内存谱系 -->
+  <rect x="40" y="394" width="740" height="126" rx="8" fill="#13162a"/>
+  <text x="56" y="418" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" font-weight="600">内存-精度谱系（同 d=128 时每向量占用）</text>
+  <text x="56" y="444" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">RaBitQ（1 bit）→ SQ4（8 字节）→ PQ8x4（4 字节）→ SQ8 / RaBitQ4bit → PQ8x8（8 字节）→ LSQ/RQ（16+ 字节）→ SQfp16 → Flat（512 字节）</text>
+  <text x="56" y="468" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">组合律：IVF 骨架 ×（任一量化器）×（可选 PreTransform 预处理）×（可选 Refine 精排）= factory 字符串能表达的组合空间</text>
+  <text x="56" y="492" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">例："OPQ32,PQ32x4,Refine(Flat)" = 旋转变换 + 4-bit PQ + 精确重排三件套</text>
+  <text x="56" y="512" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">例："IVF65536(HNSW32),PQ32x8" = HNSW 当粗量化器（大数据集 nlist&gt;26 万时的选择）</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="540" viewBox="0 0 820 540">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="540" fill="#0b0d14"/>
+
+  <!-- factory DSL -->
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">index_factory：字符串 DSL 解析器（1,306 行）</text>
+
+  <rect x="40" y="46" width="740" height="44" rx="6" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="410" y="73" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle">"OPQ16,PCAR64,IVF4096(HNSW32),PQ32x4fs,Refine(Flat)"</text>
+
+  <path d="M 410 90 L 410 116" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 解析管线 -->
+  <rect x="40" y="118" width="740" height="220" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.5"/>
+  <text x="56" y="142" font-family="system-ui, sans-serif" font-size="12" fill="#4ecdc4">index_factory_sub 的消解顺序（左 = 前缀/预处理，右 = 核心）：</text>
+
+  <rect x="56" y="154" width="344" height="32" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.35"/>
+  <text x="228" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">① IDMap/IDMap2 前后缀兼容（前后都认）</text>
+  <rect x="420" y="154" width="344" height="32" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.35"/>
+  <text x="592" y="175" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">② Refine(...) / RFlat 重排包装</text>
+
+  <rect x="56" y="196" width="344" height="44" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.35"/>
+  <text x="228" y="214" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">③ 预处理链：逐段剥 PCA/PCAR/RR/HR/ITQ/OPQ/L2norm</text>
+  <text x="228" y="232" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">剥完逆序 prepend 成 IndexPreTransform</text>
+  <rect x="420" y="196" width="344" height="44" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.35"/>
+  <text x="592" y="214" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">④ 括号归一化：嵌套描述递归解析</text>
+  <text x="592" y="232" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">IVF4096(HNSW32) 的 HNSW 粗量化器来源</text>
+
+  <rect x="56" y="250" width="344" height="44" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.35"/>
+  <text x="228" y="268" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">⑤ parse_other_indexes：Flat/LSH/ZnLattice/SQ/PQ/</text>
+  <text x="228" y="286" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">RQ/LSQ/PRQ/PLSQ/RaBitQ/EDEN/SVS…</text>
+  <rect x="420" y="250" width="344" height="44" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.35"/>
+  <text x="592" y="268" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">⑥ IVF 分解：粗量化器 parse_coarse_quantizer</text>
+  <text x="592" y="286" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">+ 编码器 parse_IndexIVF + fix_ivf_fields</text>
+
+  <text x="56" y="316" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">全部 re_match（std::regex 一行包装）瀑布；顺序敏感：先精确后宽泛、fastscan（x4fs）在普通版之前</text>
+
+  <!-- 产物树 -->
+  <rect x="40" y="352" width="360" height="170" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.6"/>
+  <text x="56" y="376" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">产物的组合树</text>
+  <text x="72" y="402" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">IndexPreTransform</text>
+  <text x="88" y="422" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">└ IndexPreTransform (PCAR64)</text>
+  <text x="104" y="442" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">└ IndexRefine</text>
+  <text x="120" y="462" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">└ IndexIVFPQFastScan</text>
+  <text x="136" y="482" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">└ quantizer: IndexHNSW</text>
+  <text x="136" y="502" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">└ refine: IndexFlat</text>
+
+  <!-- AutoTune -->
+  <rect x="420" y="352" width="360" height="170" rx="8" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <text x="436" y="376" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" font-weight="600">AutoTune：超参网格搜索</text>
+  <text x="436" y="402" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">ParameterSpace 从索引结构提取参数域：</text>
+  <text x="436" y="422" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">nprobe 2^0..2^12 · efSearch 2^2..2^9 · ht（PQ 汉明）</text>
+  <text x="436" y="442" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">组合号按 mixed-radix 摊开 → 格上的偏序</text>
+  <text x="436" y="462" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">OperatingPoints：手写 Pareto 前沿维护</text>
+  <text x="436" y="482" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">explore()：随机序网格 + 支配剪枝（上界劣于已有点整组跳过）</text>
+  <text x="436" y="502" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">字符串接口 set_index_parameters(idx, "nprobe=32")</text>
+</svg>

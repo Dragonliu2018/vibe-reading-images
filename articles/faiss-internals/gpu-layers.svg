@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="560" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#ff6b9d" font-weight="600">GPU 后端：faiss/gpu/（~48K 行 CUDA）与三个硬件后端</text>
+
+  <!-- GpuIndex 层 -->
+  <rect x="40" y="52" width="720" height="96" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.7"/>
+  <text x="56" y="76" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d" font-weight="600">GpuIndex 基类（继承 CPU Index，同名 API）</text>
+  <text x="56" y="98" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">GpuIndexFlat / GpuIndexIVFFlat / GpuIndexIVFPQ / GpuIndexIVFScalarQuantizer / GpuIndexBinaryFlat</text>
+  <text x="56" y="120" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">GpuIndexCagra（GPU 图索引）· BinaryCagra　—　GpuCloner 负责 CPU↔GPU 索引迁移（to_gpu 递归）</text>
+
+  <path d="M 400 148 L 400 174" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 资源管理层 -->
+  <rect x="40" y="176" width="720" height="100" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="56" y="200" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="600">GpuResources / StandardGpuResources（资源与调度）</text>
+  <text x="56" y="222" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">cublas handle · 多 stream 管理（默认 stream + 用户可用 stream）· 内存池（临时张量）</text>
+  <text x="56" y="244" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">StackDeviceMemory：栈式临时内存（临时张量生命周期随 scope 释放，免 cudaMalloc 抖动）</text>
+  <text x="56" y="266" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">多设备：每 GPU 一份资源；GpuIndexCagra 支持多 GPU 分布式建图（v1.15 折叠进 train()）</text>
+
+  <path d="M 400 276 L 400 302" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- kernel 层 -->
+  <rect x="40" y="304" width="720" height="110" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="56" y="328" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">kernel 层（faiss/gpu/impl/）</text>
+  <text x="56" y="350" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">Distance.cu（brute-force tile 化：L2 两步法——norms 预计算 + GEMM 式内积）· FlatIndex.cu</text>
+  <text x="56" y="372" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">IVFBase.cu + IVFInterleaved.cu（一个 block 处理多 query × list 的交织扫描调度）· IVFAppend.cu</text>
+  <text x="56" y="394" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">PQCodeDistances-inl.cuh（GPU PQ LUT）· CuvsCagra（委托 NVIDIA cuVS 后端，v1.15 改为显式 opt-in）</text>
+
+  <path d="M 400 414 L 400 440" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- utils 层 -->
+  <rect x="40" y="442" width="720" height="70" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.6"/>
+  <text x="56" y="466" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff" font-weight="600">GPU utils（faiss/gpu/utils/）</text>
+  <text x="56" y="488" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">Tensor/DeviceTensor（CUDA 内存张量抽象）· blockselect/warpselect（GPU 版 top-k 网络）</text>
+  <text x="56" y="508" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">MergeNetwork（排序网络）· ThrustUtils · PtxUtils　—　ROCm 经 hipify.sh 源码级转换</text>
+
+  <!-- 硬件后端注 -->
+  <rect x="40" y="522" width="720" height="30" rx="6" fill="#13162a"/>
+  <text x="56" y="542" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">三个后端：CUDA（主）· ROCm（hipify 转换）· Metal（faiss/gpu_metal/，Apple Silicon——复用 index_cpu_to_gpu 同名 API）</text>
+</svg>

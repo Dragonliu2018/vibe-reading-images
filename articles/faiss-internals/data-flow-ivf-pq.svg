@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="740" viewBox="0 0 820 740">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="740" fill="#0b0d14"/>
+
+  <!-- Python 层 -->
+  <rect x="160" y="18" width="610" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="18" width="6" height="56" rx="3" fill="#b388ff"/>
+  <text x="180" y="41" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">index.search(queries, k)</text>
+  <text x="180" y="63" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">numpy → ascontiguousarray → swig_ptr 裸指针（class_wrappers.py 的 replace_method 包装）</text>
+
+  <path d="M 465 74 L 465 94" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- SWIG/GIL -->
+  <rect x="160" y="94" width="610" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="94" width="6" height="56" rx="3" fill="#b388ff"/>
+  <text x="180" y="117" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">SWIG 层 — 释放 GIL（%exception），异常翻译为 RuntimeError</text>
+  <text x="180" y="139" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">search_c(n, swig_ptr(x), k, swig_ptr(D), swig_ptr(I), params)</text>
+
+  <path d="M 465 150 L 465 170" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 粗量化 -->
+  <rect x="160" y="170" width="610" height="60" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <rect x="160" y="170" width="6" height="60" rx="3" fill="#4ecdc4"/>
+  <text x="180" y="193" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">IndexIVF::search — quantizer-&gt;search 取 nprobe 个最近 list</text>
+  <text x="180" y="215" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">IndexFlat 量化器走 BLAS 路径（nx·d ≥ 128000 时 sgemm 批量内积）</text>
+
+  <path d="M 465 230 L 465 250" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- scanner 工厂 -->
+  <rect x="160" y="250" width="610" height="60" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <rect x="160" y="250" width="6" height="60" rx="3" fill="#f9ca24"/>
+  <text x="180" y="273" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">get_InvertedListScanner — 编码格式多态工厂</text>
+  <text x="180" y="295" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">IVFPQ 返回 make_IVFPQInvertedListScanner（SIMD level × 度量 × nbits × selector 四维分发）</text>
+
+  <path d="M 465 310 L 465 330" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- LUT -->
+  <rect x="160" y="330" width="610" height="66" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="330" width="6" height="66" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="353" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">scanner-&gt;set_query — 预计算 PQ 距离查表（LUT）</text>
+  <text x="180" y="375" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">sim_table[M×ksub] = ‖x_m − c_(m,j)‖²（ADC：查询侧一次算全，库侧退化为查表累加）</text>
+  <text x="180" y="390" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">by_residual 时 LUT 相对残差质心，set_list 传入 coarse_dis 偏置项</text>
+
+  <path d="M 465 396 L 465 416" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- OpenMP 并行 -->
+  <rect x="160" y="416" width="610" height="66" rx="6" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.6"/>
+  <rect x="160" y="416" width="6" height="66" rx="3" fill="#7bed9f"/>
+  <text x="180" y="439" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">OpenMP 并行（parallel_mode=0 按查询切分）</text>
+  <text x="180" y="461" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">每线程独立 heap + scanner；pmode=1 按 list 切（单查询低延迟）；异常经 omp_capture_exception 聚合</text>
+  <text x="180" y="477" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">max_codes 每 list 后检查预算早停</text>
+
+  <path d="M 465 482 L 465 502" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 扫码 -->
+  <rect x="160" y="502" width="610" height="66" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="502" width="6" height="66" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="525" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">逐 list：set_list(key, coarse_dis) → scan_codes(list_size, codes, ids, handler)</text>
+  <text x="180" y="547" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">precompute_mode=2 时 scan_list_with_table：4 路展开 distance_four_codes 查 LUT 累加</text>
+  <text x="180" y="563" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">selector 内联跳过不满足的 id（不算距离）</text>
+
+  <path d="M 465 568 L 465 588" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 结果收集 -->
+  <rect x="160" y="588" width="610" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="588" width="6" height="56" rx="3" fill="#b388ff"/>
+  <text x="180" y="611" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">ResultHandler 收 top-k → 写回 (D, I) numpy 数组</text>
+  <text x="180" y="633" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">store_pairs 时中间结果存 (list, offset)，供 merge/rerank 免 DirectMap</text>
+
+  <path d="M 465 644 L 465 664" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 返回 -->
+  <rect x="160" y="664" width="610" height="56" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="664" width="6" height="56" rx="3" fill="#b388ff"/>
+  <text x="180" y="687" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">return D, I（float32 [n,k] 距离 + int64 [n,k] 标签）</text>
+  <text x="180" y="709" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">IndexIVFStats（ndis/quantization_time/search_time）全局聚合可查</text>
+
+  <!-- 左侧层标签 -->
+  <text x="85" y="50" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" text-anchor="middle" font-weight="600">Python</text>
+  <text x="85" y="125" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" text-anchor="middle" font-weight="600">SWIG</text>
+  <text x="85" y="200" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" text-anchor="middle" font-weight="600">IndexIVF</text>
+  <text x="85" y="365" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="600">Scanner/LUT</text>
+  <text x="85" y="530" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="600">invlists</text>
+</svg>

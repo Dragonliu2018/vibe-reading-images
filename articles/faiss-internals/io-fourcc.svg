@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="460" viewBox="0 0 820 460">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="460" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">序列化：fourcc 就是版本号（读写 1,415 / 3,657 行的不对称）</text>
+
+  <!-- IO 抽象 -->
+  <rect x="40" y="52" width="360" height="150" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <text x="56" y="76" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="600">IO 层（顺序流式，无 seek）</text>
+  <text x="56" y="100" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">IOReader/IOWriter：单一 operator() 模仿 fread/fwrite</text>
+  <text x="56" y="120" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">实现：Vector（内存）/ File / Buffered（1MiB 合并小读）</text>
+  <text x="56" y="140" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">Mapped（mmap 只读视图）/ ZeroCopy（外部内存视图）</text>
+  <text x="56" y="164" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">READVECTOR：读 size 前先做 1TB 上限 + 溢出检查</text>
+  <text x="56" y="184" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">（反 OOM 攻击面）；宏保行号</text>
+
+  <!-- fourcc 机制 -->
+  <rect x="440" y="52" width="340" height="150" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="456" y="76" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">fourcc 机制</text>
+  <text x="456" y="100" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">4 字符字符串打包成小端 uint32</text>
+  <text x="456" y="120" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">"格式即类内容"——没有版本号字段</text>
+  <text x="456" y="140" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">类字段变了就换 fourcc，读端同认新旧码</text>
+  <text x="456" y="160" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">例：PCAMatrix 有 PCAm/PcAm/Pcam 三个历史码</text>
+  <text x="456" y="180" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">v1.15 读端认 117 个 fourcc；兼容跨度近十年</text>
+
+  <path d="M 400 127 L 440 127" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- write 流程 -->
+  <rect x="40" y="222" width="360" height="120" rx="8" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.6"/>
+  <text x="56" y="246" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f" font-weight="600">write_index（1,415 行）</text>
+  <text x="56" y="270" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">dynamic_cast if-链（派生在前基类在后）</text>
+  <text x="56" y="290" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">每支：fourcc + write_index_header + 派生字段</text>
+  <text x="56" y="310" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">+ 递归嵌套（quantizer/storage/子索引）</text>
+  <text x="56" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">invlists 的 codes 写成单一连续大块（利于 mmap）</text>
+
+  <!-- read 流程 -->
+  <rect x="440" y="222" width="340" height="120" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.6"/>
+  <text x="456" y="246" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d" font-weight="600">read_index（3,657 行）</text>
+  <text x="456" y="270" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">读 uint32 后 117 分支巨型 if-链</text>
+  <text x="456" y="290" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">每个旧 fourcc 分支 = 一段手工迁移代码</text>
+  <text x="456" y="310" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">嵌套深度上限 50 防 DoS；precomputed_table 重算</text>
+  <text x="456" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">读侧背全部历史格式的债——长度比 2.6:1</text>
+
+  <!-- IOHook -->
+  <rect x="40" y="358" width="740" height="86" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.5"/>
+  <text x="56" y="382" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff" font-weight="600">InvertedListsIOHook：第三方存储格式的注册点</text>
+  <text x="56" y="404" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">内置注册 OnDiskInvertedLists / BlockInvertedLists；第三方 add_callback(key, classname) 即插拔，不动核心读写代码</text>
+  <text x="56" y="424" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">SVS 集成不走 IOHook 而是独立 fourcc 分支 + ReaderStreambuf（把 IOReader 适配成 std::streambuf 喂 SVS 自己的反序列化器）</text>
+  <text x="56" y="442" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5">IO_FLAG_MMAP 把目标 fourcc 编进 io_flags 高 16 位——"存 ArrayInvertedLists、加载成 OnDiskInvertedLists"的格式转换 hack</text>
+</svg>
