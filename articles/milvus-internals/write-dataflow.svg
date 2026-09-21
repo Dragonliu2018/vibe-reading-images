@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="620" viewBox="0 0 820 620">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="620" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#7bed9f" font-weight="600">写路径：Insert → WAL → Growing Segment → Flush → 对象存储（v2.6 streaming 模式）</text>
+
+  <!-- Proxy insert -->
+  <rect x="40" y="52" width="740" height="64" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="56" y="76" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">Proxy.Insert — 校验 schema → 按 pkey hash 路由 vchannel</text>
+  <text x="56" y="98" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">repack_func 按 channel 分片打包 → repack_func 写入请求（分配 timestamp 由 Proxy 预取）→ 发往 channel 对应 StreamingNode</text>
+
+  <path d="M 410 116 L 410 140" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- StreamingNode WAL -->
+  <rect x="40" y="142" width="740" height="90" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.75"/>
+  <text x="56" y="166" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">StreamingNode — WAL Append（woodpecker / pulsar / kafka / rocksmq 后端）</text>
+  <text x="56" y="188" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">flusher 消费 vchannel 消息 → 写入 QueryNode delegator 的 growing segment（streaming 分发）</text>
+  <text x="56" y="208" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">time tick 周期消息 → delegator UpdateTSafe 推进水线；增量 flush 策略（sync manager）把 growing 数据落 binlog</text>
+
+  <path d="M 410 232 L 410 256" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Growing -->
+  <rect x="40" y="258" width="360" height="120" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <text x="56" y="282" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" font-weight="600">Growing Segment（C++ segcore，内存）</text>
+  <text x="56" y="304" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">ConcurrentVector 追加写 · bloom filter 维护 PK</text>
+  <text x="56" y="324" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">查询：临时索引 / brute-force（无 knowhere 索引）</text>
+  <text x="56" y="344" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">seal 条件：行数 / 大小 / 时间三阈值（DataCoord 通知）</text>
+  <text x="56" y="364" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">删除：delete buffer（内存）+ L0 段（磁盘）</text>
+
+  <!-- Flush -->
+  <rect x="440" y="258" width="340" height="120" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="456" y="282" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">Flush → 对象存储</text>
+  <text x="456" y="304" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">insert binlog（DataCodec 编码，按列）</text>
+  <text x="456" y="324" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">delete delta log · stats log（PK bloom/min/max）</text>
+  <text x="456" y="344" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">DataCoord 登记 flushed segment 元数据 → 触发 QueryCoord load</text>
+  <text x="456" y="364" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">异步：index build（DataCoord 调度 → DataNode 构建 → 索引文件上传）</text>
+
+  <path d="M 400 318 L 440 318" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="420" y="308" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">seal+flush</text>
+
+  <!-- Compaction -->
+  <rect x="40" y="404" width="740" height="90" rx="6" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.6"/>
+  <text x="56" y="428" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff" font-weight="600">Compaction（DataCoord 调度 → DataNode/StreamingNode 执行）</text>
+  <text x="56" y="450" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">L0：把删除 delta 合并进数据段（消除 delete 放大）· Single：小段合并 · Forcemerge：手动全合</text>
+  <text x="56" y="470" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">Clustering（v2.6 招牌）：采样→聚类中心→按簇重写 segment（大分段+局部性，主键聚类后查询剪枝）</text>
+
+  <!-- 底注 -->
+  <rect x="40" y="516" width="740" height="84" rx="8" fill="#13162a"/>
+  <text x="56" y="540" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" font-weight="600">v2.6 streaming 改造前后的对比：</text>
+  <text x="56" y="562" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">旧：DML 由 Proxy 直接写 MQ，DataNode 各自消费 vchannel 建 growing；QueryNode 也直连 MQ 订阅——MQ 消费者散布三处</text>
+  <text x="56" y="582" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">新：StreamingNode 统一承载 WAL（append 接口 + 流式 flush），QueryNode 经 msgdispatcher 从 streaming 层拿数据；DataNode 职责收缩为</text>
+  <text x="56" y="602" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">compaction 执行器 + index build + import——flush 逻辑抽到 internal/flushcommon 供两种节点共享</text>
+</svg>

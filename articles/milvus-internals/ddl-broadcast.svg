@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="500" viewBox="0 0 820 500">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+    <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7bed9f"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="500" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#b388ff" font-weight="600">v2.6 DDL 的新执行模型：WAL 广播 + Ack 回调（分布式幂等事务）</text>
+
+  <!-- 入口 -->
+  <rect x="40" y="56" width="740" height="60" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="56" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">Proxy.CreateCollection → RootCoord.CreateCollection（不再走内存任务队列）</text>
+  <text x="56" y="100" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">prepareSchema（校验 + 注入系统字段 + 分配 fieldID/CollectionID/PartitionID）→ vchannel 由 streaming balancer 分配</text>
+
+  <path d="M 410 116 L 410 142" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 广播 -->
+  <rect x="40" y="144" width="740" height="76" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.7"/>
+  <text x="56" y="168" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d" font-weight="600">broadcaster：DDL 消息广播到 streaming WAL</text>
+  <text x="56" y="190" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">CreateCollectionMessage（V1）→ 写控制 channel + 所有数据 vchannel；资源键锁（同库并行 / 同名 collection 互斥）</text>
+  <text x="56" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">持久化 broadcast task（含 ack 位图）——故障恢复后重放，ack 回调可无限重试 → 幂等是正确性前提</text>
+
+  <path d="M 410 220 L 410 246" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Ack 等待 -->
+  <rect x="40" y="248" width="740" height="66" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="56" y="272" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">全部 channel ack 后 → CallMessageAckCallback</text>
+  <text x="56" y="294" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">DDL 的副作用顺序 = WAL 全序（所有组件按同一顺序消费）——跨 failover 一致的串行化</text>
+
+  <path d="M 410 314 L 410 340" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 回调 -->
+  <rect x="40" y="342" width="740" height="110" rx="8" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.6"/>
+  <text x="56" y="366" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f" font-weight="600">createCollectionV1AckCallback（ddl_callbacks_create_collection.go:95）</text>
+  <text x="56" y="388" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">每个 vchannel：mixCoord.WatchChannels（datacoord 建 channel watch + 起点）</text>
+  <text x="56" y="408" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">从 appendResult 组装 model（MessageID→start position）→ meta.AddCollection 持久化 etcd（幂等）</text>
+  <text x="56" y="428" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">→ ExpireCaches 通知所有 Proxy 失效缓存</text>
+
+  <!-- 写序 -->
+  <rect x="40" y="448" width="740" height="44" rx="8" fill="#13162a"/>
+  <text x="56" y="466" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">etcd 写序换原子性：先写 fields/partitions keys，最后写 collection key——中途崩溃则 reload 不加载，重试完整重写</text>
+  <text x="56" y="484" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">querycoord 不参与 create——load 是显式 lazy 操作；drop 是两阶段（tombstone 逻辑删 → GC 确认后物理删）</text>
+</svg>

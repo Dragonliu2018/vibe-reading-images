@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="470" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">Segcore 查询执行：Plan 算子树（exec/operator/ 的物理执行）</text>
+
+  <!-- Plan 树 -->
+  <rect x="40" y="56" width="740" height="66" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.6"/>
+  <text x="56" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6">Plan 编译：proto 的 planpb.PlanNode（Proxy 解析 DSL/expr 生成）→ segcore 反序列化 → PlanNode 树</text>
+  <text x="56" y="102" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">ExecPlanNodeVisitor（query/ExecPlanNodeVisitor.cpp）遍历 plan 树 → 构造 exec 算子 DAG → Driver.cpp 驱动执行</text>
+
+  <path d="M 410 122 L 410 148" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 算子层 -->
+  <rect x="40" y="150" width="740" height="180" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="56" y="174" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="600">exec/operator/ 算子族（Driver 的物理节点）</text>
+
+  <rect x="56" y="188" width="165" height="56" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.4"/>
+  <text x="138" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">VectorSearchNode</text>
+  <text x="138" y="230" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">knowhere 索引搜索</text>
+
+  <rect x="231" y="188" width="165" height="56" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.4"/>
+  <text x="313" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">FilterBitsNode</text>
+  <text x="313" y="230" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">表达式→位图过滤</text>
+
+  <rect x="406" y="188" width="165" height="56" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.4"/>
+  <text x="488" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">MvccNode</text>
+  <text x="488" y="230" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">时间戳可见性过滤</text>
+
+  <rect x="581" y="188" width="185" height="56" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.4"/>
+  <text x="673" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">IterativeFilterNode</text>
+  <text x="673" y="230" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">向量搜索+过滤交替</text>
+
+  <rect x="56" y="252" width="165" height="56" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.4"/>
+  <text x="138" y="274" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">GroupByNode</text>
+  <text x="138" y="294" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">分组检索</text>
+
+  <rect x="231" y="252" width="165" height="56" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.4"/>
+  <text x="313" y="274" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">RandomSampleNode</text>
+  <text x="313" y="294" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">降采样</text>
+
+  <rect x="406" y="252" width="165" height="56" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.4"/>
+  <text x="488" y="274" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">RescoresNode</text>
+  <text x="488" y="294" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">多路重排（RRF/加权）</text>
+
+  <rect x="581" y="252" width="185" height="56" rx="5" fill="#1a1d33" stroke="#4ecdc4" stroke-opacity="0.4"/>
+  <text x="673" y="274" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">CountNode / CallbackSink</text>
+  <text x="673" y="294" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">计数 / 结果汇聚</text>
+
+  <!-- 数据结构 -->
+  <rect x="40" y="344" width="740" height="110" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.5"/>
+  <text x="56" y="368" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">Segment 数据结构（两种形态）</text>
+  <text x="56" y="392" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">SegmentGrowingImpl：ConcurrentVector 追加写 · InsertRecord（offset 索引）· DeletedRecord（删除位图）· TimestampIndex</text>
+  <text x="56" y="412" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">ChunkedSegmentSealedImpl：ChunkedColumn 分块静态列 · mmap 冷数据映射 · SealedIndexingRecord（knowhere 索引）</text>
+  <text x="56" y="436" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">Driver（exec/Driver.cpp）：拉取式执行——算子按 batch 产出，lazy 求值（v2.3 查询重构的核心：从 push 改 pull）</text>
+</svg>

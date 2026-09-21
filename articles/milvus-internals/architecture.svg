@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="680" viewBox="0 0 820 680">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="680" fill="#0b0d14"/>
+
+  <!-- SDK 层 -->
+  <rect x="30" y="16" width="760" height="52" rx="8" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6" stroke-dasharray="6 4"/>
+  <text x="46" y="38" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" font-weight="600">SDK / Client 层</text>
+  <text x="46" y="58" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">Python/Go/Java/Node SDK · RESTful · gRPC</text>
+
+  <path d="M 410 68 L 410 92" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Proxy 层 -->
+  <rect x="30" y="94" width="760" height="76" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="46" y="118" font-family="system-ui, sans-serif" font-size="14" fill="#4ecdc4" font-weight="600">Proxy（无状态接入层，internal/proxy/，~56K 行 Go）</text>
+  <text x="46" y="140" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">gRPC/REST → 认证 → RBAC 权限 → 限流 → 请求解析（search_pipeline 多阶段）</text>
+  <text x="46" y="160" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">按 partition key hash 路由 vchannel → 多 QueryNode 分发 → 结果 Reduce 归并返回</text>
+
+  <path d="M 200 170 L 200 196" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 410 170 L 410 196" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 620 170 L 620 196" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 协调层 -->
+  <rect x="30" y="198" width="180" height="120" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="120" y="222" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">RootCoord</text>
+  <text x="120" y="244" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">元数据 DDL + TSO</text>
+  <text x="120" y="264" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">collection/partition/alias</text>
+  <text x="120" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">DDL callbacks 通知</text>
+  <text x="120" y="304" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">（时间戳 Oracle）</text>
+
+  <rect x="230" y="198" width="180" height="120" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="320" y="222" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">DataCoord</text>
+  <text x="320" y="244" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">数据层大脑（~58K 行）</text>
+  <text x="320" y="264" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">channel 分配 · segment 管理</text>
+  <text x="320" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">compaction 调度（clustering/L0）</text>
+  <text x="320" y="304" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">索引构建调度</text>
+
+  <rect x="430" y="198" width="180" height="120" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="520" y="222" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">QueryCoordv2</text>
+  <text x="520" y="244" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">查询层大脑（~34K 行）</text>
+  <text x="520" y="264" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">load/release · replica 管理</text>
+  <text x="520" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">六类 checker 均衡</text>
+  <text x="520" y="304" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">leader 选举</text>
+
+  <rect x="630" y="198" width="160" height="120" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="710" y="222" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" text-anchor="middle" font-weight="600">StreamingCoord</text>
+  <text x="710" y="244" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">流式调度</text>
+  <text x="710" y="264" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">channel→节点的均衡</text>
+  <text x="710" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">broadcaster 广播</text>
+
+  <path d="M 410 318 L 410 344" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 工作节点层 -->
+  <rect x="30" y="346" width="240" height="150" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.85"/>
+  <text x="150" y="370" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="600">QueryNode（~36K 行 Go）</text>
+  <text x="150" y="392" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">delegator（shard 查询入口）</text>
+  <text x="150" y="410" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">sealed segment（mmap 索引）</text>
+  <text x="150" y="428" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">growing segment（实时）</text>
+  <text x="150" y="446" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">cgo 调 C++ segcore 执行</text>
+  <text x="150" y="468" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">TSafe 水线等待（MVCC）</text>
+
+  <rect x="290" y="346" width="240" height="150" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.75"/>
+  <text x="410" y="370" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d" text-anchor="middle" font-weight="600">StreamingNode（~21K 行，v2.6）</text>
+  <text x="410" y="392" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">WAL 承载（append/读/截断）</text>
+  <text x="410" y="410" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">flusher 流式落盘</text>
+  <text x="410" y="428" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">vchannel 消费 → growing seg</text>
+  <text x="410" y="446" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">time tick 推进</text>
+  <text x="410" y="468" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">（woodpecker/pulsar/kafka 后端）</text>
+
+  <rect x="550" y="346" width="240" height="150" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.7"/>
+  <text x="670" y="370" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" text-anchor="middle" font-weight="600">DataNode（~21K 行）</text>
+  <text x="670" y="392" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">compaction 执行器</text>
+  <text x="670" y="410" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">index build（cgo indexbuilder）</text>
+  <text x="670" y="428" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">bulk import v2</text>
+  <text x="670" y="446" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf" text-anchor="middle">（streaming 模式下职责收缩）</text>
+
+  <path d="M 410 496 L 410 522" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- C++ 引擎层 -->
+  <rect x="30" y="524" width="500" height="70" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.75"/>
+  <text x="46" y="548" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">C++ Segcore（internal/core/src，~334K 行）</text>
+  <text x="46" y="568" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">segcore 段引擎（growing/sealed）· exec 算子（VectorSearch/FilterBits/MvccNode）· index 索引族</text>
+  <text x="46" y="586" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">knowhere 向量索引 · Tantivy 全文 · mmap 列存储 · binlog/Parquet</text>
+
+  <!-- 存储层 -->
+  <rect x="550" y="524" width="240" height="70" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7"/>
+  <text x="566" y="548" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff" font-weight="600">存储基础设施</text>
+  <text x="566" y="568" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">etcd（元数据）· 对象存储 S3/MinIO（binlog/索引）</text>
+  <text x="566" y="586" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">WAL：woodpecker / pulsar / kafka / rocksmq</text>
+
+  <!-- 底注 -->
+  <rect x="30" y="612" width="760" height="54" rx="8" fill="#13162a"/>
+  <text x="46" y="634" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">部署形态：Standalone（mixcoord 单进程 + embedded etcd/本地存储）· Cluster（全组件独立）· Milvus Lite（pip 嵌入）</text>
+  <text x="46" y="654" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">mixcoord = RootCoord + DataCoord + QueryCoord 合体（小集群）；角色组合由 cmd/roles/roles.go 的 MilvusRoles 环境变量开关</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="540" viewBox="0 0 820 540">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="540" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">Milvus 索引族与存储层（internal/core/src/index + storage）</text>
+
+  <!-- 向量索引 -->
+  <rect x="40" y="56" width="370" height="130" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8"/>
+  <text x="56" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#6c8ef5" font-weight="600">向量索引（委托 knowhere）</text>
+  <text x="56" y="102" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">VectorMemIndex / VectorDiskIndex（VectorMemIndex.h:25）</text>
+  <text x="56" y="122" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">HNSW / IVF / FLAT / SCANN / DiskANN / GPU-CAGRA</text>
+  <text x="56" y="144" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">IndexFactory 统一分发（index_factory.h 的注册表）</text>
+  <text x="56" y="164" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">DiskFileManager / MemFileManager：磁盘缓存 + 对象存储上传下载</text>
+
+  <!-- 标量/文本索引 -->
+  <rect x="440" y="56" width="340" height="130" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <text x="456" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="600">标量 / 文本 / 空间索引（自研）</text>
+  <text x="456" y="102" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">标量：ScalarIndexSort / BitmapIndex / HybridScalarIndex</text>
+  <text x="456" y="122" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">全文：TextMatchIndex + Tantivy（Rust 倒排）+ FMIndex</text>
+  <text x="456" y="142" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">JSON：JsonInvertedIndex / JsonFlatIndex / json_stats</text>
+  <text x="456" y="162" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">空间：RTreeIndex · Ngram 倒排 · SkipIndex</text>
+
+  <!-- 存储层 -->
+  <rect x="40" y="210" width="740" height="130" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.7"/>
+  <text x="56" y="234" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff" font-weight="600">存储层（Go internal/storage + C++ core/src/storage）</text>
+  <text x="56" y="258" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">ChunkManager（Go）：MinIO/S3/Azure/GCP/local 的对象存储门面（types.go:53）</text>
+  <text x="56" y="278" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">binlog v1（DataCodec/Event）：insert/delta/stats/bm25 四类日志的事件编码</text>
+  <text x="56" y="298" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">storagev2 packed（C++ loon FFI）：Arrow Schema 跨 FFI、Parquet 列组 + 多级压缩</text>
+  <text x="56" y="318" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">存储路径契约（pkg/common）：InsertLog/DeltaLog/StatsLog/Index/PartitionStats/</text>
+  <text x="56" y="334" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">AnalyzeStats/TextIndex/JSONIndex —— 按 collection/partition/segment/field/logID 拼接</text>
+
+  <path d="M 410 340 L 410 368" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 为什么 -->
+  <rect x="40" y="370" width="740" height="160" rx="8" fill="#13162a" stroke="#b388ff" stroke-opacity="0.5"/>
+  <text x="56" y="394" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" font-weight="600">关键设计决策</text>
+  <text x="56" y="418" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">索引文件放对象存储 + QueryNode 本地 mmap 缓存：冷数据不占内存，加载走磁盘映射（mmap/ 的 ChunkedColumn）</text>
+  <text x="56" y="438" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">binlog v1 → Parquet 列组（storagev2）的双格式并存：SyncTask 按 StorageVersion 分派 writer，滚动迁移</text>
+  <text x="56" y="458" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">Go/C++ 双 storage 抽象：Go 侧管服务层 binlog 读写（flush/compaction 不经 C++）</text>
+  <text x="56" y="478" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">列式引擎（packed Parquet + 压缩 + multipart）在 C++ Arrow 栈实现性能更好——Go 经 loon FFI 调用</text>
+  <text x="56" y="502" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">与 Faiss/USearch 的关系：knowhere 之下才是引擎层——本系列 VectorSearch 组的递进阅读路径</text>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="520" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#6c8ef5" font-weight="600">模块依赖与数据流总览（实线=同步调用，虚线=异步/存储）</text>
+
+  <!-- Proxy -->
+  <rect x="30" y="60" width="150" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.8"/>
+  <text x="105" y="86" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle" font-weight="600">Proxy</text>
+  <text x="105" y="106" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">API/限流/路由/归并</text>
+
+  <!-- Coordinators -->
+  <rect x="210" y="40" width="130" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="275" y="60" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle" font-weight="600">RootCoord</text>
+  <text x="275" y="78" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">DDL/TSO/etcd</text>
+
+  <rect x="210" y="100" width="130" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="275" y="120" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle" font-weight="600">DataCoord</text>
+  <text x="275" y="138" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">segment/compaction</text>
+
+  <rect x="210" y="160" width="130" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="275" y="180" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle" font-weight="600">QueryCoord</text>
+  <text x="275" y="198" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">checker/均衡</text>
+
+  <rect x="210" y="220" width="130" height="50" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.8"/>
+  <text x="275" y="240" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle" font-weight="600">StreamingCoord</text>
+  <text x="275" y="258" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">channel 均衡/广播</text>
+
+  <!-- Workers -->
+  <rect x="370" y="60" width="150" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.8"/>
+  <text x="445" y="86" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle" font-weight="600">QueryNode</text>
+  <text x="445" y="106" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">delegator/段/cgo</text>
+
+  <rect x="370" y="160" width="150" height="70" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.75"/>
+  <text x="445" y="186" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle" font-weight="600">StreamingNode</text>
+  <text x="445" y="206" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">WAL/flusher</text>
+
+  <rect x="370" y="250" width="150" height="70" rx="8" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.7"/>
+  <text x="445" y="276" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle" font-weight="600">DataNode</text>
+  <text x="445" y="296" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">compaction/index/import</text>
+
+  <!-- C++ -->
+  <rect x="550" y="60" width="230" height="130" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.7"/>
+  <text x="665" y="86" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle" font-weight="600">C++ Core（segcore）</text>
+  <text x="665" y="108" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">segcore 段引擎 · exec 算子 · index 索引族</text>
+  <text x="665" y="128" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">knowhere → faiss/hnswlib</text>
+  <text x="665" y="148" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">tantivy 全文 · mmap</text>
+  <text x="665" y="168" font-family="system-ui, sans-serif" font-size="11" fill="#80c7ff" text-anchor="middle">（cgo 同进程共享内存）</text>
+
+  <!-- 存储 -->
+  <rect x="550" y="220" width="230" height="100" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.6"/>
+  <text x="665" y="246" font-family="system-ui, sans-serif" font-size="13" fill="#e8eaf6" text-anchor="middle" font-weight="600">存储基础设施</text>
+  <text x="665" y="268" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">etcd（元数据/TSO）</text>
+  <text x="665" y="288" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">对象存储（binlog/索引/Parquet）</text>
+  <text x="665" y="308" font-family="system-ui, sans-serif" font-size="11" fill="#aab2d5" text-anchor="middle">WAL（woodpecker/pulsar/kafka）</text>
+
+  <!-- 边 -->
+  <path d="M 180 95 L 210 65" stroke="#7a86b3" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M 180 95 L 210 125" stroke="#7a86b3" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <path d="M 180 95 L 210 185" stroke="#7a86b3" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="195" y="58" font-family="system-ui, sans-serif" font-size="9" fill="#aab2d5">元数据</text>
+
+  <path d="M 370 95 L 180 95" stroke="#7a86b3" stroke-width="1.2" marker-end="url(#arrow)" transform="translate(0,0)"/>
+  <path d="M 370 190 L 340 125" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <path d="M 370 285 L 340 235" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <path d="M 520 125 L 550 125" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="535" y="115" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">cgo</text>
+
+  <path d="M 520 200 L 550 250" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <path d="M 520 285 L 550 280" stroke="#7a86b3" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+
+  <!-- Proxy 与 QueryNode 的查询直连 -->
+  <path d="M 180 130 L 370 130" stroke="#7bed9f" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#arrow)"/>
+  <text x="275" y="122" font-family="system-ui, sans-serif" font-size="10" fill="#7bed9f" text-anchor="middle">Search 直连 shard leader（不经协调者）</text>
+
+  <!-- 底部说明 -->
+  <rect x="30" y="350" width="750" height="150" rx="8" fill="#13162a"/>
+  <text x="46" y="374" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" font-weight="600">读法要点：</text>
+  <text x="46" y="398" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">① 数据面（绿虚线）：Proxy ↔ QueryNode 点对点——协调者只在订阅路由元数据时参与，查询热路径零协调者开销</text>
+  <text x="46" y="420" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">② 控制面（实线）：DDL/调度/元数据——v2.6 起大量 DDL 走 WAL 广播（broadcaster），协调者间也从直调迁到消息</text>
+  <text x="46" y="442" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">③ 写路径：Proxy → StreamingNode WAL → flusher 落盘；DataNode 收缩为离线 worker（compaction/index/import）</text>
+  <text x="46" y="464" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">④ cgo 边界：QueryNode/DataNode 与 C++ segcore 同进程——零拷贝结果 + 高频小写入的成本优势</text>
+  <text x="46" y="486" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">⑤ 三个协调者可各自独立部署，也可 mixcoord 合体（standalone）——代码路径一致，部署形态而已</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="500" viewBox="0 0 820 500">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="500" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#f9ca24" font-weight="600">三大协调者的工作模式：心跳上报 → Checker 检查 → Plan 执行</text>
+
+  <!-- 心跳层 -->
+  <rect x="40" y="56" width="740" height="70" rx="8" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.6"/>
+  <text x="56" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#4ecdc4" font-weight="600">Dist 上报层（最终一致的全局视图）</text>
+  <text x="56" y="102" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">DataCoord → QueryCoord：segment 分布心跳（哪些 segment flushed、在哪 load）</text>
+  <text x="56" y="120" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">QueryNode → QueryCoord：负载心跳（segment/channel/leader 的实际分布 + 内存/行数）</text>
+
+  <path d="M 410 126 L 410 152" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- QueryCoord checker -->
+  <rect x="40" y="154" width="740" height="170" rx="8" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.75"/>
+  <text x="56" y="178" font-family="system-ui, sans-serif" font-size="13" fill="#f9ca24" font-weight="600">QueryCoord 的 Checker 循环（checkers/controller.go 的调度）</text>
+
+  <rect x="56" y="192" width="170" height="56" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="141" y="214" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">segment_checker</text>
+  <text x="141" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">target 有的没 load→load</text>
+  <rect x="236" y="192" width="170" height="56" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="321" y="214" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">channel_checker</text>
+  <text x="321" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">vchannel 缺副本→补</text>
+  <rect x="416" y="192" width="170" height="56" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="501" y="214" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">leader_checker</text>
+  <text x="501" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">shard leader 缺失→选主</text>
+  <rect x="596" y="192" width="170" height="56" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="681" y="214" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">balance_checker</text>
+  <text x="681" y="234" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">节点过载→迁移 segment</text>
+
+  <rect x="56" y="256" width="340" height="52" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="226" y="278" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">index_checker：索引元数据同步</text>
+  <text x="226" y="298" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">新增索引 → 通知 DataCoord 构建后重新 load</text>
+  <rect x="416" y="256" width="170" height="52" rx="5" fill="#1a1d33" stroke="#f9ca24" stroke-opacity="0.4"/>
+  <text x="501" y="278" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" text-anchor="middle">资源组隔离</text>
+  <text x="501" y="298" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5" text-anchor="middle">多租户节点池</text>
+
+  <path d="M 410 324 L 410 352" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- DataCoord compaction -->
+  <rect x="40" y="354" width="356" height="126" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.6"/>
+  <text x="56" y="378" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff" font-weight="600">DataCoord 的 Compaction 调度</text>
+  <text x="56" y="400" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">inspector 周期扫描 → 策略触发（水位/阈值）</text>
+  <text x="56" y="420" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">L0（删除堆积）· Single（小段合并）· Clustering（大段重组）</text>
+  <text x="56" y="440" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">任务队列 → 按节点 slot 派发 → DataNode/StreamingNode 执行</text>
+  <text x="56" y="460" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">索引构建调度同构：assign → DataNode 构建 → 上传对象存储</text>
+
+  <!-- RootCoord DDL -->
+  <rect x="416" y="354" width="364" height="126" rx="8" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <text x="432" y="378" font-family="system-ui, sans-serif" font-size="13" fill="#b388ff" font-weight="600">RootCoord 的 DDL + TSO</text>
+  <text x="432" y="400" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">DDL 任务队列（幂等）→ etcd 元数据持久化</text>
+  <text x="432" y="420" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">ddl_callbacks：DDL 后通知 datacoord/querycoord 异步跟进</text>
+  <text x="432" y="440" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">TSO：物理+逻辑时间戳（高 46 位物理 + 低 18 位逻辑）</text>
+  <text x="432" y="460" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">etcd lease 选举——全局唯一时间戳源（MVCC 的一致性锚）</text>
+</svg>

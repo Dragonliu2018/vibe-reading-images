@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="520" fill="#0b0d14"/>
+
+  <text x="40" y="32" font-family="system-ui, sans-serif" font-size="14" fill="#ff6b9d" font-weight="600">v2.6 流式架构：StreamingNode 统一承载 WAL</text>
+
+  <!-- 旧架构 -->
+  <rect x="40" y="56" width="360" height="180" rx="8" fill="#13162a" stroke="#e74c3c" stroke-opacity="0.5" stroke-dasharray="5 4"/>
+  <text x="56" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#e74c3c" font-weight="600">旧：MQ 直连，消费者散布三处</text>
+  <text x="56" y="104" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">Proxy → MQ（DML 直写 Pulsar/Kafka）</text>
+  <text x="56" y="124" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">DataNode 各自消费 vchannel 建 growing → flush</text>
+  <text x="56" y="144" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">QueryNode 也直连 MQ 订阅（消费数据建内存段）</text>
+  <text x="56" y="172" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">问题：MQ 消费者三处管理、exactly-once 语义难做、</text>
+  <text x="56" y="190" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">Pulsar/Kafka 本身非 Milvus 语义、事务性 append 缺失</text>
+
+  <!-- 新架构 -->
+  <rect x="440" y="56" width="340" height="180" rx="8" fill="#13162a" stroke="#7bed9f" stroke-opacity="0.7"/>
+  <text x="456" y="80" font-family="system-ui, sans-serif" font-size="13" fill="#7bed9f" font-weight="600">新：StreamingNode 统一 WAL 层</text>
+  <text x="456" y="104" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">WAL 抽象：Append / Read / Truncate（txn 语义）</text>
+  <text x="456" y="124" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">walimpls 多后端：woodpecker / pulsar / kafka / rocksmq</text>
+  <text x="456" y="144" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">flusher：WAL → write buffer → 对象存储（复用 flushcommon）</text>
+  <text x="456" y="164" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">time tick 推进 + 广播（broadcaster 的 DDL 通知）</text>
+  <text x="456" y="192" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">DataNode 职责收缩：compaction + index build + import</text>
+  <text x="456" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">（旧 FlushSegments/WatchDmChannels 已标记 Deprecated）</text>
+
+  <path d="M 400 146 L 440 146" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- StreamingCoord -->
+  <rect x="40" y="262" width="360" height="130" rx="8" fill="#13162a" stroke="#ff6b9d" stroke-opacity="0.6"/>
+  <text x="56" y="286" font-family="system-ui, sans-serif" font-size="13" fill="#ff6b9d" font-weight="600">StreamingCoord（全局流式调度）</text>
+  <text x="56" y="310" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">balancer：vchannel → StreamingNode 的分配均衡</text>
+  <text x="56" y="330" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">（节点增减时的 channel 迁移）</text>
+  <text x="56" y="354" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">broadcaster：广播消息（DDL 通知到所有相关节点）</text>
+  <text x="56" y="374" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">拓扑持久化到 etcd（channel assignment 元数据）</text>
+
+  <!-- Woodpecker -->
+  <rect x="440" y="262" width="340" height="130" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.6"/>
+  <text x="456" y="286" font-family="system-ui, sans-serif" font-size="13" fill="#80c7ff" font-weight="600">Woodpecker（自研共享日志存储，v2.6 默认）</text>
+  <text x="456" y="310" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">面向对象存储的 WAL：日志分段写入 S3/MinIO</text>
+  <text x="456" y="330" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">无本地磁盘依赖（对比 rocksmq）· 高可用免运维</text>
+  <text x="456" y="354" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">为什么自研：Pulsar/Kafka 重运维、Milvus 已有对象存储</text>
+  <text x="456" y="374" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">基础设施可复用（standalone/cluster 统一部署路径）</text>
+
+  <!-- 底注 -->
+  <rect x="40" y="416" width="740" height="84" rx="8" fill="#13162a"/>
+  <text x="56" y="440" font-family="system-ui, sans-serif" font-size="12" fill="#e8eaf6" font-weight="600">vchannel 与物理 channel 的关系</text>
+  <text x="56" y="462" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">一个 collection 有 N 个 shard（建表时定），每 shard 一个 vchannel（带 collection id 前缀）；insert 按 pkey hash 路由，</text>
+  <text x="56" y="482" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">查询按 channel 发给 shard leader（delegator）。channel 是 Milvus 数据分布的最小水平单位——分配/均衡/故障迁移都以 channel 为粒度</text>
+</svg>

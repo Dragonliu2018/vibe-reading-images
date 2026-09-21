@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="740" viewBox="0 0 820 740">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="740" fill="#0b0d14"/>
+
+  <!-- SDK -->
+  <rect x="160" y="14" width="610" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="14" width="6" height="46" rx="3" fill="#b388ff"/>
+  <text x="180" y="43" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">client.search(collection, vectors, filter, limit, consistency_level)</text>
+
+  <path d="M 465 60 L 465 80" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Proxy -->
+  <rect x="160" y="80" width="610" height="94" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <rect x="160" y="80" width="6" height="94" rx="3" fill="#4ecdc4"/>
+  <text x="180" y="103" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">Proxy.Search — interceptor 链（认证 → 权限 → 限流）</text>
+  <text x="180" y="125" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">search_pipeline：ParseRequest → AnalyzeRequest（重写/analyzer）→ ExtractVector（含 function 调用）</text>
+  <text x="180" y="145" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">→ 转换 proto plan（布尔表达式+向量参数）→ guarantee_ts 设置（consistency 落点）</text>
+  <text x="180" y="165" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">→ 对全部 vchannel 并行广播（LB 选每 channel 的 leader 副本）→ 发给各 delegator</text>
+
+  <path d="M 465 174 L 465 196" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- QueryNode -->
+  <rect x="160" y="198" width="610" height="112" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-opacity="0.75"/>
+  <rect x="160" y="198" width="6" height="112" rx="3" fill="#6c8ef5"/>
+  <text x="180" y="221" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">QueryNode.services.Search — 找到 shard 的 delegator</text>
+  <text x="180" y="243" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">delegator（shard leader）：等 TSafe（vchannel 的水线 tick ≥ guarantee_ts）——MVCC 语义的等待点</text>
+  <text x="180" y="263" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">遍历 sealed segment（Load 时 mmap 的 knowhere 索引）+ growing segment（实时数据）</text>
+  <text x="180" y="283" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">cgo：plan proto（序列化）→ C++ Search(segment, plan, placeholder, timestamp)</text>
+  <text x="180" y="303" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">各 segment 的 top-k 并行查；结果 proto 返回 delegator 汇总</text>
+
+  <path d="M 465 310 L 465 332" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Segcore C++ -->
+  <rect x="160" y="334" width="610" height="130" rx="6" fill="#13162a" stroke="#f9ca24" stroke-opacity="0.75"/>
+  <rect x="160" y="334" width="6" height="130" rx="3" fill="#f9ca24"/>
+  <text x="180" y="357" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">C++ Segcore — plan 反序列化 → ExecPlanNodeVisitor 算子树执行</text>
+  <text x="180" y="379" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">MvccNode（时间戳过滤）→ FilterBitsNode（表达式→位图）→ VectorSearchNode：</text>
+  <text x="180" y="399" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">sealed：knowhere 索引 search（预过滤位图 as bitset 传入）· growing：临时索引/brute-force</text>
+  <text x="180" y="419" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">混合查询：IterativeFilterNode（向量搜索+迭代过滤交替）· RescoresNode（多路重排）</text>
+  <text x="180" y="439" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">GroupByNode（分组检索）· RandomSampleNode（降采样）→ Reduce（去重 pk、合并 top-k）</text>
+
+  <path d="M 465 464 L 465 486" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 归并 -->
+  <rect x="160" y="488" width="610" height="88" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-opacity="0.7"/>
+  <rect x="160" y="488" width="6" height="88" rx="3" fill="#4ecdc4"/>
+  <text x="180" y="511" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">Proxy 收齐各 QueryNode 结果 → search_reduce_util 归并</text>
+  <text x="180" y="533" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">多 shard 的 top-k 归并（堆合并）· pk 去重（同 pk 取最新时间戳）· 按 score 排序</text>
+  <text x="180" y="553" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">reducer：default_limit_reducer（截断 limit）/ count_reducer（聚合计数）</text>
+
+  <path d="M 465 576 L 465 598" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 返回 -->
+  <rect x="160" y="600" width="610" height="52" rx="6" fill="#13162a" stroke="#b388ff" stroke-opacity="0.6"/>
+  <rect x="160" y="600" width="6" height="52" rx="3" fill="#b388ff"/>
+  <text x="180" y="623" font-family="system-ui, sans-serif" font-size="14" fill="#e8eaf6">return SearchResult（ids, distances, 其余字段）</text>
+  <text x="180" y="643" font-family="system-ui, sans-serif" font-size="12" fill="#aab2d5">含 topk 数组、score、round_decimal 精度截断</text>
+
+  <!-- 一致性等级侧栏 -->
+  <rect x="30" y="198" width="120" height="310" rx="8" fill="#13162a" stroke="#80c7ff" stroke-opacity="0.5"/>
+  <text x="90" y="222" font-family="system-ui, sans-serif" font-size="12" fill="#80c7ff" text-anchor="middle" font-weight="600">一致性等级</text>
+  <text x="42" y="248" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">Strong</text>
+  <text x="42" y="264" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5">guarantee = 最新 ts</text>
+  <text x="42" y="290" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">Bounded</text>
+  <text x="42" y="306" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5">ts − tolerance</text>
+  <text x="42" y="332" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">Session</text>
+  <text x="42" y="348" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5">本 client 上次见 ts</text>
+  <text x="42" y="374" font-family="system-ui, sans-serif" font-size="11" fill="#c9cfdf">Eventually</text>
+  <text x="42" y="390" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5">ts = 1（立即可见）</text>
+  <text x="42" y="420" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5">等级只影响</text>
+  <text x="42" y="436" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5">guarantee_ts 一处；</text>
+  <text x="42" y="452" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5">TSafe 等待由</text>
+  <text x="42" y="468" font-family="system-ui, sans-serif" font-size="10" fill="#aab2d5">delegator 统一做</text>
+
+  <!-- 底注 -->
+  <rect x="30" y="664" width="760" height="60" rx="8" fill="#13162a"/>
+  <text x="46" y="688" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">Growing 与 sealed 的合并发生在 delegator：growing 的结果（无 knowhere 索引，走 segcore 临时索引/暴力）与 sealed 的索引结果</text>
+  <text x="46" y="708" font-family="system-ui, sans-serif" font-size="12" fill="#c9cfdf">各自取 top-k 后归并——保证"实时插入立即可查"的同时 sealed 段享受索引加速。</text>
+</svg>
