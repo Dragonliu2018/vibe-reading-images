@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="600" viewBox="0 0 940 600" font-family="system-ui, sans-serif">
+<rect width="940" height="600" fill="#0b0d14"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+       <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker></defs>
+<text x="150" y="26" text-anchor="middle" fill="#8a93b8" font-size="13">节点服务与查询层</text>
+<text x="445" y="26" text-anchor="middle" fill="#8a93b8" font-size="13">复制与存储栈</text>
+<text x="765" y="26" text-anchor="middle" fill="#8a93b8" font-size="13">客户端与基础层</text>
+<path d="M150.0,108.0 L150.0,347.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75"/>
+<path d="M150.0,138.0 L150.0,109.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75"/>
+<path d="M226.1491818348387,361.1652508839708 L363.88456717593266,195.39590741989684" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75"/>
+<path d="M445.0,148.0 L445.0,109.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75"/>
+<path d="M445.0,108.0 L445.0,147.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75"/>
+<path d="M445.0,208.0 L445.0,257.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75"/>
+<path d="M445.0,318.0 L445.0,367.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75"/>
+<path d="M445.0,468.0 L445.0,429.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75"/>
+<path d="M237.90070809611802,259.14467946009415 L661.8122122349919,87.15049789123604" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75" stroke-dasharray="5,4"/>
+<path d="M232.6866969992388,364.8472910393576 L667.9330078704588,91.59113259266385" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75" stroke-dasharray="5,4"/>
+<path d="M203.73204062850107,463.6483382560588 L387.7636958522489,103.16338380207253" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75" stroke-dasharray="5,4"/>
+<path d="M241.78929259482624,270.02924007210373 L347.2244491924677,285.90311859215944" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75" stroke-dasharray="5,4"/>
+<path d="M765.0,108.0 L765.0,157.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75" stroke-dasharray="5,4"/>
+<path d="M658.0522078586826,297.06295742866837 L542.9521834565337,288.96827732370934" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75" stroke-dasharray="5,4"/>
+<path d="M535.8239302241973,188.53370324765174 L663.8764488225431,287.1151733107599" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.75" stroke-dasharray="5,4"/>
+<rect x="60" y="50" width="180" height="56" rx="7" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="150.0" y="74" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">PG 15 查询层</text>
+<text x="150.0" y="93" text-anchor="middle" fill="#8a93b8" font-size="10">src/postgres/ + pggate</text>
+<rect x="60" y="140" width="180" height="56" rx="7" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="150.0" y="164" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">YQL 执行层</text>
+<text x="150.0" y="183" text-anchor="middle" fill="#8a93b8" font-size="10">qlexpr/ bfpg/ ycql</text>
+<rect x="60" y="240" width="180" height="56" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="150.0" y="264" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">Master</text>
+<text x="150.0" y="283" text-anchor="middle" fill="#8a93b8" font-size="10">master/ catalog_manager</text>
+<rect x="60" y="350" width="180" height="56" rx="7" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="150.0" y="374" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">TServer</text>
+<text x="150.0" y="393" text-anchor="middle" fill="#8a93b8" font-size="10">tserver/ tablet_service</text>
+<rect x="60" y="460" width="180" height="56" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="150.0" y="484" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">CDC + xCluster</text>
+<text x="150.0" y="503" text-anchor="middle" fill="#8a93b8" font-size="10">cdc/ + master/xrepl</text>
+<rect x="350" y="50" width="190" height="56" rx="7" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="74" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">Raft 共识</text>
+<text x="445.0" y="93" text-anchor="middle" fill="#8a93b8" font-size="10">consensus/ + log (WAL)</text>
+<rect x="350" y="150" width="190" height="56" rx="7" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="445.0" y="174" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">Tablet</text>
+<text x="445.0" y="193" text-anchor="middle" fill="#8a93b8" font-size="10">tablet/ tablet_peer</text>
+<rect x="350" y="260" width="190" height="56" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="445.0" y="284" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">DocDB + dockv</text>
+<text x="445.0" y="303" text-anchor="middle" fill="#8a93b8" font-size="10">docdb/ + dockv/ MVCC</text>
+<rect x="350" y="370" width="190" height="56" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="445.0" y="394" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">RocksDB fork</text>
+<text x="445.0" y="413" text-anchor="middle" fill="#8a93b8" font-size="10">rocksdb/ 单实例多CF</text>
+<rect x="350" y="470" width="190" height="56" rx="7" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="445.0" y="494" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">向量索引</text>
+<text x="445.0" y="513" text-anchor="middle" fill="#8a93b8" font-size="10">vector_index/ hnsw/</text>
+<rect x="660" y="50" width="210" height="56" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="765.0" y="74" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">YBClient + 自研 RPC</text>
+<text x="765.0" y="93" text-anchor="middle" fill="#8a93b8" font-size="10">client/ + rpc/</text>
+<rect x="660" y="160" width="210" height="56" rx="7" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="765.0" y="184" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">util + common</text>
+<text x="765.0" y="203" text-anchor="middle" fill="#8a93b8" font-size="10">util 10k 扇入 · HybridTime</text>
+<rect x="660" y="270" width="210" height="56" rx="7" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="765.0" y="294" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">HybridClock + ClockBound</text>
+<text x="765.0" y="313" text-anchor="middle" fill="#8a93b8" font-size="10">server/ 时基</text>
+<rect x="660" y="380" width="210" height="56" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="765.0" y="404" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">yb-admin 等工具</text>
+<text x="765.0" y="423" text-anchor="middle" fill="#8a93b8" font-size="10">tools/ yb-admin</text>
+<rect x="660" y="480" width="210" height="56" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="765.0" y="504" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">Java 客户端 + CDC</text>
+<text x="765.0" y="523" text-anchor="middle" fill="#8a93b8" font-size="10">java/ (YCQL驱动)</text>
+<text x="60" y="575" fill="#7a86b3" font-size="11">实线=直接调用/包含  虚线=经 RPC 或间接依赖  （consensus↔tablet 双向：operation 与 apply 回调）</text>
+</svg>

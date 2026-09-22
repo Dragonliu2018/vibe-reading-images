@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="740" viewBox="0 0 920 740" font-family="system-ui, sans-serif">
+<rect width="920" height="740" fill="#0b0d14"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+       <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker></defs>
+<text x="40" y="70" fill="#b388ff" font-size="14" font-weight="600">YSQL 路径（分布式 SQL）</text>
+<rect x="75" y="86" width="370" height="48" rx="7" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="260" y="106" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">psql 发送 INSERT</text>
+<text x="260" y="124" text-anchor="middle" fill="#8a93b8" font-size="10">PG backend 解析/计划 (src/postgres/)</text>
+<rect x="75" y="156" width="370" height="48" rx="7" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="260" y="176" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">pggate 翻译</text>
+<text x="260" y="194" text-anchor="middle" fill="#8a93b8" font-size="10">PgSession → QLWriteRequestPB</text>
+<rect x="75" y="226" width="370" height="48" rx="7" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="260" y="246" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">批量缓冲 flush</text>
+<text x="260" y="264" text-anchor="middle" fill="#8a93b8" font-size="10">pg_client RPC 批量下发</text>
+<text x="40" y="340" fill="#4ecdc4" font-size="14" font-weight="600">YBClient 路径（存储 API）</text>
+<rect x="375" y="356" width="370" height="48" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="560" y="376" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">YBClient::Flush</text>
+<text x="560" y="394" text-anchor="middle" fill="#8a93b8" font-size="10">YBSession 批量 + write_id</text>
+<rect x="225" y="426" width="370" height="48" rx="7" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="410" y="446" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">TServer 接收</text>
+<text x="410" y="464" text-anchor="middle" fill="#8a93b8" font-size="10">tablet_service.cc Write RPC</text>
+<rect x="225" y="496" width="370" height="48" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="410" y="516" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">Tablet Peer</text>
+<text x="410" y="534" text-anchor="middle" fill="#8a93b8" font-size="10">operation 创建 → Raft 复制</text>
+<rect x="225" y="566" width="370" height="48" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="410" y="586" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">Raft 多数派提交</text>
+<text x="410" y="604" text-anchor="middle" fill="#8a93b8" font-size="10">consensus.cc → WAL log.cc</text>
+<rect x="225" y="636" width="370" height="48" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="410" y="656" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">Apply 到 DocDB</text>
+<text x="410" y="674" text-anchor="middle" fill="#8a93b8" font-size="10">DocWriteBatch 写 intent CF</text>
+<path d="M260,134 L260,154" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<path d="M260,204 L260,224" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<path d="M260,274 L260,300 L410,300 L410,424" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<path d="M560,404 L560,410 L490,430" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.9"/>
+<path d="M410,474 L410,494" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<path d="M410,544 L410,564" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<path d="M410,614 L410,634" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<text x="40" y="715" fill="#7a93b8" font-size="11">左列：YSQL 单行 INSERT 下推（PG backend 进程内 pggate）· 右列：YBClient 存储 API 直写 · 底部汇合为公共 Raft→Apply→DocDB 链</text>
+</svg>
