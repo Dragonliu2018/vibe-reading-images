@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="970" height="534" viewBox="0 0 970 534" font-family="system-ui, sans-serif">
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+  </marker>
+</defs>
+<rect width="970" height="534" fill="#0b0d14"/>
+<rect x="14" y="24" width="128" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="78" y="45.0" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="600">客户端与工具层</text>
+<path d="M142,43 L149,45.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.55"/>
+<rect x="14" y="96" width="128" height="38" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="78" y="117.0" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">连接与会话层</text>
+<path d="M142,115 L149,117.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.55"/>
+<rect x="14" y="168" width="128" height="38" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="78" y="189.0" text-anchor="middle" fill="#b388ff" font-size="13" font-weight="600">SQL 解析层</text>
+<path d="M142,187 L149,189.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.55"/>
+<rect x="14" y="240" width="128" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="78" y="261.0" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">优化器与执行器</text>
+<path d="M142,259 L149,261.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.55"/>
+<rect x="14" y="312" width="128" height="38" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="78" y="400" text-anchor="middle" fill="#6c8ef5" font-size="12.5" font-weight="600">服务器核心</text>
+<text x="78" y="415" text-anchor="middle" fill="#6c8ef5" font-size="12.5" font-weight="600">Handler API</text>
+<path d="M142,331 L149,333.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.55"/>
+<rect x="14" y="384" width="128" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="78" y="405.0" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">存储引擎层 (插件化)</text>
+<path d="M142,403 L149,405.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.55"/>
+<rect x="14" y="456" width="128" height="38" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="78" y="477.0" text-anchor="middle" fill="#80c7ff" font-size="13" font-weight="600">平台基础库</text>
+<path d="M142,475 L149,477.0" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none" opacity="0.55"/>
+<rect x="150" y="20" width="150" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="225.0" y="37.5" text-anchor="middle" fill="#e8eaf2" font-size="12">mariadb /</text>
+<text x="225.0" y="52.5" text-anchor="middle" fill="#e8eaf2" font-size="12">mysql CLI</text>
+<text x="225.0" y="59" text-anchor="middle" fill="#8a93b8" font-size="9.5">client/</text>
+<rect x="312" y="20" width="150" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="387.0" y="37.5" text-anchor="middle" fill="#e8eaf2" font-size="12">mysqldump</text>
+<text x="387.0" y="52.5" text-anchor="middle" fill="#e8eaf2" font-size="12">mysqlbinlog</text>
+<text x="387.0" y="59" text-anchor="middle" fill="#8a93b8" font-size="9.5">client/</text>
+<rect x="474" y="20" width="150" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="549.0" y="45.0" text-anchor="middle" fill="#e8eaf2" font-size="12">mariabackup</text>
+<text x="549.0" y="59" text-anchor="middle" fill="#8a93b8" font-size="9.5">extra/mariabackup/</text>
+<rect x="636" y="20" width="150" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="711.0" y="45.0" text-anchor="middle" fill="#e8eaf2" font-size="12">mysqltest (MTR)</text>
+<text x="711.0" y="59" text-anchor="middle" fill="#8a93b8" font-size="9.5">client/ + mysql-test/</text>
+<rect x="150" y="92" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="225.0" y="117.0" text-anchor="middle" fill="#e8eaf2" font-size="12">VIO 网络抽象</text>
+<text x="225.0" y="131" text-anchor="middle" fill="#8a93b8" font-size="9.5">vio/</text>
+<rect x="312" y="92" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="387.0" y="109.5" text-anchor="middle" fill="#e8eaf2" font-size="12">Protocol</text>
+<text x="387.0" y="124.5" text-anchor="middle" fill="#e8eaf2" font-size="12">(text/binary)</text>
+<text x="387.0" y="131" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/protocol.cc</text>
+<rect x="474" y="92" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="549.0" y="117.0" text-anchor="middle" fill="#e8eaf2" font-size="12">THD 会话对象</text>
+<text x="549.0" y="131" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/sql_class.cc</text>
+<rect x="636" y="92" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="711.0" y="117.0" text-anchor="middle" fill="#e8eaf2" font-size="12">ACL 权限/角色</text>
+<text x="711.0" y="131" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/sql_acl.cc</text>
+<rect x="150" y="164" width="150" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+<text x="225.0" y="181.5" text-anchor="middle" fill="#e8eaf2" font-size="12">Lex_input_stream</text>
+<text x="225.0" y="196.5" text-anchor="middle" fill="#e8eaf2" font-size="12">词法</text>
+<text x="225.0" y="203" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/sql_lex.cc</text>
+<rect x="312" y="164" width="150" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+<text x="387.0" y="181.5" text-anchor="middle" fill="#e8eaf2" font-size="12">sql_yacc.yy 语法</text>
+<text x="387.0" y="196.5" text-anchor="middle" fill="#e8eaf2" font-size="12">(bison)</text>
+<text x="387.0" y="203" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/sql_yacc.yy</text>
+<rect x="474" y="164" width="150" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+<text x="549.0" y="189.0" text-anchor="middle" fill="#e8eaf2" font-size="12">LEX / LEX 语法树</text>
+<text x="549.0" y="203" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/sql_lex.h</text>
+<rect x="636" y="164" width="150" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+<text x="711.0" y="181.5" text-anchor="middle" fill="#e8eaf2" font-size="12">命令分发</text>
+<text x="711.0" y="196.5" text-anchor="middle" fill="#e8eaf2" font-size="12">dispatch_command</text>
+<text x="711.0" y="203" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/sql_parse.cc</text>
+<rect x="150" y="236" width="150" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="225.0" y="253.5" text-anchor="middle" fill="#e8eaf2" font-size="12">JOIN::optimize</text>
+<text x="225.0" y="268.5" text-anchor="middle" fill="#e8eaf2" font-size="12"></text>
+<text x="225.0" y="275" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/sql_select.cc</text>
+<rect x="312" y="236" width="150" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="387.0" y="261.0" text-anchor="middle" fill="#e8eaf2" font-size="12">Range 优化器</text>
+<text x="387.0" y="275" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/opt_range.cc</text>
+<rect x="474" y="236" width="150" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="549.0" y="261.0" text-anchor="middle" fill="#e8eaf2" font-size="12">Item 表达式树</text>
+<text x="549.0" y="275" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/item.cc</text>
+<rect x="636" y="236" width="150" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="711.0" y="261.0" text-anchor="middle" fill="#e8eaf2" font-size="12">RowIterator 执行器</text>
+<text x="711.0" y="275" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/iter/</text>
+<rect x="798" y="236" width="150" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="873.0" y="261.0" text-anchor="middle" fill="#e8eaf2" font-size="12">Join Buffer (BKA)</text>
+<text x="873.0" y="275" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/sql_join_cache.cc</text>
+<rect x="150" y="308" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="225.0" y="333.0" text-anchor="middle" fill="#e8eaf2" font-size="12">handler.cc 引擎抽象</text>
+<text x="225.0" y="347" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/handler.cc</text>
+<rect x="312" y="308" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="387.0" y="333.0" text-anchor="middle" fill="#e8eaf2" font-size="12">ha_partition 分区</text>
+<text x="387.0" y="347" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/ha_partition.cc</text>
+<rect x="474" y="308" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="549.0" y="325.5" text-anchor="middle" fill="#e8eaf2" font-size="12">TABLE /</text>
+<text x="549.0" y="340.5" text-anchor="middle" fill="#e8eaf2" font-size="12">TABLE_SHARE</text>
+<text x="549.0" y="347" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/table.cc</text>
+<rect x="636" y="308" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="711.0" y="325.5" text-anchor="middle" fill="#e8eaf2" font-size="12">binlog</text>
+<text x="711.0" y="340.5" text-anchor="middle" fill="#e8eaf2" font-size="12">(MYSQL_BIN_LOG)</text>
+<text x="711.0" y="347" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/log.cc</text>
+<rect x="798" y="308" width="150" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="873.0" y="325.5" text-anchor="middle" fill="#e8eaf2" font-size="12">复制 (GTID</text>
+<text x="873.0" y="340.5" text-anchor="middle" fill="#e8eaf2" font-size="12">并行)</text>
+<text x="873.0" y="347" text-anchor="middle" fill="#8a93b8" font-size="9.5">sql/rpl_*.cc</text>
+<rect x="150" y="380" width="150" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="225.0" y="405.0" text-anchor="middle" fill="#e8eaf2" font-size="12">InnoDB (默认)</text>
+<text x="225.0" y="419" text-anchor="middle" fill="#8a93b8" font-size="9.5">storage/innobase/</text>
+<rect x="312" y="380" width="150" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="387.0" y="405.0" text-anchor="middle" fill="#e8eaf2" font-size="12">Aria (临时表/S3)</text>
+<text x="387.0" y="419" text-anchor="middle" fill="#8a93b8" font-size="9.5">storage/maria/</text>
+<rect x="474" y="380" width="150" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="549.0" y="405.0" text-anchor="middle" fill="#e8eaf2" font-size="12">MyISAM</text>
+<text x="549.0" y="419" text-anchor="middle" fill="#8a93b8" font-size="9.5">storage/myisam/</text>
+<rect x="636" y="380" width="150" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="711.0" y="397.5" text-anchor="middle" fill="#e8eaf2" font-size="12">MyRocks</text>
+<text x="711.0" y="412.5" text-anchor="middle" fill="#e8eaf2" font-size="12">ColumnStore</text>
+<text x="711.0" y="419" text-anchor="middle" fill="#8a93b8" font-size="9.5">rocksdb/ · columnstore/</text>
+<rect x="798" y="380" width="150" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="873.0" y="397.5" text-anchor="middle" fill="#e8eaf2" font-size="12">Spider 分片</text>
+<text x="873.0" y="412.5" text-anchor="middle" fill="#e8eaf2" font-size="12">Connect</text>
+<text x="873.0" y="419" text-anchor="middle" fill="#8a93b8" font-size="9.5">storage/spider/ · connect/</text>
+<rect x="150" y="452" width="150" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="225.0" y="477.0" text-anchor="middle" fill="#e8eaf2" font-size="12">mysys 系统原语</text>
+<text x="225.0" y="491" text-anchor="middle" fill="#8a93b8" font-size="9.5">mysys/</text>
+<rect x="312" y="452" width="150" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="387.0" y="477.0" text-anchor="middle" fill="#e8eaf2" font-size="12">strings 字符集</text>
+<text x="387.0" y="491" text-anchor="middle" fill="#8a93b8" font-size="9.5">strings/</text>
+<rect x="474" y="452" width="150" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="549.0" y="477.0" text-anchor="middle" fill="#e8eaf2" font-size="12">tpool 线程池</text>
+<text x="549.0" y="491" text-anchor="middle" fill="#8a93b8" font-size="9.5">tpool/</text>
+<rect x="636" y="452" width="150" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="711.0" y="477.0" text-anchor="middle" fill="#e8eaf2" font-size="12">dbug 调试跟踪</text>
+<text x="711.0" y="491" text-anchor="middle" fill="#8a93b8" font-size="9.5">dbug/</text>
+<rect x="798" y="452" width="150" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="873.0" y="477.0" text-anchor="middle" fill="#e8eaf2" font-size="12">IO_CACHE</text>
+<text x="873.0" y="491" text-anchor="middle" fill="#8a93b8" font-size="9.5">mysys/mf_iocache.cc</text>
+</svg>
