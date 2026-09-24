@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1056" height="458" viewBox="0 0 1056 458" font-family="system-ui, sans-serif">
+<rect width="1056" height="458" fill="#0b0d14"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+       <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker></defs>
+<rect x="14" y="24" width="164" height="38" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="96" y="41" text-anchor="middle" fill="#4ecdc4" font-size="12.5" font-weight="600">前端 React</text>
+<text x="96" y="56" text-anchor="middle" fill="#4ecdc4" font-size="12.5" font-weight="600">渲染层</text>
+<rect x="14" y="96" width="164" height="38" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+<text x="96" y="117.0" text-anchor="middle" fill="#6c8ef5" font-size="13" font-weight="600">Tauri 命令层</text>
+<rect x="14" y="168" width="164" height="38" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="96" y="189.0" text-anchor="middle" fill="#f9ca24" font-size="13" font-weight="600">服务层（业务核心）</text>
+<rect x="14" y="240" width="164" height="38" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="96" y="261.0" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="600">本地代理引擎</text>
+<rect x="14" y="312" width="164" height="38" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="96" y="333.0" text-anchor="middle" fill="#b388ff" font-size="13" font-weight="600">格式转换层</text>
+<rect x="14" y="384" width="164" height="38" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+<text x="96" y="405.0" text-anchor="middle" fill="#80c7ff" font-size="13" font-weight="600">持久化与同步</text>
+<rect x="186" y="20" width="200" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="286.0" y="45.0" text-anchor="middle" fill="#e8eaf2" font-size="12">App.tsx 视图装配</text>
+<text x="286.0" y="59" text-anchor="middle" fill="#8a93b8" font-size="9.5">src/App.tsx</text>
+<rect x="396" y="20" width="200" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="496.0" y="45.0" text-anchor="middle" fill="#e8eaf2" font-size="12">AppSwitcher 九工具切换</text>
+<text x="496.0" y="59" text-anchor="middle" fill="#8a93b8" font-size="9.5">components/AppSwitcher.tsx</text>
+<rect x="606" y="20" width="200" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="706.0" y="45.0" text-anchor="middle" fill="#e8eaf2" font-size="12">功能面板组件族</text>
+<text x="706.0" y="59" text-anchor="middle" fill="#8a93b8" font-size="9.5">components/{providers,mcp,...}</text>
+<rect x="816" y="20" width="200" height="46" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.2"/>
+<text x="916.0" y="45.0" text-anchor="middle" fill="#e8eaf2" font-size="12">供应商预设</text>
+<text x="916.0" y="59" text-anchor="middle" fill="#8a93b8" font-size="9.5">config/*Presets.ts</text>
+<rect x="186" y="92" width="200" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="286.0" y="117.0" text-anchor="middle" fill="#e8eaf2" font-size="12">commands/（38 个模块）</text>
+<text x="286.0" y="131" text-anchor="middle" fill="#8a93b8" font-size="9.5">commands/*.rs</text>
+<rect x="396" y="92" width="200" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="496.0" y="117.0" text-anchor="middle" fill="#e8eaf2" font-size="12">DTO 与 invoke 桥</text>
+<text x="496.0" y="131" text-anchor="middle" fill="#8a93b8" font-size="9.5">前端 invoke ↔ Rust</text>
+<rect x="606" y="92" width="200" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="706.0" y="117.0" text-anchor="middle" fill="#e8eaf2" font-size="12">错误映射</text>
+<text x="706.0" y="131" text-anchor="middle" fill="#8a93b8" font-size="9.5">error.rs</text>
+<rect x="816" y="92" width="200" height="46" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.2"/>
+<text x="916.0" y="117.0" text-anchor="middle" fill="#e8eaf2" font-size="12">Deep Link 路由</text>
+<text x="916.0" y="131" text-anchor="middle" fill="#8a93b8" font-size="9.5">deeplink/</text>
+<rect x="186" y="164" width="200" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="286.0" y="189.0" text-anchor="middle" fill="#e8eaf2" font-size="12">供应商/切换</text>
+<text x="286.0" y="203" text-anchor="middle" fill="#8a93b8" font-size="9.5">services/provider/ + config.rs</text>
+<rect x="396" y="164" width="200" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="496.0" y="189.0" text-anchor="middle" fill="#e8eaf2" font-size="12">用量统计</text>
+<text x="496.0" y="203" text-anchor="middle" fill="#8a93b8" font-size="9.5">usage_stats.rs + session_usage_*</text>
+<rect x="606" y="164" width="200" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="706.0" y="189.0" text-anchor="middle" fill="#e8eaf2" font-size="12">MCP/Prompt/Skill</text>
+<text x="706.0" y="203" text-anchor="middle" fill="#8a93b8" font-size="9.5">services/{mcp,prompt,skill}.rs</text>
+<rect x="816" y="164" width="200" height="46" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.2"/>
+<text x="916.0" y="189.0" text-anchor="middle" fill="#e8eaf2" font-size="12">余额/订阅/OAuth</text>
+<text x="916.0" y="203" text-anchor="middle" fill="#8a93b8" font-size="9.5">subscription + balance</text>
+<rect x="186" y="236" width="200" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="286.0" y="261.0" text-anchor="middle" fill="#e8eaf2" font-size="12">HTTP 服务器</text>
+<text x="286.0" y="275" text-anchor="middle" fill="#8a93b8" font-size="9.5">proxy/server.rs</text>
+<rect x="396" y="236" width="200" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="496.0" y="261.0" text-anchor="middle" fill="#e8eaf2" font-size="12">转发器</text>
+<text x="496.0" y="275" text-anchor="middle" fill="#8a93b8" font-size="9.5">proxy/forwarder.rs (5.5k 行)</text>
+<rect x="606" y="236" width="200" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="706.0" y="261.0" text-anchor="middle" fill="#e8eaf2" font-size="12">供应商路由/故障转移</text>
+<text x="706.0" y="275" text-anchor="middle" fill="#8a93b8" font-size="9.5">provider_router + failover + 熔断</text>
+<rect x="816" y="236" width="200" height="46" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.2"/>
+<text x="916.0" y="261.0" text-anchor="middle" fill="#e8eaf2" font-size="12">SSE 流式</text>
+<text x="916.0" y="275" text-anchor="middle" fill="#8a93b8" font-size="9.5">sse.rs + session.rs</text>
+<rect x="186" y="308" width="200" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+<text x="286.0" y="333.0" text-anchor="middle" fill="#e8eaf2" font-size="12">Responses 转换</text>
+<text x="286.0" y="347" text-anchor="middle" fill="#8a93b8" font-size="9.5">transform_responses.rs</text>
+<rect x="396" y="308" width="200" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+<text x="496.0" y="333.0" text-anchor="middle" fill="#e8eaf2" font-size="12">Codex Chat 转换</text>
+<text x="496.0" y="347" text-anchor="middle" fill="#8a93b8" font-size="9.5">transform_codex_chat.rs</text>
+<rect x="606" y="308" width="200" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+<text x="706.0" y="333.0" text-anchor="middle" fill="#e8eaf2" font-size="12">Gemini 转换</text>
+<text x="706.0" y="347" text-anchor="middle" fill="#8a93b8" font-size="9.5">transform_gemini.rs</text>
+<rect x="816" y="308" width="200" height="46" rx="6" fill="#13162a" stroke="#b388ff" stroke-width="1.2"/>
+<text x="916.0" y="333.0" text-anchor="middle" fill="#e8eaf2" font-size="12">流式转换</text>
+<text x="916.0" y="347" text-anchor="middle" fill="#8a93b8" font-size="9.5">streaming_*.rs (7k 行)</text>
+<rect x="186" y="380" width="200" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="286.0" y="405.0" text-anchor="middle" fill="#e8eaf2" font-size="12">SQLite + DAO</text>
+<text x="286.0" y="419" text-anchor="middle" fill="#8a93b8" font-size="9.5">database/dao/</text>
+<rect x="396" y="380" width="200" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="496.0" y="405.0" text-anchor="middle" fill="#e8eaf2" font-size="12">迁移/备份</text>
+<text x="496.0" y="419" text-anchor="middle" fill="#8a93b8" font-size="9.5">migration.rs + backup.rs</text>
+<rect x="606" y="380" width="200" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="706.0" y="405.0" text-anchor="middle" fill="#e8eaf2" font-size="12">WebDAV/S3 同步</text>
+<text x="706.0" y="419" text-anchor="middle" fill="#8a93b8" font-size="9.5">webdav*.rs + s3*.rs</text>
+<rect x="816" y="380" width="200" height="46" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.2"/>
+<text x="916.0" y="405.0" text-anchor="middle" fill="#e8eaf2" font-size="12">同步协议</text>
+<text x="916.0" y="419" text-anchor="middle" fill="#8a93b8" font-size="9.5">sync_protocol.rs</text>
+</svg>

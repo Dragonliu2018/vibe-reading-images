@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="700" viewBox="0 0 940 700" font-family="system-ui, sans-serif">
+<rect width="940" height="700" fill="#0b0d14"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+       <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/></marker></defs>
+<text x="30" y="60" fill="#4ecdc4" font-size="14" font-weight="600">Claude Code 发起请求（Anthropic Messages API 格式）</text>
+<rect x="140" y="96" width="660" height="48" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="470" y="116" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">本地代理接收 127.0.0.1:port</text>
+<text x="470" y="134" text-anchor="middle" fill="#8a93b8" font-size="10">proxy/server.rs + handlers.rs</text>
+<rect x="140" y="166" width="660" height="48" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="470" y="186" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">供应商路由与选择</text>
+<text x="470" y="204" text-anchor="middle" fill="#8a93b8" font-size="10">provider_router.rs + ProxyState</text>
+<path d="M470,144 L470,164" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<rect x="140" y="236" width="660" height="48" rx="7" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="470" y="256" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">格式转换（请求方向）</text>
+<text x="470" y="274" text-anchor="middle" fill="#8a93b8" font-size="10">anthropic_to_responses / anthropic_to_openai / transform_gemini</text>
+<path d="M470,214 L470,234" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<rect x="140" y="306" width="660" height="48" rx="7" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+<text x="470" y="326" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">转发到上游供应商</text>
+<text x="470" y="344" text-anchor="middle" fill="#8a93b8" font-size="10">forwarder.rs + hyper_client.rs</text>
+<path d="M470,284 L470,304" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<rect x="140" y="376" width="660" height="48" rx="7" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="470" y="396" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">上游响应（供应商格式 SSE）</text>
+<text x="470" y="414" text-anchor="middle" fill="#8a93b8" font-size="10">streaming_*.rs 流式解析</text>
+<path d="M470,354 L470,374" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<rect x="140" y="446" width="660" height="48" rx="7" fill="#13162a" stroke="#b388ff" stroke-width="1.5"/>
+<text x="470" y="466" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">格式转换（响应方向，含 thinking 整流）</text>
+<text x="470" y="484" text-anchor="middle" fill="#8a93b8" font-size="10">chat_sse_to_response_value + thinking_rectifier</text>
+<path d="M470,424 L470,444" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<rect x="140" y="516" width="660" height="48" rx="7" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+<text x="470" y="536" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">故障转移判定</text>
+<text x="470" y="554" text-anchor="middle" fill="#8a93b8" font-size="10">failover_switch.rs + circuit_breaker.rs —— 失败则回到路由重选</text>
+<path d="M470,494 L470,514" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<rect x="140" y="586" width="660" height="48" rx="7" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+<text x="470" y="606" text-anchor="middle" fill="#e8eaf2" font-size="13.5" font-weight="600">回写 Anthropic events 给 Claude Code</text>
+<text x="470" y="624" text-anchor="middle" fill="#8a93b8" font-size="10">sse.rs 组装 message_start / content_block_delta ...</text>
+<path d="M470,564 L470,584" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+<path d="M140,564 L140,640 L120,640 L120,190 L138,190" stroke="#f9ca24" stroke-width="1.3" fill="none" opacity="0.7" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+<text x="66" y="420" fill="#f9ca24" font-size="10.5" transform="rotate(-90 66 420)" text-anchor="middle">失败重选供应商</text>
+<text x="30" y="680" fill="#7a86b3" font-size="11">一次代理请求的完整路径：格式转换双向各一次；故障转移在响应阶段判定后回到路由层重选</text>
+</svg>
