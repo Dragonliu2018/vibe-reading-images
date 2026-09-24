@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="560" viewBox="0 0 840 560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a86b3"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="840" height="560" fill="#0b0d14"/>
+  <text x="420" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#e8ecf5" font-weight="600">模块依赖地图</text>
+
+  <!-- ===== 左列：基础与凭据 ===== -->
+  <rect x="40" y="140" width="160" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="120" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">配置与热重载</text>
+  <text x="120" y="174" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">config + watcher</text>
+
+  <rect x="40" y="240" width="160" height="44" rx="6" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="120" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">OAuth 认证与持久化</text>
+  <text x="120" y="274" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">internal/auth + store</text>
+
+  <rect x="40" y="340" width="160" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="120" y="358" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">模型注册表</text>
+  <text x="120" y="374" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">internal/registry</text>
+
+  <rect x="40" y="440" width="160" height="44" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="120" y="458" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">Home 集群客户端</text>
+  <text x="120" y="474" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">internal/home</text>
+
+  <!-- ===== 中列：主链路 ===== -->
+  <rect x="300" y="60" width="240" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="420" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">服务核心 Service</text>
+  <text x="420" y="94" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">sdk/cliproxy（装配 / 生命周期）</text>
+
+  <rect x="300" y="160" width="240" height="44" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="420" y="178" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">HTTP 网关</text>
+  <text x="420" y="194" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">internal/api + sdk/api/handlers</text>
+
+  <rect x="300" y="260" width="240" height="44" rx="6" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="420" y="278" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">Conductor 凭据调度</text>
+  <text x="420" y="294" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">sdk/cliproxy/auth</text>
+
+  <rect x="300" y="360" width="240" height="44" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="420" y="378" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">Provider 执行器</text>
+  <text x="420" y="394" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">internal/runtime/executor</text>
+
+  <!-- ===== 右列：横切扩展 ===== -->
+  <rect x="640" y="100" width="160" height="44" rx="6" fill="#13162a" stroke="#80c7ff" stroke-width="1.5"/>
+  <text x="720" y="118" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">Management API</text>
+  <text x="720" y="134" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">/v0/management</text>
+
+  <rect x="640" y="200" width="160" height="44" rx="6" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="720" y="218" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">插件系统</text>
+  <text x="720" y="234" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">pluginhost + pluginstore</text>
+
+  <rect x="640" y="300" width="160" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="720" y="318" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">翻译矩阵</text>
+  <text x="720" y="334" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">internal/translator</text>
+
+  <rect x="640" y="400" width="160" height="44" rx="6" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="720" y="418" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e8ecf5">Thinking + 回放缓存</text>
+  <text x="720" y="434" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">internal/thinking + cache</text>
+
+  <!-- ===== 主链路箭头 ===== -->
+  <path d="M 420 104 L 420 160" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="430" y="140" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">NewServer 装配</text>
+  <path d="M 420 204 L 420 260" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="430" y="240" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">Execute / ExecuteStream</text>
+  <path d="M 420 304 L 420 360" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="430" y="340" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">ProviderExecutor 契约</text>
+
+  <!-- 服务核心 -> Conductor（右侧绕行） -->
+  <path d="M 540 82 L 570 82 L 570 282 L 540 282" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="548" y="190" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd" text-anchor="end">注册 executor</text>
+  <text x="548" y="203" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd" text-anchor="end">StartAutoRefresh</text>
+
+  <!-- 插件 -> Conductor -->
+  <path d="M 640 222 L 590 222 L 590 292 L 540 292" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="598" y="180" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">RegisterExecutor</text>
+  <text x="598" y="193" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">插件调度器 / 拦截器</text>
+
+  <!-- 执行器 -> 翻译矩阵 -->
+  <path d="M 540 372 L 560 372 L 560 322 L 640 322" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- 执行器 -> Thinking -->
+  <path d="M 540 392 L 575 392 L 575 422 L 640 422" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="556" y="445" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">Translate* / suffix / replay</text>
+
+  <!-- 配置热重载 -> 服务核心 -->
+  <path d="M 200 162 L 250 162 L 250 82 L 300 82" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="210" y="120" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">reload 回调</text>
+
+  <!-- OAuth -> Conductor -->
+  <path d="M 200 262 L 240 262 L 240 272 L 300 272" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="205" y="230" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">凭据加载 / 刷新</text>
+
+  <!-- Conductor -> 模型注册表 -->
+  <path d="M 300 292 L 230 292 L 230 362 L 200 362" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="210" y="330" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">RegisterClient</text>
+  <text x="210" y="343" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">LookupModelInfo</text>
+
+  <!-- Home -> Conductor -->
+  <path d="M 200 462 L 264 462 L 264 302 L 300 302" stroke="#7a86b3" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="210" y="440" font-family="system-ui, sans-serif" font-size="10" fill="#9aa3bd">Home dispatch</text>
+
+  <!-- 图例 -->
+  <rect x="40" y="510" width="12" height="12" fill="#13162a" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="60" y="520" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3bd">凭据 / 配置源</text>
+  <rect x="150" y="510" width="12" height="12" fill="#13162a" stroke="#6c8ef5" stroke-width="1.5"/>
+  <text x="170" y="520" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3bd">核心链路</text>
+  <rect x="250" y="510" width="12" height="12" fill="#13162a" stroke="#ff6b9d" stroke-width="1.5"/>
+  <text x="270" y="520" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3bd">执行 / 扩展</text>
+  <rect x="350" y="510" width="12" height="12" fill="#13162a" stroke="#f9ca24" stroke-width="1.5"/>
+  <text x="370" y="520" font-family="system-ui, sans-serif" font-size="11" fill="#9aa3bd">横切服务</text>
+</svg>
